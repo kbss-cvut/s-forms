@@ -12,7 +12,7 @@ export default class DefaultFormGenerator {
      * @param rootQuestion Optional, contains root question with data for the default form template
      */
     static generateForm(rootQuestion) {
-        var formTemplate = require('./defaultForm.json');
+        var formTemplate = require('./defaultForm');
         // Deep copy of the form template to prevent modifications
         formTemplate = JSON.parse(JSON.stringify(formTemplate));
         if (!rootQuestion) {

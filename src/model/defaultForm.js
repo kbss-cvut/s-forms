@@ -1,4 +1,4 @@
-{
+module.exports = {
   "@graph": [
     {
       "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
