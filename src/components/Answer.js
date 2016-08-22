@@ -30,10 +30,10 @@ export default class Answer extends React.Component {
     componentWillMount() {
         var question = this.props.question;
         if (FormUtils.isTypeahead(question)) {
-            if (!question[Constants.FORM.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
+            if (!question[Constants.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
                 Configuration.actions.loadFormOptions(this._queryHash, FormUtils.getPossibleValuesQuery(question));
             } else {
-                this.setState({options: JsonldUtils.processTypeaheadOptions(question[Constants.FORM.HAS_OPTION])});
+                this.setState({options: JsonldUtils.processTypeaheadOptions(question[Constants.HAS_OPTION])});
             }
         }
     }
@@ -66,12 +66,12 @@ export default class Answer extends React.Component {
     };
 
     _setValue(change, value) {
-        if (this.props.answer[Constants.FORM.HAS_OBJECT_VALUE]) {
-            change[Constants.FORM.HAS_OBJECT_VALUE] = {
+        if (this.props.answer[Constants.HAS_OBJECT_VALUE]) {
+            change[Constants.HAS_OBJECT_VALUE] = {
                 '@id': value
             };
         } else {
-            change[Constants.FORM.HAS_DATA_VALUE] = {
+            change[Constants.HAS_DATA_VALUE] = {
                 '@value': value
             };
         }
@@ -116,13 +116,13 @@ export default class Answer extends React.Component {
                     title: title,
                     onChange: this.onChange,
                     disabled: FormUtils.isDisabled(question)
-                }, this._generateSelectOptions(question[Constants.FORM.HAS_OPTION])
+                }, this._generateSelectOptions(question[Constants.HAS_OPTION])
             );
         } else {
             var answer = this.props.answer;
             // TODO This is temporary to show labels for IRI-based values
-            if (answer[Constants.FORM.HAS_OBJECT_VALUE] && answer[Constants.FORM.HAS_OBJECT_VALUE][JsonldUtils.RDFS_LABEL]) {
-                value = JsonldUtils.getJsonAttValue(answer[Constants.FORM.HAS_OBJECT_VALUE], JsonldUtils.RDFS_LABEL);
+            if (answer[Constants.HAS_OBJECT_VALUE] && answer[Constants.HAS_OBJECT_VALUE][JsonldUtils.RDFS_LABEL]) {
+                value = JsonldUtils.getJsonAttValue(answer[Constants.HAS_OBJECT_VALUE], JsonldUtils.RDFS_LABEL);
             }
             var inputType = FormUtils.isTextarea(question, value) ? 'textarea' : 'text';
             component = React.createElement(Configuration.inputComponent, {
@@ -139,7 +139,7 @@ export default class Answer extends React.Component {
     }
 
     static _hasOptions(item) {
-        return item[Constants.FORM.HAS_OPTION] && item[Constants.FORM.HAS_OPTION].length !== 0;
+        return item[Constants.HAS_OPTION] && item[Constants.HAS_OPTION].length !== 0;
     }
 
     _generateSelectOptions(options) {

@@ -23,11 +23,11 @@ export default class Question extends React.Component {
     }
 
     onAnswerChange = (answerIndex, change) => {
-        this._onChange(Constants.FORM.HAS_ANSWER, answerIndex, change);
+        this._onChange(Constants.HAS_ANSWER, answerIndex, change);
     };
 
     onSubQuestionChange = (subQuestionIndex, change) => {
-        this._onChange(Constants.FORM.HAS_SUBQUESTION, subQuestionIndex, change);
+        this._onChange(Constants.HAS_SUBQUESTION, subQuestionIndex, change);
     };
 
     _onChange(att, valueIndex, newValue) {
@@ -68,7 +68,7 @@ export default class Question extends React.Component {
             row.push(<div key={'row-item-' + i} className={cls}>
                 <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange}/>
             </div>);
-            if (row.length === Constants.FORM.GENERATED_ROW_SIZE || isTextarea) {
+            if (row.length === Constants.GENERATED_ROW_SIZE || isTextarea) {
                 children.push(<div className='row' key={'question-row-' + i}>{row}</div>);
                 row = [];
             }
@@ -81,22 +81,22 @@ export default class Question extends React.Component {
 
     _getAnswers() {
         var question = this.props.question;
-        if (!question[Constants.FORM.HAS_ANSWER]) {
+        if (!question[Constants.HAS_ANSWER]) {
             if (FormUtils.isSection(question) || FormUtils.isWizardStep(question)) {
-                question[Constants.FORM.HAS_ANSWER] = [];
+                question[Constants.HAS_ANSWER] = [];
             } else {
-                question[Constants.FORM.HAS_ANSWER] = [QuestionAnswerProcessor.generateAnswer(question)];
+                question[Constants.HAS_ANSWER] = [QuestionAnswerProcessor.generateAnswer(question)];
             }
         }
-        if (!Array.isArray(question[Constants.FORM.HAS_ANSWER])) {
-            question[Constants.FORM.HAS_ANSWER] = [question[Constants.FORM.HAS_ANSWER]];
+        if (!Array.isArray(question[Constants.HAS_ANSWER])) {
+            question[Constants.HAS_ANSWER] = [question[Constants.HAS_ANSWER]];
         }
-        return question[Constants.FORM.HAS_ANSWER];
+        return question[Constants.HAS_ANSWER];
     }
 
     static _getAnswerClass(isTextarea) {
         return isTextarea ? 'col-xs-12' : (
-            Constants.FORM.GENERATED_ROW_SIZE === 1 ? 'col-xs-6' : 'col-xs-' + (Constants.COLUMN_COUNT / Constants.FORM.GENERATED_ROW_SIZE));
+            Constants.GENERATED_ROW_SIZE === 1 ? 'col-xs-6' : 'col-xs-' + (Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE));
     }
 
     renderSubQuestions() {
@@ -111,14 +111,14 @@ export default class Question extends React.Component {
 
     _getSubQuestions() {
         var question = this.props.question;
-        if (!question[Constants.FORM.HAS_SUBQUESTION]) {
-            question[Constants.FORM.HAS_SUBQUESTION] = [];
+        if (!question[Constants.HAS_SUBQUESTION]) {
+            question[Constants.HAS_SUBQUESTION] = [];
         }
-        if (!Array.isArray(question[Constants.FORM.HAS_SUBQUESTION])) {
-            question[Constants.FORM.HAS_SUBQUESTION] = [question[Constants.FORM.HAS_SUBQUESTION]];
+        if (!Array.isArray(question[Constants.HAS_SUBQUESTION])) {
+            question[Constants.HAS_SUBQUESTION] = [question[Constants.HAS_SUBQUESTION]];
         }
         // TODO Temporary sorting
-        question[Constants.FORM.HAS_SUBQUESTION].sort(function (a, b) {
+        question[Constants.HAS_SUBQUESTION].sort(function (a, b) {
             var aLabel = JsonLdUtils.getJsonAttValue(a, JsonLdUtils.RDFS_LABEL),
                 bLabel = JsonLdUtils.getJsonAttValue(b, JsonLdUtils.RDFS_LABEL);
             if (aLabel < bLabel) {
@@ -128,6 +128,6 @@ export default class Question extends React.Component {
             }
             return 0;
         });
-        return question[Constants.FORM.HAS_SUBQUESTION];
+        return question[Constants.HAS_SUBQUESTION];
     }
 }
