@@ -2,8 +2,9 @@
 
 import React from "react";
 import assign from "object-assign";
-import Typeahead from "react-bootstrap-typeahead";
+import DateTimePicker from 'kbss-react-bootstrap-datetimepicker';
 import JsonldUtils from "jsonld-utils";
+import Typeahead from "react-bootstrap-typeahead";
 import Configuration from "../model/Configuration";
 import Constants from "../constants/Constants";
 import FormUtils from "../util/FormUtils";
@@ -23,7 +24,7 @@ export default class Answer extends React.Component {
             this._queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
         }
         this.state = {
-            options: this._queryHash ? Configuration.optionsStore.getOptions(this._queryHash) : []
+            options: this._queryHash ? JsonldUtils.processTypeaheadOptions(Configuration.optionsStore.getOptions(this._queryHash)) : []
         }
     }
 
@@ -118,7 +119,10 @@ export default class Answer extends React.Component {
                     disabled: FormUtils.isDisabled(question)
                 }, this._generateSelectOptions(question[Constants.HAS_OPTION])
             );
-        } else {
+        } else if (FormUtils.isCalendar(question)) {
+            component = this._renderDateTimePicker();
+        }
+        else {
             var answer = this.props.answer;
             // TODO This is temporary to show labels for IRI-based values
             if (answer[Constants.HAS_OBJECT_VALUE] && answer[Constants.HAS_OBJECT_VALUE][JsonldUtils.RDFS_LABEL]) {
@@ -160,5 +164,19 @@ export default class Answer extends React.Component {
                                   key={'opt-' + i}>{JsonldUtils.getJsonAttValue(options[i], JsonldUtils.RDFS_LABEL)}</option>);
         }
         return rendered;
+    }
+
+    _renderDateTimePicker() {
+        var question = this.props.question,
+            value = FormUtils.resolveValue(this.props.answer),
+            label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], Configuration.intl),
+            title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], Configuration.intl),
+            mode = Utils.resolveDateTimeMode(question);
+        return <div style={{position: 'relative'}}>
+            <label className='control-label'>label</label>
+            <DateTimePicker mode={mode} inputFormat={Configuration.dateTimeFormat ? Configuration.dateTimeFormat : null}
+                            inputProps={{title: title, bsSize: 'small'}}
+                            onChange={this.onChange} dateTime={value}/>
+        </div>
     }
 }

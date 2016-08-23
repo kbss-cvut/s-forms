@@ -19,6 +19,8 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
         DISABLED: 'disabled',
         HIDDEN: 'hidden',
         TEXTAREA: 'textarea',
+        DATE: 'date',
+        TIME: 'time',
         DATETIME: 'datetime'
     },
     VALUE_TYPE_CODE = 'code',

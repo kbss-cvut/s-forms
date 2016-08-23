@@ -6,6 +6,7 @@ var optionsStore = null;
 var wizardStore = null;
 var typeaheadResultList = null;
 var inputComponent = null;
+var dateTimeFormat = null;
 
 export default class Configuration {
     static get actions() {
@@ -54,5 +55,13 @@ export default class Configuration {
 
     static set inputComponent(component) {
         inputComponent = component;
+    }
+
+    static get dateTimeFormat() {
+        return dateTimeFormat;
+    }
+
+    static set dateTimeFormat(format) {
+        dateTimeFormat = format;
     }
 }

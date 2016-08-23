@@ -86,6 +86,58 @@ describe('FormUtils', () => {
         });
     });
 
+    describe('isCalendar', () => {
+        it('returns true for a date question', () => {
+            var question = {};
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DATE];
+            expect(FormUtils.isCalendar(question)).toBeTruthy();
+        });
+
+        it('returns false for a regular question', () => {
+            var question = {};
+            expect(FormUtils.isCalendar(question)).toBeFalsy();
+        });
+    });
+
+    describe('isDate', () => {
+        it('returns true for a date question', () => {
+            var question = {};
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DATE];
+            expect(FormUtils.isCalendar(question)).toBeTruthy();
+        });
+
+        it('returns false for a regular question', () => {
+            var question = {};
+            expect(FormUtils.isCalendar(question)).toBeFalsy();
+        });
+    });
+
+    describe('isTime', () => {
+        it('returns true for a time question', () => {
+            var question = {};
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.TIME];
+            expect(FormUtils.isCalendar(question)).toBeTruthy();
+        });
+
+        it('returns false for a regular question', () => {
+            var question = {};
+            expect(FormUtils.isCalendar(question)).toBeFalsy();
+        });
+    });
+
+    describe('isDateTime', () => {
+        it('returns true for a datetime question', () => {
+            var question = {};
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DATETIME];
+            expect(FormUtils.isCalendar(question)).toBeTruthy();
+        });
+
+        it('returns false for a regular question', () => {
+            var question = {};
+            expect(FormUtils.isCalendar(question)).toBeFalsy();
+        });
+    });
+
     describe('resolveValue', () => {
         it('returns null for no answer', () => {
             expect(FormUtils.resolveValue(null)).toBeNull();

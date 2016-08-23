@@ -1,6 +1,6 @@
 {
   "name": "semforms",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",

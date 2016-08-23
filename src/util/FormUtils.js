@@ -39,6 +39,22 @@ export default class FormUtils {
             || JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TEXTAREA);
     }
 
+    static isCalendar(question) {
+        return FormUtils.isDate(question) || FormUtils.isTime(question) || FormUtils.isDateTime(question);
+    }
+
+    static isDate(question) {
+        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DATE);
+    }
+
+    static isTime(question) {
+        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TIME);
+    }
+
+    static isDateTime(question) {
+        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DATETIME);
+    }
+
     static resolveValue(answer) {
         if (!answer) {
             return null;

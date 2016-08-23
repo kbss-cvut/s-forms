@@ -1,5 +1,7 @@
 'use strict';
 
+import FormUtils from './FormUtils';
+
 export default class Utils {
 
     /**
@@ -44,5 +46,18 @@ export default class Utils {
         return id;
     }
 
-
+    /**
+     * Resolves mode for the date time picker.
+     * @param question Question specifying the mode
+     * @return {*} mode for kbss-react-bootstrap-datetimepicker
+     */
+    static resolveDateTimeMode(question) {
+        if (FormUtils.isDate(question)) {
+            return 'date';
+        } else if (FormUtils.isTime(question)) {
+            return 'time';
+        } else {
+            return 'datetime';
+        }
+    }
 }
