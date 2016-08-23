@@ -2,7 +2,7 @@
 
 import React from "react";
 import assign from "object-assign";
-import DateTimePicker from 'kbss-react-bootstrap-datetimepicker';
+import DateTimePicker from "kbss-react-bootstrap-datetimepicker";
 import JsonldUtils from "jsonld-utils";
 import Typeahead from "react-bootstrap-typeahead";
 import Configuration from "../model/Configuration";
@@ -86,10 +86,6 @@ export default class Answer extends React.Component {
 
 
     render() {
-        return this._renderInputComponent();
-    }
-
-    _renderInputComponent() {
         var question = this.props.question,
             value = FormUtils.resolveValue(this.props.answer),
             label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], Configuration.intl),
@@ -97,47 +93,14 @@ export default class Answer extends React.Component {
             component;
 
         if (FormUtils.isTypeahead(question)) {
-            value = Utils.idToName(this.state.options, value);
-            var inputProps = {
-                disabled: FormUtils.isDisabled(question)
-            };
-            component = <div>
-                <label className='control-label'>{label}</label>
-                <Typeahead ref='typeahead' className='form-group form-group-sm' formInputOption='id'
-                           inputProps={inputProps}
-                           title={title} value={value} label={label} placeholder={label} filterOption='name'
-                           displayOption='name' onOptionSelected={this._onOptionSelected} optionsButton={true}
-                           options={this.state.options} customListComponent={Configuration.typeaheadResultList}/>
-            </div>;
+            component = this._renderTypeahead(value, label, title);
         } else if (Answer._hasOptions(question)) {
-            component = React.createElement(Configuration.inputComponent, {
-                    type: 'select',
-                    label: label,
-                    value: value,
-                    title: title,
-                    onChange: this.onChange,
-                    disabled: FormUtils.isDisabled(question)
-                }, this._generateSelectOptions(question[Constants.HAS_OPTION])
-            );
+            component = this._renderSelect(value, label, title);
         } else if (FormUtils.isCalendar(question)) {
-            component = this._renderDateTimePicker();
+            component = this._renderDateTimePicker(value, label, title);
         }
         else {
-            var answer = this.props.answer;
-            // TODO This is temporary to show labels for IRI-based values
-            if (answer[Constants.HAS_OBJECT_VALUE] && answer[Constants.HAS_OBJECT_VALUE][JsonldUtils.RDFS_LABEL]) {
-                value = JsonldUtils.getJsonAttValue(answer[Constants.HAS_OBJECT_VALUE], JsonldUtils.RDFS_LABEL);
-            }
-            var inputType = FormUtils.isTextarea(question, value) ? 'textarea' : 'text';
-            component = React.createElement(Configuration.inputComponent, {
-                type: inputType,
-                label: label,
-                title: title,
-                value: value,
-                onChange: this.onChange,
-                disabled: FormUtils.isDisabled(question),
-                rows: 5
-            });
+            component = this._renderRegularInput(value, label, title);
         }
         return component;
     }
@@ -166,11 +129,37 @@ export default class Answer extends React.Component {
         return rendered;
     }
 
-    _renderDateTimePicker() {
+    _renderTypeahead(value, label, title) {
+        value = Utils.idToName(this.state.options, value);
         var question = this.props.question,
-            value = FormUtils.resolveValue(this.props.answer),
-            label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], Configuration.intl),
-            title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], Configuration.intl),
+            inputProps = {
+                disabled: FormUtils.isDisabled(question)
+            };
+        return <div>
+            <label className='control-label'>{label}</label>
+            <Typeahead ref='typeahead' className='form-group form-group-sm' formInputOption='id'
+                       inputProps={inputProps}
+                       title={title} value={value} label={label} placeholder={label} filterOption='name'
+                       displayOption='name' onOptionSelected={this._onOptionSelected} optionsButton={true}
+                       options={this.state.options} customListComponent={Configuration.typeaheadResultList}/>
+        </div>;
+    }
+
+    _renderSelect(value, label, title) {
+        var question = this.props.question;
+        component = React.createElement(Configuration.inputComponent, {
+                type: 'select',
+                label: label,
+                value: value,
+                title: title,
+                onChange: this.onChange,
+                disabled: FormUtils.isDisabled(question)
+            }, this._generateSelectOptions(question[Constants.HAS_OPTION])
+        );
+    }
+
+    _renderDateTimePicker(value, label, title) {
+        var question = this.props.question,
             mode = Utils.resolveDateTimeMode(question);
         return <div style={{position: 'relative'}}>
             <label className='control-label'>label</label>
@@ -178,5 +167,25 @@ export default class Answer extends React.Component {
                             inputProps={{title: title, bsSize: 'small'}}
                             onChange={this.onChange} dateTime={value}/>
         </div>
+    }
+
+    _renderRegularInput(value, label, title) {
+        var question = this.props.question,
+            answer = this.props.answer;
+        // When the value is an object_value, but the layout does not specify neither typeahead nor select,
+        // show at least the value's label
+        if (answer[Constants.HAS_OBJECT_VALUE] && answer[Constants.HAS_OBJECT_VALUE][JsonldUtils.RDFS_LABEL]) {
+            value = JsonldUtils.getJsonAttValue(answer[Constants.HAS_OBJECT_VALUE], JsonldUtils.RDFS_LABEL);
+        }
+        var inputType = FormUtils.isTextarea(question, value) ? 'textarea' : 'text';
+        return React.createElement(Configuration.inputComponent, {
+            type: inputType,
+            label: label,
+            title: title,
+            value: value,
+            onChange: this.onChange,
+            disabled: FormUtils.isDisabled(question),
+            rows: 5
+        });
     }
 }
