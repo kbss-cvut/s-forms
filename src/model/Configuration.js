@@ -6,6 +6,8 @@ var optionsStore = null;
 var wizardStore = null;
 var typeaheadResultList = null;
 var inputComponent = null;
+var dateFormat = null;
+var timeFormat = null;
 var dateTimeFormat = null;
 
 export default class Configuration {
@@ -57,8 +59,24 @@ export default class Configuration {
         inputComponent = component;
     }
 
+    static get dateFormat() {
+        return dateFormat ? dateFormat : 'YYYY-MM-DD';
+    }
+
+    static set dateFormat(format) {
+        dateTimeFormat = format;
+    }
+
+    static get timeFormat() {
+        return timeFormat ? timeFormat : 'hh:mm:ss';
+    }
+
+    static set timeFormat(format) {
+        timeFormat = format;
+    }
+
     static get dateTimeFormat() {
-        return dateTimeFormat;
+        return dateTimeFormat ? dateTimeFormat : 'YYYY-MM-DD hh:mm:ss';
     }
 
     static set dateTimeFormat(format) {

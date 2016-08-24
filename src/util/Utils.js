@@ -1,5 +1,8 @@
 'use strict';
 
+import moment from 'moment';
+
+import Configuration from '../model/Configuration';
 import FormUtils from './FormUtils';
 
 export default class Utils {
@@ -58,6 +61,22 @@ export default class Utils {
             return 'time';
         } else {
             return 'datetime';
+        }
+    }
+
+    /**
+     * Resolves the specified value as a moment instance.
+     * @param question Question supplying context info to the resolution
+     * @param value The value to parse
+     * @return {*} moment instance
+     */
+    static resolveDateTimeValue(question, value) {
+        if (FormUtils.isDateTime(question)) {
+            return moment(value, Configuration.dateTimeFormat);
+        } else if (FormUtils.isDate(question)) {
+            return moment(value, Configuration.dateFormat);
+        } else {
+            return moment(value, Configuration.timeFormat);
         }
     }
 }

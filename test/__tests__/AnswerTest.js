@@ -2,6 +2,7 @@
 
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
+import moment from 'moment';
 import TestUtils from 'react-addons-test-utils';
 
 import Environment from '../environment/Environment';
@@ -112,12 +113,12 @@ describe('Answer component', () => {
     }
 
     it('renders date picker with answer value when date layout class is specified', () => {
+        Configuration.dateTimeFormat = 'YYYY-MM-DD';
         var date = new Date(),
-            value = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            value = moment(date).format(Configuration.dateTimeFormat);
         answer = answerWithTextValue(value);
         question[Constants.HAS_ANSWER] = [answer];
         question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATE);
-        Configuration.dateTimeFormat = 'YYYY-MM-DD';
         var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
 
             picker = TestUtils.findRenderedComponentWithType(component, require('kbss-react-bootstrap-datetimepicker').default);
@@ -127,12 +128,12 @@ describe('Answer component', () => {
     });
 
     it('renders time picker with answer value when time layout class is specified', () => {
+        Configuration.dateTimeFormat = 'hh:mm:ss';
         var date = new Date(),
-            value = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            value = moment(date).format(Configuration.dateTimeFormat);
         answer = answerWithTextValue(value);
         question[Constants.HAS_ANSWER] = [answer];
         question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
-        Configuration.dateTimeFormat = 'hh:mm:ss';
         var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
 
             picker = TestUtils.findRenderedComponentWithType(component, require('kbss-react-bootstrap-datetimepicker').default);
@@ -142,12 +143,12 @@ describe('Answer component', () => {
     });
 
     it('renders datetime picker with answer value when datetime layout class is specified', () => {
+        Configuration.dateTimeFormat = 'YYYY-MM-DD hh:mm:ss';
         var date = new Date(),
-            value = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            value = moment(date).format(Configuration.dateTimeFormat);
         answer = answerWithTextValue(value);
         question[Constants.HAS_ANSWER] = [answer];
         question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
-        Configuration.dateTimeFormat = 'YYYY-MM-DD hh:mm:ss';
         var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
 
             picker = TestUtils.findRenderedComponentWithType(component, require('kbss-react-bootstrap-datetimepicker').default);
