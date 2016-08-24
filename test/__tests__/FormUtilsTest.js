@@ -138,6 +138,19 @@ describe('FormUtils', () => {
         });
     });
 
+    describe('isCheckbox', () => {
+        it('returns true for a checkbox question', () => {
+            var question = {};
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.CHECKBOX];
+            expect(FormUtils.isCheckbox(question)).toBeTruthy();
+        });
+        it('returns false for a non-checkbox question', () => {
+            var question = {};
+            question[Constants.LAYOUT_CLASS] = [];
+            expect(FormUtils.isCheckbox(question)).toBeFalsy();
+        });
+    });
+
     describe('resolveValue', () => {
         it('returns null for no answer', () => {
             expect(FormUtils.resolveValue(null)).toBeNull();

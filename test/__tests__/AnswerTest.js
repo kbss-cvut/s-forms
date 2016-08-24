@@ -155,4 +155,19 @@ describe('Answer component', () => {
         expect(picker.props.mode).toEqual('datetime');
         expect(picker.props.dateTime).toEqual(value);
     });
+
+    it('renders checkbox with answer value when checkbox layout class is specified', () => {
+        var answer = {
+            '@id': Generator.getRandomUri()
+        };
+        answer[Constants.HAS_DATA_VALUE] = true;
+        question[Constants.HAS_ANSWER] = [answer];
+        question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.CHECKBOX);
+        var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
+
+            input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
+        expect(input).toBeDefined();
+        expect(input.type).toEqual('checkbox');
+        expect(input.checked).toBeTruthy();
+    });
 });

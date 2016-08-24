@@ -55,6 +55,10 @@ export default class FormUtils {
         return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DATETIME);
     }
 
+    static isCheckbox(question) {
+        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.CHECKBOX);
+    }
+
     static resolveValue(answer) {
         if (!answer) {
             return null;

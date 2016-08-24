@@ -60,6 +60,12 @@ export default class Answer extends React.Component {
         this.refs.typeahead.selectOption(selected);
     };
 
+    onCheckboxToggle = (e) => {
+        var change = assign({}, this.props.answer);
+        this._setValue(change, e.target.checked);
+        this.props.onChange(this.props.index, change);
+    };
+
     onChange = (e) => {
         var change = assign({}, this.props.answer);
         this._setValue(change, e.target.value);
@@ -98,8 +104,9 @@ export default class Answer extends React.Component {
             component = this._renderSelect(value, label, title);
         } else if (FormUtils.isCalendar(question)) {
             component = this._renderDateTimePicker(value, label, title);
-        }
-        else {
+        } else if (FormUtils.isCheckbox(question)) {
+            component = this._renderCheckbox(value, label, title);
+        } else {
             component = this._renderRegularInput(value, label, title);
         }
         return component;
@@ -167,6 +174,18 @@ export default class Answer extends React.Component {
                             inputProps={{title: title, bsSize: 'small'}}
                             onChange={this.onChange} dateTime={value}/>
         </div>
+    }
+
+    _renderCheckbox(value, label, title) {
+        var question = this.props.question;
+        return React.createElement(Configuration.inputComponent, {
+            type: 'checkbox',
+            label: label,
+            title: title,
+            checked: value,
+            onChange: this.onCheckboxToggle,
+            disabled: FormUtils.isDisabled(question),
+        });
     }
 
     _renderRegularInput(value, label, title) {
