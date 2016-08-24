@@ -169,7 +169,7 @@ export default class Answer extends React.Component {
         var question = this.props.question,
             mode = Utils.resolveDateTimeMode(question);
         return <div style={{position: 'relative'}}>
-            <label className='control-label'>label</label>
+            <label className='control-label'>{label}</label>
             <DateTimePicker mode={mode} inputFormat={Configuration.dateTimeFormat ? Configuration.dateTimeFormat : null}
                             inputProps={{title: title, bsSize: 'small'}}
                             onChange={this.onChange} dateTime={value}/>
