@@ -9,4 +9,4 @@ Semantic form generator and processor. For ontology-based smart forms.
 - Datetime picker
 - Select
 - Checkbox
-
+- Numeric input

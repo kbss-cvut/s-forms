@@ -35,7 +35,6 @@ export default class Utils {
      * be equal to one of the item's 'id' attribute, and if it is, the item's 'name' is returned.
      * @param items The items containing also mapping for the specified value (presumably)
      * @param id The id to map, probably a URI
-     * @return {*}
      */
     static idToName(items, id) {
         if (!items) {
@@ -77,6 +76,16 @@ export default class Utils {
             return moment(value, Configuration.dateFormat);
         } else {
             return moment(value, Configuration.timeFormat);
+        }
+    }
+
+    static resolveInputType(question, value) {
+        if (FormUtils.isTextarea(question, value)) {
+            return 'textarea';
+        } else if (FormUtils.isNumericInput(question)) {
+            return 'number';
+        } else {
+            return 'text';
         }
     }
 }

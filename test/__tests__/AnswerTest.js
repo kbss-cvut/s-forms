@@ -57,7 +57,7 @@ describe('Answer component', () => {
         question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
         var query = 'SELECT * WHERE { ?x ?y ?z .}';
         question[Constants.HAS_OPTIONS_QUERY] = query;
-        var component = Environment.render(<Answer answer={{}} question={question} onChange={onChange}/>);
+        Environment.render(<Answer answer={{}} question={question} onChange={onChange}/>);
 
         expect(actions.loadFormOptions).toHaveBeenCalled();
         expect(actions.loadFormOptions.calls.argsFor(0)[1]).toEqual(query);
@@ -170,5 +170,36 @@ describe('Answer component', () => {
         expect(input).toBeDefined();
         expect(input.type).toEqual('checkbox');
         expect(input.checked).toBeTruthy();
+    });
+
+    it('renders numeric input with answer value when number layout class is specified', () => {
+        var value = 117,
+            answer = {
+                '@id': Generator.getRandomUri()
+            };
+        answer[Constants.HAS_DATA_VALUE] = value;
+        question[Constants.HAS_ANSWER] = [answer];
+        question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.NUMBER);
+        var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
+
+            input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
+        expect(input).toBeDefined();
+        expect(input.type).toEqual('number');
+        expect(input.value).toEqual(value.toString());
+    });
+
+    it('renders textarea for answer with long value', () => {
+        var value = '';
+        for (var i = 0, len = Constants.INPUT_LENGTH_THRESHOLD + 1; i < len; i++) {
+            value += 'a';
+        }
+        answer = answerWithTextValue(value);
+        answer[Constants.HAS_DATA_VALUE] = value;
+        question[Constants.HAS_ANSWER] = [answer];
+        var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
+
+            input = TestUtils.findRenderedDOMComponentWithTag(component, 'textarea');
+        expect(input).toBeDefined();
+        expect(input.value).toEqual(value);
     });
 });

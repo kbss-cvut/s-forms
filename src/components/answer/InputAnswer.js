@@ -6,6 +6,7 @@ import JsonLdUtils from 'jsonld-utils';
 import Configuration from '../../model/Configuration';
 import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
+import Utils from '../../util/Utils';
 
 const InputAnswer = (props) => {
     var question = props.question,
@@ -16,9 +17,8 @@ const InputAnswer = (props) => {
     if (answer[Constants.HAS_OBJECT_VALUE] && answer[Constants.HAS_OBJECT_VALUE][JsonLdUtils.RDFS_LABEL]) {
         value = JsonLdUtils.getJsonAttValue(answer[Constants.HAS_OBJECT_VALUE], JsonLdUtils.RDFS_LABEL);
     }
-    var inputType = FormUtils.isTextarea(question, value) ? 'textarea' : 'text';
     return React.createElement(Configuration.inputComponent, {
-        type: inputType,
+        type: Utils.resolveInputType(question, value),
         label: props.label,
         title: props.title,
         value: value,
@@ -35,7 +35,7 @@ InputAnswer.propTypes = {
     answer: React.PropTypes.object.isRequired,
     label: React.PropTypes.string.isRequired,
     title: React.PropTypes.string,
-    value: React.PropTypes.string,
+    value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     onChange: React.PropTypes.func.isRequired
 };
 
