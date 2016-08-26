@@ -2,32 +2,23 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Grid} from 'react-bootstrap';
 
 import Configuration from '../../src/model/Configuration';
 import Constants from '../../src/constants/Constants';
 import Question from '../../src/components/Question';
+import WizardGenerator from '../../src/model/WizardGenerator';
 
-var question = {
-    "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1223764187-q",
-    "@type": "doc:question",
-    "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": [{
-        "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-636079211-a",
-        "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": 1472197552242
-    }],
-    "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "datetime",
-    "http://www.w3.org/2000/01/rdf-schema#comment": {
-        "@language": "en",
-        "@value": "The identification of the entity or organisation that is responsible for the report."
-    },
-    "http://www.w3.org/2000/01/rdf-schema#label": {
-        "@language": "en",
-        "@value": "453 - Responsible entity"
-    }
-};
+var wizard = require('./form.json');
 
 function onChange(index, change) {
     console.log(change);
 }
+
+var wizardStore = {
+    initWizard() {
+    }
+};
 
 class TestApp extends React.Component {
     constructor(props) {
@@ -36,11 +27,21 @@ class TestApp extends React.Component {
         Configuration.intl = {
             locale: navigator.language
         };
+        Configuration.wizardStore = wizardStore;
+        this.state = {
+            step: null
+        };
+        WizardGenerator.createWizard(wizard, null, null, (props) => {
+            this.setState({step: props.steps[0].data});
+        });
     }
 
     render() {
+        if (!this.state.step) {
+            return <div>'Loading wizard...'</div>;
+        }
         return <div>
-            <Question question={question} onChange={onChange}/>
+            <Question question={this.state.step} onChange={onChange} indent={0}/>
         </div>;
     }
 }

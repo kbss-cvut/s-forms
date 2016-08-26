@@ -2,7 +2,7 @@
 
 import React from "react";
 import assign from "object-assign";
-import {Panel} from "react-bootstrap";
+import {Panel, Row, Col} from "react-bootstrap";
 import JsonLdUtils from "jsonld-utils";
 import Answer from "./Answer";
 import Configuration from "../model/Configuration";
@@ -15,7 +15,8 @@ export default class Question extends React.Component {
         question: React.PropTypes.object.isRequired,
         onChange: React.PropTypes.func.isRequired,
         index: React.PropTypes.number,
-        withoutPanel: React.PropTypes.bool
+        withoutPanel: React.PropTypes.bool,
+        indent: React.PropTypes.number.isRequired
     };
 
     constructor(props) {
@@ -37,25 +38,39 @@ export default class Question extends React.Component {
     }
 
     render() {
-        if (FormUtils.isHidden(this.props.question)) {
+        var question = this.props.question;
+        if (FormUtils.isHidden(question)) {
             return null;
         }
-        if (FormUtils.isSection(this.props.question)) {
+        if (FormUtils.isAnswerable(question)) {
+            return <div>
+                {this.renderAnswers()}
+                <div style={{padding: '0 0 0 3em'}}>
+                    {this.renderSubQuestions()}
+                </div>
+            </div>
+        }
+        if (FormUtils.isSection(question)) {
             if (this.props.withoutPanel) {
                 return <div>
-                    {this.renderAnswers()}
-                    {this.renderSubQuestions()}
+                    {this._renderQuestionContent()}
                 </div>;
             } else {
-                var label = JsonLdUtils.getLocalized(this.props.question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
+                var label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
                 return <Panel header={<h5>{label}</h5>} bsStyle='info'>
-                    {this.renderAnswers()}
-                    {this.renderSubQuestions()}
+                    {this._renderQuestionContent()}
                 </Panel>;
             }
         } else {
-            return <div>{this.renderAnswers()}</div>;
+            return <div>{this._renderQuestionContent()}</div>;
         }
+    }
+
+    _renderQuestionContent() {
+        return [
+            this.renderAnswers(),
+            this.renderSubQuestions()
+        ];
     }
 
     renderAnswers() {
@@ -82,7 +97,7 @@ export default class Question extends React.Component {
     _getAnswers() {
         var question = this.props.question;
         if (!question[Constants.HAS_ANSWER]) {
-            if (FormUtils.isSection(question) || FormUtils.isWizardStep(question)) {
+            if (FormUtils.isSection(question) && !FormUtils.isAnswerable(question) || FormUtils.isWizardStep(question)) {
                 question[Constants.HAS_ANSWER] = [];
             } else {
                 question[Constants.HAS_ANSWER] = [QuestionAnswerProcessor.generateAnswer(question)];
@@ -96,7 +111,7 @@ export default class Question extends React.Component {
 
     static _getAnswerClass(isTextarea) {
         return isTextarea ? 'col-xs-12' : (
-            Constants.GENERATED_ROW_SIZE === 1 ? 'col-xs-6' : 'col-xs-' + (Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE));
+            Constants.GENERATED_ROW_SIZE === 1 ? 'col-xs-3' : 'col-xs-' + (Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE));
     }
 
     renderSubQuestions() {
@@ -104,7 +119,7 @@ export default class Question extends React.Component {
             subQuestions = this._getSubQuestions();
         for (var i = 0, len = subQuestions.length; i < len; i++) {
             children.push(<Question key={'sub-question-' + i} index={i} question={subQuestions[i]}
-                                    onChange={this.onSubQuestionChange}/>);
+                                    onChange={this.onSubQuestionChange} indent={this.props.indent + 1}/>);
         }
         return children;
     }

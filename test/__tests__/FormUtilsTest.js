@@ -151,6 +151,19 @@ describe('FormUtils', () => {
         });
     });
 
+    describe('isAnswerable', () => {
+        it('returns true for an answerable section-question', () => {
+            var question = {};
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.ANSWERABLE];
+            expect(FormUtils.isAnswerable(question)).toBeTruthy();
+        });
+        it('returns false for a non-answerable section-question', () => {
+            var question = {};
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
+            expect(FormUtils.isAnswerable(question)).toBeFalsy();
+        });
+    });
+
     describe('resolveValue', () => {
         it('returns null for no answer', () => {
             expect(FormUtils.resolveValue(null)).toBeNull();
