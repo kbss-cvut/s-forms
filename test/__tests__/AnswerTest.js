@@ -157,6 +157,23 @@ describe('Answer component', () => {
         expect(picker.props.dateTime).toEqual(value);
     });
 
+    it('renders datetime picker with answer value when no layout class is specified and numeric answer value is used', () => {
+        var value = Date.now();
+        answer = {
+            '@id': Generator.getRandomUri()
+        };
+        answer[Constants.HAS_DATA_VALUE] = value;
+        question[Constants.HAS_ANSWER] = [answer];
+        question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
+        var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
+
+            picker = TestUtils.findRenderedComponentWithType(component, require('kbss-react-bootstrap-datetimepicker').default);
+        expect(picker).not.toBeNull();
+        expect(picker.props.mode).toEqual('datetime');
+        expect(picker.props.dateTime).toEqual(value);
+        expect(picker.props.format).toEqual(Constants.DATETIME_NUMBER_FORMAT);
+    });
+
     it('renders checkbox with answer value when checkbox layout class is specified', () => {
         var answer = {
             '@id': Generator.getRandomUri()

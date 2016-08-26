@@ -3,6 +3,7 @@
 // Default bootstrap column count
 const COLUMN_COUNT = 12;
 const INPUT_LENGTH_THRESHOLD = 50;
+const DATETIME_NUMBER_FORMAT = 'x';
 
 const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
     HAS_SUBQUESTION = 'http://onto.fel.cvut.cz/ontologies/documentation/has_related_question',
@@ -46,6 +47,10 @@ export default class Constants {
 
     static get INPUT_LENGTH_THRESHOLD() {
         return INPUT_LENGTH_THRESHOLD;
+    }
+
+    static get DATETIME_NUMBER_FORMAT() {
+        return DATETIME_NUMBER_FORMAT;
     }
 
     static get FORM() {

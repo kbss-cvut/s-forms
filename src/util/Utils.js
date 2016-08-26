@@ -3,6 +3,7 @@
 import moment from 'moment';
 
 import Configuration from '../model/Configuration';
+import Constants from '../constants/Constants';
 import FormUtils from './FormUtils';
 
 export default class Utils {
@@ -54,12 +55,22 @@ export default class Utils {
      * @return {*} mode for kbss-react-bootstrap-datetimepicker
      */
     static resolveDateTimeMode(question) {
-        if (FormUtils.isDate(question)) {
+        if (FormUtils.isDateTime(question)) {
+            return 'datetime';
+        } else if (FormUtils.isDate(question)) {
             return 'date';
         } else if (FormUtils.isTime(question)) {
             return 'time';
         } else {
             return 'datetime';
+        }
+    }
+
+    static resolveDateTimePickerUiFormat(format) {
+        if (format === Constants.DATETIME_NUMBER_FORMAT) {
+            return Configuration.dateTimeFormat;
+        } else {
+            return format;
         }
     }
 
@@ -70,6 +81,9 @@ export default class Utils {
      * @return {*} moment instance
      */
     static resolveDateTimeValue(question, value) {
+        if (typeof value === 'number') {
+            return moment(value);
+        }
         if (FormUtils.isDateTime(question)) {
             return moment(value, Configuration.dateTimeFormat);
         } else if (FormUtils.isDate(question)) {
@@ -86,6 +100,25 @@ export default class Utils {
             return 'number';
         } else {
             return 'text';
+        }
+    }
+
+    /**
+     * Resolves which format of date/time/datetime value should be used in the datetime picker.
+     * @param question Question with format info
+     * @param originalValue Value read from answer, not processed by the rendered component
+     * @return {*} Format from Configuration
+     */
+    static resolveDateTimeFormat(question, originalValue) {
+        if (typeof originalValue === 'number') {
+            return Constants.DATETIME_NUMBER_FORMAT;
+        }
+        if (FormUtils.isDate(question)) {
+            return Configuration.dateFormat;
+        } else if (FormUtils.isTime(question)) {
+            return Configuration.timeFormat;
+        } else {
+            return Configuration.dateTimeFormat;
         }
     }
 }

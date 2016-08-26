@@ -64,7 +64,7 @@ export default class Configuration {
     }
 
     static set dateFormat(format) {
-        dateTimeFormat = format;
+        dateFormat = format;
     }
 
     static get timeFormat() {

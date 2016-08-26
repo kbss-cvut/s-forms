@@ -63,7 +63,8 @@
     "watchify": "watchify ./src/semforms.js -o ./dist/semforms.js",
     "lib": "babel ./src -d ./lib",
     "build-npm-prod": "npm run test && npm run build && npm run lib && npm pack",
-    "prebuild-npm-prod": "npm install"
+    "prebuild-npm-prod": "npm install",
+    "rendering-test-start": "watchify -o test/rendering/bundle.js -v -d test/rendering/TestApp.js"
   },
   "browserify": {
     "transform": [

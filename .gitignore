@@ -6,3 +6,4 @@ test/reports
 *.tgz
 lib
 dist
+**/bundle.js
