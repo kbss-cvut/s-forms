@@ -10,7 +10,6 @@ const CheckboxAnswer = (props) => {
     return React.createElement(Configuration.inputComponent, {
         type: 'checkbox',
         label: props.label,
-        bsClass: 'checkbox-answer',
         title: props.title,
         checked: props.value === true || props.value === 'true',
         onChange: (e) => {

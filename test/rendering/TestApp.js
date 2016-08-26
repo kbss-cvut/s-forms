@@ -1,13 +1,10 @@
 'use strict';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Grid} from 'react-bootstrap';
-
-import Configuration from '../../src/model/Configuration';
-import Constants from '../../src/constants/Constants';
-import Question from '../../src/components/Question';
-import WizardGenerator from '../../src/model/WizardGenerator';
+import React from "react";
+import ReactDOM from "react-dom";
+import Configuration from "../../src/model/Configuration";
+import Question from "../../src/components/Question";
+import WizardGenerator from "../../src/model/WizardGenerator";
 
 var wizard = require('./form.json');
 
