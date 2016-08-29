@@ -75,10 +75,7 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
 
 	CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/condition',
 
-	HAS_PATTERN = 'http://onto.fel.cvut.cz/ontologies/form-lt/has-pattern',
-
-	MIN_INCLUSIVE = 'http://www.w3.org/2001/XMLSchema#minInclusive',
-	MAX_INCLUSIVE = 'http://www.w3.org/2001/XMLSchema#maxInclusive';
+	HAS_PATTERN = 'http://onto.fel.cvut.cz/ontologies/form-lt/has-pattern';
 
 
 /**
@@ -255,15 +252,5 @@ export default class Constants {
 
     static get HAS_PATTERN() {
 	return HAS_PATTERN; 
-    } 
-
-    static get MIN_INCLUSIVE() {
-	return MIN_INCLUSIVE; 
-    } 
-
-    static get MAX_INCLUSIVE() {
-	return MAX_INCLUSIVE; 
-    } 
-
-
+    }
 }
