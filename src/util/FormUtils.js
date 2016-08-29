@@ -63,10 +63,6 @@ export default class FormUtils {
         return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.CHECKBOX);
     }
 
-    static isNumericInput(question) {
-        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.NUMBER);
-    }
-
     static isMaskedInput(question) {
         return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.MASKED_INPUT);
     }

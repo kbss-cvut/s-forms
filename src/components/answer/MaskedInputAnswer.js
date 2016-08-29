@@ -4,6 +4,7 @@ import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 
 import Constants from '../../constants/Constants';
+import FormUtils from '../../util/FormUtils';
 import InputAnswer from './InputAnswer';
 import Logger from '../../util/Logger';
 import MaskedInput from '../MaskedInput';
@@ -18,7 +19,7 @@ const MaskedInputAnswer = (props) => {
         return <InputAnswer {...props}/>;
     }
     return <MaskedInput mask={mask} value={value} label={props.label} title={props.title} placeholder={props.label}
-                        onChange={(e) => props.onChange(e.target.value)}/>;
+                        onChange={(e) => props.onChange(e.target.value)} disabled={FormUtils.isDisabled(question)}/>;
 };
 
 MaskedInputAnswer.propTypes = {

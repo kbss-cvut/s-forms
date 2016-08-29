@@ -196,7 +196,7 @@ describe('Answer component', () => {
             };
         answer[Constants.HAS_DATA_VALUE] = value;
         question[Constants.HAS_ANSWER] = [answer];
-        question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.NUMBER);
+        question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
         var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
 
             input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');

@@ -93,16 +93,6 @@ export default class Utils {
         }
     }
 
-    static resolveInputType(question, value) {
-        if (FormUtils.isTextarea(question, value)) {
-            return 'textarea';
-        } else if (FormUtils.isNumericInput(question)) {
-            return 'number';
-        } else {
-            return 'text';
-        }
-    }
-
     /**
      * Resolves which format of date/time/datetime value should be used in the datetime picker.
      * @param question Question with format info

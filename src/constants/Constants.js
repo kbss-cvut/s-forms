@@ -13,6 +13,7 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
     HAS_VALUE_TYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-value-type',
     IS_DISABLED = 'http://onto.fel.cvut.cz/ontologies/aviation/form-376/is-disabled',
     INPUT_MASK = 'http://onto.fel.cvut.cz/ontologies/form/has-input-mask',
+    HAS_DATATYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-datatype',
     LAYOUT_CLASS = 'http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class',
     LAYOUT = {
         FORM: 'form',
@@ -22,7 +23,6 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
         DISABLED: 'disabled',
         HIDDEN: 'hidden',
         TEXTAREA: 'textarea',
-        NUMBER: 'number',
         DATE: 'date',
         TIME: 'time',
         DATETIME: 'datetime',
@@ -38,7 +38,21 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
     HAS_ANSWER_ORIGIN = 'http://onto.fel.cvut.cz/ontologies/form/has-answer-origin',
 
     HAS_DATA_VALUE = 'http://onto.fel.cvut.cz/ontologies/documentation/has_data_value',
-    HAS_OBJECT_VALUE = 'http://onto.fel.cvut.cz/ontologies/documentation/has_object_value';
+    HAS_OBJECT_VALUE = 'http://onto.fel.cvut.cz/ontologies/documentation/has_object_value',
+
+    XSD = {
+        MAX_EXCLUSIVE: 'http://www.w3.org/2001/XMLSchema#maxExclusive',
+        MAX_INCLUSIVE: 'http://www.w3.org/2001/XMLSchema#maxInclusive',
+        MIN_EXCLUSIVE: 'http://www.w3.org/2001/XMLSchema#minExclusive',
+        MIN_INCLUSIVE: 'http://www.w3.org/2001/XMLSchema#minInclusive',
+
+        INT: 'http://www.w3.org/2001/XMLSchema#int',
+        INTEGER: 'http://www.w3.org/2001/XMLSchema#integer',
+        NEGATIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#negativeInteger',
+        NON_NEGATIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger',
+        NON_POSITIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#nonPositiveInteger',
+        POSITIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#positiveInteger'
+    };
 
 /**
  * Contains mainly definition of constants used to parse the form declaration.
@@ -88,6 +102,10 @@ export default class Constants {
         return INPUT_MASK;
     }
 
+    static get HAS_DATATYPE() {
+        return HAS_DATATYPE;
+    }
+
     static get LAYOUT_CLASS() {
         return LAYOUT_CLASS;
     }
@@ -122,5 +140,9 @@ export default class Constants {
 
     static get HAS_OBJECT_VALUE() {
         return HAS_OBJECT_VALUE;
+    }
+
+    static get XSD() {
+        return XSD;
     }
 }
