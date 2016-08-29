@@ -81,13 +81,18 @@ export default class Question extends React.Component {
             isTextarea = FormUtils.isTextarea(this.props.question, FormUtils.resolveValue(answers[i]));
             cls = Question._getAnswerClass(isTextarea);
             row.push(<div key={'row-item-' + i} className={cls}>
-                <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange}/>
+                <div className="row">
+                    <div className="col-xs-10">
+                        <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange}/>
+                    </div>
+                    <div>
+                        {this._renderUnits()}
+                        {this._renderQuestionHelp()}
+                    </div>
+                </div>
             </div>);
             if (row.length === Constants.GENERATED_ROW_SIZE || isTextarea) {
-                children.push(<div className='row' key={'question-row-' + i}>
-                    {row}
-                    {this._renderQuestionHelp()}
-                </div>);
+                children.push(<div className='row' key={'question-row-' + i}>{row}</div>);
                 row = [];
             }
         }
@@ -124,6 +129,12 @@ export default class Question extends React.Component {
             <HelpIcon
                 text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], Configuration.intl)}
                 iconClass={helpClass}/> : null;
+    }
+
+    _renderUnits() {
+        var question = this.props.question;
+        return question[Constants.HAS_UNIT] ?
+            <div className="has-unit-label">{question[Constants.HAS_UNIT]}</div> : null;
     }
 
     renderSubQuestions() {

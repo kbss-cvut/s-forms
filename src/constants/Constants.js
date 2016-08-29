@@ -14,6 +14,7 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
     IS_DISABLED = 'http://onto.fel.cvut.cz/ontologies/aviation/form-376/is-disabled',
     INPUT_MASK = 'http://onto.fel.cvut.cz/ontologies/form/has-input-mask',
     HAS_DATATYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-datatype',
+    HAS_UNIT = 'http://onto.fel.cvut.cz/ontologies/form/has-unit',
     LAYOUT_CLASS = 'http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class',
     LAYOUT = {
         FORM: 'form',
@@ -106,6 +107,10 @@ export default class Constants {
 
     static get HAS_DATATYPE() {
         return HAS_DATATYPE;
+    }
+
+    static get HAS_UNIT() {
+        return HAS_UNIT;
     }
 
     static get LAYOUT_CLASS() {

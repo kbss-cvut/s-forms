@@ -18259,7 +18259,11 @@
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--d-h--size-of-the-tumor--latero-lateral-q",
       "@type": "doc:question",
-      "label": "latero-lateral (LL)"
+      "label": "latero-lateral (LL)",
+      "has-datatype": "xsd:int",
+      "has-unit": "mm",
+      "maxInclusive": "20",
+      "minInclusive": "0"
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--d-h--size-of-the-tumor--vertical-q",
@@ -18507,6 +18511,19 @@
     },
     "description": {
       "@id": "http://purl.org/dc/elements/1.1/description"
+    },
+    "has-unit": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-unit"
+    },
+    "maxInclusive": {
+      "@id": "http://www.w3.org/2001/XMLSchema#maxInclusive"
+    },
+    "minInclusive": {
+      "@id": "http://www.w3.org/2001/XMLSchema#minInclusive"
+    },
+    "has-datatype": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-datatype",
+      "@type": "@id"
     },
     "form": "http://onto.fel.cvut.cz/ontologies/form/",
     "owl": "http://www.w3.org/2002/07/owl#",
