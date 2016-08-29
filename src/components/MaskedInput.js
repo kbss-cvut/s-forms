@@ -1,12 +1,10 @@
 'use strict';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import InputMask from 'inputmask-core';
-import {getSelection, setSelection} from 'react/lib/ReactInputSelection';
-import assign from 'object-assign';
-
-import Configuration from '../model/Configuration';
+import React from "react";
+import InputMask from "inputmask-core";
+import {getSelection, setSelection} from "react/lib/ReactInputSelection";
+import assign from "object-assign";
+import Configuration from "../model/Configuration";
 
 const KEYCODE_Z = 90;
 const KEYCODE_Y = 89;
