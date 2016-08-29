@@ -219,4 +219,22 @@ describe('Answer component', () => {
         expect(input).toBeDefined();
         expect(input.value).toEqual(value);
     });
+
+    it('renders masked input for question with masked-input layout class', () => {
+        var value = '08/2016',
+            mask = '11/1111',
+            answer = {
+                '@id': Generator.getRandomUri()
+            };
+        answer[Constants.HAS_DATA_VALUE] = value;
+        question[Constants.HAS_ANSWER] = [answer];
+        question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.MASKED_INPUT);
+        question[Constants.INPUT_MASK] = mask;
+        var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
+
+            input = TestUtils.findRenderedComponentWithType(component, require('../../src/components/MaskedInput').default);
+        expect(input).toBeDefined();
+        expect(input.props.value).toEqual(value);
+        expect(input.props.mask).toEqual(mask);
+    });
 });

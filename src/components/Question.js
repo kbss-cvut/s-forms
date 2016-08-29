@@ -15,8 +15,7 @@ export default class Question extends React.Component {
         question: React.PropTypes.object.isRequired,
         onChange: React.PropTypes.func.isRequired,
         index: React.PropTypes.number,
-        withoutPanel: React.PropTypes.bool,
-        indent: React.PropTypes.number.isRequired
+        withoutPanel: React.PropTypes.bool
     };
 
     constructor(props) {
@@ -119,7 +118,7 @@ export default class Question extends React.Component {
             subQuestions = this._getSubQuestions();
         for (var i = 0, len = subQuestions.length; i < len; i++) {
             children.push(<Question key={'sub-question-' + i} index={i} question={subQuestions[i]}
-                                    onChange={this.onSubQuestionChange} indent={this.props.indent + 1}/>);
+                                    onChange={this.onSubQuestionChange}/>);
         }
         return children;
     }

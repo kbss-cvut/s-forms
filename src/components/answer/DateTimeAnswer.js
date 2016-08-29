@@ -33,7 +33,7 @@ DateTimeAnswer.propTypes = {
     question: React.PropTypes.object.isRequired,
     label: React.PropTypes.string.isRequired,
     title: React.PropTypes.string,
-    value: React.PropTypes.oneOfType[React.PropTypes.string, React.PropTypes.number],
+    value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     onChange: React.PropTypes.func.isRequired
 };
 

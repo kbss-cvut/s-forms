@@ -12,6 +12,7 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
     HAS_OPTIONS_QUERY = 'http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query',
     HAS_VALUE_TYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-value-type',
     IS_DISABLED = 'http://onto.fel.cvut.cz/ontologies/aviation/form-376/is-disabled',
+    INPUT_MASK = 'http://onto.fel.cvut.cz/ontologies/form/has-input-mask',
     LAYOUT_CLASS = 'http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class',
     LAYOUT = {
         FORM: 'form',
@@ -26,7 +27,8 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
         TIME: 'time',
         DATETIME: 'datetime',
         CHECKBOX: 'checkbox',
-        ANSWERABLE: 'answerable'
+        ANSWERABLE: 'answerable',
+        MASKED_INPUT: 'masked-input'
     },
     VALUE_TYPE_CODE = 'code',
     VALUE_TYPE_TEXT = 'text',
@@ -80,6 +82,10 @@ export default class Constants {
 
     static get IS_DISABLED() {
         return IS_DISABLED;
+    }
+
+    static get INPUT_MASK() {
+        return INPUT_MASK;
     }
 
     static get LAYOUT_CLASS() {

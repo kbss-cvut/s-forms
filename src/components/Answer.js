@@ -8,6 +8,7 @@ import InputAnswer from "./answer/InputAnswer";
 import JsonldUtils from "jsonld-utils";
 import Configuration from "../model/Configuration";
 import Constants from "../constants/Constants";
+import MaskedInputAnswer from './answer/MaskedInputAnswer';
 import SelectAnswer from "./answer/SelectAnswer";
 import FormUtils from "../util/FormUtils";
 import TypeaheadAnswer from "./answer/TypeaheadAnswer";
@@ -58,6 +59,8 @@ export default class Answer extends React.Component {
             component = this._renderDateTimePicker(value, label, title);
         } else if (FormUtils.isCheckbox(question)) {
             component = this._renderCheckbox(value, label, title);
+        } else if (FormUtils.isMaskedInput(question)) {
+            component = this._renderMaskedInput(value, label, title);
         } else {
             component = this._renderRegularInput(value, label, title);
         }
@@ -86,6 +89,11 @@ export default class Answer extends React.Component {
     _renderCheckbox(value, label, title) {
         return <CheckboxAnswer label={label} title={title} value={value} onChange={this.onValueChange}
                                question={this.props.question}/>;
+    }
+
+    _renderMaskedInput(value, label, title) {
+        return <MaskedInputAnswer label={label} title={title} value={value} onChange={this.onValueChange}
+                                  question={this.props.question} answer={this.props.answer}/>;
     }
 
     _renderRegularInput(value, label, title) {

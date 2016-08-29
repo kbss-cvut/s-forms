@@ -5,6 +5,12 @@ import Constants from "../../src/constants/Constants";
 
 describe('FormUtils', () => {
 
+    var question;
+
+    beforeEach(() => {
+        question = {};
+    });
+
     describe('isForm', () => {
         it('returns true for a form element.', () => {
             var form = {
@@ -26,13 +32,11 @@ describe('FormUtils', () => {
 
     describe('isWizardStep', () => {
         it('returns true for a wizard step question', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.WIZARD_STEP];
             expect(FormUtils.isWizardStep(question)).toBeTruthy();
         });
 
         it('returns false for a section', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
             expect(FormUtils.isWizardStep(question)).toBeFalsy();
         });
@@ -40,7 +44,6 @@ describe('FormUtils', () => {
 
     describe('isSection', () => {
         it('returns true for a section.', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
             expect(FormUtils.isSection(question)).toBeTruthy();
         });
@@ -52,7 +55,6 @@ describe('FormUtils', () => {
 
     describe('isTypeahead', () => {
         it('returns true for a typeahead question.', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_TYPEAHEAD];
             expect(FormUtils.isTypeahead(question)).toBeTruthy();
         });
@@ -64,7 +66,6 @@ describe('FormUtils', () => {
 
     describe('isDisabled', () => {
         it('returns true for a disabled question.', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DISABLED];
             expect(FormUtils.isDisabled(question)).toBeTruthy();
         });
@@ -76,7 +77,6 @@ describe('FormUtils', () => {
 
     describe('isHidden', () => {
         it('returns true for a hidden question.', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.HIDDEN];
             expect(FormUtils.isHidden(question)).toBeTruthy();
         });
@@ -88,7 +88,6 @@ describe('FormUtils', () => {
 
     describe('isCalendar', () => {
         it('returns true for a date question', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DATE];
             expect(FormUtils.isCalendar(question)).toBeTruthy();
         });
@@ -101,51 +100,43 @@ describe('FormUtils', () => {
 
     describe('isDate', () => {
         it('returns true for a date question', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DATE];
             expect(FormUtils.isCalendar(question)).toBeTruthy();
         });
 
         it('returns false for a regular question', () => {
-            var question = {};
             expect(FormUtils.isCalendar(question)).toBeFalsy();
         });
     });
 
     describe('isTime', () => {
         it('returns true for a time question', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.TIME];
             expect(FormUtils.isCalendar(question)).toBeTruthy();
         });
 
         it('returns false for a regular question', () => {
-            var question = {};
             expect(FormUtils.isCalendar(question)).toBeFalsy();
         });
     });
 
     describe('isDateTime', () => {
         it('returns true for a datetime question', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DATETIME];
             expect(FormUtils.isCalendar(question)).toBeTruthy();
         });
 
         it('returns false for a regular question', () => {
-            var question = {};
             expect(FormUtils.isCalendar(question)).toBeFalsy();
         });
     });
 
     describe('isCheckbox', () => {
         it('returns true for a checkbox question', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.CHECKBOX];
             expect(FormUtils.isCheckbox(question)).toBeTruthy();
         });
         it('returns false for a non-checkbox question', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [];
             expect(FormUtils.isCheckbox(question)).toBeFalsy();
         });
@@ -153,14 +144,23 @@ describe('FormUtils', () => {
 
     describe('isAnswerable', () => {
         it('returns true for an answerable section-question', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.ANSWERABLE];
             expect(FormUtils.isAnswerable(question)).toBeTruthy();
         });
         it('returns false for a non-answerable section-question', () => {
-            var question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
             expect(FormUtils.isAnswerable(question)).toBeFalsy();
+        });
+    });
+
+    describe('isMaskedInput', () => {
+        it('returns true for a question with masked input layout class', () => {
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.MASKED_INPUT];
+            expect(FormUtils.isMaskedInput(question)).toBeTruthy();
+        });
+
+        it('returns false for a non-masked question', () => {
+            expect(FormUtils.isMaskedInput(question)).toBeFalsy();
         });
     });
 
