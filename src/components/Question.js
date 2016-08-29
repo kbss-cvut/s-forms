@@ -2,12 +2,13 @@
 
 import React from "react";
 import assign from "object-assign";
-import {Panel, Row, Col} from "react-bootstrap";
+import {Panel} from "react-bootstrap";
 import JsonLdUtils from "jsonld-utils";
 import Answer from "./Answer";
 import Configuration from "../model/Configuration";
 import Constants from "../constants/Constants";
 import FormUtils from "../util/FormUtils";
+import HelpIcon from "./HelpIcon";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 
 export default class Question extends React.Component {
@@ -83,7 +84,10 @@ export default class Question extends React.Component {
                 <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange}/>
             </div>);
             if (row.length === Constants.GENERATED_ROW_SIZE || isTextarea) {
-                children.push(<div className='row' key={'question-row-' + i}>{row}</div>);
+                children.push(<div className='row' key={'question-row-' + i}>
+                    {row}
+                    {this._renderQuestionHelp()}
+                </div>);
                 row = [];
             }
         }
@@ -111,6 +115,15 @@ export default class Question extends React.Component {
     static _getAnswerClass(isTextarea) {
         return isTextarea ? 'col-xs-12' : (
             Constants.GENERATED_ROW_SIZE === 1 ? 'col-xs-3' : 'col-xs-' + (Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE));
+    }
+
+    _renderQuestionHelp() {
+        var question = this.props.question,
+            helpClass = FormUtils.isCheckbox(question) ? 'help-icon-checkbox' : 'help-icon-text-input';
+        return question[Constants.HELP_DESCRIPTION] ?
+            <HelpIcon
+                text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], Configuration.intl)}
+                iconClass={helpClass}/> : null;
     }
 
     renderSubQuestions() {

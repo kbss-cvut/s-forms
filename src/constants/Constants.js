@@ -40,6 +40,8 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
     HAS_DATA_VALUE = 'http://onto.fel.cvut.cz/ontologies/documentation/has_data_value',
     HAS_OBJECT_VALUE = 'http://onto.fel.cvut.cz/ontologies/documentation/has_object_value',
 
+    HELP_DESCRIPTION = 'http://purl.org/dc/elements/1.1/description',
+
     XSD = {
         MAX_EXCLUSIVE: 'http://www.w3.org/2001/XMLSchema#maxExclusive',
         MAX_INCLUSIVE: 'http://www.w3.org/2001/XMLSchema#maxInclusive',
@@ -140,6 +142,10 @@ export default class Constants {
 
     static get HAS_OBJECT_VALUE() {
         return HAS_OBJECT_VALUE;
+    }
+
+    static get HELP_DESCRIPTION() {
+        return HELP_DESCRIPTION;
     }
 
     static get XSD() {
