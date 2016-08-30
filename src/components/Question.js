@@ -9,6 +9,7 @@ import Configuration from "../model/Configuration";
 import Constants from "../constants/Constants";
 import FormUtils from "../util/FormUtils";
 import HelpIcon from "./HelpIcon";
+import JsonObjectMap from "../util/JsonObjectMap";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 
 export default class Question extends React.Component {
@@ -21,6 +22,7 @@ export default class Question extends React.Component {
 
     constructor(props) {
         super(props);
+        JsonObjectMap.addObject(this.props.question["@id"], this.props.question);
     }
 
     onAnswerChange = (answerIndex, change) => {
@@ -34,12 +36,17 @@ export default class Question extends React.Component {
     _onChange(att, valueIndex, newValue) {
         var newState = assign({}, this.props.question);
         newState[att][valueIndex] = newValue;
+
+        JsonObjectMap.addObject(newState["@id"], newState);
         this.props.onChange(this.props.index, newState);
     }
 
     render() {
         var question = this.props.question;
         if (FormUtils.isHidden(question)) {
+            return null;
+        }
+        if (! FormUtils.isRelevant(question)) {
             return null;
         }
         if (FormUtils.isAnswerable(question)) {

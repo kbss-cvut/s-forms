@@ -3,6 +3,8 @@
 import JsonLdUtils from "jsonld-utils";
 
 import Constants from "../constants/Constants";
+import Utils from "./Utils";
+import JsonObjectMap from "./JsonObjectMap";
 
 export default class FormUtils {
 
@@ -77,4 +79,54 @@ export default class FormUtils {
             return JsonLdUtils.getJsonAttValue(answer, Constants.HAS_DATA_VALUE);
         }
     }
+
+    static isRelevant(question) {
+
+        if (!question[Constants.IS_RELEVANT_IF]) {
+            return true;
+        }
+
+        for (var cond of Utils.asArray(question[Constants.IS_RELEVANT_IF])) {
+
+            if (FormUtils.testCondition(cond)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static testCondition(condition) {
+
+        var questionsWithValidAnswer = condition[Constants.HAS_VALID_ANSWER],
+            acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE],
+            testedQuestion = condition[Constants.HAS_TESTED_QUESTION];
+
+        // valid answers
+        if (questionsWithValidAnswer) {
+            for (var question of Utils.asArray(questionsWithValidAnswer)) {
+                return true; //TODO not implemented
+            }
+        }
+
+        // concrete values
+        if (acceptedAnswerValues && testedQuestion) {
+            var question =  JsonObjectMap.getObject(testedQuestion["@id"]);
+            for (var expValueObj of Utils.asArray(acceptedAnswerValues)) {
+                var expValue = expValueObj['@id'];
+                var answer = question[Constants.HAS_ANSWER];
+
+                if (!answer) {
+                    return false;
+                }
+
+                var qValue = FormUtils.resolveValue(answer);
+
+                if (qValue === expValue) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

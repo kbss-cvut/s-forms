@@ -111,4 +111,20 @@ export default class Utils {
             return Configuration.dateTimeFormat;
         }
     }
+
+    /**
+     * Wraps passed object into new array if it is not array already.
+     * @param object_or_array An object or array.
+     * @returns {*} New array containing passed object or passed array.
+     */
+    static asArray(object_or_array) {
+        if (! object_or_array) {
+            return {};
+        }
+        if (object_or_array.constructor === Array) {
+            return object_or_array;
+        }
+        return [ object_or_array ];
+    }
+
 }

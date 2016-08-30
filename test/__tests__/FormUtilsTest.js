@@ -2,6 +2,8 @@
 
 import FormUtils from "../../src/util/FormUtils";
 import Constants from "../../src/constants/Constants";
+import JsonObjectMap from "../../src/util/JsonObjectMap";
+import assign from "object-assign";
 
 describe('FormUtils', () => {
 
@@ -193,5 +195,64 @@ describe('FormUtils', () => {
                 };
             expect(FormUtils.resolveValue(answer)).toEqual(value);
         });
+    });
+
+    describe('testCondition', () => {
+
+        var condition = {
+                "@type": ["http://onto.fel.cvut.cz/ontologies/form/condition"],
+                "http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value": [
+                    {
+                        "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/dod"
+                    },
+                    {
+                        "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/doc"
+                    }],
+                "http://onto.fel.cvut.cz/ontologies/form/has-tested-question": [{
+                    "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status"
+                }]
+            },
+            question = {
+                "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status",
+                "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+                "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": {
+                    "@type": "http://onto.fel.cvut.cz/ontologies/documentation/answer",
+                    "http://onto.fel.cvut.cz/ontologies/documentation/has_object_value": {
+                            "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/dod"
+                        }
+                }
+            };
+
+        beforeEach(function () {
+            spyOn(JsonObjectMap, "getObject").and.returnValue(question);
+        });
+
+        it('returns false in condition without answer values.', () => {
+
+            var noAnswerCondition = assign({}, condition);
+            delete noAnswerCondition["http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value"];
+            expect(FormUtils.testCondition(noAnswerCondition));
+
+            expect(JsonObjectMap.getObject).not.toHaveBeenCalled();
+        });
+
+
+        it('return true if accepts value that exists in a question.', () => {
+
+            expect(FormUtils.testCondition(condition)).toEqual(true);
+        });
+
+        it('return false if accepts value that does not exists in a question.', () => {
+
+            var wrongAnswerQuestion = assign({}, question);
+            wrongAnswerQuestion
+                ["http://onto.fel.cvut.cz/ontologies/documentation/has_answer"]
+                ["http://onto.fel.cvut.cz/ontologies/documentation/has_object_value"] = {
+                        "@id": "http://bad-value"
+                    };
+            expect(FormUtils.testCondition(wrongAnswerQuestion)).toEqual(false);
+        });
+
+
     });
 });
