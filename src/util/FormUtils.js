@@ -1,10 +1,12 @@
 'use strict';
 
 import JsonLdUtils from "jsonld-utils";
+import jsonld from "jsonld";
 
 import Constants from "../constants/Constants";
 import Utils from "./Utils";
 import JsonObjectMap from "./JsonObjectMap";
+import JsonLdObjectUtils from "./JsonLdObjectUtils"
 
 export default class FormUtils {
 
@@ -80,6 +82,19 @@ export default class FormUtils {
         }
     }
 
+    static resolveValueObject(answer) {
+        if (!answer) {
+            return null;
+        }
+        if (answer[Constants.HAS_OBJECT_VALUE]) {
+            return Utils.asArray(answer[Constants.HAS_OBJECT_VALUE])[0];
+        }
+        if (answer[Constants.HAS_DATA_VALUE]) {
+            return Utils.asArray(answer[Constants.HAS_DATA_VALUE])[0];
+        }
+        return null;
+    }
+
     static isRelevant(question) {
 
         if (!question[Constants.IS_RELEVANT_IF]) {
@@ -111,17 +126,15 @@ export default class FormUtils {
         // concrete values
         if (acceptedAnswerValues && testedQuestion) {
             var question =  JsonObjectMap.getObject(testedQuestion["@id"]);
-            for (var expValueObj of Utils.asArray(acceptedAnswerValues)) {
-                var expValue = expValueObj['@id'];
-                var answer = question[Constants.HAS_ANSWER];
+            for (var expValue of Utils.asArray(acceptedAnswerValues)) {
+                var answers = jsonld.getValues(question, Constants.HAS_ANSWER);
 
-                if (!answer) {
+                if (answers.length === 0) {
                     return false;
                 }
+                var qValue = FormUtils.resolveValueObject(answers[0]);
 
-                var qValue = FormUtils.resolveValue(answer);
-
-                if (qValue === expValue) {
+                if (JsonLdObjectUtils.compareValues(qValue, expValue)) {
                     return true;
                 }
             }

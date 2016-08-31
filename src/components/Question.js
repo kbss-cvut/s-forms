@@ -126,7 +126,7 @@ export default class Question extends React.Component {
 
     static _getAnswerClass(isTextarea) {
         return isTextarea ? 'col-xs-12' : (
-            Constants.GENERATED_ROW_SIZE === 1 ? 'col-xs-3' : 'col-xs-' + (Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE));
+            Constants.GENERATED_ROW_SIZE === 1 ? 'col-xs-5' : 'col-xs-' + (Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE));
     }
 
     _renderQuestionHelp() {
