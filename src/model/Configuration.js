@@ -52,7 +52,7 @@ export default class Configuration {
     }
 
     static get inputComponent() {
-        return inputComponent ? inputComponent : require('react-bootstrap').Input;
+        return inputComponent ? inputComponent : require('../components/DefaultInput').default;
     }
 
     static set inputComponent(component) {

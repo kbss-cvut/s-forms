@@ -1,6 +1,6 @@
 {
   "name": "semforms",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -19,18 +19,19 @@
     "url": "https://kbss.felk.cvut.cz/git/semforms.git"
   },
   "dependencies": {
-    "react-bootstrap": "^0.28.5",
+    "react-bootstrap": "^0.30.3",
     "object-assign": "^4.1.0",
     "jsonld": "^0.4.6",
     "moment": "^2.14.1",
-    "kbss-react-bootstrap-datetimepicker": "https://dev.inbas.cz/dist/kbss-react-bootstrap-datetimepicker-0.0.4.tgz",
-    "react-bootstrap-typeahead": "https://dev.inbas.cz/dist/react-bootstrap-typeahead-0.0.7.tgz",
+    "kbss-react-bootstrap-datetimepicker": "https://dev.inbas.cz/dist/kbss-react-bootstrap-datetimepicker-0.0.5.tgz",
+    "react-bootstrap-typeahead": "https://dev.inbas.cz/dist/react-bootstrap-typeahead-0.0.9.tgz",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.3.tgz",
-    "inputmask-core": "^2.1.1"
+    "inputmask-core": "^2.1.1",
+    "babel-runtime": "^6.9.2"
   },
   "peerDependencies": {
-    "react": ">= 15.0.1",
-    "react-dom": ">= 15.0.1"
+    "react": ">= 15.3.2",
+    "react-dom": ">= 15.3.2"
   },
   "main": "lib/semforms.js",
   "private": true,
@@ -48,8 +49,8 @@
     "browserify": "^13.0.0",
     "lodash": "^4.11.1",
     "react": "^15.0.1",
-    "react-addons-test-utils": "^15.0.1",
-    "react-dom": "^15.0.1",
+    "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
     "react-tools": "^0.13.3",
     "watchify": "^3.7.0",
     "webpack": "^1.12.15",
