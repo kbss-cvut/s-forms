@@ -70,11 +70,10 @@ export default class TypeaheadAnswer extends React.Component {
                 disabled: FormUtils.isDisabled(question)
             };
         return <div>
-            <label className='control-label'>{this.props.label}</label>
             <Typeahead ref={(c) => this.typeahead = c} className='form-group form-group-sm' formInputOption='id'
                        inputProps={inputProps}
                        title={this.props.title} value={value} label={this.props.label}
-                       placeholder={this.props.label} filterOption='name'
+                       placeholder={this.props.label} filterOption='name' size='small'
                        displayOption='name' onOptionSelected={this._onOptionSelected} optionsButton={true}
                        options={this.state.options} customListComponent={Configuration.typeaheadResultList}/>
         </div>;
