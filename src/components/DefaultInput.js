@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Checkbox, ControlLabel, FormControl, FormGroup, Radio} from 'react-bootstrap';
+import {HelpBlock, Checkbox, ControlLabel, FormControl, FormGroup, Radio} from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {
     static propTypes = {

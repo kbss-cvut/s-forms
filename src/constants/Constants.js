@@ -66,6 +66,7 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
 	HAS_VALID_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/has-valid-answer',
 	IS_RELEVANT_IF = 'http://onto.fel.cvut.cz/ontologies/form/is-relevant-if',
 	IS_VALID_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/is-valid-answer',
+    HAS_VALIDATION_MESSAGE = 'http://onto.fel.cvut.cz/ontologies/form/has-validation-message',
 	NEGATIVE_CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/negative-condition',
 	REQUIRES_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer',
 	REQUIRES_ANSWER_DESCRIPTION_IF = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-description-if',
@@ -220,7 +221,11 @@ export default class Constants {
 
     static get IS_VALID_ANSWER() {
 	return IS_VALID_ANSWER; 
-    } 
+    }
+
+    static get HAS_VALIDATION_MESSAGE() {
+        return HAS_VALIDATION_MESSAGE;
+    }
 
     static get NEGATIVE_CONDITION() {
 	return NEGATIVE_CONDITION; 

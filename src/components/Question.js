@@ -11,6 +11,7 @@ import FormUtils from "../util/FormUtils";
 import HelpIcon from "./HelpIcon";
 import JsonObjectMap from "../util/JsonObjectMap";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
+import ValidatorFactory from "../model/ValidatorFactory";
 
 export default class Question extends React.Component {
     static propTypes = {
@@ -22,7 +23,10 @@ export default class Question extends React.Component {
 
     constructor(props) {
         super(props);
-        JsonObjectMap.addObject(this.props.question["@id"], this.props.question);
+        JsonObjectMap.addObject(props.question["@id"], props.question);
+        this.state = {
+            validator: ValidatorFactory.createValidator(props.question)
+        };
     }
 
     onAnswerChange = (answerIndex, change) => {
@@ -36,6 +40,10 @@ export default class Question extends React.Component {
     _onChange(att, valueIndex, newValue) {
         var newState = assign({}, this.props.question);
         newState[att][valueIndex] = newValue;
+        if (att === Constants.HAS_ANSWER) {
+            var result = this.state.validator(newValue);
+            newState = assign(newState, result);
+        }
 
         JsonObjectMap.addObject(newState["@id"], newState);
         this.props.onChange(this.props.index, newState);
