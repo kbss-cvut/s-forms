@@ -55,28 +55,29 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
         POSITIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#positiveInteger'
     },
 
-	ACCEPTS_ANSWER_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value',
+    ACCEPTS_ANSWER_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value',
 
-	HAS_DATATYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-datatype',
-	HAS_LAYOUT_CLASS = 'http://onto.fel.cvut.cz/ontologies/form/has-layout-class',
-	HAS_POSSIBLE_VALUES_QUERY = 'http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query',
-	HAS_REQUIRED_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/has-required-value',
-	HAS_TESTED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/has-tested-question',
-	HAS_UNIT = 'http://onto.fel.cvut.cz/ontologies/form/has-unit',
-	HAS_VALID_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/has-valid-answer',
-	IS_RELEVANT_IF = 'http://onto.fel.cvut.cz/ontologies/form/is-relevant-if',
-	IS_VALID_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/is-valid-answer',
+    HAS_DATATYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-datatype',
+    HAS_LAYOUT_CLASS = 'http://onto.fel.cvut.cz/ontologies/form/has-layout-class',
+    HAS_POSSIBLE_VALUES_QUERY = 'http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query',
+    HAS_REQUIRED_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/has-required-value',
+    HAS_TESTED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/has-tested-question',
+    HAS_UNIT = 'http://onto.fel.cvut.cz/ontologies/form/has-unit',
+    HAS_VALID_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/has-valid-answer',
+    IS_RELEVANT_IF = 'http://onto.fel.cvut.cz/ontologies/form/is-relevant-if',
+    IS_VALID_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/is-valid-answer',
     HAS_VALIDATION_MESSAGE = 'http://onto.fel.cvut.cz/ontologies/form/has-validation-message',
-	NEGATIVE_CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/negative-condition',
-	REQUIRES_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer',
-	REQUIRES_ANSWER_DESCRIPTION_IF = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-description-if',
-	REQUIRES_ANSWER_IF = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-if',
-	REQUIRES_ANSWER_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-value',
-	REQUIRES_DESCRIPTION = 'http://onto.fel.cvut.cz/ontologies/form/requires-description',
+    NEGATIVE_CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/negative-condition',
+    REQUIRES_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer',
+    REQUIRES_ANSWER_DESCRIPTION_IF = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-description-if',
+    REQUIRES_ANSWER_IF = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-if',
+    REQUIRES_ANSWER_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-value',
+    REQUIRES_DESCRIPTION = 'http://onto.fel.cvut.cz/ontologies/form/requires-description',
+    HAS_PRECEDING_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/has-preceding-question',
 
-	CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/condition',
+    CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/condition',
 
-	HAS_PATTERN = 'http://onto.fel.cvut.cz/ontologies/form-lt/has-pattern';
+    HAS_PATTERN = 'http://onto.fel.cvut.cz/ontologies/form-lt/has-pattern';
 
 
 /**
@@ -184,43 +185,43 @@ export default class Constants {
     }
 
     static get ACCEPTS_ANSWER_VALUE() {
-	return ACCEPTS_ANSWER_VALUE;
+        return ACCEPTS_ANSWER_VALUE;
     }
 
     static get HAS_DATATYPE() {
-	return HAS_DATATYPE; 
-    } 
+        return HAS_DATATYPE;
+    }
 
     static get HAS_LAYOUT_CLASS() {
-	return HAS_LAYOUT_CLASS; 
-    } 
+        return HAS_LAYOUT_CLASS;
+    }
 
     static get HAS_POSSIBLE_VALUES_QUERY() {
-	return HAS_POSSIBLE_VALUES_QUERY; 
-    } 
+        return HAS_POSSIBLE_VALUES_QUERY;
+    }
 
     static get HAS_REQUIRED_VALUE() {
-	return HAS_REQUIRED_VALUE; 
-    } 
+        return HAS_REQUIRED_VALUE;
+    }
 
     static get HAS_TESTED_QUESTION() {
-	return HAS_TESTED_QUESTION; 
-    } 
+        return HAS_TESTED_QUESTION;
+    }
 
     static get HAS_UNIT() {
-	return HAS_UNIT; 
-    } 
+        return HAS_UNIT;
+    }
 
     static get HAS_VALID_ANSWER() {
-	return HAS_VALID_ANSWER; 
-    } 
+        return HAS_VALID_ANSWER;
+    }
 
     static get IS_RELEVANT_IF() {
-	return IS_RELEVANT_IF; 
-    } 
+        return IS_RELEVANT_IF;
+    }
 
     static get IS_VALID_ANSWER() {
-	return IS_VALID_ANSWER; 
+        return IS_VALID_ANSWER;
     }
 
     static get HAS_VALIDATION_MESSAGE() {
@@ -228,34 +229,38 @@ export default class Constants {
     }
 
     static get NEGATIVE_CONDITION() {
-	return NEGATIVE_CONDITION; 
-    } 
+        return NEGATIVE_CONDITION;
+    }
 
     static get REQUIRES_ANSWER() {
-	return REQUIRES_ANSWER; 
-    } 
+        return REQUIRES_ANSWER;
+    }
 
     static get REQUIRES_ANSWER_DESCRIPTION_IF() {
-	return REQUIRES_ANSWER_DESCRIPTION_IF; 
-    } 
+        return REQUIRES_ANSWER_DESCRIPTION_IF;
+    }
 
     static get REQUIRES_ANSWER_IF() {
-	return REQUIRES_ANSWER_IF; 
-    } 
+        return REQUIRES_ANSWER_IF;
+    }
 
     static get REQUIRES_ANSWER_VALUE() {
-	return REQUIRES_ANSWER_VALUE; 
-    } 
+        return REQUIRES_ANSWER_VALUE;
+    }
 
     static get REQUIRES_DESCRIPTION() {
-	return REQUIRES_DESCRIPTION; 
-    } 
+        return REQUIRES_DESCRIPTION;
+    }
+
+    static get HAS_PRECEDING_QUESTION() {
+        return HAS_PRECEDING_QUESTION;
+    }
 
     static get CONDITION() {
-	return CONDITION; 
-    } 
+        return CONDITION;
+    }
 
     static get HAS_PATTERN() {
-	return HAS_PATTERN; 
+        return HAS_PATTERN;
     }
 }
