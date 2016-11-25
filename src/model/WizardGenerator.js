@@ -8,6 +8,8 @@ import DefaultFormGenerator from "./DefaultFormGenerator";
 import FormUtils from "../util/FormUtils";
 import GeneratedStep from "../components/GeneratedStep";
 import Logger from "../util/Logger";
+import JsonLdFramingUtils from "../util/JsonLdFramingUtils"
+import JsonLdObjectUtils from "../util/JsonLdObjectUtils";
 
 export default class WizardGenerator {
 
@@ -34,13 +36,14 @@ export default class WizardGenerator {
      * @param callback Callback called with generated wizard step definitions when ready
      */
     static createWizard(structure, data, title, callback) {
-        jsonld.frame(structure, {}, function (err, framed) {
+
+        jsonld.flatten(structure, {}, null, function (err, flattened) {
             if (err) {
                 Logger.error(err);
             }
             try {
                 var wizardProperties = {
-                    steps: WizardGenerator._constructWizardSteps(framed),
+                    steps: WizardGenerator._constructWizardSteps(flattened),
                     title: title
                 };
             } catch (e) {
@@ -52,9 +55,17 @@ export default class WizardGenerator {
     }
 
     static _constructWizardSteps(structure) {
+
+        if (structure['@graph'][0]['@id'] !== undefined) {
+            JsonLdFramingUtils.modifyStructure(structure); //TODO make as callback
+        } else {
+            console.warn("default form is constructed.");
+        }
+
         var form = structure['@graph'],
             formElements,
             item,
+            stepQuestions = [],
             steps = [],
             i, len;
 
@@ -73,24 +84,28 @@ export default class WizardGenerator {
         for (i = 0, len = formElements.length; i < len; i++) {
             item = formElements[i];
             if (FormUtils.isWizardStep(item) && !FormUtils.isHidden(item)) {
-                steps.push({
-                    name: JsonLdUtils.getLocalized(item[JsonLdUtils.RDFS_LABEL], Configuration.intl),
-                    component: GeneratedStep,
-                    data: item
-                });
+                stepQuestions.push(item);
             } else {
                 Logger.warn('Item is not a wizard step: ' + item);
             }
         }
-        // TODO Temporary sorting
-        steps.sort(function (a, b) {
-            if (a.name < b.name) {
-                return 1;
-            } else if (a.name > b.name) {
-                return -1;
-            }
-            return 0;
-        });
+
+        // sort by label
+        stepQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
+
+        // sort by property
+        JsonLdObjectUtils.toplogicalSort(stepQuestions, Constants.HAS_PRECEDING_QUESTION);
+
+
+        steps = stepQuestions.map(
+            (q) => {
+                return {
+                    name: JsonLdUtils.getLocalized(q[JsonLdUtils.RDFS_LABEL], Configuration.intl),
+                    component: GeneratedStep,
+                    data: q
+                };
+            });
+
         Configuration.wizardStore.initWizard({
             root: form
         }, steps.map((item) => {

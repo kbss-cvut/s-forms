@@ -12,6 +12,7 @@ import HelpIcon from "./HelpIcon";
 import JsonObjectMap from "../util/JsonObjectMap";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 import ValidatorFactory from "../model/ValidatorFactory";
+import JsonLdObjectUtils from "../util/JsonLdObjectUtils";
 
 export default class Question extends React.Component {
     static propTypes = {
@@ -170,17 +171,13 @@ export default class Question extends React.Component {
         if (!Array.isArray(question[Constants.HAS_SUBQUESTION])) {
             question[Constants.HAS_SUBQUESTION] = [question[Constants.HAS_SUBQUESTION]];
         }
-        // TODO Temporary sorting
-        question[Constants.HAS_SUBQUESTION].sort(function (a, b) {
-            var aLabel = JsonLdUtils.getJsonAttValue(a, JsonLdUtils.RDFS_LABEL),
-                bLabel = JsonLdUtils.getJsonAttValue(b, JsonLdUtils.RDFS_LABEL);
-            if (aLabel < bLabel) {
-                return -1;
-            } else if (aLabel > bLabel) {
-                return 1;
-            }
-            return 0;
-        });
+
+        // sort by label
+        question[Constants.HAS_SUBQUESTION].sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
+
+        // sort by property
+        JsonLdObjectUtils.toplogicalSort(question[Constants.HAS_SUBQUESTION], Constants.HAS_PRECEDING_QUESTION);
+
         return question[Constants.HAS_SUBQUESTION];
     }
 }
