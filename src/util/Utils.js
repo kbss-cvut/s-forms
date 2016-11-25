@@ -119,7 +119,7 @@ export default class Utils {
      */
     static asArray(object_or_array) {
         if (! object_or_array) {
-            return {};
+            return [];
         }
         if (object_or_array.constructor === Array) {
             return object_or_array;
