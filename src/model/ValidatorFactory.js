@@ -15,7 +15,7 @@ export default class ValidatorFactory {
         } else {
             return () => {
                 var result = {};
-                result[Constants.IS_VALID_ANSWER] = true;
+                result[Constants.HAS_VALID_ANSWER] = true;
                 delete result[Constants.HAS_VALIDATION_MESSAGE];
                 return result;
             }
@@ -32,7 +32,7 @@ export default class ValidatorFactory {
             }
             var isValid = val !== null && val !== undefined && val !== "",
                 result = {};
-            result[Constants.IS_VALID_ANSWER] = isValid;
+            result[Constants.HAS_VALID_ANSWER] = isValid;
             result[Constants.HAS_VALIDATION_MESSAGE] = isValid ? null : JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl) + ' is missing a value.';
             return result;
         }

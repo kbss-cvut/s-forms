@@ -51,7 +51,7 @@ class InputPropertiesResolver {
                 props['disabled'] = FormUtils.isDisabled(question);
                 break;
         }
-        if (question[Constants.IS_VALID_ANSWER] === false) {
+        if (question[Constants.HAS_VALID_ANSWER] === false) {
             props['validation'] = 'error';
             props['help'] = question[Constants.HAS_VALIDATION_MESSAGE];
         }
