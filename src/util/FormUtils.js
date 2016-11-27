@@ -110,22 +110,55 @@ export default class FormUtils {
         return false;
     }
 
-    static testCondition(condition) {
+    static isValid(question) {
+        var subQ;
 
-        var questionsWithValidAnswer = condition[Constants.HAS_VALID_ANSWER],
-            acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE],
-            testedQuestion = condition[Constants.HAS_TESTED_QUESTION];
-
-        // valid answers
-        if (questionsWithValidAnswer) {
-            for (var question of Utils.asArray(questionsWithValidAnswer)) {
-                return true; //TODO not implemented
+        if (question[Constants.HAS_VALID_ANSWER] === false) {
+            return false;
+        }
+        for (subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+            if  (this.isValid(subQ) === false) {
+                return false;
             }
         }
 
+        return true;
+    }
+
+    static testCondition(condition) {
+
+        var acceptedValidationsValues = condition[Constants.ACCEPTS_VALIDATION_VALUE],
+            acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE],
+            testedQuestions = condition[Constants.HAS_TESTED_QUESTION],
+            q, question;
+
+        if (acceptedValidationsValues && acceptedAnswerValues) {
+            console.warn("Support for validation and requirement constraints at same time is not implemented !");
+        }
+
+        // valid answers
+        if (acceptedValidationsValues  && testedQuestions) {
+
+            var arr = Utils.asArray(acceptedValidationsValues);
+            if ((arr.length !== 1) || ((arr[0] !== true) && (arr[0] !== "true"))) {
+                console.warn("Validation values other than \"true\" are not implemented !");
+            }
+            for (q of Utils.asArray(testedQuestions)) {
+                question = JsonObjectMap.getObject(q["@id"]);
+                if (question === undefined) {
+                    console.warn("Questions is not loaded in an object map.");
+                    return true;
+                }
+                if (this.isValid(question) === false) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         // concrete values
-        if (acceptedAnswerValues && testedQuestion) {
-            var question =  JsonObjectMap.getObject(testedQuestion["@id"]);
+        if (acceptedAnswerValues && testedQuestions) {
+            question =  JsonObjectMap.getObject(testedQuestions["@id"]);
             for (var expValue of Utils.asArray(acceptedAnswerValues)) {
                 var answers = jsonld.getValues(question, Constants.HAS_ANSWER);
 
