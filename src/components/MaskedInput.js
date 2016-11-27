@@ -1,6 +1,7 @@
 'use strict';
 
 import React from "react";
+import ReactDOM from "react-dom";
 import InputMask from "inputmask-core";
 import {getSelection, setSelection} from "react/lib/ReactInputSelection";
 import assign from "object-assign";
@@ -197,7 +198,11 @@ export default class MaskedInput extends React.Component {
         var {size, placeholder, ...props} = this.props;
         var patternLength = this.mask.pattern.length;
         return React.createElement(Configuration.inputComponent, assign({}, props, {
-            ref: r => this.input = r.refs ? r.refs.input : r,
+            ref: (r) => {
+                if (r) {
+                    this.input = r.input ? ReactDOM.findDOMNode(r.input) : r;
+                }
+            },
             maxLength: patternLength,
             onChange: this._onChange,
             onKeyDown: this._onKeyDown,
