@@ -1,4 +1,4 @@
-# Semantic Forms
+# S-Forms
 
 Semantic form generator and processor. For ontology-based smart forms.
 
@@ -10,3 +10,5 @@ Semantic form generator and processor. For ontology-based smart forms.
 - Select
 - Checkbox
 - Numeric input
+
+

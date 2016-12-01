@@ -14,6 +14,11 @@
     "email": "martin.ledvinka@fel.cvut.cz",
     "url": "https://kbss.felk.cvut.cz/web/portal/people"
   },
+  "contributors": [{
+    "name": "Miroslav Blasko",
+    "email": "miroslav.blasko@fel.cvut.cz",
+    "url": "https://kbss.felk.cvut.cz/web/portal/people"
+  }],
   "repository": {
     "type": "git",
     "url": "https://kbss.felk.cvut.cz/git/semforms.git"
@@ -62,12 +67,12 @@
   },
   "scripts": {
     "test": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
+    "test-with-jest": "jest",
     "build": "browserify ./src/semforms.js -o ./dist/semforms.js",
     "watchify": "watchify ./src/semforms.js -o ./dist/semforms.js",
     "lib": "babel ./src -d ./lib",
-    "build-npm-prod": "npm run test && npm run build && npm run lib && npm pack",
+    "build-npm-prod": "npm run build && npm run lib && npm pack",
     "build-css": "cleancss --skip-rebase -d -o ./css/semforms.min.css ./css/semforms.css",
-    "prebuild-npm-prod": "npm install",
     "rendering-test-start": "watchify -o test/rendering/bundle.js -v -d test/rendering/TestApp.js"
   },
   "browserify": {
