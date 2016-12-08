@@ -14,6 +14,9 @@ import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 import ValidatorFactory from "../model/ValidatorFactory";
 import JsonLdObjectUtils from "../util/JsonLdObjectUtils";
 
+// TODO Remove once the pretty layout is tested
+const PRETTY_ANSWERABLE_LAYOUT = false;
+
 export default class Question extends React.Component {
     static propTypes = {
         question: React.PropTypes.object.isRequired,
@@ -39,10 +42,10 @@ export default class Question extends React.Component {
     };
 
     _onChange(att, valueIndex, newValue) {
-        var newState = assign({}, this.props.question);
+        let newState = assign({}, this.props.question);
         newState[att][valueIndex] = newValue;
         if (att === Constants.HAS_ANSWER) {
-            var result = this.state.validator(newValue);
+            const result = this.state.validator(newValue);
             newState = assign(newState, result);
         }
 
@@ -51,20 +54,31 @@ export default class Question extends React.Component {
     }
 
     render() {
-        var question = this.props.question;
+        const question = this.props.question;
         if (FormUtils.isHidden(question)) {
             return null;
         }
-        if (! FormUtils.isRelevant(question)) {
+        if (!FormUtils.isRelevant(question)) {
             return null;
         }
         if (FormUtils.isAnswerable(question)) {
-            return <div>
-                {this.renderAnswers()}
-                <div style={{padding: '0 0 0 3em'}}>
-                    {this.renderSubQuestions()}
-                </div>
-            </div>
+            if (PRETTY_ANSWERABLE_LAYOUT) {
+                return <div>
+                    <div className='panel-title answerable-question'>
+                        {this.renderAnswers()}
+                    </div>
+                    <div className='answerable-subquestions'>
+                        {this.renderSubQuestions()}
+                    </div>
+                </div>;
+            } else {
+                return <div>
+                    {this.renderAnswers()}
+                    <div style={{margin: '0 0 0 2em'}}>
+                        {this.renderSubQuestions()}
+                    </div>
+                </div>;
+            }
         }
         if (FormUtils.isSection(question)) {
             if (this.props.withoutPanel) {
@@ -72,7 +86,7 @@ export default class Question extends React.Component {
                     {this._renderQuestionContent()}
                 </div>;
             } else {
-                var label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
+                const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
                 return <Panel header={<h5>{label}</h5>} bsStyle='info'>
                     {this._renderQuestionContent()}
                 </Panel>;
@@ -90,10 +104,10 @@ export default class Question extends React.Component {
     }
 
     renderAnswers() {
-        var question = this.props.question,
-            children = [], row = [], cls, isTextarea;
-        var answers = this._getAnswers();
-        for (var i = 0, len = answers.length; i < len; i++) {
+        const question = this.props.question,
+            children = [], answers = this._getAnswers();
+        let row = [], cls, isTextarea;
+        for (let i = 0, len = answers.length; i < len; i++) {
             isTextarea = FormUtils.isTextarea(this.props.question, FormUtils.resolveValue(answers[i]));
             cls = Question._getAnswerClass(isTextarea);
             row.push(<div key={'row-item-' + i} className={cls}>
@@ -119,7 +133,7 @@ export default class Question extends React.Component {
     }
 
     _getAnswers() {
-        var question = this.props.question;
+        const question = this.props.question;
         if (!question[Constants.HAS_ANSWER]) {
             if (FormUtils.isSection(question) && !FormUtils.isAnswerable(question) || FormUtils.isWizardStep(question)) {
                 question[Constants.HAS_ANSWER] = [];
@@ -139,7 +153,7 @@ export default class Question extends React.Component {
     }
 
     _renderQuestionHelp() {
-        var question = this.props.question,
+        const question = this.props.question,
             helpClass = FormUtils.isCheckbox(question) ? 'help-icon-checkbox' : 'help-icon-text-input';
         return question[Constants.HELP_DESCRIPTION] ?
             <HelpIcon
@@ -148,15 +162,15 @@ export default class Question extends React.Component {
     }
 
     _renderUnits() {
-        var question = this.props.question;
+        const question = this.props.question;
         return question[Constants.HAS_UNIT] ?
             <div className="has-unit-label">{question[Constants.HAS_UNIT]}</div> : null;
     }
 
     renderSubQuestions() {
-        var children = [],
+        const children = [],
             subQuestions = this._getSubQuestions();
-        for (var i = 0, len = subQuestions.length; i < len; i++) {
+        for (let i = 0, len = subQuestions.length; i < len; i++) {
             children.push(<Question key={'sub-question-' + i} index={i} question={subQuestions[i]}
                                     onChange={this.onSubQuestionChange}/>);
         }
@@ -164,7 +178,7 @@ export default class Question extends React.Component {
     }
 
     _getSubQuestions() {
-        var question = this.props.question;
+        const question = this.props.question;
         if (!question[Constants.HAS_SUBQUESTION]) {
             question[Constants.HAS_SUBQUESTION] = [];
         }
