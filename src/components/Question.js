@@ -87,7 +87,7 @@ export default class Question extends React.Component {
                 </div>;
             } else {
                 const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
-                return <Panel header={<h5>{label}</h5>} bsStyle='info'>
+                return <Panel header={<div><h5>{label}{this._renderQuestionHelp()}</h5></div>} bsStyle='info'>
                     {this._renderQuestionContent()}
                 </Panel>;
             }
@@ -153,12 +153,14 @@ export default class Question extends React.Component {
     }
 
     _renderQuestionHelp() {
-        const question = this.props.question,
-            helpClass = FormUtils.isCheckbox(question) ? 'help-icon-checkbox' : 'help-icon-text-input';
+        const question = this.props.question;
+        let helpClass = FormUtils.isCheckbox(question) ? 'help-icon-checkbox' : 'help-icon-text-input';
+        if (FormUtils.isSection(question)) {
+            helpClass = 'help-icon-section';
+        }
         return question[Constants.HELP_DESCRIPTION] ?
-            <HelpIcon
-                text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], Configuration.intl)}
-                iconClass={helpClass}/> : null;
+            <HelpIcon text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], Configuration.intl)}
+                      iconClass={helpClass}/> : null;
     }
 
     _renderUnits() {
