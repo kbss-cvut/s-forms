@@ -103,11 +103,11 @@ export default class FormUtils {
 
         for (var cond of Utils.asArray(question[Constants.IS_RELEVANT_IF])) {
 
-            if (FormUtils.testCondition(cond)) {
-                return true;
+            if (! FormUtils.testCondition(cond)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     static isValid(question) {
