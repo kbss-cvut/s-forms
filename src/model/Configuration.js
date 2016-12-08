@@ -1,14 +1,14 @@
 'use strict';
 
-var actions = null;
-var intl = null;
-var optionsStore = null;
-var wizardStore = null;
-var typeaheadResultList = null;
-var inputComponent = null;
-var dateFormat = null;
-var timeFormat = null;
-var dateTimeFormat = null;
+let actions = null;
+let intl = null;
+let optionsStore = null;
+let wizardStore = null;
+let typeaheadResultList = null;
+let inputComponent = null;
+let dateFormat = null;
+let timeFormat = null;
+let dateTimeFormat = null;
 
 export default class Configuration {
     static get actions() {

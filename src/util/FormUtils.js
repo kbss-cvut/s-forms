@@ -43,7 +43,7 @@ export default class FormUtils {
     }
 
     static isTextarea(question, answerValue) {
-        return answerValue && answerValue.length > Constants.INPUT_LENGTH_THRESHOLD
+        return answerValue && answerValue.length > Constants.INPUT_LENGTH_THRESHOLD && !FormUtils.isTypeahead(question)
             || JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TEXTAREA);
     }
 
@@ -117,7 +117,7 @@ export default class FormUtils {
             return false;
         }
         for (subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
-            if  (this.isValid(subQ) === false) {
+            if (this.isValid(subQ) === false) {
                 return false;
             }
         }
@@ -137,7 +137,7 @@ export default class FormUtils {
         }
 
         // valid answers
-        if (acceptedValidationsValues  && testedQuestions) {
+        if (acceptedValidationsValues && testedQuestions) {
 
             var arr = Utils.asArray(acceptedValidationsValues);
             if ((arr.length !== 1) || ((arr[0] !== true) && (arr[0] !== "true"))) {
@@ -158,7 +158,7 @@ export default class FormUtils {
 
         // concrete values
         if (acceptedAnswerValues && testedQuestions) {
-            question =  JsonObjectMap.getObject(testedQuestions["@id"]);
+            question = JsonObjectMap.getObject(testedQuestions["@id"]);
             for (var expValue of Utils.asArray(acceptedAnswerValues)) {
                 var answers = jsonld.getValues(question, Constants.HAS_ANSWER);
 
