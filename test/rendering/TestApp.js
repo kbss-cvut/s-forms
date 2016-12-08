@@ -29,7 +29,7 @@ class TestApp extends React.Component {
             step: null
         };
         WizardGenerator.createWizard(wizard, null, null, (props) => {
-            this.setState({step: props.steps[0].data});
+            this.setState({step: props.steps[5].data});
         });
     }
 

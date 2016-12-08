@@ -7,7 +7,7 @@ import assign from "object-assign";
 
 describe('FormUtils', () => {
 
-    var question;
+    let question;
 
     beforeEach(() => {
         question = {};
@@ -15,7 +15,7 @@ describe('FormUtils', () => {
 
     describe('isForm', () => {
         it('returns true for a form element.', () => {
-            var form = {
+            const form = {
                 '@type': Constants.FORM,
                 'hasQuestion': [
                     {}, {}
@@ -26,7 +26,7 @@ describe('FormUtils', () => {
         });
 
         it('returns false for non-form element.', () => {
-            var question = {};
+            const question = {};
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
             expect(FormUtils.isForm(question)).toBeFalsy();
         });
@@ -66,6 +66,25 @@ describe('FormUtils', () => {
         });
     });
 
+    describe('isTextarea', () => {
+        it('returns true for a data value longer than the input length threshold', () => {
+            let dataValue = '';
+            for (let i = 0; i < Constants.INPUT_LENGTH_THRESHOLD + 1; i++) {
+                dataValue += i.toString();
+            }
+            expect(FormUtils.isTextarea(question, dataValue)).toBeTruthy();
+        });
+
+        it('returns false for a typeahead result with long value', () => {
+            let dataValue = '';
+            for (let i = 0; i < Constants.INPUT_LENGTH_THRESHOLD + 1; i++) {
+                dataValue += i.toString();
+            }
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_TYPEAHEAD];
+            expect(FormUtils.isTextarea(question, dataValue)).toBeFalsy();
+        });
+    });
+
     describe('isDisabled', () => {
         it('returns true for a disabled question.', () => {
             question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DISABLED];
@@ -95,7 +114,7 @@ describe('FormUtils', () => {
         });
 
         it('returns false for a regular question', () => {
-            var question = {};
+            const question = {};
             expect(FormUtils.isCalendar(question)).toBeFalsy();
         });
     });
@@ -172,7 +191,7 @@ describe('FormUtils', () => {
         });
 
         it('returns identifier of code value answer', () => {
-            var id = "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/vl-a-431/v-100",
+            const id = "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/vl-a-431/v-100",
                 answer = {
                     "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1495029633-a",
                     "@type": "http://onto.fel.cvut.cz/ontologies/documentation/answer",
@@ -184,7 +203,7 @@ describe('FormUtils', () => {
         });
 
         it('returns value of data value answer', () => {
-            var value = "2016-06-21",
+            const value = "2016-06-21",
                 answer = {
                     "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-2018758124-a",
                     "@type": "http://onto.fel.cvut.cz/ontologies/documentation/answer",
@@ -199,7 +218,7 @@ describe('FormUtils', () => {
 
     describe('testCondition', () => {
 
-        var condition = {
+        const condition = {
                 "@type": ["http://onto.fel.cvut.cz/ontologies/form/condition"],
                 "http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value": [
                     {
@@ -218,8 +237,8 @@ describe('FormUtils', () => {
                 "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": {
                     "@type": "http://onto.fel.cvut.cz/ontologies/documentation/answer",
                     "http://onto.fel.cvut.cz/ontologies/documentation/has_object_value": {
-                            "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/dod"
-                        }
+                        "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/dod"
+                    }
                 }
             };
 
@@ -229,7 +248,7 @@ describe('FormUtils', () => {
 
         it('returns false in condition without answer values.', () => {
 
-            var noAnswerCondition = assign({}, condition);
+            const noAnswerCondition = assign({}, condition);
             delete noAnswerCondition["http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value"];
             expect(FormUtils.testCondition(noAnswerCondition));
 
@@ -244,12 +263,12 @@ describe('FormUtils', () => {
 
         it('return false if accepts value that does not exists in a question.', () => {
 
-            var wrongAnswerQuestion = assign({}, question);
+            const wrongAnswerQuestion = assign({}, question);
             wrongAnswerQuestion
                 ["http://onto.fel.cvut.cz/ontologies/documentation/has_answer"]
                 ["http://onto.fel.cvut.cz/ontologies/documentation/has_object_value"] = {
-                        "@id": "http://bad-value"
-                    };
+                "@id": "http://bad-value"
+            };
             expect(FormUtils.testCondition(wrongAnswerQuestion)).toEqual(false);
         });
 
