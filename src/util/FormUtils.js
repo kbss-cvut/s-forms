@@ -167,6 +167,11 @@ export default class FormUtils {
                 }
                 var qValue = FormUtils.resolveValueObject(answers[0]);
 
+                if (qValue && expValue && qValue.hasOwnProperty('@value') && expValue.hasOwnProperty('@id') && (qValue['@value'] == expValue['@id'])) {
+                    // TODO remove !, this is temporary fix as type-ahead component returns data-value instead of code-value
+                    return true;
+                }
+
                 if (JsonLdObjectUtils.compareValues(qValue, expValue)) {
                     return true;
                 }
