@@ -73,7 +73,8 @@
     "lib": "babel ./src -d ./lib",
     "build-npm-prod": "npm run build && npm run lib && npm pack",
     "build-css": "cleancss --skip-rebase -d -o ./css/semforms.min.css ./css/semforms.css",
-    "rendering-test-start": "watchify -o test/rendering/bundle.js -v -d test/rendering/TestApp.js"
+    "rendering-test-start": "watchify -o test/rendering/bundle.js -v -d test/rendering/TestApp.js",
+    "prebuild-npm-prod": "npm install"
   },
   "browserify": {
     "transform": [
