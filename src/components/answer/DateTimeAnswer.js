@@ -2,7 +2,7 @@
 
 import React from "react";
 import moment from "moment";
-import DateTimePicker from "kbss-react-bootstrap-datetimepicker";
+import DateTimePicker from "react-bootstrap-datetimepicker";
 import Constants from '../../constants/Constants';
 import Utils from "../../util/Utils";
 

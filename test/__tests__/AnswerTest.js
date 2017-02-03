@@ -121,7 +121,7 @@ describe('Answer component', () => {
         question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATE);
         var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
 
-            picker = TestUtils.findRenderedComponentWithType(component, require('kbss-react-bootstrap-datetimepicker').default);
+            picker = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-datetimepicker').default);
         expect(picker).not.toBeNull();
         expect(picker.props.mode).toEqual('date');
         expect(picker.props.dateTime).toEqual(value);
@@ -136,7 +136,7 @@ describe('Answer component', () => {
         question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
         var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
 
-            picker = TestUtils.findRenderedComponentWithType(component, require('kbss-react-bootstrap-datetimepicker').default);
+            picker = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-datetimepicker').default);
         expect(picker).not.toBeNull();
         expect(picker.props.mode).toEqual('time');
         expect(picker.props.dateTime).toEqual(value);
@@ -151,7 +151,7 @@ describe('Answer component', () => {
         question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
         var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
 
-            picker = TestUtils.findRenderedComponentWithType(component, require('kbss-react-bootstrap-datetimepicker').default);
+            picker = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-datetimepicker').default);
         expect(picker).not.toBeNull();
         expect(picker.props.mode).toEqual('datetime');
         expect(picker.props.dateTime).toEqual(value);
@@ -167,7 +167,7 @@ describe('Answer component', () => {
         question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
         var component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
 
-            picker = TestUtils.findRenderedComponentWithType(component, require('kbss-react-bootstrap-datetimepicker').default);
+            picker = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-datetimepicker').default);
         expect(picker).not.toBeNull();
         expect(picker.props.mode).toEqual('datetime');
         expect(picker.props.dateTime).toEqual(value);

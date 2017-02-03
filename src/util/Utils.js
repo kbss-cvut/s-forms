@@ -52,7 +52,7 @@ export default class Utils {
     /**
      * Resolves mode for the date time picker.
      * @param question Question specifying the mode
-     * @return {*} mode for kbss-react-bootstrap-datetimepicker
+     * @return {*} mode for react-bootstrap-datetimepicker
      */
     static resolveDateTimeMode(question) {
         if (FormUtils.isDateTime(question)) {
