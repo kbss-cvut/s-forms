@@ -34,7 +34,7 @@ export default class MaskedInput extends React.Component {
     }
 
     componentWillMount() {
-        var options = {
+        const options = {
             pattern: this.props.mask,
             value: this.props.value,
             formatCharacters: this.props.formatCharacters
@@ -94,16 +94,16 @@ export default class MaskedInput extends React.Component {
     }
 
     _onChange = (e) => {
-        var maskValue = this.mask.getValue();
+        const maskValue = this.mask.getValue();
         if (e.target.value !== maskValue) {
             // Cut or delete operations will have shortened the value
             if (e.target.value.length < maskValue.length) {
-                var sizeDiff = maskValue.length - e.target.value.length;
+                const sizeDiff = maskValue.length - e.target.value.length;
                 this._updateMaskSelection();
                 this.mask.selection.end = this.mask.selection.start + sizeDiff;
                 this.mask.backspace();
             }
-            var value = this._getDisplayValue();
+            const value = this._getDisplayValue();
             e.target.value = value;
             if (value) {
                 this._updateInputSelection();
@@ -137,7 +137,7 @@ export default class MaskedInput extends React.Component {
             e.preventDefault();
             this._updateMaskSelection();
             if (this.mask.backspace()) {
-                var value = this._getDisplayValue();
+                const value = this._getDisplayValue();
                 e.target.value = value;
                 if (value) {
                     this._updateInputSelection();
@@ -182,7 +182,7 @@ export default class MaskedInput extends React.Component {
     }
 
     _getDisplayValue() {
-        var value = this.mask.getValue();
+        const value = this.mask.getValue();
         return value === this.mask.emptyValue ? '' : value;
     }
 
@@ -195,8 +195,8 @@ export default class MaskedInput extends React.Component {
     }
 
     render() {
-        var {size, placeholder, ...props} = this.props;
-        var patternLength = this.mask.pattern.length;
+        const {size, placeholder, ...props} = this.props,
+            patternLength = this.mask.pattern.length;
         return React.createElement(Configuration.inputComponent, assign({}, props, {
             ref: (r) => {
                 if (r) {

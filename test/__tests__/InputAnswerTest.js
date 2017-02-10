@@ -13,7 +13,7 @@ const LABEL = 'Input answer test';
 
 describe('InputAnswer', () => {
 
-    var question,
+    let question,
         answer,
         onChange;
 
@@ -41,13 +41,13 @@ describe('InputAnswer', () => {
     });
 
     it('sets min on numeric input when xsd:minInclusive is used in question', () => {
-        var min = 100,
+        const min = 100,
             value = 117;
         question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
         question[Constants.XSD.MIN_INCLUSIVE] = min;
         answer[Constants.HAS_DATA_VALUE] = value;
 
-        var component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
+        const component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
 
             input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
         expect(input.type).toEqual('number');
@@ -55,13 +55,13 @@ describe('InputAnswer', () => {
     });
 
     it('sets min on numeric input when xsd:minExclusive is used in question', () => {
-        var min = 100,
+        const min = 100,
             value = 117;
         question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
         question[Constants.XSD.MIN_EXCLUSIVE] = min;
         answer[Constants.HAS_DATA_VALUE] = value;
 
-        var component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
+        const component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
 
             input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
         expect(input.type).toEqual('number');
@@ -69,13 +69,13 @@ describe('InputAnswer', () => {
     });
 
     it('sets max on numeric input when xsd:maxExclusive is used in question', () => {
-        var max = 1000,
+        const max = 1000,
             value = 117;
         question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
         question[Constants.XSD.MAX_EXCLUSIVE] = max;
         answer[Constants.HAS_DATA_VALUE] = value;
 
-        var component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
+        const component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
 
             input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
         expect(input.type).toEqual('number');
@@ -83,13 +83,13 @@ describe('InputAnswer', () => {
     });
 
     it('sets max on numeric input when xsd:maxInclusive is used in question', () => {
-        var max = 1000,
+        const max = 1000,
             value = 117;
         question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
         question[Constants.XSD.MAX_INCLUSIVE] = max;
         answer[Constants.HAS_DATA_VALUE] = value;
 
-        var component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
+        const component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
 
             input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
         expect(input.type).toEqual('number');
@@ -97,7 +97,7 @@ describe('InputAnswer', () => {
     });
 
     it('sets both min and max on numeric input when both are used in question', () => {
-        var max = 1000,
+        const max = 1000,
             min = 100,
             value = 117;
         question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
@@ -105,7 +105,7 @@ describe('InputAnswer', () => {
         question[Constants.XSD.MIN_INCLUSIVE] = min;
         answer[Constants.HAS_DATA_VALUE] = value;
 
-        var component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
+        const component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
 
             input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
         expect(input.type).toEqual('number');
@@ -114,14 +114,21 @@ describe('InputAnswer', () => {
     });
 
     it('sets min when xsd:positiveInteger is used as question datatype', () => {
-        var value = 117;
+        const value = 117;
         question[Constants.HAS_DATATYPE] = Constants.XSD.POSITIVE_INTEGER;
         answer[Constants.HAS_DATA_VALUE] = value;
 
-        var component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
+        const component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
 
             input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
         expect(input.type).toEqual('number');
         expect(input.min).toEqual('1');
+    });
+
+    it('displays question label as input placeholder', () => {
+        const component = Environment.render(<Answer question={question} answer={answer} onChange={onChange}/>),
+
+            input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
+        expect(input.placeholder).toEqual(LABEL);
     });
 });

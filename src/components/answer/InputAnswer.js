@@ -94,6 +94,7 @@ const InputAnswer = (props) => {
     return React.createElement(Configuration.inputComponent, assign({}, InputPropertiesResolver.resolveInputProperties(question, value), {
         label: props.label,
         title: props.title,
+        placeholder: props.label,
         value: value,
         onChange: (e) => props.onChange(e.target.value)
     }));
