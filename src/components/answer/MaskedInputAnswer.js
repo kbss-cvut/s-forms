@@ -10,7 +10,7 @@ import Logger from '../../util/Logger';
 import MaskedInput from '../MaskedInput';
 
 const MaskedInputAnswer = (props) => {
-    var question = props.question,
+    const question = props.question,
         value = props.value,
         mask = JsonLdUtils.getJsonAttValue(question, Constants.INPUT_MASK);
 
@@ -18,7 +18,7 @@ const MaskedInputAnswer = (props) => {
         Logger.warn('Input mask not provided. Falling back to regular input.');
         return <InputAnswer {...props}/>;
     }
-    return <MaskedInput mask={mask} value={value} label={props.label} title={props.title} placeholder={props.label}
+    return <MaskedInput mask={mask} value={value} label={props.label} title={props.title} placeholder={mask}
                         onChange={(e) => props.onChange(e.target.value)} disabled={FormUtils.isDisabled(question)}/>;
 };
 

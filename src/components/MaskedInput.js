@@ -6,6 +6,7 @@ import InputMask from "inputmask-core";
 import {getSelection, setSelection} from "react/lib/ReactInputSelection";
 import assign from "object-assign";
 import Configuration from "../model/Configuration";
+import MaskMapper from "../util/MaskMapper";
 
 const KEYCODE_Z = 90;
 const KEYCODE_Y = 89;
@@ -35,7 +36,7 @@ export default class MaskedInput extends React.Component {
 
     componentWillMount() {
         const options = {
-            pattern: this.props.mask,
+            pattern: MaskMapper.mapMask(this.props.mask),
             value: this.props.value,
             formatCharacters: this.props.formatCharacters
         };
@@ -52,14 +53,14 @@ export default class MaskedInput extends React.Component {
             // - if so use the nextProps value
             // - otherwise the `this.mask` has a value for us (most likely from paste action)
             if (this.mask.getValue() === this.mask.emptyValue) {
-                this.mask.setPattern(nextProps.mask, {value: nextProps.value})
+                this.mask.setPattern(MaskMapper.mapMask(nextProps.mask), {value: nextProps.value})
             }
             else {
-                this.mask.setPattern(nextProps.mask, {value: this.mask.getRawValue()})
+                this.mask.setPattern(MaskMapper.mapMask(nextProps.mask), {value: this.mask.getRawValue()})
             }
         }
         else if (this.props.mask !== nextProps.mask) {
-            this.mask.setPattern(nextProps.mask, {value: this.mask.getRawValue()})
+            this.mask.setPattern(MaskMapper.mapMask(nextProps.mask), {value: this.mask.getRawValue()})
         }
         else if (this.props.value !== nextProps.value) {
             this.mask.setValue(nextProps.value)
@@ -79,7 +80,7 @@ export default class MaskedInput extends React.Component {
     }
 
     _updatePattern(props) {
-        this.mask.setPattern(props.mask, {
+        this.mask.setPattern(MaskMapper.mapMask(props.mask), {
             value: this.mask.getRawValue(),
             selection: getSelection(this.input)
         });
