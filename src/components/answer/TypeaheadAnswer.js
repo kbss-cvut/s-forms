@@ -74,7 +74,7 @@ export default class TypeaheadAnswer extends React.Component {
                        inputProps={inputProps}
                        title={this.props.title} value={value} label={this.props.label}
                        placeholder={this.props.label} filterOption='name' size='small'
-                       displayOption='name' onOptionSelected={this._onOptionSelected} optionsButton={true}
+                       displayOption='name' onOptionSelected={this._onOptionSelected} optionsButton={true} allowReset={true}
                        options={this.state.options} customListComponent={Configuration.typeaheadResultList}/>
         </div>;
     }
