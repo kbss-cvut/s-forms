@@ -38,7 +38,7 @@ class InputPropertiesResolver {
     }
 
     static resolveInputProperties(question, value) {
-        var props = {};
+        const props = {};
         props['type'] = InputPropertiesResolver._resolveInputType(question, value);
         switch (props['type']) {
             case 'textarea':
@@ -60,7 +60,7 @@ class InputPropertiesResolver {
     }
 
     static _resolveNumberRestrictions(question) {
-        var restriction = {};
+        const restriction = {};
         Object.getOwnPropertyNames(NUMBER_RULES).forEach(key => {
             if (JsonLdUtils.hasValue(question, Constants.HAS_DATATYPE, key)) {
                 assign(restriction, NUMBER_RULES[key]);
@@ -83,9 +83,9 @@ class InputPropertiesResolver {
 }
 
 const InputAnswer = (props) => {
-    var question = props.question,
-        answer = props.answer,
-        value = props.value;
+    const question = props.question,
+        answer = props.answer;
+    let value = props.value;
     // When the value is an object_value, but the layout does not specify neither typeahead nor select,
     // show at least the value's label
     if (answer[Constants.HAS_OBJECT_VALUE] && answer[Constants.HAS_OBJECT_VALUE][JsonLdUtils.RDFS_LABEL]) {

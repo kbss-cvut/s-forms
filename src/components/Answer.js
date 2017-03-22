@@ -26,13 +26,13 @@ export default class Answer extends React.Component {
     }
 
     onValueChange = (value) => {
-        var change = assign({}, this.props.answer);
+        const change = assign({}, this.props.answer);
         this._setValue(change, value);
         this.props.onChange(this.props.index, change);
     };
 
     _setValue(change, value) {
-        if (this.props.answer[Constants.HAS_OBJECT_VALUE]) {
+        if (this.props.answer[Constants.HAS_OBJECT_VALUE] || FormUtils.isTypeahead(this.props.question)) {
             change[Constants.HAS_OBJECT_VALUE] = {
                 '@id': value
             };
@@ -45,11 +45,11 @@ export default class Answer extends React.Component {
 
 
     render() {
-        var question = this.props.question,
+        const question = this.props.question,
             value = FormUtils.resolveValue(this.props.answer),
             label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], Configuration.intl),
-            title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], Configuration.intl),
-            component;
+            title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], Configuration.intl);
+        let component;
 
         if (FormUtils.isTypeahead(question)) {
             component = this._renderTypeahead(value, label, title);
