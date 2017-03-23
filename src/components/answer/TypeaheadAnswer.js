@@ -28,7 +28,7 @@ export default class TypeaheadAnswer extends React.Component {
     }
 
     componentWillMount() {
-        var question = this.props.question;
+        const question = this.props.question;
         if (!question[Constants.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
             Configuration.actions.loadFormOptions(this._queryHash, FormUtils.getPossibleValuesQuery(question));
         } else {
@@ -49,7 +49,7 @@ export default class TypeaheadAnswer extends React.Component {
             return;
         }
         options = JsonLdUtils.processTypeaheadOptions(options);
-        var value = FormUtils.resolveValue(this.props.answer),
+        const value = FormUtils.resolveValue(this.props.answer),
             selected = options.find((item) => {
                 return item.id === value;
             });
@@ -60,11 +60,11 @@ export default class TypeaheadAnswer extends React.Component {
     };
 
     _onOptionSelected = (option) => {
-        this.props.onChange(option.id);
+        this.props.onChange(option ? option.id : null);
     };
 
     render() {
-        var value = Utils.idToName(this.state.options, this.props.value),
+        const value = Utils.idToName(this.state.options, this.props.value),
             question = this.props.question,
             inputProps = {
                 disabled: FormUtils.isDisabled(question)

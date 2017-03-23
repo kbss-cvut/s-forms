@@ -32,7 +32,10 @@ export default class Answer extends React.Component {
     };
 
     _setValue(change, value) {
-        if (this.props.answer[Constants.HAS_OBJECT_VALUE] || FormUtils.isTypeahead(this.props.question)) {
+        if (value === null) {
+            change[Constants.HAS_OBJECT_VALUE] = null;
+            change[Constants.HAS_DATA_VALUE] = null;
+        } else if (this.props.answer[Constants.HAS_OBJECT_VALUE] || FormUtils.isTypeahead(this.props.question)) {
             change[Constants.HAS_OBJECT_VALUE] = {
                 '@id': value
             };
