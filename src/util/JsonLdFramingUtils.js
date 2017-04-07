@@ -82,7 +82,7 @@ export default class JsonLdFramingUtils { //TODO revise
                     child = id2ObjectMap[childId];
                     if (child !== undefined) {
                         childArray[i] = child;
-                        console.log(childId + " expanded.");
+                        //console.log(childId + " expanded.");
                         this._expandGraph(child, shape, id2ObjectMap);
                     } else {
                         console.warn("object with @id " + childId + " was not defined in input data.")
