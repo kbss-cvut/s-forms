@@ -94,7 +94,7 @@ export default class WizardGenerator {
         stepQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
 
         // sort by property
-        JsonLdObjectUtils.toplogicalSort(stepQuestions, Constants.HAS_PRECEDING_QUESTION);
+        JsonLdObjectUtils.orderPreservingToplogicalSort(stepQuestions, Constants.HAS_PRECEDING_QUESTION);
 
 
         steps = stepQuestions.map(

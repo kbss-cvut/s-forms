@@ -2,6 +2,8 @@
 
 import jsonld from "jsonld";
 import JsonLdUtils from "jsonld-utils";
+import Utils from "./Utils";
+import tsort from 'tsort';
 
 export default class JsonLdObjectUtils {
 
@@ -36,17 +38,52 @@ export default class JsonLdObjectUtils {
             swapped = false;
             for (var i = 0, len = data.length; i < len; i++) {
                 for (var j = i; j < len; j++) {
-                    if (data[i][gtProperty] && data[i][gtProperty]['@id'] === data[j]['@id']) {
-                        var tmp = data[i];
-                        data[i] = data[j];
-                        data[j] = tmp;
-                        swapped = true;
-                        break;
+                    if (data[i][gtProperty]) {
+                        let gtId = (typeof data[i][gtProperty] === 'object') ? data[i][gtProperty]['@id'] : data[i][gtProperty];
+                        if (gtId === data[j]['@id']) {
+                            var tmp = data[i];
+                            data[i] = data[j];
+                            data[j] = tmp;
+                            swapped = true;
+                            break;
+                        }
                     }
                 }
             }
         } while (swapped);
 
+        return data;
+    }
+
+    /**
+     * Sorts the specified JSON-LD data using a topological sort over partially ordered set defined by gtProperty,
+     * while preserving original order.
+     *
+     * This is useful for situations where each item only knows its immediate neighbour in the list.
+     * @param data The data to sort, should be an array
+     * @param gtProperty Property specifying that an item is greater than another item. It is used for comparison.
+     *
+     */
+    static orderPreservingToplogicalSort(data, gtProperty) {
+        let graph = tsort(),
+            id2ObjectMap = {};
+
+        for (let i = 0, len = data.length; i < len; i++) {
+            let currentId = data[i]['@id'];
+            graph.add(currentId);
+            id2ObjectMap[currentId] = data[i];
+
+            Utils.asArray(data[i][gtProperty])
+                .map(val => (typeof val === 'object') ? val['@id'] : val)
+                .map(val => [val, currentId])
+                .forEach(edge => graph.add(edge));
+        }
+
+        let sortedIds = graph.sort();
+        for (let i = 0, len = sortedIds.length; i < len; i++) {
+            data[i] = id2ObjectMap[sortedIds[i]];
+
+        }
         return data;
     }
 

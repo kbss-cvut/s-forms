@@ -14,11 +14,13 @@
     "email": "martin.ledvinka@fel.cvut.cz",
     "url": "https://kbss.felk.cvut.cz/web/portal/people"
   },
-  "contributors": [{
-    "name": "Miroslav Blasko",
-    "email": "miroslav.blasko@fel.cvut.cz",
-    "url": "https://kbss.felk.cvut.cz/web/portal/people"
-  }],
+  "contributors": [
+    {
+      "name": "Miroslav Blasko",
+      "email": "miroslav.blasko@fel.cvut.cz",
+      "url": "https://kbss.felk.cvut.cz/web/portal/people"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://kbss.felk.cvut.cz/git/semforms.git"
@@ -32,7 +34,8 @@
     "react-bootstrap-typeahead": "https://kbss.felk.cvut.cz/dist/react-bootstrap-typeahead-0.0.11.tgz",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.6.tgz",
     "inputmask-core": "^2.1.1",
-    "babel-runtime": "^6.9.2"
+    "babel-runtime": "^6.9.2",
+    "tsort": "0.0.1"
   },
   "peerDependencies": {
     "react": ">= 15.3.2",

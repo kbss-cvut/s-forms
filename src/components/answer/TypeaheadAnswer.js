@@ -8,6 +8,7 @@ import Configuration from '../../model/Configuration';
 import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import Utils from '../../util/Utils';
+import JsonLdObjectUtils from "../../util/JsonLdObjectUtils";
 
 export default class TypeaheadAnswer extends React.Component {
     static propTypes = {
@@ -23,7 +24,7 @@ export default class TypeaheadAnswer extends React.Component {
         super(props);
         this._queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
         this.state = {
-            options: this._queryHash ? JsonLdUtils.processTypeaheadOptions(Configuration.optionsStore.getOptions(this._queryHash)) : []
+            options: this._queryHash ? this._processTypeaheadOptions(Configuration.optionsStore.getOptions(this._queryHash)) : []
         }
     }
 
@@ -32,7 +33,7 @@ export default class TypeaheadAnswer extends React.Component {
         if (!question[Constants.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
             Configuration.actions.loadFormOptions(this._queryHash, FormUtils.getPossibleValuesQuery(question));
         } else {
-            this.setState({options: JsonLdUtils.processTypeaheadOptions(question[Constants.HAS_OPTION])});
+            this.setState({options: this._processTypeaheadOptions(question[Constants.HAS_OPTION])});
         }
     }
 
@@ -48,7 +49,7 @@ export default class TypeaheadAnswer extends React.Component {
         if (type !== this._queryHash) {
             return;
         }
-        options = JsonLdUtils.processTypeaheadOptions(options);
+        options = this._processTypeaheadOptions(options);
         const value = FormUtils.resolveValue(this.props.answer),
             selected = options.find((item) => {
                 return item.id === value;
@@ -62,6 +63,18 @@ export default class TypeaheadAnswer extends React.Component {
     _onOptionSelected = (option) => {
         this.props.onChange(option ? option.id : null);
     };
+
+    _processTypeaheadOptions(options) {
+        if (!options) {
+            return [];
+        }
+        // sort by label
+        options.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
+
+        // sort by property
+        JsonLdObjectUtils.orderPreservingToplogicalSort(options, Constants.HAS_PRECEDING_VALUE);
+        return JsonLdUtils.processTypeaheadOptions(options);
+    }
 
     render() {
         const value = Utils.idToName(this.state.options, this.props.value),
