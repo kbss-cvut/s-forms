@@ -271,7 +271,16 @@ describe('FormUtils', () => {
             };
             expect(FormUtils.testCondition(wrongAnswerQuestion)).toEqual(false);
         });
+    });
 
+    describe('isCollapsed', () => {
+        it('returns true when question layout class contains collapsed', () => {
+            question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.COLLAPSED];
+            expect(FormUtils.isCollapsed(question)).toBeTruthy();
+        });
 
+        it('returns false when question layout class does not contain collapsed', () => {
+            expect(FormUtils.isCollapsed(question)).toBeFalsy();
+        });
     });
 });

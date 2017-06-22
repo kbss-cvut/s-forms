@@ -27,7 +27,8 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
         DATETIME: 'datetime',
         CHECKBOX: 'checkbox',
         ANSWERABLE: 'answerable',
-        MASKED_INPUT: 'masked-input'
+        MASKED_INPUT: 'masked-input',
+        COLLAPSED: 'collapsed'
     },
     VALUE_TYPE_CODE = 'code',
     VALUE_TYPE_TEXT = 'text',

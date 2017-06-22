@@ -71,6 +71,10 @@ export default class FormUtils {
         return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.MASKED_INPUT);
     }
 
+    static isCollapsed(question) {
+        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.COLLAPSED);
+    }
+
     static resolveValue(answer) {
         if (!answer) {
             return null;
@@ -103,7 +107,7 @@ export default class FormUtils {
 
         for (var cond of Utils.asArray(question[Constants.IS_RELEVANT_IF])) {
 
-            if (! FormUtils.testCondition(cond)) {
+            if (!FormUtils.testCondition(cond)) {
                 return false;
             }
         }
@@ -168,7 +172,8 @@ export default class FormUtils {
                 var qValue = FormUtils.resolveValueObject(answers[0]);
 
                 if (qValue && expValue && qValue.hasOwnProperty('@value') && expValue.hasOwnProperty('@id') && (qValue['@value'] == expValue['@id'])) {
-                    // TODO remove !, this is temporary fix as type-ahead component returns data-value instead of code-value
+                    // TODO remove !, this is temporary fix as type-ahead component returns data-value instead of
+                    // code-value
                     return true;
                 }
 

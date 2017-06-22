@@ -2,7 +2,7 @@
 
 import React from "react";
 import assign from "object-assign";
-import {Panel} from "react-bootstrap";
+import {Glyphicon, Panel} from "react-bootstrap";
 import JsonLdUtils from "jsonld-utils";
 import Answer from "./Answer";
 import Configuration from "../model/Configuration";
@@ -22,14 +22,21 @@ export default class Question extends React.Component {
         question: React.PropTypes.object.isRequired,
         onChange: React.PropTypes.func.isRequired,
         index: React.PropTypes.number,
-        withoutPanel: React.PropTypes.bool
+        withoutPanel: React.PropTypes.bool,
+        collapsible: React.PropTypes.bool // Whether the section is collapsible (if the question is a section)
+    };
+
+    static defaultProps = {
+        withoutPanel: false,
+        collapsible: true
     };
 
     constructor(props) {
         super(props);
         JsonObjectMap.addObject(props.question["@id"], props.question);
         this.state = {
-            validator: ValidatorFactory.createValidator(props.question)
+            validator: ValidatorFactory.createValidator(props.question),
+            expanded: !FormUtils.isCollapsed(props.question)
         };
     }
 
@@ -52,6 +59,10 @@ export default class Question extends React.Component {
         JsonObjectMap.addObject(newState["@id"], newState);
         this.props.onChange(this.props.index, newState);
     }
+
+    _toggleCollapse = () => {
+        this.setState({expanded: !this.state.expanded});
+    };
 
     render() {
         const question = this.props.question;
@@ -86,8 +97,12 @@ export default class Question extends React.Component {
                     {this._renderQuestionContent()}
                 </div>;
             } else {
-                const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
-                return <Panel header={<h5>{label}{this._renderQuestionHelp()}</h5>} bsStyle='info'>
+                const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl),
+                    collapsible = this.props.collapsible;
+                return <Panel
+                    header={<h5>{collapsible && this._renderCollapseToggle()}<span onClick={this._toggleCollapse}>{label}</span>{this._renderQuestionHelp()}</h5>}
+                    bsStyle='info'
+                    expanded={this.state.expanded} collapsible={collapsible}>
                     {this._renderQuestionContent()}
                 </Panel>;
             }
@@ -150,6 +165,12 @@ export default class Question extends React.Component {
     static _getAnswerClass(isTextarea) {
         return isTextarea ? 'col-xs-12' : (
             Constants.GENERATED_ROW_SIZE === 1 ? 'col-xs-5' : 'col-xs-' + (Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE));
+    }
+
+    _renderCollapseToggle() {
+        const glyph = this.state.expanded ? 'collapse-up' : 'collapse-down',
+            title = this.state.expanded ? 'Collapse' : 'Expand';
+        return <Glyphicon glyph={glyph} onClick={this._toggleCollapse} className='collapse-toggle' title={title}/>;
     }
 
     _renderQuestionHelp() {
