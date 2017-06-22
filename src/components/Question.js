@@ -87,7 +87,7 @@ export default class Question extends React.Component {
                 </div>;
             } else {
                 const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
-                return <Panel header={<div><h5>{label}{this._renderQuestionHelp()}</h5></div>} bsStyle='info'>
+                return <Panel header={<h5>{label}{this._renderQuestionHelp()}</h5>} bsStyle='info'>
                     {this._renderQuestionContent()}
                 </Panel>;
             }
