@@ -5,7 +5,7 @@ import jsonld from "jsonld";
 
 import Constants from "../constants/Constants";
 import Utils from "./Utils";
-import JsonObjectMap from "./JsonObjectMap";
+import JsonLdObjectMap from "./JsonLdObjectMap";
 import JsonLdObjectUtils from "./JsonLdObjectUtils"
 
 export default class FormUtils {
@@ -148,7 +148,7 @@ export default class FormUtils {
                 console.warn("Validation values other than \"true\" are not implemented !");
             }
             for (q of Utils.asArray(testedQuestions)) {
-                question = JsonObjectMap.getObject(q["@id"]);
+                question = JsonLdObjectMap.getObject(q["@id"]);
                 if (question === undefined) {
                     console.warn("Questions is not loaded in an object map.");
                     return true;
@@ -162,7 +162,7 @@ export default class FormUtils {
 
         // concrete values
         if (acceptedAnswerValues && testedQuestions) {
-            question = JsonObjectMap.getObject(testedQuestions["@id"]);
+            question = JsonLdObjectMap.getObject(testedQuestions["@id"]);
             for (var expValue of Utils.asArray(acceptedAnswerValues)) {
                 var answers = jsonld.getValues(question, Constants.HAS_ANSWER);
 

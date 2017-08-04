@@ -10,6 +10,7 @@ import GeneratedStep from "../components/GeneratedStep";
 import Logger from "../util/Logger";
 import JsonLdFramingUtils from "../util/JsonLdFramingUtils"
 import JsonLdObjectUtils from "../util/JsonLdObjectUtils";
+import JsonLdObjectMap from "../util/JsonLdObjectMap";
 
 export default class WizardGenerator {
 
@@ -56,18 +57,25 @@ export default class WizardGenerator {
 
     static _constructWizardSteps(structure) {
 
-        if (structure['@graph'][0]['@id'] !== undefined) {
-            JsonLdFramingUtils.modifyStructure(structure); //TODO make as callback
-        } else {
-            console.warn("default form is constructed.");
-        }
-
-        var form = structure['@graph'],
+        let form,
             formElements,
+            id2ObjectMap,
             item,
             stepQuestions = [],
             steps = [],
             i, len;
+
+        if (structure['@graph'][0]['@id'] !== undefined) {
+            id2ObjectMap = JsonLdFramingUtils.modifyStructure(structure); //TODO make as callback
+
+            Object.keys(id2ObjectMap).map(key => {
+                JsonLdObjectMap.putObject(key, id2ObjectMap[key])
+            })
+        } else {
+            console.warn("default form is constructed.");
+        }
+
+        form = structure['@graph'];
 
         for (i = 0, len = form.length; i < len; i++) {
             item = form[i];

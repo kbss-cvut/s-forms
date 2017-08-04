@@ -5,16 +5,16 @@ import JsonLdUtils from "jsonld-utils";
 import Constants from "../constants/Constants";
 import Utils from "./Utils";
 
-export default class JsonObjectMap {
+export default class JsonLdObjectMap {
 
     static objectMap = {};
 
-    static addObject(id, question) {
-        JsonObjectMap.objectMap[id] = question;
+    static putObject(id, question) {
+        JsonLdObjectMap.objectMap[id] = question;
     }
 
     static getObject(id) {
-        return JsonObjectMap.objectMap[id];
+        return JsonLdObjectMap.objectMap[id];
     }
 
 

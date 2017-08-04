@@ -66,7 +66,7 @@ export default class JsonLdFramingUtils { //TODO revise
             console.error("Error '" + e + "' occured, while trying to apply frame-ing with custom shape.");
         }
 
-        return;
+        return id2objectMap;
     }
 
     static _expandGraph(parentNode, shape, id2ObjectMap) {

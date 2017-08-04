@@ -9,7 +9,7 @@ import Configuration from "../model/Configuration";
 import Constants from "../constants/Constants";
 import FormUtils from "../util/FormUtils";
 import HelpIcon from "./HelpIcon";
-import JsonObjectMap from "../util/JsonObjectMap";
+import JsonLdObjectMap from "../util/JsonLdObjectMap";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 import ValidatorFactory from "../model/ValidatorFactory";
 import JsonLdObjectUtils from "../util/JsonLdObjectUtils";
@@ -33,7 +33,7 @@ export default class Question extends React.Component {
 
     constructor(props) {
         super(props);
-        JsonObjectMap.addObject(props.question["@id"], props.question);
+        JsonLdObjectMap.putObject(props.question["@id"], props.question);
         this.state = {
             validator: ValidatorFactory.createValidator(props.question),
             expanded: !FormUtils.isCollapsed(props.question)
@@ -56,7 +56,7 @@ export default class Question extends React.Component {
             newState = assign(newState, result);
         }
 
-        JsonObjectMap.addObject(newState["@id"], newState);
+        JsonLdObjectMap.putObject(newState["@id"], newState);
         this.props.onChange(this.props.index, newState);
     }
 

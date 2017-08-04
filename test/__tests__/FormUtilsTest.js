@@ -2,7 +2,7 @@
 
 import FormUtils from "../../src/util/FormUtils";
 import Constants from "../../src/constants/Constants";
-import JsonObjectMap from "../../src/util/JsonObjectMap";
+import JsonObjectMap from "../../src/util/JsonLdObjectMap";
 import assign from "object-assign";
 
 describe('FormUtils', () => {
