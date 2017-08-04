@@ -114,6 +114,19 @@ export default class FormUtils {
         return true;
     }
 
+    static hasValidationLogic(question) {
+        if (question[Constants.REQUIRES_ANSWER_VALUE]) {
+            return true;
+        }
+        if (question[Constants.REQUIRES_ANSWER]) {
+            return true;
+        }
+        if (question[Constants.REQUIRES_ANSWER_IF]) {
+            return true;
+        }
+        return false;
+    }
+
     static isValid(question) {
         var subQ;
 
