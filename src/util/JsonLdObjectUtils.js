@@ -22,10 +22,14 @@ export default class JsonLdObjectUtils {
         jsonLdValue2 = (typeof(jsonLdValue2) === 'object') ? jsonLdValue2 : { '@value': jsonLdValue2};
 
         // TODO remove: workaround for bad persistance of boolean values -- { @value: "true" } instead of { @value: true }
-        if ((jsonLdValue1) && (jsonLdValue2) && (JSON.stringify(jsonLdValue2['@value']) === jsonLdValue1['@value'])) {
-            return true;
-        }
+        if (jsonLdValue1 && jsonLdValue1['@value'] && jsonLdValue2 && jsonLdValue2['@value']) {
+            const strValue1 = (typeof(jsonLdValue1)['@value'] === 'string') ? jsonLdValue1['@value'] : JSON.stringify(jsonLdValue1['@value']);
+            const strValue2 = (typeof(jsonLdValue2)['@value'] === 'string') ? jsonLdValue2['@value'] : JSON.stringify(jsonLdValue2['@value']);
 
+            if (strValue1 === strValue2) {
+                return true;
+            }
+        }
         return jsonld.compareValues(jsonLdValue1, jsonLdValue2);
     }
 
