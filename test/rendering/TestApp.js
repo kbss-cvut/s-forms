@@ -28,6 +28,7 @@ class TestApp extends React.Component {
         this.state = {
             step: null
         };
+        Configuration.readOnly = true;
         WizardGenerator.createWizard(wizard, null, null, (props) => {
             this.setState({step: props.steps[5].data});
         });

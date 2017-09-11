@@ -9,6 +9,7 @@ let inputComponent = null;
 let dateFormat = null;
 let timeFormat = null;
 let dateTimeFormat = null;
+let readOnly = false;
 
 export default class Configuration {
     static get actions() {
@@ -81,5 +82,13 @@ export default class Configuration {
 
     static set dateTimeFormat(format) {
         dateTimeFormat = format;
+    }
+
+    static get readOnly() {
+        return readOnly;
+    }
+
+    static set readOnly(newValue) {
+        readOnly = newValue;
     }
 }

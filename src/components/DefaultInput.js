@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from "react-dom";
 import {HelpBlock, Checkbox, ControlLabel, FormControl, FormGroup, Radio} from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {

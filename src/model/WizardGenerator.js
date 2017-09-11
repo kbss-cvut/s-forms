@@ -22,7 +22,7 @@ export default class WizardGenerator {
      * @param callback Callback called with wizard steps definitions (an array of one element in this case)
      */
     static createDefaultWizard(data, title, callback) {
-        var steps = WizardGenerator._constructWizardSteps(DefaultFormGenerator.generateForm(data));
+        const steps = WizardGenerator._constructWizardSteps(DefaultFormGenerator.generateForm(data));
         callback({
             steps: steps,
             title: title
@@ -39,11 +39,12 @@ export default class WizardGenerator {
     static createWizard(structure, data, title, callback) {
 
         jsonld.flatten(structure, {}, null, function (err, flattened) {
+            let wizardProperties;
             if (err) {
                 Logger.error(err);
             }
             try {
-                var wizardProperties = {
+                wizardProperties = {
                     steps: WizardGenerator._constructWizardSteps(flattened),
                     title: title
                 };

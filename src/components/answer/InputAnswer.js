@@ -29,7 +29,7 @@ class InputPropertiesResolver {
     }
 
     static _isNumeric(question) {
-        for (var i = 0, len = NUMERIC_DATATYPES.length; i < len; i++) {
+        for (let i = 0, len = NUMERIC_DATATYPES.length; i < len; i++) {
             if (JsonLdUtils.hasValue(question, Constants.HAS_DATATYPE, NUMERIC_DATATYPES[i])) {
                 return true;
             }
@@ -39,21 +39,21 @@ class InputPropertiesResolver {
 
     static resolveInputProperties(question, value) {
         const props = {};
-        props['type'] = InputPropertiesResolver._resolveInputType(question, value);
+        props.type = InputPropertiesResolver._resolveInputType(question, value);
         switch (props['type']) {
             case 'textarea':
-                props['rows'] = 5;
+                props.rows = 5;
                 break;
             case 'number':
                 assign(props, InputPropertiesResolver._resolveNumberRestrictions(question));
                 break;
             default:
-                props['disabled'] = FormUtils.isDisabled(question);
                 break;
         }
+        props.disabled = FormUtils.isDisabled(question);
         if (question[Constants.HAS_VALID_ANSWER] === false) {
-            props['validation'] = 'error';
-            props['help'] = question[Constants.HAS_VALIDATION_MESSAGE];
+            props.validation = 'error';
+            props.help = question[Constants.HAS_VALIDATION_MESSAGE];
         }
 
         return props;

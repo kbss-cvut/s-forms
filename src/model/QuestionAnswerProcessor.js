@@ -11,15 +11,16 @@ export default class QuestionAnswerProcessor {
      * @param stepData Data from individual wizard steps
      */
     static buildQuestionAnswerModel(wizardData, stepData) {
-        var question = {
+        const question = {
             subQuestions: []
-        }, processedQuestion;
+        };
+        let processedQuestion;
         if (wizardData) {
             question.uri = wizardData.root['@id'];
             question.origin = JsonLdUtils.getJsonAttValue(wizardData.root, Constants.HAS_QUESTION_ORIGIN, '@id');
         }
         if (stepData) {
-            for (var i = 0, len = stepData.length; i < len; i++) {
+            for (let i = 0, len = stepData.length; i < len; i++) {
                 // This will skip questions corresponding to empty steps in the wizard
                 processedQuestion = QuestionAnswerProcessor.processQuestionAnswerHierarchy(stepData[i]);
                 if (processedQuestion) {

@@ -1,6 +1,6 @@
 {
   "name": "semforms",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -26,13 +26,13 @@
     "url": "https://kbss.felk.cvut.cz/git/semforms.git"
   },
   "dependencies": {
-    "react-bootstrap": "^0.30.3",
+    "react-bootstrap": "^0.30.5",
     "object-assign": "^4.1.0",
     "jsonld": "^0.4.6",
     "moment": "^2.14.1",
     "react-bootstrap-datetimepicker": "https://kbss.felk.cvut.cz/dist/react-bootstrap-datetimepicker-0.0.5.tgz",
     "react-bootstrap-typeahead": "https://kbss.felk.cvut.cz/dist/react-bootstrap-typeahead-0.0.11.tgz",
-    "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.6.tgz",
+    "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.9.tgz",
     "inputmask-core": "^2.1.1",
     "babel-runtime": "^6.9.2",
     "tsort": "0.0.1"

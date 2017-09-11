@@ -1,6 +1,7 @@
 'use strict';
 
 import FormUtils from "../../src/util/FormUtils";
+import Configuration from "../../src/model/Configuration";
 import Constants from "../../src/constants/Constants";
 import JsonObjectMap from "../../src/util/JsonLdObjectMap";
 import assign from "object-assign";
@@ -11,6 +12,7 @@ describe('FormUtils', () => {
 
     beforeEach(() => {
         question = {};
+        Configuration.readOnly = false;
     });
 
     describe('isForm', () => {
@@ -92,7 +94,12 @@ describe('FormUtils', () => {
         });
 
         it('returns false for enabled question.', () => {
-            expect(FormUtils.isDisabled({})).toBeFalsy();
+            expect(FormUtils.isDisabled(question)).toBeFalsy();
+        });
+
+        it('returns true for read only form configuration.', () => {
+            Configuration.readOnly = true;
+            expect(FormUtils.isDisabled(question)).toBeTruthy();
         });
     });
 

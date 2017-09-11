@@ -3,6 +3,7 @@
 import JsonLdUtils from "jsonld-utils";
 import jsonld from "jsonld";
 
+import Configuration from "../model/Configuration";
 import Constants from "../constants/Constants";
 import Utils from "./Utils";
 import JsonLdObjectMap from "./JsonLdObjectMap";
@@ -35,7 +36,7 @@ export default class FormUtils {
     }
 
     static isDisabled(question) {
-        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DISABLED);
+        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DISABLED) || Configuration.readOnly;
     }
 
     static isHidden(question) {

@@ -10,7 +10,7 @@ import assign from "object-assign";
 class InputPropertiesResolver {
 
     static resolveValidationProperties(question) {
-        var props = {};
+        const props = {};
         if (question[Constants.HAS_VALID_ANSWER] === false) {
             props['validation'] = 'error';
             props['help'] = question[Constants.HAS_VALIDATION_MESSAGE];
@@ -21,7 +21,7 @@ class InputPropertiesResolver {
 
 
 const CheckboxAnswer = (props) => {
-    var question = props.question;
+    const question = props.question;
     return React.createElement(Configuration.inputComponent,  assign({}, InputPropertiesResolver.resolveValidationProperties(question), {
         type: 'checkbox',
         label: props.label,
