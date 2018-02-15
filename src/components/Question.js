@@ -150,14 +150,17 @@ export default class Question extends React.Component {
     _getAnswers() {
         const question = this.props.question;
         if (!question[Constants.HAS_ANSWER]) {
+            question[Constants.HAS_ANSWER] = [];
+        }
+        if (!Array.isArray(question[Constants.HAS_ANSWER])) {
+            question[Constants.HAS_ANSWER] = [question[Constants.HAS_ANSWER]];
+        }
+        if (question[Constants.HAS_ANSWER].length === 0) {
             if (FormUtils.isSection(question) && !FormUtils.isAnswerable(question) || FormUtils.isWizardStep(question)) {
                 question[Constants.HAS_ANSWER] = [];
             } else {
                 question[Constants.HAS_ANSWER] = [QuestionAnswerProcessor.generateAnswer(question)];
             }
-        }
-        if (!Array.isArray(question[Constants.HAS_ANSWER])) {
-            question[Constants.HAS_ANSWER] = [question[Constants.HAS_ANSWER]];
         }
         return question[Constants.HAS_ANSWER];
     }
