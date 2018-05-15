@@ -30,7 +30,7 @@
     "object-assign": "^4.1.0",
     "jsonld": "^0.4.6",
     "moment": "^2.14.1",
-    "react-bootstrap-datetimepicker": "https://kbss.felk.cvut.cz/dist/react-bootstrap-datetimepicker-0.0.5.tgz",
+    "react-bootstrap-datetimepicker": "https://kbss.felk.cvut.cz/dist/react-bootstrap-datetimepicker-0.0.7.tgz",
     "react-bootstrap-typeahead": "https://kbss.felk.cvut.cz/dist/react-bootstrap-typeahead-0.0.15.tgz",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.9.tgz",
     "inputmask-core": "^2.1.1",
