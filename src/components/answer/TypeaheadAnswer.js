@@ -78,18 +78,14 @@ export default class TypeaheadAnswer extends React.Component {
 
     render() {
         const value = Utils.idToName(this.state.options, this.props.value),
-            question = this.props.question,
-            inputProps = {
-                disabled: FormUtils.isDisabled(question),
-                title: this.props.title
-            };
+            question = this.props.question;
         return <div>
             <Typeahead ref={(c) => this.typeahead = c} className='form-group form-group-sm' formInputOption='id'
-                       inputProps={inputProps}
-                       value={value} label={this.props.label}
-                       placeholder={this.props.label} filterOption='name' size='small'
-                       displayOption='name' onOptionSelected={this._onOptionSelected} optionsButton={true} allowReset={true}
-                       options={this.state.options} customListComponent={Configuration.typeaheadResultList}/>
+                       inputProps={{title: this.props.title}} disabled={FormUtils.isDisabled(question)}
+                       value={value} label={this.props.label} placeholder={this.props.label} filterOption='name'
+                       size='small' displayOption='name' onOptionSelected={this._onOptionSelected} optionsButton={true}
+                       allowReset={true} options={this.state.options}
+                       customListComponent={Configuration.typeaheadResultList}/>
         </div>;
     }
 }
