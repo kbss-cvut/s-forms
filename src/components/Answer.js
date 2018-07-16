@@ -64,6 +64,8 @@ export default class Answer extends React.Component {
             component = this._renderCheckbox(value, label, title);
         } else if (FormUtils.isMaskedInput(question)) {
             component = this._renderMaskedInput(value, label, title);
+        } else if (FormUtils.isSpin(question)) {
+            component = this._renderSparqlInput(value, label, title);
         } else {
             component = this._renderRegularInput(value, label, title);
         }
@@ -102,5 +104,10 @@ export default class Answer extends React.Component {
     _renderRegularInput(value, label, title) {
         return <InputAnswer question={this.props.question} answer={this.props.answer} label={label} title={title}
                             value={value} onChange={this.onValueChange}/>;
+    }
+
+    _renderSparqlInput(value, label, title) {
+        return <InputAnswer question={this.props.question} answer={this.props.answer} label={label} title={title}
+                            value={value} onChange={this.onValueChange} spin={true}/>;
     }
 }

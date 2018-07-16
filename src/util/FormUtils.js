@@ -72,6 +72,10 @@ export default class FormUtils {
         return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.MASKED_INPUT);
     }
 
+    static isSpin(question) {
+        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.SPIN);
+    }
+
     static isCollapsed(question) {
         return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.COLLAPSED);
     }

@@ -6,6 +6,7 @@ import JsonLdUtils from "jsonld-utils";
 import Configuration from "../../model/Configuration";
 import Constants from "../../constants/Constants";
 import FormUtils from "../../util/FormUtils";
+import YASQE from "yasgui-yasqe";
 
 const NUMERIC_DATATYPES = [Constants.XSD.INT, Constants.XSD.INTEGER, Constants.XSD.NON_NEGATIVE_INTEGER,
     Constants.XSD.NON_POSITIVE_INTEGER, Constants.XSD.NEGATIVE_INTEGER, Constants.XSD.POSITIVE_INTEGER];
@@ -19,7 +20,7 @@ NUMBER_RULES[Constants.XSD.POSITIVE_INTEGER] = {min: 1};
 class InputPropertiesResolver {
 
     static _resolveInputType(question, value) {
-        if (FormUtils.isTextarea(question, value)) {
+        if (FormUtils.isSpin(question) || FormUtils.isTextarea(question, value)) {
             return 'textarea';
         } else if (InputPropertiesResolver._isNumeric(question)) {
             return 'number';
@@ -95,8 +96,21 @@ const InputAnswer = (props) => {
         label: props.label,
         title: props.title,
         placeholder: props.label,
-        value: value,
-        onChange: (e) => props.onChange(e.target.value)
+        value: value == null ? "" : value,
+        onChange: (e) => {
+            props.onChange(e.target.value);
+            if (props.spin)
+                this.hide();
+        },
+        onFocus: (e) => {
+            if (props.spin) {
+                const yasqe = YASQE.fromTextArea(e.target);
+                yasqe.setValue(value);
+                yasqe.on('change', () => {
+                    props.onChange(yasqe.getValue());
+                });
+            }
+        }
     }));
 };
 

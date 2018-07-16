@@ -19,6 +19,11 @@
       "name": "Miroslav Blasko",
       "email": "miroslav.blasko@fel.cvut.cz",
       "url": "https://kbss.felk.cvut.cz/web/portal/people"
+    },
+    {
+      "name": "Yan Doroshenko",
+      "email": "yan.doroshenko@felk.cvut.cz",
+      "url": "https://github.com/YanDoroshenko"
     }
   ],
   "repository": {
@@ -35,7 +40,8 @@
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.9.tgz",
     "inputmask-core": "^2.1.1",
     "babel-runtime": "^6.9.2",
-    "tsort": "0.0.1"
+    "tsort": "0.0.1",
+    "yasgui-yasqe": "^2.11.19"
   },
   "peerDependencies": {
     "react": ">= 15.3.2",
@@ -66,7 +72,8 @@
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",
     "jasmine-reporters": "^2.1.1",
-    "clean-css": "^3.4.12"
+    "clean-css": "^3.4.12",
+    "yasgui-yasqe": "^2.11.19"
   },
   "scripts": {
     "test": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
