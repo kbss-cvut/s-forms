@@ -20,7 +20,7 @@ NUMBER_RULES[Constants.XSD.POSITIVE_INTEGER] = {min: 1};
 class InputPropertiesResolver {
 
     static _resolveInputType(question, value) {
-        if (FormUtils.isSpin(question) || FormUtils.isTextarea(question, value)) {
+        if (FormUtils.isSparqlInput(question) || FormUtils.isTextarea(question, value)) {
             return 'textarea';
         } else if (InputPropertiesResolver._isNumeric(question)) {
             return 'number';
@@ -99,11 +99,11 @@ const InputAnswer = (props) => {
         value: value == null ? "" : value,
         onChange: (e) => {
             props.onChange(e.target.value);
-            if (props.spin)
+            if (props.sparql)
                 this.hide();
         },
         onFocus: (e) => {
-            if (props.spin) {
+            if (props.sparql) {
                 const yasqe = YASQE.fromTextArea(e.target);
                 yasqe.setValue(value);
                 yasqe.on('change', () => {

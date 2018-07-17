@@ -72,8 +72,8 @@ export default class FormUtils {
         return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.MASKED_INPUT);
     }
 
-    static isSpin(question) {
-        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.SPIN);
+    static isSparqlInput(question) {
+        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.SPARQL);
     }
 
     static isCollapsed(question) {
@@ -182,6 +182,14 @@ export default class FormUtils {
         if (acceptedAnswerValues && testedQuestions) {
             question = JsonLdObjectMap.getObject(testedQuestions["@id"]);
             for (var expValue of Utils.asArray(acceptedAnswerValues)) {
+                if (!question) {
+                    console.warn("Question is not defined.")
+                    return true;
+                }
+                if (!question.hasOwnProperty(Constants.HAS_ANSWER)) {
+                    console.warn("Question does not have answer value defined.")
+                    return true;
+                }
                 var answers = jsonld.getValues(question, Constants.HAS_ANSWER);
 
                 if (answers.length === 0) {

@@ -29,7 +29,7 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
         ANSWERABLE: 'answerable',
         MASKED_INPUT: 'masked-input',
         COLLAPSED: 'collapsed',
-        SPIN: 'spin'
+        SPARQL: 'sparql'
     },
     VALUE_TYPE_CODE = 'code',
     VALUE_TYPE_TEXT = 'text',
