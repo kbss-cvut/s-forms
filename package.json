@@ -72,8 +72,7 @@
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",
     "jasmine-reporters": "^2.1.1",
-    "clean-css": "^3.4.12",
-    "yasgui-yasqe": "^2.11.19"
+    "clean-css": "^3.4.12"
   },
   "scripts": {
     "test": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
