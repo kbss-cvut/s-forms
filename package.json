@@ -1,5 +1,5 @@
 {
-  "name": "semforms",
+  "name": "s-forms",
   "version": "0.1.7",
   "description": "Semantic forms generator and processor",
   "keywords": [
@@ -28,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://kbss.felk.cvut.cz/git/semforms.git"
+    "url": "https://kbss.felk.cvut.cz/git/s-forms.git"
   },
   "dependencies": {
     "react-bootstrap": "^0.30.5",
@@ -47,7 +47,7 @@
     "react": ">= 15.3.2",
     "react-dom": ">= 15.3.2"
   },
-  "main": "lib/semforms.js",
+  "main": "lib/s-forms.js",
   "private": true,
   "devDependencies": {
     "babel-cli": "^6.6.5",
@@ -77,11 +77,11 @@
   "scripts": {
     "test": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
     "test-with-jest": "jest",
-    "build": "browserify ./src/semforms.js -o ./dist/semforms.js",
-    "watchify": "watchify ./src/semforms.js -o ./dist/semforms.js",
+    "build": "browserify ./src/s-forms.js -o ./dist/s-forms.js",
+    "watchify": "watchify ./src/s-forms.js -o ./dist/s-forms.js",
     "lib": "babel ./src -d ./lib",
     "build-npm-prod": "npm run build && npm run lib && npm pack",
-    "build-css": "cleancss --skip-rebase -d -o ./css/semforms.min.css ./css/semforms.css",
+    "build-css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./css/s-forms.css",
     "rendering-test-start": "watchify -o test/rendering/bundle.js -v -d test/rendering/TestApp.js",
     "prebuild-npm-prod": "npm install"
   },
