@@ -108,6 +108,6 @@ export default class Answer extends React.Component {
 
     _renderSparqlInput(value, label, title) {
         return <InputAnswer question={this.props.question} answer={this.props.answer} label={label} title={title}
-                            value={value} onChange={this.onValueChange} spin={true}/>;
+                            value={value} onChange={this.onValueChange} sparql={true}/>;
     }
 }
