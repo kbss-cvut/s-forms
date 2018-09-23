@@ -11,6 +11,9 @@ import YASQE from "yasgui-yasqe";
 const NUMERIC_DATATYPES = [Constants.XSD.INT, Constants.XSD.INTEGER, Constants.XSD.NON_NEGATIVE_INTEGER,
     Constants.XSD.NON_POSITIVE_INTEGER, Constants.XSD.NEGATIVE_INTEGER, Constants.XSD.POSITIVE_INTEGER];
 
+const DECLARED_PREFIXES = "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix";
+const PREFIX = "http://www.w3.org/ns/shacl#prefix";
+
 const NUMBER_RULES = {};
 NUMBER_RULES[Constants.XSD.NON_NEGATIVE_INTEGER] = {min: 0};
 NUMBER_RULES[Constants.XSD.NON_POSITIVE_INTEGER] = {max: 0};
@@ -109,6 +112,20 @@ const InputAnswer = (props) => {
                 yasqe.on('change', () => {
                     props.onChange(yasqe.getValue());
                 });
+                const superAppend = YASQE.Autocompleters.prefixes.appendPrefixIfNeeded;
+                YASQE.Autocompleters.prefixes.appendPrefixIfNeeded = function (yasqe, completerName) {
+                    if (props.question[DECLARED_PREFIXES]) {
+                        yasqe.addPrefixes({"abcd": "http://abcde.com"});
+                        props.question[DECLARED_PREFIXES].forEach(e => {
+                            console.log(e[PREFIX]);
+                        });
+                    }
+                    else
+                        superAppend(yasqe, completerName);
+                };
+            }
+            else if (props.sparql) {
+
             }
         }
     }));
