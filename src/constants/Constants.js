@@ -29,7 +29,8 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
         ANSWERABLE: 'answerable',
         MASKED_INPUT: 'masked-input',
         COLLAPSED: 'collapsed',
-        SPARQL: 'sparql'
+        SPARQL: 'sparql',
+        TURTLE: "ttl"
     },
     VALUE_TYPE_CODE = 'code',
     VALUE_TYPE_TEXT = 'text',
@@ -80,9 +81,11 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
 
     CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/condition',
 
-    HAS_PATTERN = 'http://onto.fel.cvut.cz/ontologies/form-lt/has-pattern';
+    HAS_PATTERN = 'http://onto.fel.cvut.cz/ontologies/form-lt/has-pattern',
 
-
+    HAS_DECLARED_PREFIX = 'http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix',
+    PREFIX = "http://www.w3.org/ns/shacl#prefix",
+    NAMESPACE = "http://www.w3.org/ns/shacl#namespace";
 /**
  * Contains mainly definition of constants used to parse the form declaration.
  */
@@ -269,5 +272,17 @@ export default class Constants {
 
     static get HAS_PATTERN() {
         return HAS_PATTERN;
+    }
+
+    static get HAS_DECLARED_PREFIX() {
+        return HAS_DECLARED_PREFIX;
+    }
+
+    static get PREFIX() {
+        return PREFIX;
+    }
+
+    static get NAMESPACE() {
+        return NAMESPACE;
     }
 }

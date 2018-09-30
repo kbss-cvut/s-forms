@@ -11,6 +11,7 @@ import JsonLdObjectMap from "../util/JsonLdObjectMap";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 import ValidatorFactory from "../model/ValidatorFactory";
 import JsonLdObjectUtils from "../util/JsonLdObjectUtils";
+import PrefixIcon from "./PrefixesIcon";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
@@ -131,6 +132,7 @@ export default class Question extends React.Component {
                     <div>
                         {this._renderUnits()}
                         {this._renderQuestionHelp()}
+                        {this._renderPrefixes()}
                     </div>
                 </div>
             </div>);
@@ -183,6 +185,13 @@ export default class Question extends React.Component {
         return question[Constants.HELP_DESCRIPTION] ?
             <HelpIcon text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], Configuration.intl)}
                       iconClass={helpClass}/> : null;
+    }
+
+    _renderPrefixes() {
+        const question = this.props.question;
+        return question[Constants.HAS_DECLARED_PREFIX].length ?
+            <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]}
+                      iconClass={'help-icon-checkbox'}/> : null;
     }
 
     _renderUnits() {

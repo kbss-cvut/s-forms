@@ -8,7 +8,7 @@ import Utils from "./Utils";
 
 var formShape = {
     root: {},
-    expandProperties: [Constants.HAS_SUBQUESTION, Constants.IS_RELEVANT_IF, Constants.HAS_ANSWER]
+    expandProperties: [Constants.HAS_SUBQUESTION, Constants.IS_RELEVANT_IF, Constants.HAS_ANSWER, Constants.HAS_DECLARED_PREFIX]
 };
 formShape.root[Constants.HAS_LAYOUT_CLASS] = Constants.FORM;
 

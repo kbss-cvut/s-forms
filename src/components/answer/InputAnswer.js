@@ -12,13 +12,17 @@ const NUMERIC_DATATYPES = [Constants.XSD.INT, Constants.XSD.INTEGER, Constants.X
     Constants.XSD.NON_POSITIVE_INTEGER, Constants.XSD.NEGATIVE_INTEGER, Constants.XSD.POSITIVE_INTEGER];
 
 const DECLARED_PREFIXES = "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix";
-const PREFIX = "http://www.w3.org/ns/shacl#prefix";
 
 const NUMBER_RULES = {};
 NUMBER_RULES[Constants.XSD.NON_NEGATIVE_INTEGER] = {min: 0};
 NUMBER_RULES[Constants.XSD.NON_POSITIVE_INTEGER] = {max: 0};
 NUMBER_RULES[Constants.XSD.NEGATIVE_INTEGER] = {max: -1};
 NUMBER_RULES[Constants.XSD.POSITIVE_INTEGER] = {min: 1};
+
+const tokenTypes = {
+    "string-2": "prefixed",
+    atom: "var"
+};
 
 class InputPropertiesResolver {
 
@@ -102,7 +106,7 @@ const InputAnswer = (props) => {
         value: value == null ? "" : value,
         onChange: (e) => {
             props.onChange(e.target.value);
-            if (props.sparql)
+            if (props.sparql || props.turtle)
                 this.hide();
         },
         onFocus: (e) => {
@@ -112,20 +116,46 @@ const InputAnswer = (props) => {
                 yasqe.on('change', () => {
                     props.onChange(yasqe.getValue());
                 });
-                const superAppend = YASQE.Autocompleters.prefixes.appendPrefixIfNeeded;
                 YASQE.Autocompleters.prefixes.appendPrefixIfNeeded = function (yasqe, completerName) {
-                    if (props.question[DECLARED_PREFIXES]) {
-                        yasqe.addPrefixes({"abcd": "http://abcde.com"});
-                        props.question[DECLARED_PREFIXES].forEach(e => {
-                            console.log(e[PREFIX]);
-                        });
-                    }
-                    else
-                        superAppend(yasqe, completerName);
-                };
-            }
-            else if (props.sparql) {
+                    if (!yasqe.autocompleters.getTrie(completerName)) return; // no prefixed defined. just stop
+                    if (!yasqe.options.autocompleters || yasqe.options.autocompleters.indexOf(completerName) === -1) return; //this autocompleter is disabled
+                    const cur = yasqe.getCursor();
 
+                    const token = yasqe.getTokenAt(cur);
+                    if (tokenTypes[token.type] === "prefixed") {
+                        const colonIndex = token.string.indexOf(":");
+                        if (colonIndex !== -1) {
+                            // check previous token isnt PREFIX, or a '<'(which would mean we are in a uri)
+                            //			var firstTokenString = yasqe.getNextNonWsToken(cur.line).string.toUpperCase();
+                            const lastNonWsTokenString = yasqe.getPreviousNonWsToken(cur.line, token).string.toUpperCase();
+                            const previousToken = yasqe.getTokenAt({
+                                line: cur.line,
+                                ch: token.start
+                            }); // needs to be null (beginning of line), or whitespace
+                            if (lastNonWsTokenString !== "PREFIX" && (previousToken.type === "ws" || previousToken.type == null)) {
+                                // check whether it isnt defined already (saves us from looping
+                                // through the array)
+                                const currentPrefix = token.string.substring(0, colonIndex + 1);
+                                const queryPrefixes = yasqe.getPrefixesFromQuery();
+                                if (queryPrefixes[currentPrefix.slice(0, -1)] == null) {
+                                    // ok, so it isnt added yet!
+                                    if (props.question[Constants.HAS_DECLARED_PREFIX] && props.question[Constants.HAS_DECLARED_PREFIX].filter(p => p[Constants.PREFIX] === currentPrefix.slice(0, -1)).length) {
+                                        const prefix = props.question[Constants.HAS_DECLARED_PREFIX].filter(p => p[Constants.PREFIX] === currentPrefix.slice(0, -1));
+                                        const px = {};
+                                        px[prefix[0][Constants.PREFIX]] = prefix[0][Constants.NAMESPACE];
+                                        yasqe.addPrefixes(px);
+                                    }
+                                    else {
+                                        const completions = yasqe.autocompleters.getTrie(completerName).autoComplete(currentPrefix);
+                                        if (completions.length > 0) {
+                                            yasqe.addPrefixes(completions[0]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
             }
         }
     }));

@@ -76,6 +76,10 @@ export default class FormUtils {
         return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.SPARQL);
     }
 
+    static isTurtleInput(question) {
+        return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TURTLE);
+    }
+
     static isCollapsed(question) {
         return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.COLLAPSED);
     }

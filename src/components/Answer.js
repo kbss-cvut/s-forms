@@ -66,6 +66,8 @@ export default class Answer extends React.Component {
             component = this._renderMaskedInput(value, label, title);
         } else if (FormUtils.isSparqlInput(question)) {
             component = this._renderSparqlInput(value, label, title);
+        } else if (FormUtils.isTurtleInput(question)) {
+            component = this._renderTurtleInput(value, label, title);
         } else {
             component = this._renderRegularInput(value, label, title);
         }
@@ -107,6 +109,11 @@ export default class Answer extends React.Component {
     }
 
     _renderSparqlInput(value, label, title) {
+        return <InputAnswer question={this.props.question} answer={this.props.answer} label={label} title={title}
+                            value={value} onChange={this.onValueChange} sparql={true}/>;
+    }
+
+    _renderTurtleInput(value, label, title) {
         return <InputAnswer question={this.props.question} answer={this.props.answer} label={label} title={title}
                             value={value} onChange={this.onValueChange} sparql={true}/>;
     }
