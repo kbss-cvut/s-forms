@@ -31,6 +31,7 @@
     "url": "https://kbss.felk.cvut.cz/git/s-forms.git"
   },
   "dependencies": {
+    "prop-types": "^15.3.2",
     "react-bootstrap": "^0.30.5",
     "object-assign": "^4.1.0",
     "jsonld": "^0.4.6",

@@ -12,6 +12,7 @@ import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 import ValidatorFactory from "../model/ValidatorFactory";
 import JsonLdObjectUtils from "../util/JsonLdObjectUtils";
 import PrefixIcon from "./PrefixesIcon";
+import MediaContent from "./MediaContent";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
@@ -112,6 +113,7 @@ export default class Question extends React.Component {
 
     _renderQuestionContent() {
         return [
+            <MediaContent key={this.props.question['@id'] + '-media'} question={this.props.question}/>,
             this.renderAnswers(),
             this.renderSubQuestions()
         ];
@@ -189,7 +191,7 @@ export default class Question extends React.Component {
 
     _renderPrefixes() {
         const question = this.props.question;
-        return question[Constants.HAS_DECLARED_PREFIX].length ?
+        return question[Constants.HAS_DECLARED_PREFIX] && question[Constants.HAS_DECLARED_PREFIX].length ?
             <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]}
                       iconClass={'help-icon-checkbox'}/> : null;
     }

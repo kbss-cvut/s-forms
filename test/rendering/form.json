@@ -25,6 +25,7 @@
       "@type": "form:question-template",
       "has-origin-type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute",
       "has-template-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-1",
+      "has-media-content": "https://drive.google.com/file/d/18HBeiOb5zthhIFosidc7mRTZtNAd3Ur7/view?ts=5bc365d8",
       "comment": {
         "@language": "en",
         "@value": "The latitude of the aerodrome reference point. Aerodrome reference point: The designated geographical location of an aerodrome."
@@ -18250,7 +18251,8 @@
       ],
       "has-layout-class": "section",
       "http://purl.org/dc/elements/1.1/description": "Test help on section header\nWith newline",
-      "label": "Chemotherapy"
+      "label": "Chemotherapy",
+      "has-media-content": "https://drive.google.com/file/d/18HBeiOb5zthhIFosidc7mRTZtNAd3Ur7/preview"
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--d-h--size-of-the-tumor--horizontal-q",
@@ -18501,6 +18503,9 @@
     "has_file_number": {
       "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_file_number",
       "@type": "http://www.w3.org/2001/XMLSchema#long"
+    },
+    "has-media-content": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-media-content"
     },
     "has-author": {
       "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has-author",
