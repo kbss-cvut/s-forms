@@ -27,7 +27,7 @@ const tokenTypes = {
 class InputPropertiesResolver {
 
     static _resolveInputType(question, value) {
-        if (FormUtils.isSparqlInput(question) || FormUtils.isTextarea(question, value)) {
+        if (FormUtils.isSparqlInput(question) || FormUtils.isTurtleInput(question) || FormUtils.isTextarea(question, value)) {
             return 'textarea';
         } else if (InputPropertiesResolver._isNumeric(question)) {
             return 'number';
@@ -156,6 +156,14 @@ const InputAnswer = (props) => {
                         }
                     }
                 };
+            }
+            else if (props.turtle) {
+                console.log("TTL");
+                const yate = YATE.fromTextArea(e.target);
+                yate.setValue(value);
+                yate.on('change', () => {
+                    props.onChange(yate.getValue());
+                });
             }
         }
     }));

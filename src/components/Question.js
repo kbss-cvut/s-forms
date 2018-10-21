@@ -122,7 +122,7 @@ export default class Question extends React.Component {
             children = [], answers = this._getAnswers();
         let row = [], cls, isTextarea;
         for (let i = 0, len = answers.length; i < len; i++) {
-            isTextarea = FormUtils.isTextarea(this.props.question, FormUtils.resolveValue(answers[i]))  || FormUtils.isSparqlInput(question);
+            isTextarea = FormUtils.isTextarea(this.props.question, FormUtils.resolveValue(answers[i]))  || FormUtils.isSparqlInput(question) || FormUtils.isTurtleInput(question);
             cls = Question._getAnswerClass(isTextarea);
             row.push(<div key={'row-item-' + i} className={cls}>
                 <div className="row">
