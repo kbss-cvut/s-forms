@@ -24,16 +24,16 @@ export default class MediaContent extends React.Component {
     _renderDangerously(mediaContent) {
         if (Array.isArray(mediaContent)) {
             return <div className='col-xs-6'>
-                {mediaContent.map(src => <div key={'media-' + src} className='row embed-responsive media-content-video-container'>{MediaContent.iframe(src)}</div>)}
+                {mediaContent.map(src => <div key={'media-' + src} className='row embed-responsive-21by9 media-content-video-container'>{MediaContent.iframe(src)}</div>)}
             </div>;
         } else {
             return <div className='row'>
-                <div className='col-xs-6 embed-responsive media-content-video-container'>{MediaContent.iframe(mediaContent)}</div>
+                <div className='col-xs-6 embed-responsive-21by9 media-content-video-container'>{MediaContent.iframe(mediaContent)}</div>
             </div>;
         }
     }
 
     static iframe(src) {
-        return <iframe src={src} class="embed-responsive-item"></iframe>;
+        return <iframe src={src} className="embed-responsive-item" allowFullScreen/>;
     }
 }
