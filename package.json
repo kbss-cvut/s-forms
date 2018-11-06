@@ -1,6 +1,6 @@
 {
   "name": "s-forms",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
