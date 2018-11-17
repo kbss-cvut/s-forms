@@ -78,6 +78,7 @@ const FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form',
     REQUIRES_DESCRIPTION = 'http://onto.fel.cvut.cz/ontologies/form/requires-description',
     HAS_PRECEDING_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/has-preceding-question',
     HAS_PRECEDING_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/has-preceding-value',
+    HAS_MEDIA_CONTENT = 'http://onto.fel.cvut.cz/ontologies/form/has-media-content',
 
     CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/condition',
 
@@ -264,6 +265,10 @@ export default class Constants {
 
     static get HAS_PRECEDING_VALUE() {
         return HAS_PRECEDING_VALUE;
+    }
+
+    static get HAS_MEDIA_CONTENT() {
+        return HAS_MEDIA_CONTENT;
     }
 
     static get CONDITION() {
