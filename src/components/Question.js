@@ -112,11 +112,13 @@ export default class Question extends React.Component {
     }
 
     _renderQuestionContent() {
-        return [
-            <MediaContent key={this.props.question['@id'] + '-media'} question={this.props.question}/>,
-            this.renderAnswers(),
-            this.renderSubQuestions()
-        ];
+        let content = [];
+        if (this.state.expanded) {
+            content.push(<MediaContent key={this.props.question['@id'] + '-media'} question={this.props.question}/>)
+        }
+        content.push(this.renderAnswers());
+        content.push(this.renderSubQuestions());
+        return content;
     }
 
     renderAnswers() {
