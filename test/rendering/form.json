@@ -16607,6 +16607,24 @@
       "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
     },
     {
+      "@id": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance2190490223-a",
+      "@type": "doc:answer",
+      "has_data_value": {
+        "@language": "en",
+        "@value": "true"
+      },
+      "has-answer-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance434162734"
+    },
+    {
+      "@id": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance23232323299-a",
+      "@type": "doc:answer",
+      "has_data_value": {
+        "@language": "en",
+        "@value": "true"
+      },
+      "has-answer-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance434162734"
+    },
+    {
       "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-111570084-a",
       "@type": "doc:answer",
       "has_data_value": {
@@ -18306,12 +18324,14 @@
       "@type": "doc:question",
       "has-layout-class": "checkbox",
       "label": "Conisation (any technique including LEEP)",
+      "has_answer": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance2190490223-a",
       "description": "Checkbox answer description."
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--s-t--cervical-procedure--laparoscopic-radical-trachelectomy-q",
       "@type": "doc:question",
       "has-layout-class": "checkbox",
+      "has_answer": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance23232323299-a",
       "label": "Laparoscopic radical trachelectomy"
     },
     {
