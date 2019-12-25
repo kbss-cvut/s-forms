@@ -48,7 +48,7 @@ describe('Answer component', () => {
     it('renders a Typeahead when layout class is typeahead', () => {
         question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
         const component = Environment.render(<Answer answer={{}} question={question} onChange={onChange}/>),
-            typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead'));
+            typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead').default);
         expect(typeahead).not.toBeNull();
     });
 
@@ -73,7 +73,7 @@ describe('Answer component', () => {
         question[Constants.HAS_OPTIONS_QUERY] = 'SELECT * WHERE {?x ?y ?z. }';
         const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange}/>),
 
-            typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead'));
+            typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead').default);
         expect(typeahead).not.toBeNull();
         expect(typeahead.state.entryValue).toEqual(valueLabel);
     });

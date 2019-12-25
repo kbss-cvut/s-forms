@@ -65,7 +65,7 @@ describe('TypeaheadAnswer', () => {
         question[Constants.HAS_OPTIONS_QUERY] = query;
 
         const component = Environment.render(<TypeaheadAnswer answer={{}} question={question} onChange={onChange} label="TestLabel"/>),
-            typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead'));
+            typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead').default);
 
         expect(optionsStore.getOptions).toHaveBeenCalled();
         expect(actions.loadFormOptions).toHaveBeenCalled();
