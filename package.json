@@ -44,8 +44,8 @@
     "yasgui-yasqe": "^2.11.22"
   },
   "peerDependencies": {
-    "react": ">= 15.3.2",
-    "react-dom": ">= 15.3.2"
+    "react": ">= 16.9.0",
+    "react-dom": ">= 16.9.0"
   },
   "main": "lib/s-forms.js",
   "private": true,
@@ -65,9 +65,9 @@
     "jsdom": "^8.5.0",
     "lodash": "^4.17.15",
     "prettier": "^2.0.4",
-    "react": "~15.3.2",
+    "react": "~16.9.0",
     "react-addons-test-utils": "~15.3.2",
-    "react-dom": "~15.3.2",
+    "react-dom": "~16.9.0",
     "watchify": "^3.7.0",
     "webpack": "^4.42.1"
   },
