@@ -21,7 +21,7 @@ const DateTimeAnswer = (props) => {
         mode={mode}
         format={format}
         inputFormat={pickerUiFormat}
-        inputProps={{ title: props.title, bsSize: 'small' }}
+        inputProps={{ title: props.title, size: 'small' }}
         onChange={(date) => {
           if (format === Constants.DATETIME_NUMBER_FORMAT) {
             props.onChange(Number(date));

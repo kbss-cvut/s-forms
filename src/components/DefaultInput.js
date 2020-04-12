@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { FormText, FormLabel, FormControl, FormGroup, FormCheck } from 'react-bootstrap';
+import { FormText, FormLabel, FormControl, FormGroup, Form } from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {
   focus() {
@@ -28,24 +28,17 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderCheckbox() {
-    return (
-      <FormCheck type="checkbox" ref={(c) => (this.input = c)} {...this.props}>
-        {this.props.label}
-      </FormCheck>
-    );
+    return <Form.Check type="checkbox" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />;
   }
 
   _renderRadio() {
-    return (
-      <FormCheck type="radio" ref={(c) => (this.input = c)} {...this.props}>
-        {this.props.label}
-      </FormCheck>
-    );
+    return <Form.Check type="radio" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />;
   }
 
   _renderSelect() {
+    // TODO validation
     return (
-      <FormGroup bsSize="small" validationState={this.props.validation}>
+      <FormGroup size="small">
         {this._renderLabel()}
         <FormControl as="select" ref={(c) => (this.input = c)} {...this.props}>
           {this.props.children}
@@ -61,8 +54,9 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderTextArea() {
+    // TODO validation
     return (
-      <FormGroup bsSize="small" validationState={this.props.validation}>
+      <FormGroup size="small">
         {this._renderLabel()}
         <FormControl as="textarea" style={{ height: 'auto' }} ref={(c) => (this.input = c)} {...this.props} />
         {this.props.validation && <FormControl.Feedback />}
@@ -76,8 +70,10 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderInput() {
+    // TODO validation
+
     return (
-      <FormGroup bsSize="small" validationState={this.props.validation}>
+      <FormGroup size="small">
         {this._renderLabel()}
         <FormControl ref={(c) => (this.input = c)} as="input" {...this.props} />
         {this.props.validation && <FormControl.Feedback />}

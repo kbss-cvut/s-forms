@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Accordion } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Answer from './Answer';
@@ -48,7 +48,9 @@ export default class Question extends React.Component {
   }
 
   _toggleCollapse = () => {
-    this.setState({ expanded: !this.state.expanded });
+    if (this.props.collapsible) {
+      this.setState({ expanded: !this.state.expanded });
+    }
   };
 
   render() {
@@ -77,24 +79,27 @@ export default class Question extends React.Component {
       }
     }
     if (FormUtils.isSection(question)) {
-      if (this.props.withoutCard) {
+      const { collapsible, withoutCard } = this.props;
+
+      if (withoutCard) {
         return <div>{this._renderQuestionContent()}</div>;
-      } else {
-        const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl),
-          collapsible = this.props.collapsible;
-        return (
-          <Card variant="info" expanded={this.state.expanded} collapsible={collapsible}>
-            <Card.Header>
-              <h5>
-                {collapsible && this._renderCollapseToggle()}
-                <span onClick={this._toggleCollapse}>{label}</span>
-                {this._renderQuestionHelp()}
-              </h5>
-            </Card.Header>
-            <Card.Body>{this._renderQuestionContent()}</Card.Body>
-          </Card>
-        );
       }
+      const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
+
+      const cardBody = <Card.Body>{this._renderQuestionContent()}</Card.Body>;
+
+      return (
+        <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
+          <Card>
+            <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className="bg-info">
+              {collapsible && this._renderCollapseToggle()}
+              {label}
+              {this._renderQuestionHelp()}
+            </Accordion.Toggle>
+            {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
+          </Card>
+        </Accordion>
+      );
     } else {
       return <div>{this._renderQuestionContent()}</div>;
     }
@@ -126,7 +131,7 @@ export default class Question extends React.Component {
       row.push(
         <div key={'row-item-' + i} className={cls}>
           <div className="row">
-            <div className="col-xs-10">
+            <div className="col-10">
               <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
             </div>
             <div>
@@ -176,16 +181,16 @@ export default class Question extends React.Component {
 
   static _getAnswerClass(isTextarea) {
     return isTextarea
-      ? 'col-xs-12'
+      ? 'col-12'
       : Constants.GENERATED_ROW_SIZE === 1
-      ? 'col-xs-5'
-      : 'col-xs-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
+      ? 'col-5'
+      : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
   }
 
   _renderCollapseToggle() {
     const glyph = this.state.expanded ? 'icon-toggle-up' : 'icon-toggle-down';
     const title = this.state.expanded ? 'Collapse' : 'Expand';
-    return <span glyph={glyph} onClick={this._toggleCollapse} className={`${glyph} collapse-toggle`} title={title} />;
+    return <span onClick={this._toggleCollapse} className={`${glyph} collapse-toggle`} title={title} />;
   }
 
   _renderQuestionHelp() {
@@ -215,9 +220,10 @@ export default class Question extends React.Component {
   }
 
   renderSubQuestions() {
-    const children = [],
-      subQuestions = this._getSubQuestions();
-    for (let i = 0, len = subQuestions.length; i < len; i++) {
+    const children = [];
+    const subQuestions = this._getSubQuestions();
+
+    for (let i = 0; i < subQuestions.length; i++) {
       children.push(
         <Question key={'sub-question-' + i} index={i} question={subQuestions[i]} onChange={this.onSubQuestionChange} />
       );

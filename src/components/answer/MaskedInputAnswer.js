@@ -6,7 +6,7 @@ import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import InputAnswer from './InputAnswer';
 import Logger from '../../util/Logger';
-import MaskedInput from '../MaskedInput';
+// import MaskedInput from '../MaskedInput';
 
 const MaskedInputAnswer = (props) => {
   const question = props.question;
@@ -17,17 +17,20 @@ const MaskedInputAnswer = (props) => {
     Logger.warn('Input mask not provided. Falling back to regular input.');
     return <InputAnswer {...props} />;
   }
-  return (
-    <MaskedInput
-      mask={mask}
-      value={value}
-      label={props.label}
-      title={props.title}
-      placeholder={mask}
-      onChange={(e) => props.onChange(e.target.value)}
-      disabled={FormUtils.isDisabled(question)}
-    />
-  );
+  /*
+      return (
+        <MaskedInput
+          mask={mask}
+          value={value}
+          label={props.label}
+          title={props.title}
+          placeholder={mask}
+          onChange={(e) => props.onChange(e.target.value)}
+          disabled={FormUtils.isDisabled(question)}
+        />
+      );
+      */
+  return null;
 };
 
 MaskedInputAnswer.propTypes = {
