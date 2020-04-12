@@ -1,34 +1,44 @@
-import React from "react";
-import PropTypes from "prop-types";
-import JsonLdUtils from "jsonld-utils";
-import Constants from "../constants/Constants";
+import React from 'react';
+import PropTypes from 'prop-types';
+import JsonLdUtils from 'jsonld-utils';
+import Constants from '../constants/Constants';
 
 export default class MediaContent extends React.Component {
-    render() {
-        const mediaContent = JsonLdUtils.getJsonAttValue(this.props.question, Constants.HAS_MEDIA_CONTENT);
-        if (!mediaContent) {
-            return null;
-        }
-        return this._renderDangerously(mediaContent);
+  render() {
+    const mediaContent = JsonLdUtils.getJsonAttValue(this.props.question, Constants.HAS_MEDIA_CONTENT);
+    if (!mediaContent) {
+      return null;
     }
+    return this._renderDangerously(mediaContent);
+  }
 
-    _renderDangerously(mediaContent) {
-        if (Array.isArray(mediaContent)) {
-            return <div className='col-xs-6'>
-                {mediaContent.map(src => <div key={'media-' + src} className='row embed-responsive-21by9 media-content-video-container'>{MediaContent.iframe(src)}</div>)}
-            </div>;
-        } else {
-            return <div className='row'>
-                <div className='col-xs-6 embed-responsive-21by9 media-content-video-container'>{MediaContent.iframe(mediaContent)}</div>
-            </div>;
-        }
+  _renderDangerously(mediaContent) {
+    if (Array.isArray(mediaContent)) {
+      return (
+        <div className="col-xs-6">
+          {mediaContent.map((src) => (
+            <div key={'media-' + src} className="row embed-responsive-21by9 media-content-video-container">
+              {MediaContent.iframe(src)}
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <div className="row">
+          <div className="col-xs-6 embed-responsive-21by9 media-content-video-container">
+            {MediaContent.iframe(mediaContent)}
+          </div>
+        </div>
+      );
     }
+  }
 
-    static iframe(src) {
-        return <iframe src={src} className="embed-responsive-item" allowFullScreen/>;
-    }
+  static iframe(src) {
+    return <iframe src={src} className="embed-responsive-item" allowFullScreen />;
+  }
 }
 
 MediaContent.propTypes = {
-    question: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired
 };

@@ -10,83 +10,83 @@ let dateTimeFormat = null;
 let readOnly = false;
 
 export default class Configuration {
-    static get actions() {
-        return actions;
-    }
+  static get actions() {
+    return actions;
+  }
 
-    static set actions(a) {
-        actions = a;
-    }
+  static set actions(a) {
+    actions = a;
+  }
 
-    static get intl() {
-        return intl;
-    }
+  static get intl() {
+    return intl;
+  }
 
-    static set intl(value) {
-        intl = value;
-    }
+  static set intl(value) {
+    intl = value;
+  }
 
-    static get optionsStore() {
-        return optionsStore;
-    }
+  static get optionsStore() {
+    return optionsStore;
+  }
 
-    static set optionsStore(store) {
-        optionsStore = store;
-    }
+  static set optionsStore(store) {
+    optionsStore = store;
+  }
 
-    static get wizardStore() {
-        return wizardStore;
-    }
+  static get wizardStore() {
+    return wizardStore;
+  }
 
-    static set wizardStore(store) {
-        wizardStore = store;
-    }
+  static set wizardStore(store) {
+    wizardStore = store;
+  }
 
-    static get typeaheadResultList() {
-        return typeaheadResultList;
-    }
+  static get typeaheadResultList() {
+    return typeaheadResultList;
+  }
 
-    static set typeaheadResultList(component) {
-        typeaheadResultList = component;
-    }
+  static set typeaheadResultList(component) {
+    typeaheadResultList = component;
+  }
 
-    static get inputComponent() {
-        return inputComponent ? inputComponent : require('../components/DefaultInput').default;
-    }
+  static get inputComponent() {
+    return inputComponent ? inputComponent : require('../components/DefaultInput').default;
+  }
 
-    static set inputComponent(component) {
-        inputComponent = component;
-    }
+  static set inputComponent(component) {
+    inputComponent = component;
+  }
 
-    static get dateFormat() {
-        return dateFormat ? dateFormat : 'YYYY-MM-DD';
-    }
+  static get dateFormat() {
+    return dateFormat ? dateFormat : 'YYYY-MM-DD';
+  }
 
-    static set dateFormat(format) {
-        dateFormat = format;
-    }
+  static set dateFormat(format) {
+    dateFormat = format;
+  }
 
-    static get timeFormat() {
-        return timeFormat ? timeFormat : 'hh:mm:ss';
-    }
+  static get timeFormat() {
+    return timeFormat ? timeFormat : 'hh:mm:ss';
+  }
 
-    static set timeFormat(format) {
-        timeFormat = format;
-    }
+  static set timeFormat(format) {
+    timeFormat = format;
+  }
 
-    static get dateTimeFormat() {
-        return dateTimeFormat ? dateTimeFormat : 'YYYY-MM-DD hh:mm:ss';
-    }
+  static get dateTimeFormat() {
+    return dateTimeFormat ? dateTimeFormat : 'YYYY-MM-DD hh:mm:ss';
+  }
 
-    static set dateTimeFormat(format) {
-        dateTimeFormat = format;
-    }
+  static set dateTimeFormat(format) {
+    dateTimeFormat = format;
+  }
 
-    static get readOnly() {
-        return readOnly;
-    }
+  static get readOnly() {
+    return readOnly;
+  }
 
-    static set readOnly(newValue) {
-        readOnly = newValue;
-    }
+  static set readOnly(newValue) {
+    readOnly = newValue;
+  }
 }
