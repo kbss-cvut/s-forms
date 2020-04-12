@@ -2,6 +2,7 @@ import React from "react";
 import assign from "object-assign";
 import {Glyphicon, Panel} from "react-bootstrap";
 import JsonLdUtils from "jsonld-utils";
+import PropTypes from "prop-types";
 import Answer from "./Answer";
 import Configuration from "../model/Configuration";
 import Constants from "../constants/Constants";
@@ -18,19 +19,6 @@ import MediaContent from "./MediaContent";
 const PRETTY_ANSWERABLE_LAYOUT = false;
 
 export default class Question extends React.Component {
-    static propTypes = {
-        question: React.PropTypes.object.isRequired,
-        onChange: React.PropTypes.func.isRequired,
-        index: React.PropTypes.number,
-        withoutPanel: React.PropTypes.bool,
-        collapsible: React.PropTypes.bool // Whether the section is collapsible (if the question is a section)
-    };
-
-    static defaultProps = {
-        withoutPanel: false,
-        collapsible: true
-    };
-
     constructor(props) {
         super(props);
         JsonLdObjectMap.putObject(props.question["@id"], props.question);
@@ -100,7 +88,8 @@ export default class Question extends React.Component {
                 const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl),
                     collapsible = this.props.collapsible;
                 return <Panel
-                    header={<h5>{collapsible && this._renderCollapseToggle()}<span onClick={this._toggleCollapse}>{label}</span>{this._renderQuestionHelp()}</h5>}
+                    header={<h5>{collapsible && this._renderCollapseToggle()}<span
+                        onClick={this._toggleCollapse}>{label}</span>{this._renderQuestionHelp()}</h5>}
                     bsStyle='info'
                     expanded={this.state.expanded} collapsible={collapsible}>
                     {this._renderQuestionContent()}
@@ -126,7 +115,7 @@ export default class Question extends React.Component {
             children = [], answers = this._getAnswers();
         let row = [], cls, isTextarea;
         for (let i = 0, len = answers.length; i < len; i++) {
-            isTextarea = FormUtils.isTextarea(this.props.question, FormUtils.resolveValue(answers[i]))  || FormUtils.isSparqlInput(question) || FormUtils.isTurtleInput(question);
+            isTextarea = FormUtils.isTextarea(this.props.question, FormUtils.resolveValue(answers[i])) || FormUtils.isSparqlInput(question) || FormUtils.isTurtleInput(question);
             cls = Question._getAnswerClass(isTextarea);
             row.push(<div key={'row-item-' + i} className={cls}>
                 <div className="row">
@@ -195,7 +184,7 @@ export default class Question extends React.Component {
         const question = this.props.question;
         return question[Constants.HAS_DECLARED_PREFIX] && question[Constants.HAS_DECLARED_PREFIX].length ?
             <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]}
-                      iconClass={'help-icon-checkbox'}/> : null;
+                        iconClass={'help-icon-checkbox'}/> : null;
     }
 
     _renderUnits() {
@@ -232,3 +221,16 @@ export default class Question extends React.Component {
         return question[Constants.HAS_SUBQUESTION];
     }
 }
+
+Question.propTypes = {
+    question: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired,
+    index: PropTypes.number,
+    withoutPanel: PropTypes.bool,
+    collapsible: PropTypes.bool // Whether the section is collapsible (if the question is a section)
+};
+
+Question.defaultProps = {
+    withoutPanel: false,
+    collapsible: true
+};

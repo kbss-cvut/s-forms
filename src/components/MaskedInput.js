@@ -1,6 +1,7 @@
 'use strict';
 
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import InputMask from "inputmask-core";
 import {getSelection, setSelection} from "react/lib/ReactInputSelection";
@@ -22,14 +23,6 @@ function isRedo(e) {
 // Copied from https://github.com/insin/react-maskedinput
 
 export default class MaskedInput extends React.Component {
-    static propTypes = {
-        mask: React.PropTypes.string.isRequired,
-    };
-
-    static defaultProps = {
-        value: ''
-    };
-
     constructor(props) {
         super(props);
     }
@@ -54,15 +47,12 @@ export default class MaskedInput extends React.Component {
             // - otherwise the `this.mask` has a value for us (most likely from paste action)
             if (this.mask.getValue() === this.mask.emptyValue) {
                 this.mask.setPattern(MaskMapper.mapMask(nextProps.mask), {value: nextProps.value})
-            }
-            else {
+            } else {
                 this.mask.setPattern(MaskMapper.mapMask(nextProps.mask), {value: this.mask.getRawValue()})
             }
-        }
-        else if (this.props.mask !== nextProps.mask) {
+        } else if (this.props.mask !== nextProps.mask) {
             this.mask.setPattern(MaskMapper.mapMask(nextProps.mask), {value: this.mask.getRawValue()})
-        }
-        else if (this.props.value !== nextProps.value) {
+        } else if (this.props.value !== nextProps.value) {
             this.mask.setValue(nextProps.value)
         }
     }
@@ -217,3 +207,10 @@ export default class MaskedInput extends React.Component {
     }
 }
 
+MaskedInput.propTypes = {
+    mask: PropTypes.string.isRequired,
+};
+
+MaskedInput.defaultProps = {
+    value: ''
+};

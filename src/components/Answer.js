@@ -2,6 +2,7 @@
 
 import React from "react";
 import assign from "object-assign";
+import PropTypes from "prop-types";
 import CheckboxAnswer from "./answer/CheckboxAnswer";
 import DateTimeAnswer from "./answer/DateTimeAnswer";
 import InputAnswer from "./answer/InputAnswer";
@@ -14,13 +15,6 @@ import FormUtils from "../util/FormUtils";
 import TypeaheadAnswer from "./answer/TypeaheadAnswer";
 
 export default class Answer extends React.Component {
-    static propTypes = {
-        answer: React.PropTypes.object.isRequired,
-        question: React.PropTypes.object.isRequired,
-        onChange: React.PropTypes.func.isRequired,
-        index: React.PropTypes.number
-    };
-
     constructor(props) {
         super(props);
     }
@@ -118,3 +112,10 @@ export default class Answer extends React.Component {
                             value={value} onChange={this.onValueChange} turtle={true}/>;
     }
 }
+
+Answer.propTypes = {
+    answer: PropTypes.object.isRequired,
+    question: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired,
+    index: PropTypes.number
+};

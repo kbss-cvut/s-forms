@@ -2,20 +2,13 @@
 
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
+import PropTypes from "prop-types";
 
 import Configuration from '../../model/Configuration';
 import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 
 export default class SelectAnswer extends React.Component {
-    static propTypes = {
-        question: React.PropTypes.object.isRequired,
-        label: React.PropTypes.string.isRequired,
-        title: React.PropTypes.string,
-        value: React.PropTypes.string,
-        onChange: React.PropTypes.func.isRequired
-    };
-
     constructor(props) {
         super(props);
     }
@@ -53,3 +46,11 @@ export default class SelectAnswer extends React.Component {
         );
     }
 }
+
+SelectAnswer.propTypes = {
+    question: PropTypes.object.isRequired,
+    label: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func.isRequired
+};

@@ -4,11 +4,6 @@ import JsonLdUtils from "jsonld-utils";
 import Constants from "../constants/Constants";
 
 export default class MediaContent extends React.Component {
-
-    static propTypes = {
-        question: PropTypes.object.isRequired
-    };
-
     constructor(props) {
         super(props);
     }
@@ -37,3 +32,7 @@ export default class MediaContent extends React.Component {
         return <iframe src={src} className="embed-responsive-item" allowFullScreen/>;
     }
 }
+
+MediaContent.propTypes = {
+    question: PropTypes.object.isRequired
+};

@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from "prop-types";
 import {Glyphicon, OverlayTrigger, Tooltip} from 'react-bootstrap';
 
 const HelpIcon = (props) => {
@@ -12,9 +13,9 @@ const HelpIcon = (props) => {
 };
 
 HelpIcon.propTypes = {
-    text: React.PropTypes.string.isRequired,
-    glyph: React.PropTypes.string,
-    iconClass: React.PropTypes.string
+    text: PropTypes.string.isRequired,
+    glyph: PropTypes.string,
+    iconClass: PropTypes.string
 };
 
 HelpIcon.defaultProps = {

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
+import PropTypes from "prop-types";
 
 import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
@@ -23,12 +24,12 @@ const MaskedInputAnswer = (props) => {
 };
 
 MaskedInputAnswer.propTypes = {
-    question: React.PropTypes.object.isRequired,
-    answer: React.PropTypes.object.isRequired,
-    label: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string,
-    value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    onChange: React.PropTypes.func.isRequired
+    question: PropTypes.object.isRequired,
+    answer: PropTypes.object.isRequired,
+    label: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    onChange: PropTypes.func.isRequired
 };
 
 export default MaskedInputAnswer;

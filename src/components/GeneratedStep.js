@@ -2,14 +2,11 @@
 
 import React from "react";
 import assign from "object-assign";
+import PropTypes from "prop-types";
 import Question from "./Question";
 import Configuration from "../model/Configuration";
 
 export default class GeneratedStep extends React.Component {
-    static propTypes = {
-        stepIndex: React.PropTypes.number.isRequired
-    };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -37,3 +34,7 @@ export default class GeneratedStep extends React.Component {
         return <Question question={this.state.question} onChange={this.onChange} withoutPanel={true}/>;
     }
 }
+
+GeneratedStep.propTypes = {
+    stepIndex: PropTypes.number.isRequired
+};

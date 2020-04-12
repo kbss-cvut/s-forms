@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from "prop-types";
 import {Button, Glyphicon, ListGroup, ListGroupItem, Overlay, OverlayTrigger, Popover, Tooltip} from 'react-bootstrap';
 import Constants from "../constants/Constants";
 
@@ -45,10 +46,10 @@ class PrefixIcon extends React.Component {
 }
 
 PrefixIcon.propTypes = {
-    prefixes: React.PropTypes.array.isRequired,
-    glyph: React.PropTypes.string,
-    iconClass: React.PropTypes.string,
-    show: React.PropTypes.bool
+    prefixes: PropTypes.array.isRequired,
+    glyph: PropTypes.string,
+    iconClass: PropTypes.string,
+    show: PropTypes.bool
 };
 
 PrefixIcon.defaultProps = {

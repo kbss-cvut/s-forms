@@ -1,7 +1,7 @@
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import Typeahead from 'react-bootstrap-typeahead';
-
+import PropTypes from "prop-types";
 import Configuration from '../../model/Configuration';
 import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
@@ -9,15 +9,6 @@ import Utils from '../../util/Utils';
 import JsonLdObjectUtils from "../../util/JsonLdObjectUtils";
 
 export default class TypeaheadAnswer extends React.Component {
-    static propTypes = {
-        question: React.PropTypes.object.isRequired,
-        answer: React.PropTypes.object.isRequired,
-        label: React.PropTypes.string.isRequired,
-        title: React.PropTypes.string,
-        value: React.PropTypes.string,
-        onChange: React.PropTypes.func.isRequired
-    };
-
     constructor(props) {
         super(props);
         this._queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
@@ -87,3 +78,13 @@ export default class TypeaheadAnswer extends React.Component {
         </div>;
     }
 }
+
+TypeaheadAnswer.propTypes = {
+    question: PropTypes.object.isRequired,
+    answer: PropTypes.object.isRequired,
+    label: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func.isRequired
+};
+

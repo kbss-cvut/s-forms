@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-
+import PropTypes from "prop-types";
 import Configuration from '../../model/Configuration';
 import FormUtils from '../../util/FormUtils';
 import Constants from "../../constants/Constants";
@@ -35,11 +35,11 @@ const CheckboxAnswer = (props) => {
 };
 
 CheckboxAnswer.propTypes = {
-    question: React.PropTypes.object.isRequired,
-    label: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string,
-    value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
-    onChange: React.PropTypes.func.isRequired
+    question: PropTypes.object.isRequired,
+    label: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    onChange: PropTypes.func.isRequired
 };
 
 export default CheckboxAnswer;

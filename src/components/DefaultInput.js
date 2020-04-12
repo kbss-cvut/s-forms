@@ -2,22 +2,10 @@
 
 import React from 'react';
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import {HelpBlock, Checkbox, ControlLabel, FormControl, FormGroup, Radio} from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {
-    static propTypes = {
-        type: React.PropTypes.string,
-        label: React.PropTypes.string,
-        value: React.PropTypes.any,
-        onChange: React.PropTypes.func,
-        help: React.PropTypes.string,
-        validation: React.PropTypes.oneOf(['success', 'warning', 'error'])
-    };
-
-    static defaultProps = {
-        type: 'text'
-    };
-
     constructor(props) {
         super(props);
     }
@@ -90,3 +78,16 @@ export default class DefaultInput extends React.Component {
         </FormGroup>;
     }
 }
+
+DefaultInput.propTypes = {
+    type: PropTypes.string,
+    label: PropTypes.string,
+    value: PropTypes.any,
+    onChange: PropTypes.func,
+    help: PropTypes.string,
+    validation: PropTypes.oneOf(['success', 'warning', 'error'])
+};
+
+DefaultInput.defaultProps = {
+    type: 'text'
+};
