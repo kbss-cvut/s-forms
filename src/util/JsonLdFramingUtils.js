@@ -1,5 +1,3 @@
-'use strict';
-
 import jsonld from "jsonld";
 import Constants from "../constants/Constants.js";
 import FormUtils from "../util/FormUtils";

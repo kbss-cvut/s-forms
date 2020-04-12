@@ -1,5 +1,3 @@
-'use strict';
-
 import jsonld from "jsonld";
 import JsonLdUtils from "jsonld-utils";
 import Configuration from "../model/Configuration";

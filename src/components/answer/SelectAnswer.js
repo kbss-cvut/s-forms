@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from "prop-types";

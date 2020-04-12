@@ -1,5 +1,3 @@
-'use strict';
-
 let actions = null;
 let intl = null;
 let optionsStore = null;

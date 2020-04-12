@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import PropTypes from "prop-types";
 import {Button, Glyphicon, ListGroup, ListGroupItem, Overlay, OverlayTrigger, Popover, Tooltip} from 'react-bootstrap';

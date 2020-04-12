@@ -1,5 +1,3 @@
-'use strict';
-
 import JsonLdUtils from "jsonld-utils";
 
 import Constants from "../constants/Constants";

@@ -1,5 +1,3 @@
-'use strict';
-
 import React from "react";
 import assign from "object-assign";
 import JsonLdUtils from "jsonld-utils";

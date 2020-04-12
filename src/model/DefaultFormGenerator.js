@@ -1,5 +1,3 @@
-'use strict';
-
 import Constants from '../constants/Constants';
 
 export default class DefaultFormGenerator {

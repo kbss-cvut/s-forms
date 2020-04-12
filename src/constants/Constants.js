@@ -1,5 +1,3 @@
-'use strict';
-
 // Default bootstrap column count
 const COLUMN_COUNT = 12;
 const INPUT_LENGTH_THRESHOLD = 50;

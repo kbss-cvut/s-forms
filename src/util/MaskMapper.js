@@ -1,5 +1,3 @@
-'use strict';
-
 const REPLACEMENTS = {
     'D': '1',
     'M': '1',
