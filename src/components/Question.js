@@ -1,5 +1,4 @@
 import React from 'react';
-import assign from 'object-assign';
 import { Glyphicon, Panel } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
@@ -37,11 +36,11 @@ export default class Question extends React.Component {
   };
 
   _onChange(att, valueIndex, newValue) {
-    let newState = assign({}, this.props.question);
+    let newState = { ...this.props.question };
     newState[att][valueIndex] = newValue;
     if (att === Constants.HAS_ANSWER) {
       const result = this.state.validator(newValue);
-      newState = assign(newState, result);
+      newState = { ...newState, ...result };
     }
 
     JsonLdObjectMap.putObject(newState['@id'], newState);

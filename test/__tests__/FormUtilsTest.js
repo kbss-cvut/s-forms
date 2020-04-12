@@ -4,7 +4,6 @@ import FormUtils from '../../src/util/FormUtils';
 import Configuration from '../../src/model/Configuration';
 import Constants from '../../src/constants/Constants';
 import JsonObjectMap from '../../src/util/JsonLdObjectMap';
-import assign from 'object-assign';
 
 describe('FormUtils', () => {
   let question;
@@ -253,7 +252,7 @@ describe('FormUtils', () => {
     });
 
     it('returns false in condition without answer values.', () => {
-      const noAnswerCondition = assign({}, condition);
+      const noAnswerCondition = { ...condition };
       delete noAnswerCondition['http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value'];
       expect(FormUtils.testCondition(noAnswerCondition));
 
@@ -265,7 +264,7 @@ describe('FormUtils', () => {
     });
 
     it('return false if accepts value that does not exists in a question.', () => {
-      const wrongAnswerQuestion = assign({}, question);
+      const wrongAnswerQuestion = { ...question };
       wrongAnswerQuestion['http://onto.fel.cvut.cz/ontologies/documentation/has_answer'][
         'http://onto.fel.cvut.cz/ontologies/documentation/has_object_value'
       ] = {

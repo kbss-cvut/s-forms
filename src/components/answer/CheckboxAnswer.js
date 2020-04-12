@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Configuration from '../../model/Configuration';
 import FormUtils from '../../util/FormUtils';
 import Constants from '../../constants/Constants';
-import assign from 'object-assign';
 
 class InputPropertiesResolver {
   static resolveValidationProperties(question) {
@@ -18,19 +17,17 @@ class InputPropertiesResolver {
 
 const CheckboxAnswer = (props) => {
   const question = props.question;
-  return React.createElement(
-    Configuration.inputComponent,
-    assign({}, InputPropertiesResolver.resolveValidationProperties(question), {
-      type: 'checkbox',
-      label: props.label,
-      title: props.title,
-      checked: props.value === true || props.value === 'true',
-      onChange: (e) => {
-        props.onChange(e.target.checked);
-      },
-      disabled: FormUtils.isDisabled(question)
-    })
-  );
+  return React.createElement(Configuration.inputComponent, {
+    ...InputPropertiesResolver.resolveValidationProperties(question),
+    type: 'checkbox',
+    label: props.label,
+    title: props.title,
+    checked: props.value === true || props.value === 'true',
+    onChange: (e) => {
+      props.onChange(e.target.checked);
+    },
+    disabled: FormUtils.isDisabled(question)
+  });
 };
 
 CheckboxAnswer.propTypes = {

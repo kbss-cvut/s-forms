@@ -33,7 +33,6 @@
   "dependencies": {
     "prop-types": "^15.7.2",
     "react-bootstrap": "^0.30.5",
-    "object-assign": "^4.1.0",
     "jsonld": "^0.4.6",
     "moment": "^2.14.1",
     "react-bootstrap-datetimepicker": "https://kbss.felk.cvut.cz/dist/react-bootstrap-datetimepicker-0.0.7.tgz",

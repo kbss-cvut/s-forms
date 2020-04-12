@@ -1,5 +1,4 @@
 import React from 'react';
-import assign from 'object-assign';
 import PropTypes from 'prop-types';
 import Question from './Question';
 import Configuration from '../model/Configuration';
@@ -25,7 +24,7 @@ export default class GeneratedStep extends React.Component {
   };
 
   onChange = (index, change) => {
-    Configuration.wizardStore.updateStepData(this.props.stepIndex, assign(this.state.question, change));
+    Configuration.wizardStore.updateStepData(this.props.stepIndex, { ...this.state.question, ...change });
   };
 
   render() {

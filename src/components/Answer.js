@@ -1,5 +1,4 @@
 import React from 'react';
-import assign from 'object-assign';
 import PropTypes from 'prop-types';
 import CheckboxAnswer from './answer/CheckboxAnswer';
 import DateTimeAnswer from './answer/DateTimeAnswer';
@@ -14,7 +13,7 @@ import TypeaheadAnswer from './answer/TypeaheadAnswer';
 
 export default class Answer extends React.Component {
   onValueChange = (value) => {
-    const change = assign({}, this.props.answer);
+    const change = { ...this.props.answer };
     this._setValue(change, value);
     this.props.onChange(this.props.index, change);
   };

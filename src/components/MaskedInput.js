@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import InputMask from 'inputmask-core';
 import { getSelection, setSelection } from 'react/lib/ReactInputSelection';
-import assign from 'object-assign';
 import Configuration from '../model/Configuration';
 import MaskMapper from '../util/MaskMapper';
 
@@ -182,25 +181,23 @@ export default class MaskedInput extends React.Component {
   render() {
     const { size, placeholder, ...props } = this.props,
       patternLength = this.mask.pattern.length;
-    return React.createElement(
-      Configuration.inputComponent,
-      assign({}, props, {
-        ref: (r) => {
-          if (r) {
-            this.input = r.input ? ReactDOM.findDOMNode(r.input) : r;
-          }
-        },
-        maxLength: patternLength,
-        onChange: this._onChange,
-        onKeyDown: this._onKeyDown,
-        onKeyPress: this._onKeyPress,
-        onPaste: this._onPaste,
-        placeholder: placeholder || this.mask.emptyValue,
-        size: size || patternLength,
-        value: this._getDisplayValue(),
-        type: 'text'
-      })
-    );
+    return React.createElement(Configuration.inputComponent, {
+      ...props,
+      ref: (r) => {
+        if (r) {
+          this.input = r.input ? ReactDOM.findDOMNode(r.input) : r;
+        }
+      },
+      maxLength: patternLength,
+      onChange: this._onChange,
+      onKeyDown: this._onKeyDown,
+      onKeyPress: this._onKeyPress,
+      onPaste: this._onPaste,
+      placeholder: placeholder || this.mask.emptyValue,
+      size: size || patternLength,
+      value: this._getDisplayValue(),
+      type: 'text'
+    });
   }
 }
 
