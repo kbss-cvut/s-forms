@@ -4,9 +4,6 @@ import JsonLdUtils from "jsonld-utils";
 import Constants from "../constants/Constants";
 
 export default class MediaContent extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const mediaContent = JsonLdUtils.getJsonAttValue(this.props.question, Constants.HAS_MEDIA_CONTENT);

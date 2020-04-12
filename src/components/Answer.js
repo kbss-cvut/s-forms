@@ -13,10 +13,6 @@ import FormUtils from "../util/FormUtils";
 import TypeaheadAnswer from "./answer/TypeaheadAnswer";
 
 export default class Answer extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     onValueChange = (value) => {
         const change = assign({}, this.props.answer);
         this._setValue(change, value);

@@ -21,10 +21,6 @@ function isRedo(e) {
 // Copied from https://github.com/insin/react-maskedinput
 
 export default class MaskedInput extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentWillMount() {
         const options = {
             pattern: MaskMapper.mapMask(this.props.mask),

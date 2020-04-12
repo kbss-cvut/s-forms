@@ -7,10 +7,6 @@ import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 
 export default class SelectAnswer extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     _generateSelectOptions(options) {
         const rendered = [];
         options.sort(function (a, b) {

@@ -4,10 +4,6 @@ import PropTypes from "prop-types";
 import {HelpBlock, Checkbox, ControlLabel, FormControl, FormGroup, Radio} from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     focus() {
         ReactDOM.findDOMNode(this.input).focus();
     }
