@@ -1,15 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Glyphicon,
-  ListGroup,
-  ListGroupItem,
-  Overlay,
-  OverlayTrigger,
-  Popover,
-  Tooltip
-} from 'react-bootstrap';
+import { ListGroup, ListGroupItem, OverlayTrigger, Popover } from 'react-bootstrap';
 import Constants from '../constants/Constants';
 
 class PrefixIcon extends React.Component {
@@ -44,9 +35,8 @@ class PrefixIcon extends React.Component {
 
     return (
       <OverlayTrigger trigger="click" placement="right" overlay={p}>
-        <Glyphicon
-          glyph={this.state.glyph}
-          className={this.state.iconClass}
+        <span
+          className={`${this.state.glyph} ${this.state.iconClass}`}
           onClick={() => this.setState({ show: !this.state.show })}
         />
       </OverlayTrigger>
@@ -63,7 +53,7 @@ PrefixIcon.propTypes = {
 
 PrefixIcon.defaultProps = {
   iconClass: '',
-  glyph: 'info-sign',
+  glyph: 'icon-info-circle',
   show: false
 };
 

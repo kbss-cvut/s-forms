@@ -1,5 +1,5 @@
 import React from 'react';
-import { Glyphicon, Panel } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Answer from './Answer';
@@ -77,26 +77,22 @@ export default class Question extends React.Component {
       }
     }
     if (FormUtils.isSection(question)) {
-      if (this.props.withoutPanel) {
+      if (this.props.withoutCard) {
         return <div>{this._renderQuestionContent()}</div>;
       } else {
         const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl),
           collapsible = this.props.collapsible;
         return (
-          <Panel
-            header={
+          <Card variant="info" expanded={this.state.expanded} collapsible={collapsible}>
+            <Card.Header>
               <h5>
                 {collapsible && this._renderCollapseToggle()}
                 <span onClick={this._toggleCollapse}>{label}</span>
                 {this._renderQuestionHelp()}
               </h5>
-            }
-            bsStyle="info"
-            expanded={this.state.expanded}
-            collapsible={collapsible}
-          >
-            {this._renderQuestionContent()}
-          </Panel>
+            </Card.Header>
+            <Card.Body>{this._renderQuestionContent()}</Card.Body>
+          </Card>
         );
       }
     } else {
@@ -187,9 +183,9 @@ export default class Question extends React.Component {
   }
 
   _renderCollapseToggle() {
-    const glyph = this.state.expanded ? 'collapse-up' : 'collapse-down',
-      title = this.state.expanded ? 'Collapse' : 'Expand';
-    return <Glyphicon glyph={glyph} onClick={this._toggleCollapse} className="collapse-toggle" title={title} />;
+    const glyph = this.state.expanded ? 'icon-toggle-up' : 'icon-toggle-down';
+    const title = this.state.expanded ? 'Collapse' : 'Expand';
+    return <span glyph={glyph} onClick={this._toggleCollapse} className={`${glyph} collapse-toggle`} title={title} />;
   }
 
   _renderQuestionHelp() {
@@ -255,11 +251,11 @@ Question.propTypes = {
   question: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   index: PropTypes.number,
-  withoutPanel: PropTypes.bool,
+  withoutCard: PropTypes.bool,
   collapsible: PropTypes.bool // Whether the section is collapsible (if the question is a section)
 };
 
 Question.defaultProps = {
-  withoutPanel: false,
+  withoutCard: false,
   collapsible: true
 };

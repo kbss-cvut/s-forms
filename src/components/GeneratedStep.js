@@ -28,7 +28,7 @@ export default class GeneratedStep extends React.Component {
   };
 
   render() {
-    return <Question question={this.state.question} onChange={this.onChange} withoutPanel={true} />;
+    return <Question question={this.state.question} onChange={this.onChange} withoutCard={true} />;
   }
 }
 

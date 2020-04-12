@@ -2,8 +2,7 @@
 
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import { Panel } from 'react-bootstrap';
-import Configuration from '../../src/model/Configuration';
+import { Card } from 'react-bootstrap';
 import Constants from '../../src/constants/Constants';
 import Environment from '../environment/Environment';
 import Question from '../../src/components/Question';
@@ -42,14 +41,14 @@ describe('Question', () => {
   it('renders section collapsed when layout class is set to collapsed', () => {
     question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.COLLAPSED];
     const result = TestUtils.renderIntoDocument(<Question question={question} onChange={onChange} />),
-      panel = TestUtils.findRenderedComponentWithType(result, Panel);
-    expect(panel.props.expanded).toBeFalsy();
+      card = TestUtils.findRenderedComponentWithType(result, Card);
+    expect(card.props.expanded).toBeFalsy();
   });
 
   it('renders section by default expanded', () => {
     question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
     const result = TestUtils.renderIntoDocument(<Question question={question} onChange={onChange} />),
-      panel = TestUtils.findRenderedComponentWithType(result, Panel);
-    expect(panel.props.expanded).toBeTruthy();
+      card = TestUtils.findRenderedComponentWithType(result, Card);
+    expect(card.props.expanded).toBeTruthy();
   });
 });

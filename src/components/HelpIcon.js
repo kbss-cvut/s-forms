@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Glyphicon, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const HelpIcon = (props) => {
   const tooltip = (
@@ -11,7 +11,7 @@ const HelpIcon = (props) => {
 
   return (
     <OverlayTrigger placement="right" overlay={tooltip}>
-      <Glyphicon glyph={props.glyph} className={props.iconClass} />
+      <span className={`${props.glyph} ${props.iconClass}`} />
     </OverlayTrigger>
   );
 };
@@ -24,7 +24,7 @@ HelpIcon.propTypes = {
 
 HelpIcon.defaultProps = {
   iconClass: '',
-  glyph: 'question-sign'
+  glyph: 'icon-question-circle'
 };
 
 export default HelpIcon;
