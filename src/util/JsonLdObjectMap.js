@@ -14,6 +14,4 @@ export default class JsonLdObjectMap {
     static getObject(id) {
         return JsonLdObjectMap.objectMap[id];
     }
-
-
 }

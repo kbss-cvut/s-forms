@@ -7,8 +7,8 @@ import JsonLdObjectMap from '../../src/util/JsonLdObjectMap';
 
 describe('JsonLd framing utils', () => {
 
-    var formDocument,
-        formQuestion;
+    let formDocument;
+    let formQuestion;
 
     beforeEach(() => {
         formQuestion = {
@@ -23,7 +23,7 @@ describe('JsonLd framing utils', () => {
         formDocument = {
             "@graph": [
                 formQuestion
-             ]
+            ]
         };
         Configuration.intl = {
             locale: 'en'
@@ -34,5 +34,4 @@ describe('JsonLd framing utils', () => {
         const id2objectMap = JsonLdFramingUtils.modifyStructure(formDocument);
         expect(id2objectMap[formQuestion["@id"]]).toBe(formQuestion);
     });
-
 });

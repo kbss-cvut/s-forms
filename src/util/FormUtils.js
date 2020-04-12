@@ -112,8 +112,7 @@ export default class FormUtils {
             return true;
         }
 
-        for (var cond of Utils.asArray(question[Constants.IS_RELEVANT_IF])) {
-
+        for (let cond of Utils.asArray(question[Constants.IS_RELEVANT_IF])) {
             if (!FormUtils.testCondition(cond)) {
                 return false;
             }
@@ -135,12 +134,10 @@ export default class FormUtils {
     }
 
     static isValid(question) {
-        var subQ;
-
         if (question[Constants.HAS_VALID_ANSWER] === false) {
             return false;
         }
-        for (subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+        for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
             if (this.isValid(subQ) === false) {
                 return false;
             }
@@ -151,10 +148,10 @@ export default class FormUtils {
 
     static testCondition(condition) {
 
-        var acceptedValidationsValues = condition[Constants.ACCEPTS_VALIDATION_VALUE],
-            acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE],
-            testedQuestions = condition[Constants.HAS_TESTED_QUESTION],
-            q, question;
+        const acceptedValidationsValues = condition[Constants.ACCEPTS_VALIDATION_VALUE];
+        const acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE];
+        const testedQuestions = condition[Constants.HAS_TESTED_QUESTION];
+        let question;
 
         if (acceptedValidationsValues && acceptedAnswerValues) {
             console.warn("Support for validation and requirement constraints at same time is not implemented !");
@@ -163,11 +160,11 @@ export default class FormUtils {
         // valid answers
         if (acceptedValidationsValues && testedQuestions) {
 
-            var arr = Utils.asArray(acceptedValidationsValues);
+            const arr = Utils.asArray(acceptedValidationsValues);
             if ((arr.length !== 1) || ((arr[0] !== true) && (arr[0] !== "true"))) {
                 console.warn("Validation values other than \"true\" are not implemented !");
             }
-            for (q of Utils.asArray(testedQuestions)) {
+            for (const q of Utils.asArray(testedQuestions)) {
                 question = JsonLdObjectMap.getObject(q["@id"]);
                 if (question === undefined) {
                     console.warn("Questions is not loaded in an object map.");
@@ -183,7 +180,7 @@ export default class FormUtils {
         // concrete values
         if (acceptedAnswerValues && testedQuestions) {
             question = JsonLdObjectMap.getObject(testedQuestions["@id"]);
-            for (var expValue of Utils.asArray(acceptedAnswerValues)) {
+            for (const expValue of Utils.asArray(acceptedAnswerValues)) {
                 if (!question) {
                     console.warn("Question is not defined.")
                     return true;
@@ -192,12 +189,12 @@ export default class FormUtils {
                     console.warn("Question does not have answer value defined.")
                     return true;
                 }
-                var answers = jsonld.getValues(question, Constants.HAS_ANSWER);
+                const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
 
                 if (answers.length === 0) {
                     return false;
                 }
-                var qValue = FormUtils.resolveValueObject(answers[0]);
+                const qValue = FormUtils.resolveValueObject(answers[0]);
 
                 if (qValue && expValue && qValue.hasOwnProperty('@value') && expValue.hasOwnProperty('@id') && (qValue['@value'] == expValue['@id'])) {
                     // TODO remove !, this is temporary fix as type-ahead component returns data-value instead of

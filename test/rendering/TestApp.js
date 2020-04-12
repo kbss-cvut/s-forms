@@ -6,13 +6,13 @@ import Configuration from "../../src/model/Configuration";
 import Question from "../../src/components/Question";
 import WizardGenerator from "../../src/model/WizardGenerator";
 
-var wizard = require('./form.json');
+const wizard = require('./form.json');
 
 function onChange(index, change) {
     console.log(change);
 }
 
-var wizardStore = {
+const wizardStore = {
     initWizard() {
     }
 };

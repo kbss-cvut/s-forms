@@ -6,7 +6,6 @@ import Constants from "../../constants/Constants";
 import assign from "object-assign";
 
 class InputPropertiesResolver {
-
     static resolveValidationProperties(question) {
         const props = {};
         if (question[Constants.HAS_VALID_ANSWER] === false) {

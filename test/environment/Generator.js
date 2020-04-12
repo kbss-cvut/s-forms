@@ -7,13 +7,13 @@ export default class Generator {
     static _uriBase = 'http://onto.fel.cvut.cz/ontologies/forms';
 
     static getRandomInt() {
-        var min = 0,
-            bound = Number.MAX_SAFE_INTEGER;
+        const min = 0;
+        const bound = Number.MAX_SAFE_INTEGER;
         return Math.floor(Math.random() * (bound - min)) + min;
     }
 
     static getRandomPositiveInt(min, max) {
-        var bound = max ? max : Number.MAX_SAFE_INTEGER;
+        const bound = max ? max : Number.MAX_SAFE_INTEGER;
         if (min === null || min === undefined) {
             min = 1;
         }
@@ -29,9 +29,10 @@ export default class Generator {
     }
 
     static generateTypeaheadOptions(value, valueLabel) {
-        var options = [],
-            option;
-        for (var i = 0, count = Generator.getRandomPositiveInt(3, 10); i < count; i++) {
+        const options = [];
+        let option;
+
+        for (let i = 0; i < Generator.getRandomPositiveInt(3, 10); i++) {
             option = {
                 '@id': Generator.getRandomUri()
             };

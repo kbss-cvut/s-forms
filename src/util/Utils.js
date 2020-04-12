@@ -12,16 +12,14 @@ export default class Utils {
      * @return {number}
      */
     static getStringHash(str) {
-        var hash = 0,
-            strlen = str ? str.length : 0,
-            i,
-            c;
+        let hash = 0;
+        const strlen = str ? str.length : 0;
+
         if (strlen === 0) {
             return hash;
         }
-        for (i = 0; i < strlen; i++) {
-            c = str.charCodeAt(i);
-            hash = ((hash << 5) - hash) + c;
+        for (let i = 0; i < strlen; i++) {
+            hash = ((hash << 5) - hash) + str.charCodeAt(i);
             hash = hash & hash; // Convert to 32bit integer
         }
         return hash;
@@ -39,7 +37,7 @@ export default class Utils {
         if (!items) {
             return id;
         }
-        for (var i = 0, len = items.length; i < len; i++) {
+        for (let i = 0, len = items.length; i < len; i++) {
             if (items[i].id === id) {
                 return items[i].name;
             }
@@ -59,17 +57,15 @@ export default class Utils {
             return 'date';
         } else if (FormUtils.isTime(question)) {
             return 'time';
-        } else {
-            return 'datetime';
         }
+        return 'datetime';
     }
 
     static resolveDateTimePickerUiFormat(format) {
         if (format === Constants.DATETIME_NUMBER_FORMAT) {
             return Configuration.dateTimeFormat;
-        } else {
-            return format;
         }
+        return format;
     }
 
     /**
@@ -86,9 +82,8 @@ export default class Utils {
             return moment(value, Configuration.dateTimeFormat);
         } else if (FormUtils.isDate(question)) {
             return moment(value, Configuration.dateFormat);
-        } else {
-            return moment(value, Configuration.timeFormat);
         }
+        return moment(value, Configuration.timeFormat);
     }
 
     /**
@@ -105,9 +100,8 @@ export default class Utils {
             return Configuration.dateFormat;
         } else if (FormUtils.isTime(question)) {
             return Configuration.timeFormat;
-        } else {
-            return Configuration.dateTimeFormat;
         }
+        return Configuration.dateTimeFormat;
     }
 
     /**
@@ -116,13 +110,13 @@ export default class Utils {
      * @returns {*} New array containing passed object or passed array.
      */
     static asArray(object_or_array) {
-        if (! object_or_array) {
+        if (!object_or_array) {
             return [];
         }
         if (object_or_array.constructor === Array) {
             return object_or_array;
         }
-        return [ object_or_array ];
+        return [object_or_array];
     }
 
 }

@@ -6,7 +6,7 @@ import tsort from 'tsort';
 export default class JsonLdObjectUtils {
 
     static getFirstObject(subject, predicate) {
-        var values = jsonld.getValues(subject, predicate);
+        const values = jsonld.getValues(subject, predicate);
 
         if (values.length === 0) {
             //throw "Subject "  + subject[@id] + " does not have any value of property " + predicate;
@@ -40,15 +40,15 @@ export default class JsonLdObjectUtils {
      *
      */
     static toplogicalSort(data, gtProperty) {
-        var swapped;
+        let swapped;
         do {
             swapped = false;
-            for (var i = 0, len = data.length; i < len; i++) {
-                for (var j = i; j < len; j++) {
+            for (let i = 0; i < data.length; i++) {
+                for (let j = i; j < data.length; j++) {
                     if (data[i][gtProperty]) {
                         let gtId = (typeof data[i][gtProperty] === 'object') ? data[i][gtProperty]['@id'] : data[i][gtProperty];
                         if (gtId === data[j]['@id']) {
-                            var tmp = data[i];
+                            const tmp = data[i];
                             data[i] = data[j];
                             data[j] = tmp;
                             swapped = true;
@@ -72,10 +72,10 @@ export default class JsonLdObjectUtils {
      *
      */
     static orderPreservingToplogicalSort(data, gtProperty) {
-        let graph = tsort(),
-            id2ObjectMap = {};
+        const graph = tsort();
+        const id2ObjectMap = {};
 
-        for (let i = 0, len = data.length; i < len; i++) {
+        for (let i = 0; i < data.length; i++) {
             let currentId = data[i]['@id'];
             graph.add(currentId);
             id2ObjectMap[currentId] = data[i];
@@ -87,7 +87,7 @@ export default class JsonLdObjectUtils {
         }
 
         let sortedIds = graph.sort();
-        for (let i = 0, len = sortedIds.length; i < len; i++) {
+        for (let i = 0; i < sortedIds.length; i++) {
             data[i] = id2ObjectMap[sortedIds[i]];
 
         }
@@ -96,8 +96,8 @@ export default class JsonLdObjectUtils {
 
     static getCompareLocalizedLabelFunction(intl) {
         return (a, b) => {
-            var aLabel = JsonLdUtils.getLocalized(a[JsonLdUtils.RDFS_LABEL], intl),
-                bLabel = JsonLdUtils.getLocalized(b[JsonLdUtils.RDFS_LABEL], intl);
+            const aLabel = JsonLdUtils.getLocalized(a[JsonLdUtils.RDFS_LABEL], intl);
+            const bLabel = JsonLdUtils.getLocalized(b[JsonLdUtils.RDFS_LABEL], intl);
             if (aLabel < bLabel) {
                 return -1;
             } else if (aLabel > bLabel) {
@@ -106,5 +106,4 @@ export default class JsonLdObjectUtils {
             return 0;
         };
     }
-
 }

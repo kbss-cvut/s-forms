@@ -9,19 +9,17 @@ import QuestionAnswerProcessor from "../../src/model/QuestionAnswerProcessor";
 describe('Question answer processor', () => {
 
     it('transforms answers for a question', () => {
-        var question = {},
-            result;
+        const question = {};
         generateAnswers(question);
-        result = QuestionAnswerProcessor.processQuestionAnswerHierarchy(question);
+        const result = QuestionAnswerProcessor.processQuestionAnswerHierarchy(question);
         verifyAnswers(question, result);
     });
 
     function generateAnswers(question) {
-        var codeValue;
         question[Constants.HAS_ANSWER] = [];
-        for (var i = 0, cnt = Generator.getRandomPositiveInt(1, 5); i < cnt; i++) {
-            codeValue = Generator.getRandomBoolean();
-            var answer = {};
+        for (let i = 0; i < Generator.getRandomPositiveInt(1, 5); i++) {
+            const codeValue = Generator.getRandomBoolean();
+            const answer = {};
             answer['@id'] = Generator.getRandomUri();
             answer[Constants.HAS_ANSWER_ORIGIN] = Generator.getRandomUri();
             if (codeValue) {
@@ -43,7 +41,7 @@ describe('Question answer processor', () => {
         }
         expect(actualQuestion.answers).toBeDefined();
         expect(actualQuestion.answers.length).toEqual(expectedQuestion[Constants.HAS_ANSWER].length);
-        for (var i = 0, len = actualQuestion.answers.length; i < len; i++) {
+        for (let i = 0; i < actualQuestion.answers.length; i++) {
             expect(actualQuestion.answers[i].uri).toEqual(expectedQuestion[Constants.HAS_ANSWER][i]['@id']);
             if (expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_DATA_VALUE]) {
                 expect(actualQuestion.answers[i].textValue).toEqual(expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_DATA_VALUE]['@value']);
@@ -54,35 +52,34 @@ describe('Question answer processor', () => {
     }
 
     it('transforms hierarchy of questions and answers', () => {
-        var question = generateQuestions(),
-            result;
-        result = QuestionAnswerProcessor.processQuestionAnswerHierarchy(question);
+        const question = generateQuestions();
+        const result = QuestionAnswerProcessor.processQuestionAnswerHierarchy(question);
 
         verifyQuestions(question, result);
     });
 
     function generateQuestions() {
-        var question = {};
+        const question = {};
         question['@id'] = Generator.getRandomUri();
         question[JsonLdUtils.RDFS_LABEL] = 'Test0';
         question[JsonLdUtils.RDFS_COMMENT] = 'Test0 Comment';
         question[Constants.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
         question[Constants.HAS_SUBQUESTION] = [];
-        for (var i = 0, cnt = Generator.getRandomPositiveInt(1, 5); i < cnt; i++) {
+        for (let i = 0; i < Generator.getRandomPositiveInt(1, 5); i++) {
             question[Constants.HAS_SUBQUESTION].push(generateSubQuestions(0, 5));
         }
         return question;
     }
 
     function generateSubQuestions(depth, maxDepth) {
-        var question = {};
+        const question = {};
         question['@id'] = Generator.getRandomUri();
         question[Constants.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
         question[JsonLdUtils.RDFS_LABEL] = 'Test' + Generator.getRandomInt();
         question[JsonLdUtils.RDFS_COMMENT] = 'Test Comment';
         if (depth < maxDepth) {
             question[Constants.HAS_SUBQUESTION] = [];
-            for (var i = 0, cnt = Generator.getRandomPositiveInt(1, 5); i < cnt; i++) {
+            for (let i = 0; i < Generator.getRandomPositiveInt(1, 5); i++) {
                 question[Constants.HAS_SUBQUESTION].push(generateSubQuestions(depth + 1, maxDepth));
             }
         }
@@ -96,16 +93,15 @@ describe('Question answer processor', () => {
         if (expected[Constants.HAS_SUBQUESTION]) {
             expect(actual.subQuestions).toBeDefined();
             expect(actual.subQuestions.length).toEqual(expected[Constants.HAS_SUBQUESTION].length);
-            for (var i = 0, len = actual.subQuestions.length; i < len; i++) {
+            for (let i = 0; i < actual.subQuestions.length; i++) {
                 verifyQuestions(expected[Constants.HAS_SUBQUESTION][i], actual.subQuestions[i]);
             }
         }
     }
 
     it('Stores origin of questions', () => {
-        var question = generateQuestions(),
-            result;
-        result = QuestionAnswerProcessor.processQuestionAnswerHierarchy(question);
+        const question = generateQuestions();
+        const result = QuestionAnswerProcessor.processQuestionAnswerHierarchy(question);
 
         verifyPresenceOfQuestionOrigin(question, result);
     });
@@ -114,17 +110,16 @@ describe('Question answer processor', () => {
         expect(actual.origin).toBeDefined();
         expect(actual.origin).toEqual(expected[Constants.HAS_QUESTION_ORIGIN]);
         if (expected[Constants.HAS_SUBQUESTION]) {
-            for (var i = 0, len = actual.subQuestions.length; i < len; i++) {
+            for (let i = 0; i < actual.subQuestions.length; i++) {
                 verifyQuestions(expected[Constants.HAS_SUBQUESTION][i], actual.subQuestions[i]);
             }
         }
     }
 
     it('Stores origin of answers', () => {
-        var question = {},
-            result;
+        const question = {};
         generateAnswers(question);
-        result = QuestionAnswerProcessor.processQuestionAnswerHierarchy(question);
+        const result = QuestionAnswerProcessor.processQuestionAnswerHierarchy(question);
         verifyPresenceOfAnswerOrigin(question, result);
     });
 
@@ -134,21 +129,20 @@ describe('Question answer processor', () => {
         }
         expect(actualQuestion.answers).toBeDefined();
         expect(actualQuestion.answers.length).toEqual(expectedQuestion[Constants.HAS_ANSWER].length);
-        for (var i = 0, len = actualQuestion.answers.length; i < len; i++) {
+        for (let i = 0; i < actualQuestion.answers.length; i++) {
             expect(actualQuestion.answers[i].origin).toEqual(expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_ANSWER_ORIGIN]);
         }
     }
 
     it('builds QAM from the specified questions and answers, including form root', () => {
-        var data = {
-                root: {}
-            },
-            questions = [generateQuestions()],
-            result;
+        const data = {
+            root: {}
+        };
+        const questions = [generateQuestions()];
         data.root['@id'] = Generator.getRandomUri();
         data.root[Constants.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
 
-        result = QuestionAnswerProcessor.buildQuestionAnswerModel(data, questions);
+        const result = QuestionAnswerProcessor.buildQuestionAnswerModel(data, questions);
         expect(result.uri).toEqual(data.root['@id']);
         expect(result.origin).toEqual(data.root[Constants.HAS_QUESTION_ORIGIN]);
         expect(result.subQuestions.length).toEqual(1);

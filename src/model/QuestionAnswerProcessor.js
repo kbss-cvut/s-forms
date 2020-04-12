@@ -18,7 +18,7 @@ export default class QuestionAnswerProcessor {
             question.origin = JsonLdUtils.getJsonAttValue(wizardData.root, Constants.HAS_QUESTION_ORIGIN, '@id');
         }
         if (stepData) {
-            for (let i = 0, len = stepData.length; i < len; i++) {
+            for (let i = 0; i < stepData.length; i++) {
                 // This will skip questions corresponding to empty steps in the wizard
                 processedQuestion = QuestionAnswerProcessor.processQuestionAnswerHierarchy(stepData[i]);
                 if (processedQuestion) {
@@ -41,13 +41,13 @@ export default class QuestionAnswerProcessor {
     }
 
     static _processQuestion(question) {
-        var result = {},
-            i, len;
+        const result = {};
+
         result.uri = question['@id'];
         result.origin = JsonLdUtils.getJsonAttValue(question, Constants.HAS_QUESTION_ORIGIN, '@id');
         if (question[Constants.HAS_SUBQUESTION]) {
             result.subQuestions = [];
-            for (i = 0, len = question[Constants.HAS_SUBQUESTION].length; i < len; i++) {
+            for (let i = 0; i < question[Constants.HAS_SUBQUESTION].length; i++) {
                 result.subQuestions.push(QuestionAnswerProcessor._processQuestion(question[Constants.HAS_SUBQUESTION][i]));
             }
         }
@@ -56,7 +56,7 @@ export default class QuestionAnswerProcessor {
             if (!Array.isArray(question[Constants.HAS_ANSWER])) {
                 question[Constants.HAS_ANSWER] = [question[Constants.HAS_ANSWER]];
             }
-            for (i = 0, len = question[Constants.HAS_ANSWER].length; i < len; i++) {
+            for (let i = 0; i < question[Constants.HAS_ANSWER].length; i++) {
                 result.answers.push(QuestionAnswerProcessor.processAnswer(question[Constants.HAS_ANSWER][i]));
             }
         }
@@ -64,7 +64,7 @@ export default class QuestionAnswerProcessor {
     }
 
     static processAnswer(answer) {
-        var result = {};
+        const result = {};
         result.uri = answer['@id'];
         result.origin = JsonLdUtils.getJsonAttValue(answer, Constants.HAS_ANSWER_ORIGIN, '@id');
         if (answer[Constants.HAS_OBJECT_VALUE]) {
@@ -80,7 +80,7 @@ export default class QuestionAnswerProcessor {
      * @param question
      */
     static generateAnswer(question) {
-        var answer = {};
+        const answer = {};
         answer[Constants.HAS_DATA_VALUE] = '';
         return answer;
     }

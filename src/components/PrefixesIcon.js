@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {Button, Glyphicon, ListGroup, ListGroupItem, Overlay, OverlayTrigger, Popover, Tooltip} from 'react-bootstrap';
 import Constants from "../constants/Constants";
 
-
 class PrefixIcon extends React.Component {
     constructor(props) {
         super(props);
@@ -34,6 +33,7 @@ class PrefixIcon extends React.Component {
                 }
             </ListGroup>
         </Popover>;
+
         return (
             <OverlayTrigger trigger="click" placement="right" overlay={p}>
                 <Glyphicon glyph={this.state.glyph} className={this.state.iconClass}

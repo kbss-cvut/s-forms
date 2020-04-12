@@ -3,7 +3,7 @@
 
 import jsdom from 'jsdom';
 
-var FAKE_DOM_HTML = `
+const FAKE_DOM_HTML = `
 <html>
 <body>
 </body>

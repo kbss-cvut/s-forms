@@ -3,15 +3,13 @@ import Constants from "../constants/Constants.js";
 import FormUtils from "../util/FormUtils";
 import Utils from "./Utils";
 
-
-var formShape = {
+const formShape = {
     root: {},
     expandProperties: [Constants.HAS_SUBQUESTION, Constants.IS_RELEVANT_IF, Constants.HAS_ANSWER, Constants.HAS_DECLARED_PREFIX]
 };
 formShape.root[Constants.HAS_LAYOUT_CLASS] = Constants.FORM;
 
 export default class JsonLdFramingUtils { //TODO revise
-
 
     /**
      * Performs JSON-LD custom framing using shapes. Shape is declaration of the JSON-LD framing
@@ -32,12 +30,12 @@ export default class JsonLdFramingUtils { //TODO revise
             shape = formShape;
         }
 
-        var flattened = null,
-            err = null,
-            flattenedCallback = (e, f) => {
-                flattened = f;
-                err = e;
-            };
+        let flattened = null;
+        let err = null;
+        const flattenedCallback = (e, f) => {
+            flattened = f;
+            err = e;
+        };
 
         jsonld.flatten(input, null, null, flattenedCallback);
     }
@@ -45,12 +43,12 @@ export default class JsonLdFramingUtils { //TODO revise
 
     static modifyStructure(structure) {
 
-        var defs = structure['@graph'],
-            i, len, item,
-            form, formElements,
-            id2objectMap = {}; // mapping @id -> object
+        const defs = structure['@graph'];
+        let item;
+        let form;
+        const id2objectMap = {}; // mapping @id -> object
 
-        for (i = 0, len = defs.length; i < len; i++) {
+        for (let i = 0; i < defs.length; i++) {
             item = defs[i];
             id2objectMap[item["@id"]] = item;
             if (FormUtils.isForm(item)) {
@@ -68,14 +66,15 @@ export default class JsonLdFramingUtils { //TODO revise
     }
 
     static _expandGraph(parentNode, shape, id2ObjectMap) {
-        var props = shape.expandProperties,
-            childArray, child, childId;
+        let childArray;
+        let child;
+        let childId;
 
-        for (var prop of shape.expandProperties) {
+        for (const prop of shape.expandProperties) {
             if (parentNode.hasOwnProperty(prop)) {
                 parentNode[prop] = Utils.asArray(parentNode[prop]);
                 childArray = parentNode[prop];
-                for (var i = 0; i < childArray.length; i++) {
+                for (let i = 0; i < childArray.length; i++) {
                     childId = childArray[i]["@id"];
                     child = id2ObjectMap[childId];
                     if (child !== undefined) {

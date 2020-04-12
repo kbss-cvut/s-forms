@@ -24,15 +24,13 @@ const tokenTypes = {
 };
 
 class InputPropertiesResolver {
-
     static _resolveInputType(question, value) {
         if (FormUtils.isSparqlInput(question) || FormUtils.isTurtleInput(question) || FormUtils.isTextarea(question, value)) {
             return 'textarea';
         } else if (InputPropertiesResolver._isNumeric(question)) {
             return 'number';
-        } else {
-            return 'text';
         }
+        return 'text';
     }
 
     static _isNumeric(question) {
@@ -125,7 +123,7 @@ const InputAnswer = (props) => {
                         const colonIndex = token.string.indexOf(":");
                         if (colonIndex !== -1) {
                             // check previous token isnt PREFIX, or a '<'(which would mean we are in a uri)
-                            //			var firstTokenString = yasqe.getNextNonWsToken(cur.line).string.toUpperCase();
+                            //			const firstTokenString = yasqe.getNextNonWsToken(cur.line).string.toUpperCase();
                             const lastNonWsTokenString = yasqe.getPreviousNonWsToken(cur.line, token).string.toUpperCase();
                             const previousToken = yasqe.getTokenAt({
                                 line: cur.line,
@@ -143,8 +141,7 @@ const InputAnswer = (props) => {
                                         const px = {};
                                         px[prefix[0][Constants.PREFIX]] = prefix[0][Constants.NAMESPACE];
                                         yasqe.addPrefixes(px);
-                                    }
-                                    else {
+                                    } else {
                                         const completions = yasqe.autocompleters.getTrie(completerName).autoComplete(currentPrefix);
                                         if (completions.length > 0) {
                                             yasqe.addPrefixes(completions[0]);
@@ -155,8 +152,7 @@ const InputAnswer = (props) => {
                         }
                     }
                 };
-            }
-            else if (props.turtle) {
+            } else if (props.turtle) {
                 console.log("TTL");
                 const yate = YATE.fromTextArea(e.target);
                 yate.setValue(value);

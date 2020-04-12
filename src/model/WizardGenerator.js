@@ -56,13 +56,13 @@ export default class WizardGenerator {
 
     static _constructWizardSteps(structure) {
 
-        let form,
-            formElements,
-            id2ObjectMap,
-            item,
-            stepQuestions = [],
-            steps = [],
-            i, len;
+        let form;
+        let formElements;
+        let id2ObjectMap;
+        let item;
+        let stepQuestions = [];
+        let steps = [];
+        let len;
 
         if (structure['@graph'][0]['@id'] !== undefined) {
             id2ObjectMap = JsonLdFramingUtils.modifyStructure(structure); //TODO make as callback
@@ -76,7 +76,7 @@ export default class WizardGenerator {
 
         form = structure['@graph'];
 
-        for (i = 0, len = form.length; i < len; i++) {
+        for (let i = 0, len = form.length; i < len; i++) {
             item = form[i];
             if (FormUtils.isForm(item)) {
                 form = item;
@@ -88,7 +88,7 @@ export default class WizardGenerator {
             Logger.error('Could not find any wizard steps in the received data.');
             throw 'No wizard steps in form';
         }
-        for (i = 0, len = formElements.length; i < len; i++) {
+        for (let i = 0, len = formElements.length; i < len; i++) {
             item = formElements[i];
             if (FormUtils.isWizardStep(item) && !FormUtils.isHidden(item)) {
                 stepQuestions.push(item);

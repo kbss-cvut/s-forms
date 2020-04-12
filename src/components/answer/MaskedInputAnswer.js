@@ -9,9 +9,9 @@ import Logger from '../../util/Logger';
 import MaskedInput from '../MaskedInput';
 
 const MaskedInputAnswer = (props) => {
-    const question = props.question,
-        value = props.value,
-        mask = JsonLdUtils.getJsonAttValue(question, Constants.INPUT_MASK);
+    const question = props.question;
+    const value = props.value;
+    const mask = JsonLdUtils.getJsonAttValue(question, Constants.INPUT_MASK);
 
     if (!mask) {
         Logger.warn('Input mask not provided. Falling back to regular input.');
