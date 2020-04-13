@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { FormText, FormLabel, FormControl, FormGroup, Form } from 'react-bootstrap';
+import { FormText, FormControl, FormGroup, Form } from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {
   focus() {
@@ -28,10 +28,11 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderCheckbox() {
+    // TODO change control id to hash of label
     return (
-      <FormGroup size="small">
+      <Form.Group size="small" controlId={Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}>
         <Form.Check type="checkbox" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
-      </FormGroup>
+      </Form.Group>
     );
   }
 
@@ -58,7 +59,7 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderLabel() {
-    return this.props.label ? <FormLabel>{this.props.label}</FormLabel> : null;
+    return this.props.label ? <Form.Label>{this.props.label}</Form.Label> : null;
   }
 
   _renderTextArea() {

@@ -66,8 +66,9 @@
 }
 
 .help-icon-text-input {
-  display: block;
-  margin-top: 42px;
+  margin-bottom: 27px;
+  position: absolute;
+  bottom: 0;
 }
 
 .help-icon-checkbox {
@@ -80,8 +81,10 @@
 }
 
 .has-unit-label {
-  margin-top: 37px;
+  margin-bottom: 26px;
+  bottom: 0;
   font-weight: bold;
+  position: absolute;
 }
 
 .tooltip-content {
@@ -98,7 +101,7 @@
 }
 
 .form-label {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 input:disabled {
@@ -107,4 +110,20 @@ input:disabled {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+/* temporary typeahead fix */
+.glyphicon-remove::after {
+  content: 'x';
+}
+
+.glyphicon-triangle-bottom::after {
+  content: 'v';
+}
+
+.btn-default,
+.btn-default:hover {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
 }
