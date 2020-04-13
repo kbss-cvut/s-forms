@@ -73,7 +73,7 @@ export default class Question extends React.Component {
         return (
           <div>
             {this.renderAnswers()}
-            <div style={{ margin: '0 0 0 2em' }}>{this.renderSubQuestions()}</div>
+            <div className="ml-4">{this.renderSubQuestions()}</div>
           </div>
         );
       }
@@ -86,14 +86,16 @@ export default class Question extends React.Component {
       }
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
 
-      const cardBody = <Card.Body>{this._renderQuestionContent()}</Card.Body>;
+      const cardBody = <Card.Body className="p-3">{this._renderQuestionContent()}</Card.Body>;
+
+      const headerClassName = `bg-info text-white ${collapsible ? 'cursor-pointer' : ''}`.trim();
 
       return (
         <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
-          <Card>
-            <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className="bg-info">
+          <Card className="mb-3">
+            <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
               {collapsible && this._renderCollapseToggle()}
-              {label}
+              <h6 className="d-inline">{label}</h6>
               {this._renderQuestionHelp()}
             </Accordion.Toggle>
             {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
@@ -183,7 +185,7 @@ export default class Question extends React.Component {
     return isTextarea
       ? 'col-12'
       : Constants.GENERATED_ROW_SIZE === 1
-      ? 'col-5'
+      ? 'col-6'
       : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
   }
 

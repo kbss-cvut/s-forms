@@ -28,11 +28,19 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderCheckbox() {
-    return <Form.Check type="checkbox" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />;
+    return (
+      <FormGroup size="small">
+        <Form.Check type="checkbox" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
+      </FormGroup>
+    );
   }
 
   _renderRadio() {
-    return <Form.Check type="radio" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />;
+    return (
+      <FormGroup size="small">
+        <Form.Check type="radio" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
+      </FormGroup>
+    );
   }
 
   _renderSelect() {
