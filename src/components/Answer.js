@@ -6,7 +6,7 @@ import InputAnswer from './answer/InputAnswer';
 import JsonldUtils from 'jsonld-utils';
 import Configuration from '../model/Configuration';
 import Constants from '../constants/Constants';
-// import MaskedInputAnswer from './answer/MaskedInputAnswer';
+import MaskedInputAnswer from './answer/MaskedInputAnswer';
 import SelectAnswer from './answer/SelectAnswer';
 import FormUtils from '../util/FormUtils';
 import TypeaheadAnswer from './answer/TypeaheadAnswer';
@@ -114,7 +114,6 @@ export default class Answer extends React.Component {
   }
 
   _renderMaskedInput(value, label, title) {
-    /*
     return (
       <MaskedInputAnswer
         label={label}
@@ -125,7 +124,6 @@ export default class Answer extends React.Component {
         answer={this.props.answer}
       />
     );
-    */
     return null;
   }
 

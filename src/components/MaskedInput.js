@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import InputMask from 'inputmask-core';
-import { getSelection, setSelection } from 'react/lib/ReactInputSelection';
 import Configuration from '../model/Configuration';
 import MaskMapper from '../util/MaskMapper';
 
@@ -18,6 +17,54 @@ function isRedo(e) {
 }
 
 // Copied from https://github.com/insin/react-maskedinput
+
+function getSelection(el) {
+  let start;
+  let end;
+  let rangeEl;
+  let clone;
+
+  if (el.selectionStart !== undefined) {
+    start = el.selectionStart;
+    end = el.selectionEnd;
+  } else {
+    try {
+      el.focus();
+      rangeEl = el.createTextRange();
+      clone = rangeEl.duplicate();
+
+      rangeEl.moveToBookmark(document.selection.createRange().getBookmark());
+      clone.setEndPoint('EndToStart', rangeEl);
+
+      start = clone.text.length;
+      end = start + rangeEl.text.length;
+    } catch (e) {
+      /* not focused or not visible */
+    }
+  }
+
+  return { start, end };
+}
+
+function setSelection(el, selection) {
+  let rangeEl;
+
+  try {
+    if (el.selectionStart !== undefined) {
+      el.focus();
+      el.setSelectionRange(selection.start, selection.end);
+    } else {
+      el.focus();
+      rangeEl = el.createTextRange();
+      rangeEl.collapse(true);
+      rangeEl.moveStart('character', selection.start);
+      rangeEl.moveEnd('character', selection.end - selection.start);
+      rangeEl.select();
+    }
+  } catch (e) {
+    /* not focused or not visible */
+  }
+}
 
 export default class MaskedInput extends React.Component {
   componentWillMount() {
@@ -181,6 +228,7 @@ export default class MaskedInput extends React.Component {
   render() {
     const { size, placeholder, ...props } = this.props,
       patternLength = this.mask.pattern.length;
+
     return React.createElement(Configuration.inputComponent, {
       ...props,
       ref: (r) => {

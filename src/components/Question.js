@@ -73,7 +73,7 @@ export default class Question extends React.Component {
         return (
           <div>
             {this.renderAnswers()}
-            <div className="ml-4">{this.renderSubQuestions()}</div>
+            <div className="ml-4 mt-n2">{this.renderSubQuestions()}</div>
           </div>
         );
       }
