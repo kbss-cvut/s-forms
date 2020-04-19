@@ -3,7 +3,9 @@
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import moment from 'moment';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
+import { shallow } from 'enzyme';
+import Typeahead from 'react-bootstrap-typeahead';
 
 import Environment from '../environment/Environment';
 import Generator from '../environment/Generator';
@@ -11,6 +13,7 @@ import Generator from '../environment/Generator';
 import Answer from '../../src/components/Answer';
 import Configuration from '../../src/model/Configuration';
 import Constants from '../../src/constants/Constants';
+import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 
 describe('Answer component', () => {
   let question, onChange, answer, optionsStore, actions;
@@ -28,14 +31,18 @@ describe('Answer component', () => {
       '@language': 'en',
       '@value': 'The identification of the aerodrome/helicopter landing area by name, location and status.'
     };
-    onChange = jasmine.createSpy('onChange');
+    onChange = jest.fn();
     Configuration.intl = {
       locale: 'en'
     };
-    optionsStore = jasmine.createSpyObj('OptionsStore', ['listen', 'getOptions']);
-    optionsStore.getOptions.and.returnValue([]);
+    optionsStore = {
+      listen: jest.fn(),
+      getOptions: jest.fn(() => [])
+    };
     Configuration.optionsStore = optionsStore;
-    actions = jasmine.createSpyObj('Actions', ['loadFormOptions']);
+    actions = {
+      loadFormOptions: jest.fn()
+    };
     Configuration.actions = actions;
   });
 
@@ -53,22 +60,28 @@ describe('Answer component', () => {
     Environment.render(<Answer answer={{}} question={question} onChange={onChange} />);
 
     expect(actions.loadFormOptions).toHaveBeenCalled();
-    expect(actions.loadFormOptions.calls.argsFor(0)[1]).toEqual(query);
+    expect(actions.loadFormOptions.mock.calls[0][1]).toEqual(query);
   });
 
   it('maps answer object value to string label for the typeahead component', () => {
-    const value = Generator.getRandomUri(),
-      valueLabel = 'masterchief',
-      options = Generator.generateTypeaheadOptions(value, valueLabel);
+    const value = Generator.getRandomUri();
+    const valueLabel = 'masterchief';
+    const options = Generator.generateTypeaheadOptions(value, valueLabel);
     answer = answerWithCodeValue(value);
-    optionsStore.getOptions.and.returnValue(options);
+    optionsStore = {
+      listen: jest.fn(),
+      getOptions: jest.fn(() => options)
+    };
+    Configuration.optionsStore = optionsStore;
+
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     question[Constants.HAS_OPTIONS_QUERY] = 'SELECT * WHERE {?x ?y ?z. }';
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead').default);
+    const component = shallow(<Answer answer={answer} question={question} onChange={onChange} />);
+    const typeahead = component.find(TypeaheadAnswer).dive().find(Typeahead);
     expect(typeahead).not.toBeNull();
-    expect(typeahead.state.entryValue).toEqual(valueLabel);
+
+    expect(typeahead.dive().state('entryValue')).toEqual(valueLabel);
   });
 
   function answerWithCodeValue(value) {
@@ -228,7 +241,7 @@ describe('Answer component', () => {
     const value = Generator.getRandomUri();
     component.onValueChange(value);
     expect(onChange).toHaveBeenCalled();
-    const change = onChange.calls.argsFor(0)[1];
+    const change = onChange.mock.calls[0][1];
     expect(change[Constants.HAS_OBJECT_VALUE]['@id']).toEqual(value);
   });
 });

@@ -1,11 +1,13 @@
 'use strict';
 
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
-import { Card } from 'react-bootstrap';
+import { Card, Accordion } from 'react-bootstrap';
 import Constants from '../../src/constants/Constants';
 import Environment from '../environment/Environment';
 import Question from '../../src/components/Question';
+import { shallow } from 'enzyme';
+import JsonLdUtils from 'jsonld-utils';
+import Configuration from '../../src/model/Configuration';
 
 describe('Question', () => {
   let question;
@@ -35,20 +37,21 @@ describe('Question', () => {
         '@value': '453 - Responsible entity'
       }
     };
-    onChange = jasmine.createSpy('onChange');
+    onChange = jest.fn();
   });
 
   it('renders section collapsed when layout class is set to collapsed', () => {
     question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.COLLAPSED];
-    const result = TestUtils.renderIntoDocument(<Question question={question} onChange={onChange} />),
-      card = TestUtils.findRenderedComponentWithType(result, Card);
-    expect(card.props.expanded).toBeFalsy();
+    const result = shallow(<Question question={question} onChange={onChange} />);
+    const card = result.find(Accordion);
+    const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
+    expect(card.prop('defaultActiveKey')).toBe(label);
   });
 
   it('renders section by default expanded', () => {
     question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
-    const result = TestUtils.renderIntoDocument(<Question question={question} onChange={onChange} />),
-      card = TestUtils.findRenderedComponentWithType(result, Card);
-    expect(card.props.expanded).toBeTruthy();
+    const result = shallow(<Question question={question} onChange={onChange} />);
+    const card = result.find(Card);
+    expect(card.prop('defaultActiveKey')).toBe(undefined);
   });
 });

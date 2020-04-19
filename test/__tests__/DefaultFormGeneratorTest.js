@@ -11,7 +11,9 @@ describe('Default form generator', () => {
   let textValue;
 
   beforeEach(() => {
-    WizardStore = jasmine.createSpyObj('WizardStore', ['initWizard']);
+    WizardStore = {
+      'initWizard': jest.fn()
+    };
     Configuration.wizardStore = WizardStore;
     Configuration.intl = {
       locale: 'en'

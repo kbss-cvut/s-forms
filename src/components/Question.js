@@ -90,6 +90,7 @@ export default class Question extends React.Component {
 
       const headerClassName = `bg-info text-white ${collapsible ? 'cursor-pointer' : ''}`.trim();
 
+      // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
       return (
         <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
           <Card className="mb-3">

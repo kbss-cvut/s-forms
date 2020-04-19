@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import JsonLdUtils from 'jsonld-utils';
 
 import Answer from '../../src/components/Answer';
@@ -15,7 +15,7 @@ describe('MaskedInputAnswer', () => {
 
   beforeEach(() => {
     question = {};
-    onChange = jasmine.createSpy('onChange');
+    onChange = jest.fn();
     Environment.mockIntl();
   });
 

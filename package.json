@@ -73,7 +73,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "test": "jest --env=jsdom",
+    "test": "jest",
     "build": "webpack --config webpack.config.prod.js",
     "lib": "babel ./src -d ./lib",
     "build:lib": "npm run build && npm run build:css && npm run lib && npm pack",

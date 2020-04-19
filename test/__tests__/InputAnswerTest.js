@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import JsonLdUtils from 'jsonld-utils';
 import Answer from '../../src/components/Answer';
 import Configuration from '../../src/model/Configuration';
@@ -27,7 +27,7 @@ describe('InputAnswer', () => {
       '@language': 'en',
       '@value': 'Javascript sucks!!!'
     };
-    onChange = jasmine.createSpy('onChange');
+    onChange = jest.fn();
     Configuration.intl = {
       locale: 'en'
     };

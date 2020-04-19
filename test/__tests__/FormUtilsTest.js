@@ -248,7 +248,7 @@ describe('FormUtils', () => {
       };
 
     beforeEach(function () {
-      spyOn(JsonObjectMap, 'getObject').and.returnValue(question);
+      jest.spyOn(JsonObjectMap, 'getObject').mockReturnValue(question);
     });
 
     it('returns false in condition without answer values.', () => {
