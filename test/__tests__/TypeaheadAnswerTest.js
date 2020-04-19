@@ -1,13 +1,7 @@
-'use strict';
-
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
-import TestUtils from 'react-dom/test-utils';
-import { shallow } from 'enzyme';
 
-import Environment from '../environment/Environment';
-import Generator from '../environment/Generator';
-
+import * as Generator from '../environment/Generator';
 import Configuration from '../../src/model/Configuration';
 import Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
@@ -44,7 +38,6 @@ describe('TypeaheadAnswer', () => {
         }
       ])
     };
-
     Configuration.optionsStore = optionsStore;
     actions = {
       loadFormOptions: jest.fn()
@@ -54,12 +47,13 @@ describe('TypeaheadAnswer', () => {
 
   it('passes null to onChange when value is reset', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
-    const component = Environment.render(
+
+    const component = mount(
       <TypeaheadAnswer answer={{}} question={question} label="Test" value="123" onChange={onChange} />
     );
 
-    const resetButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
-    TestUtils.Simulate.click(resetButton);
+    const resetButton = component.find('button').first();
+    resetButton.simulate('click');
     expect(onChange).toHaveBeenCalledWith(null);
   });
 

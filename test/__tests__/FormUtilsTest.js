@@ -1,5 +1,3 @@
-'use strict';
-
 import FormUtils from '../../src/util/FormUtils';
 import Configuration from '../../src/model/Configuration';
 import Constants from '../../src/constants/Constants';

@@ -1,8 +1,6 @@
-'use strict';
-
 import Constants from '../../src/constants/Constants';
 import Configuration from '../../src/model/Configuration';
-import Generator from '../environment/Generator';
+import * as Generator from '../environment/Generator';
 import WizardGenerator from '../../src/model/WizardGenerator';
 import DefaultFormGenerator from '../../src/model/DefaultFormGenerator';
 
@@ -12,7 +10,7 @@ describe('Default form generator', () => {
 
   beforeEach(() => {
     WizardStore = {
-      'initWizard': jest.fn()
+      initWizard: jest.fn()
     };
     Configuration.wizardStore = WizardStore;
     Configuration.intl = {

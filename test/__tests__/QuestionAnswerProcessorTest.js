@@ -1,9 +1,7 @@
-'use strict';
-
 import JsonLdUtils from 'jsonld-utils';
-import Constants from '../../src/constants/Constants';
-import Generator from '../environment/Generator';
 
+import Constants from '../../src/constants/Constants';
+import * as Generator from '../environment/Generator';
 import QuestionAnswerProcessor from '../../src/model/QuestionAnswerProcessor';
 
 describe('Question answer processor', () => {
@@ -40,8 +38,10 @@ describe('Question answer processor', () => {
     }
     expect(actualQuestion.answers).toBeDefined();
     expect(actualQuestion.answers.length).toEqual(expectedQuestion[Constants.HAS_ANSWER].length);
+
     for (let i = 0; i < actualQuestion.answers.length; i++) {
       expect(actualQuestion.answers[i].uri).toEqual(expectedQuestion[Constants.HAS_ANSWER][i]['@id']);
+
       if (expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_DATA_VALUE]) {
         expect(actualQuestion.answers[i].textValue).toEqual(
           expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_DATA_VALUE]['@value']

@@ -1,9 +1,6 @@
-'use strict';
-
 import React from 'react';
 import Configuration from '../../src/model/Configuration';
 import JsonLdFramingUtils from '../../src/util/JsonLdFramingUtils';
-import JsonLdObjectMap from '../../src/util/JsonLdObjectMap';
 
 describe('JsonLd framing utils', () => {
   let formDocument;
@@ -29,6 +26,7 @@ describe('JsonLd framing utils', () => {
 
   it('returns jsonld object map from modifyStructure', () => {
     const id2objectMap = JsonLdFramingUtils.modifyStructure(formDocument);
+
     expect(id2objectMap[formQuestion['@id']]).toBe(formQuestion);
   });
 });

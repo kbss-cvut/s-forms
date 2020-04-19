@@ -1,5 +1,3 @@
-'use strict';
-
 import MaskMapper from '../../src/util/MaskMapper';
 
 describe('MaskMapper', () => {

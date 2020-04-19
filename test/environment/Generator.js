@@ -1,48 +1,44 @@
-'use strict';
-
 import JsonLdUtils from 'jsonld-utils';
 
-export default class Generator {
-  static _uriBase = 'http://onto.fel.cvut.cz/ontologies/forms';
+const _uriBase = 'http://onto.fel.cvut.cz/ontologies/forms';
 
-  static getRandomInt() {
-    const min = 0;
-    const bound = Number.MAX_SAFE_INTEGER;
-    return Math.floor(Math.random() * (bound - min)) + min;
+export const getRandomInt = () => {
+  const min = 0;
+  const bound = Number.MAX_SAFE_INTEGER;
+  return Math.floor(Math.random() * (bound - min)) + min;
+};
+
+export const getRandomPositiveInt = (min, max) => {
+  const bound = max ? max : Number.MAX_SAFE_INTEGER;
+  if (min === null || min === undefined) {
+    min = 1;
   }
+  return Math.floor(Math.random() * (bound - min)) + min;
+};
 
-  static getRandomPositiveInt(min, max) {
-    const bound = max ? max : Number.MAX_SAFE_INTEGER;
-    if (min === null || min === undefined) {
-      min = 1;
-    }
-    return Math.floor(Math.random() * (bound - min)) + min;
-  }
+export const getRandomBoolean = () => {
+  return Math.random() < 0.5;
+};
 
-  static getRandomBoolean() {
-    return Math.random() < 0.5;
-  }
+export const getRandomUri = () => {
+  return _uriBase + getRandomInt();
+};
 
-  static getRandomUri() {
-    return Generator._uriBase + Generator.getRandomInt();
-  }
+export const generateTypeaheadOptions = (value, valueLabel) => {
+  const options = [];
+  let option;
 
-  static generateTypeaheadOptions(value, valueLabel) {
-    const options = [];
-    let option;
-
-    for (let i = 0; i < Generator.getRandomPositiveInt(3, 10); i++) {
-      option = {
-        '@id': Generator.getRandomUri()
-      };
-      option[JsonLdUtils.RDFS_LABEL] = 'RandomLabel' + i;
-      options.push(option);
-    }
+  for (let i = 0; i < getRandomPositiveInt(3, 10); i++) {
     option = {
-      '@id': value
+      '@id': getRandomUri()
     };
-    option[JsonLdUtils.RDFS_LABEL] = valueLabel;
+    option[JsonLdUtils.RDFS_LABEL] = 'RandomLabel' + i;
     options.push(option);
-    return options;
   }
-}
+  option = {
+    '@id': value
+  };
+  option[JsonLdUtils.RDFS_LABEL] = valueLabel;
+  options.push(option);
+  return options;
+};
