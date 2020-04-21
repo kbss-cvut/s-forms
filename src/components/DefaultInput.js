@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { HelpBlock, Checkbox, ControlLabel, FormControl, FormGroup, Radio } from 'react-bootstrap';
+import { FormText, FormControl, FormGroup, Form } from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {
   focus() {
@@ -28,26 +28,28 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderCheckbox() {
+    // TODO change control id to hash of label
     return (
-      <Checkbox ref={(c) => (this.input = c)} {...this.props}>
-        {this.props.label}
-      </Checkbox>
+      <Form.Group size="small" controlId={Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}>
+        <Form.Check type="checkbox" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
+      </Form.Group>
     );
   }
 
   _renderRadio() {
     return (
-      <Radio ref={(c) => (this.input = c)} {...this.props}>
-        {this.props.label}
-      </Radio>
+      <FormGroup size="small">
+        <Form.Check type="radio" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
+      </FormGroup>
     );
   }
 
   _renderSelect() {
+    // TODO validation
     return (
-      <FormGroup bsSize="small" validationState={this.props.validation}>
+      <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl componentClass="select" ref={(c) => (this.input = c)} {...this.props}>
+        <FormControl as="select" ref={(c) => (this.input = c)} {...this.props}>
           {this.props.children}
         </FormControl>
         {this.props.validation && <FormControl.Feedback />}
@@ -57,19 +59,15 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderLabel() {
-    return this.props.label ? <ControlLabel>{this.props.label}</ControlLabel> : null;
+    return this.props.label ? <Form.Label>{this.props.label}</Form.Label> : null;
   }
 
   _renderTextArea() {
+    // TODO validation
     return (
-      <FormGroup bsSize="small" validationState={this.props.validation}>
+      <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl
-          componentClass="textarea"
-          style={{ height: 'auto' }}
-          ref={(c) => (this.input = c)}
-          {...this.props}
-        />
+        <FormControl as="textarea" style={{ height: 'auto' }} ref={(c) => (this.input = c)} {...this.props} />
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
       </FormGroup>
@@ -77,14 +75,16 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderHelp() {
-    return this.props.help ? <HelpBlock>{this.props.help}</HelpBlock> : null;
+    return this.props.help ? <FormText>{this.props.help}</FormText> : null;
   }
 
   _renderInput() {
+    // TODO validation
+
     return (
-      <FormGroup bsSize="small" validationState={this.props.validation}>
+      <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl ref={(c) => (this.input = c)} componentClass="input" {...this.props} />
+        <FormControl ref={(c) => (this.input = c)} as="input" {...this.props} />
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
       </FormGroup>

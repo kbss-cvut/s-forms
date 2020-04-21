@@ -12,6 +12,7 @@ export default class TypeaheadAnswer extends React.Component {
   constructor(props) {
     super(props);
     this._queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
+
     this.state = {
       options: this._queryHash
         ? this._processTypeaheadOptions(Configuration.optionsStore.getOptions(this._queryHash))
@@ -59,6 +60,7 @@ export default class TypeaheadAnswer extends React.Component {
     if (!options) {
       return [];
     }
+
     // sort by label
     options.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
 

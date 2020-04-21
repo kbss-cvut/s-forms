@@ -1,16 +1,16 @@
-'use strict';
-
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import moment from 'moment';
-import TestUtils from 'react-addons-test-utils';
+import { shallow } from 'enzyme';
+import Typeahead from 'react-bootstrap-typeahead';
+import DateTimePicker from 'react-bootstrap-datetimepicker';
 
-import Environment from '../environment/Environment';
-import Generator from '../environment/Generator';
-
+import * as Generator from '../environment/Generator';
 import Answer from '../../src/components/Answer';
 import Configuration from '../../src/model/Configuration';
 import Constants from '../../src/constants/Constants';
+import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
+import MaskedInput from '../../src/components/MaskedInput';
 
 describe('Answer component', () => {
   let question, onChange, answer, optionsStore, actions;
@@ -28,21 +28,25 @@ describe('Answer component', () => {
       '@language': 'en',
       '@value': 'The identification of the aerodrome/helicopter landing area by name, location and status.'
     };
-    onChange = jasmine.createSpy('onChange');
+    onChange = jest.fn();
     Configuration.intl = {
       locale: 'en'
     };
-    optionsStore = jasmine.createSpyObj('OptionsStore', ['listen', 'getOptions']);
-    optionsStore.getOptions.and.returnValue([]);
+    optionsStore = {
+      listen: jest.fn(),
+      getOptions: jest.fn(() => [])
+    };
     Configuration.optionsStore = optionsStore;
-    actions = jasmine.createSpyObj('Actions', ['loadFormOptions']);
+    actions = {
+      loadFormOptions: jest.fn()
+    };
     Configuration.actions = actions;
   });
 
   it('renders a Typeahead when layout class is typeahead', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
-    const component = Environment.render(<Answer answer={{}} question={question} onChange={onChange} />),
-      typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead').default);
+    const component = shallow(<Answer answer={{}} question={question} onChange={onChange} />);
+    const typeahead = component.find(Typeahead);
     expect(typeahead).not.toBeNull();
   });
 
@@ -50,25 +54,31 @@ describe('Answer component', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     const query = 'SELECT * WHERE { ?x ?y ?z .}';
     question[Constants.HAS_OPTIONS_QUERY] = query;
-    Environment.render(<Answer answer={{}} question={question} onChange={onChange} />);
+    mount(<Answer answer={{}} question={question} onChange={onChange} />);
 
     expect(actions.loadFormOptions).toHaveBeenCalled();
-    expect(actions.loadFormOptions.calls.argsFor(0)[1]).toEqual(query);
+    expect(actions.loadFormOptions.mock.calls[0][1]).toEqual(query);
   });
 
   it('maps answer object value to string label for the typeahead component', () => {
-    const value = Generator.getRandomUri(),
-      valueLabel = 'masterchief',
-      options = Generator.generateTypeaheadOptions(value, valueLabel);
+    const value = Generator.getRandomUri();
+    const valueLabel = 'masterchief';
+    const options = Generator.generateTypeaheadOptions(value, valueLabel);
     answer = answerWithCodeValue(value);
-    optionsStore.getOptions.and.returnValue(options);
+    optionsStore = {
+      listen: jest.fn(),
+      getOptions: jest.fn(() => options)
+    };
+    Configuration.optionsStore = optionsStore;
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     question[Constants.HAS_OPTIONS_QUERY] = 'SELECT * WHERE {?x ?y ?z. }';
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead').default);
+
+    const component = shallow(<Answer answer={answer} question={question} onChange={onChange} />);
+    const typeahead = component.find(TypeaheadAnswer).dive().find(Typeahead);
+
     expect(typeahead).not.toBeNull();
-    expect(typeahead.state.entryValue).toEqual(valueLabel);
+    expect(typeahead.dive().state('entryValue')).toEqual(valueLabel);
   });
 
   function answerWithCodeValue(value) {
@@ -85,11 +95,13 @@ describe('Answer component', () => {
     const value = 'masterchief';
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
+
+    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const input = component.find('input');
+
     expect(input).not.toBeNull();
-    expect(input.type).toEqual('text');
-    expect(input.value).toEqual(value);
+    expect(input.props().type).toEqual('text');
+    expect(input.props().value).toEqual(value);
   });
 
   function answerWithTextValue(value) {
@@ -105,44 +117,50 @@ describe('Answer component', () => {
 
   it('renders date picker with answer value when date layout class is specified', () => {
     Configuration.dateTimeFormat = 'YYYY-MM-DD';
-    const date = new Date(),
-      value = moment(date).format(Configuration.dateTimeFormat);
+    const date = new Date();
+    const value = moment(date).format(Configuration.dateTimeFormat);
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATE);
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      picker = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-datetimepicker').default);
+
+    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const picker = component.find(DateTimePicker);
+
     expect(picker).not.toBeNull();
-    expect(picker.props.mode).toEqual('date');
-    expect(picker.props.dateTime).toEqual(value);
+    expect(picker.props().mode).toEqual('date');
+    expect(picker.props().dateTime).toEqual(value);
   });
 
   it('renders time picker with answer value when time layout class is specified', () => {
     Configuration.dateTimeFormat = 'hh:mm:ss';
-    const date = new Date(),
-      value = moment(date).format(Configuration.dateTimeFormat);
+    const date = new Date();
+    const value = moment(date).format(Configuration.dateTimeFormat);
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      picker = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-datetimepicker').default);
+
+    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const picker = component.find(DateTimePicker);
+
     expect(picker).not.toBeNull();
-    expect(picker.props.mode).toEqual('time');
-    expect(picker.props.dateTime).toEqual(value);
+    expect(picker.props().mode).toEqual('time');
+    expect(picker.props().dateTime).toEqual(value);
   });
 
   it('renders datetime picker with answer value when datetime layout class is specified', () => {
     Configuration.dateTimeFormat = 'YYYY-MM-DD hh:mm:ss';
-    const date = new Date(),
-      value = moment(date).format(Configuration.dateTimeFormat);
+    const date = new Date();
+    const value = moment(date).format(Configuration.dateTimeFormat);
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      picker = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-datetimepicker').default);
+
+    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const picker = component.find(DateTimePicker);
+
     expect(picker).not.toBeNull();
-    expect(picker.props.mode).toEqual('datetime');
-    expect(picker.props.dateTime).toEqual(value);
+    expect(picker.props().mode).toEqual('datetime');
+    expect(picker.props().dateTime).toEqual(value);
   });
 
   it('renders datetime picker with answer value when no layout class is specified and numeric answer value is used', () => {
@@ -153,12 +171,14 @@ describe('Answer component', () => {
     answer[Constants.HAS_DATA_VALUE] = value;
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      picker = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-datetimepicker').default);
+
+    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const picker = component.find(DateTimePicker);
+
     expect(picker).not.toBeNull();
-    expect(picker.props.mode).toEqual('datetime');
-    expect(picker.props.dateTime).toEqual(value);
-    expect(picker.props.format).toEqual(Constants.DATETIME_NUMBER_FORMAT);
+    expect(picker.props().mode).toEqual('datetime');
+    expect(picker.props().dateTime).toEqual(value);
+    expect(picker.props().format).toEqual(Constants.DATETIME_NUMBER_FORMAT);
   });
 
   it('renders checkbox with answer value when checkbox layout class is specified', () => {
@@ -168,67 +188,76 @@ describe('Answer component', () => {
     answer[Constants.HAS_DATA_VALUE] = true;
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.CHECKBOX);
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
+
+    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const input = component.find('input');
+
     expect(input).toBeDefined();
-    expect(input.type).toEqual('checkbox');
-    expect(input.checked).toBeTruthy();
+    expect(input.props().type).toEqual('checkbox');
+    expect(input.props().checked).toBeTruthy();
   });
 
   it('renders numeric input with answer value when number layout class is specified', () => {
-    const value = 117,
-      answer = {
-        '@id': Generator.getRandomUri()
-      };
+    const value = 117;
+    const answer = {
+      '@id': Generator.getRandomUri()
+    };
     answer[Constants.HAS_DATA_VALUE] = value;
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      input = TestUtils.findRenderedDOMComponentWithTag(component, 'input');
+
+    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const input = component.find('input');
+
     expect(input).toBeDefined();
-    expect(input.type).toEqual('number');
-    expect(input.value).toEqual(value.toString());
+    expect(input.props().type).toEqual('number');
+    expect(input.props().value).toEqual(value);
   });
 
   it('renders textarea for answer with long value', () => {
     let value = '';
-    for (let i = 0, len = Constants.INPUT_LENGTH_THRESHOLD + 1; i < len; i++) {
+    for (let i = 0; i < Constants.INPUT_LENGTH_THRESHOLD + 1; i++) {
       value += 'a';
     }
     answer = answerWithTextValue(value);
     answer[Constants.HAS_DATA_VALUE] = value;
     question[Constants.HAS_ANSWER] = [answer];
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      input = TestUtils.findRenderedDOMComponentWithTag(component, 'textarea');
+
+    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const input = component.find('textarea');
+
     expect(input).toBeDefined();
-    expect(input.value).toEqual(value);
+    expect(input.props().value).toEqual(value);
   });
 
   it('renders masked input for question with masked-input layout class', () => {
-    const value = '08/2016',
-      mask = '11/1111',
-      answer = {
-        '@id': Generator.getRandomUri()
-      };
+    const value = '08/2016';
+    const mask = '11/1111';
+    const answer = {
+      '@id': Generator.getRandomUri()
+    };
     answer[Constants.HAS_DATA_VALUE] = value;
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.MASKED_INPUT);
     question[Constants.INPUT_MASK] = mask;
-    const component = Environment.render(<Answer answer={answer} question={question} onChange={onChange} />),
-      input = TestUtils.findRenderedComponentWithType(component, require('../../src/components/MaskedInput').default);
+
+    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const input = component.find(MaskedInput);
+
     expect(input).toBeDefined();
-    expect(input.props.value).toEqual(value);
-    expect(input.props.mask).toEqual(mask);
+    expect(input.props().value).toEqual(value);
+    expect(input.props().mask).toEqual(mask);
   });
 
   it('sets typeahead answer as code value', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
-    const component = Environment.render(<Answer answer={{}} question={question} onChange={onChange} />);
+    const component = mount(<Answer answer={{}} question={question} onChange={onChange} />);
 
     const value = Generator.getRandomUri();
-    component.onValueChange(value);
+    component.instance().onValueChange(value);
     expect(onChange).toHaveBeenCalled();
-    const change = onChange.calls.argsFor(0)[1];
+
+    const change = onChange.mock.calls[0][1];
     expect(change[Constants.HAS_OBJECT_VALUE]['@id']).toEqual(value);
   });
 });

@@ -1,8 +1,6 @@
-'use strict';
-
 import Constants from '../../src/constants/Constants';
 import Configuration from '../../src/model/Configuration';
-import Generator from '../environment/Generator';
+import * as Generator from '../environment/Generator';
 import WizardGenerator from '../../src/model/WizardGenerator';
 import DefaultFormGenerator from '../../src/model/DefaultFormGenerator';
 
@@ -11,7 +9,9 @@ describe('Default form generator', () => {
   let textValue;
 
   beforeEach(() => {
-    WizardStore = jasmine.createSpyObj('WizardStore', ['initWizard']);
+    WizardStore = {
+      initWizard: jest.fn()
+    };
     Configuration.wizardStore = WizardStore;
     Configuration.intl = {
       locale: 'en'

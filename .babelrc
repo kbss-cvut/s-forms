@@ -1,4 +1,18 @@
 {
-  "plugins": ["transform-runtime"],
-  "presets": ["es2015", "react", "stage-0"]
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-class-properties"
+  ],
+  "presets": [["@babel/preset-env", { "modules": false }], "@babel/preset-react"],
+  "env": {
+    "test": {
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
+      "plugins": [
+        "@babel/plugin-transform-runtime",
+        "@babel/plugin-proposal-export-default-from",
+        "@babel/plugin-proposal-class-properties"
+      ]
+    }
+  }
 }

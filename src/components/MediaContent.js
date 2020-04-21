@@ -15,9 +15,9 @@ export default class MediaContent extends React.Component {
   _renderDangerously(mediaContent) {
     if (Array.isArray(mediaContent)) {
       return (
-        <div className="col-xs-6">
+        <div className="col-6">
           {mediaContent.map((src) => (
-            <div key={'media-' + src} className="row embed-responsive-21by9 media-content-video-container">
+            <div key={'media-' + src} className="row embed-responsive-21by9 media-content-video-container mb-3">
               {MediaContent.iframe(src)}
             </div>
           ))}
@@ -26,7 +26,7 @@ export default class MediaContent extends React.Component {
     } else {
       return (
         <div className="row">
-          <div className="col-xs-6 embed-responsive-21by9 media-content-video-container">
+          <div className="col-6 embed-responsive-21by9 media-content-video-container mb-3">
             {MediaContent.iframe(mediaContent)}
           </div>
         </div>

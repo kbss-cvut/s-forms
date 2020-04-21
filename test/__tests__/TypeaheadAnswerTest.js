@@ -1,12 +1,7 @@
-'use strict';
-
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
-import TestUtils from 'react-addons-test-utils';
 
-import Environment from '../environment/Environment';
-import Generator from '../environment/Generator';
-
+import * as Generator from '../environment/Generator';
 import Configuration from '../../src/model/Configuration';
 import Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
@@ -30,30 +25,35 @@ describe('TypeaheadAnswer', () => {
       '@language': 'en',
       '@value': 'The identification of the aerodrome/helicopter landing area by name, location and status.'
     };
-    onChange = jasmine.createSpy('onChange');
+    onChange = jest.fn();
     Configuration.intl = {
       locale: 'en'
     };
-    optionsStore = jasmine.createSpyObj('OptionsStore', ['listen', 'getOptions']);
-    optionsStore.getOptions.and.returnValue([
-      {
-        id: '123',
-        name: '123'
-      }
-    ]);
+    optionsStore = {
+      listen: jest.fn(),
+      getOptions: jest.fn(() => [
+        {
+          id: '123',
+          name: '123'
+        }
+      ])
+    };
     Configuration.optionsStore = optionsStore;
-    actions = jasmine.createSpyObj('Actions', ['loadFormOptions']);
+    actions = {
+      loadFormOptions: jest.fn()
+    };
     Configuration.actions = actions;
   });
 
   it('passes null to onChange when value is reset', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
-    const component = Environment.render(
+
+    const component = mount(
       <TypeaheadAnswer answer={{}} question={question} label="Test" value="123" onChange={onChange} />
     );
 
-    const resetButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
-    TestUtils.Simulate.click(resetButton);
+    const resetButton = component.find('button').first();
+    resetButton.simulate('click');
     expect(onChange).toHaveBeenCalledWith(null);
   });
 
@@ -62,19 +62,23 @@ describe('TypeaheadAnswer', () => {
     const options = createOptionsWithPartialOrder(['3', '2', '1', 'before2'], ['before2<2']),
       query = 'SELECT * WHERE { ?x ?y ?z .}';
 
-    optionsStore.getOptions.and.returnValue(options);
+    optionsStore = {
+      listen: jest.fn(),
+      getOptions: jest.fn(() => options)
+    };
+    Configuration.optionsStore = optionsStore;
+
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     question[Constants.HAS_OPTIONS_QUERY] = query;
 
-    const component = Environment.render(
-        <TypeaheadAnswer answer={{}} question={question} onChange={onChange} label="TestLabel" />
-      ),
-      typeahead = TestUtils.findRenderedComponentWithType(component, require('react-bootstrap-typeahead').default);
+    const component = shallow(
+      <TypeaheadAnswer answer={{}} question={question} onChange={onChange} label="TestLabel" />
+    );
 
     expect(optionsStore.getOptions).toHaveBeenCalled();
     expect(actions.loadFormOptions).toHaveBeenCalled();
     expect(component).not.toBeNull();
-    expect(component.state.options.map((i) => i['id'])).toEqual(['1', 'before2', '2', '3']);
+    expect(component.state('options').map((i) => i['id'])).toEqual(['1', 'before2', '2', '3']);
   });
 
   function createOptionsWithPartialOrder(ids, orderingRules) {

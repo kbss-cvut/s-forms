@@ -17,6 +17,7 @@ const MaskedInputAnswer = (props) => {
     Logger.warn('Input mask not provided. Falling back to regular input.');
     return <InputAnswer {...props} />;
   }
+
   return (
     <MaskedInput
       mask={mask}
@@ -28,6 +29,8 @@ const MaskedInputAnswer = (props) => {
       disabled={FormUtils.isDisabled(question)}
     />
   );
+
+  return null;
 };
 
 MaskedInputAnswer.propTypes = {

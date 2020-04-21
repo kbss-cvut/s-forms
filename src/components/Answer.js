@@ -124,6 +124,7 @@ export default class Answer extends React.Component {
         answer={this.props.answer}
       />
     );
+    return null;
   }
 
   _renderRegularInput(value, label, title) {

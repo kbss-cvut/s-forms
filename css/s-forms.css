@@ -1,3 +1,43 @@
+@font-face {
+  font-family: 'Icomoon';
+  src: url('./Icomoon.ttf?ei0pk6') format('truetype'), url('./Icomoon.woff?ei0pk6') format('woff'),
+    url('./Icomoon.svg?ei0pk6#Icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+  font-family: 'Icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-question-circle:before {
+  content: '\f059';
+}
+
+.icon-info-circle:before {
+  content: '\f05a';
+}
+
+.icon-toggle-down:before {
+  content: '\f150';
+}
+
+.icon-toggle-up:before {
+  content: '\f151';
+}
+
 .checkbox label {
   font-weight: bold;
 }
@@ -26,7 +66,9 @@
 }
 
 .help-icon-text-input {
-  margin-top: 30px;
+  margin-bottom: 27px;
+  position: absolute;
+  bottom: 0;
 }
 
 .help-icon-checkbox {
@@ -39,8 +81,10 @@
 }
 
 .has-unit-label {
-  margin-top: 30px;
+  margin-bottom: 26px;
+  bottom: 0;
   font-weight: bold;
+  position: absolute;
 }
 
 .tooltip-content {
@@ -53,5 +97,33 @@
 }
 
 .media-content-video-container {
-  padding-top: 26.25%;
+  /* padding-top: 26.25%; */
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+input:disabled {
+  cursor: not-allowed;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* temporary typeahead fix */
+.glyphicon-remove::after {
+  content: 'x';
+}
+
+.glyphicon-triangle-bottom::after {
+  content: 'v';
+}
+
+.btn-default,
+.btn-default:hover {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
 }

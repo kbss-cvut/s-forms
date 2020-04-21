@@ -1,6 +1,6 @@
 {
   "name": "s-forms",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -33,57 +33,55 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "inputmask-core": "^2.2.0",
-    "jsonld": "^0.4.6",
+    "jsonld": "1.6.0",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.9.tgz",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "react-bootstrap": "^0.30.10",
+    "react-bootstrap": "^1.0.0",
     "react-bootstrap-datetimepicker": "https://kbss.felk.cvut.cz/dist/react-bootstrap-datetimepicker-0.0.7.tgz",
     "react-bootstrap-typeahead": "https://kbss.felk.cvut.cz/dist/react-bootstrap-typeahead-0.0.15.tgz",
     "tsort": "0.0.1",
     "yasgui-yasqe": "^2.11.22"
   },
   "peerDependencies": {
-    "react": ">= 15.3.2",
-    "react-dom": ">= 15.3.2"
+    "react": ">= 16.9.0",
+    "react-dom": ">= 16.9.0"
   },
   "main": "lib/s-forms.js",
   "private": true,
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babelify": "^7.2.0",
-    "browserify": "^13.0.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-export-default-from": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "babel-jest": "^25.3.0",
+    "babel-loader": "^8.1.0",
     "clean-css-cli": "^4.3.0",
-    "jasmine": "^2.99.0",
-    "jasmine-core": "^2.99.1",
-    "jasmine-reporters": "^2.3.2",
-    "jsdom": "^8.5.0",
-    "lodash": "^4.17.15",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "^25.3.0",
     "prettier": "^2.0.4",
-    "react": "~15.3.2",
-    "react-addons-test-utils": "~15.3.2",
-    "react-dom": "~15.3.2",
-    "watchify": "^3.7.0",
-    "webpack": "^4.42.1"
+    "prop-types": "^15.7.2",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "watchify": "^3.11.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "test": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
-    "build": "browserify ./src/s-forms.js -o ./dist/s-forms.js",
-    "watchify": "watchify ./src/s-forms.js -o ./dist/s-forms.js",
+    "test": "jest",
+    "build": "webpack --config webpack.config.prod.js",
     "lib": "babel ./src -d ./lib",
-    "build-npm-prod": "npm run build && npm run lib && npm pack",
-    "build-css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./css/s-forms.css",
-    "rendering-test-start": "watchify -o test/rendering/bundle.js -v -d test/rendering/TestApp.js",
-    "prebuild-npm-prod": "npm install"
+    "build:lib": "npm run build && npm run build:css && npm run lib && npm pack",
+    "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./css/s-forms.css",
+    "render": "webpack --config webpack.config.render.js"
   },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
-  }
+  "files": [
+    "lib/",
+    "css/"
+  ]
 }
