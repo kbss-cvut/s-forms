@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import Configuration from '../model/Configuration';
-import Constants from '../constants/Constants';
+import * as Constants from '../constants/Constants';
 import FormUtils from './FormUtils';
 
 export default class Utils {

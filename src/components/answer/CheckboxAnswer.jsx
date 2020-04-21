@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Configuration from '../../model/Configuration';
 import FormUtils from '../../util/FormUtils';
-import Constants from '../../constants/Constants';
+import * as Constants from '../../constants/Constants';
 
 class InputPropertiesResolver {
   static resolveValidationProperties(question) {

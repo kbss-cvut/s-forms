@@ -2,7 +2,7 @@ import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 
-import Constants from '../../constants/Constants';
+import * as Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import InputAnswer from './InputAnswer';
 import Logger from '../../util/Logger';

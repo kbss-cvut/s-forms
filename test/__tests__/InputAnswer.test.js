@@ -3,7 +3,7 @@ import JsonLdUtils from 'jsonld-utils';
 
 import Answer from '../../src/components/Answer';
 import Configuration from '../../src/model/Configuration';
-import Constants from '../../src/constants/Constants';
+import * as Constants from '../../src/constants/Constants';
 import * as Generator from '../environment/Generator';
 
 const LABEL = 'Input answer test';

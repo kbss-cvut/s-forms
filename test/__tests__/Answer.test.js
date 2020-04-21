@@ -8,7 +8,7 @@ import DateTimePicker from 'react-bootstrap-datetimepicker';
 import * as Generator from '../environment/Generator';
 import Answer from '../../src/components/Answer';
 import Configuration from '../../src/model/Configuration';
-import Constants from '../../src/constants/Constants';
+import * as Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 import MaskedInput from '../../src/components/MaskedInput';
 

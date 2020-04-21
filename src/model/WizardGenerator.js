@@ -1,7 +1,7 @@
 import jsonld from 'jsonld';
 import JsonLdUtils from 'jsonld-utils';
 import Configuration from '../model/Configuration';
-import Constants from '../constants/Constants';
+import * as Constants from '../constants/Constants';
 import DefaultFormGenerator from './DefaultFormGenerator';
 import FormUtils from '../util/FormUtils';
 import GeneratedStep from '../components/GeneratedStep';

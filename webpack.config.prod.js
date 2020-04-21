@@ -21,7 +21,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx', '.json'],
     modules: [path.resolve(__dirname, 'src')]
   },
   target: 'node',

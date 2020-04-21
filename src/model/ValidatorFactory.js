@@ -4,7 +4,7 @@
 
 import JsonLdUtils from 'jsonld-utils';
 
-import Constants from '../constants/Constants';
+import * as Constants from '../constants/Constants';
 import Configuration from '../model/Configuration';
 import FormUtils from '../util/FormUtils';
 

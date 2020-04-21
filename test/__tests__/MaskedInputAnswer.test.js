@@ -2,7 +2,7 @@ import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 
 import Answer from '../../src/components/Answer';
-import Constants from '../../src/constants/Constants';
+import * as Constants from '../../src/constants/Constants';
 import * as Environment from '../environment/Environment';
 import * as Generator from '../environment/Generator';
 

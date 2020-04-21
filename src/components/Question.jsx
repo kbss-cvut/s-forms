@@ -4,7 +4,7 @@ import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Answer from './Answer';
 import Configuration from '../model/Configuration';
-import Constants from '../constants/Constants';
+import * as Constants from '../constants/Constants';
 import FormUtils from '../util/FormUtils';
 import HelpIcon from './HelpIcon';
 import JsonLdObjectMap from '../util/JsonLdObjectMap';

@@ -1,4 +1,4 @@
-import Constants from '../../src/constants/Constants';
+import * as Constants from '../../src/constants/Constants';
 import Configuration from '../../src/model/Configuration';
 import * as Generator from '../environment/Generator';
 import WizardGenerator from '../../src/model/WizardGenerator';

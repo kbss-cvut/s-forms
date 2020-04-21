@@ -3,7 +3,7 @@ import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 
 import Configuration from '../../model/Configuration';
-import Constants from '../../constants/Constants';
+import * as Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 
 export default class SelectAnswer extends React.Component {

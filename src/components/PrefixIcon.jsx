@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListGroup, ListGroupItem, OverlayTrigger, Popover } from 'react-bootstrap';
-import Constants from '../constants/Constants';
+import * as Constants from '../constants/Constants';
 
 class PrefixIcon extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       show: props.show,
-      prefixes: props.prefixes,
-      iconClass: props.iconClass,
-      glyph: props.glyph
+      prefixes: props.prefixes
     };
   }
 

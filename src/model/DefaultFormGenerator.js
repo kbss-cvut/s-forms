@@ -1,4 +1,4 @@
-import Constants from '../constants/Constants';
+import * as Constants from '../constants/Constants';
 
 export default class DefaultFormGenerator {
   /**

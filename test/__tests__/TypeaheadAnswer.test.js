@@ -3,7 +3,7 @@ import JsonLdUtils from 'jsonld-utils';
 
 import * as Generator from '../environment/Generator';
 import Configuration from '../../src/model/Configuration';
-import Constants from '../../src/constants/Constants';
+import * as Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 
 describe('TypeaheadAnswer', () => {

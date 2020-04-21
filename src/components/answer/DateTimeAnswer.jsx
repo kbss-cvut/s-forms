@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import DateTimePicker from 'react-bootstrap-datetimepicker';
 import PropTypes from 'prop-types';
-import Constants from '../../constants/Constants';
+import * as Constants from '../../constants/Constants';
 import Utils from '../../util/Utils';
 
 const DateTimeAnswer = (props) => {

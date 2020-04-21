@@ -5,11 +5,11 @@ import DateTimeAnswer from './answer/DateTimeAnswer';
 import InputAnswer from './answer/InputAnswer';
 import JsonldUtils from 'jsonld-utils';
 import Configuration from '../model/Configuration';
-import Constants from '../constants/Constants';
 import MaskedInputAnswer from './answer/MaskedInputAnswer';
 import SelectAnswer from './answer/SelectAnswer';
 import FormUtils from '../util/FormUtils';
 import TypeaheadAnswer from './answer/TypeaheadAnswer';
+import * as Constants from '../constants/Constants';
 
 export default class Answer extends React.Component {
   onValueChange = (value) => {
