@@ -11,8 +11,9 @@ import JsonLdObjectMap from '../util/JsonLdObjectMap';
 import QuestionAnswerProcessor from '../model/QuestionAnswerProcessor';
 import ValidatorFactory from '../model/ValidatorFactory';
 import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
-import PrefixIcon from './PrefixesIcon';
+import PrefixIcon from './PrefixIcon';
 import MediaContent from './MediaContent';
+import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
@@ -191,9 +192,13 @@ export default class Question extends React.Component {
   }
 
   _renderCollapseToggle() {
-    const glyph = this.state.expanded ? 'icon-toggle-up' : 'icon-toggle-down';
     const title = this.state.expanded ? 'Collapse' : 'Expand';
-    return <span onClick={this._toggleCollapse} className={`${glyph} collapse-toggle`} title={title} />;
+
+    return (
+      <span onClick={this._toggleCollapse} title={title}>
+        {this.state.expanded ? <CaretSquareUp /> : <CaretSquareDown />}
+      </span>
+    );
   }
 
   _renderQuestionHelp() {
@@ -205,7 +210,7 @@ export default class Question extends React.Component {
     return question[Constants.HELP_DESCRIPTION] ? (
       <HelpIcon
         text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], Configuration.intl)}
-        iconClass={helpClass}
+        iconClassContainer={helpClass}
       />
     ) : null;
   }
@@ -213,7 +218,9 @@ export default class Question extends React.Component {
   _renderPrefixes() {
     const question = this.props.question;
     return question[Constants.HAS_DECLARED_PREFIX] && question[Constants.HAS_DECLARED_PREFIX].length ? (
-      <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]} iconClass={'help-icon-checkbox'} />
+      <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]} iconClass={'help-icon-checkbox'}>
+        <InfoCircle />
+      </PrefixIcon>
     ) : null;
   }
 

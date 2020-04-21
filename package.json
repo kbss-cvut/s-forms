@@ -77,7 +77,7 @@
     "build": "webpack --config webpack.config.prod.js",
     "lib": "babel ./src -d ./lib",
     "build:lib": "npm run build && npm run build:css && npm run lib && npm pack",
-    "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./css/s-forms.css",
+    "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "render": "webpack --config webpack.config.render.js"
   },
   "files": [
