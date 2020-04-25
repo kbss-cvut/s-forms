@@ -1,5 +1,420 @@
 {
+  "@context": {
+    "label": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+    },
+    "comment": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#comment"
+    },
+    "has-template-origin": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-template-origin",
+      "@type": "@id"
+    },
+    "has-origin-type": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-origin-type",
+      "@type": "@id"
+    },
+    "has-template": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-template",
+      "@type": "@id"
+    },
+    "has-question-origin": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-question-origin",
+      "@type": "@id"
+    },
+    "has-possible-values-query": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query"
+    },
+    "has-layout-class": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class"
+    },
+    "has_answer": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_answer",
+      "@type": "@id"
+    },
+    "has-answer-origin": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-answer-origin",
+      "@type": "@id"
+    },
+    "has_object_value": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_object_value",
+      "@type": "@id"
+    },
+    "has_key": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_key"
+    },
+    "has_related_question": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question",
+      "@type": "@id"
+    },
+    "imports": {
+      "@id": "http://www.w3.org/2002/07/owl#imports",
+      "@type": "@id"
+    },
+    "has_data_value": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value"
+    },
+    "has_revision": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_revision",
+      "@type": "http://www.w3.org/2001/XMLSchema#int"
+    },
+    "has_reporting_phase": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_reporting_phase",
+      "@type": "@id"
+    },
+    "has_file_number": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_file_number",
+      "@type": "http://www.w3.org/2001/XMLSchema#long"
+    },
+    "has-media-content": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-media-content"
+    },
+    "has-author": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has-author",
+      "@type": "@id"
+    },
+    "documents": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/documents",
+      "@type": "@id"
+    },
+    "description": {
+      "@id": "http://purl.org/dc/elements/1.1/description"
+    },
+    "has-unit": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-unit"
+    },
+    "maxInclusive": {
+      "@id": "http://www.w3.org/2001/XMLSchema#maxInclusive"
+    },
+    "minInclusive": {
+      "@id": "http://www.w3.org/2001/XMLSchema#minInclusive"
+    },
+    "has-datatype": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-datatype",
+      "@type": "@id"
+    },
+    "form": "http://onto.fel.cvut.cz/ontologies/form/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xml": "http://www.w3.org/XML/1998/namespace",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "doc": "http://onto.fel.cvut.cz/ontologies/documentation/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "aviation-safety": "http://onto.fel.cvut.cz/ontologies/aviation-safety/",
+    "form-lt": "http://onto.fel.cvut.cz/ontologies/form-layout/",
+    "ufo": "http://onto.fel.cvut.cz/ontologies/ufo/",
+    "shacl": "http://www.w3.org/ns/shacl#"
+  },
   "@graph": [
+    {
+      "@id": "_:b0",
+      "@type": "doc:answer",
+      "has_data_value": "<http://onto.fel.cvut.cz/ontologies/vfn-form-mod/filter-required-labels>\n        a       <http://topbraid.org/sparqlmotionlib#ApplyConstruct> ;\n        <http://www.w3.org/2000/01/rdf-schema#label>\n                \"filter-out-required-labels\" ;\n        <http://topbraid.org/sparqlmotion#next>\n                <http://onto.fel.cvut.cz/ontologies/vfn-form-mod/merge-modification> ;\n        <http://topbraid.org/sparqlmotionlib#constructQuery>\n                []  ;\n        <http://topbraid.org/sparqlmotionlib#replace>\n                true .\n",
+      "form:has-answer-hash": "520f19b537850b01e9ba59538fe70306347982cf"
+    },
+    {
+      "@id": "_:b1",
+      "@type": "doc:answer",
+      "doc:has_object_value": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod/filter-required-labels",
+      "form:has-answer-hash": "27cd575fa1f122ee93d0d7202383b15feca76253"
+    },
+    {
+      "@id": "_:b10",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://spinrdf.org/spin#",
+      "shacl:prefix": "spin"
+    },
+    {
+      "@id": "_:b11",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "shacl:prefix": "rdf"
+    },
+    {
+      "@id": "_:b12",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://vfn.cz/ontologies/fss-form-generation-0.1/",
+      "shacl:prefix": "fssgen"
+    },
+    {
+      "@id": "_:b13",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/aviation/eccairs-form/",
+      "shacl:prefix": "form-ecc"
+    },
+    {
+      "@id": "_:b14",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://vfn.cz/ontologies/study-model/",
+      "shacl:prefix": "stm"
+    },
+    {
+      "@id": "_:b15",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://www.w3.org/2002/07/owl#",
+      "shacl:prefix": "owl"
+    },
+    {
+      "@id": "_:b16",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/ufo/",
+      "shacl:prefix": "ufo"
+    },
+    {
+      "@id": "_:b17",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://spinrdf.org/spif#",
+      "shacl:prefix": "spif"
+    },
+    {
+      "@id": "_:b18",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://topbraid.org/sparqlmotion#",
+      "shacl:prefix": "sm"
+    },
+    {
+      "@id": "_:b19",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/lib/module/",
+      "shacl:prefix": "kbss-module"
+    },
+    {
+      "@id": "_:b2",
+      "@type": "doc:answer",
+      "has_data_value": "filter-out-required-labels",
+      "form:has-answer-hash": "815159019fd7873f7ebfc37b686008c92b480e03",
+      "form:has-answer-origin": "http://onto.fel.cvut.cz/ontologies/form/answer-origin/9fbc6733005710f9a269be4452067eb7"
+    },
+    {
+      "@id": "_:b20",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://vfn.cz/ontologies/fss-form/",
+      "shacl:prefix": "ff"
+    },
+    {
+      "@id": "_:b21",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://spinrdf.org/sp#",
+      "shacl:prefix": "sp"
+    },
+    {
+      "@id": "_:b22",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/",
+      "shacl:prefix": "e-a-3.4.0.2"
+    },
+    {
+      "@id": "_:b23",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/aviation/eccairs-form-mapping-0.2/",
+      "shacl:prefix": "form-ecc-map-0.2"
+    },
+    {
+      "@id": "_:b24",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://www.daml.org/2001/03/daml+oil#",
+      "shacl:prefix": "daml"
+    },
+    {
+      "@id": "_:b25",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/form/",
+      "shacl:prefix": "form"
+    },
+    {
+      "@id": "_:b26",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://www.w3.org/2000/01/rdf-schema#",
+      "shacl:prefix": "rdfs"
+    },
+    {
+      "@id": "_:b27",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/documentation/",
+      "shacl:prefix": "doc"
+    },
+    {
+      "@id": "_:b28",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://purl.org/dc/elements/1.1/",
+      "shacl:prefix": "dc"
+    },
+    {
+      "@id": "_:b29",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://jena.hpl.hp.com/ARQ/function#",
+      "shacl:prefix": "afn"
+    },
+    {
+      "@id": "_:b3",
+      "@type": "doc:answer",
+      "has_data_value": "true",
+      "form:has-answer-hash": "5ffe533b830f08a0326348a9160afafc8ada44db",
+      "form:has-answer-origin": "http://onto.fel.cvut.cz/ontologies/form/answer-origin/53b9d9665f3dc3863a1ab8d57daeb2cd"
+    },
+    {
+      "@id": "_:b30",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/lib/module-param/",
+      "shacl:prefix": "km-param"
+    },
+    {
+      "@id": "_:b31",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://spinrdf.org/arg#",
+      "shacl:prefix": "arg"
+    },
+    {
+      "@id": "_:b32",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#",
+      "shacl:prefix": "e-m-i"
+    },
+    {
+      "@id": "_:b33",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/aviation/eccairs-form-generation-0.2/",
+      "shacl:prefix": "form-ecc-gen-0.2"
+    },
+    {
+      "@id": "_:b34",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/eccairs/mapping/model/",
+      "shacl:prefix": "e-m-map"
+    },
+    {
+      "@id": "_:b35",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/aviation-safety/",
+      "shacl:prefix": "aviation-safety"
+    },
+    {
+      "@id": "_:b36",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/lib/spin-function/",
+      "shacl:prefix": "kbss-spif"
+    },
+    {
+      "@id": "_:b37",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/eccairs/model/",
+      "shacl:prefix": "e-m"
+    },
+    {
+      "@id": "_:b38",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/form-layout/",
+      "shacl:prefix": "form-lt"
+    },
+    {
+      "@id": "_:b39",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://topbraid.org/sparqlmotionlib#",
+      "shacl:prefix": "sml"
+    },
+    {
+      "@id": "_:b4",
+      "@type": "doc:answer",
+      "has_data_value": "# filter original labels if they are required labels\nCONSTRUCT {\n    ?s ?p ?o .\n}\nWHERE {\n    ?s ?p ?o .\n    FILTER NOT EXISTS {\n       ?s form:requires-answer ?x .\n       FILTER(?p = rdfs:label)       \n       FILTER(str(?x) = \"true\")\n    }\n}",
+      "form:has-answer-hash": "6eca62247a88fe42a442afb1b1b974dabe177c77",
+      "form:has-answer-origin": "http://onto.fel.cvut.cz/ontologies/form/answer-origin/80d87e25f723f98c8ebdd3d1e57f51bf"
+    },
+    {
+      "@id": "_:b40",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/vfn-form-lib/",
+      "shacl:prefix": "vfn-form-lib"
+    },
+    {
+      "@id": "_:b41",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://spinrdf.org/spl#",
+      "shacl:prefix": "spl"
+    },
+    {
+      "@id": "_:b42",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://vfn.cz/ontologies/fss-form-generation-0.1/",
+      "shacl:prefix": ""
+    },
+    {
+      "@id": "_:b43",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://www.w3.org/2001/XMLSchema#",
+      "shacl:prefix": "xsd"
+    },
+    {
+      "@id": "_:b44",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod/",
+      "shacl:prefix": "vfn-form-mod"
+    },
+    {
+      "@id": "_:b45",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://www.w3.org/XML/1998/namespace",
+      "shacl:prefix": "xml"
+    },
+    {
+      "@id": "_:b46",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/lib/module/rdf4j/",
+      "shacl:prefix": "km-rdf4j"
+    },
+    {
+      "@id": "_:b47",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/lib/module/sesame/",
+      "shacl:prefix": "km-sesame"
+    },
+    {
+      "@id": "_:b5",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/aviation/eccairs-form-lib/",
+      "shacl:prefix": "form-ecc-lib"
+    },
+    {
+      "@id": "_:b6",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://onto.fel.cvut.cz/ontologies/aviation/eccairs-form-config-0.2/",
+      "shacl:prefix": "form-ecc-cfg-0.2"
+    },
+    {
+      "@id": "_:b7",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://www.semanticweb.org/owl/owlapi/turtle#",
+      "shacl:prefix": "turtle"
+    },
+    {
+      "@id": "_:b8",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://vfn.cz/ontologies/fss-form-generation-0.1/",
+      "shacl:prefix": "form-fss-gen-0.1"
+    },
+    {
+      "@id": "_:b9",
+      "@type": "shacl:PrefixDeclaration",
+      "shacl:namespace": "http://www.w3.org/2005/xpath-functions#",
+      "shacl:prefix": "fn"
+    },
+    {
+      "@id": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance2190490223-a",
+      "@type": "doc:answer",
+      "has_data_value": {
+        "@language": "en",
+        "@value": "true"
+      },
+      "has-answer-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance434162734"
+    },
+    {
+      "@id": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance23232323299-a",
+      "@type": "doc:answer",
+      "has_data_value": {
+        "@language": "en",
+        "@value": "true"
+      },
+      "has-answer-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance434162734"
+    },
     {
       "@id": "doc:occurrence_report#instance-647155291",
       "@type": [
@@ -17,15 +432,256 @@
       "has_revision": "1"
     },
     {
+      "@id": "doc:question-01895aed-e075-4b8c-a971-972d5b5d1d29",
+      "@type": "doc:question",
+      "has_answer": "_:b2",
+      "has_related_question": [],
+      "has-layout-class": [],
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-origin-context": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod",
+      "form:has-preceding-question": {
+        "@id": "doc:question-419db41a-23e7-4035-8df2-32e92070c4f0"
+      },
+      "form:has-question-origin": "http://www.w3.org/2000/01/rdf-schema#label",
+      "description": "",
+      "label": "http://www.w3.org/2000/01/rdf-schema#label"
+    },
+    {
+      "@id": "doc:question-2641213c-9ccb-475d-91d9-b394ff968664",
+      "@type": "doc:question",
+      "has_answer": [],
+      "has_related_question": [
+        "doc:question-419db41a-23e7-4035-8df2-32e92070c4f0",
+        "doc:question-01895aed-e075-4b8c-a971-972d5b5d1d29",
+        "doc:question-4997a78a-8338-4f1f-bb9a-422894183c8a",
+        "doc:question-dc3d3529-fe03-48c3-aacc-53bf279be061"
+      ],
+      "has-layout-class": [
+        "section"
+      ],
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
+      "form:has-preceding-question": [],
+      "form:has-question-origin": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod/filter-required-labels",
+      "label": "Module of type Apply Construct (http://topbraid.org/sparqlmotionlib#ApplyConstruct)"
+    },
+    {
+      "@id": "doc:question-419db41a-23e7-4035-8df2-32e92070c4f0",
+      "@type": "doc:question",
+      "has_answer": "_:b1",
+      "has_related_question": [],
+      "has-layout-class": [],
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
+      "form:has-preceding-question": [],
+      "form:has-question-origin": "http://www.w3.org/2000/01/rdf-schema#Resource",
+      "label": "URI"
+    },
+    {
+      "@id": "doc:question-4997a78a-8338-4f1f-bb9a-422894183c8a",
+      "@type": "doc:question",
+      "has_answer": "_:b3",
+      "has_related_question": [],
+      "has-layout-class": [],
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-origin-context": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod",
+      "form:has-preceding-question": {
+        "@id": "doc:question-01895aed-e075-4b8c-a971-972d5b5d1d29"
+      },
+      "form:has-question-origin": "http://topbraid.org/sparqlmotionlib#replace",
+      "description": "",
+      "label": "http://topbraid.org/sparqlmotionlib#replace"
+    },
+    {
+      "@id": "doc:question-c69219f6-f68a-4cae-a12a-1705695faba1",
+      "@type": "doc:question",
+      "has_answer": [],
+      "has_related_question": "doc:question-f516f3e3-c650-4074-9076-6d89244cc81e",
+      "has-layout-class": [
+        "section"
+      ],
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
+      "form:has-preceding-question": [],
+      "form:has-question-origin": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod/filter-required-labels",
+      "label": "TTL"
+    },
+    {
+      "@id": "doc:question-dc3d3529-fe03-48c3-aacc-53bf279be061",
+      "@type": "doc:question",
+      "has_answer": "_:b4",
+      "has_related_question": [],
+      "has-layout-class": "sparql",
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-answer-value-type": "http://spinrdf.org/sp#Construct",
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [
+        {
+          "@id": "_:b5"
+        },
+        {
+          "@id": "_:b6"
+        },
+        {
+          "@id": "_:b7"
+        },
+        {
+          "@id": "_:b8"
+        },
+        {
+          "@id": "_:b9"
+        },
+        {
+          "@id": "_:b10"
+        },
+        {
+          "@id": "_:b11"
+        },
+        {
+          "@id": "_:b12"
+        },
+        {
+          "@id": "_:b13"
+        },
+        {
+          "@id": "_:b14"
+        },
+        {
+          "@id": "_:b15"
+        },
+        {
+          "@id": "_:b16"
+        },
+        {
+          "@id": "_:b17"
+        },
+        {
+          "@id": "_:b18"
+        },
+        {
+          "@id": "_:b19"
+        },
+        {
+          "@id": "_:b20"
+        },
+        {
+          "@id": "_:b21"
+        },
+        {
+          "@id": "_:b22"
+        },
+        {
+          "@id": "_:b23"
+        },
+        {
+          "@id": "_:b24"
+        },
+        {
+          "@id": "_:b25"
+        },
+        {
+          "@id": "_:b26"
+        },
+        {
+          "@id": "_:b27"
+        },
+        {
+          "@id": "_:b28"
+        },
+        {
+          "@id": "_:b29"
+        },
+        {
+          "@id": "_:b30"
+        },
+        {
+          "@id": "_:b31"
+        },
+        {
+          "@id": "_:b32"
+        },
+        {
+          "@id": "_:b33"
+        },
+        {
+          "@id": "_:b34"
+        },
+        {
+          "@id": "_:b35"
+        },
+        {
+          "@id": "_:b36"
+        },
+        {
+          "@id": "_:b37"
+        },
+        {
+          "@id": "_:b38"
+        },
+        {
+          "@id": "_:b39"
+        },
+        {
+          "@id": "_:b40"
+        },
+        {
+          "@id": "_:b41"
+        },
+        {
+          "@id": "_:b42"
+        },
+        {
+          "@id": "_:b43"
+        },
+        {
+          "@id": "_:b44"
+        },
+        {
+          "@id": "_:b45"
+        },
+        {
+          "@id": "_:b46"
+        },
+        {
+          "@id": "_:b47"
+        }
+      ],
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-origin-context": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod",
+      "form:has-preceding-question": {
+        "@id": "doc:question-01895aed-e075-4b8c-a971-972d5b5d1d29"
+      },
+      "form:has-question-origin": "http://topbraid.org/sparqlmotionlib#constructQuery",
+      "description": "",
+      "label": "http://topbraid.org/sparqlmotionlib#constructQuery"
+    },
+    {
+      "@id": "doc:question-e7e8eae0-6340-4a96-b13e-7ded2b87abd4",
+      "@type": "doc:question",
+      "has_answer": [],
+      "has_related_question": [
+        "doc:question-c69219f6-f68a-4cae-a12a-1705695faba1",
+        "doc:question-2641213c-9ccb-475d-91d9-b394ff968664"
+      ],
+      "has-layout-class": "section",
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
+      "form:has-preceding-question": [],
+      "form:has-question-origin": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod/filter-required-labels",
+      "label": "Technical section"
+    },
+    {
+      "@id": "doc:question-f516f3e3-c650-4074-9076-6d89244cc81e",
+      "@type": "doc:question",
+      "has_answer": "_:b0",
+      "has_related_question": [],
+      "has-layout-class": "ttl",
+      "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
+      "form:has-preceding-question": []
+    },
+    {
       "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-1",
       "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
     },
     {
       "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-1-qt",
       "@type": "form:question-template",
+      "has-media-content": "https://drive.google.com/file/d/18HBeiOb5zthhIFosidc7mRTZtNAd3Ur7/view?ts=5bc365d8",
       "has-origin-type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute",
       "has-template-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-1",
-      "has-media-content": "https://drive.google.com/file/d/18HBeiOb5zthhIFosidc7mRTZtNAd3Ur7/view?ts=5bc365d8",
       "comment": {
         "@language": "en",
         "@value": "The latitude of the aerodrome reference point. Aerodrome reference point: The designated geographical location of an aerodrome."
@@ -16607,24 +17263,6 @@
       "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
     },
     {
-      "@id": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance2190490223-a",
-      "@type": "doc:answer",
-      "has_data_value": {
-        "@language": "en",
-        "@value": "true"
-      },
-      "has-answer-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance434162734"
-    },
-    {
-      "@id": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance23232323299-a",
-      "@type": "doc:answer",
-      "has_data_value": {
-        "@language": "en",
-        "@value": "true"
-      },
-      "has-answer-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance434162734"
-    },
-    {
       "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-111570084-a",
       "@type": "doc:answer",
       "has_data_value": {
@@ -18254,9 +18892,7 @@
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--no-q",
       "@type": "doc:question",
-      "has-layout-class": [
-        "checkbox"
-      ],
+      "has-layout-class": "checkbox",
       "label": "No"
     },
     {
@@ -18268,9 +18904,9 @@
         "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--adjuvant-q"
       ],
       "has-layout-class": "section",
-      "http://purl.org/dc/elements/1.1/description": "Test help on section header\nWith newline",
-      "label": "Chemotherapy",
-      "has-media-content": "https://drive.google.com/file/d/18HBeiOb5zthhIFosidc7mRTZtNAd3Ur7/preview"
+      "has-media-content": "https://drive.google.com/file/d/18HBeiOb5zthhIFosidc7mRTZtNAd3Ur7/preview",
+      "description": "Test help on section header\nWith newline",
+      "label": "Chemotherapy"
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--d-h--size-of-the-tumor--horizontal-q",
@@ -18280,17 +18916,17 @@
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--d-h--size-of-the-tumor--latero-lateral-q",
       "@type": "doc:question",
-      "label": "latero-lateral (LL)",
       "has-datatype": "xsd:int",
       "has-unit": "mm",
+      "label": "latero-lateral (LL)",
       "maxInclusive": "20",
       "minInclusive": "0"
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--d-h--size-of-the-tumor--vertical-q",
       "@type": "doc:question",
-      "label": "stomal invasion / vertical (CC)",
-      "description": "Item description."
+      "description": "Item description.",
+      "label": "stomal invasion / vertical (CC)"
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--definitive-histology--lymph-nodes-histology-q",
@@ -18322,16 +18958,16 @@
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--s-t--cervical-procedure--conisation-q",
       "@type": "doc:question",
-      "has-layout-class": "checkbox",
-      "label": "Conisation (any technique including LEEP)",
       "has_answer": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance2190490223-a",
-      "description": "Checkbox answer description."
+      "has-layout-class": "checkbox",
+      "description": "Checkbox answer description.",
+      "label": "Conisation (any technique including LEEP)"
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--s-t--cervical-procedure--laparoscopic-radical-trachelectomy-q",
       "@type": "doc:question",
-      "has-layout-class": "checkbox",
       "has_answer": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance23232323299-a",
+      "has-layout-class": "checkbox",
       "label": "Laparoscopic radical trachelectomy"
     },
     {
@@ -18446,7 +19082,8 @@
       "has_related_question": [
         "http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment-q",
         "http://vfn.cz/ontologies/fss-form/primary-treatment--definitive-histology-q",
-        "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy-q"
+        "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy-q",
+        "doc:question-e7e8eae0-6340-4a96-b13e-7ded2b87abd4"
       ],
       "has-layout-class": [
         "wizard-step",
@@ -18456,111 +19093,5 @@
       "has-template": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000035-qt",
       "label": "Primary treatment"
     }
-  ],
-  "@context": {
-    "label": {
-      "@id": "http://www.w3.org/2000/01/rdf-schema#label"
-    },
-    "comment": {
-      "@id": "http://www.w3.org/2000/01/rdf-schema#comment"
-    },
-    "has-template-origin": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-template-origin",
-      "@type": "@id"
-    },
-    "has-origin-type": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-origin-type",
-      "@type": "@id"
-    },
-    "has-template": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-template",
-      "@type": "@id"
-    },
-    "has-question-origin": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-question-origin",
-      "@type": "@id"
-    },
-    "has-possible-values-query": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query"
-    },
-    "has-layout-class": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class"
-    },
-    "has_answer": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_answer",
-      "@type": "@id"
-    },
-    "has-answer-origin": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-answer-origin",
-      "@type": "@id"
-    },
-    "has_object_value": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_object_value",
-      "@type": "@id"
-    },
-    "has_key": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_key"
-    },
-    "has_related_question": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question",
-      "@type": "@id"
-    },
-    "imports": {
-      "@id": "http://www.w3.org/2002/07/owl#imports",
-      "@type": "@id"
-    },
-    "has_data_value": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value"
-    },
-    "has_revision": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_revision",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
-    },
-    "has_reporting_phase": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_reporting_phase",
-      "@type": "@id"
-    },
-    "has_file_number": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_file_number",
-      "@type": "http://www.w3.org/2001/XMLSchema#long"
-    },
-    "has-media-content": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-media-content"
-    },
-    "has-author": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has-author",
-      "@type": "@id"
-    },
-    "documents": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/documents",
-      "@type": "@id"
-    },
-    "description": {
-      "@id": "http://purl.org/dc/elements/1.1/description"
-    },
-    "has-unit": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-unit"
-    },
-    "maxInclusive": {
-      "@id": "http://www.w3.org/2001/XMLSchema#maxInclusive"
-    },
-    "minInclusive": {
-      "@id": "http://www.w3.org/2001/XMLSchema#minInclusive"
-    },
-    "has-datatype": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-datatype",
-      "@type": "@id"
-    },
-    "form": "http://onto.fel.cvut.cz/ontologies/form/",
-    "owl": "http://www.w3.org/2002/07/owl#",
-    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "xml": "http://www.w3.org/XML/1998/namespace",
-    "form-layou": "http://onto.fel.cvut.cz/ontologies/form-layout",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "doc": "http://onto.fel.cvut.cz/ontologies/documentation/",
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "aviation-safety": "http://onto.fel.cvut.cz/ontologies/aviation-safety/",
-    "form-lt": "http://onto.fel.cvut.cz/ontologies/form-layout/",
-    "ufo": "http://onto.fel.cvut.cz/ontologies/ufo/"
-  }
+  ]
 }

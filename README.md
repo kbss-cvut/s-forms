@@ -1,6 +1,6 @@
 # S-Forms
 
-Semantic form generator and processor. For ontology-based smart forms.
+Semantic form generator and processor for ontology-based smart forms.
 
 ### Supported features
 
