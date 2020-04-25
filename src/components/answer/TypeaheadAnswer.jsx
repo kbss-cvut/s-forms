@@ -7,6 +7,7 @@ import * as Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import Utils from '../../util/Utils';
 import JsonLdObjectUtils from '../../util/JsonLdObjectUtils';
+import Logger from '../../util/Logger';
 
 export default class TypeaheadAnswer extends React.Component {
   constructor(props) {
@@ -14,9 +15,7 @@ export default class TypeaheadAnswer extends React.Component {
     this.queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
 
     this.state = {
-      options: this._queryHash
-        ? this.processTypeaheadOptions(Configuration.optionsStore.getOptions(this.queryHash))
-        : []
+      options: this._queryHash ? this.processTypeaheadOptions(Configuration.getOptions(this.queryHash)) : []
     };
   }
 
@@ -24,12 +23,12 @@ export default class TypeaheadAnswer extends React.Component {
     const question = this.props.question;
 
     if (!question[Constants.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
-      const options = await Configuration.optionsStore.loadFormOptions(
-        this.queryHash,
-        FormUtils.getPossibleValuesQuery(question)
-      );
-
-      this.onOptionsLoaded(options);
+      try {
+        const options = await Configuration.loadFormOptions(this.queryHash, FormUtils.getPossibleValuesQuery(question));
+        this.onOptionsLoaded(options);
+      } catch (error) {
+        Logger.error(`An error has occurred during loadFormOptions for query hash: ${this.queryHash}`);
+      }
     } else {
       this.setState({ options: this.processTypeaheadOptions(question[Constants.HAS_OPTION]) });
     }
