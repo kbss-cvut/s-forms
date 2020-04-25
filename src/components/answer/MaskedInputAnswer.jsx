@@ -29,8 +29,6 @@ const MaskedInputAnswer = (props) => {
       disabled={FormUtils.isDisabled(question)}
     />
   );
-
-  return null;
 };
 
 MaskedInputAnswer.propTypes = {

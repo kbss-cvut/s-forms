@@ -20,16 +20,13 @@ export default class TypeaheadAnswer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const question = this.props.question;
     if (!question[Constants.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
       Configuration.actions.loadFormOptions(this._queryHash, FormUtils.getPossibleValuesQuery(question));
     } else {
       this.setState({ options: this._processTypeaheadOptions(question[Constants.HAS_OPTION]) });
     }
-  }
-
-  componentDidMount() {
     this.unsubscribe = Configuration.optionsStore.listen(this._onOptionsLoaded);
   }
 
