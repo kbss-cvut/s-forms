@@ -7,4 +7,3 @@ test/reports
 lib
 dist
 **/bundle.js
-test/rendering
