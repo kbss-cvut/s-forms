@@ -15,7 +15,7 @@ export default class TypeaheadAnswer extends React.Component {
     this.queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
 
     this.state = {
-      options: this._queryHash ? this.processTypeaheadOptions(Configuration.getOptions(this.queryHash)) : []
+      options: this.queryHash ? this.processTypeaheadOptions(Configuration.getOptions(this.queryHash)) : []
     };
   }
 

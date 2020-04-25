@@ -9,8 +9,6 @@ import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 describe('TypeaheadAnswer', () => {
   let question;
   let onChange;
-  let optionsStore;
-  let actions;
 
   beforeEach(() => {
     question = {
@@ -29,20 +27,13 @@ describe('TypeaheadAnswer', () => {
     Configuration.intl = {
       locale: 'en'
     };
-    optionsStore = {
-      listen: jest.fn(),
-      getOptions: jest.fn(() => [
-        {
-          id: '123',
-          name: '123'
-        }
-      ])
-    };
-    Configuration.optionsStore = optionsStore;
-    actions = {
-      loadFormOptions: jest.fn()
-    };
-    Configuration.actions = actions;
+    Configuration.loadFormOptions = jest.fn();
+    Configuration.getOptions = jest.fn(() => [
+      {
+        id: '123',
+        name: '123'
+      }
+    ]);
   });
 
   it('passes null to onChange when value is reset', () => {
@@ -59,14 +50,10 @@ describe('TypeaheadAnswer', () => {
 
   it('orders options using partial ordering with alphabetical ordering', () => {
     // create options
-    const options = createOptionsWithPartialOrder(['3', '2', '1', 'before2'], ['before2<2']),
-      query = 'SELECT * WHERE { ?x ?y ?z .}';
+    const options = createOptionsWithPartialOrder(['3', '2', '1', 'before2'], ['before2<2']);
+    const query = 'SELECT * WHERE { ?x ?y ?z .}';
 
-    optionsStore = {
-      listen: jest.fn(),
-      getOptions: jest.fn(() => options)
-    };
-    Configuration.optionsStore = optionsStore;
+    Configuration.getOptions = jest.fn(() => options);
 
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     question[Constants.HAS_OPTIONS_QUERY] = query;
@@ -75,8 +62,7 @@ describe('TypeaheadAnswer', () => {
       <TypeaheadAnswer answer={{}} question={question} onChange={onChange} label="TestLabel" />
     );
 
-    expect(optionsStore.getOptions).toHaveBeenCalled();
-    expect(actions.loadFormOptions).toHaveBeenCalled();
+    expect(Configuration.getOptions).toHaveBeenCalled();
     expect(component).not.toBeNull();
     expect(component.state('options').map((i) => i['id'])).toEqual(['1', 'before2', '2', '3']);
   });

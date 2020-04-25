@@ -13,7 +13,7 @@ import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 import MaskedInput from '../../src/components/MaskedInput';
 
 describe('Answer component', () => {
-  let question, onChange, answer, optionsStore, actions;
+  let question, onChange, answer;
 
   beforeEach(() => {
     question = {
@@ -32,15 +32,8 @@ describe('Answer component', () => {
     Configuration.intl = {
       locale: 'en'
     };
-    optionsStore = {
-      listen: jest.fn(),
-      getOptions: jest.fn(() => [])
-    };
-    Configuration.optionsStore = optionsStore;
-    actions = {
-      loadFormOptions: jest.fn()
-    };
-    Configuration.actions = actions;
+    Configuration.getOptions = jest.fn(() => []);
+    Configuration.loadFormOptions = jest.fn();
   });
 
   it('renders a Typeahead when layout class is typeahead', () => {
@@ -56,8 +49,8 @@ describe('Answer component', () => {
     question[Constants.HAS_OPTIONS_QUERY] = query;
     mount(<Answer answer={{}} question={question} onChange={onChange} />);
 
-    expect(actions.loadFormOptions).toHaveBeenCalled();
-    expect(actions.loadFormOptions.mock.calls[0][1]).toEqual(query);
+    expect(Configuration.loadFormOptions).toHaveBeenCalled();
+    expect(Configuration.loadFormOptions.mock.calls[0][1]).toEqual(query);
   });
 
   it('maps answer object value to string label for the typeahead component', () => {
@@ -65,11 +58,7 @@ describe('Answer component', () => {
     const valueLabel = 'masterchief';
     const options = Generator.generateTypeaheadOptions(value, valueLabel);
     answer = answerWithCodeValue(value);
-    optionsStore = {
-      listen: jest.fn(),
-      getOptions: jest.fn(() => options)
-    };
-    Configuration.optionsStore = optionsStore;
+    Configuration.getOptions = jest.fn(() => options);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     question[Constants.HAS_OPTIONS_QUERY] = 'SELECT * WHERE {?x ?y ?z. }';
