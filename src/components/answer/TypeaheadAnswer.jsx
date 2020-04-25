@@ -11,49 +11,48 @@ import JsonLdObjectUtils from '../../util/JsonLdObjectUtils';
 export default class TypeaheadAnswer extends React.Component {
   constructor(props) {
     super(props);
-    this._queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
+    this.queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
 
     this.state = {
       options: this._queryHash
-        ? this._processTypeaheadOptions(Configuration.optionsStore.getOptions(this._queryHash))
+        ? this.processTypeaheadOptions(Configuration.optionsStore.getOptions(this.queryHash))
         : []
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const question = this.props.question;
+
     if (!question[Constants.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
-      Configuration.actions.loadFormOptions(this._queryHash, FormUtils.getPossibleValuesQuery(question));
+      const options = await Configuration.optionsStore.loadFormOptions(
+        this.queryHash,
+        FormUtils.getPossibleValuesQuery(question)
+      );
+
+      this.onOptionsLoaded(options);
     } else {
-      this.setState({ options: this._processTypeaheadOptions(question[Constants.HAS_OPTION]) });
+      this.setState({ options: this.processTypeaheadOptions(question[Constants.HAS_OPTION]) });
     }
-    this.unsubscribe = Configuration.optionsStore.listen(this._onOptionsLoaded);
   }
 
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
+  onOptionsLoaded = (options) => {
+    options = this.processTypeaheadOptions(options);
 
-  _onOptionsLoaded = (type, options) => {
-    if (type !== this._queryHash) {
-      return;
-    }
-    options = this._processTypeaheadOptions(options);
-    const value = FormUtils.resolveValue(this.props.answer),
-      selected = options.find((item) => {
-        return item.id === value;
-      });
+    const value = FormUtils.resolveValue(this.props.answer);
+    const selected = options.find((item) => item.id === value);
+
     this.setState({ options: options });
+
     if (selected) {
       this.typeahead.selectOption(selected);
     }
   };
 
-  _onOptionSelected = (option) => {
+  onOptionSelected = (option) => {
     this.props.onChange(option ? option.id : null);
   };
 
-  _processTypeaheadOptions(options) {
+  processTypeaheadOptions(options) {
     if (!options) {
       return [];
     }
@@ -63,12 +62,13 @@ export default class TypeaheadAnswer extends React.Component {
 
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(options, Constants.HAS_PRECEDING_VALUE);
+
     return JsonLdUtils.processTypeaheadOptions(options);
   }
 
   render() {
-    const value = Utils.idToName(this.state.options, this.props.value),
-      question = this.props.question;
+    const value = Utils.idToName(this.state.options, this.props.value);
+
     return (
       <div>
         <Typeahead
@@ -76,14 +76,14 @@ export default class TypeaheadAnswer extends React.Component {
           className="form-group form-group-sm"
           formInputOption="id"
           inputProps={{ title: this.props.title }}
-          disabled={FormUtils.isDisabled(question)}
-          value={value}
+          disabled={FormUtils.isDisabled(this.props.question)}
+          value={value || ''}
           label={this.props.label}
           placeholder={this.props.label}
           filterOption="name"
           size="small"
           displayOption="name"
-          onOptionSelected={this._onOptionSelected}
+          onOptionSelected={this.onOptionSelected}
           optionsButton={true}
           allowReset={true}
           options={this.state.options}
