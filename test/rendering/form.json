@@ -661,7 +661,26 @@
       "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
       "form:has-preceding-question": [],
       "form:has-question-origin": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod/filter-required-labels",
-      "label": "Technical section"
+      "label": "Technical section 1"
+    },
+    {
+      "@id": "doc:question-e7e8eae0-6340-4a96-b13e-7dedaaaaaaaa",
+      "@type": "doc:question",
+      "has_answer": [],
+      "has_related_question": [
+        "doc:question-c69219f6-f68a-4caa-a1aa-1705695faba1"
+      ],
+      "has-layout-class": "section",
+      "form:has-question-origin": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod/techical-section-2",
+      "label": "Technical section 2"
+    },
+    {
+      "@id" : "doc:question-c69219f6-f68a-4caa-a1aa-1705695faba1",
+      "@type" : "http://onto.fel.cvut.cz/ontologies/documentation/question",
+      "has-layout-class" : "masked-input",
+      "has-input-mask" : "MM/YYYY",
+      "has-question-origin" : "http://vfn.cz/ontologies/fss-form/diagnosis-date-of-first-diagnosis-of-cervical-cancer2-q-qo",
+      "label" : "Date of first diagnosis of cervical cancer (month/year)"
     },
     {
       "@id": "doc:question-f516f3e3-c650-4074-9076-6d89244cc81e",
@@ -19032,9 +19051,47 @@
       "label": "Lymph node procedure"
     },
     {
-      "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment--cerclage-placement-q",
+      "@id" : "http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment--cerclage-placement-q",
       "@type": "doc:question",
-      "label": "Cerclage placement"
+      "has_related_question" : [ "http://onto.fel.cvut.cz/ontologies/documentation/question/810d24b9-4e14-4407-a333-c604fcd53abd/d6ccb3ebb3d9875603ac6b64a57d7bf4-q" ],
+      "has-layout-class" : [ "section", "collapsed" ],
+      "has-preceding-question" : "http://onto.fel.cvut.cz/ontologies/documentation/question/810d24b9-4e14-4407-a333-c604fcd53abd/ce007b9f5166e38fab999e6601823842-q",
+      "has-question-origin" : "http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment--cerclage-placement-q-qo",
+      "label" : "Cerclage placement"
+    },
+    {
+      "@id" : "http://onto.fel.cvut.cz/ontologies/documentation/answer/810d24b9-4e14-4407-a333-c604fcd53abd/5679bfe841fe273f22b389d63fef3a76-a",
+      "@type" : "http://onto.fel.cvut.cz/ontologies/documentation/answer",
+      "has_data_value" : {
+        "@language" : "en",
+        "@value" : ""
+      },
+      "has-answer-origin" : "http://onto.fel.cvut.cz/ontologies/documentation/answer/e87e2405-9683-42c1-9a1a-f1bd45ced2ac/83b207e64338bbe140e6f16b3cb69721-ao",
+      "has-origin-path" : "http://vfn.cz/ontologies/fss-form/fertility-saving-study-q-qo|QO,http://vfn.cz/ontologies/fss-form/primary-treatment-q-qo|QO,http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment-q-qo|QO,http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment--cerclage-placement-q-qo|QO,http://vfn.cz/ontologies/study-model/type-of-cerclage|QO,http://onto.fel.cvut.cz/ontologies/documentation/answer/e87e2405-9683-42c1-9a1a-f1bd45ced2ac/83b207e64338bbe140e6f16b3cb69721-ao|A0",
+      "has-origin-path-id" : "07729b8b73d01c30d0c323bf1cb00b91"
+    },
+    {
+      "@id" : "http://onto.fel.cvut.cz/ontologies/documentation/question/810d24b9-4e14-4407-a333-c604fcd53abd/d6ccb3ebb3d9875603ac6b64a57d7bf4-q",
+      "@type" : "http://onto.fel.cvut.cz/ontologies/documentation/question",
+      "has_answer" : "http://onto.fel.cvut.cz/ontologies/documentation/answer/810d24b9-4e14-4407-a333-c604fcd53abd/cceee72f579d41688bada08204c48fba-a",
+      "has-layout-class" : [ "masked-input", "collapsed" ],
+      "has-input-mask" : "MM/YYYY",
+      "has-question-origin" : "http://vfn.cz/ontologies/fss-form/primary-treatment--s-t--cerclage-placement--date-q-qo",
+      "label" : {
+        "@language" : "en",
+        "@value" : "Date of cerclage (month/year)"
+      }
+    },
+    {
+      "@id" : "http://onto.fel.cvut.cz/ontologies/documentation/answer/810d24b9-4e14-4407-a333-c604fcd53abd/cceee72f579d41688bada08204c48fba-a",
+      "@type" : "http://onto.fel.cvut.cz/ontologies/documentation/answer",
+      "has_data_value" : {
+        "@language" : "en",
+        "@value" : ""
+      },
+      "has-answer-origin" : "http://onto.fel.cvut.cz/ontologies/documentation/answer/e87e2405-9683-42c1-9a1a-f1bd45ced2ac/3a2ae19392ab01e2cff1e2ead694054d-ao",
+      "has-origin-path" : "http://vfn.cz/ontologies/fss-form/fertility-saving-study-q-qo|QO,http://vfn.cz/ontologies/fss-form/primary-treatment-q-qo|QO,http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment-q-qo|QO,http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment--cerclage-placement-q-qo|QO,http://vfn.cz/ontologies/fss-form/primary-treatment--s-t--cerclage-placement--date-q-qo|QO,http://onto.fel.cvut.cz/ontologies/documentation/answer/e87e2405-9683-42c1-9a1a-f1bd45ced2ac/3a2ae19392ab01e2cff1e2ead694054d-ao|A0",
+      "has-origin-path-id" : "92c44efa553870ffb473788eb8b29836"
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment--cervical-procedure-q",
@@ -19083,7 +19140,8 @@
         "http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment-q",
         "http://vfn.cz/ontologies/fss-form/primary-treatment--definitive-histology-q",
         "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy-q",
-        "doc:question-e7e8eae0-6340-4a96-b13e-7ded2b87abd4"
+        "doc:question-e7e8eae0-6340-4a96-b13e-7ded2b87abd4",
+        "doc:question-e7e8eae0-6340-4a96-b13e-7dedaaaaaaaa"
       ],
       "has-layout-class": [
         "wizard-step",
