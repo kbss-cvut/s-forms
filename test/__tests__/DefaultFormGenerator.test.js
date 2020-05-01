@@ -5,14 +5,12 @@ import WizardGenerator from '../../src/model/WizardGenerator';
 import DefaultFormGenerator from '../../src/model/DefaultFormGenerator';
 
 describe('Default form generator', () => {
-  let WizardStore;
+  let initWizard;
   let textValue;
 
   beforeEach(() => {
-    WizardStore = {
-      initWizard: jest.fn()
-    };
-    Configuration.wizardStore = WizardStore;
+    initWizard = jest.fn();
+    Configuration.initWizard = initWizard;
     Configuration.intl = {
       locale: 'en'
     };
@@ -25,7 +23,7 @@ describe('Default form generator', () => {
     WizardGenerator.createDefaultWizard(null, null, (props) => (wizardSteps = props.steps));
 
     expect(wizardSteps.length).toEqual(1);
-    expect(WizardStore.initWizard).toHaveBeenCalledWith({ root: form['@graph'][0] }, [
+    expect(initWizard).toHaveBeenCalledWith({ root: form['@graph'][0] }, [
       form['@graph'][0][Constants.HAS_SUBQUESTION][0]
     ]);
   });
