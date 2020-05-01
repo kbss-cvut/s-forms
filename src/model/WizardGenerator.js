@@ -73,7 +73,7 @@ export default class WizardGenerator {
 
     form = structure['@graph'];
 
-    for (let i = 0, len = form.length; i < len; i++) {
+    for (let i = 0; i < form.length; i++) {
       item = form[i];
       if (FormUtils.isForm(item)) {
         form = item;
@@ -85,7 +85,7 @@ export default class WizardGenerator {
       Logger.error('Could not find any wizard steps in the received data.');
       throw 'No wizard steps in form';
     }
-    for (let i = 0, len = formElements.length; i < len; i++) {
+    for (let i = 0; i < formElements.length; i++) {
       item = formElements[i];
       if (FormUtils.isWizardStep(item) && !FormUtils.isHidden(item)) {
         stepQuestions.push(item);
@@ -108,7 +108,7 @@ export default class WizardGenerator {
       };
     });
 
-    Configuration.wizardStore.initWizard(
+    Configuration.initWizard(
       {
         root: form
       },

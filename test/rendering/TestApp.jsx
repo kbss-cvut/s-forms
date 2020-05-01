@@ -11,10 +11,6 @@ function onChange(index, change) {
   console.log(change);
 }
 
-const wizardStore = {
-  initWizard() {}
-};
-
 class TestApp extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +18,7 @@ class TestApp extends React.Component {
     Configuration.intl = {
       locale: navigator.language
     };
-    Configuration.wizardStore = wizardStore;
+    Configuration.initWizard = () => {};
     this.state = {
       step: null
     };
