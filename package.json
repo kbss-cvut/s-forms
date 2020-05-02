@@ -79,11 +79,13 @@
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js",
     "lib": "babel ./src -d ./lib",
-    "build:lib": "npm run build && npm run build:css && npm run lib && npm pack",
+    "build:lib": "npm run build:css && npm run lib && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css"
   },
   "files": [
     "lib/",
-    "css/"
-  ]
+    "css/",
+    "types/"
+  ],
+  "types": "types/s-forms.d.ts"
 }

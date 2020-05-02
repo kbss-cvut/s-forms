@@ -1,7 +1,7 @@
-let actions = null;
 let intl = null;
-let optionsStore = null;
-let wizardStore = null;
+let loadFormOptions = null;
+let getOptions = null;
+let initWizard = null;
 let typeaheadResultList = null;
 let inputComponent = null;
 let dateFormat = null;
@@ -10,14 +10,6 @@ let dateTimeFormat = null;
 let readOnly = false;
 
 export default class Configuration {
-  static get actions() {
-    return actions;
-  }
-
-  static set actions(a) {
-    actions = a;
-  }
-
   static get intl() {
     return intl;
   }
@@ -26,20 +18,28 @@ export default class Configuration {
     intl = value;
   }
 
-  static get optionsStore() {
-    return optionsStore;
+  static set loadFormOptions(func) {
+    loadFormOptions = func;
   }
 
-  static set optionsStore(store) {
-    optionsStore = store;
+  static get loadFormOptions() {
+    return loadFormOptions;
   }
 
-  static get wizardStore() {
-    return wizardStore;
+  static set getOptions(func) {
+    getOptions = func;
   }
 
-  static set wizardStore(store) {
-    wizardStore = store;
+  static get getOptions() {
+    return getOptions;
+  }
+
+  static set initWizard(func) {
+    initWizard = func;
+  }
+
+  static get initWizard() {
+    return initWizard;
   }
 
   static get typeaheadResultList() {
