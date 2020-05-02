@@ -2,7 +2,6 @@ let intl = null;
 let loadFormOptions = null;
 let getOptions = null;
 let initWizard = null;
-let typeaheadResultList = null;
 let inputComponent = null;
 let dateFormat = null;
 let timeFormat = null;
@@ -40,14 +39,6 @@ export default class Configuration {
 
   static get initWizard() {
     return initWizard;
-  }
-
-  static get typeaheadResultList() {
-    return typeaheadResultList;
-  }
-
-  static set typeaheadResultList(component) {
-    typeaheadResultList = component;
   }
 
   static get inputComponent() {

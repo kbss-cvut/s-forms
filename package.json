@@ -39,7 +39,7 @@
     "prop-types": "^15.7.2",
     "react-bootstrap": "^1.0.0",
     "react-bootstrap-datetimepicker": "https://kbss.felk.cvut.cz/dist/react-bootstrap-datetimepicker-0.0.7.tgz",
-    "react-bootstrap-typeahead": "https://kbss.felk.cvut.cz/dist/react-bootstrap-typeahead-0.0.15.tgz",
+    "react-select": "^3.1.0",
     "tsort": "0.0.1",
     "yasgui-yasqe": "^2.11.22"
   },

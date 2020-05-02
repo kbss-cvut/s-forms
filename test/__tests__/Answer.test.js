@@ -2,8 +2,8 @@ import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import moment from 'moment';
 import { shallow } from 'enzyme';
-import Typeahead from 'react-bootstrap-typeahead';
 import DateTimePicker from 'react-bootstrap-datetimepicker';
+import Select from 'react-select';
 
 import * as Generator from '../environment/Generator';
 import Answer from '../../src/components/Answer';
@@ -39,7 +39,7 @@ describe('Answer component', () => {
   it('renders a Typeahead when layout class is typeahead', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     const component = shallow(<Answer answer={{}} question={question} onChange={onChange} />);
-    const typeahead = component.find(Typeahead);
+    const typeahead = component.find(Select);
     expect(typeahead).not.toBeNull();
   });
 
@@ -64,10 +64,10 @@ describe('Answer component', () => {
     question[Constants.HAS_OPTIONS_QUERY] = 'SELECT * WHERE {?x ?y ?z. }';
 
     const component = shallow(<Answer answer={answer} question={question} onChange={onChange} />);
-    const typeahead = component.find(TypeaheadAnswer).dive().find(Typeahead);
+    const typeahead = component.find(TypeaheadAnswer).dive().find(Select);
 
     expect(typeahead).not.toBeNull();
-    expect(typeahead.dive().state('entryValue')).toEqual(valueLabel);
+    expect(typeahead.dive().state('value')[0].name).toEqual(valueLabel);
   });
 
   function answerWithCodeValue(value) {

@@ -36,18 +36,6 @@ describe('TypeaheadAnswer', () => {
     ]);
   });
 
-  it('passes null to onChange when value is reset', () => {
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
-
-    const component = mount(
-      <TypeaheadAnswer answer={{}} question={question} label="Test" value="123" onChange={onChange} />
-    );
-
-    const resetButton = component.find('button').first();
-    resetButton.simulate('click');
-    expect(onChange).toHaveBeenCalledWith(null);
-  });
-
   it('orders options using partial ordering with alphabetical ordering', () => {
     // create options
     const options = createOptionsWithPartialOrder(['3', '2', '1', 'before2'], ['before2<2']);

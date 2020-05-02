@@ -34,10 +34,10 @@ export default class Answer extends React.Component {
   }
 
   render() {
-    const question = this.props.question,
-      value = FormUtils.resolveValue(this.props.answer),
-      label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], Configuration.intl),
-      title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], Configuration.intl);
+    const question = this.props.question;
+    const value = FormUtils.resolveValue(this.props.answer);
+    const label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], Configuration.intl);
+    const title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], Configuration.intl);
     let component;
 
     if (FormUtils.isTypeahead(question)) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
-import Typeahead from 'react-bootstrap-typeahead';
+import Select, { components } from 'react-select';
 import PropTypes from 'prop-types';
 import Configuration from '../../model/Configuration';
 import * as Constants from '../../constants/Constants';
@@ -8,13 +8,14 @@ import FormUtils from '../../util/FormUtils';
 import Utils from '../../util/Utils';
 import JsonLdObjectUtils from '../../util/JsonLdObjectUtils';
 import Logger from '../../util/Logger';
+import { FormGroup, Form } from 'react-bootstrap';
 
 export default class TypeaheadAnswer extends React.Component {
   constructor(props) {
     super(props);
     this.queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
-
     this.state = {
+      isLoading: true,
       options: this.queryHash ? this.processTypeaheadOptions(Configuration.getOptions(this.queryHash)) : []
     };
   }
@@ -25,27 +26,14 @@ export default class TypeaheadAnswer extends React.Component {
     if (!question[Constants.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
       try {
         const options = await Configuration.loadFormOptions(this.queryHash, FormUtils.getPossibleValuesQuery(question));
-        this.onOptionsLoaded(options);
+        this.setState({ options: this.processTypeaheadOptions(options), isLoading: false });
       } catch (error) {
         Logger.error(`An error has occurred during loadFormOptions for query hash: ${this.queryHash}`);
       }
     } else {
-      this.setState({ options: this.processTypeaheadOptions(question[Constants.HAS_OPTION]) });
+      this.setState({ options: this.processTypeaheadOptions(question[Constants.HAS_OPTION]), isLoading: false });
     }
   }
-
-  onOptionsLoaded = (options) => {
-    options = this.processTypeaheadOptions(options);
-
-    const value = FormUtils.resolveValue(this.props.answer);
-    const selected = options.find((item) => item.id === value);
-
-    this.setState({ options: options });
-
-    if (selected) {
-      this.typeahead.selectOption(selected);
-    }
-  };
 
   onOptionSelected = (option) => {
     this.props.onChange(option ? option.id : null);
@@ -66,29 +54,31 @@ export default class TypeaheadAnswer extends React.Component {
   }
 
   render() {
-    const value = Utils.idToName(this.state.options, this.props.value);
+    const { Option } = components;
+
+    const DescriptionOption = (props) => {
+      const innerProps = { ...props.innerProps, title: props.data.description };
+
+      return <Option {...props} title={props.data.description} innerProps={innerProps} />;
+    };
 
     return (
-      <div>
-        <Typeahead
-          ref={(c) => (this.typeahead = c)}
-          className="form-group form-group-sm"
-          formInputOption="id"
-          inputProps={{ title: this.props.title }}
-          disabled={FormUtils.isDisabled(this.props.question)}
-          value={value || ''}
-          label={this.props.label}
-          placeholder={this.props.label}
-          filterOption="name"
-          size="small"
-          displayOption="name"
-          onOptionSelected={this.onOptionSelected}
-          optionsButton={true}
-          allowReset={true}
+      <FormGroup size="small">
+        <Form.Label>{this.props.label}</Form.Label>
+        <Select
           options={this.state.options}
-          customListComponent={Configuration.typeaheadResultList}
+          isSearchable={true}
+          isLoading={this.state.isLoading}
+          isClearable={true}
+          isDisabled={FormUtils.isDisabled(this.props.question)}
+          value={this.state.options.filter((option) => option.id === this.props.value)}
+          placeholder={!this.state.isLoading ? this.props.label : ''}
+          getOptionLabel={(option) => option.name}
+          getOptionValue={(option) => option.id}
+          onChange={this.onOptionSelected}
+          components={{ Option: DescriptionOption }}
         />
-      </div>
+      </FormGroup>
     );
   }
 }
