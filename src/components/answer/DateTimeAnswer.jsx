@@ -14,12 +14,20 @@ const DateTimeAnswer = (props) => {
   const isDate = FormUtils.isDate(props.question);
   const isTime = FormUtils.isTime(props.question);
 
-  console.log(props.value);
+  let value;
+
+  // workaround because it is not possible to construct Date only with time
+  if (isTime && props.value) {
+    value = new Date(`0 ${props.value}`);
+  } else {
+    value = props.value ? new Date(props.value) : new Date();
+  }
+
   return (
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
       <DatePicker
-        selected={props.value ? new Date(props.value) : new Date()}
+        selected={value}
         onChange={(date) => {
           props.onChange(moment(date).format(format.replace('yyyy', 'YYYY').replace('dd', 'DD')));
         }}
