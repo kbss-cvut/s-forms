@@ -24,6 +24,10 @@
       "name": "Yan Doroshenko",
       "email": "yan.doroshenko@felk.cvut.cz",
       "url": "https://github.com/YanDoroshenko"
+    },
+    {
+      "name": "Tomas Klima",
+      "email": "tomas.klim@gmail.com"
     }
   ],
   "repository": {
@@ -31,13 +35,12 @@
     "url": "https://kbss.felk.cvut.cz/git/s-forms.git"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
     "inputmask-core": "^2.2.0",
     "jsonld": "1.6.0",
-    "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.9.tgz",
-    "moment": "^2.24.0",
+    "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.11.tgz",
+    "moment": "^2.25.1",
     "prop-types": "^15.7.2",
-    "react-bootstrap": "^1.0.0",
+    "react-bootstrap": "^1.0.1",
     "react-datepicker": "^2.14.1",
     "react-select": "^3.1.0",
     "tsort": "0.0.1",
@@ -51,27 +54,26 @@
   "private": true,
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
-    "babel-jest": "^25.3.0",
+    "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
     "clean-css-cli": "^4.3.0",
     "css-loader": "^3.5.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "html-webpack-plugin": "^4.2.0",
-    "jest": "^25.3.0",
-    "prettier": "^2.0.4",
-    "prop-types": "^15.7.2",
+    "html-webpack-plugin": "^4.3.0",
+    "jest": "^25.5.4",
+    "prettier": "^2.0.5",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "style-loader": "^1.2.1",
     "watchify": "^3.11.1",
-    "webpack": "^4.42.1",
+    "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-node-externals": "^1.7.2"
