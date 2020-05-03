@@ -50,7 +50,7 @@ export default class Configuration {
   }
 
   static get dateFormat() {
-    return dateFormat ? dateFormat : 'YYYY-MM-DD';
+    return dateFormat ? dateFormat : 'yyyy-MM-dd';
   }
 
   static set dateFormat(format) {
@@ -58,7 +58,7 @@ export default class Configuration {
   }
 
   static get timeFormat() {
-    return timeFormat ? timeFormat : 'hh:mm:ss';
+    return timeFormat ? timeFormat : 'HH:mm:ss';
   }
 
   static set timeFormat(format) {
@@ -66,7 +66,7 @@ export default class Configuration {
   }
 
   static get dateTimeFormat() {
-    return dateTimeFormat ? dateTimeFormat : 'YYYY-MM-DD hh:mm:ss';
+    return dateTimeFormat ? dateTimeFormat : 'yyyy-MM-dd HH:mm:ss';
   }
 
   static set dateTimeFormat(format) {

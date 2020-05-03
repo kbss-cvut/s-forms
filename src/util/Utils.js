@@ -96,6 +96,7 @@ export default class Utils {
     if (typeof originalValue === 'number') {
       return Constants.DATETIME_NUMBER_FORMAT;
     }
+
     if (FormUtils.isDate(question)) {
       return Configuration.dateFormat;
     } else if (FormUtils.isTime(question)) {

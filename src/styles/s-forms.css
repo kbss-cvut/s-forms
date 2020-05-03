@@ -58,10 +58,6 @@ svg {
   line-height: 0.9;
 }
 
-.media-content-video-container {
-  /* padding-top: 26.25%; */
-}
-
 .form-label {
   font-weight: 500;
 }
@@ -74,18 +70,14 @@ input:disabled {
   cursor: pointer;
 }
 
-/* temporary typeahead fix */
-.glyphicon-remove::after {
-  content: 'x';
+.accordion > .card {
+  overflow: visible;
 }
 
-.glyphicon-triangle-bottom::after {
-  content: 'v';
+.react-datepicker-wrapper {
+  display: block;
 }
 
-.btn-default,
-.btn-default:hover {
-  color: #fff;
-  background-color: #343a40;
-  border-color: #343a40;
+.react-datepicker__navigation:focus {
+  outline: none;
 }

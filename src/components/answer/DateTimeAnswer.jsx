@@ -1,37 +1,38 @@
 import React from 'react';
-import moment from 'moment';
-import DateTimePicker from 'react-bootstrap-datetimepicker';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { FormGroup, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import * as Constants from '../../constants/Constants';
 import Utils from '../../util/Utils';
+import FormUtils from '../../util/FormUtils';
+import moment from 'moment';
 
 const DateTimeAnswer = (props) => {
-  const mode = Utils.resolveDateTimeMode(props.question);
-  let value = Utils.resolveDateTimeValue(props.question, props.value);
+  // TODO format === "x", timestamp?, locale
   const format = Utils.resolveDateTimeFormat(props.question, props.value);
-  const pickerUiFormat = Utils.resolveDateTimePickerUiFormat(format);
 
-  if (!value.isValid()) {
-    value = moment();
-  }
+  const isDate = FormUtils.isDate(props.question);
+  const isTime = FormUtils.isTime(props.question);
+
+  console.log(props.value);
   return (
-    <div style={{ position: 'relative' }}>
-      <label className="control-label">{props.label}</label>
-      <DateTimePicker
-        mode={mode}
-        format={format}
-        inputFormat={pickerUiFormat}
-        inputProps={{ title: props.title, size: 'small' }}
+    <FormGroup size="small">
+      <Form.Label>{props.label}</Form.Label>
+      <DatePicker
+        selected={props.value ? new Date(props.value) : new Date()}
         onChange={(date) => {
-          if (format === Constants.DATETIME_NUMBER_FORMAT) {
-            props.onChange(Number(date));
-          } else {
-            props.onChange(date);
-          }
+          props.onChange(moment(date).format(format.replace('yyyy', 'YYYY').replace('dd', 'DD')));
         }}
-        dateTime={format === Constants.DATETIME_NUMBER_FORMAT ? value.valueOf() : value.format(format)}
+        showTimeSelect={!isDate}
+        showTimeSelectOnly={isTime}
+        timeFormat="HH:mm"
+        timeIntervals={1}
+        timeCaption="Time"
+        dateFormat={format}
+        className="form-control"
+        disabled={FormUtils.isDisabled(props.question)}
       />
-    </div>
+    </FormGroup>
   );
 };
 

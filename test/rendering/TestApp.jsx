@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Configuration from '../../src/model/Configuration';
 import Question from '../../src/components/Question';
 import WizardGenerator from '../../src/model/WizardGenerator';
-import MaskedInput from '../../src/components/MaskedInput';
+import '../../src/styles/s-forms.css';
 
 const wizard = require('./form.json');
 
@@ -14,7 +14,7 @@ function onChange(index, change) {
 class TestApp extends React.Component {
   constructor(props) {
     super(props);
-    Configuration.dateFormat = 'YYYY-MM-DD';
+    Configuration.dateFormat = 'yyyy-MM-dd';
     Configuration.intl = {
       locale: navigator.language
     };
