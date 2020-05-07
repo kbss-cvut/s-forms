@@ -35,10 +35,11 @@
     "url": "https://kbss.felk.cvut.cz/git/s-forms.git"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "date-fns": "^2.13.0",
     "inputmask-core": "^2.2.0",
     "jsonld": "1.6.0",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.11.tgz",
-    "moment": "^2.25.1",
     "prop-types": "^15.7.2",
     "react-bootstrap": "^1.0.1",
     "react-datepicker": "^2.14.1",

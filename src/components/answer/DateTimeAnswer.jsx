@@ -5,23 +5,26 @@ import { FormGroup, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Utils from '../../util/Utils';
 import FormUtils from '../../util/FormUtils';
-import moment from 'moment';
+import { format } from 'date-fns';
+import * as Constants from '../../constants/Constants';
+import Configuration from '../../model/Configuration';
 
 const DateTimeAnswer = (props) => {
-  // TODO format === "x", timestamp?, locale
-  const format = Utils.resolveDateTimeFormat(props.question, props.value);
+  const dateFormat = Utils.resolveDateTimeFormat(props.question, props.value);
 
   const isDate = FormUtils.isDate(props.question);
   const isTime = FormUtils.isTime(props.question);
 
-  let value;
-
   // workaround because it is not possible to construct Date only with time
+  let value;
   if (isTime && props.value) {
     value = new Date(`0 ${props.value}`);
   } else {
     value = props.value ? new Date(props.value) : new Date();
   }
+
+  // DatePicker does not know dateFormat "x", translate to datetime
+  const datePickerFormat = dateFormat === 'x' ? Configuration.dateTimeFormat : dateFormat;
 
   return (
     <FormGroup size="small">
@@ -29,14 +32,18 @@ const DateTimeAnswer = (props) => {
       <DatePicker
         selected={value}
         onChange={(date) => {
-          props.onChange(moment(date).format(format.replace('yyyy', 'YYYY').replace('dd', 'DD')));
+          if (dateFormat === Constants.DATETIME_NUMBER_FORMAT) {
+            props.onChange(Number(date));
+          } else {
+            props.onChange(format(date, dateFormat));
+          }
         }}
         showTimeSelect={!isDate}
         showTimeSelectOnly={isTime}
         timeFormat="HH:mm"
         timeIntervals={1}
         timeCaption="Time"
-        dateFormat={format}
+        dateFormat={datePickerFormat}
         className="form-control"
         disabled={FormUtils.isDisabled(props.question)}
       />

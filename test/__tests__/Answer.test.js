@@ -1,8 +1,8 @@
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { shallow } from 'enzyme';
-import DateTimePicker from 'react-bootstrap-datetimepicker';
+import DatePicker from 'react-datepicker';
 import Select from 'react-select';
 
 import * as Generator from '../environment/Generator';
@@ -105,55 +105,60 @@ describe('Answer component', () => {
   }
 
   it('renders date picker with answer value when date layout class is specified', () => {
-    Configuration.dateTimeFormat = 'YYYY-MM-DD';
-    const date = new Date();
-    const value = moment(date).format(Configuration.dateTimeFormat);
+    Configuration.dateTimeFormat = 'yyyy-MM-dd';
+    const date = new Date('2000-01-01');
+    const value = format(date, Configuration.dateTimeFormat);
+
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATE);
 
     const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
-    const picker = component.find(DateTimePicker);
+    const picker = component.find(DatePicker);
 
     expect(picker).not.toBeNull();
-    expect(picker.props().mode).toEqual('date');
-    expect(picker.props().dateTime).toEqual(value);
+    expect(picker.props().showTimeSelect).toEqual(false);
+    expect(picker.props().showTimeSelectOnly).toEqual(false);
+    expect(picker.props().selected).toEqual(date);
   });
 
   it('renders time picker with answer value when time layout class is specified', () => {
-    Configuration.dateTimeFormat = 'hh:mm:ss';
+    Configuration.dateTimeFormat = 'HH:mm:ss';
     const date = new Date();
-    const value = moment(date).format(Configuration.dateTimeFormat);
+    const value = format(date, Configuration.dateTimeFormat);
+
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
 
     const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
-    const picker = component.find(DateTimePicker);
+    const picker = component.find(DatePicker);
 
     expect(picker).not.toBeNull();
-    expect(picker.props().mode).toEqual('time');
-    expect(picker.props().dateTime).toEqual(value);
+    expect(picker.props().showTimeSelect).toEqual(true);
+    expect(picker.props().showTimeSelectOnly).toEqual(true);
+    expect(picker.props().selected).toEqual(new Date(`0 ${value}`));
   });
 
   it('renders datetime picker with answer value when datetime layout class is specified', () => {
-    Configuration.dateTimeFormat = 'YYYY-MM-DD hh:mm:ss';
+    Configuration.dateTimeFormat = 'yyyy-MM-dd HH:mm:ss';
     const date = new Date();
-    const value = moment(date).format(Configuration.dateTimeFormat);
+    const value = format(date, Configuration.dateTimeFormat);
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
     const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
-    const picker = component.find(DateTimePicker);
+    const picker = component.find(DatePicker);
 
     expect(picker).not.toBeNull();
-    expect(picker.props().mode).toEqual('datetime');
-    expect(picker.props().dateTime).toEqual(value);
+    expect(picker.props().showTimeSelect).toEqual(true);
+    expect(picker.props().showTimeSelectOnly).toEqual(false);
+    expect(picker.props().selected).toEqual(new Date(value));
   });
 
   it('renders datetime picker with answer value when no layout class is specified and numeric answer value is used', () => {
-    const value = Date.now();
+    const value = Number(new Date());
     answer = {
       '@id': Generator.getRandomUri()
     };
@@ -162,12 +167,12 @@ describe('Answer component', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
     const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
-    const picker = component.find(DateTimePicker);
+    const picker = component.find(DatePicker);
 
     expect(picker).not.toBeNull();
-    expect(picker.props().mode).toEqual('datetime');
-    expect(picker.props().dateTime).toEqual(value);
-    expect(picker.props().format).toEqual(Constants.DATETIME_NUMBER_FORMAT);
+    expect(picker.props().showTimeSelect).toEqual(true);
+    expect(picker.props().showTimeSelectOnly).toEqual(false);
+    expect(picker.props().selected).toEqual(new Date(value));
   });
 
   it('renders checkbox with answer value when checkbox layout class is specified', () => {

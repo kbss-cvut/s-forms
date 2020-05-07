@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { format } from 'date-fns';
 
 import Configuration from '../model/Configuration';
 import * as Constants from '../constants/Constants';
@@ -43,47 +43,6 @@ export default class Utils {
       }
     }
     return id;
-  }
-
-  /**
-   * Resolves mode for the date time picker.
-   * @param question Question specifying the mode
-   * @return {*} mode for react-bootstrap-datetimepicker
-   */
-  static resolveDateTimeMode(question) {
-    if (FormUtils.isDateTime(question)) {
-      return 'datetime';
-    } else if (FormUtils.isDate(question)) {
-      return 'date';
-    } else if (FormUtils.isTime(question)) {
-      return 'time';
-    }
-    return 'datetime';
-  }
-
-  static resolveDateTimePickerUiFormat(format) {
-    if (format === Constants.DATETIME_NUMBER_FORMAT) {
-      return Configuration.dateTimeFormat;
-    }
-    return format;
-  }
-
-  /**
-   * Resolves the specified value as a moment instance.
-   * @param question Question supplying context info to the resolution
-   * @param value The value to parse
-   * @return {*} moment instance
-   */
-  static resolveDateTimeValue(question, value) {
-    if (typeof value === 'number') {
-      return moment(value);
-    }
-    if (FormUtils.isDateTime(question)) {
-      return moment(value, Configuration.dateTimeFormat);
-    } else if (FormUtils.isDate(question)) {
-      return moment(value, Configuration.dateFormat);
-    }
-    return moment(value, Configuration.timeFormat);
   }
 
   /**

@@ -18859,10 +18859,25 @@
       "has-layout-class": ["section", "answerable", "datetime"]
     },
     {
+      "@id": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance123456-a",
+      "@type": "doc:answer",
+      "has_data_value": {
+        "@value": 1588838472000
+      },
+      "has-answer-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance434162734"
+    },
+    {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q1",
       "@type": "doc:question",
       "label": "Time",
       "has-layout-class": ["section", "answerable", "time"]
+    },
+    {
+      "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q3",
+      "@type": "doc:question",
+      "label": "Timestamp in db",
+      "has_answer": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance123456-a",
+      "has-layout-class": ["section", "answerable", "datetime"]
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q2",
@@ -18883,7 +18898,8 @@
       "has_related_question": [
         "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q",
         "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q1",
-        "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q2"
+        "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q2",
+        "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q3"
       ],
       "has-layout-class": ["section", "answerable", "checkbox"],
       "label": "Neoadjuvant (before treatment procedure)"
