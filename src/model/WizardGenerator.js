@@ -16,14 +16,15 @@ export default class WizardGenerator {
    *
    * @param data Optional, data for which the wizard should be generated (i.e. the root question)
    * @param title Optional, title of the wizard
-   * @param callback Callback called with wizard steps definitions (an array of one element in this case)
+   * @return Wizard steps definitions (an array of one element in this case)
    */
-  static createDefaultWizard(data, title, callback) {
+  static createDefaultWizard(data, title) {
     const steps = WizardGenerator._constructWizardSteps(DefaultFormGenerator.generateForm(data));
-    callback({
+
+    return {
       steps: steps,
       title: title
-    });
+    };
   }
 
   /**
@@ -31,25 +32,26 @@ export default class WizardGenerator {
    * @param structure The wizard structure in JSON-LD
    * @param data Optional, data for which the wizard will be generated (i.e. the root question)
    * @param title Optional, wizard title
-   * @param callback Callback called with generated wizard step definitions when ready
+   * @return Promise with generated wizard step definitions when ready
    */
-  static createWizard(structure, data, title, callback) {
-    jsonld.flatten(structure, {}, null, function (err, flattened) {
-      let wizardProperties;
-      if (err) {
-        Logger.error(err);
-      }
-      try {
-        wizardProperties = {
-          steps: WizardGenerator._constructWizardSteps(flattened),
-          title: title
-        };
-      } catch (e) {
-        WizardGenerator.createDefaultWizard(data, title, callback);
-        return;
-      }
-      callback(wizardProperties);
-    });
+  static createWizard(structure, data, title) {
+    return new Promise((resolve) =>
+      jsonld.flatten(structure, {}, null, (err, flattened) => {
+        let wizardProperties;
+        if (err) {
+          Logger.error(err);
+        }
+        try {
+          wizardProperties = {
+            steps: WizardGenerator._constructWizardSteps(flattened),
+            title: title
+          };
+        } catch (e) {
+          wizardProperties = WizardGenerator.createDefaultWizard(data, title);
+        }
+        return resolve(wizardProperties);
+      })
+    );
   }
 
   static _constructWizardSteps(structure) {
@@ -59,7 +61,6 @@ export default class WizardGenerator {
     let item;
     let stepQuestions = [];
     let steps = [];
-    let len;
 
     if (structure['@graph'][0]['@id'] !== undefined) {
       id2ObjectMap = JsonLdFramingUtils.modifyStructure(structure); //TODO make as callback
@@ -100,22 +101,19 @@ export default class WizardGenerator {
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(stepQuestions, Constants.HAS_PRECEDING_QUESTION);
 
-    steps = stepQuestions.map((q) => {
-      return {
-        name: JsonLdUtils.getLocalized(q[JsonLdUtils.RDFS_LABEL], Configuration.intl),
-        component: GeneratedStep,
-        data: q
-      };
-    });
+    steps = stepQuestions.map((q) => ({
+      name: JsonLdUtils.getLocalized(q[JsonLdUtils.RDFS_LABEL], Configuration.intl),
+      component: GeneratedStep,
+      data: q
+    }));
 
     Configuration.initWizard(
       {
         root: form
       },
-      steps.map((item) => {
-        return item.data;
-      })
+      steps.map((item) => item.data)
     );
+
     return steps;
   }
 }

@@ -12,20 +12,20 @@ function onChange(index, change) {
 }
 
 class TestApp extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    step: null
+  };
+
+  async componentDidMount() {
     Configuration.dateFormat = 'yyyy-MM-dd';
     Configuration.intl = {
       locale: navigator.language
     };
     Configuration.initWizard = () => {};
-    this.state = {
-      step: null
-    };
     Configuration.readOnly = true;
-    WizardGenerator.createWizard(wizard, null, null, (props) => {
-      this.setState({ step: props.steps[5].data });
-    });
+
+    const wizardProperties = await WizardGenerator.createWizard(wizard, null, null);
+    this.setState({ step: wizardProperties.steps[5].data });
   }
 
   render() {

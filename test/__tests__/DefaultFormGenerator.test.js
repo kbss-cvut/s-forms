@@ -17,12 +17,11 @@ describe('Default form generator', () => {
     textValue = 'masterchief';
   });
 
-  it('generates empty one-step wizard as a default form', () => {
+  it('generates empty one-step wizard as a default form', async () => {
     const form = DefaultFormGenerator.generateForm();
-    let wizardSteps = null;
-    WizardGenerator.createDefaultWizard(null, null, (props) => (wizardSteps = props.steps));
+    const wizard = await WizardGenerator.createDefaultWizard(null, null);
 
-    expect(wizardSteps.length).toEqual(1);
+    expect(wizard.steps.length).toEqual(1);
     expect(initWizard).toHaveBeenCalledWith({ root: form['@graph'][0] }, [
       form['@graph'][0][Constants.HAS_SUBQUESTION][0]
     ]);

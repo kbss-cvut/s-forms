@@ -91,20 +91,20 @@ export class WizardGenerator {
    *
    * @param data Optional, data for which the wizard should be generated (i.e. the root question)
    * @param title Optional, title of the wizard
-   * @param callback Callback called with wizard steps definitions (an array of one element in this case)
+   * @return Wizard steps definitions (an array of one element in this case)
    */
-  createDefaultWizard(data, title, callback): void;
+  static createDefaultWizard(data, title): any;
 
   /**
    * Generates wizard steps from the specified data-enriched template.
    * @param structure The wizard structure in JSON-LD
    * @param data Optional, data for which the wizard will be generated (i.e. the root question)
    * @param title Optional, wizard title
-   * @param callback Callback called with generated wizard step definitions when ready
+   * @return Promise with generated wizard step definitions when ready
    */
-  createWizard(structure, data, title, callback): void;
+  static createWizard(structure, data, title): any;
 
-  _constructWizardSteps(structure): void;
+  static _constructWizardSteps(structure): any;
 }
 
 export class Configuration {

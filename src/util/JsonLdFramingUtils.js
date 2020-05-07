@@ -4,7 +4,9 @@ import FormUtils from '../util/FormUtils';
 import Utils from './Utils';
 
 const formShape = {
-  root: {},
+  root: {
+    [Constants.HAS_LAYOUT_CLASS]: Constants.FORM
+  },
   expandProperties: [
     Constants.HAS_SUBQUESTION,
     Constants.IS_RELEVANT_IF,
@@ -12,7 +14,6 @@ const formShape = {
     Constants.HAS_DECLARED_PREFIX
   ]
 };
-formShape.root[Constants.HAS_LAYOUT_CLASS] = Constants.FORM;
 
 export default class JsonLdFramingUtils {
   //TODO revise
