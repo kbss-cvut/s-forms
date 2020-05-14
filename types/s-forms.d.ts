@@ -109,14 +109,15 @@ export class WizardGenerator {
 
 export class Configuration {
   static intl: any;
-  static loadFormOptions: Function;
-  static getOptions: Function;
-  static initWizard: Function;
+  static i18n: { [x: string]: any };
   static inputComponent: ReactElement;
   static dateFormat: string;
   static timeFormat: string;
   static dateTimeFormat: string;
   static readOnly: boolean;
+  static fetchTypeAheadValues: Promise<{}>;
+  static horizontalWizardNav: boolean;
+  static modalView: boolean;
 }
 
 export class QuestionAnswerProcessor {

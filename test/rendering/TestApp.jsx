@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Configuration from '../../src/model/Configuration';
-import Question from '../../src/components/Question';
 import WizardGenerator from '../../src/model/WizardGenerator';
+import WizardContainer from '../../src/components/wizard/WizardContainer';
+
 import '../../src/styles/s-forms.css';
 
-const wizard = require('./form.json');
+const form = require('./form.json');
+const possibleValues = require('./possibleValues.json');
 
 function onChange(index, change) {
   console.log(change);
@@ -13,7 +15,8 @@ function onChange(index, change) {
 
 class TestApp extends React.Component {
   state = {
-    step: null
+    wizardProperties: null,
+    wizard: null
   };
 
   async componentDidMount() {
@@ -21,21 +24,36 @@ class TestApp extends React.Component {
     Configuration.intl = {
       locale: navigator.language
     };
-    Configuration.initWizard = () => {};
-    Configuration.readOnly = true;
+    Configuration.fetchTypeAheadValues = () => new Promise((resolve) => setTimeout(resolve(possibleValues), 1500));
+    Configuration.i18n = {
+      'wizard.next': 'Další',
+      'wizard.previous': 'Předchozí'
+    };
+    Configuration.horizontalWizardNav = true;
+    Configuration.modalView = true;
 
-    const wizardProperties = await WizardGenerator.createWizard(wizard, null, null);
-    this.setState({ step: wizardProperties.steps[5].data });
+    const wizardProperties = await WizardGenerator.createWizard(form, null, null);
+    this.setState({ wizardProperties, form });
   }
 
   render() {
-    if (!this.state.step) {
+    if (!this.state.wizardProperties) {
       return <div>'Loading wizard...'</div>;
     }
+
     return (
-      <div>
-        <Question question={this.state.step} onChange={onChange} indent={0} />
-      </div>
+      <WizardContainer
+        steps={this.state.wizardProperties.steps}
+        data={{
+          root: form
+        }}
+        enableForwardSkip={true}
+        onHide={() => {
+          console.log('hide');
+        }}
+        show={true}
+        title={'Title'}
+      />
     );
   }
 }

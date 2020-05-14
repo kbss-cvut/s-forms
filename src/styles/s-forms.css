@@ -81,3 +81,11 @@ input:disabled {
 .react-datepicker__navigation:focus {
   outline: none;
 }
+
+.wizard-step {
+  min-height: 650px;
+}
+
+.wizard-step-content {
+  min-height: 600px;
+}

@@ -128,6 +128,7 @@ export default class Question extends React.Component {
     let row = [],
       cls,
       isTextarea;
+
     for (let i = 0, len = answers.length; i < len; i++) {
       isTextarea =
         FormUtils.isTextarea(this.props.question, FormUtils.resolveValue(answers[i])) ||
@@ -138,7 +139,14 @@ export default class Question extends React.Component {
         <div key={'row-item-' + i} className={cls}>
           <div className="row">
             <div className="col-10">
-              <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
+              <Answer
+                index={i}
+                answer={answers[i]}
+                question={question}
+                onChange={this.onAnswerChange}
+                loadFormOptions={this.props.loadFormOptions}
+                getOptions={this.props.getOptions}
+              />
             </div>
             <div>
               {this._renderUnits()}
@@ -237,7 +245,14 @@ export default class Question extends React.Component {
 
     for (let i = 0; i < subQuestions.length; i++) {
       children.push(
-        <Question key={'sub-question-' + i} index={i} question={subQuestions[i]} onChange={this.onSubQuestionChange} />
+        <Question
+          key={'sub-question-' + i}
+          index={i}
+          question={subQuestions[i]}
+          onChange={this.onSubQuestionChange}
+          loadFormOptions={this.props.loadFormOptions}
+          getOptions={this.props.getOptions}
+        />
       );
     }
     return children;

@@ -1,12 +1,13 @@
 let intl = null;
-let loadFormOptions = null;
-let getOptions = null;
-let initWizard = null;
+let i18n = { 'wizard.next': 'Next', 'wizard.previous': 'Previous' };
 let inputComponent = null;
 let dateFormat = null;
 let timeFormat = null;
 let dateTimeFormat = null;
 let readOnly = false;
+let fetchTypeAheadValues = null;
+let horizontalWizardNav = true;
+let modalView = false;
 
 export default class Configuration {
   static get intl() {
@@ -17,28 +18,12 @@ export default class Configuration {
     intl = value;
   }
 
-  static set loadFormOptions(func) {
-    loadFormOptions = func;
+  static get i18n() {
+    return i18n;
   }
 
-  static get loadFormOptions() {
-    return loadFormOptions;
-  }
-
-  static set getOptions(func) {
-    getOptions = func;
-  }
-
-  static get getOptions() {
-    return getOptions;
-  }
-
-  static set initWizard(func) {
-    initWizard = func;
-  }
-
-  static get initWizard() {
-    return initWizard;
+  static set i18n(object) {
+    i18n = object;
   }
 
   static get inputComponent() {
@@ -79,5 +64,29 @@ export default class Configuration {
 
   static set readOnly(newValue) {
     readOnly = newValue;
+  }
+
+  static get fetchTypeAheadValues() {
+    return fetchTypeAheadValues;
+  }
+
+  static set fetchTypeAheadValues(func) {
+    fetchTypeAheadValues = func;
+  }
+
+  static get horizontalWizardNav() {
+    return horizontalWizardNav;
+  }
+
+  static set horizontalWizardNav(boolean) {
+    horizontalWizardNav = boolean;
+  }
+
+  static get modalView() {
+    return modalView;
+  }
+
+  static set modalView(boolean) {
+    modalView = boolean;
   }
 }

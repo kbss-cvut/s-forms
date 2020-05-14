@@ -16,7 +16,15 @@ export default class GeneratedStep extends React.Component {
   };
 
   render() {
-    return <Question question={this.state.question} onChange={this.onChange} withoutCard={true} />;
+    return (
+      <Question
+        question={this.state.question}
+        onChange={this.onChange}
+        withoutCard={true}
+        loadFormOptions={this.props.loadFormOptions}
+        getOptions={this.props.getOptions}
+      />
+    );
   }
 }
 

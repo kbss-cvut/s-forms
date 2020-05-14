@@ -107,13 +107,6 @@ export default class WizardGenerator {
       data: q
     }));
 
-    Configuration.initWizard(
-      {
-        root: form
-      },
-      steps.map((item) => item.data)
-    );
-
     return steps;
   }
 }

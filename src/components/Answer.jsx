@@ -73,6 +73,8 @@ export default class Answer extends React.Component {
         title={title}
         value={value}
         onChange={this.onValueChange}
+        getOptions={this.props.getOptions}
+        loadFormOptions={this.props.loadFormOptions}
       />
     );
   }

@@ -10,14 +10,15 @@ import JsonLdObjectUtils from '../../util/JsonLdObjectUtils';
 import Logger from '../../util/Logger';
 import { FormGroup, Form } from 'react-bootstrap';
 
-export default class TypeaheadAnswer extends React.Component {
+class TypeaheadAnswer extends React.Component {
   constructor(props) {
     super(props);
     this.queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
     this.state = {
       isLoading: true,
-      options: this.queryHash ? this.processTypeaheadOptions(Configuration.getOptions(this.queryHash)) : []
+      options: this.queryHash ? this.processTypeaheadOptions(this.props.getOptions(this.queryHash)) : []
     };
+    this.mounted = true;
   }
 
   async componentDidMount() {
@@ -25,14 +26,20 @@ export default class TypeaheadAnswer extends React.Component {
 
     if (!question[Constants.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
       try {
-        const options = await Configuration.loadFormOptions(this.queryHash, FormUtils.getPossibleValuesQuery(question));
-        this.setState({ options: this.processTypeaheadOptions(options), isLoading: false });
+        const options = await this.props.loadFormOptions(this.queryHash, FormUtils.getPossibleValuesQuery(question));
+        if (this.mounted) {
+          this.setState({ options: this.processTypeaheadOptions(options), isLoading: false });
+        }
       } catch (error) {
         Logger.error(`An error has occurred during loadFormOptions for query hash: ${this.queryHash}`);
       }
     } else {
       this.setState({ options: this.processTypeaheadOptions(question[Constants.HAS_OPTION]), isLoading: false });
     }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   onOptionSelected = (option) => {
@@ -89,5 +96,9 @@ TypeaheadAnswer.propTypes = {
   label: PropTypes.string.isRequired,
   title: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  getOptions: PropTypes.func.isRequired,
+  loadFormOptions: PropTypes.func.isRequired
 };
+
+export default TypeaheadAnswer;
