@@ -94,7 +94,7 @@ const WizardStep = (props) => {
 
     return question[Constants.HELP_DESCRIPTION] ? (
       <HelpIcon
-        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], props.intl)}
+        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], Configuration.intl)}
         iconClass="help-icon-section"
       />
     ) : null;

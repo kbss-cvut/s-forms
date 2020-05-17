@@ -21,12 +21,14 @@ const FormGenContextProvider = ({ children, ...props }) => {
     if (data.length) {
       return new Promise((resolve) => {
         jsonld.frame(data, {}, null, (err, framed) => {
+          const option = framed['@graph'];
+
           setOptions((prevState) => ({
             ...prevState,
-            [id]: framed['@graph']
+            [id]: option
           }));
-
-          return resolve(options[id]);
+          
+          return resolve(option);
         });
       });
     }

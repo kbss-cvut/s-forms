@@ -38,18 +38,22 @@ export default class WizardGenerator {
     return new Promise((resolve) =>
       jsonld.flatten(structure, {}, null, (err, flattened) => {
         let wizardProperties;
+        let structure;
         if (err) {
           Logger.error(err);
         }
         try {
+          const [steps, form] = WizardGenerator._constructWizardSteps(flattened);
+
+          structure = form;
           wizardProperties = {
-            steps: WizardGenerator._constructWizardSteps(flattened),
-            title: title
+            steps,
+            title
           };
         } catch (e) {
           wizardProperties = WizardGenerator.createDefaultWizard(data, title);
         }
-        return resolve(wizardProperties);
+        return resolve([wizardProperties, structure]);
       })
     );
   }
@@ -107,6 +111,6 @@ export default class WizardGenerator {
       data: q
     }));
 
-    return steps;
+    return [steps, {root: form}];
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormGenContextProvider } from '../../contexts/FormGenContext';
 import { WizardContextProvider } from '../../contexts/WizardContext';
@@ -6,16 +6,13 @@ import Wizard from './Wizard';
 import WizardWindow from './WizardWindow';
 import Configuration from '../../model/Configuration';
 
-const WizardContainer = (props) => {
-  console.log(props.show);
-  return (
-    <WizardContextProvider {...props}>
-      <FormGenContextProvider>
-        {Configuration.modalView ? <WizardWindow {...props} /> : <Wizard {...props} />}
-      </FormGenContextProvider>
-    </WizardContextProvider>
-  );
-};
+const WizardContainer = forwardRef((props, ref) => (
+  <WizardContextProvider {...props}>
+    <FormGenContextProvider>
+      {Configuration.modalView ? <WizardWindow {...props} ref={ref} /> : <Wizard {...props} ref={ref} />}
+    </FormGenContextProvider>
+  </WizardContextProvider>
+));
 
 WizardContainer.propTypes = {
   start: PropTypes.number,

@@ -6,6 +6,7 @@ import VerticalWizardNav from './VerticalWizardNav';
 import { Card } from 'react-bootstrap';
 import { WizardContext } from '../../contexts/WizardContext';
 import Configuration from '../../model/Configuration';
+import QuestionAnswerProcessor from '../../model/QuestionAnswerProcessor';
 
 class Wizard extends React.Component {
   constructor(props) {
@@ -16,6 +17,13 @@ class Wizard extends React.Component {
       previousDisabled: false
     };
   }
+
+  getFormData = () => {
+    const data = this.context.getData();
+    const stepData = this.context.getStepData();
+
+    return QuestionAnswerProcessor.buildQuestionAnswerModel(data, stepData);
+  };
 
   onAdvance = () => {
     const change = {};

@@ -14,26 +14,31 @@ function onChange(index, change) {
 }
 
 class TestApp extends React.Component {
-  state = {
-    wizardProperties: null,
-    wizard: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      wizardProperties: null,
+      wizard: null
+    };
+    this.form = React.createRef();
+  }
 
   async componentDidMount() {
     Configuration.dateFormat = 'yyyy-MM-dd';
     Configuration.intl = {
       locale: navigator.language
     };
-    Configuration.fetchTypeAheadValues = () => new Promise((resolve) => setTimeout(resolve(possibleValues), 1500));
+    Configuration.fetchTypeAheadValues = () =>
+      new Promise((resolve) => setTimeout(resolve({ data: possibleValues }), 1500));
     Configuration.i18n = {
       'wizard.next': 'Další',
       'wizard.previous': 'Předchozí'
     };
     Configuration.horizontalWizardNav = true;
-    Configuration.modalView = true;
+    Configuration.modalView = false;
 
-    const wizardProperties = await WizardGenerator.createWizard(form, null, null);
-    this.setState({ wizardProperties, form });
+    const [wizardProperties, structure] = await WizardGenerator.createWizard(form, null, null);
+    this.setState({ wizardProperties, form: structure });
   }
 
   render() {
@@ -42,18 +47,23 @@ class TestApp extends React.Component {
     }
 
     return (
-      <WizardContainer
-        steps={this.state.wizardProperties.steps}
-        data={{
-          root: form
-        }}
-        enableForwardSkip={true}
-        onHide={() => {
-          console.log('hide');
-        }}
-        show={true}
-        title={'Title'}
-      />
+      <React.Fragment>
+        <WizardContainer
+          ref={this.form}
+          steps={this.state.wizardProperties.steps}
+          data={this.state.form}
+          enableForwardSkip={true}
+          onHide={() => {}}
+          show={true}
+          title={'Title'}
+        />
+        <button
+          style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
+          onClick={() => console.log(this.form.current.getFormData())}
+        >
+          Save
+        </button>
+      </React.Fragment>
     );
   }
 }

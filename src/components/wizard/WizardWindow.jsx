@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 import Wizard from './Wizard';
 
-const WizardWindow = (props) => {
+const WizardWindow = React.forwardRef((props, ref) =>  {
   const properties = { ...props, onClose: props.onHide };
 
   const getModalProps = () => {
@@ -25,11 +25,11 @@ const WizardWindow = (props) => {
       </Modal.Header>
 
       <Modal.Body className="overflow-hidden p-0">
-        <Wizard {...properties} />
+        <Wizard {...properties} ref={ref} />
       </Modal.Body>
     </Modal>
   );
-};
+});
 
 WizardWindow.propTypes = {
   onHide: PropTypes.func,

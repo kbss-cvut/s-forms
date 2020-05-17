@@ -179,3 +179,5 @@ export interface HelpIconProps {
 }
 
 export const HelpIcon: FunctionComponent<HelpIconProps>;
+
+export const WizardContainer: FunctionComponent<any, React.Ref>;
