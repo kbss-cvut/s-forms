@@ -22,7 +22,8 @@ WizardContainer.propTypes = {
   enableForwardSkip: PropTypes.bool,
   onHide: PropTypes.func,
   show: PropTypes.bool,
-  title: PropTypes.string
+  title: PropTypes.string,
+  isFormValid: PropTypes.func
 };
 
 export default WizardContainer;

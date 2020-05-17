@@ -9,16 +9,13 @@ import '../../src/styles/s-forms.css';
 const form = require('./form.json');
 const possibleValues = require('./possibleValues.json');
 
-function onChange(index, change) {
-  console.log(change);
-}
-
 class TestApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       wizardProperties: null,
-      wizard: null
+      wizard: null,
+      isFormValid: false
     };
     this.form = React.createRef();
   }
@@ -28,11 +25,10 @@ class TestApp extends React.Component {
     Configuration.intl = {
       locale: navigator.language
     };
-    Configuration.fetchTypeAheadValues = () =>
-      new Promise((resolve) => setTimeout(resolve({ data: possibleValues }), 1500));
+    Configuration.fetchTypeAheadValues = () => new Promise((resolve) => setTimeout(resolve(possibleValues), 1500));
     Configuration.i18n = {
-      'wizard.next': 'Další',
-      'wizard.previous': 'Předchozí'
+      'wizard.next': 'Next',
+      'wizard.previous': 'Previous'
     };
     Configuration.horizontalWizardNav = true;
     Configuration.modalView = false;
@@ -56,8 +52,10 @@ class TestApp extends React.Component {
           onHide={() => {}}
           show={true}
           title={'Title'}
+          isFormValid={(isFormValid) => this.setState({ isFormValid })}
         />
         <button
+          disabled={!this.state.isFormValid}
           style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
           onClick={() => console.log(this.form.current.getFormData())}
         >

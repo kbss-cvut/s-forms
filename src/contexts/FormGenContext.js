@@ -27,7 +27,7 @@ const FormGenContextProvider = ({ children, ...props }) => {
             ...prevState,
             [id]: option
           }));
-          
+
           return resolve(option);
         });
       });

@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import FormUtils from '../util/FormUtils';
 
 const INITIAL_DATA = {};
 const INITIAL_STEP_DATA = [];
@@ -7,8 +8,15 @@ const INITIAL_STEP_DATA = [];
 const WizardContext = React.createContext({});
 
 const WizardContextProvider = (props) => {
-  const [data, setData] = useState(props.data || {});
-  const [stepData, setStepData] = useState(props.steps ? props.steps.map((item) => item.data) : []);
+  const [data, setData] = useState(props.data || INITIAL_DATA);
+  const [stepData, setStepData] = useState(props.steps ? props.steps.map((item) => item.data) : INITIAL_STEP_DATA);
+
+  useEffect(() => {
+    if (props.isFormValid) {
+      const isValid = FormUtils.isValid(data);
+      props.isFormValid(isValid);
+    }
+  }, []);
 
   const updateData = (update) => {
     if (!update) return;
@@ -23,6 +31,11 @@ const WizardContextProvider = (props) => {
     newStepData[index] = { ...newStepData[index], ...update };
 
     setStepData(newStepData);
+
+    if (props.isFormValid) {
+      const isValid = FormUtils.isValid(data);
+      props.isFormValid(isValid);
+    }
   };
 
   const insertStep = (index, update) => {
@@ -62,7 +75,7 @@ const WizardContextProvider = (props) => {
       getData,
       getStepData
     }),
-    [getData, getStepData, removeStep, insertStep, updateData, updateStepData]
+    []
   );
 
   return (
@@ -75,7 +88,8 @@ const WizardContextProvider = (props) => {
 WizardContextProvider.propTypes = {
   children: PropTypes.element.isRequired,
   data: PropTypes.object,
-  stepData: PropTypes.array
+  stepData: PropTypes.array,
+  isFormValid: PropTypes.func
 };
 
 export { WizardContext, WizardContextProvider };

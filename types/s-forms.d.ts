@@ -115,7 +115,7 @@ export class Configuration {
   static timeFormat: string;
   static dateTimeFormat: string;
   static readOnly: boolean;
-  static fetchTypeAheadValues: Promise<{}>;
+  static fetchTypeAheadValues: { [x: string]: any };
   static horizontalWizardNav: boolean;
   static modalView: boolean;
 }
