@@ -10,7 +10,7 @@ import MaskedInput from '../MaskedInput';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 const MaskedInputAnswer = (props) => {
-  const { options } = useContext(ConfigurationContext);
+  const { componentsOptions } = useContext(ConfigurationContext);
 
   const question = props.question;
   const value = props.value;
@@ -29,7 +29,7 @@ const MaskedInputAnswer = (props) => {
       title={props.title}
       placeholder={mask}
       onChange={(e) => props.onChange(e.target.value)}
-      disabled={FormUtils.isDisabled(question, options)}
+      disabled={FormUtils.isDisabled(question, componentsOptions)}
     />
   );
 };

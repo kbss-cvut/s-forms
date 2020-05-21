@@ -43,7 +43,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -70,7 +70,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -96,7 +96,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -130,7 +130,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -166,7 +166,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: {
+          componentsOptions: {
             readOnly: false,
             dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
           },
@@ -195,7 +195,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: {
+          componentsOptions: {
             readOnly: false,
             dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
           },
@@ -223,7 +223,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: {
+          componentsOptions: {
             readOnly: false,
             dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
           },
@@ -253,7 +253,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: {
+          componentsOptions: {
             readOnly: false,
             dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
           },
@@ -282,7 +282,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: {
+          componentsOptions: {
             readOnly: false
           },
           inputComponent: DefaultInput
@@ -310,7 +310,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: {
+          componentsOptions: {
             readOnly: false
           },
           inputComponent: DefaultInput
@@ -338,7 +338,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: {
+          componentsOptions: {
             readOnly: false
           },
           inputComponent: DefaultInput
@@ -367,7 +367,7 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >

@@ -97,7 +97,7 @@ class InputPropertiesResolver {
 }
 
 const InputAnswer = (props) => {
-  const { inputComponent, options } = useContext(ConfigurationContext);
+  const { inputComponent, componentsOptions } = useContext(ConfigurationContext);
 
   const question = props.question;
   const answer = props.answer;
@@ -108,7 +108,7 @@ const InputAnswer = (props) => {
     value = JsonLdUtils.getJsonAttValue(answer[Constants.HAS_OBJECT_VALUE], JsonLdUtils.RDFS_LABEL);
   }
   return React.createElement(inputComponent, {
-    ...InputPropertiesResolver.resolveInputProperties(question, value, options),
+    ...InputPropertiesResolver.resolveInputProperties(question, value, componentsOptions),
     label: props.label,
     title: props.title,
     value: value == null ? '' : value,

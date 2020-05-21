@@ -46,7 +46,7 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -69,7 +69,7 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -92,7 +92,7 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -115,7 +115,7 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -140,7 +140,7 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -162,7 +162,7 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >

@@ -31,7 +31,7 @@ describe('MaskedInputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: false },
+          componentsOptions: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
@@ -58,7 +58,7 @@ describe('MaskedInputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          options: { readOnly: true },
+          componentsOptions: { readOnly: true },
           inputComponent: DefaultInput
         }}
       >

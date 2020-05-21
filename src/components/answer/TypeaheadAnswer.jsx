@@ -83,7 +83,7 @@ const TypeaheadAnswer = (props) => {
         isSearchable={true}
         isLoading={isLoading}
         isClearable={true}
-        isDisabled={FormUtils.isDisabled(props.question, configurationContext.options)}
+        isDisabled={FormUtils.isDisabled(props.question, configurationContext.componentsOptions)}
         value={options.filter((option) => option.id === props.value)}
         placeholder={''}
         getOptionLabel={(option) => option.name}

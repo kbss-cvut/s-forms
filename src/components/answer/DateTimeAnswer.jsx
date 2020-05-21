@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import DatePicker from 'react-datepicker';
 import { FormGroup, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
@@ -11,9 +11,9 @@ import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DateTimeAnswer = (props) => {
-  const { options } = useContext(ConfigurationContext);
+  const { componentsOptions } = useContext(ConfigurationContext);
 
-  const dateFormat = Utils.resolveDateTimeFormat(props.question, props.value, options.dateTimeAnswer);
+  const dateFormat = Utils.resolveDateTimeFormat(props.question, props.value, componentsOptions.dateTimeAnswer);
 
   const isDate = FormUtils.isDate(props.question);
   const isTime = FormUtils.isTime(props.question);
@@ -27,7 +27,7 @@ const DateTimeAnswer = (props) => {
   }
 
   // DatePicker does not know dateFormat "x", translate to datetime
-  const datePickerFormat = dateFormat === 'x' ? options.dateTimeAnswer.dateTimeFormat : dateFormat;
+  const datePickerFormat = dateFormat === 'x' ? componentsOptions.dateTimeAnswer.dateTimeFormat : dateFormat;
 
   const onChange = (date) => {
     if (dateFormat === Constants.DATETIME_NUMBER_FORMAT) {
@@ -51,7 +51,7 @@ const DateTimeAnswer = (props) => {
         timeCaption="Time"
         dateFormat={datePickerFormat}
         className="form-control"
-        disabled={FormUtils.isDisabled(props.question, options.readOnly)}
+        disabled={FormUtils.isDisabled(props.question, componentsOptions.readOnly)}
       />
     </FormGroup>
   );

@@ -28,7 +28,6 @@ class TestApp extends React.Component {
     Configuration.intl = {
       locale: 'cs'
     };
-
     const [wizardProperties, structure] = await WizardGenerator.createWizard(form, null, null);
     this.setState({ wizardProperties, form: structure });
   }
@@ -54,12 +53,17 @@ class TestApp extends React.Component {
           horizontalWizardNav={true}
           modalView={false}
           modalProps={modalProps}
-          i18n={{
-            'wizard.next': 'Next',
-            'wizard.previous': 'Previous'
-          }}
           fetchTypeAheadValues={this.fetchTypeAheadValues}
           isFormValid={(isFormValid) => this.setState({ isFormValid })}
+          options={{
+            i18n: {
+              'wizard.next': 'Next',
+              'wizard.previous': 'Previous'
+            },
+            intl: {
+              locale: 'cs'
+            }
+          }}
         />
         <button
           disabled={!this.state.isFormValid}

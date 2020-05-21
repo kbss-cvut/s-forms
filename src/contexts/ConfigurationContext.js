@@ -7,7 +7,7 @@ const ConfigurationContextProvider = ({ children, ...props }) => {
   const values = useMemo(
     () => ({
       inputComponent: props.components.inputComponent || require('../components/DefaultInput').default,
-      options: props.componentsOptions
+      componentsOptions: props.componentsOptions
     }),
     []
   );

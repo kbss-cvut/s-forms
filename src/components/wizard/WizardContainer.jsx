@@ -7,7 +7,11 @@ import Wizard from './Wizard';
 import WizardWindow from './WizardWindow';
 
 const WizardContainer = forwardRef((props, ref) => (
-  <ConfigurationContextProvider components={props.components} componentsOptions={props.componentsOptions}>
+  <ConfigurationContextProvider
+    components={props.components}
+    componentsOptions={props.componentsOptions}
+    options={props.options}
+  >
     <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
       <WizardContextProvider {...props}>
         {props.modalView ? <WizardWindow {...props} ref={ref} /> : <Wizard {...props} ref={ref} />}

@@ -16,7 +16,7 @@ class InputPropertiesResolver {
 }
 
 const CheckboxAnswer = (props) => {
-  const { inputComponent, options } = useContext(ConfigurationContext);
+  const { inputComponent, componentsOptions } = useContext(ConfigurationContext);
 
   const question = props.question;
 
@@ -29,7 +29,7 @@ const CheckboxAnswer = (props) => {
     onChange: (e) => {
       props.onChange(e.target.checked);
     },
-    disabled: FormUtils.isDisabled(question, options.readOnly)
+    disabled: FormUtils.isDisabled(question, componentsOptions.readOnly)
   });
 };
 
