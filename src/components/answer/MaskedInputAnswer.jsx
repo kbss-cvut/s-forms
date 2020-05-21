@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 
@@ -7,8 +7,11 @@ import FormUtils from '../../util/FormUtils';
 import InputAnswer from './InputAnswer';
 import Logger from '../../util/Logger';
 import MaskedInput from '../MaskedInput';
+import { ComponentsContext } from '../../contexts/ComponentsContext';
 
 const MaskedInputAnswer = (props) => {
+  const { options } = useContext(ComponentsContext);
+
   const question = props.question;
   const value = props.value;
   const mask = JsonLdUtils.getJsonAttValue(question, Constants.INPUT_MASK);
@@ -26,7 +29,7 @@ const MaskedInputAnswer = (props) => {
       title={props.title}
       placeholder={mask}
       onChange={(e) => props.onChange(e.target.value)}
-      disabled={FormUtils.isDisabled(question)}
+      disabled={FormUtils.isDisabled(question, options)}
     />
   );
 };

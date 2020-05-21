@@ -2,9 +2,9 @@ import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 
-import Configuration from '../../model/Configuration';
 import * as Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
+import { ComponentsContext } from '../../contexts/ComponentsContext';
 
 export default class SelectAnswer extends React.Component {
   _generateSelectOptions(options) {
@@ -33,7 +33,7 @@ export default class SelectAnswer extends React.Component {
   render() {
     const question = this.props.question;
     return React.createElement(
-      Configuration.inputComponent,
+      this.context.inputComponent,
       {
         type: 'select',
         label: this.props.label,
@@ -42,12 +42,14 @@ export default class SelectAnswer extends React.Component {
         onChange: (e) => {
           this.props.onChange(e.target.value);
         },
-        disabled: FormUtils.isDisabled(question)
+        disabled: FormUtils.isDisabled(question, this.context.options)
       },
       this._generateSelectOptions(question[Constants.HAS_OPTION])
     );
   }
 }
+
+SelectAnswer.contextType = ComponentsContext;
 
 SelectAnswer.propTypes = {
   question: PropTypes.object.isRequired,

@@ -1,14 +1,20 @@
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
+import Select from 'react-select';
 
 import * as Generator from '../environment/Generator';
 import Configuration from '../../src/model/Configuration';
 import * as Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
+import { FormGenContext } from '../../src/contexts/FormGenContext';
+import { ComponentsContext } from '../../src/contexts/ComponentsContext';
+import DefaultInput from '../../src/components/DefaultInput';
 
 describe('TypeaheadAnswer', () => {
   let question;
   let onChange;
+  let loadFormOptions;
+  let getOptions;
 
   beforeEach(() => {
     question = {
@@ -27,8 +33,8 @@ describe('TypeaheadAnswer', () => {
     Configuration.intl = {
       locale: 'en'
     };
-    Configuration.loadFormOptions = jest.fn();
-    Configuration.getOptions = jest.fn(() => [
+    loadFormOptions = jest.fn();
+    getOptions = jest.fn(() => [
       {
         id: '123',
         name: '123'
@@ -41,18 +47,27 @@ describe('TypeaheadAnswer', () => {
     const options = createOptionsWithPartialOrder(['3', '2', '1', 'before2'], ['before2<2']);
     const query = 'SELECT * WHERE { ?x ?y ?z .}';
 
-    Configuration.getOptions = jest.fn(() => options);
-
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     question[Constants.HAS_OPTIONS_QUERY] = query;
 
-    const component = shallow(
-      <TypeaheadAnswer answer={{}} question={question} onChange={onChange} label="TestLabel" />
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
+          <TypeaheadAnswer answer={{}} question={question} onChange={onChange} label="TestLabel" options={options}/>
+        </FormGenContext.Provider>
+      </ComponentsContext.Provider>
     );
 
-    expect(Configuration.getOptions).toHaveBeenCalled();
-    expect(component).not.toBeNull();
-    expect(component.state('options').map((i) => i['id'])).toEqual(['1', 'before2', '2', '3']);
+    waitForComponentToPaint(component);
+
+    const select = component.find(TypeaheadAnswer).find(Select);
+    expect(select).not.toBeNull();
+    expect(select.prop('options').map((i) => i['id'])).toEqual(['1', 'before2', '2', '3']);
   });
 
   function createOptionsWithPartialOrder(ids, orderingRules) {

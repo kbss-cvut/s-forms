@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import Select, { components } from 'react-select';
 import PropTypes from 'prop-types';
@@ -9,79 +9,84 @@ import Utils from '../../util/Utils';
 import JsonLdObjectUtils from '../../util/JsonLdObjectUtils';
 import Logger from '../../util/Logger';
 import { FormGroup, Form } from 'react-bootstrap';
+import { FormGenContext } from '../../contexts/FormGenContext';
+import { ComponentsContext } from '../../contexts/ComponentsContext';
 
-export default class TypeaheadAnswer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(this.props.question));
-    this.state = {
-      isLoading: true,
-      options: this.queryHash ? this.processTypeaheadOptions(Configuration.getOptions(this.queryHash)) : []
-    };
+const processTypeaheadOptions = (options) => {
+  if (!options) {
+    return [];
   }
 
-  async componentDidMount() {
-    const question = this.props.question;
+  // sort by label
+  options.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
+
+  // sort by property
+  JsonLdObjectUtils.orderPreservingToplogicalSort(options, Constants.HAS_PRECEDING_VALUE);
+
+  return JsonLdUtils.processTypeaheadOptions(options);
+};
+
+const TypeaheadAnswer = (props) => {
+  const queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(props.question));
+
+  const formGenContext = useContext(FormGenContext);
+  const componentsContext = useContext(ComponentsContext);
+
+  const [isLoading, setLoading] = useState(true);
+  const [options, setOptions] = useState(processTypeaheadOptions(props.options));
+
+  useEffect(() => {
+    const question = props.question;
+
+    async function loadFormOptions() {
+      try {
+        const options = await formGenContext.loadFormOptions(queryHash, FormUtils.getPossibleValuesQuery(question));
+        setLoading(false);
+        setOptions(processTypeaheadOptions(options));
+      } catch (error) {
+        Logger.error(`An error has occurred during loadFormOptions for query hash: ${queryHash}`);
+      }
+    }
 
     if (!question[Constants.HAS_OPTION] && FormUtils.getPossibleValuesQuery(question)) {
-      try {
-        const options = await Configuration.loadFormOptions(this.queryHash, FormUtils.getPossibleValuesQuery(question));
-        this.setState({ options: this.processTypeaheadOptions(options), isLoading: false });
-      } catch (error) {
-        Logger.error(`An error has occurred during loadFormOptions for query hash: ${this.queryHash}`);
-      }
+      loadFormOptions();
     } else {
-      this.setState({ options: this.processTypeaheadOptions(question[Constants.HAS_OPTION]), isLoading: false });
+      setLoading(false);
+      setOptions(processTypeaheadOptions(question[Constants.HAS_OPTION]));
     }
-  }
+  }, []);
 
-  onOptionSelected = (option) => {
-    this.props.onChange(option ? option.id : null);
+  const onOptionSelected = (option) => {
+    props.onChange(option ? option.id : null);
   };
 
-  processTypeaheadOptions(options) {
-    if (!options) {
-      return [];
-    }
+  const { Option } = components;
 
-    // sort by label
-    options.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
+  const DescriptionOption = (props) => {
+    const innerProps = { ...props.innerProps, title: props.data.description };
 
-    // sort by property
-    JsonLdObjectUtils.orderPreservingToplogicalSort(options, Constants.HAS_PRECEDING_VALUE);
+    return <Option {...props} title={props.data.description} innerProps={innerProps} />;
+  };
 
-    return JsonLdUtils.processTypeaheadOptions(options);
-  }
-
-  render() {
-    const { Option } = components;
-
-    const DescriptionOption = (props) => {
-      const innerProps = { ...props.innerProps, title: props.data.description };
-
-      return <Option {...props} title={props.data.description} innerProps={innerProps} />;
-    };
-
-    return (
-      <FormGroup size="small">
-        <Form.Label>{this.props.label}</Form.Label>
-        <Select
-          options={this.state.options}
-          isSearchable={true}
-          isLoading={this.state.isLoading}
-          isClearable={true}
-          isDisabled={FormUtils.isDisabled(this.props.question)}
-          value={this.state.options.filter((option) => option.id === this.props.value)}
-          placeholder={!this.state.isLoading ? this.props.label : ''}
-          getOptionLabel={(option) => option.name}
-          getOptionValue={(option) => option.id}
-          onChange={this.onOptionSelected}
-          components={{ Option: DescriptionOption }}
-        />
-      </FormGroup>
-    );
-  }
-}
+  return (
+    <FormGroup size="small">
+      <Form.Label>{props.label}</Form.Label>
+      <Select
+        options={options}
+        isSearchable={true}
+        isLoading={isLoading}
+        isClearable={true}
+        isDisabled={FormUtils.isDisabled(props.question, componentsContext.options)}
+        value={options.filter((option) => option.id === props.value)}
+        placeholder={!isLoading ? props.label : ''}
+        getOptionLabel={(option) => option.name}
+        getOptionValue={(option) => option.id}
+        onChange={onOptionSelected}
+        components={{ Option: DescriptionOption }}
+      />
+    </FormGroup>
+  );
+};
 
 TypeaheadAnswer.propTypes = {
   question: PropTypes.object.isRequired,
@@ -91,3 +96,5 @@ TypeaheadAnswer.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired
 };
+
+export default TypeaheadAnswer;

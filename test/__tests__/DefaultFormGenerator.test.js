@@ -5,12 +5,9 @@ import WizardGenerator from '../../src/model/WizardGenerator';
 import DefaultFormGenerator from '../../src/model/DefaultFormGenerator';
 
 describe('Default form generator', () => {
-  let initWizard;
   let textValue;
 
   beforeEach(() => {
-    initWizard = jest.fn();
-    Configuration.initWizard = initWizard;
     Configuration.intl = {
       locale: 'en'
     };
@@ -19,11 +16,14 @@ describe('Default form generator', () => {
 
   it('generates empty one-step wizard as a default form', async () => {
     const form = DefaultFormGenerator.generateForm();
-    const wizard = await WizardGenerator.createDefaultWizard(null, null);
+    const [wizardProperties, structure] = await WizardGenerator.createDefaultWizard(null, null, null);
 
-    expect(wizard.steps.length).toEqual(1);
-    expect(initWizard).toHaveBeenCalledWith({ root: form['@graph'][0] }, [
-      form['@graph'][0][Constants.HAS_SUBQUESTION][0]
+    expect(wizardProperties.steps.length).toEqual(1);
+
+    expect(structure).toEqual({ root: form['@graph'][0] });
+
+    expect(wizardProperties.steps[0][Constants.HAS_SUBQUESTION]).toEqual([
+      form['@graph'][0][Constants.HAS_SUBQUESTION][0][Constants.HAS_SUBQUESTION][0]
     ]);
   });
 

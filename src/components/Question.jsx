@@ -14,6 +14,7 @@ import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
 import PrefixIcon from './PrefixIcon';
 import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
+import { WizardContext } from '../contexts/WizardContext';
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
@@ -128,6 +129,7 @@ export default class Question extends React.Component {
     let row = [],
       cls,
       isTextarea;
+
     for (let i = 0, len = answers.length; i < len; i++) {
       isTextarea =
         FormUtils.isTextarea(this.props.question, FormUtils.resolveValue(answers[i])) ||
