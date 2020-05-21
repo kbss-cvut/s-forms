@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
-import Configuration from '../../model/Configuration';
 import * as Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import YASQE from 'yasgui-yasqe';
+import { ComponentsContext } from '../../contexts/ComponentsContext';
 
 const NUMERIC_DATATYPES = [
   Constants.XSD.INT,
@@ -51,7 +51,7 @@ class InputPropertiesResolver {
     return false;
   }
 
-  static resolveInputProperties(question, value) {
+  static resolveInputProperties(question, value, options) {
     let props = {};
     props.type = InputPropertiesResolver._resolveInputType(question, value);
     switch (props['type']) {
@@ -64,7 +64,7 @@ class InputPropertiesResolver {
       default:
         break;
     }
-    props.disabled = FormUtils.isDisabled(question);
+    props.disabled = FormUtils.isDisabled(question, options.readOnly);
     if (question[Constants.HAS_VALID_ANSWER] === false) {
       props.validation = 'error';
       props.help = question[Constants.HAS_VALIDATION_MESSAGE];
@@ -97,16 +97,18 @@ class InputPropertiesResolver {
 }
 
 const InputAnswer = (props) => {
-  const question = props.question,
-    answer = props.answer;
+  const { inputComponent, options } = useContext(ComponentsContext);
+
+  const question = props.question;
+  const answer = props.answer;
   let value = props.value;
   // When the value is an object_value, but the layout does not specify neither typeahead nor select,
   // show at least the value's label
   if (answer[Constants.HAS_OBJECT_VALUE] && answer[Constants.HAS_OBJECT_VALUE][JsonLdUtils.RDFS_LABEL]) {
     value = JsonLdUtils.getJsonAttValue(answer[Constants.HAS_OBJECT_VALUE], JsonLdUtils.RDFS_LABEL);
   }
-  return React.createElement(Configuration.inputComponent, {
-    ...InputPropertiesResolver.resolveInputProperties(question, value),
+  return React.createElement(inputComponent, {
+    ...InputPropertiesResolver.resolveInputProperties(question, value, options),
     label: props.label,
     title: props.title,
     placeholder: props.label,

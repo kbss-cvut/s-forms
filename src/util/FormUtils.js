@@ -1,7 +1,6 @@
 import JsonLdUtils from 'jsonld-utils';
 import jsonld from 'jsonld';
 
-import Configuration from '../model/Configuration';
 import * as Constants from '../constants/Constants';
 import Utils from './Utils';
 import JsonLdObjectMap from './JsonLdObjectMap';
@@ -32,8 +31,8 @@ export default class FormUtils {
     return JsonLdUtils.getJsonAttValue(question, Constants.HAS_OPTIONS_QUERY);
   }
 
-  static isDisabled(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DISABLED) || Configuration.readOnly;
+  static isDisabled(question, options) {
+    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DISABLED) || options.readOnly;
   }
 
   static isHidden(question) {

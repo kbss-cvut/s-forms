@@ -1,7 +1,6 @@
 import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import { format } from 'date-fns';
-import { shallow } from 'enzyme';
 import DatePicker from 'react-datepicker';
 import Select from 'react-select';
 
@@ -12,9 +11,11 @@ import * as Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 import MaskedInput from '../../src/components/MaskedInput';
 import { FormGenContext } from '../../src/contexts/FormGenContext';
+import { ComponentsContext } from '../../src/contexts/ComponentsContext';
+import DefaultInput from '../../src/components/DefaultInput';
 
 describe('Answer component', () => {
-  let question, onChange, answer, getOptions;
+  let question, onChange, answer, getOptions, loadFormOptions;
 
   beforeEach(() => {
     question = {
@@ -33,15 +34,25 @@ describe('Answer component', () => {
     Configuration.intl = {
       locale: 'en'
     };
+    getOptions = jest.fn(() => []);
+    loadFormOptions = jest.fn();
   });
 
   it('renders a Typeahead when layout class is typeahead', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     const component = mount(
-      <FormGenContext.Provider value={{ getOptions: () => [], loadFormOptions: () => [] }}>
-        <Answer answer={{}} question={question} onChange={onChange} />
-      </FormGenContext.Provider>
+      <ComponentsContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
+          <Answer answer={{}} question={question} onChange={onChange}/>
+        </FormGenContext.Provider>
+      </ComponentsContext.Provider>
     );
+
     const typeahead = component.find(Select);
     expect(typeahead).not.toBeNull();
   });
@@ -57,15 +68,48 @@ describe('Answer component', () => {
     question[Constants.HAS_OPTIONS_QUERY] = 'SELECT * WHERE {?x ?y ?z. }';
 
     const component = mount(
-      <FormGenContext.Provider value={{ getOptions, loadFormOptions: () => options }}>
-        <Answer answer={answer} question={question} onChange={onChange} />
-      </FormGenContext.Provider>
+      <ComponentsContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <FormGenContext.Provider value={{ getOptions, loadFormOptions: () => options }}>
+          <Answer answer={answer} question={question} onChange={onChange}/>
+        </FormGenContext.Provider>
+      </ComponentsContext.Provider>
     );
+
+    waitForComponentToPaint(component);
     const typeahead = component.find(Answer).find(TypeaheadAnswer).find(Select);
 
     expect(typeahead).not.toBeNull();
 
     expect(typeahead.state('value')[0].name).toEqual(valueLabel);
+  });
+
+  it('loads typeahead options when layout class is typeahead and no possible values are specified', () => {
+    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
+    const query = 'SELECT * WHERE { ?x ?y ?z .}';
+    question[Constants.HAS_OPTIONS_QUERY] = query;
+
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
+          <Answer answer={{}} question={question} onChange={onChange}/>
+        </FormGenContext.Provider>
+      </ComponentsContext.Provider>
+    );
+
+    waitForComponentToPaint(component);
+
+    expect(loadFormOptions).toHaveBeenCalled();
+    expect(loadFormOptions.mock.calls[0][1]).toEqual(query);
   });
 
   function answerWithCodeValue(value) {
@@ -83,7 +127,16 @@ describe('Answer component', () => {
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
 
-    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange}/>s
+      </ComponentsContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input).not.toBeNull();
@@ -103,15 +156,26 @@ describe('Answer component', () => {
   }
 
   it('renders date picker with answer value when date layout class is specified', () => {
-    Configuration.dateTimeFormat = 'yyyy-MM-dd';
     const date = new Date('2000-01-01');
-    const value = format(date, Configuration.dateTimeFormat);
+    const value = format(date, 'yyyy-MM-dd HH:mm:ss');
 
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATE);
 
-    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: {
+            readOnly: false,
+            dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+          },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange}/>
+      </ComponentsContext.Provider>
+    );
     const picker = component.find(DatePicker);
 
     expect(picker).not.toBeNull();
@@ -121,15 +185,26 @@ describe('Answer component', () => {
   });
 
   it('renders time picker with answer value when time layout class is specified', () => {
-    Configuration.dateTimeFormat = 'HH:mm:ss';
     const date = new Date();
-    const value = format(date, Configuration.dateTimeFormat);
+    const value = format(date, 'HH:mm:ss');
 
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
 
-    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: {
+            readOnly: false,
+            dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+          },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange}/>
+      </ComponentsContext.Provider>
+    );
     const picker = component.find(DatePicker);
 
     expect(picker).not.toBeNull();
@@ -139,14 +214,25 @@ describe('Answer component', () => {
   });
 
   it('renders datetime picker with answer value when datetime layout class is specified', () => {
-    Configuration.dateTimeFormat = 'yyyy-MM-dd HH:mm:ss';
     const date = new Date();
-    const value = format(date, Configuration.dateTimeFormat);
+    const value = format(date, 'yyyy-MM-dd HH:mm:ss');
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
-    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: {
+            readOnly: false,
+            dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+          },
+          inputComponent: { inputComponent: DefaultInput }
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange}/>
+      </ComponentsContext.Provider>
+    );
     const picker = component.find(DatePicker);
 
     expect(picker).not.toBeNull();
@@ -164,7 +250,19 @@ describe('Answer component', () => {
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
-    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: {
+            readOnly: false,
+            dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+          },
+          inputComponent: { inputComponent: DefaultInput }
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange}/>
+      </ComponentsContext.Provider>
+    );
     const picker = component.find(DatePicker);
 
     expect(picker).not.toBeNull();
@@ -181,7 +279,18 @@ describe('Answer component', () => {
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.CHECKBOX);
 
-    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: {
+            readOnly: false
+          },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange}/>
+      </ComponentsContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input).toBeDefined();
@@ -198,7 +307,18 @@ describe('Answer component', () => {
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
 
-    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: {
+            readOnly: false
+          },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange}/>
+      </ComponentsContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input).toBeDefined();
@@ -215,7 +335,18 @@ describe('Answer component', () => {
     answer[Constants.HAS_DATA_VALUE] = value;
     question[Constants.HAS_ANSWER] = [answer];
 
-    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: {
+            readOnly: false
+          },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange}/>
+      </ComponentsContext.Provider>
+    );
     const input = component.find('textarea');
 
     expect(input).toBeDefined();
@@ -233,7 +364,16 @@ describe('Answer component', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.MASKED_INPUT);
     question[Constants.INPUT_MASK] = mask;
 
-    const component = mount(<Answer answer={answer} question={question} onChange={onChange} />);
+    const component = mount(
+      <ComponentsContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange}/>
+      </ComponentsContext.Provider>
+    );
     const input = component.find(MaskedInput);
 
     expect(input).toBeDefined();

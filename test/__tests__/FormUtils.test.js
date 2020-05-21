@@ -1,5 +1,4 @@
 import FormUtils from '../../src/util/FormUtils';
-import Configuration from '../../src/model/Configuration';
 import * as Constants from '../../src/constants/Constants';
 import JsonObjectMap from '../../src/util/JsonLdObjectMap';
 
@@ -8,7 +7,6 @@ describe('FormUtils', () => {
 
   beforeEach(() => {
     question = {};
-    Configuration.readOnly = false;
   });
 
   describe('isForm', () => {
@@ -84,16 +82,11 @@ describe('FormUtils', () => {
   describe('isDisabled', () => {
     it('returns true for a disabled question.', () => {
       question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DISABLED];
-      expect(FormUtils.isDisabled(question)).toBeTruthy();
+      expect(FormUtils.isDisabled(question, { readOnly: true })).toBeTruthy();
     });
 
     it('returns false for enabled question.', () => {
-      expect(FormUtils.isDisabled(question)).toBeFalsy();
-    });
-
-    it('returns true for read only form configuration.', () => {
-      Configuration.readOnly = true;
-      expect(FormUtils.isDisabled(question)).toBeTruthy();
+      expect(FormUtils.isDisabled(question, { readOnly: false })).toBeFalsy();
     });
   });
 

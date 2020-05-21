@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Configuration from '../../model/Configuration';
 import FormUtils from '../../util/FormUtils';
 import * as Constants from '../../constants/Constants';
+import { ComponentsContext } from '../../contexts/ComponentsContext';
 
 class InputPropertiesResolver {
   static resolveValidationProperties(question) {
@@ -16,8 +16,11 @@ class InputPropertiesResolver {
 }
 
 const CheckboxAnswer = (props) => {
+  const { inputComponent, options } = useContext(ComponentsContext);
+
   const question = props.question;
-  return React.createElement(Configuration.inputComponent, {
+
+  return React.createElement(inputComponent, {
     ...InputPropertiesResolver.resolveValidationProperties(question),
     type: 'checkbox',
     label: props.label,
@@ -26,7 +29,7 @@ const CheckboxAnswer = (props) => {
     onChange: (e) => {
       props.onChange(e.target.checked);
     },
-    disabled: FormUtils.isDisabled(question)
+    disabled: FormUtils.isDisabled(question, options.readOnly)
   });
 };
 

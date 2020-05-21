@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import InputMask from 'inputmask-core';
-import Configuration from '../model/Configuration';
 import MaskMapper from '../util/MaskMapper';
+import { ComponentsContext } from '../contexts/ComponentsContext';
 
 const KEYCODE_Z = 90;
 const KEYCODE_Y = 89;
@@ -225,7 +225,7 @@ export default class MaskedInput extends React.Component {
     const { size, placeholder, ...props } = this.props,
       patternLength = this.mask.pattern.length;
 
-    return React.createElement(Configuration.inputComponent, {
+    return React.createElement(this.context.inputComponent, {
       ...props,
       ref: (r) => {
         if (r) {
@@ -244,6 +244,8 @@ export default class MaskedInput extends React.Component {
     });
   }
 }
+
+MaskedInput.contextType = ComponentsContext;
 
 MaskedInput.propTypes = {
   mask: PropTypes.string.isRequired

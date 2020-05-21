@@ -87,11 +87,11 @@ class Wizard extends React.Component {
   };
 
   render() {
-    const cardClassname = Configuration.horizontalWizardNav ? '' : 'flex-row p-2';
-    const containerClassname = Configuration.horizontalWizardNav ? 'card-body' : 'col-10 p-0';
+    const cardClassname = this.props.horizontalWizardNav ? '' : 'flex-row p-2';
+    const containerClassname = this.props.horizontalWizardNav ? 'card-body' : 'col-10 p-0';
     return (
       <Card className={cardClassname}>
-        {Configuration.horizontalWizardNav ? (
+        {this.props.horizontalWizardNav ? (
           <HorizontalWizardNav
             currentStep={this.state.currentStep}
             steps={this.props.steps}
@@ -143,17 +143,24 @@ class Wizard extends React.Component {
         isFirstStep={this.state.currentStep === 0}
         isLastStep={this.state.currentStep === this.props.steps.length - 1}
         defaultNextDisabled={step.defaultNextDisabled}
+        i18n={this.props.i18n}
       />
     );
   };
 }
+
+Wizard.defaultProps = {
+  horizontalWizardNav: true
+};
 
 Wizard.propTypes = {
   start: PropTypes.number,
   steps: PropTypes.array,
   onFinish: PropTypes.func,
   onClose: PropTypes.func,
-  enableForwardSkip: PropTypes.bool // Whether to allow forward step skipping
+  enableForwardSkip: PropTypes.bool, // Whether to allow forward step skipping
+  horizontalWizardNav: PropTypes.bool,
+  i18n: PropTypes.object
 };
 
 Wizard.contextType = WizardContext;

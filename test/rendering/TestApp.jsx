@@ -20,18 +20,14 @@ class TestApp extends React.Component {
     this.form = React.createRef();
   }
 
+  fetchTypeAheadValues = (query) => {
+    return new Promise((resolve) => setTimeout(resolve(possibleValues), 1500));
+  };
+
   async componentDidMount() {
-    Configuration.dateFormat = 'yyyy-MM-dd';
     Configuration.intl = {
       locale: 'cs'
     };
-    Configuration.fetchTypeAheadValues = () => new Promise((resolve) => setTimeout(resolve(possibleValues), 1500));
-    Configuration.i18n = {
-      'wizard.next': 'Next',
-      'wizard.previous': 'Previous'
-    };
-    Configuration.horizontalWizardNav = true;
-    Configuration.modalView = false;
 
     const [wizardProperties, structure] = await WizardGenerator.createWizard(form, null, null);
     this.setState({ wizardProperties, form: structure });
@@ -42,6 +38,12 @@ class TestApp extends React.Component {
       return <div>'Loading wizard...'</div>;
     }
 
+    const modalProps = {
+      onHide: () => {},
+      show: true,
+      title: 'Title'
+    };
+
     return (
       <React.Fragment>
         <WizardContainer
@@ -49,9 +51,14 @@ class TestApp extends React.Component {
           steps={this.state.wizardProperties.steps}
           data={this.state.form}
           enableForwardSkip={true}
-          onHide={() => {}}
-          show={true}
-          title={'Title'}
+          horizontalWizardNav={true}
+          modalView={false}
+          modalProps
+          i18n={{
+            'wizard.next': 'Next',
+            'wizard.previous': 'Previous'
+          }}
+          fetchTypeAheadValues={this.fetchTypeAheadValues}
           isFormValid={(isFormValid) => this.setState({ isFormValid })}
         />
         <button

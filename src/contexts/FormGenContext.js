@@ -2,7 +2,6 @@ import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import jsonld from 'jsonld';
 import Logger from '../util/Logger';
-import Configuration from '../model/Configuration';
 
 const FormGenContext = React.createContext({});
 
@@ -16,7 +15,7 @@ const FormGenContextProvider = ({ children, ...props }) => {
       return option;
     }
 
-    const data = await Configuration.fetchTypeAheadValues(query);
+    const data = await props.fetchTypeAheadValues(query);
 
     if (data.length) {
       return new Promise((resolve) => {

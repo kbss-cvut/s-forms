@@ -5,7 +5,6 @@ import HelpIcon from '../HelpIcon';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import { WizardContext } from '../../contexts/WizardContext';
-import { FormGenContext } from '../../contexts/FormGenContext';
 import Configuration from '../../model/Configuration';
 import GeneratedStep from '../GeneratedStep';
 
@@ -62,7 +61,7 @@ const WizardStep = (props) => {
     if (!props.isLastStep) {
       return (
         <Button onClick={onNext} disabled={advanceDisabled} variant="primary" size="sm">
-          {Configuration.i18n['wizard.next']}
+          {props.i18n['wizard.next']}
         </Button>
       );
     }
@@ -95,7 +94,7 @@ const WizardStep = (props) => {
       <ButtonToolbar className="m-3 float-right">
         {!props.isFirstStep && (
           <Button className="mr-2" onClick={onPrevious} disabled={retreatDisabled} variant="primary" size="sm">
-            {Configuration.i18n['wizard.previous']}
+            {props.i18n['wizard.previous']}
           </Button>
         )}
         {renderAdvanceButton()}
@@ -109,6 +108,13 @@ const WizardStep = (props) => {
   );
 };
 
+WizardStep.defaultProps = {
+  i18n: {
+    'wizard.next': 'Next',
+    'wizard.previous': 'Previous'
+  }
+};
+
 WizardStep.propTypes = {
   onClose: PropTypes.func,
   onFinish: PropTypes.func.isRequired,
@@ -120,7 +126,8 @@ WizardStep.propTypes = {
   stepIndex: PropTypes.number.isRequired,
   isFirstStep: PropTypes.bool,
   isLastStep: PropTypes.bool,
-  defaultNextDisabled: PropTypes.bool
+  defaultNextDisabled: PropTypes.bool,
+  i18n: PropTypes.object
 };
 
 export default WizardStep;
