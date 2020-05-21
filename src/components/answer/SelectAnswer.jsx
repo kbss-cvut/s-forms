@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import * as Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
-import { ComponentsContext } from '../../contexts/ComponentsContext';
+import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 export default class SelectAnswer extends React.Component {
   _generateSelectOptions(options) {
@@ -49,7 +49,7 @@ export default class SelectAnswer extends React.Component {
   }
 }
 
-SelectAnswer.contextType = ComponentsContext;
+SelectAnswer.contextType = ConfigurationContext;
 
 SelectAnswer.propTypes = {
   question: PropTypes.object.isRequired,

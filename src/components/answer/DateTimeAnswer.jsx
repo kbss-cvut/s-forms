@@ -6,12 +6,12 @@ import { format } from 'date-fns';
 import Utils from '../../util/Utils';
 import FormUtils from '../../util/FormUtils';
 import * as Constants from '../../constants/Constants';
-import { ComponentsContext } from '../../contexts/ComponentsContext';
+import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DateTimeAnswer = (props) => {
-  const { options } = useContext(ComponentsContext);
+  const { options } = useContext(ConfigurationContext);
 
   const dateFormat = Utils.resolveDateTimeFormat(props.question, props.value, options.dateTimeAnswer);
 

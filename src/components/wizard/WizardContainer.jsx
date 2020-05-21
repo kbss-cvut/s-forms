@@ -2,18 +2,18 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormGenContextProvider } from '../../contexts/FormGenContext';
 import { WizardContextProvider } from '../../contexts/WizardContext';
-import { ComponentsContextProvider } from '../../contexts/ComponentsContext';
+import { ConfigurationContextProvider } from '../../contexts/ConfigurationContext';
 import Wizard from './Wizard';
 import WizardWindow from './WizardWindow';
 
 const WizardContainer = forwardRef((props, ref) => (
-  <ComponentsContextProvider components={props.components} componentsOptions={props.componentsOptions}>
+  <ConfigurationContextProvider components={props.components} componentsOptions={props.componentsOptions}>
     <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
       <WizardContextProvider {...props}>
         {props.modalView ? <WizardWindow {...props} ref={ref} /> : <Wizard {...props} ref={ref} />}
       </WizardContextProvider>
     </FormGenContextProvider>
-  </ComponentsContextProvider>
+  </ConfigurationContextProvider>
 ));
 
 WizardContainer.defaultProps = {

@@ -7,7 +7,7 @@ import Configuration from '../../src/model/Configuration';
 import * as Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 import { FormGenContext } from '../../src/contexts/FormGenContext';
-import { ComponentsContext } from '../../src/contexts/ComponentsContext';
+import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
 import DefaultInput from '../../src/components/DefaultInput';
 
 describe('TypeaheadAnswer', () => {
@@ -51,16 +51,16 @@ describe('TypeaheadAnswer', () => {
     question[Constants.HAS_OPTIONS_QUERY] = query;
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
-          <TypeaheadAnswer answer={{}} question={question} onChange={onChange} label="TestLabel" options={options}/>
+          <TypeaheadAnswer answer={{}} question={question} onChange={onChange} label="TestLabel" options={options} />
         </FormGenContext.Provider>
-      </ComponentsContext.Provider>
+      </ConfigurationContext.Provider>
     );
 
     waitForComponentToPaint(component);

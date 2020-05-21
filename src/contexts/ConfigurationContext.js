@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-const ComponentsContext = React.createContext({});
+const ConfigurationContext = React.createContext({});
 
-const ComponentsContextProvider = ({ children, ...props }) => {
+const ConfigurationContextProvider = ({ children, ...props }) => {
   const values = useMemo(
     () => ({
       inputComponent: props.components.inputComponent || require('../components/DefaultInput').default,
@@ -12,10 +12,10 @@ const ComponentsContextProvider = ({ children, ...props }) => {
     []
   );
 
-  return <ComponentsContext.Provider value={values}>{children}</ComponentsContext.Provider>;
+  return <ConfigurationContext.Provider value={values}>{children}</ConfigurationContext.Provider>;
 };
 
-ComponentsContextProvider.defaultProps = {
+ConfigurationContextProvider.defaultProps = {
   components: {},
   componentsOptions: {
     dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' },
@@ -23,10 +23,10 @@ ComponentsContextProvider.defaultProps = {
   }
 };
 
-ComponentsContextProvider.propTypes = {
+ConfigurationContextProvider.propTypes = {
   children: PropTypes.element.isRequired,
   components: PropTypes.object,
   componentsOptions: PropTypes.object
 };
 
-export { ComponentsContext, ComponentsContextProvider };
+export { ConfigurationContext, ConfigurationContextProvider };

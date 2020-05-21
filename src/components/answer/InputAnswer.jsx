@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import YASQE from 'yasgui-yasqe';
-import { ComponentsContext } from '../../contexts/ComponentsContext';
+import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 const NUMERIC_DATATYPES = [
   Constants.XSD.INT,
@@ -97,7 +97,7 @@ class InputPropertiesResolver {
 }
 
 const InputAnswer = (props) => {
-  const { inputComponent, options } = useContext(ComponentsContext);
+  const { inputComponent, options } = useContext(ConfigurationContext);
 
   const question = props.question;
   const answer = props.answer;

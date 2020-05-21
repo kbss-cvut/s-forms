@@ -5,7 +5,7 @@ import Answer from '../../src/components/Answer';
 import Configuration from '../../src/model/Configuration';
 import * as Constants from '../../src/constants/Constants';
 import * as Generator from '../environment/Generator';
-import { ComponentsContext } from '../../src/contexts/ComponentsContext';
+import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
 import DefaultInput from '../../src/components/DefaultInput';
 
 const LABEL = 'Input answer test';
@@ -43,12 +43,16 @@ describe('InputAnswer', () => {
     question[Constants.XSD.MIN_INCLUSIVE] = min;
     answer[Constants.HAS_DATA_VALUE] = value;
 
-    const component = mount(      <ComponentsContext.Provider
-      value={{
-        options: { readOnly: false },
-        inputComponent: DefaultInput
-      }}
-    ><Answer question={question} answer={answer} onChange={onChange} /></ComponentsContext.Provider>);
+    const component = mount(
+      <ConfigurationContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer question={question} answer={answer} onChange={onChange} />
+      </ConfigurationContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input.props().type).toEqual('number');
@@ -62,12 +66,16 @@ describe('InputAnswer', () => {
     question[Constants.XSD.MIN_EXCLUSIVE] = min;
     answer[Constants.HAS_DATA_VALUE] = value;
 
-    const component = mount(      <ComponentsContext.Provider
-      value={{
-        options: { readOnly: false },
-        inputComponent: DefaultInput
-      }}
-    ><Answer question={question} answer={answer} onChange={onChange} /></ComponentsContext.Provider>);
+    const component = mount(
+      <ConfigurationContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer question={question} answer={answer} onChange={onChange} />
+      </ConfigurationContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input.props().type).toEqual('number');
@@ -81,12 +89,16 @@ describe('InputAnswer', () => {
     question[Constants.XSD.MAX_EXCLUSIVE] = max;
     answer[Constants.HAS_DATA_VALUE] = value;
 
-    const component = mount(      <ComponentsContext.Provider
-      value={{
-        options: { readOnly: false },
-        inputComponent: DefaultInput
-      }}
-    ><Answer question={question} answer={answer} onChange={onChange} /></ComponentsContext.Provider>);
+    const component = mount(
+      <ConfigurationContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer question={question} answer={answer} onChange={onChange} />
+      </ConfigurationContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input.props().type).toEqual('number');
@@ -100,12 +112,16 @@ describe('InputAnswer', () => {
     question[Constants.XSD.MAX_INCLUSIVE] = max;
     answer[Constants.HAS_DATA_VALUE] = value;
 
-    const component = mount(      <ComponentsContext.Provider
-      value={{
-        options: { readOnly: false },
-        inputComponent: DefaultInput
-      }}
-    ><Answer question={question} answer={answer} onChange={onChange} /></ComponentsContext.Provider>);
+    const component = mount(
+      <ConfigurationContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer question={question} answer={answer} onChange={onChange} />
+      </ConfigurationContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input.props().type).toEqual('number');
@@ -121,12 +137,16 @@ describe('InputAnswer', () => {
     question[Constants.XSD.MIN_INCLUSIVE] = min;
     answer[Constants.HAS_DATA_VALUE] = value;
 
-    const component = mount(      <ComponentsContext.Provider
-      value={{
-        options: { readOnly: false },
-        inputComponent: DefaultInput
-      }}
-    ><Answer question={question} answer={answer} onChange={onChange} /></ComponentsContext.Provider>);
+    const component = mount(
+      <ConfigurationContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer question={question} answer={answer} onChange={onChange} />
+      </ConfigurationContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input.props().type).toEqual('number');
@@ -139,12 +159,16 @@ describe('InputAnswer', () => {
     question[Constants.HAS_DATATYPE] = Constants.XSD.POSITIVE_INTEGER;
     answer[Constants.HAS_DATA_VALUE] = value;
 
-    const component = mount(      <ComponentsContext.Provider
-      value={{
-        options: { readOnly: false },
-        inputComponent: DefaultInput
-      }}
-    ><Answer question={question} answer={answer} onChange={onChange} /></ComponentsContext.Provider>);
+    const component = mount(
+      <ConfigurationContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer question={question} answer={answer} onChange={onChange} />
+      </ConfigurationContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input.props().type).toEqual('number');

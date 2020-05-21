@@ -11,7 +11,7 @@ import * as Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 import MaskedInput from '../../src/components/MaskedInput';
 import { FormGenContext } from '../../src/contexts/FormGenContext';
-import { ComponentsContext } from '../../src/contexts/ComponentsContext';
+import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
 import DefaultInput from '../../src/components/DefaultInput';
 
 describe('Answer component', () => {
@@ -41,16 +41,16 @@ describe('Answer component', () => {
   it('renders a Typeahead when layout class is typeahead', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
-          <Answer answer={{}} question={question} onChange={onChange}/>
+          <Answer answer={{}} question={question} onChange={onChange} />
         </FormGenContext.Provider>
-      </ComponentsContext.Provider>
+      </ConfigurationContext.Provider>
     );
 
     const typeahead = component.find(Select);
@@ -68,16 +68,16 @@ describe('Answer component', () => {
     question[Constants.HAS_OPTIONS_QUERY] = 'SELECT * WHERE {?x ?y ?z. }';
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions: () => options }}>
-          <Answer answer={answer} question={question} onChange={onChange}/>
+          <Answer answer={answer} question={question} onChange={onChange} />
         </FormGenContext.Provider>
-      </ComponentsContext.Provider>
+      </ConfigurationContext.Provider>
     );
 
     waitForComponentToPaint(component);
@@ -94,16 +94,16 @@ describe('Answer component', () => {
     question[Constants.HAS_OPTIONS_QUERY] = query;
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
-          <Answer answer={{}} question={question} onChange={onChange}/>
+          <Answer answer={{}} question={question} onChange={onChange} />
         </FormGenContext.Provider>
-      </ComponentsContext.Provider>
+      </ConfigurationContext.Provider>
     );
 
     waitForComponentToPaint(component);
@@ -128,14 +128,14 @@ describe('Answer component', () => {
     question[Constants.HAS_ANSWER] = [answer];
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange}/>s
-      </ComponentsContext.Provider>
+        <Answer answer={answer} question={question} onChange={onChange} />s
+      </ConfigurationContext.Provider>
     );
     const input = component.find('input');
 
@@ -164,7 +164,7 @@ describe('Answer component', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATE);
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: {
             readOnly: false,
@@ -173,8 +173,8 @@ describe('Answer component', () => {
           inputComponent: DefaultInput
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange}/>
-      </ComponentsContext.Provider>
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
     );
     const picker = component.find(DatePicker);
 
@@ -193,7 +193,7 @@ describe('Answer component', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: {
             readOnly: false,
@@ -202,8 +202,8 @@ describe('Answer component', () => {
           inputComponent: DefaultInput
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange}/>
-      </ComponentsContext.Provider>
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
     );
     const picker = component.find(DatePicker);
 
@@ -221,7 +221,7 @@ describe('Answer component', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: {
             readOnly: false,
@@ -230,8 +230,8 @@ describe('Answer component', () => {
           inputComponent: { inputComponent: DefaultInput }
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange}/>
-      </ComponentsContext.Provider>
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
     );
     const picker = component.find(DatePicker);
 
@@ -251,7 +251,7 @@ describe('Answer component', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: {
             readOnly: false,
@@ -260,8 +260,8 @@ describe('Answer component', () => {
           inputComponent: { inputComponent: DefaultInput }
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange}/>
-      </ComponentsContext.Provider>
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
     );
     const picker = component.find(DatePicker);
 
@@ -280,7 +280,7 @@ describe('Answer component', () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.CHECKBOX);
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: {
             readOnly: false
@@ -288,8 +288,8 @@ describe('Answer component', () => {
           inputComponent: DefaultInput
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange}/>
-      </ComponentsContext.Provider>
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
     );
     const input = component.find('input');
 
@@ -308,7 +308,7 @@ describe('Answer component', () => {
     question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: {
             readOnly: false
@@ -316,8 +316,8 @@ describe('Answer component', () => {
           inputComponent: DefaultInput
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange}/>
-      </ComponentsContext.Provider>
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
     );
     const input = component.find('input');
 
@@ -336,7 +336,7 @@ describe('Answer component', () => {
     question[Constants.HAS_ANSWER] = [answer];
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: {
             readOnly: false
@@ -344,8 +344,8 @@ describe('Answer component', () => {
           inputComponent: DefaultInput
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange}/>
-      </ComponentsContext.Provider>
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
     );
     const input = component.find('textarea');
 
@@ -365,14 +365,14 @@ describe('Answer component', () => {
     question[Constants.INPUT_MASK] = mask;
 
     const component = mount(
-      <ComponentsContext.Provider
+      <ConfigurationContext.Provider
         value={{
           options: { readOnly: false },
           inputComponent: DefaultInput
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange}/>
-      </ComponentsContext.Provider>
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
     );
     const input = component.find(MaskedInput);
 

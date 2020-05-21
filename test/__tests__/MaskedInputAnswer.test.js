@@ -5,7 +5,7 @@ import Answer from '../../src/components/Answer';
 import * as Constants from '../../src/constants/Constants';
 import * as Environment from '../environment/Environment';
 import * as Generator from '../environment/Generator';
-import { ComponentsContext } from '../../src/contexts/ComponentsContext';
+import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
 import DefaultInput from '../../src/components/DefaultInput';
 
 describe('MaskedInputAnswer', () => {
@@ -28,12 +28,16 @@ describe('MaskedInputAnswer', () => {
     question[JsonLdUtils.RDFS_LABEL] = 'Test';
     question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.MASKED_INPUT];
 
-    const component = mount(<ComponentsContext.Provider
-      value={{
-        options: { readOnly: false },
-        inputComponent: DefaultInput
-      }}
-    ><Answer answer={answer} question={question} onChange={onChange}/></ComponentsContext.Provider>);
+    const component = mount(
+      <ConfigurationContext.Provider
+        value={{
+          options: { readOnly: false },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input.props().value).toEqual(value);
@@ -51,12 +55,16 @@ describe('MaskedInputAnswer', () => {
     question[Constants.INPUT_MASK] = mask;
     question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.MASKED_INPUT, Constants.LAYOUT.DISABLED];
 
-    const component = mount(<ComponentsContext.Provider
-      value={{
-        options: { readOnly: true },
-        inputComponent: DefaultInput
-      }}
-    ><Answer answer={answer} question={question} onChange={onChange}/></ComponentsContext.Provider>);
+    const component = mount(
+      <ConfigurationContext.Provider
+        value={{
+          options: { readOnly: true },
+          inputComponent: DefaultInput
+        }}
+      >
+        <Answer answer={answer} question={question} onChange={onChange} />
+      </ConfigurationContext.Provider>
+    );
     const input = component.find('input');
 
     expect(input.props().value).toEqual(value);

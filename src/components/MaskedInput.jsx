@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import InputMask from 'inputmask-core';
 import MaskMapper from '../util/MaskMapper';
-import { ComponentsContext } from '../contexts/ComponentsContext';
+import { ConfigurationContext } from '../contexts/ConfigurationContext';
 
 const KEYCODE_Z = 90;
 const KEYCODE_Y = 89;
@@ -245,7 +245,7 @@ export default class MaskedInput extends React.Component {
   }
 }
 
-MaskedInput.contextType = ComponentsContext;
+MaskedInput.contextType = ConfigurationContext;
 
 MaskedInput.propTypes = {
   mask: PropTypes.string.isRequired

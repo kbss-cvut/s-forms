@@ -7,10 +7,10 @@ import FormUtils from '../../util/FormUtils';
 import InputAnswer from './InputAnswer';
 import Logger from '../../util/Logger';
 import MaskedInput from '../MaskedInput';
-import { ComponentsContext } from '../../contexts/ComponentsContext';
+import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 const MaskedInputAnswer = (props) => {
-  const { options } = useContext(ComponentsContext);
+  const { options } = useContext(ConfigurationContext);
 
   const question = props.question;
   const value = props.value;

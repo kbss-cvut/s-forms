@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import FormUtils from '../../util/FormUtils';
 import * as Constants from '../../constants/Constants';
-import { ComponentsContext } from '../../contexts/ComponentsContext';
+import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 class InputPropertiesResolver {
   static resolveValidationProperties(question) {
@@ -16,7 +16,7 @@ class InputPropertiesResolver {
 }
 
 const CheckboxAnswer = (props) => {
-  const { inputComponent, options } = useContext(ComponentsContext);
+  const { inputComponent, options } = useContext(ConfigurationContext);
 
   const question = props.question;
 

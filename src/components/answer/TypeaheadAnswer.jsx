@@ -10,7 +10,7 @@ import JsonLdObjectUtils from '../../util/JsonLdObjectUtils';
 import Logger from '../../util/Logger';
 import { FormGroup, Form } from 'react-bootstrap';
 import { FormGenContext } from '../../contexts/FormGenContext';
-import { ComponentsContext } from '../../contexts/ComponentsContext';
+import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 const processTypeaheadOptions = (options) => {
   if (!options) {
@@ -30,7 +30,7 @@ const TypeaheadAnswer = (props) => {
   const queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(props.question));
 
   const formGenContext = useContext(FormGenContext);
-  const componentsContext = useContext(ComponentsContext);
+  const configurationContext = useContext(ConfigurationContext);
 
   const [isLoading, setLoading] = useState(true);
   const [options, setOptions] = useState(processTypeaheadOptions(props.options));
@@ -72,7 +72,7 @@ const TypeaheadAnswer = (props) => {
   const DescriptionOption = (props) => {
     const innerProps = { ...props.innerProps, title: props.data.description };
 
-    return <Option {...props} title={props.data.description} innerProps={innerProps}/>;
+    return <Option {...props} title={props.data.description} innerProps={innerProps} />;
   };
 
   return (
@@ -83,7 +83,7 @@ const TypeaheadAnswer = (props) => {
         isSearchable={true}
         isLoading={isLoading}
         isClearable={true}
-        isDisabled={FormUtils.isDisabled(props.question, componentsContext.options)}
+        isDisabled={FormUtils.isDisabled(props.question, configurationContext.options)}
         value={options.filter((option) => option.id === props.value)}
         placeholder={''}
         getOptionLabel={(option) => option.name}
