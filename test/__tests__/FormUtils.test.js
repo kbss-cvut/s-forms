@@ -82,11 +82,11 @@ describe('FormUtils', () => {
   describe('isDisabled', () => {
     it('returns true for a disabled question.', () => {
       question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DISABLED];
-      expect(FormUtils.isDisabled(question, { readOnly: true })).toBeTruthy();
+      expect(FormUtils.isDisabled(question)).toBeTruthy();
     });
 
     it('returns false for enabled question.', () => {
-      expect(FormUtils.isDisabled(question, { readOnly: false })).toBeFalsy();
+      expect(FormUtils.isDisabled(question)).toBeFalsy();
     });
   });
 

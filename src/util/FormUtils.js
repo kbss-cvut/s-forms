@@ -31,8 +31,8 @@ export default class FormUtils {
     return JsonLdUtils.getJsonAttValue(question, Constants.HAS_OPTIONS_QUERY);
   }
 
-  static isDisabled(question, options) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DISABLED) || options.readOnly;
+  static isDisabled(question) {
+    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DISABLED);
   }
 
   static isHidden(question) {

@@ -42,7 +42,7 @@ export default class SelectAnswer extends React.Component {
         onChange: (e) => {
           this.props.onChange(e.target.value);
         },
-        disabled: FormUtils.isDisabled(question, this.context.options)
+        disabled: this.context.componentsOptions.readOnly || FormUtils.isDisabled(question)
       },
       this._generateSelectOptions(question[Constants.HAS_OPTION])
     );

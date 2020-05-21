@@ -51,7 +51,7 @@ class InputPropertiesResolver {
     return false;
   }
 
-  static resolveInputProperties(question, value, options) {
+  static resolveInputProperties(question, value, componentsOptions) {
     let props = {};
     props.type = InputPropertiesResolver._resolveInputType(question, value);
     switch (props['type']) {
@@ -64,7 +64,7 @@ class InputPropertiesResolver {
       default:
         break;
     }
-    props.disabled = FormUtils.isDisabled(question, options.readOnly);
+    props.disabled = componentsOptions.readOnly || FormUtils.isDisabled(question);
     if (question[Constants.HAS_VALID_ANSWER] === false) {
       props.validation = 'error';
       props.help = question[Constants.HAS_VALIDATION_MESSAGE];

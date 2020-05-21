@@ -51,7 +51,7 @@ const DateTimeAnswer = (props) => {
         timeCaption="Time"
         dateFormat={datePickerFormat}
         className="form-control"
-        disabled={FormUtils.isDisabled(props.question, componentsOptions.readOnly)}
+        disabled={componentsOptions.readOnly || FormUtils.isDisabled(props.question)}
       />
     </FormGroup>
   );

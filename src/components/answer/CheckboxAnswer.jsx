@@ -29,7 +29,7 @@ const CheckboxAnswer = (props) => {
     onChange: (e) => {
       props.onChange(e.target.checked);
     },
-    disabled: FormUtils.isDisabled(question, componentsOptions.readOnly)
+    disabled: componentsOptions.readOnly || FormUtils.isDisabled(question)
   });
 };
 

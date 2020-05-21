@@ -29,7 +29,7 @@ const MaskedInputAnswer = (props) => {
       title={props.title}
       placeholder={mask}
       onChange={(e) => props.onChange(e.target.value)}
-      disabled={FormUtils.isDisabled(question, componentsOptions)}
+      disabled={componentsOptions.readOnly || FormUtils.isDisabled(question)}
     />
   );
 };
