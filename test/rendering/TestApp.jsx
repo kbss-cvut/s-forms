@@ -53,7 +53,7 @@ class TestApp extends React.Component {
           enableForwardSkip={true}
           horizontalWizardNav={true}
           modalView={false}
-          modalProps
+          modalProps={modalProps}
           i18n={{
             'wizard.next': 'Next',
             'wizard.previous': 'Previous'

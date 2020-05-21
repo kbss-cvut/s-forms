@@ -14,7 +14,6 @@ import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
 import PrefixIcon from './PrefixIcon';
 import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
-import { WizardContext } from '../contexts/WizardContext';
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
