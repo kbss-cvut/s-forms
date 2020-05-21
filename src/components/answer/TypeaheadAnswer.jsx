@@ -65,7 +65,7 @@ const TypeaheadAnswer = (props) => {
   const DescriptionOption = (props) => {
     const innerProps = { ...props.innerProps, title: props.data.description };
 
-    return <Option {...props} title={props.data.description} innerProps={innerProps} />;
+    return <Option {...props} title={props.data.description} innerProps={innerProps}/>;
   };
 
   return (
@@ -78,7 +78,7 @@ const TypeaheadAnswer = (props) => {
         isClearable={true}
         isDisabled={FormUtils.isDisabled(props.question, componentsContext.options)}
         value={options.filter((option) => option.id === props.value)}
-        placeholder={!isLoading ? props.label : ''}
+        placeholder={''}
         getOptionLabel={(option) => option.name}
         getOptionValue={(option) => option.id}
         onChange={onOptionSelected}

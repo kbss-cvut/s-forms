@@ -150,20 +150,4 @@ describe('InputAnswer', () => {
     expect(input.props().type).toEqual('number');
     expect(input.props().min).toEqual(1);
   });
-
-  it('displays question label as input placeholder', () => {
-    const component = mount(
-      <ComponentsContext.Provider
-        value={{
-          options: { readOnly: false },
-          inputComponent: DefaultInput
-        }}
-      >
-        <Answer question={question} answer={answer} onChange={onChange} />
-      </ComponentsContext.Provider>
-    );
-    const input = component.find('input');
-
-    expect(input.props().placeholder).toEqual(LABEL);
-  });
 });

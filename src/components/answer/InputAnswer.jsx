@@ -111,7 +111,6 @@ const InputAnswer = (props) => {
     ...InputPropertiesResolver.resolveInputProperties(question, value, options),
     label: props.label,
     title: props.title,
-    placeholder: props.label,
     value: value == null ? '' : value,
     onChange: (e) => {
       props.onChange(e.target.value);

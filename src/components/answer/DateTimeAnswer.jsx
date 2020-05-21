@@ -23,7 +23,7 @@ const DateTimeAnswer = (props) => {
   if (isTime && props.value) {
     value = new Date(`0 ${props.value}`);
   } else {
-    value = props.value ? new Date(props.value) : new Date();
+    value = props.value ? new Date(props.value) : null;
   }
 
   // DatePicker does not know dateFormat "x", translate to datetime
@@ -37,15 +37,12 @@ const DateTimeAnswer = (props) => {
     }
   };
 
-  useEffect(() => {
-    onChange(value);
-  }, []);
-
   return (
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
       <DatePicker
         selected={value}
+        placeholderText={datePickerFormat.toUpperCase()}
         onChange={onChange}
         showTimeSelect={!isDate}
         showTimeSelectOnly={isTime}
