@@ -7,11 +7,10 @@ import PropTypes from 'prop-types';
 import { WizardContext } from '../../contexts/WizardContext';
 import { FormGenContext } from '../../contexts/FormGenContext';
 import Configuration from '../../model/Configuration';
+import GeneratedStep from '../GeneratedStep';
 
 const WizardStep = (props) => {
-  const generatedStep = React.createRef();
   const wizardContext = React.useContext(WizardContext);
-  const formGenContext = React.useContext(FormGenContext);
 
   const [advanceDisabled, setAdvanceDisabled] = useState(
     props.defaultNextDisabled != null ? props.defaultNextDisabled : false
@@ -28,10 +27,6 @@ const WizardStep = (props) => {
       wizardContext.updateStepData(props.stepIndex, getStepData());
       props.onAdvance();
     }
-  };
-
-  const getStepData = () => {
-    return generatedStep.current.getData ? generatedStep.current.getData() : null;
   };
 
   const onNext = () => {
@@ -74,21 +69,6 @@ const WizardStep = (props) => {
     return null;
   };
 
-  const renderComponent = () => {
-    const PropsComponent = props.component;
-
-    return (
-      <PropsComponent
-        ref={generatedStep}
-        stepIndex={props.stepIndex}
-        getStepData={wizardContext.getStepData}
-        updateStepData={wizardContext.updateStepData}
-        getOptions={formGenContext.getOptions}
-        loadFormOptions={formGenContext.loadFormOptions}
-      />
-    );
-  };
-
   const _renderHelpIcon = () => {
     const question = wizardContext.getStepData([props.stepIndex]);
 
@@ -107,7 +87,9 @@ const WizardStep = (props) => {
           {props.title}
           {_renderHelpIcon()}
         </Card.Header>
-        <Card.Body>{renderComponent()}</Card.Body>
+        <Card.Body>
+          <GeneratedStep stepIndex={props.stepIndex} question={wizardContext.getStepData(props.stepIndex)} />
+        </Card.Body>
       </Card>
 
       <ButtonToolbar className="m-3 float-right">

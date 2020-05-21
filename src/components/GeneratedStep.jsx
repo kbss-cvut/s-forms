@@ -1,33 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Question from './Question';
+import { WizardContext } from '../contexts/WizardContext';
 
-export default class GeneratedStep extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      question: this.props.getStepData(this.props.stepIndex)
-    };
-  }
+const GeneratedStep = (props) => {
+  const wizardContext = React.useContext(WizardContext);
 
-  onChange = (index, change) => {
-    this.props.updateStepData(this.props.stepIndex, { ...this.state.question, ...change });
-    this.setState({ question: this.props.getStepData(this.props.stepIndex) });
+  const onChange = (index, change) => {
+    wizardContext.updateStepData(props.stepIndex, { ...question, ...change });
   };
 
-  render() {
-    return (
-      <Question
-        question={this.state.question}
-        onChange={this.onChange}
-        withoutCard={true}
-        loadFormOptions={this.props.loadFormOptions}
-        getOptions={this.props.getOptions}
-      />
-    );
-  }
-}
+  const question = wizardContext.getStepData(props.stepIndex);
+
+  return <Question question={question} onChange={onChange} withoutCard={true} />;
+};
 
 GeneratedStep.propTypes = {
   stepIndex: PropTypes.number.isRequired
 };
+
+export default GeneratedStep;

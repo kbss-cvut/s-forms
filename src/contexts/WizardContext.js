@@ -9,7 +9,7 @@ const WizardContext = React.createContext({});
 
 const WizardContextProvider = (props) => {
   const [data, setData] = useState(props.data || INITIAL_DATA);
-  const [stepData, setStepData] = useState(props.steps ? props.steps.map((item) => item.data) : INITIAL_STEP_DATA);
+  const [stepData, setStepData] = useState(props.steps || INITIAL_STEP_DATA);
 
   useEffect(() => {
     if (props.isFormValid) {

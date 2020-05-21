@@ -23,7 +23,7 @@ class TestApp extends React.Component {
   async componentDidMount() {
     Configuration.dateFormat = 'yyyy-MM-dd';
     Configuration.intl = {
-      locale: navigator.language
+      locale: 'cs'
     };
     Configuration.fetchTypeAheadValues = () => new Promise((resolve) => setTimeout(resolve(possibleValues), 1500));
     Configuration.i18n = {

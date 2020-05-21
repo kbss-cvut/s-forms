@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import JsonLdUtils from 'jsonld-utils';
+import { Card } from 'react-bootstrap';
 import WizardStep from './WizardStep';
 import HorizontalWizardNav from './HorizontalWizardNav';
 import VerticalWizardNav from './VerticalWizardNav';
-import { Card } from 'react-bootstrap';
 import { WizardContext } from '../../contexts/WizardContext';
 import Configuration from '../../model/Configuration';
 import QuestionAnswerProcessor from '../../model/QuestionAnswerProcessor';
@@ -58,7 +59,7 @@ class Wizard extends React.Component {
    */
   onInsertStepAfterCurrent = (step) => {
     this.props.steps.splice(this.state.currentStep + 1, 0, step);
-    this.context.insertStep(this.state.currentStep + 1, step.data);
+    this.context.insertStep(this.state.currentStep + 1, step);
   };
 
   /**
@@ -67,7 +68,7 @@ class Wizard extends React.Component {
    */
   onAddStep = (step) => {
     this.props.steps.push(step);
-    this.context.insertStep(this.props.steps.length - 1, step.data);
+    this.context.insertStep(this.props.steps.length - 1, step);
   };
 
   onRemoveStep = (stepId) => {
@@ -137,8 +138,7 @@ class Wizard extends React.Component {
         onInsertStepAfterCurrent={this.onInsertStepAfterCurrent}
         onAddStep={this.onAddStep}
         onRemoveStep={this.onRemoveStep}
-        component={step.component}
-        title={step.name}
+        title={JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], Configuration.intl)}
         stepIndex={this.state.currentStep}
         isFirstStep={this.state.currentStep === 0}
         isLastStep={this.state.currentStep === this.props.steps.length - 1}

@@ -1,10 +1,8 @@
 import jsonld from 'jsonld';
-import JsonLdUtils from 'jsonld-utils';
 import Configuration from '../model/Configuration';
 import * as Constants from '../constants/Constants';
 import DefaultFormGenerator from './DefaultFormGenerator';
 import FormUtils from '../util/FormUtils';
-import GeneratedStep from '../components/GeneratedStep';
 import Logger from '../util/Logger';
 import JsonLdFramingUtils from '../util/JsonLdFramingUtils';
 import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
@@ -16,15 +14,19 @@ export default class WizardGenerator {
    *
    * @param data Optional, data for which the wizard should be generated (i.e. the root question)
    * @param title Optional, title of the wizard
-   * @return Wizard steps definitions (an array of one element in this case)
+   * @return Wizard steps definitions (an array of one element in this case) and form data
    */
   static createDefaultWizard(data, title) {
-    const steps = WizardGenerator._constructWizardSteps(DefaultFormGenerator.generateForm(data));
+    const defaultFormData = DefaultFormGenerator.generateForm(data);
 
-    return {
-      steps: steps,
-      title: title
+    const [steps, form] = WizardGenerator._constructWizardSteps(defaultFormData);
+
+    const wizardProperties = {
+      steps,
+      title
     };
+
+    return [wizardProperties, form];
   }
 
   /**
@@ -32,20 +34,20 @@ export default class WizardGenerator {
    * @param structure The wizard structure in JSON-LD
    * @param data Optional, data for which the wizard will be generated (i.e. the root question)
    * @param title Optional, wizard title
-   * @return Promise with generated wizard step definitions when ready
+   * @return Promise with generated wizard step definitions and form data
    */
   static createWizard(structure, data, title) {
     return new Promise((resolve) =>
       jsonld.flatten(structure, {}, null, (err, flattened) => {
         let wizardProperties;
-        let structure;
+        let form;
         if (err) {
           Logger.error(err);
         }
         try {
-          const [steps, form] = WizardGenerator._constructWizardSteps(flattened);
+          const [steps, rootForm] = WizardGenerator._constructWizardSteps(flattened);
 
-          structure = form;
+          form = rootForm;
           wizardProperties = {
             steps,
             title
@@ -53,7 +55,7 @@ export default class WizardGenerator {
         } catch (e) {
           wizardProperties = WizardGenerator.createDefaultWizard(data, title);
         }
-        return resolve([wizardProperties, structure]);
+        return resolve([wizardProperties, form]);
       })
     );
   }
@@ -64,7 +66,6 @@ export default class WizardGenerator {
     let id2ObjectMap;
     let item;
     let stepQuestions = [];
-    let steps = [];
 
     if (structure['@graph'][0]['@id'] !== undefined) {
       id2ObjectMap = JsonLdFramingUtils.modifyStructure(structure); //TODO make as callback
@@ -76,28 +77,22 @@ export default class WizardGenerator {
       console.warn('default form is constructed.');
     }
 
-    form = structure['@graph'];
-
-    for (let i = 0; i < form.length; i++) {
-      item = form[i];
-      if (FormUtils.isForm(item)) {
-        form = item;
-        break;
-      }
-    }
+    form = structure['@graph'].find((item) => FormUtils.isForm(item));
     formElements = form[Constants.HAS_SUBQUESTION];
+
     if (!formElements) {
       Logger.error('Could not find any wizard steps in the received data.');
       throw 'No wizard steps in form';
     }
-    for (let i = 0; i < formElements.length; i++) {
-      item = formElements[i];
+
+    stepQuestions = formElements.filter((item) => {
       if (FormUtils.isWizardStep(item) && !FormUtils.isHidden(item)) {
-        stepQuestions.push(item);
-      } else {
-        Logger.warn('Item is not a wizard step: ' + item);
+        return true;
       }
-    }
+
+      Logger.warn('Item is not a wizard step: ' + item);
+      return false;
+    });
 
     // sort by label
     stepQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
@@ -105,12 +100,6 @@ export default class WizardGenerator {
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(stepQuestions, Constants.HAS_PRECEDING_QUESTION);
 
-    steps = stepQuestions.map((q) => ({
-      name: JsonLdUtils.getLocalized(q[JsonLdUtils.RDFS_LABEL], Configuration.intl),
-      component: GeneratedStep,
-      data: q
-    }));
-
-    return [steps, {root: form}];
+    return [stepQuestions, { root: form }];
   }
 }

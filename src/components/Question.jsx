@@ -14,6 +14,7 @@ import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
 import PrefixIcon from './PrefixIcon';
 import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
+import { WizardContext } from '../contexts/WizardContext';
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
@@ -139,14 +140,7 @@ export default class Question extends React.Component {
         <div key={'row-item-' + i} className={cls}>
           <div className="row">
             <div className="col-10">
-              <Answer
-                index={i}
-                answer={answers[i]}
-                question={question}
-                onChange={this.onAnswerChange}
-                loadFormOptions={this.props.loadFormOptions}
-                getOptions={this.props.getOptions}
-              />
+              <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
             </div>
             <div>
               {this._renderUnits()}
@@ -245,14 +239,7 @@ export default class Question extends React.Component {
 
     for (let i = 0; i < subQuestions.length; i++) {
       children.push(
-        <Question
-          key={'sub-question-' + i}
-          index={i}
-          question={subQuestions[i]}
-          onChange={this.onSubQuestionChange}
-          loadFormOptions={this.props.loadFormOptions}
-          getOptions={this.props.getOptions}
-        />
+        <Question key={'sub-question-' + i} index={i} question={subQuestions[i]} onChange={this.onSubQuestionChange} />
       );
     }
     return children;

@@ -1,6 +1,8 @@
 import React from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import JsonLdUtils from 'jsonld-utils';
+import Configuration from '../../model/Configuration';
 
 //TODO add "disabled" to VerticalWizardNav
 const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => (
@@ -13,7 +15,7 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => (
           id={'wizard-nav-' + index}
           active={index === currentStep ? 'active' : ''}
         >
-          {step.name}
+          {JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], Configuration.intl)}
         </ListGroupItem>
       ))}
     </ListGroup>

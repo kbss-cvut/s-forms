@@ -8,21 +8,25 @@ import Configuration from '../model/Configuration';
 import MaskedInputAnswer from './answer/MaskedInputAnswer';
 import SelectAnswer from './answer/SelectAnswer';
 import FormUtils from '../util/FormUtils';
+import Utils from '../util/Utils';
 import TypeaheadAnswer from './answer/TypeaheadAnswer';
 import * as Constants from '../constants/Constants';
+import { FormGenContext } from '../contexts/FormGenContext';
 
-export default class Answer extends React.Component {
-  onValueChange = (value) => {
-    const change = { ...this.props.answer };
-    this._setValue(change, value);
-    this.props.onChange(this.props.index, change);
+const Answer = (props) => {
+  const formGenContext = React.useContext(FormGenContext);
+
+  const onValueChange = (value) => {
+    const change = { ...props.answer };
+    _setValue(change, value);
+    props.onChange(props.index, change);
   };
 
-  _setValue(change, value) {
+  const _setValue = (change, value) => {
     if (value === null) {
       change[Constants.HAS_OBJECT_VALUE] = null;
       change[Constants.HAS_DATA_VALUE] = null;
-    } else if (this.props.answer[Constants.HAS_OBJECT_VALUE] || FormUtils.isTypeahead(this.props.question)) {
+    } else if (props.answer[Constants.HAS_OBJECT_VALUE] || FormUtils.isTypeahead(props.question)) {
       change[Constants.HAS_OBJECT_VALUE] = {
         '@id': value
       };
@@ -31,145 +35,128 @@ export default class Answer extends React.Component {
         '@value': value
       };
     }
-  }
+  };
 
-  render() {
-    const question = this.props.question;
-    const value = FormUtils.resolveValue(this.props.answer);
-    const label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], Configuration.intl);
-    const title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], Configuration.intl);
-    let component;
-
-    if (FormUtils.isTypeahead(question)) {
-      component = this._renderTypeahead(value, label, title);
-    } else if (Answer._hasOptions(question)) {
-      component = this._renderSelect(value, label, title);
-    } else if (FormUtils.isCalendar(question)) {
-      component = this._renderDateTimePicker(value, label, title);
-    } else if (FormUtils.isCheckbox(question)) {
-      component = this._renderCheckbox(value, label, title);
-    } else if (FormUtils.isMaskedInput(question)) {
-      component = this._renderMaskedInput(value, label, title);
-    } else if (FormUtils.isSparqlInput(question)) {
-      component = this._renderSparqlInput(value, label, title);
-    } else if (FormUtils.isTurtleInput(question)) {
-      component = this._renderTurtleInput(value, label, title);
-    } else {
-      component = this._renderRegularInput(value, label, title);
-    }
-    return component;
-  }
-
-  static _hasOptions(item) {
+  const _hasOptions = (item) => {
     return item[Constants.HAS_OPTION] && item[Constants.HAS_OPTION].length !== 0;
-  }
+  };
 
-  _renderTypeahead(value, label, title) {
+  const _renderTypeahead = (value, label, title) => {
+    const queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(props.question));
+    const options = formGenContext.getOptions(queryHash) || [];
+
     return (
       <TypeaheadAnswer
-        question={this.props.question}
-        answer={this.props.answer}
+        question={props.question}
+        answer={props.answer}
         label={label}
         title={title}
         value={value}
-        onChange={this.onValueChange}
-        getOptions={this.props.getOptions}
-        loadFormOptions={this.props.loadFormOptions}
+        onChange={onValueChange}
+        options={options}
       />
     );
-  }
+  };
 
-  _renderSelect(value, label, title) {
+  const _renderSelect = (value, label, title) => {
     return (
-      <SelectAnswer
-        question={this.props.question}
-        label={label}
-        title={title}
-        value={value}
-        onChange={this.onValueChange}
-      />
+      <SelectAnswer question={props.question} label={label} title={title} value={value} onChange={onValueChange} />
     );
-  }
+  };
 
-  _renderDateTimePicker(value, label, title) {
+  const _renderDateTimePicker = (value, label, title) => {
     return (
-      <DateTimeAnswer
-        question={this.props.question}
-        value={value}
-        title={title}
-        label={label}
-        onChange={this.onValueChange}
-      />
+      <DateTimeAnswer question={props.question} value={value} title={title} label={label} onChange={onValueChange} />
     );
-  }
+  };
 
-  _renderCheckbox(value, label, title) {
+  const _renderCheckbox = (value, label, title) => {
     return (
-      <CheckboxAnswer
-        label={label}
-        title={title}
-        value={value}
-        onChange={this.onValueChange}
-        question={this.props.question}
-      />
+      <CheckboxAnswer label={label} title={title} value={value} onChange={onValueChange} question={props.question} />
     );
-  }
+  };
 
-  _renderMaskedInput(value, label, title) {
+  const _renderMaskedInput = (value, label, title) => {
     return (
       <MaskedInputAnswer
         label={label}
         title={title}
         value={value}
-        onChange={this.onValueChange}
-        question={this.props.question}
-        answer={this.props.answer}
+        onChange={onValueChange}
+        question={props.question}
+        answer={props.answer}
       />
     );
     return null;
-  }
+  };
 
-  _renderRegularInput(value, label, title) {
+  const _renderRegularInput = (value, label, title) => {
     return (
       <InputAnswer
-        question={this.props.question}
-        answer={this.props.answer}
+        question={props.question}
+        answer={props.answer}
         label={label}
         title={title}
         value={value}
-        onChange={this.onValueChange}
+        onChange={onValueChange}
       />
     );
-  }
+  };
 
-  _renderSparqlInput(value, label, title) {
+  const _renderSparqlInput = (value, label, title) => {
     return (
       <InputAnswer
-        question={this.props.question}
-        answer={this.props.answer}
+        question={props.question}
+        answer={props.answer}
         label={label}
         title={title}
         value={value}
-        onChange={this.onValueChange}
+        onChange={onValueChange}
         sparql={true}
       />
     );
-  }
+  };
 
-  _renderTurtleInput(value, label, title) {
+  const _renderTurtleInput = (value, label, title) => {
     return (
       <InputAnswer
-        question={this.props.question}
-        answer={this.props.answer}
+        question={props.question}
+        answer={props.answer}
         label={label}
         title={title}
         value={value}
-        onChange={this.onValueChange}
+        onChange={onValueChange}
         turtle={true}
       />
     );
+  };
+
+  const question = props.question;
+  const value = FormUtils.resolveValue(props.answer);
+  const label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], Configuration.intl);
+  const title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], Configuration.intl);
+  let component;
+
+  if (FormUtils.isTypeahead(question)) {
+    component = _renderTypeahead(value, label, title);
+  } else if (_hasOptions(question)) {
+    component = _renderSelect(value, label, title);
+  } else if (FormUtils.isCalendar(question)) {
+    component = _renderDateTimePicker(value, label, title);
+  } else if (FormUtils.isCheckbox(question)) {
+    component = _renderCheckbox(value, label, title);
+  } else if (FormUtils.isMaskedInput(question)) {
+    component = _renderMaskedInput(value, label, title);
+  } else if (FormUtils.isSparqlInput(question)) {
+    component = _renderSparqlInput(value, label, title);
+  } else if (FormUtils.isTurtleInput(question)) {
+    component = _renderTurtleInput(value, label, title);
+  } else {
+    component = _renderRegularInput(value, label, title);
   }
-}
+
+  return component;
+};
 
 Answer.propTypes = {
   answer: PropTypes.object.isRequired,
@@ -177,3 +164,5 @@ Answer.propTypes = {
   onChange: PropTypes.func.isRequired,
   index: PropTypes.number
 };
+
+export default Answer;
