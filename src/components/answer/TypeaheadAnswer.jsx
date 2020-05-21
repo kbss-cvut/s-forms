@@ -36,13 +36,16 @@ const TypeaheadAnswer = (props) => {
   const [options, setOptions] = useState(processTypeaheadOptions(props.options));
 
   useEffect(() => {
+    let isCancelled = false;
     const question = props.question;
 
     async function loadFormOptions() {
       try {
         const options = await formGenContext.loadFormOptions(queryHash, FormUtils.getPossibleValuesQuery(question));
-        setLoading(false);
-        setOptions(processTypeaheadOptions(options));
+        if (!isCancelled) {
+          setLoading(false);
+          setOptions(processTypeaheadOptions(options));
+        }
       } catch (error) {
         Logger.error(`An error has occurred during loadFormOptions for query hash: ${queryHash}`);
       }
@@ -54,6 +57,10 @@ const TypeaheadAnswer = (props) => {
       setLoading(false);
       setOptions(processTypeaheadOptions(question[Constants.HAS_OPTION]));
     }
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   const onOptionSelected = (option) => {

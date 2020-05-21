@@ -7,7 +7,6 @@ import WizardContainer from '../../src/components/wizard/WizardContainer';
 import '../../src/styles/s-forms.css';
 
 const form = require('./form.json');
-const possibleValues = require('./possibleValues.json');
 
 class TestApp extends React.Component {
   constructor(props) {
@@ -21,7 +20,8 @@ class TestApp extends React.Component {
   }
 
   fetchTypeAheadValues = (query) => {
-    return new Promise((resolve) => setTimeout(resolve(possibleValues), 1500));
+    const possibleValues = require('./possibleValues.json');
+    return new Promise((resolve) => setTimeout(() => resolve(possibleValues), 1500));
   };
 
   async componentDidMount() {
