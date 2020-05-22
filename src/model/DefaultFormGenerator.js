@@ -32,8 +32,10 @@ export default class DefaultFormGenerator {
     }
     stepQuestion['@id'] = question.uri;
     const answer = question.answers ? question.answers[0] : {};
-    questionAnswer['@id'] = answer.uri;
-    questionAnswer[Constants.HAS_DATA_VALUE] = answer.textValue;
+    if (answer) {
+      questionAnswer['@id'] = answer.uri;
+      questionAnswer[Constants.HAS_DATA_VALUE] = answer.textValue;
+    }
     return formTemplate;
   }
 }

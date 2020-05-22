@@ -75,7 +75,7 @@ const WizardContextProvider = (props) => {
       getData,
       getStepData
     }),
-    []
+    [getStepData, getData]
   );
 
   return (

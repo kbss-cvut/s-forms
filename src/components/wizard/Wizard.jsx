@@ -26,8 +26,8 @@ class Wizard extends React.Component {
 
   onAdvance = () => {
     const change = {};
-    if (this.state.currentStep !== this.props.steps.length - 1) {
-      this.props.steps[this.state.currentStep + 1].visited = true;
+    if (this.state.currentStep !== this.context.getStepData().length - 1) {
+      this.context.getStepData()[this.state.currentStep + 1].visited = true;
       change.currentStep = this.state.currentStep + 1;
     }
     this.setState(change);
@@ -56,7 +56,7 @@ class Wizard extends React.Component {
    * @param step The step to insert
    */
   onInsertStepAfterCurrent = (step) => {
-    this.props.steps.splice(this.state.currentStep + 1, 0, step);
+    this.context.getStepData().splice(this.state.currentStep + 1, 0, step);
     this.context.insertStep(this.state.currentStep + 1, step);
   };
 
@@ -65,15 +65,15 @@ class Wizard extends React.Component {
    * @param step The step to add
    */
   onAddStep = (step) => {
-    this.props.steps.push(step);
-    this.context.insertStep(this.props.steps.length - 1, step);
+    this.context.getStepData().push(step);
+    this.context.insertStep(this.context.getStepData().length - 1, step);
   };
 
   onRemoveStep = (stepId) => {
     const stateUpdate = {};
-    for (let i = 0, len = this.props.steps.length; i < len; i++) {
-      if (this.props.steps[i].id === stepId) {
-        this.props.steps.splice(i, 1);
+    for (let i = 0, len = this.context.getStepData().length; i < len; i++) {
+      if (this.context.getStepData()[i].id === stepId) {
+        this.context.getStepData().splice(i, 1);
         this.context.removeStep(i);
         if (i === this.state.currentStep && i !== 0) {
           stateUpdate.currentStep = this.state.currentStep - 1;
@@ -84,33 +84,49 @@ class Wizard extends React.Component {
     this.setState(stateUpdate);
   };
 
+  renderNav() {
+    if (this.context.getStepData().length <= 1) {
+      return null;
+    }
+
+    return this.props.horizontalWizardNav ? (
+      <HorizontalWizardNav
+        currentStep={this.state.currentStep}
+        steps={this.context.getStepData()}
+        onNavigate={this.navigate}
+      />
+    ) : (
+      <VerticalWizardNav
+        currentStep={this.state.currentStep}
+        steps={this.context.getStepData()}
+        onNavigate={this.navigate}
+      />
+    );
+  }
+
   render() {
     const cardClassname = this.props.horizontalWizardNav ? '' : 'flex-row p-2';
     const containerClassname = this.props.horizontalWizardNav ? 'card-body' : 'col-10 p-0';
     return (
       <Card className={cardClassname}>
-        {this.props.horizontalWizardNav ? (
-          <HorizontalWizardNav
-            currentStep={this.state.currentStep}
-            steps={this.props.steps}
-            onNavigate={this.navigate}
-          />
-        ) : (
-          <VerticalWizardNav currentStep={this.state.currentStep} steps={this.props.steps} onNavigate={this.navigate} />
-        )}
+        {this.renderNav()}
         <div className={containerClassname}>{this.initComponent()}</div>
       </Card>
     );
 
-    // <VerticalWizardNav currentStep={this.state.currentStep} steps={this.props.steps} onNavigate={this.navigate} />
+    // <VerticalWizardNav currentStep={this.state.currentStep} steps={this.context.getStepData()} onNavigate={this.navigate} />
   }
 
   navigate = (stepIndex) => {
-    if (stepIndex === this.state.currentStep || stepIndex >= this.props.steps.length) {
+    if (stepIndex === this.state.currentStep || stepIndex >= this.context.getStepData().length) {
       return;
     }
     // Can we jump forward?
-    if (stepIndex > this.state.currentStep && !this.props.steps[stepIndex].visited && !this.props.enableForwardSkip) {
+    if (
+      stepIndex > this.state.currentStep &&
+      !this.context.getStepData()[stepIndex].visited &&
+      !this.props.enableForwardSkip
+    ) {
       return;
     }
     this.setState({
@@ -119,10 +135,10 @@ class Wizard extends React.Component {
   };
 
   initComponent = () => {
-    if (this.props.steps.length === 0) {
+    if (this.context.getStepData().length === 0) {
       return <div className="font-italic">There are no steps in this wizard.</div>;
     }
-    const step = this.props.steps[this.state.currentStep];
+    const step = this.context.getStepData()[this.state.currentStep];
 
     return (
       <WizardStep
@@ -137,7 +153,7 @@ class Wizard extends React.Component {
         onRemoveStep={this.onRemoveStep}
         stepIndex={this.state.currentStep}
         isFirstStep={this.state.currentStep === 0}
-        isLastStep={this.state.currentStep === this.props.steps.length - 1}
+        isLastStep={this.state.currentStep === this.context.getStepData().length - 1}
         i18n={this.props.i18n}
       />
     );
