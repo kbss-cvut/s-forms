@@ -1,4 +1,4 @@
 import WizardGenerator from './model/WizardGenerator';
-import WizardContainer from './components/wizard/WizardContainer';
+import SForms from './components/SForms';
 
-export { WizardGenerator, WizardContainer };
+export { WizardGenerator, SForms };

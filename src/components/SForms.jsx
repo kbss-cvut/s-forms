@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { FormGenContextProvider } from '../../contexts/FormGenContext';
-import { WizardContextProvider } from '../../contexts/WizardContext';
-import { ConfigurationContextProvider } from '../../contexts/ConfigurationContext';
-import Wizard from './Wizard';
-import WizardWindow from './WizardWindow';
+import { FormGenContextProvider } from '../contexts/FormGenContext';
+import { WizardContextProvider } from '../contexts/WizardContext';
+import { ConfigurationContextProvider } from '../contexts/ConfigurationContext';
+import Wizard from './wizard/Wizard';
+import WizardWindow from './wizard/WizardWindow';
 
-const WizardContainer = forwardRef((props, ref) => (
+const SForms = forwardRef((props, ref) => (
   <ConfigurationContextProvider
     components={props.components}
     componentsOptions={props.componentsOptions}
@@ -20,11 +20,11 @@ const WizardContainer = forwardRef((props, ref) => (
   </ConfigurationContextProvider>
 ));
 
-WizardContainer.defaultProps = {
+SForms.defaultProps = {
   modalView: false
 };
 
-WizardContainer.propTypes = {
+SForms.propTypes = {
   start: PropTypes.number,
   steps: PropTypes.array,
   onFinish: PropTypes.func,
@@ -37,4 +37,4 @@ WizardContainer.propTypes = {
   modalView: PropTypes.bool
 };
 
-export default WizardContainer;
+export default SForms;

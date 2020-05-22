@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WizardGenerator from '../../src/model/WizardGenerator';
-import WizardContainer from '../../src/components/wizard/WizardContainer';
+import SForms from '../../src/components/SForms';
 
 import '../../src/styles/s-forms.css';
 
@@ -45,7 +45,7 @@ class TestApp extends React.Component {
 
     return (
       <React.Fragment>
-        <WizardContainer
+        <SForms
           ref={this.form}
           steps={this.state.wizardProperties.steps}
           data={this.state.form}
