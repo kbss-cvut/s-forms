@@ -3,18 +3,26 @@ import JsonLdUtils from 'jsonld-utils';
 
 import Answer from '../../src/components/Answer';
 import * as Constants from '../../src/constants/Constants';
-import * as Environment from '../environment/Environment';
 import * as Generator from '../environment/Generator';
 import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
 import DefaultInput from '../../src/components/DefaultInput';
 
 describe('MaskedInputAnswer', () => {
-  let question, onChange;
+  let question, onChange, options, inputComponent, componentsOptions;
 
   beforeEach(() => {
     question = {};
     onChange = jest.fn();
-    Environment.mockIntl();
+    options = {
+      intl: {
+        locale: 'en'
+      }
+    };
+    componentsOptions = {
+      readOnly: false,
+      dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+    };
+    inputComponent = DefaultInput;
   });
 
   it('renders a regular input when question contains no mask', () => {
@@ -31,8 +39,9 @@ describe('MaskedInputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />
@@ -58,8 +67,9 @@ describe('MaskedInputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: true },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />

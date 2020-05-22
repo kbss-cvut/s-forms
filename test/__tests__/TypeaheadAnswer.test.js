@@ -3,7 +3,6 @@ import JsonLdUtils from 'jsonld-utils';
 import Select from 'react-select';
 
 import * as Generator from '../environment/Generator';
-import Configuration from '../../src/model/Configuration';
 import * as Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 import { FormGenContext } from '../../src/contexts/FormGenContext';
@@ -30,9 +29,6 @@ describe('TypeaheadAnswer', () => {
       '@value': 'The identification of the aerodrome/helicopter landing area by name, location and status.'
     };
     onChange = jest.fn();
-    Configuration.intl = {
-      locale: 'en'
-    };
     loadFormOptions = jest.fn();
     getOptions = jest.fn(() => [
       {
@@ -54,7 +50,12 @@ describe('TypeaheadAnswer', () => {
       <ConfigurationContext.Provider
         value={{
           componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          inputComponent: DefaultInput,
+          options: {
+            intl: {
+              locale: 'en'
+            }
+          }
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>

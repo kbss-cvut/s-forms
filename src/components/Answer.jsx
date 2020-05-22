@@ -4,7 +4,6 @@ import CheckboxAnswer from './answer/CheckboxAnswer';
 import DateTimeAnswer from './answer/DateTimeAnswer';
 import InputAnswer from './answer/InputAnswer';
 import JsonldUtils from 'jsonld-utils';
-import Configuration from '../model/Configuration';
 import MaskedInputAnswer from './answer/MaskedInputAnswer';
 import SelectAnswer from './answer/SelectAnswer';
 import FormUtils from '../util/FormUtils';
@@ -12,9 +11,11 @@ import Utils from '../util/Utils';
 import TypeaheadAnswer from './answer/TypeaheadAnswer';
 import * as Constants from '../constants/Constants';
 import { FormGenContext } from '../contexts/FormGenContext';
+import { ConfigurationContext } from '../contexts/ConfigurationContext';
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
+  const { options } = React.useContext(ConfigurationContext);
 
   const onValueChange = (value) => {
     const change = { ...props.answer };
@@ -133,8 +134,9 @@ const Answer = (props) => {
 
   const question = props.question;
   const value = FormUtils.resolveValue(props.answer);
-  const label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], Configuration.intl);
-  const title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], Configuration.intl);
+
+  const label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], options.intl);
+  const title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], options.intl);
   let component;
 
   if (FormUtils.isTypeahead(question)) {

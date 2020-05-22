@@ -3,7 +3,6 @@ import { Card, Accordion } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Answer from './Answer';
-import Configuration from '../model/Configuration';
 import * as Constants from '../constants/Constants';
 import FormUtils from '../util/FormUtils';
 import HelpIcon from './HelpIcon';
@@ -14,6 +13,7 @@ import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
 import PrefixIcon from './PrefixIcon';
 import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
+import { ConfigurationContext } from '../contexts/ConfigurationContext';
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
@@ -23,9 +23,13 @@ export default class Question extends React.Component {
     super(props);
     JsonLdObjectMap.putObject(props.question['@id'], props.question);
     this.state = {
-      validator: ValidatorFactory.createValidator(props.question),
+      validator: null,
       expanded: !FormUtils.isCollapsed(props.question)
     };
+  }
+
+  componentDidMount() {
+    this.setState({ validator: ValidatorFactory.createValidator(this.props.question, this.context.options.intl) });
   }
 
   onAnswerChange = (answerIndex, change) => {
@@ -85,7 +89,7 @@ export default class Question extends React.Component {
       if (withoutCard) {
         return <div>{this._renderQuestionContent()}</div>;
       }
-      const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl);
+      const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
       const cardBody = <Card.Body className="p-3">{this._renderQuestionContent()}</Card.Body>;
 
@@ -212,7 +216,7 @@ export default class Question extends React.Component {
     }
     return question[Constants.HELP_DESCRIPTION] ? (
       <HelpIcon
-        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], Configuration.intl)}
+        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], this.context.options.intl)}
         iconClassContainer={helpClass}
       />
     ) : null;
@@ -254,7 +258,9 @@ export default class Question extends React.Component {
     }
 
     // sort by label
-    question[Constants.HAS_SUBQUESTION].sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
+    question[Constants.HAS_SUBQUESTION].sort(
+      JsonLdObjectUtils.getCompareLocalizedLabelFunction(this.context.options.intl)
+    );
 
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(
@@ -265,6 +271,8 @@ export default class Question extends React.Component {
     return question[Constants.HAS_SUBQUESTION];
   }
 }
+
+Question.contextType = ConfigurationContext;
 
 Question.propTypes = {
   question: PropTypes.object.isRequired,

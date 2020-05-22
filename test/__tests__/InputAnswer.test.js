@@ -2,7 +2,6 @@ import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 
 import Answer from '../../src/components/Answer';
-import Configuration from '../../src/model/Configuration';
 import * as Constants from '../../src/constants/Constants';
 import * as Generator from '../environment/Generator';
 import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
@@ -11,7 +10,7 @@ import DefaultInput from '../../src/components/DefaultInput';
 const LABEL = 'Input answer test';
 
 describe('InputAnswer', () => {
-  let question, answer, onChange;
+  let question, answer, onChange, options, componentsOptions, inputComponent;
 
   beforeEach(() => {
     question = {
@@ -27,9 +26,16 @@ describe('InputAnswer', () => {
       '@value': 'Javascript sucks!!!'
     };
     onChange = jest.fn();
-    Configuration.intl = {
-      locale: 'en'
+    options = {
+      intl: {
+        locale: 'en'
+      }
     };
+    componentsOptions = {
+      readOnly: false,
+      dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+    };
+    inputComponent = DefaultInput;
     answer = {
       id: Generator.getRandomUri()
     };
@@ -46,8 +52,9 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer question={question} answer={answer} onChange={onChange} />
@@ -69,8 +76,9 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer question={question} answer={answer} onChange={onChange} />
@@ -92,8 +100,9 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer question={question} answer={answer} onChange={onChange} />
@@ -115,8 +124,9 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer question={question} answer={answer} onChange={onChange} />
@@ -140,8 +150,9 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer question={question} answer={answer} onChange={onChange} />
@@ -162,8 +173,9 @@ describe('InputAnswer', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer question={question} answer={answer} onChange={onChange} />

@@ -5,17 +5,16 @@
 import JsonLdUtils from 'jsonld-utils';
 
 import * as Constants from '../constants/Constants';
-import Configuration from '../model/Configuration';
 import FormUtils from '../util/FormUtils';
 
 export default class ValidatorFactory {
-  static createValidator(question) {
+  static createValidator(question, intl) {
     if (question[Constants.REQUIRES_ANSWER]) {
       if (FormUtils.isCheckbox(question)) {
         //TODO revise
-        return ValidatorFactory._generateRequiresAnswerCheckBoxValidator(question);
+        return ValidatorFactory._generateRequiresAnswerCheckBoxValidator(question, intl);
       }
-      return ValidatorFactory._generateRequiresAnswerValidator(question);
+      return ValidatorFactory._generateRequiresAnswerValidator(question, intl);
     } else {
       return () => {
         const result = {};
@@ -26,7 +25,7 @@ export default class ValidatorFactory {
     }
   }
 
-  static _generateRequiresAnswerValidator(question) {
+  static _generateRequiresAnswerValidator(question, intl) {
     return (answer) => {
       let val = null;
       if (answer[Constants.HAS_DATA_VALUE]) {
@@ -39,12 +38,12 @@ export default class ValidatorFactory {
       result[Constants.HAS_VALID_ANSWER] = isValid;
       result[Constants.HAS_VALIDATION_MESSAGE] = isValid
         ? null
-        : JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl) + ' is missing a value.';
+        : JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], intl) + ' is missing a value.';
       return result;
     };
   }
 
-  static _generateRequiresAnswerCheckBoxValidator(question) {
+  static _generateRequiresAnswerCheckBoxValidator(question, intl) {
     return (answer) => {
       let val = null;
       if (answer[Constants.HAS_DATA_VALUE]) {
@@ -57,7 +56,7 @@ export default class ValidatorFactory {
       result[Constants.HAS_VALID_ANSWER] = isValid;
       result[Constants.HAS_VALIDATION_MESSAGE] = isValid
         ? null
-        : JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], Configuration.intl) + ' must be checked.';
+        : JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], intl) + ' must be checked.';
       return result;
     };
   }

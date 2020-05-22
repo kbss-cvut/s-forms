@@ -7,7 +7,8 @@ const ConfigurationContextProvider = ({ children, ...props }) => {
   const values = useMemo(
     () => ({
       inputComponent: props.components.inputComponent || require('../components/DefaultInput').default,
-      componentsOptions: props.componentsOptions
+      componentsOptions: props.componentsOptions,
+      options: props.options
     }),
     []
   );
@@ -20,13 +21,17 @@ ConfigurationContextProvider.defaultProps = {
   componentsOptions: {
     dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' },
     readOnly: false
+  },
+  options: {
+    intl: { locale: 'en' }
   }
 };
 
 ConfigurationContextProvider.propTypes = {
   children: PropTypes.element.isRequired,
   components: PropTypes.object,
-  componentsOptions: PropTypes.object
+  componentsOptions: PropTypes.object,
+  options: PropTypes.object
 };
 
 export { ConfigurationContext, ConfigurationContextProvider };

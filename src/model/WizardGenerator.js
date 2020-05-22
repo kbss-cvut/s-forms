@@ -1,5 +1,4 @@
 import jsonld from 'jsonld';
-import Configuration from '../model/Configuration';
 import * as Constants from '../constants/Constants';
 import DefaultFormGenerator from './DefaultFormGenerator';
 import FormUtils from '../util/FormUtils';
@@ -16,10 +15,10 @@ export default class WizardGenerator {
    * @param title Optional, title of the wizard
    * @return Wizard steps definitions (an array of one element in this case) and form data
    */
-  static createDefaultWizard(data, title) {
+  static createDefaultWizard(data, title, intl) {
     const defaultFormData = DefaultFormGenerator.generateForm(data);
 
-    const [steps, form] = WizardGenerator._constructWizardSteps(defaultFormData);
+    const [steps, form] = WizardGenerator._constructWizardSteps(defaultFormData, intl);
 
     const wizardProperties = {
       steps,
@@ -36,7 +35,7 @@ export default class WizardGenerator {
    * @param title Optional, wizard title
    * @return Promise with generated wizard step definitions and form data
    */
-  static createWizard(structure, data, title) {
+  static createWizard(structure, data, title, intl) {
     return new Promise((resolve) =>
       jsonld.flatten(structure, {}, null, (err, flattened) => {
         let wizardProperties;
@@ -45,7 +44,7 @@ export default class WizardGenerator {
           Logger.error(err);
         }
         try {
-          const [steps, rootForm] = WizardGenerator._constructWizardSteps(flattened);
+          const [steps, rootForm] = WizardGenerator._constructWizardSteps(flattened, intl);
 
           form = rootForm;
           wizardProperties = {
@@ -60,11 +59,10 @@ export default class WizardGenerator {
     );
   }
 
-  static _constructWizardSteps(structure) {
+  static _constructWizardSteps(structure, intl) {
     let form;
     let formElements;
     let id2ObjectMap;
-    let item;
     let stepQuestions = [];
 
     if (structure['@graph'][0]['@id'] !== undefined) {
@@ -95,7 +93,7 @@ export default class WizardGenerator {
     });
 
     // sort by label
-    stepQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
+    stepQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl));
 
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(stepQuestions, Constants.HAS_PRECEDING_QUESTION);

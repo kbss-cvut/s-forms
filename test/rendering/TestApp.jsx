@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Configuration from '../../src/model/Configuration';
 import WizardGenerator from '../../src/model/WizardGenerator';
 import WizardContainer from '../../src/components/wizard/WizardContainer';
 
@@ -25,10 +24,11 @@ class TestApp extends React.Component {
   };
 
   async componentDidMount() {
-    Configuration.intl = {
+    const intl = {
       locale: 'cs'
     };
-    const [wizardProperties, structure] = await WizardGenerator.createWizard(form, null, null);
+
+    const [wizardProperties, structure] = await WizardGenerator.createWizard(form, null, null, intl);
     this.setState({ wizardProperties, form: structure });
   }
 

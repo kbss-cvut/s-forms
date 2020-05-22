@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import JsonLdUtils from 'jsonld-utils';
 import { Card } from 'react-bootstrap';
 import WizardStep from './WizardStep';
 import HorizontalWizardNav from './HorizontalWizardNav';
 import VerticalWizardNav from './VerticalWizardNav';
 import { WizardContext } from '../../contexts/WizardContext';
-import Configuration from '../../model/Configuration';
 import QuestionAnswerProcessor from '../../model/QuestionAnswerProcessor';
 
 class Wizard extends React.Component {
@@ -129,20 +127,17 @@ class Wizard extends React.Component {
     return (
       <WizardStep
         key={'step' + this.state.currentStep}
+        step={step}
         onClose={this.props.onClose}
         onFinish={this.onFinish}
         onAdvance={this.onAdvance}
         onRetreat={this.onRetreat}
-        onNext={step.onNext}
-        onPrevious={step.onPrevious}
         onInsertStepAfterCurrent={this.onInsertStepAfterCurrent}
         onAddStep={this.onAddStep}
         onRemoveStep={this.onRemoveStep}
-        title={JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], Configuration.intl)}
         stepIndex={this.state.currentStep}
         isFirstStep={this.state.currentStep === 0}
         isLastStep={this.state.currentStep === this.props.steps.length - 1}
-        defaultNextDisabled={step.defaultNextDisabled}
         i18n={this.props.i18n}
       />
     );

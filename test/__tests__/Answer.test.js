@@ -6,7 +6,6 @@ import Select from 'react-select';
 
 import * as Generator from '../environment/Generator';
 import Answer from '../../src/components/Answer';
-import Configuration from '../../src/model/Configuration';
 import * as Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 import MaskedInput from '../../src/components/MaskedInput';
@@ -15,7 +14,7 @@ import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
 import DefaultInput from '../../src/components/DefaultInput';
 
 describe('Answer component', () => {
-  let question, onChange, answer, getOptions, loadFormOptions;
+  let question, onChange, answer, getOptions, loadFormOptions, options, inputComponent, componentsOptions;
 
   beforeEach(() => {
     question = {
@@ -31,9 +30,16 @@ describe('Answer component', () => {
       '@value': 'The identification of the aerodrome/helicopter landing area by name, location and status.'
     };
     onChange = jest.fn();
-    Configuration.intl = {
-      locale: 'en'
+    options = {
+      intl: {
+        locale: 'en'
+      }
     };
+    componentsOptions = {
+      readOnly: false,
+      dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+    };
+    inputComponent = DefaultInput;
     getOptions = jest.fn(() => []);
     loadFormOptions = jest.fn();
   });
@@ -43,8 +49,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
@@ -60,9 +67,9 @@ describe('Answer component', () => {
   it('maps answer object value to string label for the typeahead component', () => {
     const value = Generator.getRandomUri();
     const valueLabel = 'masterchief';
-    const options = Generator.generateTypeaheadOptions(value, valueLabel);
+    const typeAheadOptions = Generator.generateTypeaheadOptions(value, valueLabel);
     answer = answerWithCodeValue(value);
-    getOptions = jest.fn(() => options);
+    getOptions = jest.fn(() => typeAheadOptions);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     question[Constants.HAS_OPTIONS_QUERY] = 'SELECT * WHERE {?x ?y ?z. }';
@@ -70,11 +77,12 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
-        <FormGenContext.Provider value={{ getOptions, loadFormOptions: () => options }}>
+        <FormGenContext.Provider value={{ getOptions, loadFormOptions: () => typeAheadOptions }}>
           <Answer answer={answer} question={question} onChange={onChange} />
         </FormGenContext.Provider>
       </ConfigurationContext.Provider>
@@ -96,8 +104,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
@@ -130,8 +139,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />s
@@ -166,11 +176,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: {
-            readOnly: false,
-            dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
-          },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />
@@ -195,11 +203,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: {
-            readOnly: false,
-            dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
-          },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />
@@ -223,11 +229,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: {
-            readOnly: false,
-            dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
-          },
-          inputComponent: { inputComponent: DefaultInput }
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />
@@ -253,11 +257,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: {
-            readOnly: false,
-            dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
-          },
-          inputComponent: { inputComponent: DefaultInput }
+          componentsOptions,
+          inputComponent: { inputComponent },
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />
@@ -282,10 +284,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: {
-            readOnly: false
-          },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />
@@ -310,10 +311,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: {
-            readOnly: false
-          },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />
@@ -338,10 +338,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: {
-            readOnly: false
-          },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />
@@ -367,8 +366,9 @@ describe('Answer component', () => {
     const component = mount(
       <ConfigurationContext.Provider
         value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput
+          componentsOptions,
+          inputComponent,
+          options
         }}
       >
         <Answer answer={answer} question={question} onChange={onChange} />

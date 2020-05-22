@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import Select, { components } from 'react-select';
 import PropTypes from 'prop-types';
-import Configuration from '../../model/Configuration';
 import * as Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import Utils from '../../util/Utils';
@@ -12,18 +11,18 @@ import { FormGroup, Form } from 'react-bootstrap';
 import { FormGenContext } from '../../contexts/FormGenContext';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
-const processTypeaheadOptions = (options) => {
+const processTypeaheadOptions = (options, intl) => {
   if (!options) {
     return [];
   }
 
   // sort by label
-  options.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(Configuration.intl));
+  options.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl));
 
   // sort by property
   JsonLdObjectUtils.orderPreservingToplogicalSort(options, Constants.HAS_PRECEDING_VALUE);
 
-  return JsonLdUtils.processTypeaheadOptions(options);
+  return JsonLdUtils.processTypeaheadOptions(options, intl);
 };
 
 const TypeaheadAnswer = (props) => {
@@ -32,8 +31,10 @@ const TypeaheadAnswer = (props) => {
   const formGenContext = useContext(FormGenContext);
   const configurationContext = useContext(ConfigurationContext);
 
+  const intl = configurationContext.options.intl;
+
   const [isLoading, setLoading] = useState(true);
-  const [options, setOptions] = useState(processTypeaheadOptions(props.options));
+  const [options, setOptions] = useState(processTypeaheadOptions(props.options, intl));
 
   useEffect(() => {
     let isCancelled = false;
@@ -44,7 +45,7 @@ const TypeaheadAnswer = (props) => {
         const options = await formGenContext.loadFormOptions(queryHash, FormUtils.getPossibleValuesQuery(question));
         if (!isCancelled) {
           setLoading(false);
-          setOptions(processTypeaheadOptions(options));
+          setOptions(processTypeaheadOptions(options, intl));
         }
       } catch (error) {
         Logger.error(`An error has occurred during loadFormOptions for query hash: ${queryHash}`);
@@ -55,7 +56,7 @@ const TypeaheadAnswer = (props) => {
       loadFormOptions();
     } else {
       setLoading(false);
-      setOptions(processTypeaheadOptions(question[Constants.HAS_OPTION]));
+      setOptions(processTypeaheadOptions(question[Constants.HAS_OPTION], intl));
     }
 
     return () => {
@@ -83,7 +84,9 @@ const TypeaheadAnswer = (props) => {
         isSearchable={true}
         isLoading={isLoading}
         isClearable={true}
-        isDisabled={configurationContext.componentsOptions.readOnly || FormUtils.isDisabled(props.question)}
+        isDisabled={
+          isLoading || configurationContext.componentsOptions.readOnly || FormUtils.isDisabled(props.question)
+        }
         value={options.filter((option) => option.id === props.value)}
         placeholder={''}
         getOptionLabel={(option) => option.name}

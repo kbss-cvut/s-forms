@@ -1,5 +1,4 @@
 import React from 'react';
-import Configuration from '../../src/model/Configuration';
 import JsonLdFramingUtils from '../../src/util/JsonLdFramingUtils';
 
 describe('JsonLd framing utils', () => {
@@ -18,9 +17,6 @@ describe('JsonLd framing utils', () => {
     };
     formDocument = {
       '@graph': [formQuestion]
-    };
-    Configuration.intl = {
-      locale: 'en'
     };
   });
 

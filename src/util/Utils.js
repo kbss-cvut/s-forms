@@ -1,6 +1,3 @@
-import { format } from 'date-fns';
-
-import Configuration from '../model/Configuration';
 import * as Constants from '../constants/Constants';
 import FormUtils from './FormUtils';
 
