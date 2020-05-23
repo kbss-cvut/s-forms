@@ -34,7 +34,10 @@ class TestApp extends React.Component {
       },
       intl: {
         locale: 'cs'
-      }
+      },
+      modalView: false,
+      modalProps,
+      horizontalWizardNav: true
     };
 
     return (
@@ -45,10 +48,7 @@ class TestApp extends React.Component {
           options={options}
           fetchTypeAheadValues={this.fetchTypeAheadValues}
           isFormValid={(isFormValid) => this.setState({ isFormValid })}
-          modalView={false}
-          modalProps={modalProps}
           enableForwardSkip={true}
-          horizontalWizardNav={true}
         />
         <button
           disabled={!this.state.isFormValid}

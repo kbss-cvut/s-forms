@@ -55,7 +55,8 @@ const FormGenContextProvider = ({ children, ...props }) => {
 };
 
 FormGenContextProvider.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  fetchTypeAheadValues: PropTypes.func
 };
 
 export { FormGenContext, FormGenContextProvider };

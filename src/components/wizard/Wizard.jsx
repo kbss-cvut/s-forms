@@ -4,45 +4,31 @@ import { Card } from 'react-bootstrap';
 import WizardStep from './WizardStep';
 import HorizontalWizardNav from './HorizontalWizardNav';
 import VerticalWizardNav from './VerticalWizardNav';
+import { ConfigurationContext } from '../../contexts/ConfigurationContext';
+import WizardWindow from './WizardWindow';
 import { WizardContext } from '../../contexts/WizardContext';
-import QuestionAnswerProcessor from '../../model/QuestionAnswerProcessor';
 
-class Wizard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentStep: this.props.start || 0,
-      nextDisabled: false,
-      previousDisabled: false
-    };
-  }
+const Wizard = (props) => {
+  const [currentStep, setCurrentStep] = React.useState(props.start || 0);
 
-  getFormData = () => {
-    const data = this.context.getData();
-    const stepData = this.context.getStepData();
+  const wizardContext = React.useContext(WizardContext);
+  const configurationContext = React.useContext(ConfigurationContext);
 
-    return QuestionAnswerProcessor.buildQuestionAnswerModel(data, stepData);
-  };
-
-  onAdvance = () => {
-    const change = {};
-    if (this.state.currentStep !== this.context.getStepData().length - 1) {
-      this.context.getStepData()[this.state.currentStep + 1].visited = true;
-      change.currentStep = this.state.currentStep + 1;
+  const onAdvance = () => {
+    if (currentStep !== wizardContext.getStepData().length - 1) {
+      wizardContext.getStepData()[currentStep + 1].visited = true;
+      setCurrentStep((prevCurrentStep) => prevCurrentStep + 1);
     }
-    this.setState(change);
   };
 
-  onRetreat = () => {
-    if (this.state.currentStep === 0) {
+  const onRetreat = () => {
+    if (currentStep === 0) {
       return;
     }
-    this.setState({
-      currentStep: this.state.currentStep - 1
-    });
+    setCurrentStep((prevCurrentStep) => prevCurrentStep - 1);
   };
 
-  onFinish = (errCallback) => {
+  const onFinish = (errCallback) => {
     const data = {
       data: this.context.getData(),
       stepData: this.context.getStepData()
@@ -55,125 +41,110 @@ class Wizard extends React.Component {
    * Insert the specified step after the current one.
    * @param step The step to insert
    */
-  onInsertStepAfterCurrent = (step) => {
-    this.context.getStepData().splice(this.state.currentStep + 1, 0, step);
-    this.context.insertStep(this.state.currentStep + 1, step);
+  const onInsertStepAfterCurrent = (step) => {
+    configurationContext.getStepData().splice(currentStep + 1, 0, step);
+    configurationContext.insertStep(currentStep + 1, step);
   };
 
   /**
    * Adds the specified step to the end of this wizard.
    * @param step The step to add
    */
-  onAddStep = (step) => {
-    this.context.getStepData().push(step);
-    this.context.insertStep(this.context.getStepData().length - 1, step);
+  const onAddStep = (step) => {
+    wizardContext.getStepData().push(step);
+    wizardContext.insertStep(wizardContext.getStepData().length - 1, step);
   };
 
-  onRemoveStep = (stepId) => {
-    const stateUpdate = {};
-    for (let i = 0, len = this.context.getStepData().length; i < len; i++) {
-      if (this.context.getStepData()[i].id === stepId) {
-        this.context.getStepData().splice(i, 1);
-        this.context.removeStep(i);
-        if (i === this.state.currentStep && i !== 0) {
-          stateUpdate.currentStep = this.state.currentStep - 1;
+  const onRemoveStep = (stepId) => {
+    const stepData = wizardContext.getStepData();
+
+    for (let i = 0; i < stepData.length; i++) {
+      if (stepData[i].id === stepId) {
+        wizardContext.getStepData().splice(i, 1);
+        wizardContext.removeStep(i);
+        if (i === currentStep && i !== 0) {
+          setCurrentStep((prevCurrentStep) => prevCurrentStep - 1);
         }
         break;
       }
     }
-    this.setState(stateUpdate);
   };
 
-  renderNav() {
-    if (this.context.getStepData().length <= 1) {
-      return null;
-    }
-
-    return this.props.horizontalWizardNav ? (
-      <HorizontalWizardNav
-        currentStep={this.state.currentStep}
-        steps={this.context.getStepData()}
-        onNavigate={this.navigate}
-      />
-    ) : (
-      <VerticalWizardNav
-        currentStep={this.state.currentStep}
-        steps={this.context.getStepData()}
-        onNavigate={this.navigate}
-      />
-    );
-  }
-
-  render() {
-    const cardClassname = this.props.horizontalWizardNav ? '' : 'flex-row p-2';
-    const containerClassname = this.props.horizontalWizardNav ? 'card-body' : 'col-10 p-0';
-    return (
-      <Card className={cardClassname}>
-        {this.renderNav()}
-        <div className={containerClassname}>{this.initComponent()}</div>
-      </Card>
-    );
-
-    // <VerticalWizardNav currentStep={this.state.currentStep} steps={this.context.getStepData()} onNavigate={this.navigate} />
-  }
-
-  navigate = (stepIndex) => {
-    if (stepIndex === this.state.currentStep || stepIndex >= this.context.getStepData().length) {
+  const navigate = (stepIndex) => {
+    if (stepIndex === currentStep || stepIndex >= wizardContext.getStepData().length) {
       return;
     }
     // Can we jump forward?
-    if (
-      stepIndex > this.state.currentStep &&
-      !this.context.getStepData()[stepIndex].visited &&
-      !this.props.enableForwardSkip
-    ) {
+    if (stepIndex > currentStep && !wizardContext.getStepData()[stepIndex].visited && !props.enableForwardSkip) {
       return;
     }
-    this.setState({
-      currentStep: stepIndex
-    });
+    setCurrentStep(stepIndex);
   };
 
-  initComponent = () => {
-    if (this.context.getStepData().length === 0) {
+  const renderNav = () => {
+    if (wizardContext.getStepData().length <= 1) {
+      return null;
+    }
+
+    return configurationContext.options.horizontalWizardNav ? (
+      <HorizontalWizardNav currentStep={currentStep} steps={wizardContext.getStepData()} onNavigate={navigate} />
+    ) : (
+      <VerticalWizardNav currentStep={currentStep} steps={wizardContext.getStepData()} onNavigate={navigate} />
+    );
+  };
+
+  const renderWizard = () => {
+    const isHorizontal = configurationContext.options.horizontalWizardNav;
+
+    const cardClassname = isHorizontal ? '' : 'flex-row p-2';
+    const containerClassname = isHorizontal ? 'card-body' : 'col-10 p-0';
+
+    return (
+      <Card className={cardClassname}>
+        {renderNav()}
+        <div className={containerClassname}>{initComponent()}</div>
+      </Card>
+    );
+  };
+
+  const initComponent = () => {
+    const stepData = wizardContext.getStepData();
+
+    if (stepData.length === 0) {
       return <div className="font-italic">There are no steps in this wizard.</div>;
     }
-    const step = this.context.getStepData()[this.state.currentStep];
+
+    const step = stepData[currentStep];
 
     return (
       <WizardStep
-        key={'step' + this.state.currentStep}
+        key={'step' + currentStep}
         step={step}
-        onClose={this.props.onClose}
-        onFinish={this.onFinish}
-        onAdvance={this.onAdvance}
-        onRetreat={this.onRetreat}
-        onInsertStepAfterCurrent={this.onInsertStepAfterCurrent}
-        onAddStep={this.onAddStep}
-        onRemoveStep={this.onRemoveStep}
-        stepIndex={this.state.currentStep}
-        isFirstStep={this.state.currentStep === 0}
-        isLastStep={this.state.currentStep === this.context.getStepData().length - 1}
-        i18n={this.props.i18n}
+        onFinish={onFinish}
+        onAdvance={onAdvance}
+        onRetreat={onRetreat}
+        onInsertStepAfterCurrent={onInsertStepAfterCurrent}
+        onAddStep={onAddStep}
+        onRemoveStep={onRemoveStep}
+        stepIndex={currentStep}
+        isFirstStep={currentStep === 0}
+        isLastStep={currentStep === wizardContext.getStepData().length - 1}
       />
     );
   };
-}
 
-Wizard.defaultProps = {
-  horizontalWizardNav: true
+  if (configurationContext.options.modalView) {
+    return <WizardWindow>{renderWizard()}</WizardWindow>;
+  }
+
+  return renderWizard();
 };
 
 Wizard.propTypes = {
   start: PropTypes.number,
-  steps: PropTypes.array,
   onFinish: PropTypes.func,
   onClose: PropTypes.func,
-  enableForwardSkip: PropTypes.bool, // Whether to allow forward step skipping
-  horizontalWizardNav: PropTypes.bool,
-  i18n: PropTypes.object
+  enableForwardSkip: PropTypes.bool // Whether to allow forward step skipping
 };
-
-Wizard.contextType = WizardContext;
 
 export default Wizard;

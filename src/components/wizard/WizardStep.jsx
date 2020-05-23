@@ -111,15 +111,12 @@ const WizardStep = (props) => {
 
 WizardStep.propTypes = {
   step: PropTypes.object.isRequired,
-  onClose: PropTypes.func,
   onFinish: PropTypes.func.isRequired,
   onAdvance: PropTypes.func,
   onRetreat: PropTypes.func,
-  title: PropTypes.string,
   stepIndex: PropTypes.number.isRequired,
   isFirstStep: PropTypes.bool,
-  isLastStep: PropTypes.bool,
-  i18n: PropTypes.object
+  isLastStep: PropTypes.bool
 };
 
 export default WizardStep;

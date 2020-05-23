@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { FormGenContextProvider } from '../contexts/FormGenContext';
 import { WizardContextProvider } from '../contexts/WizardContext';
 import { ConfigurationContextProvider } from '../contexts/ConfigurationContext';
-import Wizard from './wizard/Wizard';
-import WizardWindow from './wizard/WizardWindow';
 import WizardGenerator from '../model/WizardGenerator';
+import FormManager from './FormManager';
 
 const SForms = forwardRef((props, ref) => {
   const [loading, setLoading] = useState(true);
@@ -41,16 +40,12 @@ const SForms = forwardRef((props, ref) => {
     >
       <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
         <WizardContextProvider data={form} steps={wizardProperties.steps} isFormValid={props.isFormValid}>
-          {props.modalView ? <WizardWindow {...props} ref={ref} /> : <Wizard {...props} ref={ref} />}
+          <FormManager ref={ref} {...props} />
         </WizardContextProvider>
       </FormGenContextProvider>
     </ConfigurationContextProvider>
   );
 });
-
-SForms.defaultProps = {
-  modalView: false
-};
 
 SForms.propTypes = {
   form: PropTypes.object.isRequired,
@@ -60,8 +55,6 @@ SForms.propTypes = {
   componentsOptions: PropTypes.object,
   fetchTypeAheadValues: PropTypes.func,
   isFormValid: PropTypes.func,
-  modalView: PropTypes.bool,
-  modalProps: PropTypes.object,
   loader: PropTypes.element
 };
 

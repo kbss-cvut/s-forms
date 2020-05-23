@@ -1,30 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
-import Wizard from './Wizard';
+import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 const WizardWindow = React.forwardRef((props, ref) => {
-  const properties = { ...props, onClose: props.onHide };
+  const { options } = React.useContext(ConfigurationContext);
 
   return (
-    <Modal {...props.modalProps} show={props.show} size="xl" title={props.title} animation={true}>
+    <Modal size="xl" animation={true} {...options.modalProps}>
       <Modal.Header closeButton>
-        <Modal.Title>{props.title}</Modal.Title>
+        <Modal.Title>{options.modalProps.title}</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body className="overflow-hidden p-0">
-        <Wizard {...properties} ref={ref} />
-      </Modal.Body>
+      <Modal.Body className="overflow-hidden p-0">{props.children}</Modal.Body>
     </Modal>
   );
 });
 
 WizardWindow.propTypes = {
-  modalProps: PropTypes.shape({
-    onHide: PropTypes.func,
-    title: PropTypes.string,
-    show: PropTypes.bool
-  })
+  children: PropTypes.element.isRequired
 };
 
 export default WizardWindow;

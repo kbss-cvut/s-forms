@@ -87,8 +87,8 @@ const WizardContextProvider = (props) => {
 
 WizardContextProvider.propTypes = {
   children: PropTypes.element.isRequired,
-  data: PropTypes.object,
-  stepData: PropTypes.array,
+  data: PropTypes.object.isRequired,
+  stepData: PropTypes.array.isRequired,
   isFormValid: PropTypes.func
 };
 
