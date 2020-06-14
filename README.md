@@ -1,4 +1,4 @@
-# S-Forms
+# SForms
 
 Semantic form generator and processor for ontology-based smart forms.
 
@@ -12,6 +12,8 @@ Semantic form generator and processor for ontology-based smart forms.
 - Numeric input
 
 # Development 
+
+Building SForms library can be done using `npm run build:lib`.
 
 ## Debugging content of a form
 
