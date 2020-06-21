@@ -5,13 +5,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   context: resolve('test'),
-  entry: './rendering/TestApp.jsx',
+  entry: ['core-js/stable/object/assign', 'core-js/stable/promise', './rendering/TestApp.jsx'],
   output: {
     filename: 'bundle.js',
     path: resolve('build/'),
     publicPath: '/'
   },
   devServer: {
+    host: '0.0.0.0',
     port: 8888,
     historyApiFallback: true
   },
@@ -27,10 +28,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
-    alias: {
-      jsonld: resolve('./node_modules/jsonld/dist/jsonld.js')
-    }
+    extensions: ['.js', '.jsx', '.json']
   },
   plugins: [
     new HtmlWebpackPlugin({
