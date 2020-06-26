@@ -7,16 +7,15 @@ const GeneratedStep = (props) => {
   const wizardContext = React.useContext(WizardContext);
 
   const onChange = (index, change) => {
-    wizardContext.updateStepData(props.stepIndex, { ...question, ...change });
+    wizardContext.updateStepData(props.stepIndex, { ...props.question, ...change });
   };
 
-  const question = wizardContext.getStepData(props.stepIndex);
-
-  return <Question question={question} onChange={onChange} withoutCard={true} />;
+  return <Question question={props.question} onChange={onChange} withoutCard={true} />;
 };
 
 GeneratedStep.propTypes = {
-  stepIndex: PropTypes.number.isRequired
+  stepIndex: PropTypes.number.isRequired,
+  question: PropTypes.object.isRequired
 };
 
 export default GeneratedStep;

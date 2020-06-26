@@ -37,20 +37,20 @@ export default class WizardGenerator {
    */
   static createWizard(structure, data, title, intl) {
     return new Promise((resolve) =>
-      jsonld.flatten(structure, {}, null, (err, flattened) => {
+      jsonld.flatten(structure, {}, null, (err, structure) => {
         let wizardProperties;
         let form;
         if (err) {
           Logger.error(err);
         }
         try {
-          const [steps, rootForm] = WizardGenerator._constructWizardSteps(flattened, intl);
-
+          const [steps, rootForm] = WizardGenerator._constructWizardSteps(structure, intl);
           form = rootForm;
           wizardProperties = {
             steps,
             title
           };
+
         } catch (e) {
           wizardProperties = WizardGenerator.createDefaultWizard(data, title);
         }

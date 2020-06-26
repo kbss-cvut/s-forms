@@ -88,7 +88,7 @@ const WizardStep = (props) => {
           {_renderHelpIcon()}
         </Card.Header>
         <Card.Body>
-          <GeneratedStep stepIndex={props.stepIndex} question={wizardContext.getStepData(props.stepIndex)} />
+          <GeneratedStep stepIndex={props.stepIndex} question={props.step} />
         </Card.Body>
       </Card>
 
