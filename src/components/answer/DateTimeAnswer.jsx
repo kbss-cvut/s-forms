@@ -8,8 +8,6 @@ import FormUtils from '../../util/FormUtils';
 import * as Constants from '../../constants/Constants';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
-import 'react-datepicker/dist/react-datepicker.css';
-
 const DateTimeAnswer = (props) => {
   const { componentsOptions } = useContext(ConfigurationContext);
 

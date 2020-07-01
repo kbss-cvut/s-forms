@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import SForms from '../../src/components/SForms';
 
 import '../../src/styles/s-forms.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const form = require('./form.json');
 
