@@ -135,8 +135,8 @@ const Answer = (props) => {
   const question = props.question;
   const value = FormUtils.resolveValue(props.answer);
 
-  const label = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_LABEL], options.intl);
-  const title = JsonldUtils.getLocalized(question[JsonldUtils.RDFS_COMMENT], options.intl);
+  const label = JsonldUtils.getLocalized(question[Constants.RDFS_LABEL], options.intl);
+  const title = JsonldUtils.getLocalized(question[Constants.RDFS_COMMENT], options.intl);
   let component;
 
   if (FormUtils.isTypeahead(question)) {

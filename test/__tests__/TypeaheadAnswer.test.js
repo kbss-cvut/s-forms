@@ -20,11 +20,11 @@ describe('TypeaheadAnswer', () => {
       '@id': Generator.getRandomUri()
     };
     question[Constants.LAYOUT_CLASS] = [];
-    question[JsonLdUtils.RDFS_LABEL] = {
+    question[Constants.RDFS_LABEL] = {
       '@language': 'en',
       '@value': '1 - Aerodrome General'
     };
-    question[JsonLdUtils.RDFS_COMMENT] = {
+    question[Constants.RDFS_COMMENT] = {
       '@language': 'en',
       '@value': 'The identification of the aerodrome/helicopter landing area by name, location and status.'
     };

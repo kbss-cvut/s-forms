@@ -17,11 +17,11 @@ describe('InputAnswer', () => {
       '@id': Generator.getRandomUri()
     };
     question[Constants.LAYOUT_CLASS] = [];
-    question[JsonLdUtils.RDFS_LABEL] = {
+    question[Constants.RDFS_LABEL] = {
       '@language': 'en',
       '@value': LABEL
     };
-    question[JsonLdUtils.RDFS_COMMENT] = {
+    question[Constants.RDFS_COMMENT] = {
       '@language': 'en',
       '@value': 'Javascript sucks!!!'
     };
