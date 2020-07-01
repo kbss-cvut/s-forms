@@ -106,4 +106,8 @@ export default class JsonLdObjectUtils {
       return 0;
     };
   }
+
+  static orderByLocalizedLabels(data, intl) {
+    return data.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl));
+  }
 }
