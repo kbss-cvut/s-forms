@@ -52,7 +52,7 @@
     "react": ">= 16.9.0",
     "react-dom": ">= 16.9.0"
   },
-  "main": "lib/s-forms.js",
+  "main": "dist/s-forms.js",
   "private": true,
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -86,11 +86,11 @@
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js",
     "lib": "babel ./src -d ./lib",
-    "build:lib": "npm run build:css && npm run lib && npm pack",
+    "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css"
   },
   "files": [
-    "lib/",
+    "dist/",
     "css/",
     "types/"
   ],
