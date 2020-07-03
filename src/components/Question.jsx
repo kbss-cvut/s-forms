@@ -258,9 +258,7 @@ export default class Question extends React.Component {
     }
 
     // sort by label
-    question[Constants.HAS_SUBQUESTION].sort(
-      JsonLdObjectUtils.getCompareLocalizedLabelFunction(this.context.options.intl)
-    );
+    JsonLdObjectUtils.orderByLocalizedLabels(question[Constants.HAS_SUBQUESTION], this.context.options.intl);
 
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(

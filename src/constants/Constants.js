@@ -1,3 +1,5 @@
+import JsonLdUtils from 'jsonld-utils';
+
 // Default bootstrap column count
 export const COLUMN_COUNT = 12;
 export const INPUT_LENGTH_THRESHOLD = 50;
@@ -79,3 +81,7 @@ export const HAS_PATTERN = 'http://onto.fel.cvut.cz/ontologies/form-lt/has-patte
 export const HAS_DECLARED_PREFIX = 'http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix';
 export const PREFIX = 'http://www.w3.org/ns/shacl#prefix';
 export const NAMESPACE = 'http://www.w3.org/ns/shacl#namespace';
+
+export const RDFS_LABEL = JsonLdUtils.RDFS_LABEL;
+export const RDFS_COMMENT = JsonLdUtils.RDFS_COMMENT;
+export const DEFAULT_HAS_CHILD = JsonLdUtils.DEFAULT_HAS_CHILD;

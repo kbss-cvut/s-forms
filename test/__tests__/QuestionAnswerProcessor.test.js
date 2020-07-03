@@ -64,8 +64,8 @@ describe('Question answer processor', () => {
   function generateQuestions() {
     const question = {};
     question['@id'] = Generator.getRandomUri();
-    question[JsonLdUtils.RDFS_LABEL] = 'Test0';
-    question[JsonLdUtils.RDFS_COMMENT] = 'Test0 Comment';
+    question[Constants.RDFS_LABEL] = 'Test0';
+    question[Constants.RDFS_COMMENT] = 'Test0 Comment';
     question[Constants.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
     question[Constants.HAS_SUBQUESTION] = [];
     for (let i = 0; i < Generator.getRandomPositiveInt(1, 5); i++) {
@@ -78,8 +78,8 @@ describe('Question answer processor', () => {
     const question = {};
     question['@id'] = Generator.getRandomUri();
     question[Constants.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
-    question[JsonLdUtils.RDFS_LABEL] = 'Test' + Generator.getRandomInt();
-    question[JsonLdUtils.RDFS_COMMENT] = 'Test Comment';
+    question[Constants.RDFS_LABEL] = 'Test' + Generator.getRandomInt();
+    question[Constants.RDFS_COMMENT] = 'Test Comment';
     if (depth < maxDepth) {
       question[Constants.HAS_SUBQUESTION] = [];
       for (let i = 0; i < Generator.getRandomPositiveInt(1, 5); i++) {
