@@ -37,7 +37,7 @@ const DateTimeAnswer = (props) => {
 
   return (
     <FormGroup size="small">
-      <Form.Label>{props.label}</Form.Label>
+      <Form.Label className={'w-100'}>{props.label}</Form.Label>
       <DatePicker
         selected={value}
         placeholderText={datePickerFormat.toUpperCase()}
