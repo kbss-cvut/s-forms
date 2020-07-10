@@ -89,3 +89,7 @@ input:disabled {
 .wizard-step-content {
   min-height: 600px;
 }
+
+.list-group-item.active {
+  font-weight: 500;
+}
