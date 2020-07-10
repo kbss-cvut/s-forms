@@ -58,17 +58,6 @@ const WizardStep = (props) => {
 
   const disableNext = () => setAdvanceDisabled(true);
 
-  const renderAdvanceButton = () => {
-    if (!props.isLastStep) {
-      return (
-        <Button onClick={onNext} disabled={advanceDisabled} variant="primary" size="sm">
-          {options.i18n['wizard.next']}
-        </Button>
-      );
-    }
-    return null;
-  };
-
   const _renderHelpIcon = () => {
     const question = wizardContext.getStepData([props.stepIndex]);
 
@@ -78,6 +67,23 @@ const WizardStep = (props) => {
         iconClass="help-icon-section"
       />
     ) : null;
+  };
+
+  const _renderWizardStepButtons = () => {
+    return (
+      <ButtonToolbar className="m-3 float-right">
+        {!props.isFirstStep && (
+          <Button className="mr-2" onClick={onPrevious} disabled={retreatDisabled} variant="primary" size="sm">
+            {options.i18n['wizard.previous']}
+          </Button>
+        )}
+        {!props.isLastStep && (
+          <Button onClick={onNext} disabled={advanceDisabled} variant="primary" size="sm">
+            {options.i18n['wizard.next']}
+          </Button>
+        )}
+      </ButtonToolbar>
+    );
   };
 
   return (
@@ -92,14 +98,8 @@ const WizardStep = (props) => {
         </Card.Body>
       </Card>
 
-      <ButtonToolbar className="m-3 float-right">
-        {!props.isFirstStep && (
-          <Button className="mr-2" onClick={onPrevious} disabled={retreatDisabled} variant="primary" size="sm">
-            {options.i18n['wizard.previous']}
-          </Button>
-        )}
-        {renderAdvanceButton()}
-      </ButtonToolbar>
+      {options.wizardStepButtons && _renderWizardStepButtons()}
+
       {currentError && (
         <Alert variant="danger">
           <p>{currentError.message}</p>

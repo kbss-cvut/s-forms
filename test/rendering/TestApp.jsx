@@ -38,7 +38,8 @@ class TestApp extends React.Component {
       },
       modalView: false,
       modalProps,
-      horizontalWizardNav: true
+      horizontalWizardNav: true,
+      wizardStepButtons: true
     };
 
     return (

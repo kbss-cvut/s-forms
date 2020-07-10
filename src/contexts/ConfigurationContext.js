@@ -19,7 +19,8 @@ const defaultProps = {
     },
     modalView: false,
     modalProps: {},
-    horizontalWizardNav: true
+    horizontalWizardNav: true,
+    wizardStepButtons: true
   }
 };
 

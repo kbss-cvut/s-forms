@@ -10,6 +10,7 @@ export interface SOptions {
   modalView?: boolean; // default false
   modalProps?: Modal;
   horizontalWizardNav?: boolean; // default true
+  wizardStepButtons?: boolean; // default true
 }
 
 export interface SComponents {
