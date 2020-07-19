@@ -106,6 +106,7 @@ export module Constants {
   const REQUIRES_ANSWER_VALUE: unique symbol;
   const REQUIRES_DESCRIPTION: unique symbol;
   const HAS_PRECEDING_QUESTION: unique symbol;
+  const HAS_PRECEDING_VALUE: unique symbol;
   const HAS_MEDIA_CONTENT: unique symbol;
   const CONDITION: unique symbol;
   const HAS_PATTERN: unique symbol;
