@@ -10,6 +10,7 @@ import Logger from '../../util/Logger';
 import { FormGroup, Form } from 'react-bootstrap';
 import { FormGenContext } from '../../contexts/FormGenContext';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
+import OptimizedMenuList from "./OptimizedMenuList";
 
 const processTypeaheadOptions = (options, intl) => {
   if (!options) {
@@ -92,7 +93,7 @@ const TypeaheadAnswer = (props) => {
         getOptionLabel={(option) => option.name}
         getOptionValue={(option) => option.id}
         onChange={onOptionSelected}
-        components={{ Option: DescriptionOption }}
+        components={{ MenuList: OptimizedMenuList, Option: DescriptionOption }}
       />
     </FormGroup>
   );
