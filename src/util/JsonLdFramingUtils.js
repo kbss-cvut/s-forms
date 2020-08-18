@@ -94,4 +94,42 @@ export default class JsonLdFramingUtils {
       }
     });
   }
+
+  static compressStructure = (rootNode) => {
+    let object2IdMap = []; // mapping object -> id
+    let idIncluded = new Set();
+
+    object2IdMap = this._compressGraph(rootNode, object2IdMap, idIncluded);
+
+    object2IdMap = object2IdMap.sort((a, b) => a['@id'].localeCompare(b['@id']));
+
+    return object2IdMap;
+  };
+
+  static _compressGraph = (parentNode, object2IdMap, idIncluded) => {
+    if (!idIncluded.has(parentNode['@id'])) {
+      object2IdMap.push(parentNode);
+      idIncluded.add(parentNode['@id']);
+    }
+
+    formShape.expandProperties.forEach((prop) => {
+      if (parentNode.hasOwnProperty(prop)) {
+        const childArray = parentNode[prop];
+
+        for (let i = 0; i < childArray.length; i++) {
+          const child = childArray[i];
+
+          if (child !== undefined) {
+            childArray[i] = child;
+
+            object2IdMap = this._compressGraph(child, object2IdMap, idIncluded);
+
+            parentNode[prop][i] = { '@id': child['@id'] };
+          }
+        }
+      }
+    });
+
+    return object2IdMap;
+  };
 }

@@ -132,6 +132,7 @@ export class JsonLdObjectUtils {
 export class JsonLdFramingUtils {
   static customFrame(input, shape, callback): any;
   static expandStructure(structure: JsonLdObj): JsonLdObj;
+  static compressStructure(structure: JsonLdObj): JsonLdObj;
 }
 
 export class JsonLdObjectMap {
