@@ -20,8 +20,8 @@ describe('JsonLd framing utils', () => {
     };
   });
 
-  it('returns jsonld object map from modifyStructure', () => {
-    const id2objectMap = JsonLdFramingUtils.modifyStructure(formDocument);
+  it('returns expanded jsonld object map from expandStructure', () => {
+    const id2objectMap = JsonLdFramingUtils.expandStructure(formDocument);
 
     expect(id2objectMap[formQuestion['@id']]).toBe(formQuestion);
   });

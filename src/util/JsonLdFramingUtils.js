@@ -48,22 +48,20 @@ export default class JsonLdFramingUtils {
     jsonld.flatten(input, null, null, flattenedCallback);
   }
 
-  static modifyStructure(structure) {
-    const defs = structure['@graph'];
-    let item;
-    let form;
+  static expandStructure(structure) {
+    let root;
     const id2objectMap = {}; // mapping @id -> object
 
-    for (let i = 0; i < defs.length; i++) {
-      item = defs[i];
+    structure['@graph'].forEach((item) => {
       id2objectMap[item['@id']] = item;
+
       if (FormUtils.isForm(item)) {
-        form = item;
+        root = item;
       }
-    }
+    });
 
     try {
-      this._expandGraph(form, formShape, id2objectMap);
+      this._expandGraph(root, formShape, id2objectMap);
     } catch (e) {
       console.error("Error '" + e + "' occured, while trying to apply frame-ing with custom shape.");
     }
@@ -76,13 +74,15 @@ export default class JsonLdFramingUtils {
     let child;
     let childId;
 
-    for (const prop of shape.expandProperties) {
+    shape.expandProperties.forEach((prop) => {
       if (parentNode.hasOwnProperty(prop)) {
         parentNode[prop] = Utils.asArray(parentNode[prop]);
         childArray = parentNode[prop];
+
         for (let i = 0; i < childArray.length; i++) {
           childId = childArray[i]['@id'];
           child = id2ObjectMap[childId];
+
           if (child !== undefined) {
             childArray[i] = child;
             //console.log(childId + " expanded.");
@@ -92,6 +92,6 @@ export default class JsonLdFramingUtils {
           }
         }
       }
-    }
+    });
   }
 }
