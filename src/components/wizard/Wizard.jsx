@@ -14,68 +14,29 @@ const Wizard = (props) => {
   const wizardContext = React.useContext(WizardContext);
   const configurationContext = React.useContext(ConfigurationContext);
 
-  const onAdvance = () => {
-    if (currentStep !== wizardContext.getStepData().length - 1) {
-      wizardContext.getStepData()[currentStep + 1].visited = true;
+  const onNextStep = () => {
+    const stepData = wizardContext.getStepData();
+    if (currentStep !== stepData.length - 1) {
+      stepData[currentStep + 1].visited = true;
       setCurrentStep((prevCurrentStep) => prevCurrentStep + 1);
     }
   };
 
-  const onRetreat = () => {
+  const onPreviousStep = () => {
     if (currentStep === 0) {
       return;
     }
     setCurrentStep((prevCurrentStep) => prevCurrentStep - 1);
   };
 
-  const onFinish = (errCallback) => {
-    const data = {
-      data: this.context.getData(),
-      stepData: this.context.getStepData()
-    };
-    this.context.reset();
-    this.props.onFinish(data, this.props.onClose, errCallback);
-  };
-
-  /**
-   * Insert the specified step after the current one.
-   * @param step The step to insert
-   */
-  const onInsertStepAfterCurrent = (step) => {
-    configurationContext.getStepData().splice(currentStep + 1, 0, step);
-    configurationContext.insertStep(currentStep + 1, step);
-  };
-
-  /**
-   * Adds the specified step to the end of this wizard.
-   * @param step The step to add
-   */
-  const onAddStep = (step) => {
-    wizardContext.getStepData().push(step);
-    wizardContext.insertStep(wizardContext.getStepData().length - 1, step);
-  };
-
-  const onRemoveStep = (stepId) => {
+  const navigate = (stepIndex) => {
     const stepData = wizardContext.getStepData();
 
-    for (let i = 0; i < stepData.length; i++) {
-      if (stepData[i].id === stepId) {
-        wizardContext.getStepData().splice(i, 1);
-        wizardContext.removeStep(i);
-        if (i === currentStep && i !== 0) {
-          setCurrentStep((prevCurrentStep) => prevCurrentStep - 1);
-        }
-        break;
-      }
-    }
-  };
-
-  const navigate = (stepIndex) => {
-    if (stepIndex === currentStep || stepIndex >= wizardContext.getStepData().length) {
+    if (stepIndex === currentStep || stepIndex >= stepData.length) {
       return;
     }
     // Can we jump forward?
-    if (stepIndex > currentStep && !wizardContext.getStepData()[stepIndex].visited && !props.enableForwardSkip) {
+    if (stepIndex > currentStep && !stepData[stepIndex].visited && !props.enableForwardSkip) {
       return;
     }
     setCurrentStep(stepIndex);
@@ -86,10 +47,12 @@ const Wizard = (props) => {
       return null;
     }
 
+    const stepData = wizardContext.getStepData();
+
     return configurationContext.options.horizontalWizardNav ? (
-      <HorizontalWizardNav currentStep={currentStep} steps={wizardContext.getStepData()} onNavigate={navigate} />
+      <HorizontalWizardNav currentStep={currentStep} steps={stepData} onNavigate={navigate} />
     ) : (
-      <VerticalWizardNav currentStep={currentStep} steps={wizardContext.getStepData()} onNavigate={navigate} />
+      <VerticalWizardNav currentStep={currentStep} steps={stepData} onNavigate={navigate} />
     );
   };
 
@@ -120,12 +83,8 @@ const Wizard = (props) => {
       <WizardStep
         key={'step' + currentStep}
         step={step}
-        onFinish={onFinish}
-        onAdvance={onAdvance}
-        onRetreat={onRetreat}
-        onInsertStepAfterCurrent={onInsertStepAfterCurrent}
-        onAddStep={onAddStep}
-        onRemoveStep={onRemoveStep}
+        onNext={onNextStep}
+        onPrevious={onPreviousStep}
         stepIndex={currentStep}
         isFirstStep={currentStep === 0}
         isLastStep={currentStep === wizardContext.getStepData().length - 1}
@@ -142,8 +101,6 @@ const Wizard = (props) => {
 
 Wizard.propTypes = {
   start: PropTypes.number,
-  onFinish: PropTypes.func,
-  onClose: PropTypes.func,
   enableForwardSkip: PropTypes.bool // Whether to allow forward step skipping
 };
 
