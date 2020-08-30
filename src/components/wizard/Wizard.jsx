@@ -8,11 +8,13 @@ import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import WizardWindow from './WizardWindow';
 import { WizardContext } from '../../contexts/WizardContext';
 
-const Wizard = (props) => {
-  const [currentStep, setCurrentStep] = React.useState(props.start || 0);
-
+const Wizard = () => {
   const wizardContext = React.useContext(WizardContext);
-  const configurationContext = React.useContext(ConfigurationContext);
+  const { options } = React.useContext(ConfigurationContext);
+
+  const start = options.startingStep < wizardContext.getStepData().length ? options.startingStep : 0;
+
+  const [currentStep, setCurrentStep] = React.useState(start);
 
   const onNextStep = () => {
     const stepData = wizardContext.getStepData();
@@ -36,7 +38,7 @@ const Wizard = (props) => {
       return;
     }
     // Can we jump forward?
-    if (stepIndex > currentStep && !stepData[stepIndex].visited && !props.enableForwardSkip) {
+    if (stepIndex > currentStep && !stepData[stepIndex].visited && !options.enableForwardSkip) {
       return;
     }
     setCurrentStep(stepIndex);
@@ -49,7 +51,7 @@ const Wizard = (props) => {
 
     const stepData = wizardContext.getStepData();
 
-    return configurationContext.options.horizontalWizardNav ? (
+    return options.horizontalWizardNav ? (
       <HorizontalWizardNav currentStep={currentStep} steps={stepData} onNavigate={navigate} />
     ) : (
       <VerticalWizardNav currentStep={currentStep} steps={stepData} onNavigate={navigate} />
@@ -57,7 +59,7 @@ const Wizard = (props) => {
   };
 
   const renderWizard = () => {
-    const isHorizontal = configurationContext.options.horizontalWizardNav;
+    const isHorizontal = options.horizontalWizardNav;
 
     const cardClassname = isHorizontal ? '' : 'flex-row p-2';
     const containerClassname = isHorizontal ? 'card-body' : 'col-10 p-0';
@@ -92,16 +94,11 @@ const Wizard = (props) => {
     );
   };
 
-  if (configurationContext.options.modalView) {
+  if (options.modalView) {
     return <WizardWindow>{renderWizard()}</WizardWindow>;
   }
 
   return renderWizard();
-};
-
-Wizard.propTypes = {
-  start: PropTypes.number,
-  enableForwardSkip: PropTypes.bool // Whether to allow forward step skipping
 };
 
 export default Wizard;
