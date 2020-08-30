@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import WizardStep from './WizardStep';
 import HorizontalWizardNav from './HorizontalWizardNav';
@@ -85,8 +84,8 @@ const Wizard = () => {
       <WizardStep
         key={'step' + currentStep}
         step={step}
-        onNext={onNextStep}
-        onPrevious={onPreviousStep}
+        onNextStep={onNextStep}
+        onPreviousStep={onPreviousStep}
         stepIndex={currentStep}
         isFirstStep={currentStep === 0}
         isLastStep={currentStep === wizardContext.getStepData().length - 1}

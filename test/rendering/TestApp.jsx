@@ -39,7 +39,9 @@ class TestApp extends React.Component {
       modalView: false,
       modalProps,
       horizontalWizardNav: true,
-      wizardStepButtons: true
+      wizardStepButtons: true,
+      enableForwardSkip: true,
+      startingStep: 1
     };
 
     return (
@@ -50,7 +52,6 @@ class TestApp extends React.Component {
           options={options}
           fetchTypeAheadValues={this.fetchTypeAheadValues}
           isFormValid={(isFormValid) => this.setState({ isFormValid })}
-          enableForwardSkip={true}
         />
         <button
           disabled={!this.state.isFormValid}
