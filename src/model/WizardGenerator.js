@@ -50,7 +50,6 @@ export default class WizardGenerator {
             steps,
             title
           };
-
         } catch (e) {
           wizardProperties = WizardGenerator.createDefaultWizard(data, title);
         }
@@ -66,7 +65,7 @@ export default class WizardGenerator {
     let stepQuestions = [];
 
     if (structure['@graph'][0]['@id'] !== undefined) {
-      id2ObjectMap = JsonLdFramingUtils.modifyStructure(structure); //TODO make as callback
+      id2ObjectMap = JsonLdFramingUtils.expandStructure(structure); //TODO make as callback
 
       Object.keys(id2ObjectMap).map((key) => {
         JsonLdObjectMap.putObject(key, id2ObjectMap[key]);

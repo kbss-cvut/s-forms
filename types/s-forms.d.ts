@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
+import { JsonLdObj } from 'jsonld/jsonld-spec';
 
 export interface SOptions {
   intl?: { locale: string }; // default 'en'
@@ -132,7 +133,8 @@ export class JsonLdObjectUtils {
 
 export class JsonLdFramingUtils {
   static customFrame(input, shape, callback): any;
-  static modifyStructure(structure): any;
+  static expandStructure(structure: JsonLdObj): JsonLdObj;
+  static compressStructure(structure: JsonLdObj): JsonLdObj;
 }
 
 export class JsonLdObjectMap {
