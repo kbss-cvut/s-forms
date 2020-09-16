@@ -12,51 +12,14 @@ const WizardStep = (props) => {
   const wizardContext = React.useContext(WizardContext);
   const { options } = React.useContext(ConfigurationContext);
 
-  const [advanceDisabled, setAdvanceDisabled] = useState(
-    props.step.defaultNextDisabled != null ? props.step.defaultNextDisabled : false
-  );
-  const [retreatDisabled, setRetreatDisabled] = useState(false);
-  const [currentError, setCurrentError] = useState(null);
-
-  const onAdvance = (err) => {
-    if (err) {
-      setAdvanceDisabled(true);
-      setRetreatDisabled(true);
-      setCurrentError(err);
-    } else {
-      wizardContext.updateStepData(props.stepIndex, wizardContext.getStepData());
-      props.onAdvance();
-    }
-  };
-
-  const onNext = () => {
-    setAdvanceDisabled(true);
-    setRetreatDisabled(true);
-
-    if (props.step.onNext) {
-      props.step.onNext.apply(this, [onAdvance]);
-    } else {
-      wizardContext.updateStepData(props.stepIndex, wizardContext.getStepData());
-      props.onAdvance();
-    }
-  };
-
-  const onPrevious = () => {
-    if (props.step.onPrevious) {
-      props.step.onPrevious.apply(this, [props.onRetreat]);
-    } else {
-      props.onRetreat();
-    }
-  };
-
-  const onFinish = () => {
+  const onNextStep = () => {
     wizardContext.updateStepData(props.stepIndex, wizardContext.getStepData());
-    props.onFinish();
+    props.onNextStep();
   };
 
-  const enableNext = () => setAdvanceDisabled(false);
-
-  const disableNext = () => setAdvanceDisabled(true);
+  const onPreviousStep = () => {
+    props.onPreviousStep();
+  };
 
   const _renderHelpIcon = () => {
     const question = wizardContext.getStepData([props.stepIndex]);
@@ -73,12 +36,12 @@ const WizardStep = (props) => {
     return (
       <ButtonToolbar className="m-3 float-right">
         {!props.isFirstStep && (
-          <Button className="mr-2" onClick={onPrevious} disabled={retreatDisabled} variant="primary" size="sm">
+          <Button className="mr-2" onClick={onPreviousStep} variant="primary" size="sm">
             {options.i18n['wizard.previous']}
           </Button>
         )}
         {!props.isLastStep && (
-          <Button onClick={onNext} disabled={advanceDisabled} variant="primary" size="sm">
+          <Button onClick={onNextStep} variant="primary" size="sm">
             {options.i18n['wizard.next']}
           </Button>
         )}
@@ -99,21 +62,14 @@ const WizardStep = (props) => {
       </Card>
 
       {options.wizardStepButtons && _renderWizardStepButtons()}
-
-      {currentError && (
-        <Alert variant="danger">
-          <p>{currentError.message}</p>
-        </Alert>
-      )}
     </div>
   );
 };
 
 WizardStep.propTypes = {
   step: PropTypes.object.isRequired,
-  onFinish: PropTypes.func.isRequired,
-  onAdvance: PropTypes.func,
-  onRetreat: PropTypes.func,
+  onNextStep: PropTypes.func,
+  onPreviousStep: PropTypes.func,
   stepIndex: PropTypes.number.isRequired,
   isFirstStep: PropTypes.bool,
   isLastStep: PropTypes.bool

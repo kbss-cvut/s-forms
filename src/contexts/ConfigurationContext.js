@@ -20,7 +20,9 @@ const defaultProps = {
     modalView: false,
     modalProps: {},
     horizontalWizardNav: true,
-    wizardStepButtons: true
+    wizardStepButtons: true,
+    enableForwardSkip: false,
+    startingStep: 0
   }
 };
 

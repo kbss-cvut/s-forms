@@ -38,25 +38,6 @@ const WizardContextProvider = (props) => {
     }
   };
 
-  const insertStep = (index, update) => {
-    const newStepData = [...stepData];
-
-    newStepData.splice(index, 0, update || {});
-    setStepData(newStepData);
-  };
-
-  const removeStep = (index) => {
-    const newStepData = [...stepData];
-
-    newStepData.splice(index, 1);
-    setStepData(newStepData);
-  };
-
-  const reset = () => {
-    setData(INITIAL_DATA);
-    setStepData(INITIAL_STEP_DATA);
-  };
-
   const getData = () => {
     return data;
   };
@@ -69,9 +50,6 @@ const WizardContextProvider = (props) => {
     () => ({
       updateData,
       updateStepData,
-      insertStep,
-      removeStep,
-      reset,
       getData,
       getStepData
     }),

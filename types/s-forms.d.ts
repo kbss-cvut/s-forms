@@ -11,6 +11,8 @@ export interface SOptions {
   modalProps?: Modal;
   horizontalWizardNav?: boolean; // default true
   wizardStepButtons?: boolean; // default true
+  enableForwardSkip?: boolean; // default false
+  startingStep?: number; // default 0; indexed from 0
 }
 
 export interface SComponents {
