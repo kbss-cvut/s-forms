@@ -14,6 +14,7 @@ export interface SOptions {
   wizardStepButtons?: boolean; // default true
   enableForwardSkip?: boolean; // default false
   startingStep?: number; // default 0; indexed from 0
+  startingQuestionId?: string; // default undefined; overrides startingStep
 }
 
 export interface SComponents {

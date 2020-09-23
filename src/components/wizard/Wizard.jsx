@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import WizardStep from './WizardStep';
 import HorizontalWizardNav from './HorizontalWizardNav';
@@ -6,14 +6,60 @@ import VerticalWizardNav from './VerticalWizardNav';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import WizardWindow from './WizardWindow';
 import { WizardContext } from '../../contexts/WizardContext';
+import * as Constants from '../../constants/Constants';
+
+const findStepByQuestionId = (stepData, id) => {
+  const findQuestionTraversal = (question, index) => {
+    if (!question) {
+      return -1;
+    }
+
+    if (question['@id'] === id) {
+      return index;
+    }
+
+    let subQuestions = question[Constants.HAS_SUBQUESTION];
+
+    if (!Array.isArray(subQuestions)) {
+      subQuestions = [subQuestions];
+    }
+
+    return subQuestions.findIndex((q, index) => findQuestionTraversal(q, index) !== -1);
+  };
+
+  return stepData.findIndex((step, index) => findQuestionTraversal(step, index) !== -1);
+};
 
 const Wizard = () => {
   const wizardContext = React.useContext(WizardContext);
   const { options } = React.useContext(ConfigurationContext);
 
-  const start = options.startingStep < wizardContext.getStepData().length ? options.startingStep : 0;
+  let startingStep = 0;
+  if (options.startingQuestionId) {
+    startingStep = findStepByQuestionId(wizardContext.getStepData(), options.startingQuestionId);
 
-  const [currentStep, setCurrentStep] = React.useState(start);
+    if (startingStep === -1) {
+      console.warn(`Question with id ${options.startingQuestionId} not found!`);
+      startingStep = 0;
+    }
+  } else if (options.startingStep) {
+    startingStep = options.startingStep < wizardContext.getStepData().length ? options.startingStep : 0;
+  }
+
+  const [currentStep, setCurrentStep] = React.useState(startingStep);
+
+  const [scrolledToStartingQuestionId, setScrolledToStartingQuestionId] = React.useState(false);
+
+  useEffect(() => {
+    if (options.startingQuestionId && !scrolledToStartingQuestionId) {
+      const element = document.getElementById(options.startingQuestionId);
+      if (element) {
+        element.scrollIntoView();
+        element.classList.add('text-warning');
+        setScrolledToStartingQuestionId(true);
+      }
+    }
+  });
 
   const onNextStep = () => {
     const stepData = wizardContext.getStepData();
