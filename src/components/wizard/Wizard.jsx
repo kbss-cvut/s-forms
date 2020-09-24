@@ -55,7 +55,7 @@ const Wizard = () => {
       const element = document.getElementById(options.startingQuestionId);
       if (element) {
         element.scrollIntoView();
-        element.classList.add('text-warning');
+        element.classList.add('text-danger');
         setScrolledToStartingQuestionId(true);
       }
     }

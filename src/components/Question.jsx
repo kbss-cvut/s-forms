@@ -97,10 +97,10 @@ export default class Question extends React.Component {
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
       return (
-        <Accordion defaultActiveKey={!this.state.expanded ? label : undefined} id={question['@id']}>
+        <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
           <Card className="mb-3">
             <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
-              <h6 className="d-inline">
+              <h6 className="d-inline" id={question['@id']}>
                 {collapsible && this._renderCollapseToggle()}
                 {label}
               </h6>
