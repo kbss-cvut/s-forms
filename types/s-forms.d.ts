@@ -92,6 +92,7 @@ export module Constants {
     NON_NEGATIVE_INTEGER: string;
     NON_POSITIVE_INTEGER: string;
     POSITIVE_INTEGER: string;
+    BOOLEAN: string;
   };
   const ACCEPTS_ANSWER_VALUE: unique symbol;
   const HAS_DATATYPE: unique symbol;

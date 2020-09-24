@@ -54,7 +54,9 @@ export const XSD = {
   NEGATIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#negativeInteger',
   NON_NEGATIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger',
   NON_POSITIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#nonPositiveInteger',
-  POSITIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#positiveInteger'
+  POSITIVE_INTEGER: 'http://www.w3.org/2001/XMLSchema#positiveInteger',
+
+  BOOLEAN: 'http://www.w3.org/2001/XMLSchema#boolean'
 };
 export const ACCEPTS_ANSWER_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value';
 export const HAS_DATATYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-datatype';
