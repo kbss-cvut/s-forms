@@ -37,6 +37,11 @@ svg {
   margin-bottom: 0.15rem;
 }
 
+.caret-square-up,
+.caret-square-down {
+  margin-right: 0.2rem;
+}
+
 .help-icon-text-input {
   margin-bottom: 25px;
   bottom: 0;

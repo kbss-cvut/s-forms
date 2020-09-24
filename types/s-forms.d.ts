@@ -7,6 +7,8 @@ export interface SOptions {
   i18n?: {
     'wizard.next': string; // default 'Next'
     'wizard.previous': string; // default 'Previous'
+    'section.expand': string; // default 'Expand'
+    'section.collapse': string; // default 'Collapse'
   };
   modalView?: boolean; // default false
   modalProps?: Modal;

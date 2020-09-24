@@ -199,11 +199,13 @@ export default class Question extends React.Component {
   }
 
   _renderCollapseToggle() {
-    const title = this.state.expanded ? 'Collapse' : 'Expand';
+    const { options } = this.context;
+
+    const title = this.state.expanded ? options.i18n['section.collapse'] : options.i18n['section.expand'];
 
     return (
       <span onClick={this._toggleCollapse} title={title}>
-        {this.state.expanded ? <CaretSquareUp /> : <CaretSquareDown />}
+        {this.state.expanded ? <CaretSquareUp title={title} /> : <CaretSquareDown title={title} />}
       </span>
     );
   }

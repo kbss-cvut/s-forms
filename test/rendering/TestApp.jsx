@@ -31,7 +31,9 @@ class TestApp extends React.Component {
     const options = {
       i18n: {
         'wizard.next': 'Next',
-        'wizard.previous': 'Previous'
+        'wizard.previous': 'Previous',
+        'section.expand': 'Expand',
+        'section.collapse': 'Collapse'
       },
       intl: {
         locale: 'cs'
