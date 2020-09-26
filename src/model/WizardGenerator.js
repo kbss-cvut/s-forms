@@ -20,12 +20,7 @@ export default class WizardGenerator {
 
     const [steps, form] = WizardGenerator._constructWizardSteps(defaultFormData, intl);
 
-    const wizardProperties = {
-      steps,
-      title
-    };
-
-    return [wizardProperties, form];
+    return [steps, { root: form }];
   }
 
   /**
@@ -51,7 +46,12 @@ export default class WizardGenerator {
             title
           };
         } catch (e) {
-          wizardProperties = WizardGenerator.createDefaultWizard(data, title);
+          const [steps, rootForm] = WizardGenerator.createDefaultWizard(data, title);
+          form = rootForm;
+          wizardProperties = {
+            steps,
+            title
+          };
         }
         return resolve([wizardProperties, form]);
       })
@@ -78,8 +78,8 @@ export default class WizardGenerator {
     formElements = form[Constants.HAS_SUBQUESTION];
 
     if (!formElements) {
-      Logger.error('Could not find any wizard steps in the received data.');
-      throw 'No wizard steps in form';
+      Logger.error('Could not find any questions in the received data.');
+      throw 'Questions in the form';
     }
 
     stepQuestions = formElements.filter((item) => {
@@ -90,6 +90,11 @@ export default class WizardGenerator {
       Logger.warn('Item is not a wizard step: ' + item);
       return false;
     });
+
+    if (!stepQuestions.length) {
+      Logger.error('Could not find any wizard steps in the received data.');
+      throw 'No wizard steps in form';
+    }
 
     // sort by label
     stepQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl));
