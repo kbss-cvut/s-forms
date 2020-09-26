@@ -7,6 +7,7 @@ import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import WizardWindow from './WizardWindow';
 import { WizardContext } from '../../contexts/WizardContext';
 import * as Constants from '../../constants/Constants';
+import Utils from "../../util/Utils";
 
 const findStepByQuestionId = (stepData, id) => {
   const findQuestionTraversal = (question, index) => {
@@ -18,11 +19,7 @@ const findStepByQuestionId = (stepData, id) => {
       return index;
     }
 
-    let subQuestions = question[Constants.HAS_SUBQUESTION];
-
-    if (!Array.isArray(subQuestions)) {
-      subQuestions = [subQuestions];
-    }
+    const subQuestions = Utils.asArray(question[Constants.HAS_SUBQUESTION]);
 
     return subQuestions.findIndex((q, index) => findQuestionTraversal(q, index) !== -1);
   };
