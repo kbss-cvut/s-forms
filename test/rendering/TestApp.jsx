@@ -5,7 +5,8 @@ import SForms from '../../src/components/SForms';
 import '../../src/styles/s-forms.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const form = require('./form.json');
+const form1 = require('./form1.json'); // form with wizard steps
+const form2 = require('./form2.json'); // form without wizard steps (proudly assembled in Semantic Form Web Editor)
 
 class TestApp extends React.Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class TestApp extends React.Component {
       <React.Fragment>
         <SForms
           ref={this.refForm}
-          form={form}
+          form={form1}
           options={options}
           fetchTypeAheadValues={this.fetchTypeAheadValues}
           isFormValid={(isFormValid) => this.setState({ isFormValid })}

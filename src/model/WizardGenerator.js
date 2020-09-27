@@ -91,8 +91,9 @@ export default class WizardGenerator {
     });
 
     if (!stepQuestions.length) {
-      Logger.error('Could not find any wizard steps in the received data.');
-      throw 'No wizard steps in form';
+      Logger.log('Could not find any wizard steps in the received data. Building form without steps');
+
+      form[Constants.HAS_SUBQUESTION].forEach((question) => stepQuestions.push(question));
     }
 
     // sort by label

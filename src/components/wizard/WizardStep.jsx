@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Alert, Button, ButtonToolbar, Card } from 'react-bootstrap';
+import React from 'react';
+import { Button, ButtonToolbar, Card } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import * as Constants from '../../constants/Constants';
 import HelpIcon from '../HelpIcon';
 import { WizardContext } from '../../contexts/WizardContext';
-import GeneratedStep from '../GeneratedStep';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
+import Question from '../Question';
 
 const WizardStep = (props) => {
   const wizardContext = React.useContext(WizardContext);
@@ -49,6 +49,10 @@ const WizardStep = (props) => {
     );
   };
 
+  const onChange = (index, change) => {
+    wizardContext.updateStepData(props.stepIndex || index, { ...props.step, ...change });
+  };
+
   return (
     <div className="wizard-step">
       <Card className="wizard-step-content">
@@ -57,7 +61,7 @@ const WizardStep = (props) => {
           {_renderHelpIcon()}
         </Card.Header>
         <Card.Body>
-          <GeneratedStep stepIndex={props.stepIndex} question={props.step} />
+          <Question question={props.step} onChange={onChange} withoutCard={true} index={props.stepIndex} />
         </Card.Body>
       </Card>
 

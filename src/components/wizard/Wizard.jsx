@@ -74,10 +74,6 @@ const Wizard = () => {
   const initComponent = () => {
     const stepData = wizardContext.getStepData();
 
-    if (stepData.length === 0) {
-      return <div className="font-italic">There are no steps in this wizard.</div>;
-    }
-
     const step = stepData[currentStep];
 
     return (
