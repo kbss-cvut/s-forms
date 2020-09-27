@@ -9,11 +9,11 @@ import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import Question from '../Question';
 
 const WizardStep = (props) => {
-  const wizardContext = React.useContext(FormQuestionsContext);
+  const formQuestionsContext = React.useContext(FormQuestionsContext);
   const { options } = React.useContext(ConfigurationContext);
 
   const onNextStep = () => {
-    wizardContext.updateFormQuestionsData(props.stepIndex, wizardContext.getFormQuestionsData());
+    formQuestionsContext.updateFormQuestionsData(props.stepIndex, formQuestionsContext.getFormQuestionsData());
     props.onNextStep();
   };
 
@@ -22,7 +22,7 @@ const WizardStep = (props) => {
   };
 
   const _renderHelpIcon = () => {
-    const question = wizardContext.getFormQuestionsData([props.stepIndex]);
+    const question = formQuestionsContext.getFormQuestionsData([props.stepIndex]);
 
     return question[Constants.HELP_DESCRIPTION] ? (
       <HelpIcon
@@ -50,13 +50,13 @@ const WizardStep = (props) => {
   };
 
   const onChange = (index, change) => {
-    wizardContext.updateFormQuestionsData(props.stepIndex || index, { ...props.step, ...change });
+    formQuestionsContext.updateFormQuestionsData(props.stepIndex || index, { ...props.step, ...change });
   };
 
   return (
     <div className="wizard-step">
       <Card className="wizard-step-content">
-        <Card.Header className="bg-primary text-white" as="h6">
+        <Card.Header className="bg-primary text-white" as="h6" id={props.step['@id']}>
           {JsonLdUtils.getLocalized(props.step[JsonLdUtils.RDFS_LABEL], options.intl)}
           {_renderHelpIcon()}
         </Card.Header>

@@ -69,14 +69,14 @@ export default class Question extends React.Component {
     if (FormUtils.isAnswerable(question)) {
       if (PRETTY_ANSWERABLE_LAYOUT) {
         return (
-          <div>
+          <div id={question['@id']}>
             <div className="panel-title answerable-question">{this.renderAnswers()}</div>
             <div className="answerable-subquestions">{this.renderSubQuestions()}</div>
           </div>
         );
       } else {
         return (
-          <div>
+          <div id={question['@id']}>
             {this.renderAnswers()}
             <div className="ml-4 mt-n2">{this.renderSubQuestions()}</div>
           </div>
@@ -100,7 +100,7 @@ export default class Question extends React.Component {
         <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
           <Card className="mb-3">
             <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
-              <h6 className="d-inline">
+              <h6 className="d-inline" id={question['@id']}>
                 {collapsible && this._renderCollapseToggle()}
                 {label}
               </h6>
@@ -135,12 +135,12 @@ export default class Question extends React.Component {
 
     for (let i = 0, len = answers.length; i < len; i++) {
       isTextarea =
-        FormUtils.isTextarea(this.props.question, FormUtils.resolveValue(answers[i])) ||
+        FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
         FormUtils.isSparqlInput(question) ||
         FormUtils.isTurtleInput(question);
       cls = Question._getAnswerClass(isTextarea);
       row.push(
-        <div key={'row-item-' + i} className={cls}>
+        <div key={'row-item-' + i} className={cls} id={question['@id']}>
           <div className="row">
             <div className="col-10">
               <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
