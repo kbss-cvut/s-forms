@@ -11,12 +11,12 @@ export default class WizardGenerator {
   /**
    * Generates a default, one-step wizard.
    *
-   * @param data Optional, data for which the wizard should be generated (i.e. the root question)
-   * @param title Optional, title of the wizard
+   * @param intl Preferred language of questions
+   *
    * @return Wizard steps definitions (an array of one element in this case) and form data
    */
-  static createDefaultWizard(data, title, intl) {
-    const defaultFormData = DefaultFormGenerator.generateForm(data);
+  static createDefaultWizard(intl) {
+    const defaultFormData = DefaultFormGenerator.generateForm();
 
     const [steps, form] = WizardGenerator._constructWizardSteps(defaultFormData, intl);
 
@@ -25,12 +25,13 @@ export default class WizardGenerator {
 
   /**
    * Generates wizard steps from the specified data-enriched template.
+   *
    * @param structure The wizard structure in JSON-LD
-   * @param data Optional, data for which the wizard will be generated (i.e. the root question)
-   * @param title Optional, wizard title
+   * @param intl Preferred language of questions
+   *
    * @return Promise with generated wizard step definitions and form data
    */
-  static createWizard(structure, data, title, intl) {
+  static createWizard(structure, intl) {
     return new Promise((resolve) =>
       jsonld.flatten(structure, {}, null, (err, structure) => {
         let wizardProperties;
@@ -42,15 +43,13 @@ export default class WizardGenerator {
           const [steps, rootForm] = WizardGenerator._constructWizardSteps(structure, intl);
           form = rootForm;
           wizardProperties = {
-            steps,
-            title
+            steps
           };
         } catch (e) {
-          const [steps, rootForm] = WizardGenerator.createDefaultWizard(data, title);
+          const [steps, rootForm] = WizardGenerator.createDefaultWizard(intl);
           form = rootForm;
           wizardProperties = {
-            steps,
-            title
+            steps
           };
         }
         return resolve([wizardProperties, form]);
@@ -79,7 +78,7 @@ export default class WizardGenerator {
 
     if (!formElements) {
       Logger.error('Could not find any questions in the received data.');
-      throw 'Questions in the form';
+      throw 'No questions in the form';
     }
 
     stepQuestions = formElements.filter((item) => {

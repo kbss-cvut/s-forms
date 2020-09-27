@@ -14,7 +14,7 @@ const SForms = forwardRef((props, ref) => {
   useEffect(() => {
     const buildWizard = async () => {
       const intl = props.options.intl;
-      const [wizardProperties, structure] = await WizardGenerator.createWizard(props.form, props.formData, null, intl);
+      const [wizardProperties, structure] = await WizardGenerator.createWizard(props.form, intl);
 
       if (wizardProperties.steps.length > 0) {
         wizardProperties.steps[0].visited = true;
@@ -49,7 +49,6 @@ const SForms = forwardRef((props, ref) => {
 
 SForms.propTypes = {
   form: PropTypes.object.isRequired,
-  formData: PropTypes.object,
   options: PropTypes.object.isRequired,
   components: PropTypes.object,
   componentsOptions: PropTypes.object,
