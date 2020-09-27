@@ -43,7 +43,9 @@ class TestApp extends React.Component {
       horizontalWizardNav: true,
       wizardStepButtons: true,
       enableForwardSkip: true,
-      startingStep: 1
+      startingStep: 1,
+      startingQuestionId:
+        'http://onto.fel.cvut.cz/ontologies/documentation/question-c69219f6-f68a-4caa-a1aa-1705695faba1'
     };
 
     return (

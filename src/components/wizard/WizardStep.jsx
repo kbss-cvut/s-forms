@@ -52,7 +52,7 @@ const WizardStep = (props) => {
   return (
     <div className="wizard-step">
       <Card className="wizard-step-content">
-        <Card.Header className="bg-primary text-white" as="h6">
+        <Card.Header className="bg-primary text-white" as="h6" id={props.step['@id']}>
           {JsonLdUtils.getLocalized(props.step[JsonLdUtils.RDFS_LABEL], options.intl)}
           {_renderHelpIcon()}
         </Card.Header>
