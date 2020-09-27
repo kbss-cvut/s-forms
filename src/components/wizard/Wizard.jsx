@@ -4,7 +4,6 @@ import WizardStep from './WizardStep';
 import HorizontalWizardNav from './HorizontalWizardNav';
 import VerticalWizardNav from './VerticalWizardNav';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
-import FormWindow from '../FormWindow';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 
 const Wizard = () => {
@@ -57,20 +56,6 @@ const Wizard = () => {
     );
   };
 
-  const renderWizard = () => {
-    const isHorizontal = options.horizontalWizardNav;
-
-    const cardClassname = isHorizontal ? '' : 'flex-row p-2';
-    const containerClassname = isHorizontal ? 'card-body' : 'col-10 p-0';
-
-    return (
-      <Card className={cardClassname}>
-        {renderNav()}
-        <div className={containerClassname}>{initComponent()}</div>
-      </Card>
-    );
-  };
-
   const initComponent = () => {
     const stepData = wizardContext.getFormQuestionsData();
 
@@ -89,11 +74,16 @@ const Wizard = () => {
     );
   };
 
-  if (options.modalView) {
-    return <FormWindow>{renderWizard()}</FormWindow>;
-  }
+  const isHorizontal = options.horizontalWizardNav;
+  const cardClassname = isHorizontal ? '' : 'flex-row p-2';
+  const containerClassname = isHorizontal ? 'card-body' : 'col-10 p-0';
 
-  return renderWizard();
+  return (
+    <Card className={cardClassname}>
+      {renderNav()}
+      <div className={containerClassname}>{initComponent()}</div>
+    </Card>
+  );
 };
 
 export default Wizard;

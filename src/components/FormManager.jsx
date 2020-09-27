@@ -18,35 +18,35 @@ class FormManager extends React.Component {
     this.context.updateFormQuestionsData(index, { ...question, ...change });
   };
 
+  renderWizardlessForm = () => {
+    const formQuestionsData = this.context.getFormQuestionsData();
+
+    return (
+      <div className="p-4">
+        {formQuestionsData.map((question, index) => (
+          <Question
+            key={question['@id']}
+            question={question}
+            onChange={(index, change) => this.onStepChange(question, index, change)}
+            index={index}
+          />
+        ))}
+      </div>
+    );
+  };
+
   render() {
     const { modalView } = this.props;
 
     const formQuestionsData = this.context.getFormQuestionsData();
 
-    if (formQuestionsData.every((question) => !FormUtils.isWizardStep(question))) {
-      return (
-        <div className="p-4">
-          {formQuestionsData.map((question, index) => (
-            <Question
-              key={question['@id']}
-              question={question}
-              onChange={(index, change) => this.onStepChange(question, index, change)}
-              index={index}
-            />
-          ))}
-        </div>
-      );
-    }
+    const isWizardless = formQuestionsData.every((question) => !FormUtils.isWizardStep(question));
 
     if (modalView) {
-      return (
-        <FormWindow>
-          <Wizard />
-        </FormWindow>
-      );
+      return <FormWindow>{isWizardless ? this.renderWizardlessForm() : <Wizard />}</FormWindow>;
     }
 
-    return <Wizard />;
+    return isWizardless ? this.renderWizardlessForm() : <Wizard />;
   }
 }
 

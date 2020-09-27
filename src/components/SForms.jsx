@@ -41,7 +41,7 @@ const SForms = forwardRef((props, ref) => {
     >
       <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
         <FormQuestionsProvider data={form} formQuestions={formProperties.formQuestions} isFormValid={props.isFormValid}>
-          <FormManager ref={ref} {...props} />
+          <FormManager ref={ref} modalView={props.options && props.options.modalView} />
         </FormQuestionsProvider>
       </FormGenContextProvider>
     </ConfigurationContextProvider>
