@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
-import { ConfigurationContext } from '../../contexts/ConfigurationContext';
+import { ConfigurationContext } from '../contexts/ConfigurationContext';
 
-const WizardWindow = React.forwardRef((props, ref) => {
+const FormWindow = React.forwardRef((props, ref) => {
   const { options } = React.useContext(ConfigurationContext);
 
   return (
@@ -17,8 +17,8 @@ const WizardWindow = React.forwardRef((props, ref) => {
   );
 });
 
-WizardWindow.propTypes = {
+FormWindow.propTypes = {
   children: PropTypes.element.isRequired
 };
 
-export default WizardWindow;
+export default FormWindow;

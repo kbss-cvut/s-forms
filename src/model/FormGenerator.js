@@ -7,61 +7,61 @@ import JsonLdFramingUtils from '../util/JsonLdFramingUtils';
 import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
 import JsonLdObjectMap from '../util/JsonLdObjectMap';
 
-export default class WizardGenerator {
+export default class FormGenerator {
   /**
-   * Generates a default, one-step wizard.
+   * Generates a default form with one-step wizard.
    *
    * @param intl Preferred language of questions
    *
-   * @return Wizard steps definitions (an array of one element in this case) and form data
+   * @return Form definition (a one-step wizard with one question) and form data
    */
-  static createDefaultWizard(intl) {
+  static constructDefaultForm(intl) {
     const defaultFormData = DefaultFormGenerator.generateForm();
 
-    const [steps, form] = WizardGenerator._constructWizardSteps(defaultFormData, intl);
+    const [formQuestions, form] = FormGenerator._constructFormQuestions(defaultFormData, intl);
 
-    return [steps, { root: form }];
+    return [formQuestions, { root: form }];
   }
 
   /**
-   * Generates wizard steps from the specified data-enriched template.
+   * Generates form definition from the specified data-enriched template.
    *
-   * @param structure The wizard structure in JSON-LD
+   * @param structure The form structure in JSON-LD
    * @param intl Preferred language of questions
    *
-   * @return Promise with generated wizard step definitions and form data
+   * @return Promise with generated form definition and form data
    */
-  static createWizard(structure, intl) {
+  static constructForm(structure, intl) {
     return new Promise((resolve) =>
       jsonld.flatten(structure, {}, null, (err, structure) => {
-        let wizardProperties;
+        let formProperties;
         let form;
         if (err) {
           Logger.error(err);
         }
         try {
-          const [steps, rootForm] = WizardGenerator._constructWizardSteps(structure, intl);
+          const [formQuestions, rootForm] = FormGenerator._constructFormQuestions(structure, intl);
           form = rootForm;
-          wizardProperties = {
-            steps
+          formProperties = {
+            formQuestions
           };
         } catch (e) {
-          const [steps, rootForm] = WizardGenerator.createDefaultWizard(intl);
+          const [formQuestions, rootForm] = FormGenerator.constructDefaultForm(intl);
           form = rootForm;
-          wizardProperties = {
-            steps
+          formProperties = {
+            formQuestions
           };
         }
-        return resolve([wizardProperties, form]);
+        return resolve([formProperties, form]);
       })
     );
   }
 
-  static _constructWizardSteps(structure, intl) {
+  static _constructFormQuestions(structure, intl) {
     let form;
     let formElements;
     let id2ObjectMap;
-    let stepQuestions = [];
+    let formQuestions = [];
 
     if (structure['@graph'][0]['@id'] !== undefined) {
       id2ObjectMap = JsonLdFramingUtils.expandStructure(structure); //TODO make as callback
@@ -81,7 +81,7 @@ export default class WizardGenerator {
       throw 'No questions in the form';
     }
 
-    stepQuestions = formElements.filter((item) => {
+    formQuestions = formElements.filter((item) => {
       if (FormUtils.isWizardStep(item) && !FormUtils.isHidden(item)) {
         return true;
       }
@@ -90,18 +90,18 @@ export default class WizardGenerator {
       return false;
     });
 
-    if (!stepQuestions.length) {
+    if (!formQuestions.length) {
       Logger.log('Could not find any wizard steps in the received data. Building form without steps');
 
-      form[Constants.HAS_SUBQUESTION].forEach((question) => stepQuestions.push(question));
+      form[Constants.HAS_SUBQUESTION].forEach((question) => formQuestions.push(question));
     }
 
     // sort by label
-    stepQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl));
+    formQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl));
 
     // sort by property
-    JsonLdObjectUtils.orderPreservingToplogicalSort(stepQuestions, Constants.HAS_PRECEDING_QUESTION);
+    JsonLdObjectUtils.orderPreservingToplogicalSort(formQuestions, Constants.HAS_PRECEDING_QUESTION);
 
-    return [stepQuestions, { root: form }];
+    return [formQuestions, { root: form }];
   }
 }

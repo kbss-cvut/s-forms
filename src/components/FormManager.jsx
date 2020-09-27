@@ -1,29 +1,32 @@
 import React from 'react';
 import QuestionAnswerProcessor from '../model/QuestionAnswerProcessor';
-import { WizardContext } from '../contexts/WizardContext';
+import { FormQuestionsContext } from '../contexts/FormQuestionsContext';
 import Wizard from './wizard/Wizard';
 import { FormUtils } from '../s-forms';
 import Question from './Question';
+import FormWindow from './FormWindow';
 
 class FormManager extends React.Component {
   getFormData = () => {
     const data = this.context.getData();
-    const stepData = this.context.getStepData();
+    const formQuestionsData = this.context.getFormQuestionsData();
 
-    return QuestionAnswerProcessor.buildQuestionAnswerModel(data, stepData);
+    return QuestionAnswerProcessor.buildQuestionAnswerModel(data, formQuestionsData);
   };
 
   onStepChange = (question, index, change) => {
-    this.context.updateStepData(index, { ...question, ...change });
+    this.context.updateFormQuestionsData(index, { ...question, ...change });
   };
 
   render() {
-    const stepData = this.context.getStepData();
+    const { modalView } = this.props;
 
-    if (stepData.every((step) => !FormUtils.isWizardStep(step))) {
+    const formQuestionsData = this.context.getFormQuestionsData();
+
+    if (formQuestionsData.every((question) => !FormUtils.isWizardStep(question))) {
       return (
         <div className="p-4">
-          {stepData.map((question, index) => (
+          {formQuestionsData.map((question, index) => (
             <Question
               key={question['@id']}
               question={question}
@@ -35,10 +38,18 @@ class FormManager extends React.Component {
       );
     }
 
-    return <Wizard {...this.props} />;
+    if (modalView) {
+      return (
+        <FormWindow>
+          <Wizard />
+        </FormWindow>
+      );
+    }
+
+    return <Wizard />;
   }
 }
 
-FormManager.contextType = WizardContext;
+FormManager.contextType = FormQuestionsContext;
 
 export default FormManager;

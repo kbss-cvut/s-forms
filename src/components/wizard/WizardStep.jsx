@@ -4,16 +4,16 @@ import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import * as Constants from '../../constants/Constants';
 import HelpIcon from '../HelpIcon';
-import { WizardContext } from '../../contexts/WizardContext';
+import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import Question from '../Question';
 
 const WizardStep = (props) => {
-  const wizardContext = React.useContext(WizardContext);
+  const wizardContext = React.useContext(FormQuestionsContext);
   const { options } = React.useContext(ConfigurationContext);
 
   const onNextStep = () => {
-    wizardContext.updateStepData(props.stepIndex, wizardContext.getStepData());
+    wizardContext.updateFormQuestionsData(props.stepIndex, wizardContext.getFormQuestionsData());
     props.onNextStep();
   };
 
@@ -22,7 +22,7 @@ const WizardStep = (props) => {
   };
 
   const _renderHelpIcon = () => {
-    const question = wizardContext.getStepData([props.stepIndex]);
+    const question = wizardContext.getFormQuestionsData([props.stepIndex]);
 
     return question[Constants.HELP_DESCRIPTION] ? (
       <HelpIcon
@@ -50,7 +50,7 @@ const WizardStep = (props) => {
   };
 
   const onChange = (index, change) => {
-    wizardContext.updateStepData(props.stepIndex || index, { ...props.step, ...change });
+    wizardContext.updateFormQuestionsData(props.stepIndex || index, { ...props.step, ...change });
   };
 
   return (

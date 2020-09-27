@@ -4,19 +4,19 @@ import WizardStep from './WizardStep';
 import HorizontalWizardNav from './HorizontalWizardNav';
 import VerticalWizardNav from './VerticalWizardNav';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
-import WizardWindow from './WizardWindow';
-import { WizardContext } from '../../contexts/WizardContext';
+import FormWindow from '../FormWindow';
+import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 
 const Wizard = () => {
-  const wizardContext = React.useContext(WizardContext);
+  const wizardContext = React.useContext(FormQuestionsContext);
   const { options } = React.useContext(ConfigurationContext);
 
-  const start = options.startingStep < wizardContext.getStepData().length ? options.startingStep : 0;
+  const start = options.startingStep < wizardContext.getFormQuestionsData().length ? options.startingStep : 0;
 
   const [currentStep, setCurrentStep] = React.useState(start);
 
   const onNextStep = () => {
-    const stepData = wizardContext.getStepData();
+    const stepData = wizardContext.getFormQuestionsData();
     if (currentStep !== stepData.length - 1) {
       stepData[currentStep + 1].visited = true;
       setCurrentStep((prevCurrentStep) => prevCurrentStep + 1);
@@ -31,7 +31,7 @@ const Wizard = () => {
   };
 
   const navigate = (stepIndex) => {
-    const stepData = wizardContext.getStepData();
+    const stepData = wizardContext.getFormQuestionsData();
 
     if (stepIndex === currentStep || stepIndex >= stepData.length) {
       return;
@@ -44,16 +44,16 @@ const Wizard = () => {
   };
 
   const renderNav = () => {
-    if (wizardContext.getStepData().length <= 1) {
+    if (wizardContext.getFormQuestionsData().length <= 1) {
       return null;
     }
 
-    const stepData = wizardContext.getStepData();
+    const formQuestionsData = wizardContext.getFormQuestionsData();
 
     return options.horizontalWizardNav ? (
-      <HorizontalWizardNav currentStep={currentStep} steps={stepData} onNavigate={navigate} />
+      <HorizontalWizardNav currentStep={currentStep} steps={formQuestionsData} onNavigate={navigate} />
     ) : (
-      <VerticalWizardNav currentStep={currentStep} steps={stepData} onNavigate={navigate} />
+      <VerticalWizardNav currentStep={currentStep} steps={formQuestionsData} onNavigate={navigate} />
     );
   };
 
@@ -72,7 +72,7 @@ const Wizard = () => {
   };
 
   const initComponent = () => {
-    const stepData = wizardContext.getStepData();
+    const stepData = wizardContext.getFormQuestionsData();
 
     const step = stepData[currentStep];
 
@@ -84,13 +84,13 @@ const Wizard = () => {
         onPreviousStep={onPreviousStep}
         stepIndex={currentStep}
         isFirstStep={currentStep === 0}
-        isLastStep={currentStep === wizardContext.getStepData().length - 1}
+        isLastStep={currentStep === wizardContext.getFormQuestionsData().length - 1}
       />
     );
   };
 
   if (options.modalView) {
-    return <WizardWindow>{renderWizard()}</WizardWindow>;
+    return <FormWindow>{renderWizard()}</FormWindow>;
   }
 
   return renderWizard();
