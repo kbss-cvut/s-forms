@@ -33,7 +33,7 @@ const ConfigurationContextProvider = ({ children, ...props }) => {
       componentsOptions: { ...defaultProps.componentsOptions, ...props.componentsOptions },
       options: { ...defaultProps.options, ...props.options }
     }),
-    []
+    [props]
   );
 
   return <ConfigurationContext.Provider value={values}>{children}</ConfigurationContext.Provider>;
