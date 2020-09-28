@@ -42,7 +42,7 @@ class FormManager extends React.Component {
     const formQuestionsData = this.context.getFormQuestionsData();
 
     if (!formQuestionsData.length) {
-      return <Card className="p-3 font-italic">There are no questions available.</Card>;
+      return <Card className="p-3 font-italic">There are no questions available...</Card>;
     }
 
     const isWizardless = formQuestionsData.every((question) => !FormUtils.isWizardStep(question));

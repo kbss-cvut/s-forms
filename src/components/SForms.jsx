@@ -31,13 +31,7 @@ const SForms = forwardRef((props, ref) => {
   }, []);
 
   if (loading) {
-    return (
-      props.loader || (
-        <Card className="p3 font-italic">
-          <Card.Body>Loading SForms...</Card.Body>
-        </Card>
-      )
-    );
+    return props.loader || <Card className="p-3 font-italic">Loading SForms...</Card>;
   }
 
   return (
