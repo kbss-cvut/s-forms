@@ -6,6 +6,7 @@ import { ConfigurationContextProvider } from '../contexts/ConfigurationContext';
 import FormGenerator from '../model/FormGenerator';
 import FormManager from './FormManager';
 import { FormUtils } from '../s-forms';
+import { Card } from 'react-bootstrap';
 
 const SForms = forwardRef((props, ref) => {
   const [loading, setLoading] = useState(true);
@@ -30,7 +31,13 @@ const SForms = forwardRef((props, ref) => {
   }, []);
 
   if (loading) {
-    return props.loader || <div>'Loading SForms...'</div>;
+    return (
+      props.loader || (
+        <Card className="p3 font-italic">
+          <Card.Body>Loading SForms...</Card.Body>
+        </Card>
+      )
+    );
   }
 
   return (

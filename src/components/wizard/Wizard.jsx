@@ -86,10 +86,6 @@ const Wizard = () => {
   };
 
   const renderNav = () => {
-    if (formQuestionsContext.getFormQuestionsData().length <= 1) {
-      return null;
-    }
-
     const formQuestionsData = formQuestionsContext.getFormQuestionsData();
 
     return options.horizontalWizardNav ? (
@@ -117,13 +113,18 @@ const Wizard = () => {
     );
   };
 
+  let nav = null;
+  if (formQuestionsContext.getFormQuestionsData().length > 1) {
+    nav = renderNav();
+  }
+
   const isHorizontal = options.horizontalWizardNav;
-  const cardClassname = isHorizontal ? '' : 'flex-row p-2';
-  const containerClassname = isHorizontal ? 'card-body' : 'col-10 p-0';
+  const cardClassname = isHorizontal ? '' : 'flex-row p-3';
+  const containerClassname = isHorizontal ? 'card-body p-3' : nav ? 'col-10 p-0 pl-3' : 'col-12 p-0';
 
   return (
     <Card className={cardClassname}>
-      {renderNav()}
+      {nav}
       <div className={containerClassname}>{initComponent()}</div>
     </Card>
   );

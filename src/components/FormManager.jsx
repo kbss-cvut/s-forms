@@ -5,6 +5,7 @@ import Wizard from './wizard/Wizard';
 import { FormUtils } from '../s-forms';
 import Question from './Question';
 import FormWindow from './FormWindow';
+import Card from 'react-bootstrap/Card';
 
 class FormManager extends React.Component {
   getFormData = () => {
@@ -22,7 +23,7 @@ class FormManager extends React.Component {
     const formQuestionsData = this.context.getFormQuestionsData();
 
     return (
-      <div className="p-4">
+      <Card className="p-3">
         {formQuestionsData.map((question, index) => (
           <Question
             key={question['@id']}
@@ -31,7 +32,7 @@ class FormManager extends React.Component {
             index={index}
           />
         ))}
-      </div>
+      </Card>
     );
   };
 
@@ -41,7 +42,7 @@ class FormManager extends React.Component {
     const formQuestionsData = this.context.getFormQuestionsData();
 
     if (!formQuestionsData.length) {
-      return <Card className="p-4 font-italic">There are no questions available.</Card>;
+      return <Card className="p-3 font-italic">There are no questions available.</Card>;
     }
 
     const isWizardless = formQuestionsData.every((question) => !FormUtils.isWizardStep(question));
