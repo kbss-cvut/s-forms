@@ -14,6 +14,7 @@ import PrefixIcon from './PrefixIcon';
 import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
+import classNames from "classnames";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
@@ -93,7 +94,10 @@ export default class Question extends React.Component {
 
       const cardBody = <Card.Body className="p-3">{this._renderQuestionContent()}</Card.Body>;
 
-      const headerClassName = `bg-info text-white ${collapsible ? 'cursor-pointer' : ''}`.trim();
+      const headerClassName = classNames(
+          FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
+          collapsible ? 'cursor-pointer' : ''
+      )
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
       return (
@@ -196,6 +200,10 @@ export default class Question extends React.Component {
       : Constants.GENERATED_ROW_SIZE === 1
       ? 'col-6'
       : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
+  }
+
+  static getEmphasizedClass(question) {
+    return FormUtils.isEmphasised(question) ? 'bg-warning' : "";
   }
 
   _renderCollapseToggle() {

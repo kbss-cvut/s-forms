@@ -19,21 +19,22 @@ export const INPUT_MASK = 'http://onto.fel.cvut.cz/ontologies/form/has-input-mas
 export const LAYOUT_CLASS = 'http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class';
 export const LAYOUT = {
   FORM: 'form',
-  QUESTION_TYPEAHEAD: 'type-ahead',
   QUESTION_SECTION: 'section',
   WIZARD_STEP: 'wizard-step',
-  DISABLED: 'disabled',
-  HIDDEN: 'hidden',
-  TEXTAREA: 'textarea',
   DATE: 'date',
   TIME: 'time',
   DATETIME: 'datetime',
+  TEXTAREA: 'textarea',
   CHECKBOX: 'checkbox',
+  QUESTION_TYPEAHEAD: 'type-ahead',
   ANSWERABLE: 'answerable',
   MASKED_INPUT: 'masked-input',
-  COLLAPSED: 'collapsed',
   SPARQL: 'sparql',
-  TURTLE: 'ttl'
+  TURTLE: 'ttl',
+  DISABLED: 'disabled',
+  HIDDEN: 'hidden',
+  COLLAPSED: 'collapsed',
+  EMPHASISED: 'emphasised'
 };
 export const VALUE_TYPE_CODE = 'code';
 export const VALUE_TYPE_TEXT = 'text';

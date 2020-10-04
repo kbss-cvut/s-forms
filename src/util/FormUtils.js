@@ -82,6 +82,10 @@ export default class FormUtils {
     return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.COLLAPSED);
   }
 
+  static isEmphasised(question) {
+    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISED);
+  }
+
   static resolveValue(answer) {
     if (!answer) {
       return null;
