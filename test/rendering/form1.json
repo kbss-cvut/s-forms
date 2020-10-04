@@ -18666,7 +18666,8 @@
         "http://vfn.cz/ontologies/fss-form/primary-treatment-q",
 	"http://vfn.cz/ontologies/fss-form/new-q",
 	"layout-options-65",
-	"category-1-wizard-question-65"
+	"category-1-wizard-question-65",
+	"layout-options-emphasised-8480"
       ],
       "has-layout-class": "form",
       "has-origin-type": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/e-24",
@@ -19420,6 +19421,7 @@
     {
       "@id": "coloring-different-categories-of-questions",
       "@type": "doc:question",
+      "has-preceding-question": "show-layout-options-for-wizard-steps",
       "has_related_question": [
         "category-1-8136",
 	"category-1-7717",
@@ -19436,7 +19438,11 @@
     {
       "@id": "layout-options-65",
       "@type": "doc:question",
-      "has_related_question": "coloring-different-categories-of-questions",
+      "has_related_question": [ 
+		"show-layout-options-for-wizard-steps",
+		"coloring-different-categories-of-questions",
+		"emphasised-section-1-1089"
+	],
       "has-layout-class": [ 
 		"section",
 		"wizard-step"
@@ -19454,6 +19460,7 @@
                 "category-1",
                 "wizard-step"
         ],
+      "is-relevant-if" : "_:b1b1b1",
       "label": "_ Layout options (Category 1)"
     },
     {
@@ -19464,6 +19471,69 @@
 	"category-2"
       ],
       "label": "Category 2"
-    }
+    },
+    {
+      "@id": "layout-options-emphasised-8480",
+      "@type": "doc:question",
+      "has_related_question": "a-question-1665",
+      "has-layout-class": [
+        "section",
+        "wizard-step",
+	"emphasised"
+      ],
+      "is-relevant-if" : "_:b1b1b1",
+      "label": "_ Layout options (Emphasised)"
+    },
+    {
+      "@id": "a-question-1665",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "label": "A question"
+    },
+    {
+      "@id": "non-emphasised-question-9025",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "label": "Non-emphasised question"
+    },
+    {
+      "@id": "emphasised-question-8150",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [ 
+		"text",
+		"emphasised"
+	],
+      "label": "(Not implemented) Emphasised question"
+    },
+    {
+      "@id": "emphasised-section-1-1089",
+      "@type": "doc:question",
+      "has-preceding-question": "show-layout-options-for-wizard-steps",
+      "has_related_question": [
+        "emphasised-question-8150",
+        "non-emphasised-question-9025"
+      ],
+      "has-layout-class": [ 
+		"section",
+		"emphasised"
+	],
+      "label": "Emphasised section"
+    },
+    {
+      "@id": "show-layout-options-for-wizard-steps",
+      "@type": "doc:question",
+      "has-layout-class": "checkbox",
+      "label": "Show layout options at top-level of form"
+    },
+    {
+	"@id" : "_:b1b1b1",
+    	"@type" : "http://onto.fel.cvut.cz/ontologies/form/condition",
+    	"http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value" : true,
+    	"has-tested-question" : "show-layout-options-for-wizard-steps"
+  }
+   
   ]
 }
