@@ -1,35 +1,37 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormGenContextProvider } from '../contexts/FormGenContext';
-import { WizardContextProvider } from '../contexts/WizardContext';
+import { FormQuestionsProvider } from '../contexts/FormQuestionsContext';
 import { ConfigurationContextProvider } from '../contexts/ConfigurationContext';
-import WizardGenerator from '../model/WizardGenerator';
+import FormGenerator from '../model/FormGenerator';
 import FormManager from './FormManager';
+import { FormUtils } from '../s-forms';
+import { Card } from 'react-bootstrap';
 
 const SForms = forwardRef((props, ref) => {
   const [loading, setLoading] = useState(true);
-  const [wizardProperties, setWizardProperties] = useState(null);
+  const [formProperties, setFormProperties] = useState(null);
   const [form, setForm] = useState(null);
 
   useEffect(() => {
-    const buildWizard = async () => {
+    const initialiseSForms = async () => {
       const intl = props.options.intl;
-      const [wizardProperties, structure] = await WizardGenerator.createWizard(props.form, props.formData, null, intl);
+      const [formProperties, structure] = await FormGenerator.constructForm(props.form, intl);
 
-      if (wizardProperties.steps.length > 0) {
-        wizardProperties.steps[0].visited = true;
+      if (formProperties.formQuestions.some((step) => FormUtils.isWizardStep(step))) {
+        formProperties.formQuestions[0].visited = true;
       }
 
-      setWizardProperties(wizardProperties);
+      setFormProperties(formProperties);
       setForm(structure);
       setLoading(false);
     };
 
-    buildWizard();
+    initialiseSForms();
   }, []);
 
   if (loading) {
-    return props.loader || <div>'Loading SForms...'</div>;
+    return props.loader || <Card className="p-3 font-italic">Loading SForms...</Card>;
   }
 
   return (
@@ -39,9 +41,9 @@ const SForms = forwardRef((props, ref) => {
       options={props.options}
     >
       <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
-        <WizardContextProvider data={form} steps={wizardProperties.steps} isFormValid={props.isFormValid}>
-          <FormManager ref={ref} {...props} />
-        </WizardContextProvider>
+        <FormQuestionsProvider data={form} formQuestions={formProperties.formQuestions} isFormValid={props.isFormValid}>
+          <FormManager ref={ref} modalView={props.options && props.options.modalView} />
+        </FormQuestionsProvider>
       </FormGenContextProvider>
     </ConfigurationContextProvider>
   );
@@ -49,7 +51,6 @@ const SForms = forwardRef((props, ref) => {
 
 SForms.propTypes = {
   form: PropTypes.object.isRequired,
-  formData: PropTypes.object,
   options: PropTypes.object.isRequired,
   components: PropTypes.object,
   componentsOptions: PropTypes.object,

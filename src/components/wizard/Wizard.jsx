@@ -4,10 +4,9 @@ import WizardStep from './WizardStep';
 import HorizontalWizardNav from './HorizontalWizardNav';
 import VerticalWizardNav from './VerticalWizardNav';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
-import WizardWindow from './WizardWindow';
-import { WizardContext } from '../../contexts/WizardContext';
+import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
+import Utils from '../../util/Utils';
 import * as Constants from '../../constants/Constants';
-import Utils from "../../util/Utils";
 
 const findStepByQuestionId = (stepData, id) => {
   const findQuestionTraversal = (question, index) => {
@@ -28,19 +27,19 @@ const findStepByQuestionId = (stepData, id) => {
 };
 
 const Wizard = () => {
-  const wizardContext = React.useContext(WizardContext);
+  const formQuestionsContext = React.useContext(FormQuestionsContext);
   const { options } = React.useContext(ConfigurationContext);
 
   let startingStep = 0;
   if (options.startingQuestionId) {
-    startingStep = findStepByQuestionId(wizardContext.getStepData(), options.startingQuestionId);
+    startingStep = findStepByQuestionId(formQuestionsContext.getFormQuestionsData(), options.startingQuestionId);
 
     if (startingStep === -1) {
       console.warn(`Question with id ${options.startingQuestionId} not found!`);
       startingStep = 0;
     }
   } else if (options.startingStep) {
-    startingStep = options.startingStep < wizardContext.getStepData().length ? options.startingStep : 0;
+    startingStep = options.startingStep < formQuestionsContext.getFormQuestionsData().length ? options.startingStep : 0;
   }
 
   const [currentStep, setCurrentStep] = React.useState(startingStep);
@@ -59,7 +58,7 @@ const Wizard = () => {
   });
 
   const onNextStep = () => {
-    const stepData = wizardContext.getStepData();
+    const stepData = formQuestionsContext.getFormQuestionsData();
     if (currentStep !== stepData.length - 1) {
       stepData[currentStep + 1].visited = true;
       setCurrentStep((prevCurrentStep) => prevCurrentStep + 1);
@@ -74,7 +73,7 @@ const Wizard = () => {
   };
 
   const navigate = (stepIndex) => {
-    const stepData = wizardContext.getStepData();
+    const stepData = formQuestionsContext.getFormQuestionsData();
 
     if (stepIndex === currentStep || stepIndex >= stepData.length) {
       return;
@@ -87,39 +86,17 @@ const Wizard = () => {
   };
 
   const renderNav = () => {
-    if (wizardContext.getStepData().length <= 1) {
-      return null;
-    }
-
-    const stepData = wizardContext.getStepData();
+    const formQuestionsData = formQuestionsContext.getFormQuestionsData();
 
     return options.horizontalWizardNav ? (
-      <HorizontalWizardNav currentStep={currentStep} steps={stepData} onNavigate={navigate} />
+      <HorizontalWizardNav currentStep={currentStep} steps={formQuestionsData} onNavigate={navigate} />
     ) : (
-      <VerticalWizardNav currentStep={currentStep} steps={stepData} onNavigate={navigate} />
-    );
-  };
-
-  const renderWizard = () => {
-    const isHorizontal = options.horizontalWizardNav;
-
-    const cardClassname = isHorizontal ? '' : 'flex-row p-2';
-    const containerClassname = isHorizontal ? 'card-body' : 'col-10 p-0';
-
-    return (
-      <Card className={cardClassname}>
-        {renderNav()}
-        <div className={containerClassname}>{initComponent()}</div>
-      </Card>
+      <VerticalWizardNav currentStep={currentStep} steps={formQuestionsData} onNavigate={navigate} />
     );
   };
 
   const initComponent = () => {
-    const stepData = wizardContext.getStepData();
-
-    if (stepData.length === 0) {
-      return <div className="font-italic">There are no steps in this wizard.</div>;
-    }
+    const stepData = formQuestionsContext.getFormQuestionsData();
 
     const step = stepData[currentStep];
 
@@ -131,16 +108,26 @@ const Wizard = () => {
         onPreviousStep={onPreviousStep}
         stepIndex={currentStep}
         isFirstStep={currentStep === 0}
-        isLastStep={currentStep === wizardContext.getStepData().length - 1}
+        isLastStep={currentStep === formQuestionsContext.getFormQuestionsData().length - 1}
       />
     );
   };
 
-  if (options.modalView) {
-    return <WizardWindow>{renderWizard()}</WizardWindow>;
+  let nav = null;
+  if (formQuestionsContext.getFormQuestionsData().length > 1) {
+    nav = renderNav();
   }
 
-  return renderWizard();
+  const isHorizontal = options.horizontalWizardNav;
+  const cardClassname = isHorizontal ? '' : 'flex-row p-3';
+  const containerClassname = isHorizontal ? 'card-body p-3' : nav ? 'col-10 p-0 pl-3' : 'col-12 p-0';
+
+  return (
+    <Card className={cardClassname}>
+      {nav}
+      <div className={containerClassname}>{initComponent()}</div>
+    </Card>
+  );
 };
 
 export default Wizard;

@@ -5,7 +5,8 @@ import SForms from '../../src/components/SForms';
 import '../../src/styles/s-forms.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const form = require('./form.json');
+const form1 = require('./form1.json'); // form with wizard steps
+const form2 = require('./form2.json'); // form without wizard steps (proudly assembled in Semantic Form Web Editor)
 
 class TestApp extends React.Component {
   constructor(props) {
@@ -43,16 +44,14 @@ class TestApp extends React.Component {
       horizontalWizardNav: true,
       wizardStepButtons: true,
       enableForwardSkip: true,
-      startingStep: 1,
-      startingQuestionId:
-        'http://onto.fel.cvut.cz/ontologies/documentation/question-c69219f6-f68a-4caa-a1aa-1705695faba1'
+      startingStep: 1
     };
 
     return (
-      <React.Fragment>
+      <div className="p-4">
         <SForms
           ref={this.refForm}
-          form={form}
+          form={form1}
           options={options}
           fetchTypeAheadValues={this.fetchTypeAheadValues}
           isFormValid={(isFormValid) => this.setState({ isFormValid })}
@@ -64,7 +63,7 @@ class TestApp extends React.Component {
         >
           Save
         </button>
-      </React.Fragment>
+      </div>
     );
   }
 }

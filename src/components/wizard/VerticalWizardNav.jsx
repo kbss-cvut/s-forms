@@ -9,7 +9,7 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
 
   return (
-    <div className="wizard-nav col-2 p-0 pr-2">
+    <div className="wizard-nav col-2 p-0">
       <ListGroup>
         {steps.map((step, index) => (
           <ListGroupItem

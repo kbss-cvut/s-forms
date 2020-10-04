@@ -34,7 +34,6 @@ export interface SComponentsOptions {
 
 export interface SFormsProps {
   form: object;
-  formData?: object;
   options?: SOptions;
   components?: SComponents;
   componentsOptions?: SComponentsOptions;

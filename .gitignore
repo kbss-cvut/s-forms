@@ -7,3 +7,4 @@ test/reports
 lib
 dist
 **/bundle.js
+.DS_Store
