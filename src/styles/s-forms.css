@@ -98,3 +98,23 @@ input:disabled {
 .list-group-item.active {
   font-weight: 500;
 }
+
+.question-category-1 {
+  background-color: rgba(8, 255, 0, 0.05);
+}
+
+.question-category-2 {
+  background-color: rgba(230, 127, 0, 0.05);
+}
+
+.question-category-3 {
+  background-color: rgba(222, 0, 230, 0.05);
+}
+
+.question-category-4 {
+  background-color: rgba(0, 84, 230, 0.05);
+}
+
+.question-category-5 {
+  background-color: rgba(0, 230, 222, 0.05);
+}

@@ -14,6 +14,7 @@ import PrefixIcon from './PrefixIcon';
 import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
+import classNames from 'classnames';
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
@@ -85,13 +86,14 @@ export default class Question extends React.Component {
     }
     if (FormUtils.isSection(question)) {
       const { collapsible, withoutCard } = this.props;
+      const categoryClass = Question._getQuestionCategoryClass(question);
 
       if (withoutCard) {
         return <div>{this._renderQuestionContent()}</div>;
       }
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
-      const cardBody = <Card.Body className="p-3">{this._renderQuestionContent()}</Card.Body>;
+      const cardBody = <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>;
 
       const headerClassName = `bg-info text-white ${collapsible ? 'cursor-pointer' : ''}`.trim();
 
@@ -138,7 +140,10 @@ export default class Question extends React.Component {
         FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
         FormUtils.isSparqlInput(question) ||
         FormUtils.isTurtleInput(question);
-      cls = Question._getAnswerClass(isTextarea);
+      cls = classNames(
+          Question._getAnswerClass(isTextarea),
+          Question._getQuestionCategoryClass(question)
+      );
       row.push(
         <div key={'row-item-' + i} className={cls} id={question['@id']}>
           <div className="row">
@@ -196,6 +201,11 @@ export default class Question extends React.Component {
       : Constants.GENERATED_ROW_SIZE === 1
       ? 'col-6'
       : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
+  }
+
+  static _getQuestionCategoryClass(question) {
+    const layoutCategory = FormUtils.getCategory(question);
+    return layoutCategory ? "question-" + layoutCategory : "";
   }
 
   _renderCollapseToggle() {

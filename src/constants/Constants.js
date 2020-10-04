@@ -33,7 +33,14 @@ export const LAYOUT = {
   MASKED_INPUT: 'masked-input',
   COLLAPSED: 'collapsed',
   SPARQL: 'sparql',
-  TURTLE: 'ttl'
+  TURTLE: 'ttl',
+  CATEGORY: [
+    'category-1',
+    'category-2',
+    'category-3',
+    'category-4',
+    'category-5'
+  ]
 };
 export const VALUE_TYPE_CODE = 'code';
 export const VALUE_TYPE_TEXT = 'text';

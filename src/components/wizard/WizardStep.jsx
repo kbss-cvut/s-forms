@@ -53,6 +53,8 @@ const WizardStep = (props) => {
     formQuestionsContext.updateFormQuestionsData(props.stepIndex || index, { ...props.step, ...change });
   };
 
+  const categoryClass = Question._getQuestionCategoryClass(props.step);
+
   return (
     <div className="wizard-step">
       <Card className="wizard-step-content">
@@ -60,7 +62,7 @@ const WizardStep = (props) => {
           {JsonLdUtils.getLocalized(props.step[JsonLdUtils.RDFS_LABEL], options.intl)}
           {_renderHelpIcon()}
         </Card.Header>
-        <Card.Body>
+        <Card.Body className={categoryClass}>
           <Question question={props.step} onChange={onChange} withoutCard={true} index={props.stepIndex} />
         </Card.Body>
       </Card>
