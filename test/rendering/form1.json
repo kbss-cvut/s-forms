@@ -18663,7 +18663,10 @@
         "http://vfn.cz/ontologies/fss-form/inclusion-critera-q",
         "http://vfn.cz/ontologies/fss-form/diagnosis-q",
         "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence-q",
-        "http://vfn.cz/ontologies/fss-form/primary-treatment-q"
+        "http://vfn.cz/ontologies/fss-form/primary-treatment-q",
+	"http://vfn.cz/ontologies/fss-form/new-q",
+	"layout-options-65",
+	"category-1-wizard-question-65"
       ],
       "has-layout-class": "form",
       "has-origin-type": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/e-24",
@@ -19211,6 +19214,256 @@
       "has-question-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000035-387bcc18f2ec44cdb7676b7a1571a13d",
       "has-template": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000035-qt",
       "label": "Primary treatment"
+    },
+    {
+      "@id": "category-1-4352",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-1"
+      ],
+      "label": "Category 1"
+    },
+    {
+      "@id": "category-1-5232",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-1"
+      ],
+      "has-preceding-question": "category-2-8401",
+      "label": "Category 1"
+    },
+    {
+      "@id": "category-1-599",
+      "@type": "doc:question",
+      "has_related_question": [
+        "category-1-4352",
+        "category-2-8401",
+        "category-1-5232",
+        "category-3-8338"
+      ],
+      "has-layout-class": [
+        "section",
+        "category-1"
+      ],
+      "label": "Category 1"
+    },
+    {
+      "@id": "category-1-7717",
+      "@type": "doc:question",
+      "has_related_question": [
+        "category-1-599",
+        "category-2-3477",
+        "category-3-6863",
+        "category-2-333"
+      ],
+      "has-layout-class": [
+        "section",
+        "category-1"
+      ],
+      "label": "Category 1"
+    },
+    {
+      "@id": "category-2-2617",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-2"
+      ],
+      "label": "Category 2"
+    },
+    {
+      "@id": "category-2-333",
+      "@type": "doc:question",
+      "has_related_question": [
+        "category-2-2617",
+        "category-3-5220",
+        "category-4-3775",
+        "category-5-446"
+      ],
+      "has-layout-class": [
+        "section",
+        "category-2"
+      ],
+      "has-preceding-question": "category-3-6863",
+      "label": "Category 2"
+    },
+    {
+      "@id": "category-2-3477",
+      "@type": "doc:question",
+      "has_related_question": "category-3-9989",
+      "has-layout-class": [
+        "section",
+        "category-2"
+      ],
+      "has-preceding-question": "category-1-599",
+      "label": "Category 2"
+    },
+    {
+      "@id": "category-2-8401",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-2"
+      ],
+      "has-preceding-question": "category-1-4352",
+      "label": "Category 2"
+    },
+    {
+      "@id": "category-3-5220",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-3"
+      ],
+      "has-preceding-question": "category-2-2617",
+      "label": "Category 3"
+    },
+    {
+      "@id": "category-3-6863",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "text",
+        "category-3"
+      ],
+      "has-preceding-question": "category-2-3477",
+      "label": "Category 3"
+    },
+    {
+      "@id": "category-3-8338",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-3"
+      ],
+      "label": "Category 3"
+    },
+    {
+      "@id": "category-3-9989",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-3"
+      ],
+      "label": "Category 3"
+    },
+    {
+      "@id": "category-4-3775",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-4"
+      ],
+      "has-preceding-question": "category-3-5220",
+      "label": "Category 4"
+    },
+    {
+      "@id": "category-5-446",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-5"
+      ],
+      "label": "Category 5"
+    },
+    {
+      "@id": "category-1-8136",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-1"
+      ],
+      "label": "Category 1"
+    },
+    {
+      "@id": "category-2-1012",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-2"
+      ],
+      "has-preceding-question": "category-1-8136",
+      "label": "Category 2"
+    },
+    {
+      "@id": "category-3-9744",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-3"
+      ],
+      "has-preceding-question": "category-2-1012",
+      "label": "Category 3"
+    },
+    {
+      "@id": "category-4-1633",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-4"
+      ],
+      "has-preceding-question": "category-3-9744",
+      "label": "Category 4"
+    },
+    {
+      "@id": "category-5-9824",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": [
+        "category-5"
+      ],
+      "has-preceding-question": "category-4-1633",
+      "label": "Category 5"
+    },
+    {
+      "@id": "coloring-different-categories-of-questions",
+      "@type": "doc:question",
+      "has_related_question": [
+        "category-1-8136",
+	"category-1-7717",
+        "category-2-1012",
+        "category-3-9744",
+        "category-4-1633",
+        "category-5-9824"
+      ],
+      "has-layout-class": [
+        "section"
+      ],
+      "label": "Coloring different categories of questions"
+    },
+    {
+      "@id": "layout-options-65",
+      "@type": "doc:question",
+      "has_related_question": "coloring-different-categories-of-questions",
+      "has-layout-class": [ 
+		"section",
+		"wizard-step"
+        ],
+      "label": "Layout options"
+    },
+    { 
+      "@id": "category-1-wizard-question-65",
+      "@type": "doc:question",
+      "has_related_question": [
+        "category-2-1200"
+      ],
+      "has-layout-class": [
+                "section",
+                "category-1",
+                "wizard-step"
+        ],
+      "label": "_ Layout options (Category 1)"
+    },
+    {
+      "@id": "category-2-1200",
+      "@type": "doc:question",
+      "has-layout-class": [
+        "text",
+	"category-2"
+      ],
+      "label": "Category 2"
     }
   ]
 }
