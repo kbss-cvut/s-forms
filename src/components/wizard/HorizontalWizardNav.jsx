@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import JsonLdUtils from 'jsonld-utils';
 import FormUtils from '../../util/FormUtils';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
+import Question from "../Question";
 
 const HorizontalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
@@ -12,7 +13,7 @@ const HorizontalWizardNav = ({ steps, onNavigate, currentStep }) => {
     <Card.Header>
       <Nav variant="tabs" activeKey={currentStep} onSelect={(key) => onNavigate(parseInt(key))}>
         {steps.map((step, index) => (
-          <NavItem key={'nav' + index} id={'wizard-nav-' + index}>
+          <NavItem key={'nav' + index} id={'wizard-nav-' + index} className={Question.getEmphasizedClass(step)}>
             <NavLink eventKey={index} active={index === currentStep} disabled={!FormUtils.isRelevant(step)}>
               {JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], options.intl)}
             </NavLink>
