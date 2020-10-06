@@ -34,7 +34,14 @@ export const LAYOUT = {
   DISABLED: 'disabled',
   HIDDEN: 'hidden',
   COLLAPSED: 'collapsed',
-  EMPHASISED: 'emphasised'
+  EMPHASISED: 'emphasised',
+  CATEGORY: [
+    'category-1',
+    'category-2',
+    'category-3',
+    'category-4',
+    'category-5'
+  ]
 };
 export const VALUE_TYPE_CODE = 'code';
 export const VALUE_TYPE_TEXT = 'text';

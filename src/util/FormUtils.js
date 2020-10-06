@@ -86,6 +86,12 @@ export default class FormUtils {
     return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISED);
   }
 
+  static getCategory(question) {
+    return Constants.LAYOUT.CATEGORY.find(
+        c => JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c)
+    );
+  }
+
   static resolveValue(answer) {
     if (!answer) {
       return null;
