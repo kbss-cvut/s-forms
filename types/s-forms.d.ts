@@ -2,8 +2,12 @@ import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { JsonLdObj } from 'jsonld/jsonld-spec';
 
+export type Intl = {
+  locale?: string;
+};
+
 export interface SOptions {
-  intl?: { locale: string }; // default 'en'
+  intl?: Intl; // default 'en'
   i18n?: {
     'wizard.next': string; // default 'Next'
     'wizard.previous': string; // default 'Previous'
@@ -57,21 +61,22 @@ export module Constants {
   const LAYOUT_CLASS: unique symbol;
   const LAYOUT: {
     FORM: string;
-    QUESTION_TYPEAHEAD: string;
     QUESTION_SECTION: string;
     WIZARD_STEP: string;
-    DISABLED: string;
-    HIDDEN: string;
-    TEXTAREA: string;
     DATE: string;
     TIME: string;
     DATETIME: string;
+    TEXTAREA: string;
     CHECKBOX: string;
-    ANSWERABLE: string;
+    QUESTION_TYPEAHEAD: string;
     MASKED_INPUT: string;
-    COLLAPSED: string;
     SPARQL: string;
     TURTLE: string;
+    ANSWERABLE: string;
+    COLLAPSED: string;
+    DISABLED: string;
+    EMPHASISED: string;
+    HIDDEN: string;
   };
   const VALUE_TYPE_CODE: unique symbol;
   const VALUE_TYPE_TEXT: unique symbol;
@@ -164,6 +169,7 @@ export class FormUtils {
   static isSparqlInput(question): boolean;
   static isTurtleInput(question): boolean;
   static isCollapsed(question): boolean;
+  static isEmphasised(question): boolean;
   static resolveValue(answer): any;
   static resolveValueObject(answer): any;
   static isRelevant(question): boolean;
