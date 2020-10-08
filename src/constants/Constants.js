@@ -12,7 +12,7 @@ export default class Constants {
   static FORM = 'http://onto.fel.cvut.cz/ontologies/documentation/form';
   static HAS_SUBQUESTION = 'http://onto.fel.cvut.cz/ontologies/documentation/has_related_question';
   static HAS_ANSWER = 'http://onto.fel.cvut.cz/ontologies/documentation/has_answer';
-  static HAS_OPTION = 'http=//onto.fel.cvut.cz/ontologies/form/has-possible-value';
+  static HAS_OPTION = 'http://onto.fel.cvut.cz/ontologies/form/has-possible-value';
   static HAS_OPTIONS_QUERY = 'http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query';
   static HAS_VALUE_TYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-value-type';
   static IS_DISABLED = 'http://onto.fel.cvut.cz/ontologies/aviation/form-376/is-disabled';

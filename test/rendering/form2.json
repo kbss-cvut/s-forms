@@ -23,6 +23,9 @@
     "has-possible-values-query": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query"
     },
+    "has-possible-value": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-possible-value"
+    },
     "has-layout-class": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class"
     },
@@ -127,7 +130,17 @@
       "has-layout-class": "type-ahead",
       "has-possible-values-query": "http://example.com/",
       "requires-answer": true,
-      "label": "Profession"
+      "label": "Profession",
+      "has-possible-value": [
+        {
+          "@id": "http://profession.com/chef",
+          "label": "Chef"
+        },
+        {
+          "@id": "http://profession.com/developer",
+          "label": "Developer"
+        }
+      ]
     },
     {
       "@id": "x:form-root",

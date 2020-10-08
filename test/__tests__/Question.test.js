@@ -37,7 +37,8 @@ describe('Question', () => {
     options = {
       intl: {
         locale: 'en'
-      }
+      },
+      i18n: {}
     };
     componentsOptions = {
       readOnly: false,

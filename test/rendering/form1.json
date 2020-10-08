@@ -25,6 +25,9 @@
     "has-possible-values-query": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query"
     },
+    "has-possible-value": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-possible-value"
+    },
     "has-layout-class": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class"
     },
@@ -18444,7 +18447,20 @@
         "@language": "en",
         "@value": "  "
       },
-      "label": "Grade"
+      "label": "Grade",
+      "has-possible-value": [{
+        "@id" : "https://example.com/grade/low",
+        "label" : [{
+          "@language" : "en",
+          "@value" : "Low"
+        }]
+      }, {
+        "@id" : "https://example.com/grade/high",
+        "label" : [{
+          "@language" : "en",
+          "@value" : "High"
+        }]
+      }]
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/diagnosis-histology-histological-type-q",

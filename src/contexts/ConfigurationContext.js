@@ -15,7 +15,9 @@ const defaultProps = {
     intl: { locale: 'en' },
     i18n: {
       'wizard.next': 'Next',
-      'wizard.previous': 'Previous'
+      'wizard.previous': 'Previous',
+      'section.collapse': 'Collapse',
+      'section.expand': 'Expand'
     },
     modalView: false,
     modalProps: {},

@@ -4,7 +4,7 @@ import SForms from '../../src/components/SForms';
 
 import '../../src/styles/s-forms.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import queryString from 'query-string'
+import queryString from 'query-string';
 
 const form1 = require('./form1.json'); // form with wizard steps
 const form2 = require('./form2.json'); // form without wizard steps (proudly assembled in Semantic Form Web Editor)
@@ -12,8 +12,8 @@ const form2 = require('./form2.json'); // form without wizard steps (proudly ass
 const getP = (queryParameterName, defaultValue) => {
   return {
     [queryParameterName]: getQueryParameter(queryParameterName, defaultValue)
-  }
-}
+  };
+};
 
 const getQueryParameter = (parameterName, defaultValue) => {
   const value = queryString.parse(window.location.search)[parameterName];
@@ -21,7 +21,7 @@ const getQueryParameter = (parameterName, defaultValue) => {
     return value;
   }
   return defaultValue;
-}
+};
 
 class TestApp extends React.Component {
   constructor(props) {
@@ -59,7 +59,7 @@ class TestApp extends React.Component {
       horizontalWizardNav: false,
       wizardStepButtons: true,
       enableForwardSkip: true,
-      ...getP('startingQuestionId', "layout-options-65"),
+      ...getP('startingQuestionId', 'layout-options-65'),
       startingStep: 1
     };
 

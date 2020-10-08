@@ -11,7 +11,8 @@ const formShape = {
     Constants.HAS_SUBQUESTION,
     Constants.IS_RELEVANT_IF,
     Constants.HAS_ANSWER,
-    Constants.HAS_DECLARED_PREFIX
+    Constants.HAS_DECLARED_PREFIX,
+    Constants.HAS_OPTION
   ]
 };
 
