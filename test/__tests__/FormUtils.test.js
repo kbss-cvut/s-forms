@@ -1,5 +1,5 @@
 import FormUtils from '../../src/util/FormUtils';
-import * as Constants from '../../src/constants/Constants';
+import Constants from '../../src/constants/Constants';
 import JsonObjectMap from '../../src/util/JsonLdObjectMap';
 
 describe('FormUtils', () => {

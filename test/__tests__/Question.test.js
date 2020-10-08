@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Accordion } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 
-import * as Constants from '../../src/constants/Constants';
+import Constants from '../../src/constants/Constants';
 import Question from '../../src/components/Question';
 import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
 import DefaultInput from '../../src/components/DefaultInput';

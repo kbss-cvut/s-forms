@@ -6,7 +6,7 @@ import VerticalWizardNav from './VerticalWizardNav';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Utils from '../../util/Utils';
-import * as Constants from '../../constants/Constants';
+import Constants from '../../constants/Constants';
 
 const findStepByQuestionId = (stepData, id) => {
   const findQuestionTraversal = (question, index) => {

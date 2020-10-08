@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import Select, { components } from 'react-select';
 import PropTypes from 'prop-types';
-import * as Constants from '../../constants/Constants';
+import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import Utils from '../../util/Utils';
 import JsonLdObjectUtils from '../../util/JsonLdObjectUtils';
@@ -10,7 +10,7 @@ import Logger from '../../util/Logger';
 import { FormGroup, Form } from 'react-bootstrap';
 import { FormGenContext } from '../../contexts/FormGenContext';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
-import OptimizedMenuList from "./OptimizedMenuList";
+import OptimizedMenuList from './OptimizedMenuList';
 
 const processTypeaheadOptions = (options, intl) => {
   if (!options) {

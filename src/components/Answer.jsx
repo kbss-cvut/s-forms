@@ -9,7 +9,7 @@ import SelectAnswer from './answer/SelectAnswer';
 import FormUtils from '../util/FormUtils';
 import Utils from '../util/Utils';
 import TypeaheadAnswer from './answer/TypeaheadAnswer';
-import * as Constants from '../constants/Constants';
+import Constants from '../constants/Constants';
 import { FormGenContext } from '../contexts/FormGenContext';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 

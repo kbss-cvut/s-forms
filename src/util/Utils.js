@@ -1,4 +1,4 @@
-import * as Constants from '../constants/Constants';
+import Constants from '../constants/Constants';
 import FormUtils from './FormUtils';
 
 export default class Utils {

@@ -2,7 +2,7 @@ import React from 'react';
 import JsonLdUtils from 'jsonld-utils';
 
 import Answer from '../../src/components/Answer';
-import * as Constants from '../../src/constants/Constants';
+import Constants from '../../src/constants/Constants';
 import * as Generator from '../environment/Generator';
 import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
 import DefaultInput from '../../src/components/DefaultInput';

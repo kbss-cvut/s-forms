@@ -4,7 +4,7 @@
 
 import JsonLdUtils from 'jsonld-utils';
 
-import * as Constants from '../constants/Constants';
+import Constants from '../constants/Constants';
 import FormUtils from '../util/FormUtils';
 
 export default class ValidatorFactory {

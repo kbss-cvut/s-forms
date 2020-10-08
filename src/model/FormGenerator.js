@@ -1,5 +1,5 @@
 import jsonld from 'jsonld';
-import * as Constants from '../constants/Constants';
+import Constants from '../constants/Constants';
 import DefaultFormGenerator from './DefaultFormGenerator';
 import FormUtils from '../util/FormUtils';
 import Logger from '../util/Logger';

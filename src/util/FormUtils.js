@@ -1,7 +1,7 @@
 import JsonLdUtils from 'jsonld-utils';
 import jsonld from 'jsonld';
 
-import * as Constants from '../constants/Constants';
+import Constants from '../constants/Constants';
 import Utils from './Utils';
 import JsonLdObjectMap from './JsonLdObjectMap';
 import JsonLdObjectUtils from './JsonLdObjectUtils';

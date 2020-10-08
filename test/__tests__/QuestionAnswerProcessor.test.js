@@ -1,6 +1,6 @@
 import JsonLdUtils from 'jsonld-utils';
 
-import * as Constants from '../../src/constants/Constants';
+import Constants from '../../src/constants/Constants';
 import * as Generator from '../environment/Generator';
 import QuestionAnswerProcessor from '../../src/model/QuestionAnswerProcessor';
 

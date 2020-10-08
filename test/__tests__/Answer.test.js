@@ -6,7 +6,7 @@ import Select from 'react-select';
 
 import * as Generator from '../environment/Generator';
 import Answer from '../../src/components/Answer';
-import * as Constants from '../../src/constants/Constants';
+import Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 import MaskedInput from '../../src/components/MaskedInput';
 import { FormGenContext } from '../../src/contexts/FormGenContext';

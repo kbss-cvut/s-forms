@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import Utils from '../../util/Utils';
 import FormUtils from '../../util/FormUtils';
-import * as Constants from '../../constants/Constants';
+import Constants from '../../constants/Constants';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 const DateTimeAnswer = (props) => {

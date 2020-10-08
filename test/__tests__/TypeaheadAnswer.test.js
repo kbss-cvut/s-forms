@@ -3,7 +3,7 @@ import JsonLdUtils from 'jsonld-utils';
 import Select from 'react-select';
 
 import * as Generator from '../environment/Generator';
-import * as Constants from '../../src/constants/Constants';
+import Constants from '../../src/constants/Constants';
 import TypeaheadAnswer from '../../src/components/answer/TypeaheadAnswer';
 import { FormGenContext } from '../../src/contexts/FormGenContext';
 import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';

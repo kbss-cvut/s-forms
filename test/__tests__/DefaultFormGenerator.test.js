@@ -1,4 +1,4 @@
-import * as Constants from '../../src/constants/Constants';
+import Constants from '../../src/constants/Constants';
 import FormGenerator from '../../src/model/FormGenerator';
 import DefaultFormGenerator from '../../src/model/DefaultFormGenerator';
 

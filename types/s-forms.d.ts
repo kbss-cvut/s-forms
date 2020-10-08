@@ -52,20 +52,20 @@ type FixedLengthArray<T extends any[]> = Pick<T, Exclude<keyof T, ArrayLengthMut
   [Symbol.iterator]: () => IterableIterator<ArrayItems<T>>;
 };
 
-export module Constants {
-  const COLUMN_COUNT: unique symbol;
-  const INPUT_LENGTH_THRESHOLD: unique symbol;
-  const DATETIME_NUMBER_FORMAT: unique symbol;
-  const FORM: unique symbol;
-  const HAS_SUBQUESTION: unique symbol;
-  const HAS_ANSWER: unique symbol;
-  const HAS_OPTION: unique symbol;
-  const HAS_OPTIONS_QUERY: unique symbol;
-  const HAS_VALUE_TYPE: unique symbol;
-  const IS_DISABLED: unique symbol;
-  const INPUT_MASK: unique symbol;
-  const LAYOUT_CLASS: unique symbol;
-  const LAYOUT: {
+export class Constants {
+  static COLUMN_COUNT: string;
+  static INPUT_LENGTH_THRESHOLD: string;
+  static DATETIME_NUMBER_FORMAT: string;
+  static FORM: string;
+  static HAS_SUBQUESTION: string;
+  static HAS_ANSWER: string;
+  static HAS_OPTION: string;
+  static HAS_OPTIONS_QUERY: string;
+  static HAS_VALUE_TYPE: string;
+  static IS_DISABLED: string;
+  static INPUT_MASK: string;
+  static LAYOUT_CLASS: string;
+  static LAYOUT: {
     FORM: string;
     QUESTION_SECTION: string;
     WIZARD_STEP: string;
@@ -86,15 +86,15 @@ export module Constants {
     HIDDEN: string;
     CATEGORY: FixedLengthArray<[string, string, string, string, string]>;
   };
-  const VALUE_TYPE_CODE: unique symbol;
-  const VALUE_TYPE_TEXT: unique symbol;
-  const GENERATED_ROW_SIZE: unique symbol;
-  const HAS_QUESTION_ORIGIN: unique symbol;
-  const HAS_ANSWER_ORIGIN: unique symbol;
-  const HAS_DATA_VALUE: unique symbol;
-  const HAS_OBJECT_VALUE: unique symbol;
-  const HELP_DESCRIPTION: unique symbol;
-  const XSD: {
+  static VALUE_TYPE_CODE: string;
+  static VALUE_TYPE_TEXT: string;
+  static GENERATED_ROW_SIZE: string;
+  static HAS_QUESTION_ORIGIN: string;
+  static HAS_ANSWER_ORIGIN: string;
+  static HAS_DATA_VALUE: string;
+  static HAS_OBJECT_VALUE: string;
+  static HELP_DESCRIPTION: string;
+  static XSD: {
     MAX_EXCLUSIVE: string;
     MAX_INCLUSIVE: string;
     MIN_EXCLUSIVE: string;
@@ -107,35 +107,35 @@ export module Constants {
     POSITIVE_INTEGER: string;
     BOOLEAN: string;
   };
-  const ACCEPTS_ANSWER_VALUE: unique symbol;
-  const HAS_DATATYPE: unique symbol;
-  const HAS_LAYOUT_CLASS: unique symbol;
-  const HAS_POSSIBLE_VALUES_QUERY: unique symbol;
-  const HAS_REQUIRED_VALUE: unique symbol;
-  const HAS_TESTED_QUESTION: unique symbol;
-  const HAS_UNIT: unique symbol;
-  const HAS_VALID_ANSWER: unique symbol;
-  const IS_RELEVANT_IF: unique symbol;
-  const ACCEPTS_VALIDATION_VALUE: unique symbol;
-  const HAS_VALIDATION_MESSAGE: unique symbol;
-  const NEGATIVE_CONDITION: unique symbol;
-  const REQUIRES_ANSWER: unique symbol;
-  const REQUIRES_ANSWER_DESCRIPTION_IF: unique symbol;
-  const REQUIRES_ANSWER_IF: unique symbol;
-  const REQUIRES_ANSWER_VALUE: unique symbol;
-  const REQUIRES_DESCRIPTION: unique symbol;
-  const HAS_PRECEDING_QUESTION: unique symbol;
-  const HAS_PRECEDING_VALUE: unique symbol;
-  const HAS_MEDIA_CONTENT: unique symbol;
-  const CONDITION: unique symbol;
-  const HAS_PATTERN: unique symbol;
-  const HAS_DECLARED_PREFIX: unique symbol;
-  const PREFIX: unique symbol;
-  const NAMESPACE: unique symbol;
+  static ACCEPTS_ANSWER_VALUE: string;
+  static HAS_DATATYPE: string;
+  static HAS_LAYOUT_CLASS: string;
+  static HAS_POSSIBLE_VALUES_QUERY: string;
+  static HAS_REQUIRED_VALUE: string;
+  static HAS_TESTED_QUESTION: string;
+  static HAS_UNIT: string;
+  static HAS_VALID_ANSWER: string;
+  static IS_RELEVANT_IF: string;
+  static ACCEPTS_VALIDATION_VALUE: string;
+  static HAS_VALIDATION_MESSAGE: string;
+  static NEGATIVE_CONDITION: string;
+  static REQUIRES_ANSWER: string;
+  static REQUIRES_ANSWER_DESCRIPTION_IF: string;
+  static REQUIRES_ANSWER_IF: string;
+  static REQUIRES_ANSWER_VALUE: string;
+  static REQUIRES_DESCRIPTION: string;
+  static HAS_PRECEDING_QUESTION: string;
+  static HAS_PRECEDING_VALUE: string;
+  static HAS_MEDIA_CONTENT: string;
+  static CONDITION: string;
+  static HAS_PATTERN: string;
+  static HAS_DECLARED_PREFIX: string;
+  static PREFIX: string;
+  static NAMESPACE: string;
 
-  const RDFS_LABEL: unique symbol;
-  const RDFS_COMMENT: unique symbol;
-  const DEFAULT_HAS_CHILD: unique symbol;
+  static RDFS_LABEL: string;
+  static RDFS_COMMENT: string;
+  static DEFAULT_HAS_CHILD: string;
 }
 
 export class JsonLdObjectUtils {

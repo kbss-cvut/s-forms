@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
-import * as Constants from '../../constants/Constants';
+import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import YASQE from 'yasgui-yasqe';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';

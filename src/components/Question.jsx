@@ -3,7 +3,7 @@ import { Card, Accordion } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Answer from './Answer';
-import * as Constants from '../constants/Constants';
+import Constants from '../constants/Constants';
 import FormUtils from '../util/FormUtils';
 import HelpIcon from './HelpIcon';
 import JsonLdObjectMap from '../util/JsonLdObjectMap';
@@ -93,12 +93,14 @@ export default class Question extends React.Component {
       }
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
-      const cardBody = <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>;
+      const cardBody = (
+        <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
+      );
 
       const headerClassName = classNames(
-          FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
-          collapsible ? 'cursor-pointer' : ''
-      )
+        FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
+        collapsible ? 'cursor-pointer' : ''
+      );
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
       return (
@@ -143,10 +145,7 @@ export default class Question extends React.Component {
         FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
         FormUtils.isSparqlInput(question) ||
         FormUtils.isTurtleInput(question);
-      cls = classNames(
-          Question._getAnswerClass(isTextarea),
-          Question._getQuestionCategoryClass(question)
-      );
+      cls = classNames(Question._getAnswerClass(isTextarea), Question._getQuestionCategoryClass(question));
       row.push(
         <div key={'row-item-' + i} className={cls} id={question['@id']}>
           <div className="row">
@@ -208,11 +207,11 @@ export default class Question extends React.Component {
 
   static _getQuestionCategoryClass(question) {
     const layoutCategory = FormUtils.getCategory(question);
-    return layoutCategory ? "question-" + layoutCategory : "";
+    return layoutCategory ? 'question-' + layoutCategory : '';
   }
 
   static getEmphasizedClass(question) {
-    return FormUtils.isEmphasised(question) ? 'bg-warning' : "";
+    return FormUtils.isEmphasised(question) ? 'bg-warning' : '';
   }
 
   _renderCollapseToggle() {

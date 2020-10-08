@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import JsonLdUtils from 'jsonld-utils';
-import * as Constants from '../constants/Constants';
+import Constants from '../constants/Constants';
 
 export default class MediaContent extends React.Component {
   render() {

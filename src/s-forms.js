@@ -1,5 +1,5 @@
 import SForms from './components/SForms';
-import * as Constants from './constants/Constants';
+import Constants from './constants/Constants';
 import JsonLdObjectUtils from './util/JsonLdObjectUtils';
 import JsonLdFramingUtils from './util/JsonLdFramingUtils';
 import JsonLdObjectMap from './util/JsonLdObjectMap';

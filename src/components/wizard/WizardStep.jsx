@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, ButtonToolbar, Card } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
-import * as Constants from '../../constants/Constants';
+import Constants from '../../constants/Constants';
 import HelpIcon from '../HelpIcon';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';

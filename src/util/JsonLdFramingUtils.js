@@ -1,5 +1,5 @@
 import jsonld from 'jsonld';
-import * as Constants from '../constants/Constants.js';
+import Constants from '../constants/Constants';
 import FormUtils from '../util/FormUtils';
 import Utils from './Utils';
 
