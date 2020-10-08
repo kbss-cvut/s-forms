@@ -24,6 +24,7 @@ export const LAYOUT = {
   DATE: 'date',
   TIME: 'time',
   DATETIME: 'datetime',
+  TEXT: 'text',
   TEXTAREA: 'textarea',
   CHECKBOX: 'checkbox',
   QUESTION_TYPEAHEAD: 'type-ahead',
@@ -35,13 +36,7 @@ export const LAYOUT = {
   HIDDEN: 'hidden',
   COLLAPSED: 'collapsed',
   EMPHASISED: 'emphasised',
-  CATEGORY: [
-    'category-1',
-    'category-2',
-    'category-3',
-    'category-4',
-    'category-5'
-  ]
+  CATEGORY: ['category-1', 'category-2', 'category-3', 'category-4', 'category-5']
 };
 export const VALUE_TYPE_CODE = 'code';
 export const VALUE_TYPE_TEXT = 'text';

@@ -46,6 +46,10 @@ export default class FormUtils {
     );
   }
 
+  static isText(question) {
+    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TEXT);
+  }
+
   static isCalendar(question) {
     return FormUtils.isDate(question) || FormUtils.isTime(question) || FormUtils.isDateTime(question);
   }
@@ -87,9 +91,7 @@ export default class FormUtils {
   }
 
   static getCategory(question) {
-    return Constants.LAYOUT.CATEGORY.find(
-        c => JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c)
-    );
+    return Constants.LAYOUT.CATEGORY.find((c) => JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c));
   }
 
   static resolveValue(answer) {

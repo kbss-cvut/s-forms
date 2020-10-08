@@ -46,6 +46,12 @@ export interface SFormsProps {
   loader?: React.ElementType; // default <div>Loading SForms...</div>
 }
 
+type ArrayLengthMutationKeys = 'category-1' | 'category-2' | 'category-3' | 'category-4' | 'category-5';
+type ArrayItems<T extends Array<any>> = T extends Array<infer TItems> ? TItems : never;
+type FixedLengthArray<T extends any[]> = Pick<T, Exclude<keyof T, ArrayLengthMutationKeys>> & {
+  [Symbol.iterator]: () => IterableIterator<ArrayItems<T>>;
+};
+
 export module Constants {
   const COLUMN_COUNT: unique symbol;
   const INPUT_LENGTH_THRESHOLD: unique symbol;
@@ -67,6 +73,7 @@ export module Constants {
     TIME: string;
     DATETIME: string;
     TEXTAREA: string;
+    TEXT: string;
     CHECKBOX: string;
     QUESTION_TYPEAHEAD: string;
     MASKED_INPUT: string;
@@ -77,6 +84,7 @@ export module Constants {
     DISABLED: string;
     EMPHASISED: string;
     HIDDEN: string;
+    CATEGORY: FixedLengthArray<[string, string, string, string, string]>;
   };
   const VALUE_TYPE_CODE: unique symbol;
   const VALUE_TYPE_TEXT: unique symbol;
@@ -160,6 +168,7 @@ export class FormUtils {
   static isDisabled(question): boolean;
   static isHidden(question): boolean;
   static isTextarea(question, answerValue): boolean;
+  static isText(question): boolean;
   static isCalendar(question): boolean;
   static isDate(question): boolean;
   static isTime(question): boolean;
@@ -169,6 +178,7 @@ export class FormUtils {
   static isSparqlInput(question): boolean;
   static isTurtleInput(question): boolean;
   static isCollapsed(question): boolean;
+  static getCategory(question): string;
   static isEmphasised(question): boolean;
   static resolveValue(answer): any;
   static resolveValueObject(answer): any;
