@@ -65,6 +65,10 @@ const TypeaheadAnswer = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    setOptions(processTypeaheadOptions(props.question[Constants.HAS_OPTION], intl));
+  }, [intl]);
+
   const onOptionSelected = (option) => {
     props.onChange(option ? option.id : null);
   };
