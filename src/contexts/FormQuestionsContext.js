@@ -18,6 +18,11 @@ const FormQuestionsProvider = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    setData(props.data || INITIAL_DATA);
+    setFormQuestionsData(props.formQuestions || INITIAL_FORM_QUESTIONS_DATA);
+  }, [props.data, props.formQuestions]);
+
   const updateData = (update) => {
     if (!update) return;
 

@@ -27,7 +27,8 @@ class TestApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFormValid: false
+      isFormValid: false,
+      myForm: form1
     };
     this.refForm = React.createRef();
   }
@@ -67,7 +68,7 @@ class TestApp extends React.Component {
       <div className="p-4">
         <SForms
           ref={this.refForm}
-          form={form1}
+          form={this.state.myForm}
           options={options}
           fetchTypeAheadValues={this.fetchTypeAheadValues}
           isFormValid={(isFormValid) => this.setState({ isFormValid })}
@@ -75,7 +76,10 @@ class TestApp extends React.Component {
         <button
           disabled={!this.state.isFormValid}
           style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
-          onClick={() => console.log(this.refForm.current.getFormData())}
+          onClick={() => {
+            console.log(this.refForm.current.getFormData())
+            myForm: prevState.myForm === form2 ? form1 : form2;
+          }}
         >
           Save
         </button>

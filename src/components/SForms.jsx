@@ -28,7 +28,7 @@ const SForms = forwardRef((props, ref) => {
     };
 
     initialiseSForms();
-  }, []);
+  }, [props.form]);
 
   if (loading) {
     return props.loader || <Card className="p-3 font-italic">Loading SForms...</Card>;
