@@ -77,11 +77,10 @@ class TestApp extends React.Component {
           disabled={!this.state.isFormValid}
           style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
           onClick={() => {
-            console.log(this.refForm.current.getFormData())
-            myForm: prevState.myForm === form2 ? form1 : form2;
+            this.setState((prevState) => ({myForm: prevState.myForm === form2 ? form1 : form2}));
           }}
         >
-          Save
+          Switch form
         </button>
       </div>
     );
