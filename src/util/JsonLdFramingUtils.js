@@ -102,7 +102,12 @@ export default class JsonLdFramingUtils {
 
     object2IdMap = this._compressGraph(rootNode, object2IdMap, idIncluded);
 
-    object2IdMap = object2IdMap.sort((a, b) => a['@id'].localeCompare(b['@id']));
+    object2IdMap = object2IdMap.sort((a, b) => {
+      if (a['@id'] && b['@id']) {
+        return a['@id'].localeCompare(b['@id']);
+      }
+      return 0;
+    });
 
     return object2IdMap;
   };
