@@ -28,7 +28,7 @@ class TestApp extends React.Component {
     super(props);
     this.state = {
       isFormValid: false,
-      myForm: form1
+      selectedForm: form1
     };
     this.refForm = React.createRef();
   }
@@ -68,7 +68,7 @@ class TestApp extends React.Component {
       <div className="p-4">
         <SForms
           ref={this.refForm}
-          form={this.state.myForm}
+          form={this.state.selectedForm}
           options={options}
           fetchTypeAheadValues={this.fetchTypeAheadValues}
           isFormValid={(isFormValid) => this.setState({ isFormValid })}
@@ -77,7 +77,7 @@ class TestApp extends React.Component {
           disabled={!this.state.isFormValid}
           style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
           onClick={() => {
-            this.setState((prevState) => ({myForm: prevState.myForm === form2 ? form1 : form2}));
+            this.setState((prevState) => ({selectedForm: prevState.selectedForm === form2 ? form1 : form2}));
           }}
         >
           Switch form
