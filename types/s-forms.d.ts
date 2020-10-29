@@ -37,6 +37,7 @@ export interface SComponentsOptions {
 }
 
 export interface SFormsProps {
+  ref?: React.RefObject<HTMLDivElement>;
   form: object;
   options?: SOptions;
   components?: SComponents;

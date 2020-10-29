@@ -15,6 +15,10 @@ class FormManager extends React.Component {
     return QuestionAnswerProcessor.buildQuestionAnswerModel(data, formQuestionsData);
   };
 
+  getFormQuestionsData = () => {
+    return this.context.getFormQuestionsData();
+  };
+
   onStepChange = (question, index, change) => {
     this.context.updateFormQuestionsData(index, { ...question, ...change });
   };
