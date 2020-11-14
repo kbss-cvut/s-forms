@@ -10,8 +10,8 @@ export default class SelectAnswer extends React.Component {
   _generateSelectOptions(options) {
     const rendered = [];
     options.sort(function (a, b) {
-      const aLabel = JsonLdUtils.getJsonAttValue(a, JsonldUtils.RDFS_LABEL),
-        bLabel = JsonLdUtils.getJsonAttValue(b, JsonldUtils.RDFS_LABEL);
+      const aLabel = JsonLdUtils.getJsonAttValue(a, Constants.RDFS_LABEL),
+        bLabel = JsonLdUtils.getJsonAttValue(b, Constants.RDFS_LABEL);
       if (aLabel < bLabel) {
         return -1;
       }
@@ -20,10 +20,11 @@ export default class SelectAnswer extends React.Component {
       }
       return 0;
     });
-    for (let i = 0, len = options.length; i < len; i++) {
+
+    for (let i = 0; i < options.length; i++) {
       rendered.push(
-        <option value={JsonLdUtils.getJsonAttValue(options[i], JsonldUtils.RDFS_LABEL)} key={'opt-' + i}>
-          {JsonLdUtils.getJsonAttValue(options[i], JsonldUtils.RDFS_LABEL)}
+        <option value={JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)} key={'opt-' + i}>
+          {JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)}
         </option>
       );
     }
@@ -32,6 +33,7 @@ export default class SelectAnswer extends React.Component {
 
   render() {
     const question = this.props.question;
+
     return React.createElement(
       this.context.inputComponent,
       {
