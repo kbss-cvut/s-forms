@@ -1,0 +1,223 @@
+{
+  "@context": {
+    "doc": "http://onto.fel.cvut.cz/ontologies/documentation/",
+    "x": "https://x.com/x/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "form": "http://onto.fel.cvut.cz/ontologies/form/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xml": "http://www.w3.org/XML/1998/namespace",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "label": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+    },
+    "has_data_value": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value"
+    },
+    "has_answer": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_answer"
+    },
+    "has-answer-origin": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-answer-origin"
+    },
+    "has-possible-values-query": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query"
+    },
+    "has-possible-value": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-possible-value"
+    },
+    "has-layout-class": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class"
+    },
+    "has_related_question": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question",
+      "@type": "@id"
+    },
+    "has-question-origin": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-question-origin",
+      "@type": "@id"
+    },
+    "is-relevant-if": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/is-relevant-if",
+      "@type": "@id"
+    },
+    "has-tested-question": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-tested-question",
+      "@type": "@id"
+    },
+    "accepts-answer-value": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "minInclusive": {
+      "@id": "http://www.w3.org/2001/XMLSchema#minInclusive"
+    },
+    "maxInclusive": {
+      "@id": "http://www.w3.org/2001/XMLSchema#maxInclusive"
+    },
+    "has-datatype": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-datatype",
+      "@type": "@id"
+    },
+    "has-preceding-question": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-preceding-question",
+      "@type": "@id"
+    },
+    "comment": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#comment"
+    },
+    "has-unit": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-unit"
+    },
+    "has-input-mask": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-input-mask"
+    },
+    "description": {
+      "@id": "http://purl.org/dc/elements/1.1/description"
+    },
+    "is-relevant-if_removed": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/is-relevant-if_removed",
+      "@type": "@id"
+    },
+    "requires-answer": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/requires-answer",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "accepts-validation-value": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/accepts-validation-value"
+    },
+    "imports": {
+      "@id": "http://www.w3.org/2002/07/owl#imports",
+      "@type": "@id"
+    },
+    "requires-answer-if": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/requires-answer-if",
+      "@type": "@id"
+    },
+    "has-media-content": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-media-content"
+    },
+    "has-composite-pattern": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-composite-pattern"
+    },
+    "has-pattern": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-pattern"
+    },
+    "has-composite-variables": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-composite-variables"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "age-1063",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "has-datatype": "xsd:int",
+      "has-preceding-question": "last-name-1495",
+      "has-unit": "years",
+      "label": "Age"
+    },
+    {
+      "@id": "first-name-6663",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "has-datatype": "foaf:givenName",
+      "requires-answer": true,
+      "label": "First name"
+    },
+    {
+      "@id": "first-name-9402",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "has-datatype": "foaf:givenName",
+      "has-pattern": "([A-Za-z]+)",
+      "has-preceding-question": "title-7183",
+      "label": "Jméno"
+    },
+    {
+      "@id": "x:form-root",
+      "@type": "doc:question",
+      "has_related_question": [
+        "first-name-6663",
+        "middle-name-4161",
+        "last-name-1495",
+        "age-1063",
+        "sectionfoo-1592",
+        "test-section-666"
+      ],
+      "has-layout-class": "form"
+    },
+    {
+      "@id": "last-name-1495",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "has-datatype": "foaf:familyName",
+      "has-preceding-question": "middle-name-4161",
+      "requires-answer": true,
+      "label": "Příjmení"
+    },
+    {
+      "@id": "last-name-6610",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "has-datatype": "foaf:familyName",
+      "has-pattern": "([A-Za-z]+)",
+      "label": "Příjmení"
+    },
+    {
+      "@id": "middle-name-4161",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "has-preceding-question": "first-name-6663",
+      "label": "Middle name"
+    },
+    {
+      "@id": "sectionfoo-1592",
+      "@type": "doc:question",
+      "has_related_question": [
+        "title-7183",
+        "first-name-9402",
+        "last-name-6610"
+      ],
+      "has-composite-variables": [
+        "title-7183",
+        "first-name-9402",
+        "last-name-6610"
+      ],
+      "has-layout-class": "name",
+      "has-datatype": "foaf:name",
+      "has-composite-pattern": "?1 ?2 ?3",
+      "--has-pattern": "^(?:([A-Za-z]{1,3}) )?([A-Za-z ]+) ([A-Za-z]+)$",
+      "has-pattern": "^(?:([A-Za-z]{1,4}\\.) )?(.+) (.+)$",
+      "requires-answer": true,
+      "label": "Celé jméno"
+    },
+    {
+      "@id": "test-5278",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "label": "test"
+    },
+    {
+      "@id": "test-section-666",
+      "@type": "doc:question",
+      "has_related_question": "test-5278",
+      "has-layout-class": "section",
+      "label": "testSection"
+    },
+    {
+      "@id": "title-7183",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "label": "Titul"
+    }
+  ]
+}

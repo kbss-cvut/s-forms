@@ -18,6 +18,9 @@ export default class Constants {
   static IS_DISABLED = 'http://onto.fel.cvut.cz/ontologies/aviation/form-376/is-disabled';
   static INPUT_MASK = 'http://onto.fel.cvut.cz/ontologies/form/has-input-mask';
   static LAYOUT_CLASS = 'http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class';
+  static COMPOSITE_PATTERN = 'http://onto.fel.cvut.cz/ontologies/form/has-composite-pattern';
+  static PATTERN = 'http://onto.fel.cvut.cz/ontologies/form/has-pattern';
+  static COMPOSITE_VARIABLES = 'http://onto.fel.cvut.cz/ontologies/form/has-composite-variables';
   static LAYOUT = {
     FORM: 'form',
     QUESTION_SECTION: 'section',
