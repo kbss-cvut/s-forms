@@ -6,6 +6,9 @@ import { FormUtils } from '../s-forms';
 import Question from './Question';
 import FormWindow from './FormWindow';
 import Card from 'react-bootstrap/Card';
+import JsonLdUtils from 'jsonld-utils';
+import Constants from '../constants/Constants';
+import CompositeQuestion from './CompositeQuestion';
 
 class FormManager extends React.Component {
   getFormData = () => {
@@ -28,17 +31,29 @@ class FormManager extends React.Component {
 
     return (
       <Card className="p-3">
-        {formQuestionsData.map((question, index) => (
-          <Question
-            key={question['@id']}
-            question={question}
-            onChange={(index, change) => this.onStepChange(question, index, change)}
-            index={index}
-          />
-        ))}
+        {formQuestionsData.map((q, i) => this._mapQuestion(q, i))}
       </Card>
     );
   };
+
+  _mapQuestion(question, index) {
+
+    if (JsonLdUtils.getJsonAttValue(question, Constants.COMPOSITE_PATTERN)) {
+      return (<CompositeQuestion
+        key={question['@id']}
+        question={question}
+        onChange={(index, change) => this.onStepChange(question, index, change)}
+        index={index}
+      />);
+    }
+
+    return (<Question
+      key={question['@id']}
+      question={question}
+      onChange={(index, change) => this.onStepChange(question, index, change)}
+      index={index}
+    />);
+  }
 
   render() {
     const { modalView } = this.props;
