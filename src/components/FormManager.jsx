@@ -9,8 +9,19 @@ import Card from 'react-bootstrap/Card';
 import JsonLdUtils from 'jsonld-utils';
 import Constants from '../constants/Constants';
 import CompositeQuestion from './CompositeQuestion';
+import ComponentRegistry from '../util/ComponentRegistry';
 
 class FormManager extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    ComponentRegistry.registerComponent(
+      CompositeQuestion,
+      q => JsonLdUtils.getJsonAttValue(q, Constants.COMPOSITE_PATTERN)
+    );
+  }
+
   getFormData = () => {
     const data = this.context.getData();
     const formQuestionsData = this.context.getFormQuestionsData();
@@ -38,21 +49,17 @@ class FormManager extends React.Component {
 
   _mapQuestion(question, index) {
 
-    if (JsonLdUtils.getJsonAttValue(question, Constants.COMPOSITE_PATTERN)) {
-      return (<CompositeQuestion
-        key={question['@id']}
-        question={question}
-        onChange={(index, change) => this.onStepChange(question, index, change)}
-        index={index}
-      />);
+    let component = ComponentRegistry.mapQuestion(question, index);
+    if (!component) {
+      component = Question;
     }
 
-    return (<Question
-      key={question['@id']}
-      question={question}
-      onChange={(index, change) => this.onStepChange(question, index, change)}
-      index={index}
-    />);
+    return React.createElement(component, {
+      key: question['@id'],
+      question: question,
+      onChange: (index, change) => this.onStepChange(question, index, change),
+      index: index
+    });
   }
 
   render() {
