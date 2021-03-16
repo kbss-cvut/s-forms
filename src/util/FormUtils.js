@@ -124,12 +124,12 @@ export default class FormUtils {
     }
 
     for (let cond of Utils.asArray(question[Constants.IS_RELEVANT_IF])) {
-      if (!FormUtils.testCondition(cond)) {
-        return false;
+      if (FormUtils.testCondition(cond)) {
+        return true;
       }
     }
 
-    return true;
+    return false;
   }
 
   static hasValidationLogic(question) {
@@ -162,6 +162,7 @@ export default class FormUtils {
     const acceptedValidationsValues = condition[Constants.ACCEPTS_VALIDATION_VALUE];
     const acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE];
     const testedQuestions = condition[Constants.HAS_TESTED_QUESTION];
+
     let question;
 
     if (acceptedValidationsValues && acceptedAnswerValues) {
