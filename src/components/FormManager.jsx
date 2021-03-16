@@ -10,6 +10,7 @@ import JsonLdUtils from 'jsonld-utils';
 import Constants from '../constants/Constants';
 import CompositeQuestion from './CompositeQuestion';
 import ComponentRegistry from '../util/ComponentRegistry';
+import QuestionWithAdvanced from './QuestionWithAdvanced';
 
 class FormManager extends React.Component {
 
@@ -20,6 +21,24 @@ class FormManager extends React.Component {
       CompositeQuestion,
       q => JsonLdUtils.getJsonAttValue(q, Constants.COMPOSITE_PATTERN)
     );
+
+    ComponentRegistry.registerComponent(
+      QuestionWithAdvanced,
+      q => {
+        if (!FormUtils.isSection(q)) {
+          return false;
+        }
+        let subQuestions = q[Constants.HAS_SUBQUESTION];
+        if (subQuestions && subQuestions.length) {
+          for (let subQuestion of subQuestions) {
+            if (JsonLdUtils.hasValue(subQuestion, Constants.SHOW_ADVANCED_QUESTION, true)) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+    )
   }
 
   getFormData = () => {
