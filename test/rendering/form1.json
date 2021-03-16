@@ -230,7 +230,7 @@
       "has_related_question": [],
       "has-layout-class": "checkbox",
       "show-advanced-question": true,
-      "label": "show-advanced-fields"
+      "label": "Show advanced questions"
     },
     {
       "@id": "test-2-8331",

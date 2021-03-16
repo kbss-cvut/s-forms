@@ -1,10 +1,12 @@
 import React from 'react';
-import { Accordion, Card } from 'react-bootstrap';
+import { Accordion, Card, Form } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import Constants from '../constants/Constants';
 import FormUtils from '../util/FormUtils';
 import Question from './Question';
 import classNames from 'classnames';
+import { ConfigurationContext } from '../contexts/ConfigurationContext';
+import JsonldUtils from 'jsonld-utils';
 
 export default class QuestionWithAdvanced extends Question {
 
@@ -102,6 +104,9 @@ export default class QuestionWithAdvanced extends Question {
       collapsible ? 'cursor-pointer' : ''
     );
 
+    const showAdvancedQuestion = this._getShowAdvancedQuestion(question).question;
+    const advancedQuestionLabel = JsonldUtils.getLocalized(showAdvancedQuestion[Constants.RDFS_LABEL], this.context.options.intl);
+
     return (
       <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
         <Card className="mb-3">
@@ -110,7 +115,16 @@ export default class QuestionWithAdvanced extends Question {
               {collapsible && this._renderCollapseToggle()}
               {label}
             </h6>
-            <button style={{float: 'right'}} onClick={this._toggleAdvanced}>{this.state.showAdvanced ? 'Hide advanced' : 'Show advanced'}</button>
+
+            <Form.Switch
+              onChange={this._toggleAdvanced}
+              id={'--switch-' + showAdvancedQuestion['@id']}
+              label={advancedQuestionLabel}
+              checked={this.state.showAdvanced}
+              inline
+              style={{float: 'right'}}
+            />
+
             {this._renderQuestionHelp()}
           </Accordion.Toggle>
           {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
@@ -121,3 +135,5 @@ export default class QuestionWithAdvanced extends Question {
   }
 
 }
+
+QuestionWithAdvanced.contextType = ConfigurationContext;
