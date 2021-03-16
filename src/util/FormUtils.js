@@ -161,6 +161,7 @@ export default class FormUtils {
   static testCondition(condition) {
     const acceptedValidationsValues = condition[Constants.ACCEPTS_VALIDATION_VALUE];
     const acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE];
+    const acceptedNonEmptyAnswerValues = condition[Constants.ACCEPTS_NON_EMPTY_ANSWER_VALUE];
     const testedQuestions = condition[Constants.HAS_TESTED_QUESTION];
 
     let question;
@@ -186,6 +187,25 @@ export default class FormUtils {
         }
       }
       return true;
+    }
+
+    // any non empty value
+    if (acceptedNonEmptyAnswerValues && testedQuestions) {
+      question = JsonLdObjectMap.getObject(testedQuestions['@id']);
+      if (!question) {
+        return false;
+      }
+      if (!question.hasOwnProperty(Constants.HAS_ANSWER)) {
+        return false;
+      }
+
+      const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
+      if (!answers.length) {
+        return false;
+      }
+
+      const qValue = FormUtils.resolveValueObject(answers[0]);
+      return qValue && qValue['@value'];
     }
 
     // concrete values

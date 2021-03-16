@@ -49,6 +49,10 @@
       "@id": "http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value",
       "@type": "http://www.w3.org/2001/XMLSchema#boolean"
     },
+    "accepts-non-empty-answer-value": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/accepts-non-empty-answer-value",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
     "minInclusive": {
       "@id": "http://www.w3.org/2001/XMLSchema#minInclusive"
     },
@@ -112,11 +116,6 @@
   },
   "@graph": [
     {
-      "@id": "_:b0",
-      "accepts-answer-value": true,
-      "has-tested-question": "show-advanced-fields-4248"
-    },
-    {
       "@id": "age-1063",
       "@type": "doc:question",
       "has_related_question": [],
@@ -163,7 +162,7 @@
       "@type": "doc:question",
       "has_related_question": [],
       "has-layout-class": "checkbox",
-      "has-preceding-question": "test-2-8331",
+      "has-preceding-question": "test-3-8331",
       "label": "checkbox-test"
     },
     {
@@ -238,8 +237,35 @@
       "has_related_question": [],
       "has-layout-class": "text",
       "has-preceding-question": "test-5278",
-      "is-relevant-if": "_:b0",
+      "is-relevant-if": [
+        {
+          "accepts-answer-value": true,
+          "has-tested-question": "show-advanced-fields-4248"
+        },
+        {
+          "has-tested-question": "test-2-8331",
+          "accepts-non-empty-answer-value": true
+        }
+      ],
       "label": "test 2 advanced"
+    },
+    {
+      "@id": "test-3-8331",
+      "@type": "doc:question",
+      "has_related_question": [],
+      "has-layout-class": "text",
+      "has-preceding-question": "test-2-8331",
+      "is-relevant-if": [
+        {
+          "accepts-answer-value": true,
+          "has-tested-question": "show-advanced-fields-4248"
+        },
+        {
+          "has-tested-question": "test-3-8331",
+          "accepts-non-empty-answer-value": true
+        }
+      ],
+      "label": "test 3 advanced"
     },
     {
       "@id": "test-5278",
@@ -263,6 +289,7 @@
         "show-advanced-fields-4248",
         "test-5278",
         "test-2-8331",
+        "test-3-8331",
         "checkbox-test-452"
       ],
       "has-layout-class": "section",
