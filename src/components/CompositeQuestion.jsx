@@ -123,16 +123,4 @@ export default class CompositeQuestion extends Question {
     );
   }
 
-  renderSubQuestions() {
-    const children = [];
-    const subQuestions = this._getSubQuestions();
-
-    for (let i = 0; i < subQuestions.length; i++) {
-      children.push(
-        <Question key={'sub-question-' + i} index={i} question={subQuestions[i]} onChange={this.onSubQuestionChange} />
-      );
-    }
-    return children;
-  }
-
 }

@@ -1,3 +1,5 @@
+import Question from '../components/Question';
+
 let components = [];
 
 export default class ComponentRegistry {
@@ -14,7 +16,7 @@ export default class ComponentRegistry {
       }
     }
 
-    return null;
+    return Question;
   }
 
 }

@@ -15,6 +15,7 @@ import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
+import ComponentRegistry from '../util/ComponentRegistry';
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = false;
@@ -259,9 +260,18 @@ export default class Question extends React.Component {
     const subQuestions = this._getSubQuestions();
 
     for (let i = 0; i < subQuestions.length; i++) {
-      children.push(
-        <Question key={'sub-question-' + i} index={i} question={subQuestions[i]} onChange={this.onSubQuestionChange} />
-      );
+
+      let question = subQuestions[i];
+      let component = ComponentRegistry.mapQuestion(question, i);
+
+      let element = React.createElement(component, {
+        key: 'sub-question-' + i,
+        question: question,
+        onChange: this.onSubQuestionChange,
+        index: i
+      });
+
+      children.push(element);
     }
     return children;
   }
