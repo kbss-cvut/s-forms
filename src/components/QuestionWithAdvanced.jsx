@@ -7,6 +7,7 @@ import Question from './Question';
 import classNames from 'classnames';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import JsonldUtils from 'jsonld-utils';
+import HelpIcon from './HelpIcon';
 
 export default class QuestionWithAdvanced extends Question {
 
@@ -76,6 +77,23 @@ export default class QuestionWithAdvanced extends Question {
     this._onChange(Constants.HAS_SUBQUESTION, index, question);
   };
 
+  _renderShowAdvancedHelp() {
+    const { question } = this._getShowAdvancedQuestion();
+
+    if (question[Constants.HELP_DESCRIPTION]) {
+      return (
+        <HelpIcon
+          absolutePosition={false}
+          overlayPlacement="left"
+          text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], this.context.options.intl)}
+          iconClassContainer="help-icon-section"
+        />
+      );
+    }
+
+    return null;
+  }
+
   render() {
     const question = this.props.question;
 
@@ -116,16 +134,20 @@ export default class QuestionWithAdvanced extends Question {
               {label}
             </h6>
 
-            <Form.Switch
-              onChange={this._toggleAdvanced}
-              id={'--switch-' + showAdvancedQuestion['@id']}
-              label={advancedQuestionLabel}
-              checked={this.state.showAdvanced}
-              inline
-              style={{float: 'right'}}
-            />
-
             {this._renderQuestionHelp()}
+
+            <div style={{float: 'right'}}>
+              <Form.Switch
+                onChange={this._toggleAdvanced}
+                id={'--switch-' + showAdvancedQuestion['@id']}
+                label={advancedQuestionLabel}
+                checked={this.state.showAdvanced}
+                inline
+              />
+
+              {this._renderShowAdvancedHelp()}
+            </div>
+
           </Accordion.Toggle>
           {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
 

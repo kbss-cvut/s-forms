@@ -11,8 +11,8 @@ const HelpIcon = (props) => {
   );
 
   return (
-    <OverlayTrigger placement="right" overlay={tooltip}>
-      <span className={props.iconClassContainer} style={{ position: 'absolute' }}>
+    <OverlayTrigger placement={props.overlayPlacement} overlay={tooltip}>
+      <span className={props.iconClassContainer} style={{ position: props.absolutePosition ? 'absolute' : null }}>
         <QuestionCircle className={props.iconClass} />
       </span>
     </OverlayTrigger>
@@ -22,12 +22,16 @@ const HelpIcon = (props) => {
 HelpIcon.propTypes = {
   text: PropTypes.string.isRequired,
   iconClassContainer: PropTypes.string,
-  iconClass: PropTypes.string
+  iconClass: PropTypes.string,
+  overlayPlacement: PropTypes.string,
+  absolutePosition: PropTypes.bool,
 };
 
 HelpIcon.defaultProps = {
   iconClassContainer: '',
-  iconClass: ''
+  iconClass: '',
+  overlayPlacement: 'right',
+  absolutePosition: true
 };
 
 export default HelpIcon;
