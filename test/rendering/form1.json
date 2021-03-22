@@ -99,6 +99,13 @@
       "@id": "http://onto.fel.cvut.cz/ontologies/form/has-datatype",
       "@type": "@id"
     },
+    "has-tested-question" : {
+      "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-tested-question",
+      "@type" : "@id"
+    },
+    "accepts-answer-value" : {
+      "@id" : "http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value"
+    },
     "form": "http://onto.fel.cvut.cz/ontologies/form/",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -109,6 +116,7 @@
     "aviation-safety": "http://onto.fel.cvut.cz/ontologies/aviation-safety/",
     "form-lt": "http://onto.fel.cvut.cz/ontologies/form-layout/",
     "ufo": "http://onto.fel.cvut.cz/ontologies/ufo/",
+    "ex" : "http://onto.fel.cvut.cz/ontologies/s-forms/example/",
     "shacl": "http://www.w3.org/ns/shacl#"
   },
   "@graph": [
