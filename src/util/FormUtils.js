@@ -158,6 +158,30 @@ export default class FormUtils {
     return true;
   }
 
+  static hasAnyAnswer(question) {
+    if (!question) {
+      return false;
+    }
+
+    if (question.hasOwnProperty(Constants.HAS_ANSWER)) {
+      const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
+      if (answers.length) {
+        const qValue = FormUtils.resolveValueObject(answers[0]);
+        if (qValue && qValue['@value']) {
+          return true;
+        }
+      }
+    }
+
+    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+      if (FormUtils.hasAnyAnswer(subQ)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   static testCondition(condition) {
     const acceptedValidationsValues = condition[Constants.ACCEPTS_VALIDATION_VALUE];
     const acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE];
@@ -192,20 +216,7 @@ export default class FormUtils {
     // any non empty value
     if (acceptedNonEmptyAnswerValues && testedQuestions) {
       question = JsonLdObjectMap.getObject(testedQuestions['@id']);
-      if (!question) {
-        return false;
-      }
-      if (!question.hasOwnProperty(Constants.HAS_ANSWER)) {
-        return false;
-      }
-
-      const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
-      if (!answers.length) {
-        return false;
-      }
-
-      const qValue = FormUtils.resolveValueObject(answers[0]);
-      return qValue && qValue['@value'];
+      return FormUtils.hasAnyAnswer(question);
     }
 
     // concrete values
