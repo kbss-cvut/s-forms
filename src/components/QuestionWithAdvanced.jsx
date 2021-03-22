@@ -11,6 +11,34 @@ import HelpIcon from './HelpIcon';
 
 export default class QuestionWithAdvanced extends Question {
 
+  static findShowAdvancedQuestion(parent) {
+
+    let subQuestions = parent[Constants.HAS_SUBQUESTION];
+    if (subQuestions && subQuestions.length) {
+      for (let i = 0; i < subQuestions.length; i++) {
+        if (JsonLdUtils.hasValue(subQuestions[i], Constants.SHOW_ADVANCED_QUESTION, true)) {
+          return { index: i, question: subQuestions[i] };
+        }
+      }
+    }
+
+    return null;
+  }
+
+  static isShowAdvanced(question) {
+
+    let value = false;
+
+    if (question[Constants.HAS_ANSWER] && question[Constants.HAS_ANSWER].length) {
+      let answer = question[Constants.HAS_ANSWER][0];
+      if (answer[Constants.HAS_DATA_VALUE]) {
+        value = !!answer[Constants.HAS_DATA_VALUE]['@value'];
+      }
+    }
+
+    return value;
+  }
+
   constructor(props) {
     super(props);
 
@@ -32,31 +60,12 @@ export default class QuestionWithAdvanced extends Question {
   }
 
   _getShowAdvancedQuestion() {
-    const question = this.props.question;
-    let subQuestions = question[Constants.HAS_SUBQUESTION];
-    if (subQuestions && subQuestions.length) {
-      for (let i = 0; i < subQuestions.length; i++) {
-        if (JsonLdUtils.hasValue(subQuestions[i], Constants.SHOW_ADVANCED_QUESTION, true)) {
-          return { index: i, question: subQuestions[i] };
-        }
-      }
-    }
-    return null;
+    return QuestionWithAdvanced.findShowAdvancedQuestion(this.props.question);
   }
 
   _getShowAdvancedState() {
     let { question } = this._getShowAdvancedQuestion();
-
-    let value = false;
-
-    if (question[Constants.HAS_ANSWER] && question[Constants.HAS_ANSWER].length) {
-      let answer = question[Constants.HAS_ANSWER][0];
-      if (answer[Constants.HAS_DATA_VALUE]) {
-        value = !!answer[Constants.HAS_DATA_VALUE]['@value'];
-      }
-    }
-
-    return value;
+    return QuestionWithAdvanced.isShowAdvanced(question);
   }
 
   _toggleAdvanced = (e) => {
@@ -65,8 +74,6 @@ export default class QuestionWithAdvanced extends Question {
     let { index, question } = this._getShowAdvancedQuestion();
 
     let value = this._getShowAdvancedState();
-
-    console.log(question);
 
     question[Constants.HAS_ANSWER] = [{}];
     question[Constants.HAS_ANSWER][0][Constants.HAS_DATA_VALUE] = { '@value': !value }
