@@ -7,6 +7,7 @@ import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Utils from '../../util/Utils';
 import Constants from '../../constants/Constants';
+import ComponentRegistry from '../../util/ComponentRegistry';
 
 const findStepByQuestionId = (stepData, id) => {
   const findQuestionTraversal = (question, index) => {
@@ -100,17 +101,17 @@ const Wizard = () => {
 
     const step = stepData[currentStep];
 
-    return (
-      <WizardStep
-        key={'step' + currentStep}
-        step={step}
-        onNextStep={onNextStep}
-        onPreviousStep={onPreviousStep}
-        stepIndex={currentStep}
-        isFirstStep={currentStep === 0}
-        isLastStep={currentStep === formQuestionsContext.getFormQuestionsData().length - 1}
-      />
-    );
+    let stepComponent = ComponentRegistry.mapWizardStep(step);
+    return React.createElement(stepComponent, {
+      options: options,
+      key: 'step' + currentStep,
+      step: step,
+      onNextStep: onNextStep,
+      onPreviousStep: onPreviousStep,
+      stepIndex: currentStep,
+      isFirstStep: currentStep === 0,
+      isLastStep: currentStep === formQuestionsContext.getFormQuestionsData().length - 1
+    });
   };
 
   let nav = null;
