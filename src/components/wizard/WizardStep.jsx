@@ -5,74 +5,94 @@ import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
 import HelpIcon from '../HelpIcon';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
-import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import Question from '../Question';
+import ComponentRegistry from '../../util/ComponentRegistry';
 
-const WizardStep = (props) => {
-  const formQuestionsContext = React.useContext(FormQuestionsContext);
-  const { options } = React.useContext(ConfigurationContext);
 
-  const onNextStep = () => {
-    formQuestionsContext.updateFormQuestionsData(props.stepIndex, formQuestionsContext.getFormQuestionsData());
-    props.onNextStep();
+export default class WizardStep extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  onNextStep = () => {
+    this.context.updateFormQuestionsData(this.props.stepIndex, this.context.getFormQuestionsData());
+    this.props.onNextStep();
   };
 
-  const onPreviousStep = () => {
-    props.onPreviousStep();
+  onPreviousStep = () => {
+    this.props.onPreviousStep();
   };
 
-  const _renderHelpIcon = () => {
-    const question = formQuestionsContext.getFormQuestionsData([props.stepIndex]);
+  _renderHelpIcon = () => {
+    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
 
     return question[Constants.HELP_DESCRIPTION] ? (
       <HelpIcon
-        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
+        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], this.props.options.intl)}
         iconClass="help-icon-section"
       />
     ) : null;
   };
 
-  const _renderWizardStepButtons = () => {
+  _renderWizardStepButtons = () => {
     return (
       <ButtonToolbar className="m-3 float-right">
-        {!props.isFirstStep && (
-          <Button className="mr-2" onClick={onPreviousStep} variant="primary" size="sm">
-            {options.i18n['wizard.previous']}
+        {!this.props.isFirstStep && (
+          <Button className="mr-2" onClick={this.onPreviousStep} variant="primary" size="sm">
+            {this.props.options.i18n['wizard.previous']}
           </Button>
         )}
-        {!props.isLastStep && (
-          <Button onClick={onNextStep} variant="primary" size="sm">
-            {options.i18n['wizard.next']}
+        {!this.props.isLastStep && (
+          <Button onClick={this.onNextStep} variant="primary" size="sm">
+            {this.props.options.i18n['wizard.next']}
           </Button>
         )}
       </ButtonToolbar>
     );
   };
 
-  const onChange = (index, change) => {
-    formQuestionsContext.updateFormQuestionsData(props.stepIndex || index, { ...props.step, ...change });
+  onChange = (index, change) => {
+    this.context.updateFormQuestionsData(this.props.stepIndex || index, { ...this.props.step, ...change });
   };
 
-  const categoryClass = Question._getQuestionCategoryClass(props.step);
+  render() {
 
-  return (
-    <div className="wizard-step">
-      <Card className="wizard-step-content">
-        <Card.Header className="bg-primary text-white" as="h6" id={props.step['@id']}>
-          {JsonLdUtils.getLocalized(props.step[JsonLdUtils.RDFS_LABEL], options.intl)}
-          {_renderHelpIcon()}
-        </Card.Header>
-        <Card.Body className={categoryClass}>
-          <Question question={props.step} onChange={onChange} withoutCard={true} index={props.stepIndex} />
-        </Card.Body>
-      </Card>
+    const categoryClass = Question._getQuestionCategoryClass(this.props.step);
 
-      {options.wizardStepButtons && _renderWizardStepButtons()}
-    </div>
-  );
-};
+    let questionComponent = ComponentRegistry.mapQuestion(this.props.step, 0);
+    let questionElement = React.createElement(questionComponent, {
+      question: this.props.step,
+      onChange: this.onChange,
+      withoutCard: true,
+      index: this.props.stepIndex
+    });
+
+    return (
+      <div className="wizard-step">
+        <Card className="wizard-step-content">
+          <Card.Header className="bg-primary text-white" as="h6" id={this.props.step['@id']}>
+            {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
+            {this._renderHelpIcon()}
+          </Card.Header>
+          <Card.Body className={categoryClass}>
+            {questionElement}
+          </Card.Body>
+        </Card>
+
+        {this.props.options.wizardStepButtons && this._renderWizardStepButtons()}
+      </div>
+    );
+
+
+  }
+
+}
+
+WizardStep.contextType = FormQuestionsContext;
 
 WizardStep.propTypes = {
+  options: PropTypes.object.isRequired,
   step: PropTypes.object.isRequired,
   onNextStep: PropTypes.func,
   onPreviousStep: PropTypes.func,
@@ -80,5 +100,3 @@ WizardStep.propTypes = {
   isFirstStep: PropTypes.bool,
   isLastStep: PropTypes.bool
 };
-
-export default WizardStep;
