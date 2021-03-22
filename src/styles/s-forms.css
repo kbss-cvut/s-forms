@@ -118,3 +118,21 @@ input:disabled {
 .question-category-5 {
   background-color: rgba(0, 230, 222, 0.05);
 }
+
+.card-header:first-child {
+  line-height: 24px;
+}
+
+.card-header.bg-info {
+  background-color: #e6f9fb !important;
+}
+
+.card-header.bg-primary .custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #c6c6c6;
+  background-color: #fff;
+}
+
+.card-header.bg-primary .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
+  background-color: #007bff;
+}
