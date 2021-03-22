@@ -112,6 +112,32 @@ export default class QuestionWithAdvanced extends Question {
       return null;
     }
 
+    const showAdvancedQuestion = this._getShowAdvancedQuestion(question).question;
+    const advancedQuestionLabel = JsonldUtils.getLocalized(showAdvancedQuestion[Constants.RDFS_LABEL], this.context.options.intl);
+
+    if (FormUtils.isAnswerable(question)) {
+      return (
+        <div id={question['@id']}>
+          {this.renderAnswers()}
+          <div className="ml-4 mt-n2">
+            <div>
+              <Form.Switch
+                onChange={this._toggleAdvanced}
+                id={'--switch-' + showAdvancedQuestion['@id']}
+                label={advancedQuestionLabel}
+                checked={this.state.showAdvanced}
+                inline
+              />
+
+              {this._renderShowAdvancedHelp()}
+            </div>
+
+            {this.renderSubQuestions()}
+          </div>
+        </div>
+      );
+    }
+
     const { collapsible, withoutCard } = this.props;
     const categoryClass = Question._getQuestionCategoryClass(question);
 
@@ -128,9 +154,6 @@ export default class QuestionWithAdvanced extends Question {
       FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
       collapsible ? 'cursor-pointer' : ''
     );
-
-    const showAdvancedQuestion = this._getShowAdvancedQuestion(question).question;
-    const advancedQuestionLabel = JsonldUtils.getLocalized(showAdvancedQuestion[Constants.RDFS_LABEL], this.context.options.intl);
 
     return (
       <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>

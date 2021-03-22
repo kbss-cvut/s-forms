@@ -25,7 +25,7 @@ class FormManager extends React.Component {
 
     const advancedQuestionMap = q => {
 
-      if (!FormUtils.isSection(q)) {
+      if (!FormUtils.isSection(q) && !FormUtils.isAnswerable(q)) {
         return false;
       }
       let subQuestions = q[Constants.HAS_SUBQUESTION];
