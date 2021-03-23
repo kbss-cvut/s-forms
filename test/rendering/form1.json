@@ -15,6 +15,10 @@
          "@type" : "@id",
          "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-answer-origin"
       },
+      "has-sub-condition" : {
+         "@type" : "@id",
+         "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-sub-condition"
+      },
       "aviation-safety" : "http://onto.fel.cvut.cz/ontologies/aviation-safety/",
       "has-origin-type" : {
          "@type" : "@id",
@@ -125,12 +129,53 @@
    },
    "@graph" : [
       {
+         "@id" : "ex:sc--multiplicity-in-accept-states-condition",
+         "@type" : "form:condition",
+         "has-tested-question" : "tested-question-8153",
+         "accepts-answer-value" : [ 
+		{
+      			"@id" : "ex:accepted-value-1"
+    	 	}, 
+		{
+      			"@id" : "ex:accepted-value-2"
+    	 	} 
+	]
+      },
+      {
          "@id" : "ex:sc--ast-accepts-answer-value",
          "@type" : "form:condition",
          "has-tested-question" : "tested-question-419",
          "accepts-answer-value" : [ {
       		"@id" : "ex:accepted-value-4208994"
     	 	} ]
+      },
+      {
+         "@id" : "ex:cc--or--condition-1",
+         "@type" : "form:condition",
+         "has-tested-question" : "tested-question-1-8535",
+         "accepts-answer-value" : [ {
+      		"@id" : "ex:accepted-value-4208994"
+    	 	} ]
+      },
+      {
+         "@id" : "ex:cc--or--condition-2",
+         "@type" : "form:condition",
+         "has-tested-question" : "tested-question-2-7291",
+         "accepts-answer-value" : [ {
+      		"@id" : "ex:accepted-value-4208994"
+    	 	} ]
+      },
+      {
+         "@id" : "ex:cc--or--condition",
+         "@type" : "form:or-condition",
+	 "has-sub-condition" : [ 
+		{
+      			"@id" : "ex:cc--or--condition-1"
+    	 	},
+		{
+      			"@id" : "ex:cc--or--condition-2"
+    	 	}
+	 ]
       },
       {
          "@type" : "doc:answer",
@@ -843,6 +888,7 @@
          },
          "@id" : "hidden-question-1755",
          "has-layout-class" : [],
+         "is-relevant-if" : "ex:cc--or--condition",
          "form:has-preceding-question" : {
             "@id" : "tested-question-2-7291"
          },
@@ -884,6 +930,7 @@
          "@type" : "doc:question",
          "has-layout-class" : [],
          "@id" : "hidden-question-3949",
+	 "is-relevant-if": "ex:sc--multiplicity-in-accept-states-condition",
          "label" : {
             "@language" : "en",
             "@value" : "Hidden question"
@@ -2595,6 +2642,20 @@
          }
       },
       {
+         "@id" : "ex:accepted-value-1",
+         "label" : {
+            "@language" : "en",
+            "@value" : "accepted value 1"
+         }
+      },
+      {
+         "@id" : "ex:accepted-value-2",
+         "label" : {
+            "@language" : "en",
+            "@value" : "accepted value 2"
+         }
+      },
+      {
          "label" : {
             "@language" : "en",
             "@value" : "value 2"
@@ -2676,12 +2737,26 @@
       },
       {
          "@id" : "tested-question-1-8535",
+         "has-possible-value" : [
+            {
+               "@id" : "ex:accepted-value-4208994"
+            },
+            {
+               "@id" : "option-6989605"
+            },
+            {
+               "@id" : "option-5194877"
+            },
+            {
+               "@id" : "option-5858615"
+            }
+         ],
          "label" : {
             "@language" : "en",
             "@value" : "Tested question 1"
          },
          "has_related_question" : [],
-         "has-layout-class" : [],
+         "has-layout-class" : "type-ahead",
          "@type" : "doc:question"
       },
       {
@@ -2713,8 +2788,22 @@
             "@id" : "tested-question-1-8535"
          },
          "@type" : "doc:question",
-         "has-layout-class" : [],
+         "has-layout-class" : "type-ahead",
          "@id" : "tested-question-2-7291",
+         "has-possible-value" : [
+            {
+               "@id" : "ex:accepted-value-4208994"
+            },
+            {
+               "@id" : "option-6989605"
+            },
+            {
+               "@id" : "option-5194877"
+            },
+            {
+               "@id" : "option-5858615"
+            }
+         ],
          "label" : {
             "@value" : "Tested question 2",
             "@language" : "en"
@@ -2784,8 +2873,25 @@
             "@language" : "en",
             "@value" : "Tested question"
          },
+         "has-possible-value" : [
+            {
+               "@id" : "ex:accepted-value-1"
+            },
+            {
+               "@id" : "ex:accepted-value-2"
+            },
+            {
+               "@id" : "option-6989605"
+            },
+            {
+               "@id" : "option-5194877"
+            },
+            {
+               "@id" : "option-5858615"
+            }
+         ],
          "has_related_question" : [],
-         "has-layout-class" : [],
+         "has-layout-class" : "type-ahead", 
          "@type" : "doc:question"
       },
       {
