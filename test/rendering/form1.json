@@ -2731,7 +2731,21 @@
             "@language" : "en"
          },
          "@id" : "tested-question-1-2058",
-         "has-layout-class" : [],
+         "has-possible-value" : [
+            {
+               "@id" : "ex:accepted-value-4208994"
+            },
+            {
+               "@id" : "option-6989605"
+            },
+            {
+               "@id" : "option-5194877"
+            },
+            {
+               "@id" : "option-5858615"
+            }
+         ],
+         "has-layout-class" : "type-ahead",
          "@type" : "doc:question",
          "has_related_question" : []
       },
@@ -2766,7 +2780,21 @@
          },
          "@id" : "tested-question-1258",
          "@type" : "doc:question",
-         "has-layout-class" : [],
+         "has-possible-value" : [
+            {
+               "@id" : "ex:accepted-value-4208994"
+            },
+            {
+               "@id" : "option-6989605"
+            },
+            {
+               "@id" : "option-5194877"
+            },
+            {
+               "@id" : "option-5858615"
+            }
+         ],
+         "has-layout-class" : "type-ahead",
          "has_related_question" : []
       },
       {
@@ -2775,7 +2803,21 @@
             "@value" : "Tested question 2"
          },
          "@id" : "tested-question-2-5915",
-         "has-layout-class" : [],
+         "has-possible-value" : [
+            {
+               "@id" : "ex:accepted-value-4208994"
+            },
+            {
+               "@id" : "option-6989605"
+            },
+            {
+               "@id" : "option-5194877"
+            },
+            {
+               "@id" : "option-5858615"
+            }
+         ],
+         "has-layout-class" : "type-ahead",
          "@type" : "doc:question",
          "form:has-preceding-question" : {
             "@id" : "tested-question-1-2058"
@@ -2843,15 +2885,43 @@
             "@language" : "en"
          },
          "@id" : "tested-question-4336",
-         "has-layout-class" : [],
+         "has-possible-value" : [
+            {
+               "@id" : "ex:accepted-value-4208994"
+            },
+            {
+               "@id" : "option-6989605"
+            },
+            {
+               "@id" : "option-5194877"
+            },
+            {
+               "@id" : "option-5858615"
+            }
+         ],
+         "has-layout-class" : "type-ahead",
          "@type" : "doc:question",
          "has_related_question" : []
       },
       {
          "has_related_question" : [],
-         "has-layout-class" : [],
          "@type" : "doc:question",
          "@id" : "tested-question-4568",
+         "has-possible-value" : [
+            {
+               "@id" : "ex:accepted-value-4208994"
+            },
+            {
+               "@id" : "option-6989605"
+            },
+            {
+               "@id" : "option-5194877"
+            },
+            {
+               "@id" : "option-5858615"
+            }
+         ],
+         "has-layout-class" : "type-ahead", 
          "label" : {
             "@value" : "Tested question",
             "@language" : "en"
@@ -2860,8 +2930,22 @@
       {
          "has_related_question" : [],
          "@type" : "doc:question",
-         "has-layout-class" : [],
          "@id" : "tested-question-6130",
+         "has-possible-value" : [
+            {
+               "@id" : "ex:accepted-value-4208994"
+            },
+            {
+               "@id" : "option-6989605"
+            },
+            {
+               "@id" : "option-5194877"
+            },
+            {
+               "@id" : "option-5858615"
+            }
+         ],
+         "has-layout-class" : "type-ahead",
          "label" : {
             "@value" : "Tested question",
             "@language" : "en"
