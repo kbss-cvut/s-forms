@@ -158,11 +158,29 @@ export default class FormUtils {
     return true;
   }
 
+  static testOrCondition(condition) {
+    const hasSubCondition = condition[Constants.HAS_SUB_CONDITION];
+    if (! hasSubCondition) {
+      console.warn('Or condition does not have any sub-condition !');
+    }
+    for (const subCond of Utils.asArray(hasSubCondition)) {
+      if (this.testCondition(JsonLdObjectMap.getObject(subCond['@id']))){
+          return true;
+      }
+    }
+    return false;
+  }
+
   static testCondition(condition) {
+    const isOrCondition = condition[Constants.HAS_SUB_CONDITION];
     const acceptedValidationsValues = condition[Constants.ACCEPTS_VALIDATION_VALUE];
     const acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE];
     const testedQuestions = condition[Constants.HAS_TESTED_QUESTION];
     let question;
+
+    if (isOrCondition) {
+      return this.testOrCondition(condition);
+    }
 
     if (acceptedValidationsValues && acceptedAnswerValues) {
       console.warn('Support for validation and requirement constraints at same time is not implemented !');

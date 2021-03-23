@@ -83,6 +83,8 @@ export default class Constants {
   static HAS_PRECEDING_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/has-preceding-value';
   static HAS_MEDIA_CONTENT = 'http://onto.fel.cvut.cz/ontologies/form/has-media-content';
   static CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/condition';
+  static OR_CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/or-condition';
+  static HAS_SUB_CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/has-sub-condition';
   static HAS_PATTERN = 'http://onto.fel.cvut.cz/ontologies/form-lt/has-pattern';
   static HAS_DECLARED_PREFIX = 'http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix';
   static PREFIX = 'http://www.w3.org/ns/shacl#prefix';
