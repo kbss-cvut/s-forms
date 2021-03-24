@@ -163,8 +163,8 @@ export default class FormUtils {
     if (! hasSubCondition) {
       console.warn('Or condition does not have any sub-condition !');
     }
-    for (const subCond of Utils.asArray(hasSubCondition)) {
-      if (this.testCondition(JsonLdObjectMap.getObject(subCond['@id']))){
+    for (const subC of this._getMappedObjectsArray(hasSubCondition)) {
+      if (this.testCondition(subC)){
           return true;
       }
     }
@@ -175,6 +175,7 @@ export default class FormUtils {
     const isOrCondition = condition[Constants.HAS_SUB_CONDITION];
     const acceptedValidationsValues = condition[Constants.ACCEPTS_VALIDATION_VALUE];
     const acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE];
+    const accepts = condition[Constants.ACCEPTS];
     const testedQuestions = condition[Constants.HAS_TESTED_QUESTION];
     let question;
 
@@ -184,6 +185,26 @@ export default class FormUtils {
 
     if (acceptedValidationsValues && acceptedAnswerValues) {
       console.warn('Support for validation and requirement constraints at same time is not implemented !');
+    }
+
+    // any answer within all subquestions
+    if (accepts && testedQuestions) {
+      const arr = Utils.asArray(accepts);
+      if (arr.length !== 1) {
+        console.warn('Support for multiple accepts values is not implemented !');
+      }
+      if (arr[0]['@id'] === Constants.ANSWERED_QUESTION) {
+        if (acceptedAnswerValues || acceptedValidationsValues) {
+          console.warn('Support for accepted answer/validations values is not implemented !')
+        }
+        for (const q of this._getMappedObjectsArray(testedQuestions)) {
+          if (! this.hasAnswer(q)) {
+              return false;
+          }
+        }
+        return true;
+      }
+      console.warn('No support to accept question of type ' + arr[0]['@id'] + ' !')
     }
 
     // valid answers
@@ -241,6 +262,50 @@ export default class FormUtils {
         }
       }
     }
+    return false;
+  }
+
+  //returns array of valid object while ignoring
+  static _getMappedObjectsArray(jsonObjects, objectType) {
+    return Utils.asArray(jsonObjects).map(
+        o => {
+          const obj = JsonLdObjectMap.getObject(o['@id']);
+          if (obj === undefined) {
+            const ot = (objectType ? objectType : 'Object');
+            console.warn(
+                (objectType ? objectType : 'Object')
+                + ' "' + o['@id'] + '"'
+                + ' is not loaded in an object map.');
+            return null;
+          }
+          return obj;
+        }
+    ).filter(function (o) { return (o !== null)})
+  }
+
+  static hasAnswer(question) {
+    if (!question) {
+      return false;
+    }
+
+    if (question.hasOwnProperty(Constants.HAS_ANSWER)) {
+      const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
+      if (answers.length) {
+        const qValue = FormUtils.resolveValueObject(answers[0]);
+        if (qValue) {
+          if (qValue['@value'] || qValue['@id']) {
+            return true;
+          }
+        }
+      }
+    }
+
+    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+      if (FormUtils.hasAnswer(subQ)) {
+        return true;
+      }
+    }
+
     return false;
   }
 }

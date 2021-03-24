@@ -63,11 +63,13 @@ export default class Constants {
     BOOLEAN: 'http://www.w3.org/2001/XMLSchema#boolean'
   };
   static ACCEPTS_ANSWER_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value';
+  static ACCEPTS = 'http://onto.fel.cvut.cz/ontologies/form/accepts';
   static HAS_DATATYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-datatype';
   static HAS_LAYOUT_CLASS = 'http://onto.fel.cvut.cz/ontologies/form/has-layout-class';
   static HAS_POSSIBLE_VALUES_QUERY = 'http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query';
   static HAS_REQUIRED_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/has-required-value';
   static HAS_TESTED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/has-tested-question';
+  static HAS_TESTED_FORM = 'http://onto.fel.cvut.cz/ontologies/form/has-tested-form';
   static HAS_UNIT = 'http://onto.fel.cvut.cz/ontologies/form/has-unit';
   static HAS_VALID_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/has-valid-answer';
   static IS_RELEVANT_IF = 'http://onto.fel.cvut.cz/ontologies/form/is-relevant-if';
@@ -89,6 +91,9 @@ export default class Constants {
   static HAS_DECLARED_PREFIX = 'http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix';
   static PREFIX = 'http://www.w3.org/ns/shacl#prefix';
   static NAMESPACE = 'http://www.w3.org/ns/shacl#namespace';
+
+  static NOT_ANSWERED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/not-answered-question';
+  static ANSWERED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/answered-question';
 
   static RDFS_LABEL = JsonLdUtils.RDFS_LABEL;
   static RDFS_COMMENT = JsonLdUtils.RDFS_COMMENT;
