@@ -64,6 +64,7 @@ export default class Constants {
 
     BOOLEAN: 'http://www.w3.org/2001/XMLSchema#boolean'
   };
+  static STEP = 'http://onto.fel.cvut.cz/ontologies/form/step';
   static ACCEPTS_ANSWER_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value';
   static ACCEPTS = 'http://onto.fel.cvut.cz/ontologies/form/accepts';
   static HAS_DATATYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-datatype';

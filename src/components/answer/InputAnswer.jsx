@@ -59,7 +59,11 @@ class InputPropertiesResolver {
         props.rows = 5;
         break;
       case 'number':
-        props = { ...props, ...InputPropertiesResolver._resolveNumberRestrictions(question) };
+        props = {
+          ...props,
+          ...InputPropertiesResolver._resolveNumberRestrictions(question),
+          ...this._resolveStepRestriction(question)
+        };
         break;
       default:
         break;
@@ -71,6 +75,14 @@ class InputPropertiesResolver {
     }
 
     return props;
+  }
+
+  static _resolveStepRestriction(question) {
+    let restriction = {};
+    if (question[Constants.STEP] !== undefined) {
+      restriction['step'] = JsonLdUtils.getJsonAttValue(question, Constants.STEP);
+    }
+    return restriction;
   }
 
   static _resolveNumberRestrictions(question) {
