@@ -18,7 +18,7 @@ import classNames from 'classnames';
 import ComponentRegistry from '../util/ComponentRegistry';
 
 // TODO Remove once the pretty layout is tested
-const PRETTY_ANSWERABLE_LAYOUT = false;
+const PRETTY_ANSWERABLE_LAYOUT = true;
 
 export default class Question extends React.Component {
   constructor(props) {

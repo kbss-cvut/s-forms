@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import JsonldUtils from 'jsonld-utils';
 import HelpIcon from './HelpIcon';
+import Answer from './Answer';
 
 export default class QuestionWithAdvanced extends Question {
 
@@ -101,6 +102,27 @@ export default class QuestionWithAdvanced extends Question {
     return null;
   }
 
+  _renderSwitch() {
+
+    const question = this.props.question;
+    const showAdvancedQuestion = this._getShowAdvancedQuestion(question).question;
+    const advancedQuestionLabel = JsonldUtils.getLocalized(showAdvancedQuestion[Constants.RDFS_LABEL], this.context.options.intl);
+
+    return (
+      <div className="show-advanced-switch" style={{float: 'right'}}>
+        <Form.Switch
+          onChange={this._toggleAdvanced}
+          id={'--switch-' + showAdvancedQuestion['@id']}
+          label={advancedQuestionLabel}
+          checked={this.state.showAdvanced}
+          inline
+        />
+
+        {this._renderShowAdvancedHelp()}
+      </div>
+    )
+  }
+
   render() {
     const question = this.props.question;
 
@@ -112,28 +134,11 @@ export default class QuestionWithAdvanced extends Question {
       return null;
     }
 
-    const showAdvancedQuestion = this._getShowAdvancedQuestion(question).question;
-    const advancedQuestionLabel = JsonldUtils.getLocalized(showAdvancedQuestion[Constants.RDFS_LABEL], this.context.options.intl);
-
     if (FormUtils.isAnswerable(question)) {
       return (
         <div id={question['@id']}>
-          {this.renderAnswers()}
-          <div className="ml-4 mt-n2">
-            <div>
-              <Form.Switch
-                onChange={this._toggleAdvanced}
-                id={'--switch-' + showAdvancedQuestion['@id']}
-                label={advancedQuestionLabel}
-                checked={this.state.showAdvanced}
-                inline
-              />
-
-              {this._renderShowAdvancedHelp()}
-            </div>
-
-            {this.renderSubQuestions()}
-          </div>
+          <div className="panel-title answerable-question">{this.renderAnswers()}</div>
+          <div className="answerable-subquestions">{this.renderSubQuestions()}</div>
         </div>
       );
     }
@@ -166,17 +171,7 @@ export default class QuestionWithAdvanced extends Question {
 
             {this._renderQuestionHelp()}
 
-            <div style={{float: 'right'}}>
-              <Form.Switch
-                onChange={this._toggleAdvanced}
-                id={'--switch-' + showAdvancedQuestion['@id']}
-                label={advancedQuestionLabel}
-                checked={this.state.showAdvanced}
-                inline
-              />
-
-              {this._renderShowAdvancedHelp()}
-            </div>
+            {this._renderSwitch()}
 
           </Accordion.Toggle>
           {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
@@ -184,6 +179,40 @@ export default class QuestionWithAdvanced extends Question {
         </Card>
       </Accordion>
     );
+  }
+
+  renderAnswers() {
+    const question = this.props.question;
+
+    if (!FormUtils.isAnswerable(question)) {
+      return super.renderAnswers();
+    }
+
+    const answer = this._getAnswers()[0];
+
+    let isTextarea =
+      FormUtils.isTextarea(question, FormUtils.resolveValue(answer)) ||
+      FormUtils.isSparqlInput(question) ||
+      FormUtils.isTurtleInput(question);
+    let cls = classNames(Question._getAnswerClass(isTextarea), Question._getQuestionCategoryClass(question));
+
+    return [(
+      <div className="row" key={'question-row-0'}>
+        <div key={'row-item-0'} className={cls} id={question['@id']}>
+          <div className="row">
+            <div className="col-10">
+              <Answer index={0} answer={answer} question={question} onChange={this.onAnswerChange} />
+            </div>
+            <div>
+              {this._renderUnits()}
+              {this._renderQuestionHelp()}
+              {this._renderPrefixes()}
+            </div>
+          </div>
+        </div>
+        {this._renderSwitch()}
+      </div>
+    )];
   }
 
 }
