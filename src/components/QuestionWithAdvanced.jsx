@@ -134,15 +134,6 @@ export default class QuestionWithAdvanced extends Question {
       return null;
     }
 
-    if (FormUtils.isAnswerable(question)) {
-      return (
-        <div id={question['@id']}>
-          <div className="panel-title answerable-question">{this.renderAnswers()}</div>
-          <div className="answerable-subquestions">{this.renderSubQuestions()}</div>
-        </div>
-      );
-    }
-
     const { collapsible, withoutCard } = this.props;
     const categoryClass = Question._getQuestionCategoryClass(question);
 
@@ -151,13 +142,32 @@ export default class QuestionWithAdvanced extends Question {
     }
     const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
-    const cardBody = (
-      <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
-    );
-
     const headerClassName = classNames(
       FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
-      collapsible ? 'cursor-pointer' : ''
+      collapsible ? 'cursor-pointer' : '',
+      this.state.expanded ? 'section-expanded' : 'section-collapsed'
+    );
+
+    if (FormUtils.isAnswerable(question)) {
+
+      const cardBody = (
+        <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
+      );
+
+      return (
+        <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+          <Card className="mb-3">
+            <Card.Header onClick={this._toggleCollapse} className={headerClassName}>
+              {this.renderAnswers()}
+            </Card.Header>
+            {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+          </Card>
+        </Accordion>
+      );
+    }
+
+    const cardBody = (
+      <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
     );
 
     return (
