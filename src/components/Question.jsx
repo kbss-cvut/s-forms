@@ -28,6 +28,10 @@ export default class Question extends React.Component {
       validator: null,
       expanded: !FormUtils.isCollapsed(props.question)
     };
+
+    if (FormUtils.isAnswerable(props.question)) {
+      this.state.expanded = !!FormUtils.resolveValue(this._getAnswers()[0]);
+    }
   }
 
   componentDidMount() {
@@ -35,6 +39,13 @@ export default class Question extends React.Component {
   }
 
   onAnswerChange = (answerIndex, change) => {
+
+    // is answerable section
+    if (FormUtils.isSection(this.props.question)) {
+      let expanded = !!FormUtils.resolveValue(change);
+      this.setState({ expanded: expanded });
+    }
+
     this._onChange(Constants.HAS_ANSWER, answerIndex, change);
   };
 
@@ -56,6 +67,20 @@ export default class Question extends React.Component {
 
   _toggleCollapse = () => {
     if (this.props.collapsible) {
+
+      const question = this.props.question;
+      if (FormUtils.isAnswerable(question) && FormUtils.isSection(question)) {
+
+        let change = {};
+        change[Constants.HAS_DATA_VALUE] = {
+          '@value': !this.state.expanded
+        }
+
+        this.onAnswerChange(0, change);
+        return;
+      }
+
+
       this.setState({ expanded: !this.state.expanded });
     }
   };
@@ -68,7 +93,7 @@ export default class Question extends React.Component {
     if (!FormUtils.isRelevant(question)) {
       return null;
     }
-    if (FormUtils.isAnswerable(question)) {
+    if (FormUtils.isAnswerable(question) && !FormUtils.isSection(question)) {
       if (PRETTY_ANSWERABLE_LAYOUT) {
         return (
           <div id={question['@id']}>
@@ -94,13 +119,31 @@ export default class Question extends React.Component {
       }
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
-      const cardBody = (
-        <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
-      );
-
       const headerClassName = classNames(
         FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
         collapsible ? 'cursor-pointer' : ''
+      );
+
+      if (FormUtils.isAnswerable(question)) {
+
+        const cardBody = (
+          <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
+        );
+
+        return (
+          <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+            <Card className="mb-3">
+              <Card.Header onClick={this._toggleCollapse} className={headerClassName}>
+                {this.renderAnswers()}
+              </Card.Header>
+              {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+            </Card>
+          </Accordion>
+        );
+      }
+
+      const cardBody = (
+        <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
       );
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse

@@ -150,6 +150,18 @@ input:disabled {
   text-align: right;
 }
 
+.section-collapsed .show-advanced-switch {
+  display: none;
+}
+
 .answerable-question .show-advanced-switch {
   padding-right: 20px;
+}
+
+.card-header .form-group {
+  margin-bottom: 0;
+}
+
+.answerable-section .card-header .form-group {
+  pointer-events: none;
 }
