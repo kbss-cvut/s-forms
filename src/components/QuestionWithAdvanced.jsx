@@ -204,7 +204,7 @@ export default class QuestionWithAdvanced extends Question {
       FormUtils.isTextarea(question, FormUtils.resolveValue(answer)) ||
       FormUtils.isSparqlInput(question) ||
       FormUtils.isTurtleInput(question);
-    let cls = classNames(Question._getAnswerClass(isTextarea), Question._getQuestionCategoryClass(question));
+    let cls = classNames(Question._getAnswerClass(question, isTextarea), Question._getQuestionCategoryClass(question));
 
     return [(
       <div className="row" key={'question-row-0'}>

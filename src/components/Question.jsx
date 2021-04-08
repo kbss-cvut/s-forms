@@ -189,7 +189,7 @@ export default class Question extends React.Component {
         FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
         FormUtils.isSparqlInput(question) ||
         FormUtils.isTurtleInput(question);
-      cls = classNames(Question._getAnswerClass(isTextarea), Question._getQuestionCategoryClass(question));
+      cls = classNames(Question._getAnswerClass(question, isTextarea), Question._getQuestionCategoryClass(question));
       row.push(
         <div key={'row-item-' + i} className={cls} id={question['@id']}>
           <div className="row">
@@ -241,12 +241,18 @@ export default class Question extends React.Component {
     return question[Constants.HAS_ANSWER];
   }
 
-  static _getAnswerClass(isTextarea) {
-    return isTextarea
+  static _getAnswerClass(question, isTextarea) {
+    let columns = isTextarea
       ? 'col-12'
       : Constants.GENERATED_ROW_SIZE === 1
       ? 'col-6'
       : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
+
+    if (JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISE_ON_RELEVANT)) {
+      return [columns, 'emphasise-on-relevant'];
+    }
+
+    return columns;
   }
 
   static _getQuestionCategoryClass(question) {

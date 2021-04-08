@@ -165,3 +165,38 @@ input:disabled {
 .answerable-section .card-header .form-group {
   pointer-events: none;
 }
+
+.emphasise-on-relevant {
+  animation: emphasiseOnRelevant 1.2s ease-in;
+}
+
+@keyframes emphasiseOnRelevant {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+    background-color: yellow;
+  }
+
+  25% {
+    display: block;
+    opacity: 0;
+  }
+
+  75% {
+    display: block;
+    opacity: 1;
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+    background-color: transparent;
+  }
+}
+
+
