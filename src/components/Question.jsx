@@ -28,10 +28,6 @@ export default class Question extends React.Component {
       validator: null,
       expanded: !FormUtils.isCollapsed(props.question)
     };
-
-    if (FormUtils.isAnswerable(props.question)) {
-      this.state.expanded = !!FormUtils.resolveValue(this._getAnswers()[0]);
-    }
   }
 
   componentDidMount() {
@@ -71,13 +67,10 @@ export default class Question extends React.Component {
       const question = this.props.question;
       if (FormUtils.isAnswerable(question) && FormUtils.isSection(question)) {
 
-        let change = {};
-        change[Constants.HAS_DATA_VALUE] = {
-          '@value': !this.state.expanded
+        if (!this._getFirstAnswerValue()) {
+          // prevent expanding/collapsing when the checkbox is not checked
+          return;
         }
-
-        this.onAnswerChange(0, change);
-        return;
       }
 
 
@@ -125,21 +118,7 @@ export default class Question extends React.Component {
       );
 
       if (FormUtils.isAnswerable(question)) {
-
-        const cardBody = (
-          <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
-        );
-
-        return (
-          <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
-            <Card className="mb-3">
-              <Card.Header onClick={this._toggleCollapse} className={headerClassName}>
-                {this.renderAnswers()}
-              </Card.Header>
-              {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
-            </Card>
-          </Accordion>
-        );
+        return this.renderAnswerableSection();
       }
 
       const cardBody = (
@@ -174,6 +153,35 @@ export default class Question extends React.Component {
     content.push(this.renderAnswers());
     content.push(this.renderSubQuestions());
     return content;
+  }
+
+  renderAnswerableSection() {
+    const question = this.props.question;
+    const collapsible = this.props.collapsible;
+    const categoryClass = Question._getQuestionCategoryClass(question);
+    let headerClassNames = [
+      FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
+      this.state.expanded ? 'section-expanded' : 'section-collapsed'
+    ];
+
+    if (collapsible && this._getFirstAnswerValue()) {
+      headerClassNames.push('cursor-pointer');
+    }
+
+    const cardBody = (
+      <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
+    );
+
+    return (
+      <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+        <Card className="mb-3">
+          <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
+            {this.renderAnswers()}
+          </Card.Header>
+          {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+        </Card>
+      </Accordion>
+    );
   }
 
   renderAnswers() {
@@ -344,6 +352,10 @@ export default class Question extends React.Component {
     );
 
     return question[Constants.HAS_SUBQUESTION];
+  }
+
+  _getFirstAnswerValue() {
+    return FormUtils.resolveValue(this._getAnswers()[0]);
   }
 }
 

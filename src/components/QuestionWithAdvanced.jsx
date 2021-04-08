@@ -149,21 +149,7 @@ export default class QuestionWithAdvanced extends Question {
     );
 
     if (FormUtils.isAnswerable(question)) {
-
-      const cardBody = (
-        <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
-      );
-
-      return (
-        <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
-          <Card className="mb-3">
-            <Card.Header onClick={this._toggleCollapse} className={headerClassName}>
-              {this.renderAnswers()}
-            </Card.Header>
-            {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
-          </Card>
-        </Accordion>
-      );
+      return this.renderAnswerableSection();
     }
 
     const cardBody = (

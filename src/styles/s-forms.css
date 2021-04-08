@@ -32,6 +32,15 @@
   margin-top: 0.37rem;
 }
 
+.answerable-section .form-group .form-check-label {
+  margin-left: 2px;
+}
+
+.answerable-section .card-header .col-10 {
+  width: auto;
+  flex-basis: auto;
+}
+
 svg {
   fill: currentColor;
 }
@@ -47,6 +56,7 @@ svg {
 .caret-square-up,
 .caret-square-down {
   margin-right: 0.2rem;
+  margin-left: -5px;
 }
 
 .help-icon-text-input {
@@ -158,12 +168,12 @@ input:disabled {
   padding-right: 20px;
 }
 
-.card-header .form-group {
-  margin-bottom: 0;
+.answerable-section .show-advanced-switch {
+  padding-right: 15px;
 }
 
-.answerable-section .card-header .form-group {
-  pointer-events: none;
+.card-header .form-group {
+  margin-bottom: 0;
 }
 
 .emphasise-on-relevant {
