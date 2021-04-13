@@ -145,34 +145,6 @@ input:disabled {
   background-color: #e6f9fb !important;
 }
 
-.card-header.bg-primary .custom-control-input:checked ~ .custom-control-label::before {
-  color: #fff;
-  border-color: #c6c6c6;
-  background-color: #fff;
-}
-
-.card-header.bg-primary .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
-  background-color: #007bff;
-}
-
-.show-advanced-switch {
-  float: right;
-  flex-grow: 1;
-  text-align: right;
-}
-
-.section-collapsed .show-advanced-switch {
-  display: none;
-}
-
-.answerable-question .show-advanced-switch {
-  padding-right: 20px;
-}
-
-.answerable-section .show-advanced-switch {
-  padding-right: 15px;
-}
-
 .card-header .form-group {
   margin-bottom: 0;
 }
