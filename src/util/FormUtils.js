@@ -124,12 +124,12 @@ export default class FormUtils {
     }
 
     for (let cond of Utils.asArray(question[Constants.IS_RELEVANT_IF])) {
-      if (FormUtils.testCondition(cond)) {
-        return true;
+      if (!FormUtils.testCondition(cond)) {
+        return false;
       }
     }
 
-    return false;
+    return true;
   }
 
   static hasValidationLogic(question) {
