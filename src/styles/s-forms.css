@@ -40,6 +40,7 @@
 .answerable-section .card-header .col-10 {
   width: auto;
   flex-basis: auto;
+  padding-right: 0;
 }
 
 svg {
