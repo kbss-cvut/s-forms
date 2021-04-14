@@ -101,7 +101,7 @@ const Wizard = () => {
 
     const step = stepData[currentStep];
 
-    let stepComponent = ComponentRegistry.mapWizardStep(step);
+    let stepComponent = ComponentRegistry.mapComponent(step, currentStep, WizardStep);
     return React.createElement(stepComponent, {
       options: options,
       key: 'step' + currentStep,

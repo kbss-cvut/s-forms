@@ -35,7 +35,7 @@ class FormManager extends React.Component {
 
   _mapQuestion(question, index) {
 
-    let component = ComponentRegistry.mapQuestion(question, index);
+    let component = ComponentRegistry.mapComponent(question, index);
     return React.createElement(component, {
       key: question['@id'],
       question: question,

@@ -60,7 +60,7 @@ export default class WizardStep extends React.Component {
 
     const categoryClass = Question._getQuestionCategoryClass(this.props.step);
 
-    let questionComponent = ComponentRegistry.mapQuestion(this.props.step, 0);
+    let questionComponent = ComponentRegistry.mapComponent(this.props.step, 0);
     let questionElement = React.createElement(questionComponent, {
       question: this.props.step,
       onChange: this.onChange,

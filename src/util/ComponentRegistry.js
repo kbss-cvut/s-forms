@@ -1,8 +1,6 @@
 import Question from '../components/Question';
-import WizardStep from '../components/wizard/WizardStep';
 
 let components = [];
-let wizardSteps = [];
 
 export default class ComponentRegistry {
 
@@ -10,30 +8,18 @@ export default class ComponentRegistry {
     components.push({ component, mapRule });
   }
 
-  static registerWizardStep(component, mapRule) {
-    wizardSteps.push({ component, mapRule });
-  }
-
-  static mapQuestion(question, index) {
-
+  static mapComponent(question, index, def) {
     for (let { component, mapRule } of components) {
       if (mapRule(question, index)) {
         return component;
       }
     }
 
-    return Question;
-  }
-
-  static mapWizardStep(step) {
-
-    for (let { component, mapRule } of wizardSteps) {
-      if (mapRule(step)) {
-        return component;
-      }
+    if (def !== undefined) {
+      return def;
     }
 
-    return WizardStep;
+    return Question;
   }
 
 }

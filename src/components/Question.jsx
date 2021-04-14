@@ -319,7 +319,7 @@ export default class Question extends React.Component {
     for (let i = 0; i < subQuestions.length; i++) {
 
       let question = subQuestions[i];
-      let component = ComponentRegistry.mapQuestion(question, i);
+      let component = ComponentRegistry.mapComponent(question, i);
 
       let element = React.createElement(component, {
         key: 'sub-question-' + i,
