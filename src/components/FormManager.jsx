@@ -3,9 +3,9 @@ import QuestionAnswerProcessor from '../model/QuestionAnswerProcessor';
 import { FormQuestionsContext } from '../contexts/FormQuestionsContext';
 import Wizard from './wizard/Wizard';
 import { FormUtils } from '../s-forms';
-import Question from './Question';
 import FormWindow from './FormWindow';
 import Card from 'react-bootstrap/Card';
+import ComponentRegistry from '../util/ComponentRegistry';
 
 class FormManager extends React.Component {
   getFormData = () => {
@@ -28,17 +28,21 @@ class FormManager extends React.Component {
 
     return (
       <Card className="p-3">
-        {formQuestionsData.map((question, index) => (
-          <Question
-            key={question['@id']}
-            question={question}
-            onChange={(index, change) => this.onStepChange(question, index, change)}
-            index={index}
-          />
-        ))}
+        {formQuestionsData.map((q, i) => this._mapQuestion(q, i))}
       </Card>
     );
   };
+
+  _mapQuestion(question, index) {
+
+    let component = ComponentRegistry.mapComponent(question, index);
+    return React.createElement(component, {
+      key: question['@id'],
+      question: question,
+      onChange: (index, change) => this.onStepChange(question, index, change),
+      index: index
+    });
+  }
 
   render() {
     const { modalView } = this.props;

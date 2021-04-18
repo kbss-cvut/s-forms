@@ -15,9 +15,10 @@ import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
+import ComponentRegistry from '../util/ComponentRegistry';
 
 // TODO Remove once the pretty layout is tested
-const PRETTY_ANSWERABLE_LAYOUT = false;
+const PRETTY_ANSWERABLE_LAYOUT = true;
 
 export default class Question extends React.Component {
   constructor(props) {
@@ -34,6 +35,13 @@ export default class Question extends React.Component {
   }
 
   onAnswerChange = (answerIndex, change) => {
+
+    // is answerable section
+    if (FormUtils.isSection(this.props.question)) {
+      let expanded = !!FormUtils.resolveValue(change);
+      this.setState({ expanded: expanded });
+    }
+
     this._onChange(Constants.HAS_ANSWER, answerIndex, change);
   };
 
@@ -55,6 +63,17 @@ export default class Question extends React.Component {
 
   _toggleCollapse = () => {
     if (this.props.collapsible) {
+
+      const question = this.props.question;
+      if (FormUtils.isAnswerable(question) && FormUtils.isSection(question)) {
+
+        if (!this._getFirstAnswerValue()) {
+          // prevent expanding/collapsing when the checkbox is not checked
+          return;
+        }
+      }
+
+
       this.setState({ expanded: !this.state.expanded });
     }
   };
@@ -67,7 +86,7 @@ export default class Question extends React.Component {
     if (!FormUtils.isRelevant(question)) {
       return null;
     }
-    if (FormUtils.isAnswerable(question)) {
+    if (FormUtils.isAnswerable(question) && !FormUtils.isSection(question)) {
       if (PRETTY_ANSWERABLE_LAYOUT) {
         return (
           <div id={question['@id']}>
@@ -93,13 +112,17 @@ export default class Question extends React.Component {
       }
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
-      const cardBody = (
-        <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
-      );
-
       const headerClassName = classNames(
         FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
         collapsible ? 'cursor-pointer' : ''
+      );
+
+      if (FormUtils.isAnswerable(question)) {
+        return this.renderAnswerableSection();
+      }
+
+      const cardBody = (
+        <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
       );
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
@@ -132,6 +155,35 @@ export default class Question extends React.Component {
     return content;
   }
 
+  renderAnswerableSection() {
+    const question = this.props.question;
+    const collapsible = this.props.collapsible;
+    const categoryClass = Question._getQuestionCategoryClass(question);
+    let headerClassNames = [
+      FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
+      this.state.expanded ? 'section-expanded' : 'section-collapsed'
+    ];
+
+    if (collapsible && this._getFirstAnswerValue()) {
+      headerClassNames.push('cursor-pointer');
+    }
+
+    const cardBody = (
+      <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
+    );
+
+    return (
+      <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+        <Card className="mb-3">
+          <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
+            {this.renderAnswers()}
+          </Card.Header>
+          {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+        </Card>
+      </Accordion>
+    );
+  }
+
   renderAnswers() {
     const question = this.props.question,
       children = [],
@@ -145,7 +197,7 @@ export default class Question extends React.Component {
         FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
         FormUtils.isSparqlInput(question) ||
         FormUtils.isTurtleInput(question);
-      cls = classNames(Question._getAnswerClass(isTextarea), Question._getQuestionCategoryClass(question));
+      cls = classNames(Question._getAnswerClass(question, isTextarea), Question._getQuestionCategoryClass(question));
       row.push(
         <div key={'row-item-' + i} className={cls} id={question['@id']}>
           <div className="row">
@@ -197,12 +249,18 @@ export default class Question extends React.Component {
     return question[Constants.HAS_ANSWER];
   }
 
-  static _getAnswerClass(isTextarea) {
-    return isTextarea
+  static _getAnswerClass(question, isTextarea) {
+    let columns = isTextarea
       ? 'col-12'
       : Constants.GENERATED_ROW_SIZE === 1
       ? 'col-6'
       : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
+
+    if (JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISE_ON_RELEVANT)) {
+      return [columns, 'emphasise-on-relevant'];
+    }
+
+    return columns;
   }
 
   static _getQuestionCategoryClass(question) {
@@ -259,9 +317,18 @@ export default class Question extends React.Component {
     const subQuestions = this._getSubQuestions();
 
     for (let i = 0; i < subQuestions.length; i++) {
-      children.push(
-        <Question key={'sub-question-' + i} index={i} question={subQuestions[i]} onChange={this.onSubQuestionChange} />
-      );
+
+      let question = subQuestions[i];
+      let component = ComponentRegistry.mapComponent(question, i);
+
+      let element = React.createElement(component, {
+        key: 'sub-question-' + i,
+        question: question,
+        onChange: this.onSubQuestionChange,
+        index: i
+      });
+
+      children.push(element);
     }
     return children;
   }
@@ -285,6 +352,10 @@ export default class Question extends React.Component {
     );
 
     return question[Constants.HAS_SUBQUESTION];
+  }
+
+  _getFirstAnswerValue() {
+    return FormUtils.resolveValue(this._getAnswers()[0]);
   }
 }
 
