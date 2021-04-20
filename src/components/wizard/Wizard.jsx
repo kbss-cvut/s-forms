@@ -7,7 +7,6 @@ import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Utils from '../../util/Utils';
 import Constants from '../../constants/Constants';
-import ComponentRegistry from '../../util/ComponentRegistry';
 
 const findStepByQuestionId = (stepData, id) => {
   const findQuestionTraversal = (question, index) => {
@@ -29,7 +28,7 @@ const findStepByQuestionId = (stepData, id) => {
 
 const Wizard = () => {
   const formQuestionsContext = React.useContext(FormQuestionsContext);
-  const { options } = React.useContext(ConfigurationContext);
+  const { options, mapComponent } = React.useContext(ConfigurationContext);
 
   let startingStep = 0;
   if (options.startingQuestionId) {
@@ -101,13 +100,14 @@ const Wizard = () => {
 
     const step = stepData[currentStep];
 
-    let stepComponent = ComponentRegistry.mapComponent(step, currentStep, WizardStep);
+    let stepComponent = mapComponent(step, WizardStep);
     return React.createElement(stepComponent, {
       options: options,
       key: 'step' + currentStep,
       step: step,
       onNextStep: onNextStep,
       onPreviousStep: onPreviousStep,
+      mapComponent: mapComponent,
       stepIndex: currentStep,
       isFirstStep: currentStep === 0,
       isLastStep: currentStep === formQuestionsContext.getFormQuestionsData().length - 1

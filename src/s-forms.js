@@ -7,7 +7,6 @@ import FormUtils from './util/FormUtils';
 import Question from './components/Question';
 import { ConfigurationContext } from './contexts/ConfigurationContext';
 import Answer from './components/Answer';
-import ComponentRegistry from './util/ComponentRegistry';
 import HelpIcon from './components/HelpIcon';
 import WizardStep from './components/wizard/WizardStep';
 
@@ -22,6 +21,5 @@ export {
   Answer,
   HelpIcon,
   ConfigurationContext,
-  ComponentRegistry,
   WizardStep
 };

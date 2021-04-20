@@ -189,13 +189,6 @@ export class FormUtils {
   static testCondition(condition): boolean;
 }
 
-export class ComponentRegistry {
-
-  static registerComponent(component, mapRule): void;
-
-  static mapComponent(question, index, def): any;
-}
-
 declare const SForms: React.ForwardRefExoticComponent<SFormsProps>;
 
 export default SForms;
