@@ -55,6 +55,14 @@ svg {
   margin-bottom: 0.15rem;
 }
 
+.question-circle {
+  fill: grey;
+}
+
+.text-white .question-circle {
+  fill: white;
+}
+
 .caret-square-up,
 .caret-square-down {
   margin-right: 0.2rem;
