@@ -8,15 +8,15 @@ export default class ComponentRegistry {
     components.push({ component, mapRule });
   }
 
-  static mapComponent(question, index, def) {
+  static mapComponent(question, index, defaultComponent) {
     for (let { component, mapRule } of components) {
       if (mapRule(question, index)) {
         return component;
       }
     }
 
-    if (def !== undefined) {
-      return def;
+    if (defaultComponent !== undefined) {
+      return defaultComponent;
     }
 
     return Question;
