@@ -190,9 +190,8 @@ export default class Question extends React.Component {
     const question = this.props.question,
       children = [],
       answers = this._getAnswers();
-    let row = [],
-      cls,
-      isTextarea;
+    let cls;
+    let isTextarea;
 
     for (let i = 0, len = answers.length; i < len; i++) {
       isTextarea =
@@ -200,37 +199,15 @@ export default class Question extends React.Component {
         FormUtils.isSparqlInput(question) ||
         FormUtils.isTurtleInput(question);
       cls = classNames(
-        Question._getAnswerClass(question, isTextarea),
+        'answer',
         Question._getQuestionCategoryClass(question),
         Question.getEmphasizedOnRelevantClass(question)
       );
-      row.push(
-        <div key={'row-item-' + i} className={cls} id={question['@id']}>
-          <div className="row">
-            <div className="col-10">
-              <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
-            </div>
-            <div>
-              {this._renderUnits()}
-              {this._renderQuestionHelp()}
-              {this._renderPrefixes()}
-            </div>
-          </div>
-        </div>
-      );
-      if (row.length === Constants.GENERATED_ROW_SIZE || isTextarea) {
-        children.push(
-          <div className="row" key={'question-row-' + i}>
-            {row}
-          </div>
-        );
-        row = [];
-      }
-    }
-    if (row.length > 0) {
       children.push(
-        <div className="row" key={'question-row-' + i}>
-          {row}
+        <div key={'row-item-' + i} className={cls} id={question['@id']}>
+          <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
+          {this._renderUnits()}
+          {this._renderPrefixes()}
         </div>
       );
     }

@@ -67,10 +67,9 @@ svg {
 }
 
 .has-unit-label {
-  margin-bottom: 26px;
-  bottom: 0;
   font-weight: bold;
-  position: absolute;
+  margin-top: 12px;
+  margin-left: 12px;
 }
 
 .tooltip-content {
@@ -136,6 +135,17 @@ input:disabled {
 
 .question-category-5 {
   background-color: rgba(0, 230, 222, 0.05);
+}
+
+.form-group {
+  flex-grow: 1;
+  max-width: 500px;
+}
+
+.answer {
+  display: flex;
+  position: relative;
+  align-items: center;
 }
 
 .card-header:first-child {

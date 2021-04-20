@@ -37,7 +37,7 @@ const MaskedInputAnswer = (props) => {
 MaskedInputAnswer.propTypes = {
   question: PropTypes.object.isRequired,
   answer: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.object.isRequired,
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired
