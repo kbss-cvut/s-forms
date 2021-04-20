@@ -12,6 +12,8 @@ import TypeaheadAnswer from './answer/TypeaheadAnswer';
 import Constants from '../constants/Constants';
 import { FormGenContext } from '../contexts/FormGenContext';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
+import HelpIcon from './HelpIcon';
+import JsonLdUtils from 'jsonld-utils';
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
@@ -132,10 +134,28 @@ const Answer = (props) => {
     );
   };
 
+  const _getLabel = (question) => {
+
+    const label = JsonldUtils.getLocalized(question[Constants.RDFS_LABEL], options.intl);
+    const questionHelp = question[Constants.HELP_DESCRIPTION] ? (
+      <HelpIcon
+        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
+        absolutePosition={false}
+      />
+    ) : null;
+
+    return (
+      <div>
+        <span>{label}</span>
+        {questionHelp}
+      </div>
+    );
+  }
+
   const question = props.question;
   const value = FormUtils.resolveValue(props.answer);
 
-  const label = JsonldUtils.getLocalized(question[Constants.RDFS_LABEL], options.intl);
+  const label = _getLabel(question);
   const title = JsonldUtils.getLocalized(question[Constants.RDFS_COMMENT], options.intl);
   let component;
 

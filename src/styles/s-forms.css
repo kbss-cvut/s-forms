@@ -55,6 +55,14 @@ svg {
   margin-bottom: 0.15rem;
 }
 
+.question-circle {
+  fill: grey;
+}
+
+.text-white .question-circle {
+  fill: white;
+}
+
 .caret-square-up,
 .caret-square-down {
   margin-right: 0.2rem;
@@ -67,10 +75,9 @@ svg {
 }
 
 .has-unit-label {
-  margin-bottom: 26px;
-  bottom: 0;
   font-weight: bold;
-  position: absolute;
+  margin-top: 12px;
+  margin-left: 12px;
 }
 
 .tooltip-content {
@@ -138,6 +145,17 @@ input:disabled {
   background-color: rgba(0, 230, 222, 0.05);
 }
 
+.form-group {
+  flex-grow: 1;
+  max-width: 500px;
+}
+
+.answer {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
 .card-header:first-child {
   line-height: 24px;
 }
@@ -146,12 +164,20 @@ input:disabled {
   background-color: #e6f9fb !important;
 }
 
+.card-header.section-background {
+  background-color: #e6f9fb
+}
+
 .card-header .form-group {
   margin-bottom: 0;
 }
 
 .emphasise-on-relevant {
   animation: emphasiseOnRelevant 1.2s ease-in;
+}
+
+.card-header.emphasise-on-relevant {
+  animation: emphasiseOnRelevantSection 1.2s ease-in;
 }
 
 @keyframes emphasiseOnRelevant {
@@ -183,4 +209,32 @@ input:disabled {
   }
 }
 
+@keyframes emphasiseOnRelevantSection {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+    background-color: yellow;
+  }
+
+  25% {
+    display: block;
+    opacity: 0;
+  }
+
+  75% {
+    display: block;
+    opacity: 1;
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+    background-color: #e6f9fb;
+  }
+}
 

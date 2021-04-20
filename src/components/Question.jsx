@@ -15,7 +15,6 @@ import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
-import ComponentRegistry from '../util/ComponentRegistry';
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -113,8 +112,9 @@ export default class Question extends React.Component {
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
       const headerClassName = classNames(
-        FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
-        collapsible ? 'cursor-pointer' : ''
+        FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
+        collapsible ? 'cursor-pointer' : '',
+        Question.getEmphasizedOnRelevantClass(question)
       );
 
       if (FormUtils.isAnswerable(question)) {
@@ -160,8 +160,9 @@ export default class Question extends React.Component {
     const collapsible = this.props.collapsible;
     const categoryClass = Question._getQuestionCategoryClass(question);
     let headerClassNames = [
-      FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
-      this.state.expanded ? 'section-expanded' : 'section-collapsed'
+      FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
+      this.state.expanded ? 'section-expanded' : 'section-collapsed',
+      Question.getEmphasizedOnRelevantClass(question)
     ];
 
     if (collapsible && this._getFirstAnswerValue()) {
@@ -188,43 +189,24 @@ export default class Question extends React.Component {
     const question = this.props.question,
       children = [],
       answers = this._getAnswers();
-    let row = [],
-      cls,
-      isTextarea;
+    let cls;
+    let isTextarea;
 
     for (let i = 0, len = answers.length; i < len; i++) {
       isTextarea =
         FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
         FormUtils.isSparqlInput(question) ||
         FormUtils.isTurtleInput(question);
-      cls = classNames(Question._getAnswerClass(question, isTextarea), Question._getQuestionCategoryClass(question));
-      row.push(
-        <div key={'row-item-' + i} className={cls} id={question['@id']}>
-          <div className="row">
-            <div className="col-10">
-              <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
-            </div>
-            <div>
-              {this._renderUnits()}
-              {this._renderQuestionHelp()}
-              {this._renderPrefixes()}
-            </div>
-          </div>
-        </div>
+      cls = classNames(
+        'answer',
+        Question._getQuestionCategoryClass(question),
+        Question.getEmphasizedOnRelevantClass(question)
       );
-      if (row.length === Constants.GENERATED_ROW_SIZE || isTextarea) {
-        children.push(
-          <div className="row" key={'question-row-' + i}>
-            {row}
-          </div>
-        );
-        row = [];
-      }
-    }
-    if (row.length > 0) {
       children.push(
-        <div className="row" key={'question-row-' + i}>
-          {row}
+        <div key={'row-item-' + i} className={cls} id={question['@id']}>
+          <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
+          {this._renderUnits()}
+          {this._renderPrefixes()}
         </div>
       );
     }
@@ -256,10 +238,6 @@ export default class Question extends React.Component {
       ? 'col-6'
       : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
 
-    if (JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISE_ON_RELEVANT)) {
-      return [columns, 'emphasise-on-relevant'];
-    }
-
     return columns;
   }
 
@@ -270,6 +248,14 @@ export default class Question extends React.Component {
 
   static getEmphasizedClass(question) {
     return FormUtils.isEmphasised(question) ? 'bg-warning' : '';
+  }
+
+  static getEmphasizedOnRelevantClass(question) {
+    if (JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISE_ON_RELEVANT)) {
+      return 'emphasise-on-relevant';
+    }
+
+    return '';
   }
 
   _renderCollapseToggle() {
@@ -319,7 +305,7 @@ export default class Question extends React.Component {
     for (let i = 0; i < subQuestions.length; i++) {
 
       let question = subQuestions[i];
-      let component = ComponentRegistry.mapComponent(question, i);
+      let component = this.context.mapComponent(question, Question);
 
       let element = React.createElement(component, {
         key: 'sub-question-' + i,

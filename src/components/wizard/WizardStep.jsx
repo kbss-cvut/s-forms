@@ -6,7 +6,6 @@ import Constants from '../../constants/Constants';
 import HelpIcon from '../HelpIcon';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
-import ComponentRegistry from '../../util/ComponentRegistry';
 
 
 export default class WizardStep extends React.Component {
@@ -60,7 +59,7 @@ export default class WizardStep extends React.Component {
 
     const categoryClass = Question._getQuestionCategoryClass(this.props.step);
 
-    let questionComponent = ComponentRegistry.mapComponent(this.props.step, 0);
+    let questionComponent = this.props.mapComponent(this.props.step, Question);
     let questionElement = React.createElement(questionComponent, {
       question: this.props.step,
       onChange: this.onChange,
@@ -96,6 +95,7 @@ WizardStep.propTypes = {
   step: PropTypes.object.isRequired,
   onNextStep: PropTypes.func,
   onPreviousStep: PropTypes.func,
+  mapComponent: PropTypes.func,
   stepIndex: PropTypes.number.isRequired,
   isFirstStep: PropTypes.bool,
   isLastStep: PropTypes.bool

@@ -33,7 +33,8 @@ const ConfigurationContextProvider = ({ children, ...props }) => {
     () => ({
       inputComponent: (props.components && props.components.inputComponent) || defaultProps.components.inputComponent,
       componentsOptions: { ...defaultProps.componentsOptions, ...props.componentsOptions },
-      options: { ...defaultProps.options, ...props.options }
+      options: { ...defaultProps.options, ...props.options },
+      mapComponent: props.mapComponent
     }),
     [props]
   );
@@ -44,7 +45,7 @@ const ConfigurationContextProvider = ({ children, ...props }) => {
 ConfigurationContextProvider.propTypes = {
   children: PropTypes.element.isRequired,
   components: PropTypes.object,
-  componentsOptions: PropTypes.object,
+  mapComponent: PropTypes.func,
   options: PropTypes.object
 };
 

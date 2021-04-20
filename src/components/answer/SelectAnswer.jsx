@@ -55,7 +55,7 @@ SelectAnswer.contextType = ConfigurationContext;
 
 SelectAnswer.propTypes = {
   question: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.object.isRequired,
   title: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired

@@ -94,7 +94,7 @@ export default class DefaultInput extends React.Component {
 
 DefaultInput.propTypes = {
   type: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.object,
   value: PropTypes.any,
   onChange: PropTypes.func,
   help: PropTypes.string,

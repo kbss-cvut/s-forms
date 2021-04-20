@@ -34,15 +34,37 @@ const SForms = forwardRef((props, ref) => {
     return props.loader || <Card className="p-3 font-italic">Loading SForms...</Card>;
   }
 
+  const _getComponentMappingFunction = (components) => {
+
+    return (question, defaultComponent) => {
+
+      if (!components) {
+        return defaultComponent;
+      }
+
+      for (let { component, mapRule } of components) {
+        if (mapRule(question)) {
+          return component;
+        }
+      }
+
+      return defaultComponent;
+    };
+  }
+
+  const _mapComponent = _getComponentMappingFunction(props.componentMapRules);
+
+
   return (
     <ConfigurationContextProvider
       components={props.components}
       componentsOptions={props.componentsOptions}
+      mapComponent={_mapComponent}
       options={props.options}
     >
       <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
         <FormQuestionsProvider data={form} formQuestions={formProperties.formQuestions} isFormValid={props.isFormValid}>
-          <FormManager ref={ref} modalView={props.options && props.options.modalView} />
+          <FormManager ref={ref} modalView={props.options && props.options.modalView} mapComponent={_mapComponent} />
         </FormQuestionsProvider>
       </FormGenContextProvider>
     </ConfigurationContextProvider>
@@ -52,6 +74,7 @@ const SForms = forwardRef((props, ref) => {
 SForms.propTypes = {
   form: PropTypes.object.isRequired,
   options: PropTypes.object.isRequired,
+  componentMapRules: PropTypes.array,
   components: PropTypes.object,
   componentsOptions: PropTypes.object,
   fetchTypeAheadValues: PropTypes.func,

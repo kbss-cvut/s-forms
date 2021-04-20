@@ -35,7 +35,7 @@ const CheckboxAnswer = (props) => {
 
 CheckboxAnswer.propTypes = {
   question: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.object.isRequired,
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onChange: PropTypes.func.isRequired
