@@ -146,12 +146,20 @@ input:disabled {
   background-color: #e6f9fb !important;
 }
 
+.card-header.section-background {
+  background-color: #e6f9fb
+}
+
 .card-header .form-group {
   margin-bottom: 0;
 }
 
 .emphasise-on-relevant {
   animation: emphasiseOnRelevant 1.2s ease-in;
+}
+
+.card-header.emphasise-on-relevant {
+  animation: emphasiseOnRelevantSection 1.2s ease-in;
 }
 
 @keyframes emphasiseOnRelevant {
@@ -183,4 +191,32 @@ input:disabled {
   }
 }
 
+@keyframes emphasiseOnRelevantSection {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+    background-color: yellow;
+  }
+
+  25% {
+    display: block;
+    opacity: 0;
+  }
+
+  75% {
+    display: block;
+    opacity: 1;
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+    background-color: #e6f9fb;
+  }
+}
 

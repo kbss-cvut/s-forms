@@ -113,8 +113,9 @@ export default class Question extends React.Component {
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
       const headerClassName = classNames(
-        FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
-        collapsible ? 'cursor-pointer' : ''
+        FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
+        collapsible ? 'cursor-pointer' : '',
+        Question.getEmphasizedOnRelevantClass(question)
       );
 
       if (FormUtils.isAnswerable(question)) {
@@ -160,8 +161,9 @@ export default class Question extends React.Component {
     const collapsible = this.props.collapsible;
     const categoryClass = Question._getQuestionCategoryClass(question);
     let headerClassNames = [
-      FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'bg-info',
-      this.state.expanded ? 'section-expanded' : 'section-collapsed'
+      FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
+      this.state.expanded ? 'section-expanded' : 'section-collapsed',
+      Question.getEmphasizedOnRelevantClass(question)
     ];
 
     if (collapsible && this._getFirstAnswerValue()) {
@@ -197,7 +199,11 @@ export default class Question extends React.Component {
         FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
         FormUtils.isSparqlInput(question) ||
         FormUtils.isTurtleInput(question);
-      cls = classNames(Question._getAnswerClass(question, isTextarea), Question._getQuestionCategoryClass(question));
+      cls = classNames(
+        Question._getAnswerClass(question, isTextarea),
+        Question._getQuestionCategoryClass(question),
+        Question.getEmphasizedOnRelevantClass(question)
+      );
       row.push(
         <div key={'row-item-' + i} className={cls} id={question['@id']}>
           <div className="row">
@@ -256,10 +262,6 @@ export default class Question extends React.Component {
       ? 'col-6'
       : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
 
-    if (JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISE_ON_RELEVANT)) {
-      return [columns, 'emphasise-on-relevant'];
-    }
-
     return columns;
   }
 
@@ -270,6 +272,14 @@ export default class Question extends React.Component {
 
   static getEmphasizedClass(question) {
     return FormUtils.isEmphasised(question) ? 'bg-warning' : '';
+  }
+
+  static getEmphasizedOnRelevantClass(question) {
+    if (JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISE_ON_RELEVANT)) {
+      return 'emphasise-on-relevant';
+    }
+
+    return '';
   }
 
   _renderCollapseToggle() {
