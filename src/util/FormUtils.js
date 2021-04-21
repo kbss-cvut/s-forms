@@ -235,7 +235,7 @@ export default class FormUtils {
           return true;
         }
         if (!question.hasOwnProperty(Constants.HAS_ANSWER)) {
-          console.warn('Question does not have answer value defined.');
+          //console.warn('Question does not have answer value defined.');
           return false;
         }
         const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
