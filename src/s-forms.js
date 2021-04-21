@@ -6,6 +6,7 @@ import JsonLdObjectMap from './util/JsonLdObjectMap';
 import FormUtils from './util/FormUtils';
 import Question from './components/Question';
 import { ConfigurationContext } from './contexts/ConfigurationContext';
+import { FormQuestionsContext } from './contexts/FormQuestionsContext';
 import Answer from './components/Answer';
 import HelpIcon from './components/HelpIcon';
 import WizardStep from './components/wizard/WizardStep';
@@ -21,5 +22,6 @@ export {
   Answer,
   HelpIcon,
   ConfigurationContext,
+  FormQuestionsContext,
   WizardStep
 };

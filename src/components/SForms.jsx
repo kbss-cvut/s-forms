@@ -34,7 +34,7 @@ const SForms = forwardRef((props, ref) => {
     return props.loader || <Card className="p-3 font-italic">Loading SForms...</Card>;
   }
 
-  const _getComponentMappingFunction = (components) => {
+  const _getComponentMappingFunction = (components, form) => {
 
     return (question, defaultComponent) => {
 
@@ -43,7 +43,7 @@ const SForms = forwardRef((props, ref) => {
       }
 
       for (let { component, mapRule } of components) {
-        if (mapRule(question)) {
+        if (mapRule(question, form)) {
           return component;
         }
       }
@@ -52,7 +52,7 @@ const SForms = forwardRef((props, ref) => {
     };
   }
 
-  const _mapComponent = _getComponentMappingFunction(props.componentMapRules);
+  const _mapComponent = _getComponentMappingFunction(props.componentMapRules, form);
 
 
   return (
