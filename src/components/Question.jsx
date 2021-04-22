@@ -33,6 +33,19 @@ export default class Question extends React.Component {
     this.setState({ validator: ValidatorFactory.createValidator(this.props.question, this.context.options.intl) });
   }
 
+  componentDidUpdate() {
+    const question = this.props.question;
+
+    if (FormUtils.isSection(question) && FormUtils.isAnswerable(question)) {
+      const answerValue = this._getFirstAnswerValue();
+      if (this.state.expanded && !answerValue) {
+        // close expanded answerable section that does not have positive answer
+        this.setState({ expanded: false });
+      }
+
+    }
+  }
+
   onAnswerChange = (answerIndex, change) => {
 
     // is answerable section
