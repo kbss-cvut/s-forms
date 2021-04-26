@@ -145,15 +145,15 @@ input:disabled {
   background-color: rgba(0, 230, 222, 0.05);
 }
 
-.form-group {
-  flex-grow: 1;
-  max-width: 500px;
-}
-
 .answer {
   display: flex;
   position: relative;
   align-items: center;
+}
+
+.answer > .answer-content {
+  flex-grow: 1;
+  max-width: 500px;
 }
 
 .card-header:first-child {
