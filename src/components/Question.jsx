@@ -37,13 +37,9 @@ export default class Question extends React.Component {
     const question = this.props.question;
 
     if (FormUtils.isSection(question) && FormUtils.isAnswerable(question)) {
-      // answerable section
-
       const answerValue = this._getFirstAnswerValue();
       if (this.state.expanded && !answerValue) {
-        // section is expanded but answer is not positive
-        // close section
-        // console.warn('expanded state does not match answerable section value');
+        // close expanded answerable section that does not have positive answer
         this.setState({ expanded: false });
       }
 
