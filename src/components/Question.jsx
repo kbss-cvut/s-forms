@@ -217,7 +217,9 @@ export default class Question extends React.Component {
       );
       children.push(
         <div key={'row-item-' + i} className={cls} id={question['@id']}>
-          <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
+          <div className="answer-content" style={this._getAnswerWidthStyle()}>
+            <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
+          </div>
           {this._renderUnits()}
           {this._renderPrefixes()}
         </div>
@@ -242,6 +244,19 @@ export default class Question extends React.Component {
       }
     }
     return question[Constants.HAS_ANSWER];
+  }
+
+  _getAnswerWidthStyle() {
+    const length = Number(this.props.question[Constants.HAS_INITIAL_INPUT_LENGTH]);
+    if (!length) {
+      return {};
+    }
+
+    return {
+      flexGrow: 0,
+      maxWidth: 'none',
+      width: `calc(${length}ch + 1.5rem + 2px)`
+    }
   }
 
   static _getAnswerClass(question, isTextarea) {
