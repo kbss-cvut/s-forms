@@ -247,7 +247,7 @@ export default class Question extends React.Component {
   }
 
   _getAnswerWidthStyle() {
-    const length = Number(this.props.question[Constants.LAYOUT_INITIAL_INPUT_LENGTH]);
+    const length = Number(this.props.question[Constants.HAS_INITIAL_INPUT_LENGTH]);
     if (!length) {
       return {};
     }
