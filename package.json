@@ -35,6 +35,7 @@
     "url": "https://kbss.felk.cvut.cz/git/s-forms.git"
   },
   "dependencies": {
+    "@triply/yasgui": "^4.2.14",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",
