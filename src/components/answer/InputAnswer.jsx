@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import YASQE from 'yasgui-yasqe';
+import YATE from "yasgui-yasqe";
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 const NUMERIC_DATATYPES = [
