@@ -6,6 +6,7 @@ import FormUtils from '../../util/FormUtils';
 import YASQE from 'yasgui-yasqe';
 import YATE from "yasgui-yasqe";
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
+import "@triply/yasgui/build/yasgui.min.css";
 
 const NUMERIC_DATATYPES = [
   Constants.XSD.INT,
