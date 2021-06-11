@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { QuestionCircle } from '../styles/icons';
 
-// TODO:fix issue https://github.com/kbss-cvut/s-forms/issues/28
 const HelpIcon = (props) => {
   const tooltip = (
     <Tooltip id="help-tooltip" className="tooltip-content">
