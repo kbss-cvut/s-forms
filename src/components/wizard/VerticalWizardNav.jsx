@@ -14,7 +14,7 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
       <ListGroup>
         {steps.map((step, index) => (
           <ListGroupItem
-            disabled={!FormUtils.isRelevant(step)}
+            hidden={!FormUtils.isRelevant(step)}
             key={'nav' + index}
             onClick={() => onNavigate(index)}
             id={'wizard-nav-' + index}
