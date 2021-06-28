@@ -4,12 +4,55 @@ import PropTypes from 'prop-types';
 import { FormText, FormControl, FormGroup, Form } from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      cursorPositionOnFocus: 0
+    };
+  }
+
   focus() {
     ReactDOM.findDOMNode(this.input).focus();
   }
 
   getInputDOMNode() {
     return ReactDOM.findDOMNode(this.input);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.fieldDidExpand(prevProps);
+    this.fieldDidShrink(prevProps);
+  }
+
+  fieldDidExpand(prevProps) {
+    const cursorPositionOnFocus = this.state.cursorPositionOnFocus;
+    if (this.props.type === "textarea" && prevProps.type !== "textarea") {
+      this.focus();
+      this.getInputDOMNode().setSelectionRange(
+          cursorPositionOnFocus,
+          cursorPositionOnFocus
+      );
+    }
+  }
+
+  fieldDidShrink(prevProps) {
+    const cursorPositionOnFocus = this.state.cursorPositionOnFocus;
+    if (this.props.type === "text" && prevProps.type !== "text") {
+      this.focus();
+      this.getInputDOMNode().setSelectionRange(
+          cursorPositionOnFocus,
+          cursorPositionOnFocus
+      );
+    }
+  }
+
+  sendCursorToCorrectPosition(e) {
+    this.props.onChange(e)
+    this.setState({
+      inputLength: e.target.value.length,
+      cursorPositionOnFocus: e.target.selectionStart
+    })
   }
 
   render() {
@@ -64,14 +107,19 @@ export default class DefaultInput extends React.Component {
 
   _renderTextArea() {
     // TODO validation
-    return (
-      <FormGroup size="small">
-        {this._renderLabel()}
-        <FormControl as="textarea" style={{ height: 'auto' }} ref={(c) => (this.input = c)} {...this.props} />
-        {this.props.validation && <FormControl.Feedback />}
-        {this._renderHelp()}
-      </FormGroup>
-    );
+    return(
+        <FormGroup size="small">
+          {this._renderLabel()}
+          <FormControl ref={(c) => (this.input = c)}
+                       as="textarea"
+                       {...this.props}
+                       onChange={e => this.sendCursorToCorrectPosition(e)}
+
+          />
+          {this.props.validation && <FormControl.Feedback />}
+          {this._renderHelp()}
+        </FormGroup>
+    )
   }
 
   _renderHelp() {
@@ -84,7 +132,11 @@ export default class DefaultInput extends React.Component {
     return (
       <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl ref={(c) => (this.input = c)} as="input" {...this.props} />
+        <FormControl ref={(c) => (this.input = c)}
+                     as="input"
+                     {...this.props}
+                     onChange={e => this.sendCursorToCorrectPosition(e)}
+        />
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
       </FormGroup>
