@@ -67,7 +67,7 @@ export default class DefaultInput extends React.Component {
     return (
       <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl as="textarea" style={{ height: 'auto' }} ref={(c) => (this.input = c)} {...this.props} />
+        <FormControl as="textarea" style={{ height: 'auto' }} ref={(c) => (this.input = c)} {...this.props} autoFocus/>
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
       </FormGroup>
@@ -84,7 +84,7 @@ export default class DefaultInput extends React.Component {
     return (
       <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl ref={(c) => (this.input = c)} as="input" {...this.props} />
+        <FormControl ref={(c) => (this.input = c)} as="input" {...this.props} autoFocus/>
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
       </FormGroup>
