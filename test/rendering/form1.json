@@ -583,7 +583,8 @@
          ],
          "@id" : "category-1-wizard-question-65",
          "@type" : "doc:question",
-         "has_related_question" : "category-2-1200"
+         "has_related_question" : "category-2-1200",
+	 "is-relevant-if" : "ex:show-layout-options-for-wizard-steps-condition"
       },
       {
          "label" : "Category 2",
@@ -1811,6 +1812,14 @@
          ]
       },
       {
+         "@id" : "ex:show-layout-options-for-wizard-steps-condition",
+         "@type" : "form:condition",
+         "has-tested-question" : "ex:show-layout-options-for-wizard-steps",
+         "accepts-answer-value" : [
+		true
+         ]
+      },
+      {
          "label" : "Show layout options at top-level of form",
          "@type" : "doc:question",
          "@id" : "ex:show-layout-options-for-wizard-steps",
@@ -2604,7 +2613,8 @@
          ],
          "@id" : "layout-options-emphasised-8480",
          "@type" : "doc:question",
-         "has_related_question" : "a-question-1665"
+         "has_related_question" : "a-question-1665",
+	 "is-relevant-if" : "ex:show-layout-options-for-wizard-steps-condition"
       },
       {
          "@id" : "multiplicity-in-accept-states-9052",
