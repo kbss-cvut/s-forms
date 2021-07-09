@@ -81,7 +81,7 @@ export default class JsonLdFramingUtils {
         childArray = parentNode[prop];
 
         for (let i = 0; i < childArray.length; i++) {
-          childId = childArray[i]['@id'];
+          childId = this._getId(childArray[i]);
           child = id2ObjectMap[childId];
 
           if (child !== undefined) {
@@ -94,6 +94,13 @@ export default class JsonLdFramingUtils {
         }
       }
     });
+  }
+
+  static _getId(jsonObject) {
+      if (typeof jsonObject === 'string') {
+        return jsonObject;
+      }
+      return jsonObject['@id']
   }
 
   static compressStructure = (rootNode) => {
