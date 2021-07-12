@@ -67,7 +67,12 @@ export default class DefaultInput extends React.Component {
     return (
       <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl as="textarea" style={{ height: 'auto' }} ref={(c) => (this.input = c)} {...this.props} autoFocus/>
+        <FormControl as="textarea"
+                     style={{ height: 'auto' }}
+                     ref={(c) => (this.input = c)}
+                     {...this.props}
+                     autoFocus
+                     onFocus={e => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}/>
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
       </FormGroup>
@@ -84,7 +89,11 @@ export default class DefaultInput extends React.Component {
     return (
       <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl ref={(c) => (this.input = c)} as="input" {...this.props} autoFocus/>
+        <FormControl ref={(c) => (this.input = c)}
+                     as="input"
+                     {...this.props}
+                     autoFocus
+                     onFocus={e => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}/>
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
       </FormGroup>
