@@ -14,6 +14,7 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
       <ListGroup>
         {steps.map((step, index) => (
           <ListGroupItem
+              // TODO: if debug mode true then set hidden as false
             hidden={!FormUtils.isRelevant(step)}
             key={'nav' + index}
             onClick={() => onNavigate(index)}
