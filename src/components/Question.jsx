@@ -39,7 +39,9 @@ export default class Question extends React.Component {
     if (FormUtils.isSection(question) && FormUtils.isAnswerable(question)) {
       const answerValue = this._getFirstAnswerValue();
 
+      // Irrelevant questions are expanded if debugMode is on
       if (this.context.options.debugMode) {
+        return null;
 
       } else if (this.state.expanded && !answerValue) {
         // close expanded answerable section that does not have positive answer
@@ -189,16 +191,30 @@ export default class Question extends React.Component {
       <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
     );
 
-    return (
-      <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
-        <Card className="mb-3">
-          <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
-            {this.renderAnswers()}
-          </Card.Header>
-          {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
-        </Card>
-      </Accordion>
-    );
+    if (this.context.options.debugMode) {
+      return (
+          <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+            <Card className="mb-3">
+              <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
+                {this.renderAnswers()}
+              </Card.Header>
+              {collapsible ? <Accordion.Collapse className="debugMode" eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+            </Card>
+          </Accordion>
+      );
+    } else {
+      return (
+          <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+            <Card className="mb-3">
+              <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
+                {this.renderAnswers()}
+              </Card.Header>
+              {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+            </Card>
+          </Accordion>
+      );
+    }
+
   }
 
   renderAnswers() {

@@ -28,9 +28,24 @@ class TestApp extends React.Component {
     super(props);
     this.state = {
       isFormValid: false,
-      selectedForm: form1
+      selectedForm: form1,
+      // debugMode: false
     };
     this.refForm = React.createRef();
+/*    this.keyMap = {
+      debugKey:"alt+d"
+    };
+
+    this.handlers = {
+      debugKey: (e) => {
+        console.log("Debug Mode Activated")
+        this.setState(prevState => {
+          return {
+            debugMode: !prevState.debugMode
+          }
+        })
+      }
+    }*/
   }
 
   fetchTypeAheadValues = (query) => {
@@ -60,30 +75,32 @@ class TestApp extends React.Component {
       horizontalWizardNav: false,
       wizardStepButtons: true,
       enableForwardSkip: true,
-      ...getP('startingQuestionId', 'aircraft-name-9553'),
+      ...getP('startingQuestionId', 'category-2-1200'),
       startingStep: 1,
       debugMode: true
     };
 
     return (
-      <div className="p-4">
-        <SForms
-          ref={this.refForm}
-          form={this.state.selectedForm}
-          options={options}
-          fetchTypeAheadValues={this.fetchTypeAheadValues}
-          isFormValid={(isFormValid) => this.setState({ isFormValid })}
-        />
-        <button
-          disabled={!this.state.isFormValid}
-          style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
-          onClick={() => {
-            this.setState((prevState) => ({selectedForm: prevState.selectedForm === form2 ? form1 : form2}));
-          }}
-        >
-          Switch form
-        </button>
-      </div>
+        <div className="p-4">
+{/*          <HotKeys keyMap={this.keyMap} handlers={this.handlers}>*/}
+            <SForms
+                ref={this.refForm}
+                form={this.state.selectedForm}
+                options={options}
+                fetchTypeAheadValues={this.fetchTypeAheadValues}
+                isFormValid={(isFormValid) => this.setState({ isFormValid })}
+            />
+            <button
+                disabled={!this.state.isFormValid}
+                style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
+                onClick={() => {
+                  this.setState((prevState) => ({selectedForm: prevState.selectedForm === form2 ? form1 : form2}));
+                }}
+            >
+              Switch form
+            </button>
+{/*          </HotKeys>*/}
+        </div>
     );
   }
 }

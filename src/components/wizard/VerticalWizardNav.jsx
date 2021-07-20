@@ -21,7 +21,7 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
             action={true}
             active={index === currentStep ? 'active' : ''}
             variant={'default'}
-            className={Question.getEmphasizedClass(step)}
+            className={options.debugMode && !FormUtils.isRelevant(step) ? "debugMode" : Question.getEmphasizedClass(step)}
           >
             {JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], options.intl)}
           </ListGroupItem>
