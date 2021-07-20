@@ -180,6 +180,10 @@ input:disabled {
   animation: emphasiseOnRelevantSection 1.2s ease-in;
 }
 
+.debugMode {
+  opacity: 50%;
+}
+
 @keyframes emphasiseOnRelevant {
   0% {
     display: none;

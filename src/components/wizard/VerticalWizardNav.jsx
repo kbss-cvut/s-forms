@@ -14,14 +14,14 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
       <ListGroup>
         {steps.map((step, index) => (
           <ListGroupItem
-            hidden={!FormUtils.isRelevant(step)}
+            hidden={options.debugMode ? false : !FormUtils.isRelevant(step)}
             key={'nav' + index}
             onClick={() => onNavigate(index)}
             id={'wizard-nav-' + index}
             action={true}
             active={index === currentStep ? 'active' : ''}
             variant={'default'}
-            className={Question.getEmphasizedClass(step)}
+            className={options.debugMode && !FormUtils.isRelevant(step) ? "debugMode" : Question.getEmphasizedClass(step)}
           >
             {JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], options.intl)}
           </ListGroupItem>
