@@ -39,8 +39,9 @@ export default class Question extends React.Component {
     if (FormUtils.isSection(question) && FormUtils.isAnswerable(question)) {
       const answerValue = this._getFirstAnswerValue();
 
-      // TODO: if debug mode true then remove this section
-      if (this.state.expanded && !answerValue) {
+      if (this.context.options.debugMode) {
+
+      } else if (this.state.expanded && !answerValue) {
         // close expanded answerable section that does not have positive answer
         this.setState({ expanded: false });
       }

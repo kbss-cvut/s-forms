@@ -60,8 +60,9 @@ class TestApp extends React.Component {
       horizontalWizardNav: false,
       wizardStepButtons: true,
       enableForwardSkip: true,
-      ...getP('startingQuestionId', 'layout-options-65'),
-      startingStep: 1
+      ...getP('startingQuestionId', 'aircraft-name-9553'),
+      startingStep: 1,
+      debugMode: true
     };
 
     return (
