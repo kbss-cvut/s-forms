@@ -5,8 +5,9 @@ import JsonLdUtils from 'jsonld-utils';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import FormUtils from '../../util/FormUtils';
 import Question from "../Question";
+import EnhancedHotKeysComponent from "../HOC/EnhancedHotKeysComponent";
 
-const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
+const VerticalWizardNav = ({ steps, onNavigate, currentStep, debugMode }) => {
   const { options } = useContext(ConfigurationContext);
 
   return (
@@ -14,14 +15,14 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
       <ListGroup>
         {steps.map((step, index) => (
           <ListGroupItem
-            hidden={options.debugMode ? false : !FormUtils.isRelevant(step)}
+            hidden={debugMode ? false : !FormUtils.isRelevant(step)}
             key={'nav' + index}
             onClick={() => onNavigate(index)}
             id={'wizard-nav-' + index}
             action={true}
             active={index === currentStep ? 'active' : ''}
             variant={'default'}
-            className={options.debugMode && !FormUtils.isRelevant(step) ? "debugMode" : Question.getEmphasizedClass(step)}
+            className={debugMode && !FormUtils.isRelevant(step) ? "debugMode" : Question.getEmphasizedClass(step)}
           >
             {JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], options.intl)}
           </ListGroupItem>
@@ -37,4 +38,4 @@ VerticalWizardNav.propTypes = {
   onNavigate: PropTypes.func.isRequired
 };
 
-export default VerticalWizardNav;
+export default EnhancedHotKeysComponent(VerticalWizardNav);

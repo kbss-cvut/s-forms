@@ -5,7 +5,6 @@ import SForms from '../../src/components/SForms';
 import '../../src/styles/s-forms.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import queryString from 'query-string';
-
 const form1 = require('./form1.json'); // form with wizard steps
 const form2 = require('./form2.json'); // form without wizard steps (proudly assembled in Semantic Form Web Editor)
 
@@ -29,23 +28,8 @@ class TestApp extends React.Component {
     this.state = {
       isFormValid: false,
       selectedForm: form1,
-      // debugMode: false
     };
     this.refForm = React.createRef();
-/*    this.keyMap = {
-      debugKey:"alt+d"
-    };
-
-    this.handlers = {
-      debugKey: (e) => {
-        console.log("Debug Mode Activated")
-        this.setState(prevState => {
-          return {
-            debugMode: !prevState.debugMode
-          }
-        })
-      }
-    }*/
   }
 
   fetchTypeAheadValues = (query) => {
@@ -77,12 +61,10 @@ class TestApp extends React.Component {
       enableForwardSkip: true,
       ...getP('startingQuestionId', 'category-2-1200'),
       startingStep: 1,
-      debugMode: true
     };
 
     return (
         <div className="p-4">
-{/*          <HotKeys keyMap={this.keyMap} handlers={this.handlers}>*/}
             <SForms
                 ref={this.refForm}
                 form={this.state.selectedForm}
@@ -99,7 +81,6 @@ class TestApp extends React.Component {
             >
               Switch form
             </button>
-{/*          </HotKeys>*/}
         </div>
     );
   }
