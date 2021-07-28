@@ -761,6 +761,173 @@
          }
       },
       {
+               "@type" : "doc:question",
+               "has_related_question" : [
+                  "intrinsic-aspects"
+               ],
+               "description" : {
+                  "@value" : "This section demonstrates different form components that can be used to collect data from patterns within Unified Foundation Ontology (UFO) models.",
+                  "@language" : "en"
+               },
+               "@id" : "ufo-based-patterns",
+               "has-layout-class" : [
+                  "section",
+                  "wizard-step"
+               ],
+               "label" : {
+                  "@value" : "UFO-based patterns",
+                  "@language" : "en"
+               },
+               "form:has-preceding-question" : {
+                  "@id" : "layout-options-65"
+               }
+      },
+      {
+         "@type" : "doc:question",
+         "has_related_question" : [
+		"simple-intrinsic-aspects"
+         ],
+         "description" : {
+            "@value" : "This section demonstrates different form components that can be used to collect data about UFO intrinsic aspects.",
+            "@language" : "en"
+         },
+         "@id" : "intrinsic-aspects",
+         "has-layout-class" : [
+            "section"
+         ],
+         "label" : {
+            "@value" : "Intrinsic aspects",
+            "@language" : "en"
+         },
+         "label" : {
+            "@value" : "Vlastnosti",
+            "@language" : "cs"
+         }
+      },
+      {
+         "@type" : "doc:question",
+         "has_related_question" : [
+         	"simple-intrinsic-aspects-boolean"
+         ],
+         "description" : {
+            "@value" : "This section demonstrates different form components that can be used to collect data about UFO intrinsic aspects, i.e. those that require only one question to answer.",
+            "@language" : "en"
+         },
+         "@id" : "simple-intrinsic-aspects",
+         "has-layout-class" : [
+            "section"
+         ],
+         "label" : {
+            "@value" : "Simple aspects",
+            "@language" : "en"
+         },
+         "label" : {
+            "@value" : "Jednoduché vlastnosti",
+            "@language" : "cs"
+         }
+      },
+      {
+         "@type" : "doc:question",
+         "has_related_question" : [
+         	"smoking-allowed-variant-1",
+         	"smoking-allowed-variant-2"
+         ],
+         "@id" : "simple-intrinsic-aspects-boolean",
+         "has-layout-class" : [
+            "section"
+         ],
+         "label" : {
+            "@value" : "With boolean answer",
+            "@language" : "en"
+         },
+         "label" : {
+            "@value" : "Booleovská odpověď",
+            "@language" : "en"
+         }
+      },
+      {
+         "@type" : "doc:question",
+         "has_related_question" : [
+         ],
+         "@id" : "smoking-allowed-variant-1",
+         "description" : {
+            "@value" : "Is smoking allowed?",
+            "@language" : "en"
+         },
+         "has-layout-class" : [
+            "checkbox"
+         ],
+         "label" : {
+            "@value" : "Smoking allowed",
+            "@language" : "en"
+         },
+         "label" : {
+            "@value" : "Kouření povoleno",
+            "@language" : "cs"
+         }
+      },
+      {
+         "@type" : "doc:question",
+         "has_related_question" : [
+         ],
+         "@id" : "smoking-allowed-variant-2",
+         "description" : {
+            "@value" : "Is smoking allowed?",
+            "@language" : "en"
+         },
+         "label" : {
+            "@value" : "Kouření povoleno",
+            "@language" : "cs"
+         },
+         "has-layout-class" : [
+            "type-ahead"
+         ],
+         "has-possible-value" : [
+            {
+               "@id" : "ex:yes"
+            },
+            {
+               "@id" : "ex:no"
+            },
+            {
+               "@id" : "ex:dont-know"
+            }
+         ]
+      },
+      {
+         "label" : {
+            "@language" : "en",
+            "@value" : "Yes"
+         },
+         "label" : {
+            "@language" : "cs",
+            "@value" : "Ano"
+         },
+         "@id" : "ex:yes"
+      },
+      {
+         "label" : {
+            "@language" : "en",
+            "@value" : "No"
+         },
+         "label" : {
+            "@language" : "cs",
+            "@value" : "Ne"
+         },
+         "@id" : "ex:no"
+      },
+      {
+         "label" : {
+            "@language" : "en",
+            "@value" : "Don't know"
+         },
+         "label" : {
+            "@language" : "cs",
+            "@value" : "Nevím"
+         },
+         "@id" : "ex:dont-know"
+      },
+      {
          "has_related_question" : [
             "http://vfn.cz/ontologies/fss-form/diagnosis-q",
             "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence-q",
@@ -784,7 +951,7 @@
             "@language" : "en"
          },
          "form:has-preceding-question" : {
-            "@id" : "conditional-logic-6448"
+            "@id" : "ufo-based-patterns"
          }
       },
       {
@@ -2093,6 +2260,7 @@
          "has_related_question" : [
             "layout-options-65",
             "conditional-logic-6448",
+            "ufo-based-patterns",
             "domain-specific-9087",
             "http://vfn.cz/ontologies/fss-form/new-q",
             "category-1-wizard-question-65",
