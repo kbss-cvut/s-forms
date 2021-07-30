@@ -28,24 +28,9 @@ class TestApp extends React.Component {
     super(props);
     this.state = {
       isFormValid: false,
-      selectedForm: form1,
-      // debugMode: false
+      selectedForm: form1
     };
     this.refForm = React.createRef();
-/*    this.keyMap = {
-      debugKey:"alt+d"
-    };
-
-    this.handlers = {
-      debugKey: (e) => {
-        console.log("Debug Mode Activated")
-        this.setState(prevState => {
-          return {
-            debugMode: !prevState.debugMode
-          }
-        })
-      }
-    }*/
   }
 
   fetchTypeAheadValues = (query) => {
@@ -82,7 +67,6 @@ class TestApp extends React.Component {
 
     return (
         <div className="p-4">
-{/*          <HotKeys keyMap={this.keyMap} handlers={this.handlers}>*/}
             <SForms
                 ref={this.refForm}
                 form={this.state.selectedForm}
@@ -99,7 +83,6 @@ class TestApp extends React.Component {
             >
               Switch form
             </button>
-{/*          </HotKeys>*/}
         </div>
     );
   }

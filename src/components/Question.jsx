@@ -97,26 +97,40 @@ export default class Question extends React.Component {
 
   render() {
     const question = this.props.question;
+    const renderQuestion = this.renderQuestion(question);
+
     if (FormUtils.isHidden(question)) {
       return null;
+    }
+    if (!FormUtils.isRelevant(question) && this.context.options.debugMode) {
+      return (
+          <div className="debugMode">
+            {renderQuestion}
+          </div>
+      );
     }
     if (!FormUtils.isRelevant(question)) {
       return null;
     }
+
+    else return renderQuestion
+  }
+
+  renderQuestion(question) {
     if (FormUtils.isAnswerable(question) && !FormUtils.isSection(question)) {
       if (PRETTY_ANSWERABLE_LAYOUT) {
         return (
-          <div id={question['@id']}>
-            <div className="panel-title answerable-question">{this.renderAnswers()}</div>
-            <div className="answerable-subquestions">{this.renderSubQuestions()}</div>
-          </div>
+            <div id={question['@id']}>
+              <div className="panel-title answerable-question">{this.renderAnswers()}</div>
+              <div className="answerable-subquestions">{this.renderSubQuestions()}</div>
+            </div>
         );
       } else {
         return (
-          <div id={question['@id']}>
-            {this.renderAnswers()}
-            <div className="ml-4 mt-n2">{this.renderSubQuestions()}</div>
-          </div>
+            <div id={question['@id']}>
+              {this.renderAnswers()}
+              <div className="ml-4 mt-n2">{this.renderSubQuestions()}</div>
+            </div>
         );
       }
     }
@@ -130,9 +144,9 @@ export default class Question extends React.Component {
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
       const headerClassName = classNames(
-        FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
-        collapsible ? 'cursor-pointer' : '',
-        Question.getEmphasizedOnRelevantClass(question)
+          FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
+          collapsible ? 'cursor-pointer' : '',
+          Question.getEmphasizedOnRelevantClass(question)
       );
 
       if (FormUtils.isAnswerable(question)) {
@@ -140,23 +154,23 @@ export default class Question extends React.Component {
       }
 
       const cardBody = (
-        <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
+          <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
       );
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
       return (
-        <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
-          <Card className="mb-3">
-            <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
-              <h6 className="d-inline" id={question['@id']}>
-                {collapsible && this._renderCollapseToggle()}
-                {label}
-              </h6>
-              {this._renderQuestionHelp()}
-            </Accordion.Toggle>
-            {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
-          </Card>
-        </Accordion>
+          <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
+            <Card className="mb-3">
+              <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
+                <h6 className="d-inline" id={question['@id']}>
+                  {collapsible && this._renderCollapseToggle()}
+                  {label}
+                </h6>
+                {this._renderQuestionHelp()}
+              </Accordion.Toggle>
+              {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
+            </Card>
+          </Accordion>
       );
     } else {
       return <div>{this._renderQuestionContent()}</div>;
@@ -191,7 +205,7 @@ export default class Question extends React.Component {
       <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
     );
 
-    if (this.context.options.debugMode) {
+    if (this.context.options.debugMode && !FormUtils.hasAnswer(question)) {
       return (
           <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
             <Card className="mb-3">
