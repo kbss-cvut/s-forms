@@ -207,7 +207,7 @@ export default class Question extends React.Component {
 
     if (this.context.options.debugMode && !FormUtils.hasAnswer(question)) {
       return (
-          <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+          <Accordion activeKey={this.state.expanded ? question['@id'] : this.setState({expanded: true})} className="answerable-section">
             <Card className="mb-3">
               <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
                 {this.renderAnswers()}
