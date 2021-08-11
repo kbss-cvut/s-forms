@@ -4,12 +4,40 @@ import PropTypes from 'prop-types';
 import { FormText, FormControl, FormGroup, Form } from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      cursorPositionOnFocus: 0
+    };
+  }
+
   focus() {
     ReactDOM.findDOMNode(this.input).focus();
   }
 
   getInputDOMNode() {
     return ReactDOM.findDOMNode(this.input);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    let cursorPositionOnFocus = this.state.cursorPositionOnFocus
+
+    if (this.props.type === "textarea" && prevProps.type !== "textarea") {
+      this.focus();
+      console.log(cursorPositionOnFocus)
+      this.getInputDOMNode().setSelectionRange(
+          cursorPositionOnFocus,
+          cursorPositionOnFocus
+      );
+    }
+    if (this.props.type === "text" && prevProps.type !== "text") {
+      this.focus();
+      this.getInputDOMNode().setSelectionRange(
+          cursorPositionOnFocus,
+          cursorPositionOnFocus
+      );
+    }
   }
 
   render() {
@@ -64,19 +92,25 @@ export default class DefaultInput extends React.Component {
 
   _renderTextArea() {
     // TODO validation
-    return (
-      <FormGroup size="small">
-        {this._renderLabel()}
-        <FormControl as="textarea"
-                     style={{ height: 'auto' }}
-                     ref={(c) => (this.input = c)}
-                     {...this.props}
-                     autoFocus
-                     onFocus={e => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}/>
-        {this.props.validation && <FormControl.Feedback />}
-        {this._renderHelp()}
-      </FormGroup>
-    );
+    return(
+        <FormGroup size="small">
+          {this._renderLabel()}
+          <FormControl ref={(c) => (this.input = c)}
+                       as="textarea"
+                       {...this.props}
+                       onChange={e => {
+                         this.props.onChange(e)
+                         this.setState({
+                           inputLength: e.target.value.length,
+                           cursorPositionOnFocus: e.target.selectionStart
+                         })
+                       }}
+
+          />
+          {this.props.validation && <FormControl.Feedback />}
+          {this._renderHelp()}
+        </FormGroup>
+    )
   }
 
   _renderHelp() {
@@ -92,8 +126,14 @@ export default class DefaultInput extends React.Component {
         <FormControl ref={(c) => (this.input = c)}
                      as="input"
                      {...this.props}
-                     autoFocus
-                     onFocus={e => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}/>
+                     onChange={e => {
+                       this.props.onChange(e)
+                       this.setState({
+                         inputLength: e.target.value.length,
+                         cursorPositionOnFocus: e.target.selectionStart
+                       })
+                     }}
+        />
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
       </FormGroup>
