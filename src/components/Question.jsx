@@ -15,6 +15,7 @@ import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
+import QuestionCommentIcon from "./QuestionCommentIcon";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -140,18 +141,27 @@ export default class Question extends React.Component {
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
       return (
-        <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
-          <Card className="mb-3">
-            <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
-              <h6 className="d-inline" id={question['@id']}>
-                {collapsible && this._renderCollapseToggle()}
-                {label}
-              </h6>
-              {this._renderQuestionHelp()}
-            </Accordion.Toggle>
-            {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
-          </Card>
-        </Accordion>
+          <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
+            <Card className="mb-3">
+              <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
+                <div className="row">
+                  <div className="col-sm-auto">
+                    <h6 className="d-inline" id={question['@id']}>
+                      {collapsible && this._renderCollapseToggle()}
+                      {label}
+                    </h6>
+                  </div>
+                  <div className="col-sm-auto">
+                    {this._renderQuestionHelp()}
+                  </div>
+                  <div className="col-sm-1">
+                    {this._renderQuestionComment()}
+                  </div>
+                </div>
+              </Accordion.Toggle>
+              {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
+            </Card>
+          </Accordion>
       );
     } else {
       return <div>{this._renderQuestionContent()}</div>;
@@ -310,6 +320,10 @@ export default class Question extends React.Component {
         iconClassContainer={helpClass}
       />
     ) : null;
+  }
+
+  _renderQuestionComment() {
+    return <QuestionCommentIcon />
   }
 
   _renderPrefixes() {

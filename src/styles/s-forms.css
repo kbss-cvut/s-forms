@@ -47,15 +47,20 @@ svg {
   fill: currentColor;
 }
 
+.question-comment {
+  margin-left: 0.5vw;
+}
+
 .caret-square-up,
 .caret-square-down,
 .question-circle,
+.question-comment,
 .info-circle {
   height: 1rem;
   margin-bottom: 0.15rem;
 }
 
-.question-circle {
+.question-circle, .question-comment {
   fill: grey;
 }
 
