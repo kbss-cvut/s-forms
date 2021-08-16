@@ -61,7 +61,11 @@ class TestApp extends React.Component {
       wizardStepButtons: true,
       enableForwardSkip: true,
       ...getP('startingQuestionId', 'layout-options-65'),
-      startingStep: 1
+      startingStep: 1,
+      users: [
+          {id: "http://fel.cvut.cz/people/maxchopart", label: "Max Chopart"},
+          {id: "http://fel.cvut.cz/people/miroslavblasko", label: "Miroslav Blasko"}],
+      currentUser: "http://fel.cvut.cz/people/maxchopart"
     };
 
     return (
