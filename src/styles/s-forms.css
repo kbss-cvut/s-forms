@@ -49,6 +49,11 @@ svg {
 
 .question-comment {
   margin-left: 0.5vw;
+  cursor: pointer;
+}
+
+.no-padding-left {
+  padding-left: 0;
 }
 
 .caret-square-up,
