@@ -21,7 +21,7 @@ export default class DefaultInput extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    let cursorPositionOnFocus = this.state.cursorPositionOnFocus
+    const cursorPositionOnFocus = this.state.cursorPositionOnFocus
 
     if (this.props.type === "textarea" && prevProps.type !== "textarea") {
       this.focus();
