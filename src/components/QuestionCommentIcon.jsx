@@ -14,7 +14,8 @@ class QuestionCommentIcon extends React.Component {
             show: false,
             currentUserLabel: '',
             timestamp: '',
-            commentValue: ''
+            commentValue: '',
+            submittedCommentValue: ''
         }
     }
 
@@ -51,40 +52,51 @@ class QuestionCommentIcon extends React.Component {
     }
 
     renderComments() {
-        if (this.state.commentValue) {
-
-            return <SubmittedComment
-                timestamp={this.state.timestamp}
-                currentUserLabel={this.state.currentUserLabel}
-                commentValue={this.state.commentValue}
-            />
-        } else {
-            return <SubmittedComment
-                timestamp={this.state.timestamp}
-                currentUserLabel={this.state.currentUserLabel}
-                commentValue={this.state.commentValue}
-            />
+        if (this.state.submittedCommentValue) {
+            return(
+                <>
+                    <br/>
+                    <SubmittedComment
+                        timestamp={this.state.timestamp}
+                        currentUserLabel={this.state.currentUserLabel}
+                        submittedCommentValue={this.state.submittedCommentValue}
+                    />
+                </>
+            )
         }
     }
 
-    // TODO: add commentValue && save state of comments
+    showFormAndComments() {
+        this.handleStateShow();
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.setState({submittedCommentValue: this.state.commentValue})
+        this.getCurrentUserLabel();
+        this.getTimeStamp();
+    }
+
+    handleCommentChange(e) {
+        this.setState({commentValue: e.target.value})
+    }
+
     render() {
         return (
             <>
-            <span ref={this.target} onClick={() => {
-                this.handleStateShow();
-                this.getCurrentUserLabel();
-                this.getTimeStamp();
-            }}>
+            <span ref={this.target} onClick={() => this.showFormAndComments()}>
                 <QuestionComment />
             </span>
 
                 <Overlay target={this.target.current} show={this.state.show} placement="right">
                     {(props) => (
                         <Tooltip id="comment-tooltip" {...props}>
-                        <span ref={this.formRef} onClick={() => this.getTimeStamp()}>
-                            <CommentForm/>
-                            <br/>
+                        <span ref={this.formRef}>
+                            <CommentForm
+                                handleSubmit={(e) => this.handleSubmit(e)}
+                                handleCommentChange={(e) => this.handleCommentChange(e)}
+                                commentValue={this.state.commentValue}
+                            />
                             {this.renderComments()}
                         </span>
                         </Tooltip>

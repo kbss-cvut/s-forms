@@ -1,49 +1,32 @@
 import React from "react";
 import {Button, Form} from "react-bootstrap";
-import {ConfigurationContext} from "../contexts/ConfigurationContext";
+import PropTypes from "prop-types";
 
-class CommentForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            commentValue: ''
-        }
-
-        this.handleCommentChange = this.handleCommentChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    handleCommentChange(e) {
-        this.setState({commentValue: e.target.value})
-    }
-
-    // TODO: handle submit
-    handleSubmit(e) {
-        e.preventDefault()
-    }
-
-    render() {
-        return (
-            <Form onSubmit={this.handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicComment">
-                    <Form.Label>Comments</Form.Label>
-                    <Form.Control
-                        name="comment"
-                        as="textarea"
-                        placeholder="Write your comments here"
-                        required
-                        value={this.state.commentValue}
-                        onChange={e => this.handleCommentChange(e)}
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-        )
-    }
+const CommentForm = (props) => {
+    return (
+        <Form onSubmit={props.handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicComment">
+                <Form.Label>Comments</Form.Label>
+                <Form.Control
+                    name="comment"
+                    as="textarea"
+                    placeholder="Write your comments here"
+                    required
+                    value={props.commentValue}
+                    onChange={props.handleCommentChange}
+                />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
+    )
 }
 
-CommentForm.contextType = ConfigurationContext;
+CommentForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    handleCommentChange: PropTypes.func.isRequired,
+    commentValue: PropTypes.string.isRequired
+}
 
 export default CommentForm
