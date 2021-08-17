@@ -1,52 +1,100 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import QuestionComment from "../styles/icons/QuestionComment";
 import {Overlay, Tooltip} from "react-bootstrap";
 import CommentForm from "./CommentForm";
+import SubmittedComment from "./SubmittedComment";
+import {ConfigurationContext} from "../contexts/ConfigurationContext";
 
-const clickOutsideRefHandler = (handler) => {
-    const formRef = useRef(null);
+class QuestionCommentIcon extends React.Component {
+    constructor(props) {
+        super(props);
+        this.formRef = React.createRef();
+        this.target = React.createRef();
+        this.state = {
+            show: false,
+            currentUserLabel: '',
+            timestamp: '',
+            commentValue: ''
+        }
+    }
 
-    useEffect(() => {
-        const eventHandler = (e) => {
-            if (!formRef.current.contains(e.target)) {
-                handler();
+    getCurrentUserLabel() {
+        const users = this.context.options.users;
+        const currentUser = this.context.options.currentUser;
+
+        const currentUserId = users.find(c => c.id === currentUser);
+        this.setState({
+            currentUserLabel: currentUserId.label
+        })
+    }
+
+    getTimeStamp() {
+        const timestamp = Date.now();
+        const date = new Date(timestamp);
+        const dateReformatted = (date.getDate()+
+            "/"+(date.getMonth()+1)+
+            "/"+date.getFullYear()+
+            " "+date.getHours()+
+            ":"+date.getMinutes()+
+            ":"+date.getSeconds());
+        this.setState({
+            timestamp: dateReformatted
+        })
+    }
+
+    handleStateShow() {
+        this.setState(prevState => {
+            return {
+                show: !prevState.show
             }
-        };
+        })
+    }
 
-        document.addEventListener("mousedown", eventHandler);
+    renderComments() {
+        if (this.state.commentValue) {
 
-        return () => {
-            document.removeEventListener("mousedown", eventHandler)
-        };
-    });
+            return <SubmittedComment
+                timestamp={this.state.timestamp}
+                currentUserLabel={this.state.currentUserLabel}
+                commentValue={this.state.commentValue}
+            />
+        } else {
+            return <SubmittedComment
+                timestamp={this.state.timestamp}
+                currentUserLabel={this.state.currentUserLabel}
+                commentValue={this.state.commentValue}
+            />
+        }
+    }
 
-    return formRef;
-}
-
-const QuestionCommentIcon = () => {
-    const [show, setShow] = useState(false);
-    const target = useRef(null);
-    const formRef = clickOutsideRefHandler(() => {
-        setShow(false);
-    })
-
-    return (
-        <>
-            <span ref={target} onClick={() => setShow(!show)}>
+    // TODO: add commentValue && save state of comments
+    render() {
+        return (
+            <>
+            <span ref={this.target} onClick={() => {
+                this.handleStateShow();
+                this.getCurrentUserLabel();
+                this.getTimeStamp();
+            }}>
                 <QuestionComment />
             </span>
 
-            <Overlay target={target.current} show={show} placement="right">
-                {(props) => (
-                    <Tooltip id="comment-tooltip" {...props}>
-                        <span ref={formRef}>
+                <Overlay target={this.target.current} show={this.state.show} placement="right">
+                    {(props) => (
+                        <Tooltip id="comment-tooltip" {...props}>
+                        <span ref={this.formRef} onClick={() => this.getTimeStamp()}>
                             <CommentForm/>
+                            <br/>
+                            {this.renderComments()}
                         </span>
-                    </Tooltip>
-                )}
-            </Overlay>
-        </>
-    );
+                        </Tooltip>
+                    )}
+                </Overlay>
+            </>
+        );
+    }
 }
+
+QuestionCommentIcon.contextType = ConfigurationContext
 
 export default QuestionCommentIcon;
