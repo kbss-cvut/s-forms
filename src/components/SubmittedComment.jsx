@@ -1,7 +1,6 @@
 import React from "react";
 import {Accordion, Button, Card} from "react-bootstrap";
-import {ConfigurationContext} from "../contexts/ConfigurationContext";
-import PropTypes, {string} from "prop-types";
+import PropTypes from "prop-types";
 
 class SubmittedComment extends React.Component {
     constructor(props) {
@@ -9,7 +8,7 @@ class SubmittedComment extends React.Component {
         this.state = {
             currentUserLabel: '',
             timestamp: '',
-            comment: ''
+            submittedCommentValue: ''
         }
     }
 
@@ -24,7 +23,7 @@ class SubmittedComment extends React.Component {
                     </Card.Header>
                     <Card.Footer>{this.props.timestamp}</Card.Footer>
                     <Accordion.Collapse eventKey="0">
-                        <Card.Text>{this.props.commentValue}</Card.Text>
+                        <Card.Body>{this.props.submittedCommentValue}</Card.Body>
                     </Accordion.Collapse>
                 </Card>
             </Accordion>
@@ -36,12 +35,10 @@ class SubmittedComment extends React.Component {
     }
 }
 
-SubmittedComment.contextType = ConfigurationContext;
-
 SubmittedComment.propTypes = {
     currentUserLabel: PropTypes.string,
     timestamp: PropTypes.string.isRequired,
-    commentValue: PropTypes.string
+    submittedCommentValue: PropTypes.string.isRequired
 }
 
 export default SubmittedComment
