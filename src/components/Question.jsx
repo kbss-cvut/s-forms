@@ -205,29 +205,28 @@ export default class Question extends React.Component {
       <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
     );
 
+    let debugMode;
+    let activeKey;
     if (this.context.options.debugMode && !FormUtils.hasAnswer(question)) {
-      return (
-          <Accordion activeKey={question['@id']} className="answerable-section">
-            <Card className="mb-3">
-              <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
-                {this.renderAnswers()}
-              </Card.Header>
-              {collapsible ? <Accordion.Collapse className="debugMode" eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
-            </Card>
-          </Accordion>
-      );
-    } else {
-      return (
-          <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
-            <Card className="mb-3">
-              <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
-                {this.renderAnswers()}
-              </Card.Header>
-              {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
-            </Card>
-          </Accordion>
-      );
+      debugMode = "debugMode";
+      activeKey = question['@id'];
     }
+    else {
+      debugMode = "";
+      activeKey = this.state.expanded ? question['@id'] : undefined;
+    }
+
+      return (
+          <Accordion activeKey={activeKey} className="answerable-section">
+            <Card className="mb-3">
+              <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
+                {this.renderAnswers()}
+              </Card.Header>
+              {collapsible ? <Accordion.Collapse className={debugMode} eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+            </Card>
+          </Accordion>
+      );
+
 
   }
 
