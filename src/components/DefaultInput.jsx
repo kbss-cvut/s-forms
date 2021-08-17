@@ -21,16 +21,23 @@ export default class DefaultInput extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const cursorPositionOnFocus = this.state.cursorPositionOnFocus
+    this.fieldDidExpand(prevProps);
+    this.fieldDidShrink(prevProps);
+  }
 
+  fieldDidExpand(prevProps) {
+    const cursorPositionOnFocus = this.state.cursorPositionOnFocus;
     if (this.props.type === "textarea" && prevProps.type !== "textarea") {
       this.focus();
-      console.log(cursorPositionOnFocus)
       this.getInputDOMNode().setSelectionRange(
           cursorPositionOnFocus,
           cursorPositionOnFocus
       );
     }
+  }
+
+  fieldDidShrink(prevProps) {
+    const cursorPositionOnFocus = this.state.cursorPositionOnFocus;
     if (this.props.type === "text" && prevProps.type !== "text") {
       this.focus();
       this.getInputDOMNode().setSelectionRange(
@@ -38,6 +45,14 @@ export default class DefaultInput extends React.Component {
           cursorPositionOnFocus
       );
     }
+  }
+
+  sendCursorToCorrectPosition(e) {
+    this.props.onChange(e)
+    this.setState({
+      inputLength: e.target.value.length,
+      cursorPositionOnFocus: e.target.selectionStart
+    })
   }
 
   render() {
@@ -98,13 +113,7 @@ export default class DefaultInput extends React.Component {
           <FormControl ref={(c) => (this.input = c)}
                        as="textarea"
                        {...this.props}
-                       onChange={e => {
-                         this.props.onChange(e)
-                         this.setState({
-                           inputLength: e.target.value.length,
-                           cursorPositionOnFocus: e.target.selectionStart
-                         })
-                       }}
+                       onChange={e => this.sendCursorToCorrectPosition(e)}
 
           />
           {this.props.validation && <FormControl.Feedback />}
@@ -126,13 +135,7 @@ export default class DefaultInput extends React.Component {
         <FormControl ref={(c) => (this.input = c)}
                      as="input"
                      {...this.props}
-                     onChange={e => {
-                       this.props.onChange(e)
-                       this.setState({
-                         inputLength: e.target.value.length,
-                         cursorPositionOnFocus: e.target.selectionStart
-                       })
-                     }}
+                     onChange={e => this.sendCursorToCorrectPosition(e)}
         />
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
