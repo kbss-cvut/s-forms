@@ -190,6 +190,14 @@ input:disabled {
   animation: emphasiseOnRelevantSection 1.2s ease-in;
 }
 
+.comment-content .comment-author {
+  font-weight: 700;
+}
+
+.comment-content .comment-value {
+  text-align: left;
+}
+
 @keyframes emphasiseOnRelevant {
   0% {
     display: none;

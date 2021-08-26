@@ -5,7 +5,7 @@ import JsonLdUtils from 'jsonld-utils';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import FormUtils from '../../util/FormUtils';
 import Question from "../Question";
-import QuestionCommentIcon from "../QuestionCommentIcon";
+import QuestionCommentIcon from "../comment/QuestionCommentIcon";
 
 const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
