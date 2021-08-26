@@ -15,7 +15,7 @@ import MediaContent from './MediaContent';
 import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
-import QuestionCommentIcon from "./QuestionCommentIcon";
+import QuestionCommentIcon from "./comment/QuestionCommentIcon";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;

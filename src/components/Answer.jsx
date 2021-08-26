@@ -14,7 +14,7 @@ import { FormGenContext } from '../contexts/FormGenContext';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import HelpIcon from './HelpIcon';
 import JsonLdUtils from 'jsonld-utils';
-import QuestionCommentIcon from "./QuestionCommentIcon";
+import QuestionCommentIcon from "./comment/QuestionCommentIcon";
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
