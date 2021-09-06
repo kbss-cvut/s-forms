@@ -8,7 +8,7 @@ export default class DefaultInput extends React.Component {
     super(props);
 
     this.state = {
-      cursorPositionOnFocus: 0
+      cursorPosition: 0
     };
   }
 
@@ -21,37 +21,31 @@ export default class DefaultInput extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.fieldDidExpand(prevProps);
-    this.fieldDidShrink(prevProps);
+    if (this.fieldDidShrink(prevProps) || this.fieldDidExpand(prevProps)) {
+      this.updateFieldCursorPosition();
+    }
   }
 
   fieldDidExpand(prevProps) {
-    const cursorPositionOnFocus = this.state.cursorPositionOnFocus;
-    if (this.props.type === "textarea" && prevProps.type !== "textarea") {
-      this.focus();
-      this.getInputDOMNode().setSelectionRange(
-          cursorPositionOnFocus,
-          cursorPositionOnFocus
-      );
-    }
+    return this.props.type === "textarea" && prevProps.type !== "textarea";
   }
 
   fieldDidShrink(prevProps) {
-    const cursorPositionOnFocus = this.state.cursorPositionOnFocus;
-    if (this.props.type === "text" && prevProps.type !== "text") {
-      this.focus();
-      this.getInputDOMNode().setSelectionRange(
-          cursorPositionOnFocus,
-          cursorPositionOnFocus
-      );
-    }
+    return this.props.type === "text" && prevProps.type !== "text";
   }
 
-  sendCursorToCorrectPosition(e) {
+  updateFieldCursorPosition() {
+    this.focus();
+    this.getInputDOMNode().setSelectionRange(
+        this.state.cursorPosition,
+        this.state.cursorPosition
+    );
+  }
+
+  saveCursorPosition(e) {
     this.props.onChange(e)
     this.setState({
-      inputLength: e.target.value.length,
-      cursorPositionOnFocus: e.target.selectionStart
+      cursorPosition: e.target.selectionStart
     })
   }
 
@@ -113,8 +107,7 @@ export default class DefaultInput extends React.Component {
           <FormControl ref={(c) => (this.input = c)}
                        as="textarea"
                        {...this.props}
-                       onChange={e => this.sendCursorToCorrectPosition(e)}
-
+                       onChange={e => this.saveCursorPosition(e)}
           />
           {this.props.validation && <FormControl.Feedback />}
           {this._renderHelp()}
@@ -135,7 +128,7 @@ export default class DefaultInput extends React.Component {
         <FormControl ref={(c) => (this.input = c)}
                      as="input"
                      {...this.props}
-                     onChange={e => this.sendCursorToCorrectPosition(e)}
+                     onChange={e => this.saveCursorPosition(e)}
         />
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
