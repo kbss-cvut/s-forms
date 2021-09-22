@@ -36,11 +36,10 @@ const CommentForm = (props) => {
             commentValue: commentValue
         };
         props.onSaveComment(comment);
-        console.log(comment)
         setCommentValue('');
     }
     return (
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} className="comment-form">
             <Form.Group className="mb-3" controlId="formBasicComment">
                 <Form.Label>Comments</Form.Label>
                 <Form.Control
@@ -52,7 +51,7 @@ const CommentForm = (props) => {
                     onChange={commentValueChangeHandler}
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button className="comment-button" variant="primary" type="submit" >
                 Submit
             </Button>
         </Form>

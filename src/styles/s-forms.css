@@ -190,12 +190,21 @@ input:disabled {
   animation: emphasiseOnRelevantSection 1.2s ease-in;
 }
 
-.comment-content .comment-author {
-  font-weight: 700;
+.comment-tooltip > .tooltip-inner {
+  max-width: none;
+  width: 30vw;
 }
 
-.comment-content .comment-value {
+.comment-content {
   text-align: left;
+}
+
+.comment-content .comment-author {
+  font-weight: 900;
+}
+
+.comment-list-items {
+  padding-top: 20px;
 }
 
 @keyframes emphasiseOnRelevant {
