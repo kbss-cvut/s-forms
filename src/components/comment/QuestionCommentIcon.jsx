@@ -28,7 +28,7 @@ const QuestionCommentIcon = () => {
 
             <Overlay target={target.current} show={show} placement="right" rootClose={true} onHide={hideOverlay}>
                 {(props) => (
-                    <Tooltip id="comment-tooltip" {...props}>
+                    <Tooltip className="comment-tooltip" {...props}>
                         <span>
                             <NewComment onAddComment={addCommentHandler}/>
                             <CommentList comments={comment}/>
