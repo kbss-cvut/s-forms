@@ -12,7 +12,8 @@ const formShape = {
     Constants.IS_RELEVANT_IF,
     Constants.HAS_ANSWER,
     Constants.HAS_DECLARED_PREFIX,
-    Constants.HAS_OPTION
+    Constants.HAS_OPTION,
+    Constants.HAS_COMMENT
   ]
 };
 

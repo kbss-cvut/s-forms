@@ -62,10 +62,26 @@ export default class Question extends React.Component {
     this._onChange(Constants.HAS_SUBQUESTION, subQuestionIndex, change);
   };
 
+  onCommentChange = (commentIndex, change) => {
+    this._onChangeComment(Constants.HAS_COMMENT, commentIndex, change);
+  };
+
   _onChange(att, valueIndex, newValue) {
     let newState = { ...this.props.question };
     newState[att][valueIndex] = newValue;
     if (att === Constants.HAS_ANSWER) {
+      const result = this.state.validator(newValue);
+      newState = { ...newState, ...result };
+    }
+
+    JsonLdObjectMap.putObject(newState['@id'], newState);
+    this.props.onChange(this.props.index, newState);
+  }
+
+  _onChangeComment(att, valueIndex, newValue) {
+    let newState = { ...this.props.question };
+    newState[att][valueIndex] = newValue;
+    if (att === Constants.HAS_COMMENT) {
       const result = this.state.validator(newValue);
       newState = { ...newState, ...result };
     }
@@ -323,7 +339,29 @@ export default class Question extends React.Component {
   }
 
   _renderQuestionComment() {
-    return <QuestionCommentIcon />
+    const children = [],
+        questionComment = this._getQuestionComment();
+
+    for (let i = 0, len = questionComment.length; i < len; i++) {
+      children.push(
+          <div key={'row-item-'}>
+            <QuestionCommentIcon comment={questionComment[i]}/>
+          </div>
+      );
+    }
+    return children;
+    // return <QuestionCommentIcon />
+  }
+
+  _getQuestionComment() {
+    const question = this.props.question;
+
+    if (!Array.isArray(question[Constants.HAS_COMMENT])) {
+      question[Constants.HAS_COMMENT] = [question[Constants.HAS_COMMENT]];
+    } else {
+      question[Constants.HAS_COMMENT] = [QuestionAnswerProcessor.generateComment(question)];
+    }
+    return question[Constants.HAS_COMMENT];
   }
 
   _renderPrefixes() {

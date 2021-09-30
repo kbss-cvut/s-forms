@@ -3,6 +3,7 @@ import QuestionComment from "../../styles/icons/QuestionComment";
 import {Overlay, Tooltip} from "react-bootstrap";
 import CommentList from "./CommentList";
 import NewComment from "./NewComment";
+import JsonLdObjectUtils from "../../util/JsonLdObjectUtils";
 
 const QuestionCommentIcon = () => {
     const target = useRef(null);
@@ -18,6 +19,10 @@ const QuestionCommentIcon = () => {
         setComment(prevComment => {
             return [comment, ...prevComment];
         });
+
+        const commentJsonLd = {
+            "@context" : "something"
+        }
     }
 
     return (

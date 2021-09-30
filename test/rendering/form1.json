@@ -19,6 +19,12 @@
          "@type" : "@id",
          "@id" : "http://onto.fel.cvut.cz/ontologies/documentation/has_answer"
       },
+      "has-comment" : {
+         "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-comment"
+      },
+      "has-timestamp" : {
+         "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-timestamp"
+      },
       "has-origin-type" : {
          "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-origin-type",
          "@type" : "@id"
@@ -494,7 +500,19 @@
          "@id" : "aircraft-name-9553",
          "has-layout-class" : "text",
          "@type" : "doc:question",
-         "has_related_question" : []
+         "has_related_question" : [],
+         "has-comment" : [
+            {
+               "has_data_value" : "Some comment",
+               "has-author"  : "Max Chopart",
+               "has-timestamp" : "151652672357"
+            },
+            {
+               "has_data_value" : "Another comment",
+               "has-author"  : "Miroslav Blasko",
+               "has-timestamp" : "763763782"
+            }
+         ]
       },
       {
          "@id" : "aircraft-number-2375",

@@ -59,6 +59,15 @@ export default class QuestionAnswerProcessor {
         result.answers.push(QuestionAnswerProcessor.processAnswer(question[Constants.HAS_ANSWER][i]));
       }
     }
+    if (question[Constants.HAS_COMMENT]) {
+      result.comments = [];
+      if (!Array.isArray(question[Constants.HAS_COMMENT])) {
+        question[Constants.HAS_COMMENT] = [question[Constants.HAS_COMMENT]];
+      }
+      for (let i = 0; i < question[Constants.HAS_COMMENT].length; i++) {
+        result.comments.push(QuestionAnswerProcessor.processComment(question[Constants.HAS_COMMENT][i]));
+      }
+    }
     return result;
   }
 
@@ -82,5 +91,38 @@ export default class QuestionAnswerProcessor {
     const answer = {};
     answer[Constants.HAS_DATA_VALUE] = '';
     return answer;
+  }
+
+  static processComment(question, comment) {
+    const comments = [];
+
+    comments.uri = question['@id'];
+    if (question[Constants.HAS_COMMENT]) {
+
+      // const commentValue = comment.commentValue;
+      // const commentAuthor = comment.author;
+      // const commentTimeStamp = comment.timestamp;
+
+      comments.push(comment);
+    }
+
+    return comments;
+  }
+
+  /**
+   * Generates an empty comment for the specified question
+   * @param question
+   */
+  static generateComment(question) {
+    const comments = [];
+    const comment = {};
+
+    comment[Constants.HAS_DATA_VALUE] = '';
+    comment[Constants.HAS_AUTHOR] = '';
+    comment[Constants.HAS_TIMESTAMP] = '';
+
+    comments.push(comment)
+
+    return comments;
   }
 }
