@@ -19,6 +19,12 @@
          "@type" : "@id",
          "@id" : "http://onto.fel.cvut.cz/ontologies/documentation/has_answer"
       },
+      "has-comment" : {
+         "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-comment"
+      },
+      "has-timestamp" : {
+         "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-timestamp"
+      },
       "has-origin-type" : {
          "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-origin-type",
          "@type" : "@id"
@@ -66,7 +72,11 @@
          "@id" : "http://www.w3.org/2001/XMLSchema#minInclusive"
       },
       "has-author" : {
-         "@id" : "http://onto.fel.cvut.cz/ontologies/documentation/has-author",
+         "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-author",
+         "@type" : "@id"
+      },
+      "has-comment-value" : {
+         "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-comment-value",
          "@type" : "@id"
       },
       "has-unit" : {
@@ -494,7 +504,21 @@
          "@id" : "aircraft-name-9553",
          "has-layout-class" : "text",
          "@type" : "doc:question",
-         "has_related_question" : []
+         "has_related_question" : [],
+         "has-comment" : [
+            {
+               "@type" : "form:comment",
+               "has-comment-value" : "Some comment",
+               "has-author"  : "http://fel.cvut.cz/people/maxchopart",
+               "has-timestamp" : "151652672357"
+            },
+            {
+               "@type" : "form:comment",
+               "has-comment-value" : "Another comment",
+               "has-author"  : "Miroslav Blasko",
+               "has-timestamp" : "763763782"
+            }
+         ]
       },
       {
          "@id" : "aircraft-number-2375",
