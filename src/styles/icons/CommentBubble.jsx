@@ -1,6 +1,6 @@
 import React from "react";
 
-const QuestionComment = () => {
+const CommentBubble = () => {
     return(
         <svg
             className="question-comment"
@@ -21,4 +21,4 @@ const QuestionComment = () => {
     )
 }
 
-export default QuestionComment
+export default CommentBubble

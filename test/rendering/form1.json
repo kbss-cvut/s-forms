@@ -76,8 +76,7 @@
          "@type" : "@id"
       },
       "has-comment-value" : {
-         "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-comment-value",
-         "@type" : "@id"
+         "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-comment-value"
       },
       "has-unit" : {
          "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-unit"
@@ -509,13 +508,13 @@
             {
                "@type" : "form:comment",
                "has-comment-value" : "Some comment",
-               "has-author"  : "http://fel.cvut.cz/people/maxchopart",
+               "has-author"  : "http://fel.cvut.cz/people/max-chopart",
                "has-timestamp" : "151652672357"
             },
             {
                "@type" : "form:comment",
                "has-comment-value" : "Another comment",
-               "has-author"  : "Miroslav Blasko",
+               "has-author"  : "http://fel.cvut.cz/people/miroslav-blasko",
                "has-timestamp" : "763763782"
             }
          ]

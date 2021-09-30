@@ -63,9 +63,9 @@ class TestApp extends React.Component {
       ...getP('startingQuestionId', 'layout-options-65'),
       startingStep: 1,
       users: [
-          {id: "http://fel.cvut.cz/people/maxchopart", label: "Max Chopart"},
-          {id: "http://fel.cvut.cz/people/miroslavblasko", label: "Miroslav Blasko"}],
-      currentUser: "http://fel.cvut.cz/people/maxchopart"
+          {id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart"},
+          {id: "http://fel.cvut.cz/people/miroslav-blasko", label: "Miroslav Blasko"}],
+      currentUser: "http://fel.cvut.cz/people/max-chopart"
     };
 
     return (

@@ -1,10 +1,11 @@
 import React, {useRef, useState} from "react";
-import QuestionComment from "../../styles/icons/QuestionComment";
+import CommentBubble from "../../styles/icons/CommentBubble";
 import {Overlay, Tooltip} from "react-bootstrap";
 import CommentList from "./CommentList";
 import NewComment from "./NewComment";
+import PropTypes from "prop-types";
 
-const QuestionCommentIcon = () => {
+const QuestionCommentIcon = (props) => {
     const target = useRef(null);
 
     const [show, setShow] = useState(false);
@@ -23,15 +24,15 @@ const QuestionCommentIcon = () => {
     return (
         <>
             <span ref={target} onClick={() => setShow(!show)}>
-                <QuestionComment />
+                <CommentBubble />
             </span>
 
             <Overlay target={target.current} show={show} placement="right" rootClose={true} onHide={hideOverlay}>
-                {(props) => (
-                    <Tooltip className="comment-tooltip" {...props}>
+                {(overlayProps) => (
+                    <Tooltip className="comment-tooltip" {...overlayProps}>
                         <span>
                             <NewComment onAddComment={addCommentHandler}/>
-                            <CommentList comments={comment}/>
+                            <CommentList question={props.question} comments={comment}/>
                         </span>
                     </Tooltip>
                 )}
@@ -39,5 +40,9 @@ const QuestionCommentIcon = () => {
         </>
     );
 }
+
+QuestionCommentIcon.propTypes = {
+    question: PropTypes.object.isRequired
+};
 
 export default QuestionCommentIcon;

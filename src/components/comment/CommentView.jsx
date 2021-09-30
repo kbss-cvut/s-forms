@@ -5,7 +5,7 @@ import en from "javascript-time-ago/locale/en";
 const CommentView = (props) => {
     TimeAgo.addLocale(en);
     const time = new TimeAgo('en-US');
-    const timeAgo = time.format(props.timestamp);
+    const timeAgo = time.format(parseInt(props.timestamp));
 
     return (
         <div className="comment-content">

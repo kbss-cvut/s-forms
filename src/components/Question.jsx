@@ -323,7 +323,7 @@ export default class Question extends React.Component {
   }
 
   _renderQuestionComment() {
-    return <QuestionCommentIcon />
+    return <QuestionCommentIcon question={this.props.question} />
   }
 
   _renderPrefixes() {

@@ -149,7 +149,7 @@ const Answer = (props) => {
       <div>
         <span>{label}</span>
         {questionHelp}
-        <QuestionCommentIcon />
+        <QuestionCommentIcon question={question}/>
       </div>
     );
   }
