@@ -10,6 +10,7 @@ import QuestionCommentIcon from "../comment/QuestionCommentIcon";
 const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
 
+    // TODO implement QuestionCommentIcon
     return (
         <div className="wizard-nav col-2 p-0">
             <ListGroup>
@@ -25,7 +26,7 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
                         className={Question.getEmphasizedClass(step)}
                     >
                         {JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], options.intl)}
-                        <QuestionCommentIcon question={step}/>
+                        {/*<QuestionCommentIcon question={step}/>*/}
                     </ListGroupItem>
                 ))}
             </ListGroup>

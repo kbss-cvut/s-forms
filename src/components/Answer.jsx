@@ -145,11 +145,12 @@ const Answer = (props) => {
       />
     ) : null;
 
+    // TODO implement QuestionCommentIcon
     return (
       <div>
         <span>{label}</span>
         {questionHelp}
-        <QuestionCommentIcon question={question}/>
+        {/*<QuestionCommentIcon question={question} onChange={}/>*/}
       </div>
     );
   }

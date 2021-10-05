@@ -509,13 +509,13 @@
                "@type" : "form:comment",
                "has-comment-value" : "Some comment",
                "has-author"  : "http://fel.cvut.cz/people/max-chopart",
-               "has-timestamp" : "151652672357"
+               "has-timestamp" : "1633096904"
             },
             {
                "@type" : "form:comment",
                "has-comment-value" : "Another comment",
                "has-author"  : "http://fel.cvut.cz/people/miroslav-blasko",
-               "has-timestamp" : "763763782"
+               "has-timestamp" : "1633096908"
             }
          ]
       },

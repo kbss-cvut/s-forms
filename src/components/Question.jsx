@@ -62,6 +62,10 @@ export default class Question extends React.Component {
     this._onChange(Constants.HAS_SUBQUESTION, subQuestionIndex, change);
   };
 
+  onCommentChange = (commentIndex, change) => {
+    this._onChange(Constants.HAS_COMMENT, commentIndex, change)
+  }
+
   _onChange(att, valueIndex, newValue) {
     let newState = { ...this.props.question };
     newState[att][valueIndex] = newValue;
@@ -323,7 +327,10 @@ export default class Question extends React.Component {
   }
 
   _renderQuestionComment() {
-    return <QuestionCommentIcon question={this.props.question} />
+    return <QuestionCommentIcon
+        question={this.props.question}
+        onChange={this.onCommentChange}
+    />
   }
 
   _renderPrefixes() {

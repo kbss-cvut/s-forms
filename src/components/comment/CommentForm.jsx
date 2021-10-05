@@ -1,6 +1,7 @@
 import React, {useContext, useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import {ConfigurationContext} from "../../contexts/ConfigurationContext";
+import PropTypes from "prop-types";
 
 const CommentForm = (props) => {
     const context = useContext(ConfigurationContext);
@@ -21,14 +22,16 @@ const CommentForm = (props) => {
         setTimestamp(Date.now());
     }
 
-    const commentValueChangeHandler = (e) => {
+    const onValueChange = (e) => {
         setCommentValue(e.target.value);
-        getTimeStamp();
         getAuthor();
+        getTimeStamp();
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
+
+        props.onChange(commentValue);
 
         const comment = {
             author: author,
@@ -48,7 +51,7 @@ const CommentForm = (props) => {
                     placeholder="Write your comments here"
                     required
                     value={commentValue}
-                    onChange={commentValueChangeHandler}
+                    onChange={onValueChange}
                 />
             </Form.Group>
             <Button className="comment-button" variant="primary" type="submit" >
@@ -57,5 +60,10 @@ const CommentForm = (props) => {
         </Form>
     )
 }
+
+CommentForm.propTypes = {
+    onSaveComment: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired
+};
 
 export default CommentForm;
