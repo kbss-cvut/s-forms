@@ -145,12 +145,11 @@ const Answer = (props) => {
       />
     ) : null;
 
-    // TODO implement QuestionCommentIcon
     return (
       <div>
         <span>{label}</span>
         {questionHelp}
-        {/*<QuestionCommentIcon question={question} onChange={}/>*/}
+        <QuestionCommentIcon question={question} onChange={props.onCommentChange}/>
       </div>
     );
   }
@@ -187,7 +186,8 @@ Answer.propTypes = {
   answer: PropTypes.object.isRequired,
   question: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  index: PropTypes.number
+  index: PropTypes.number,
+  onCommentChange: PropTypes.func.isRequired
 };
 
 export default Answer;

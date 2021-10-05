@@ -503,21 +503,7 @@
          "@id" : "aircraft-name-9553",
          "has-layout-class" : "text",
          "@type" : "doc:question",
-         "has_related_question" : [],
-         "has-comment" : [
-            {
-               "@type" : "form:comment",
-               "has-comment-value" : "Some comment",
-               "has-author"  : "http://fel.cvut.cz/people/max-chopart",
-               "has-timestamp" : "1633096904"
-            },
-            {
-               "@type" : "form:comment",
-               "has-comment-value" : "Another comment",
-               "has-author"  : "http://fel.cvut.cz/people/miroslav-blasko",
-               "has-timestamp" : "1633096908"
-            }
-         ]
+         "has_related_question" : []
       },
       {
          "@id" : "aircraft-number-2375",

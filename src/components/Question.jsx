@@ -232,7 +232,12 @@ export default class Question extends React.Component {
       children.push(
         <div key={'row-item-' + i} className={cls} id={question['@id']}>
           <div className="answer-content" style={this._getAnswerWidthStyle()}>
-            <Answer index={i} answer={answers[i]} question={question} onChange={this.onAnswerChange} />
+            <Answer
+                index={i}
+                answer={answers[i]}
+                question={question}
+                onChange={this.onAnswerChange}
+                onCommentChange={this.onCommentChange}/>
           </div>
           {this._renderUnits()}
           {this._renderPrefixes()}
