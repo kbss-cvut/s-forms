@@ -14,7 +14,7 @@ const NewComment = (props) => {
     return (
         <CommentForm
             onSaveComment={saveCommentHandler}
-            onChange={props.onValueChange}
+            onChange={props.onCommentValueChange}
         />
     )
 }
@@ -22,7 +22,7 @@ const NewComment = (props) => {
 NewComment.propTypes = {
     onAddComment: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    onValueChange: PropTypes.func.isRequired,
+    onCommentValueChange: PropTypes.func.isRequired,
     comment: PropTypes.array.isRequired
 };
 

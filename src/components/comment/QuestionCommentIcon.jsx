@@ -42,21 +42,21 @@ const QuestionCommentIcon = (props) => {
         return question[Constants.HAS_COMMENT];
     };
 
-    const onValueChange = (value) => {
+    const onCommentValueChangeHandler = (value) => {
         const change = {};
-        _setValue(change, value);
+        _setComment(change, value);
         props.onChange(commentIndex, change);
     };
 
-    const _setValue = (change, value) => {
+    const _setComment = (change, value) => {
         change[Constants.HAS_COMMENT_VALUE] = {
-            '@id' : value
+            [Constants.HAS_COMMENT_VALUE] : value
         }
         change[Constants.HAS_AUTHOR] = {
-            '@value' : context.options.currentUser
+            [Constants.HAS_AUTHOR] : context.options.currentUser
         }
         change[Constants.HAS_TIMESTAMP] = {
-            '@value' : Date.now()
+            [Constants.HAS_TIMESTAMP] : Date.now()
         }
     };
 
@@ -73,7 +73,7 @@ const QuestionCommentIcon = (props) => {
                             <NewComment
                                 onAddComment={addCommentHandler}
                                 onChange={props.onChange}
-                                onValueChange={onValueChange}
+                                onCommentValueChange={onCommentValueChangeHandler}
                                 comment={_getComments()}
                             />
                             <CommentList

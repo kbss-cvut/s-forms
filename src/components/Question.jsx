@@ -155,12 +155,16 @@ export default class Question extends React.Component {
                       {label}
                     </h6>
                   </div>
-                  <div className="col-sm-auto">
-                    {this._renderQuestionHelp()}
-                  </div>
-                  <div className="col-sm-1">
-                    {this._renderQuestionComment()}
-                  </div>
+                  {this._renderQuestionHelp() ?
+                      <>
+                        <div className="col-sm-auto">
+                          {this._renderQuestionHelp()}
+                        </div>
+                        <div className="col-sm-auto">
+                          {this._renderQuestionComment()}
+                        </div>
+                      </>
+                      : this._renderQuestionComment()}
                 </div>
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
@@ -170,6 +174,19 @@ export default class Question extends React.Component {
     } else {
       return <div>{this._renderQuestionContent()}</div>;
     }
+  }
+
+  _renderTest() {
+    return (
+        <>
+          <div className="col-sm-auto">
+            {this._renderQuestionHelp()}
+          </div>
+          <div className="col-sm-1">
+            {this._renderQuestionComment()}
+          </div>
+        </>
+    )
   }
 
   _renderQuestionContent() {

@@ -192,7 +192,12 @@ input:disabled {
 
 .comment-tooltip > .tooltip-inner {
   max-width: none;
-  width: 30vw;
+  max-height: 400px;
+  width: 800px;
+  border: solid 2px #afafaf;
+  background-color: #cbeef6;
+  color: #000000;
+  overflow: hidden scroll;
 }
 
 .comment-content {
@@ -205,6 +210,11 @@ input:disabled {
 
 .comment-list-items {
   padding-top: 20px;
+}
+
+.comment-timestamp {
+  color: #696969;
+  font-style: italic;
 }
 
 @keyframes emphasiseOnRelevant {
