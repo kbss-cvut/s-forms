@@ -20,6 +20,8 @@ const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
   const { options } = React.useContext(ConfigurationContext);
 
+  const [mouseHover, setMouseHover] = React.useState(false);
+
   const onValueChange = (value) => {
     const change = { ...props.answer };
     _setValue(change, value);
@@ -40,6 +42,10 @@ const Answer = (props) => {
       };
     }
   };
+
+  const onMouseHoverHandler = () => {
+    setMouseHover(!mouseHover);
+  }
 
   const _hasOptions = (item) => {
     return item[Constants.HAS_OPTION] && item[Constants.HAS_OPTION].length !== 0;
@@ -76,7 +82,7 @@ const Answer = (props) => {
 
   const _renderCheckbox = (value, label, title) => {
     return (
-      <CheckboxAnswer label={label} title={title} value={value} onChange={onValueChange} question={props.question} />
+      <CheckboxAnswer label={label} title={title} value={value} onChange={onValueChange} question={props.question} mouseHover={mouseHover}/>
     );
   };
 
@@ -149,7 +155,7 @@ const Answer = (props) => {
       <div>
         <span>{label}</span>
         {questionHelp}
-        <QuestionCommentIcon question={question} onChange={props.onCommentChange}/>
+        <QuestionCommentIcon question={question} onChange={props.onCommentChange} onMouseHover={onMouseHoverHandler}/>
       </div>
     );
   }

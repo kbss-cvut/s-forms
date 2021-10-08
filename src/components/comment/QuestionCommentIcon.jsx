@@ -62,7 +62,7 @@ const QuestionCommentIcon = (props) => {
 
     return (
         <>
-            <span ref={target} onClick={() => setShow(!show)}>
+            <span ref={target} onClick={() => setShow(!show)} onMouseEnter={props.onMouseHover} onMouseLeave={props.onMouseHover}>
                 <CommentBubble />
             </span>
 

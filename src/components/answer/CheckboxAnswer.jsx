@@ -29,7 +29,7 @@ const CheckboxAnswer = (props) => {
     onChange: (e) => {
       props.onChange(e.target.checked);
     },
-    disabled: componentsOptions.readOnly || FormUtils.isDisabled(question)
+    disabled: componentsOptions.readOnly || FormUtils.isDisabled(question) || props.mouseHover
   });
 };
 
@@ -38,7 +38,8 @@ CheckboxAnswer.propTypes = {
   label: PropTypes.object.isRequired,
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  mouseHover: PropTypes.bool
 };
 
 export default CheckboxAnswer;

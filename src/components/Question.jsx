@@ -176,19 +176,6 @@ export default class Question extends React.Component {
     }
   }
 
-  _renderTest() {
-    return (
-        <>
-          <div className="col-sm-auto">
-            {this._renderQuestionHelp()}
-          </div>
-          <div className="col-sm-1">
-            {this._renderQuestionComment()}
-          </div>
-        </>
-    )
-  }
-
   _renderQuestionContent() {
     let content = [];
     if (this.state.expanded) {
