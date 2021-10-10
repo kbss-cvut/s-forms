@@ -217,6 +217,12 @@ input:disabled {
   font-style: italic;
 }
 
+.send-comment-arrow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
 @keyframes emphasiseOnRelevant {
   0% {
     display: none;

@@ -1,7 +1,8 @@
 import React, {useContext, useState} from "react";
-import {Button, Form} from "react-bootstrap";
+import {Button, Form, Col, Row} from "react-bootstrap";
 import {ConfigurationContext} from "../../contexts/ConfigurationContext";
 import PropTypes from "prop-types";
+import ArrowRight from "../../styles/icons/ArrowRight";
 
 const CommentForm = (props) => {
     const context = useContext(ConfigurationContext);
@@ -41,24 +42,34 @@ const CommentForm = (props) => {
         props.onSaveComment(comment);
         setCommentValue('');
     }
+
+    const onKeyUpHandler = (e) => {
+        if (e.key === 'Enter'&& e.ctrlKey) submitHandler(e)
+    }
+
     return (
-        <Form onSubmit={submitHandler} className="comment-form">
+        <Form onSubmit={submitHandler} className="comment-form" onKeyUp={onKeyUpHandler}>
             <Form.Group className="mb-3" controlId="formBasicComment">
-                <Form.Label>Comments</Form.Label>
-                <Form.Control
-                    name="comment"
-                    as="textarea"
-                    placeholder="Write your comments here"
-                    required
-                    value={commentValue}
-                    onChange={onValueChange}
-                />
+                <Col className="col-lg-12">
+                    <Row className="col-lg-12">
+                        <Form.Control
+                            name="comment"
+                            as="textarea"
+                            placeholder="Write your comments here"
+                            required
+                            value={commentValue}
+                            onChange={onValueChange}
+                        />
+                    </Row>
+                    <Row className="send-comment-arrow col-lg-12">
+                        <Button className="comment-button" variant="light" type="submit" >
+                            <ArrowRight />
+                        </Button>
+                    </Row>
+                </Col>
             </Form.Group>
-            <Button className="comment-button" variant="primary" type="submit" >
-                Submit
-            </Button>
         </Form>
-    )
+    );
 }
 
 CommentForm.propTypes = {
