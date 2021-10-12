@@ -193,7 +193,7 @@ input:disabled {
 .comment-tooltip > .tooltip-inner {
   max-width: none;
   max-height: 400px;
-  width: 800px;
+  width: 50vw;
   border: solid 2px #afafaf;
   background-color: #cbeef6;
   color: #000000;
