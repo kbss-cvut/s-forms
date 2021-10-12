@@ -223,6 +223,13 @@ input:disabled {
   margin-top: 10px;
 }
 
+.comment-badge {
+  position: relative;
+  bottom: 13px;
+  right: 7px;
+  font-size: 9px;
+}
+
 @keyframes emphasiseOnRelevant {
   0% {
     display: none;

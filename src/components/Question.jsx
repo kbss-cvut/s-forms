@@ -160,9 +160,9 @@ export default class Question extends React.Component {
                         <Col className="col-sm-auto">
                           {this._renderQuestionHelp()}
                         </Col>
-                        <Row className="col-sm-auto">
+                        <Col className="col-sm-auto">
                           {this._renderQuestionComment()}
-                        </Row>
+                        </Col>
                       </>
                       : this._renderQuestionComment()}
                 </Row>

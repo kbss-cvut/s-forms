@@ -1,6 +1,6 @@
 import React, {useContext, useRef, useState} from "react";
 import CommentBubble from "../../styles/icons/CommentBubble";
-import {Overlay, Tooltip} from "react-bootstrap";
+import {Badge, Overlay, Tooltip} from "react-bootstrap";
 import CommentList from "./CommentList";
 import NewComment from "./NewComment";
 import PropTypes from "prop-types";
@@ -69,7 +69,8 @@ const QuestionCommentIcon = (props) => {
     return (
         <>
             <span ref={target} onClick={onClickHandler}>
-                <CommentBubble />
+                <CommentBubble/>
+                {commentIndex > 0 ? <Badge className="comment-badge" pill variant="primary">{commentIndex}</Badge> : null}
             </span>
 
             <Overlay target={target.current} show={show} placement="right" rootClose={true} onHide={hideOverlay}>
