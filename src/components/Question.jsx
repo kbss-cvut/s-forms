@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Accordion } from 'react-bootstrap';
+import {Card, Accordion, Row, Col} from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Answer from './Answer';
@@ -148,24 +148,24 @@ export default class Question extends React.Component {
           <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
             <Card className="mb-3">
               <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
-                <div className="row">
-                  <div className="col-sm-auto">
+                <Row>
+                  <Col className="col-sm-auto no-padding-right">
                     <h6 className="d-inline" id={question['@id']}>
                       {collapsible && this._renderCollapseToggle()}
                       {label}
                     </h6>
-                  </div>
+                  </Col>
                   {this._renderQuestionHelp() ?
                       <>
-                        <div className="col-sm-auto">
+                        <Col className="col-sm-auto">
                           {this._renderQuestionHelp()}
-                        </div>
-                        <div className="col-sm-auto">
+                        </Col>
+                        <Row className="col-sm-auto">
                           {this._renderQuestionComment()}
-                        </div>
+                        </Row>
                       </>
                       : this._renderQuestionComment()}
-                </div>
+                </Row>
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
             </Card>
