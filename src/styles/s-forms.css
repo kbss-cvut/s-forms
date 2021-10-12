@@ -208,6 +208,10 @@ input:disabled {
   font-weight: 900;
 }
 
+.comment-content .comment-value {
+  white-space: pre-line;
+}
+
 .comment-list-items {
   padding-top: 20px;
 }

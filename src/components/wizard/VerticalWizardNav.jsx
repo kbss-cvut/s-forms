@@ -26,7 +26,6 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
                         className={Question.getEmphasizedClass(step)}
                     >
                         {JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], options.intl)}
-                        {/*<QuestionCommentIcon question={step}/>*/}
                     </ListGroupItem>
                 ))}
             </ListGroup>

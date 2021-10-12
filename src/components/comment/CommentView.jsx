@@ -14,7 +14,7 @@ const CommentView = (props) => {
                 <span className="col-auto text-muted comment-timestamp">{timeAgo}</span>
             </div>
             <div className="row">
-                <span className="col comment-value" style={ { whiteSpace: "pre-line" } }>{props.commentValue}</span>
+                <span className="col comment-value">{props.commentValue}</span>
             </div>
         </div>
     );
