@@ -62,7 +62,7 @@ const CommentForm = (props) => {
                         />
                     </Row>
                     <Row className="send-comment-arrow col-lg-12">
-                        <Button className="comment-button" variant="light" type="submit" >
+                        <Button className="comment-button" variant="primary" type="submit" >
                             <ArrowRight />
                         </Button>
                     </Row>
