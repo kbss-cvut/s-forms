@@ -6,6 +6,8 @@ import Constants from '../../constants/Constants';
 import HelpIcon from '../HelpIcon';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
+import QuestionCommentIcon from "../comment/QuestionCommentIcon";
+import JsonLdObjectMap from "../../util/JsonLdObjectMap";
 
 
 export default class WizardStep extends React.Component {
@@ -33,6 +35,24 @@ export default class WizardStep extends React.Component {
       />
     ) : null;
   };
+
+  _renderQuestionCommentIcon = () => {
+    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
+
+    return <QuestionCommentIcon question={question} onChange={this.onCommentChange} />
+  }
+
+  onCommentChange = (commentIndex, change) => {
+    this._onChange(Constants.HAS_COMMENT, commentIndex, change)
+  }
+
+  _onChange(att, valueIndex, newValue) {
+    let newState = { ...this.props.step};
+    newState[att][valueIndex] = newValue;
+
+    JsonLdObjectMap.putObject(newState['@id'], newState);
+    this.onChange(this.props.index, newState);
+  }
 
   _renderWizardStepButtons = () => {
     return (
@@ -73,6 +93,7 @@ export default class WizardStep extends React.Component {
           <Card.Header className="bg-primary text-white" as="h6" id={this.props.step['@id']}>
             {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
             {this._renderHelpIcon()}
+            {this._renderQuestionCommentIcon()}
           </Card.Header>
           <Card.Body className={categoryClass}>
             {questionElement}
