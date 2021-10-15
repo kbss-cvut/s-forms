@@ -1,45 +1,18 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import {Button, Form, Col, Row} from "react-bootstrap";
-import {ConfigurationContext} from "../../contexts/ConfigurationContext";
 import PropTypes from "prop-types";
 import ArrowRight from "../../styles/icons/ArrowRight";
 
 const CommentForm = (props) => {
-    const context = useContext(ConfigurationContext);
-
-    const [author, setAuthor] = useState('');
-    const [timestamp, setTimestamp] = useState(null);
     const [commentValue, setCommentValue] = useState('');
-
-    const getAuthor = () => {
-        const users = context.options.users;
-        const currentUser = context.options.currentUser;
-
-        const currentUserId = users.find(c => c.id === currentUser);
-        setAuthor(currentUserId.label)
-    }
-
-    const getTimeStamp = () => {
-        setTimestamp(Date.now());
-    }
 
     const onValueChange = (e) => {
         setCommentValue(e.target.value);
-        getAuthor();
-        getTimeStamp();
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-
         props.onChange(commentValue);
-
-        const comment = {
-            author: author,
-            timestamp: timestamp,
-            commentValue: commentValue
-        };
-        props.onSaveComment(comment);
         setCommentValue('');
     }
 
@@ -73,7 +46,6 @@ const CommentForm = (props) => {
 }
 
 CommentForm.propTypes = {
-    onSaveComment: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired
 };
 

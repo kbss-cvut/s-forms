@@ -2,30 +2,18 @@ import React, {useContext, useRef, useState} from "react";
 import CommentBubble from "../../styles/icons/CommentBubble";
 import {Badge, Overlay, Tooltip} from "react-bootstrap";
 import CommentList from "./CommentList";
-import NewComment from "./NewComment";
 import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
 import {ConfigurationContext} from "../../contexts/ConfigurationContext";
+import CommentForm from "./CommentForm";
 
 const QuestionCommentIcon = (props) => {
     const context = useContext(ConfigurationContext);
-
     const target = useRef(null);
-
     const [show, setShow] = useState(false);
-    const [comment, setComment] = useState([]);
-    const [commentIndex, setCommentIndex] = useState(0);
 
     const hideOverlay = () => {
         setShow(false);
-    }
-
-    const addCommentHandler = (comment) => {
-        setComment(prevComment => {
-            return [comment, ...prevComment];
-        });
-
-        setCommentIndex(commentIndex + 1);
     }
 
     // TODO make util function
@@ -45,7 +33,7 @@ const QuestionCommentIcon = (props) => {
     const onCommentValueChangeHandler = (value) => {
         const change = {};
         _setComment(change, value);
-        props.onChange(commentIndex, change);
+        props.onChange(getCommentsLength(), change);
     };
 
     const _setComment = (change, value) => {
@@ -66,27 +54,23 @@ const QuestionCommentIcon = (props) => {
         setShow(!show);
     }
 
+    const getCommentsLength = () => {
+       return _getComments().length;
+    }
+
     return (
         <>
             <span ref={target} onClick={onClickHandler}>
                 <CommentBubble/>
-                {commentIndex > 0 ? <Badge className="comment-badge" pill variant="primary">{commentIndex}</Badge> : null}
+                {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
             </span>
 
             <Overlay target={target.current} show={show} placement="right" rootClose={true} onHide={hideOverlay}>
                 {(overlayProps) => (
                     <Tooltip className="comment-tooltip" {...overlayProps}>
                         <span>
-                            <NewComment
-                                onAddComment={addCommentHandler}
-                                onChange={props.onChange}
-                                onCommentValueChange={onCommentValueChangeHandler}
-                                comment={_getComments()}
-                            />
-                            <CommentList
-                                question={props.question}
-                                comment={comment}
-                            />
+                            <CommentForm onChange={onCommentValueChangeHandler} />
+                            <CommentList comment={_getComments()} />
                         </span>
                     </Tooltip>
                 )}

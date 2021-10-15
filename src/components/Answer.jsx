@@ -15,6 +15,7 @@ import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import HelpIcon from './HelpIcon';
 import JsonLdUtils from 'jsonld-utils';
 import QuestionCommentIcon from "./comment/QuestionCommentIcon";
+import {Col, Row} from "react-bootstrap";
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
@@ -146,11 +147,19 @@ const Answer = (props) => {
     ) : null;
 
     return (
-      <div>
-        <span>{label}</span>
-        {questionHelp}
-        <QuestionCommentIcon question={question} onChange={props.onCommentChange} />
-      </div>
+        <Row>
+          <Col className="no-padding-right" lg="auto">{label}</Col>
+          {questionHelp ?
+              <>
+                <Col lg="1">{questionHelp}</Col>
+                <Col lg="1"><QuestionCommentIcon question={question} onChange={props.onCommentChange}/></Col>
+              </>
+              : <Col lg="1"><QuestionCommentIcon
+                  question={question}
+                  onChange={props.onCommentChange}/>
+              </Col>
+          }
+        </Row>
     );
   }
 

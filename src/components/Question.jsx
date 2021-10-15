@@ -149,7 +149,7 @@ export default class Question extends React.Component {
             <Card className="mb-3">
               <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
                 <Row>
-                  <Col className="col-sm-auto no-padding-right">
+                  <Col className="no-padding-right" lg="auto">
                     <h6 className="d-inline" id={question['@id']}>
                       {collapsible && this._renderCollapseToggle()}
                       {label}
@@ -157,14 +157,15 @@ export default class Question extends React.Component {
                   </Col>
                   {this._renderQuestionHelp() ?
                       <>
-                        <Col className="col-sm-auto">
+                        <Col lg="auto">
                           {this._renderQuestionHelp()}
                         </Col>
-                        <Col className="col-sm-auto">
+                        <Col lg="auto">
                           {this._renderQuestionComment()}
                         </Col>
                       </>
-                      : this._renderQuestionComment()}
+                      : <Col lg="auto">{this._renderQuestionComment()}</Col>
+                  }
                 </Row>
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}

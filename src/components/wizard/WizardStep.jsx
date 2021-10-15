@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonToolbar, Card } from 'react-bootstrap';
+import {Button, ButtonToolbar, Card, Col, Row} from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
@@ -91,9 +91,16 @@ export default class WizardStep extends React.Component {
       <div className="wizard-step">
         <Card className="wizard-step-content">
           <Card.Header className="bg-primary text-white" as="h6" id={this.props.step['@id']}>
-            {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
-            {this._renderHelpIcon()}
-            {this._renderQuestionCommentIcon()}
+            <Row>
+              <Col className="no-padding-right" lg="auto">{JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}</Col>
+              {this._renderHelpIcon() ?
+                  <>
+                    <Col lg="auto">{this._renderHelpIcon()}</Col>
+                    <Col lg="auto">{this._renderQuestionCommentIcon()}</Col>
+                  </>
+                  : <Col lg="auto">{this._renderQuestionCommentIcon()}</Col>
+              }
+            </Row>
           </Card.Header>
           <Card.Body className={categoryClass}>
             {questionElement}
