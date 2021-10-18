@@ -157,14 +157,14 @@ export default class Question extends React.Component {
                   </Col>
                   {this._renderQuestionHelp() ?
                       <>
-                        <Col lg="auto">
+                        <Col className="no-padding-left" lg="auto">
                           {this._renderQuestionHelp()}
                         </Col>
-                        <Col lg="auto">
+                        <Col className="no-padding-left" lg="auto">
                           {this._renderQuestionComment()}
                         </Col>
                       </>
-                      : <Col lg="auto">{this._renderQuestionComment()}</Col>
+                      : <Col className="no-padding-left" lg="auto">{this._renderQuestionComment()}</Col>
                   }
                 </Row>
               </Accordion.Toggle>

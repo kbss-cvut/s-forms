@@ -151,12 +151,14 @@ const Answer = (props) => {
           <Col className="no-padding-right" lg="auto">{label}</Col>
           {questionHelp ?
               <>
-                <Col lg="1">{questionHelp}</Col>
-                <Col lg="1"><QuestionCommentIcon question={question} onChange={props.onCommentChange}/></Col>
+                <Col className="no-padding-left" lg="1" >{questionHelp}</Col>
+                <Col className="no-padding-left" lg="auto"><QuestionCommentIcon question={question} onChange={props.onCommentChange}/></Col>
               </>
-              : <Col lg="1"><QuestionCommentIcon
+              : <Col className="no-padding-left" lg="auto">
+                <QuestionCommentIcon
                   question={question}
-                  onChange={props.onCommentChange}/>
+                  onChange={props.onCommentChange}
+                />
               </Col>
           }
         </Row>

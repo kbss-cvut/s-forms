@@ -95,10 +95,10 @@ export default class WizardStep extends React.Component {
               <Col className="no-padding-right" lg="auto">{JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}</Col>
               {this._renderHelpIcon() ?
                   <>
-                    <Col lg="auto">{this._renderHelpIcon()}</Col>
-                    <Col lg="auto">{this._renderQuestionCommentIcon()}</Col>
+                    <Col className="no-padding-left" lg="auto">{this._renderHelpIcon()}</Col>
+                    <Col className="no-padding-left" lg="auto">{this._renderQuestionCommentIcon()}</Col>
                   </>
-                  : <Col lg="auto">{this._renderQuestionCommentIcon()}</Col>
+                  : <Col className="no-padding-left" lg="auto">{this._renderQuestionCommentIcon()}</Col>
               }
             </Row>
           </Card.Header>

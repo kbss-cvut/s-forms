@@ -20,8 +20,12 @@ const CommentForm = (props) => {
         if (e.key === 'Enter'&& e.ctrlKey) submitHandler(e)
     }
 
+    const onClickHandler = (e) => {
+        e.stopPropagation();
+    }
+
     return (
-        <Form onSubmit={submitHandler} className="comment-form" onKeyUp={onKeyUpHandler}>
+        <Form onSubmit={submitHandler} className="comment-form" onKeyUp={onKeyUpHandler} onClick={onClickHandler}>
             <Form.Group className="mb-3" controlId="formBasicComment">
                 <Col className="col-lg-12">
                     <Row className="col-lg-12">

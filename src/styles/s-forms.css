@@ -56,6 +56,10 @@ svg {
   padding-right: 0;
 }
 
+.no-padding-left {
+  padding-left: 0;
+}
+
 .caret-square-up,
 .caret-square-down,
 .question-circle,
