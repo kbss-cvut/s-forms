@@ -160,11 +160,9 @@ export default class Question extends React.Component {
                         <Col className="no-padding-left" lg="auto">
                           {this._renderQuestionHelp()}
                         </Col>
-                        <Col className="no-padding-left" lg="auto">
                           {this._renderQuestionComment()}
-                        </Col>
                       </>
-                      : <Col className="no-padding-left" lg="auto">{this._renderQuestionComment()}</Col>
+                      : this._renderQuestionComment()
                   }
                 </Row>
               </Accordion.Toggle>
@@ -337,10 +335,15 @@ export default class Question extends React.Component {
   }
 
   _renderQuestionComment() {
-    return <QuestionCommentIcon
-        question={this.props.question}
-        onChange={this.onCommentChange}
-    />
+    if (this.context.options.enableComments) {
+      return (
+          <Col className="no-padding-left" lg="auto">
+            <QuestionCommentIcon
+                question={this.props.question}
+                onChange={this.onCommentChange} />
+          </Col>
+      );
+    } else return null;
   }
 
   _renderPrefixes() {

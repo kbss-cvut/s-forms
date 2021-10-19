@@ -39,7 +39,16 @@ export default class WizardStep extends React.Component {
   _renderQuestionCommentIcon = () => {
     const question = this.context.getFormQuestionsData([this.props.stepIndex]);
 
-    return <QuestionCommentIcon question={question} onChange={this.onCommentChange} />
+    if (this.props.options.enableComments) {
+      return (
+          <Col className="no-padding-left" lg="auto">
+            <QuestionCommentIcon
+                question={question}
+                onChange={this.onCommentChange}
+            />
+          </Col>
+      );
+    } else return null;
   }
 
   onCommentChange = (commentIndex, change) => {
@@ -96,9 +105,9 @@ export default class WizardStep extends React.Component {
               {this._renderHelpIcon() ?
                   <>
                     <Col className="no-padding-left" lg="auto">{this._renderHelpIcon()}</Col>
-                    <Col className="no-padding-left" lg="auto">{this._renderQuestionCommentIcon()}</Col>
+                    {this._renderQuestionCommentIcon()}
                   </>
-                  : <Col className="no-padding-left" lg="auto">{this._renderQuestionCommentIcon()}</Col>
+                  : this._renderQuestionCommentIcon()
               }
             </Row>
           </Card.Header>

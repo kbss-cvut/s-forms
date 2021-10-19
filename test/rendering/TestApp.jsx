@@ -65,7 +65,8 @@ class TestApp extends React.Component {
       users: [
           {id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart"},
           {id: "http://fel.cvut.cz/people/miroslav-blasko", label: "Miroslav Blasko"}],
-      currentUser: "http://fel.cvut.cz/people/max-chopart"
+      currentUser: "http://fel.cvut.cz/people/max-chopart",
+      enableComments: false
     };
 
     return (
