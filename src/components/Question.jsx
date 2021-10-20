@@ -104,7 +104,7 @@ export default class Question extends React.Component {
     }
     if (!FormUtils.isRelevant(question) && this.context.options.debugMode) {
       return (
-          <div className="debugMode">
+          <div className="showIrrelevant">
             {renderQuestion}
           </div>
       );
@@ -113,7 +113,7 @@ export default class Question extends React.Component {
       return null;
     }
 
-    else return renderQuestion
+    return renderQuestion;
   }
 
   renderQuestion(question) {
@@ -205,14 +205,14 @@ export default class Question extends React.Component {
       <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
     );
 
-    let debugMode;
+    const debugMode = this.context.options.debugMode;
+    let showIrrelevant = "showIrrelevant";
     let activeKey;
-    if (this.context.options.debugMode && !FormUtils.hasAnswer(question)) {
-      debugMode = "debugMode";
+
+    if (debugMode && !FormUtils.hasAnswer(question)) {
       activeKey = question['@id'];
-    }
-    else {
-      debugMode = "";
+    } else {
+      showIrrelevant = "";
       activeKey = this.state.expanded ? question['@id'] : undefined;
     }
 
@@ -222,7 +222,7 @@ export default class Question extends React.Component {
               <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
                 {this.renderAnswers()}
               </Card.Header>
-              {collapsible ? <Accordion.Collapse className={debugMode} eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+              {collapsible ? <Accordion.Collapse className={showIrrelevant} eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
             </Card>
           </Accordion>
       );

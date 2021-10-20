@@ -180,7 +180,7 @@ input:disabled {
   animation: emphasiseOnRelevantSection 1.2s ease-in;
 }
 
-.debugMode {
+.showIrrelevant {
   opacity: 50%;
   pointer-events: none;
 }
