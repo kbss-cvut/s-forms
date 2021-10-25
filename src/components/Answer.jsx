@@ -146,29 +146,10 @@ const Answer = (props) => {
       />
     ) : null;
 
-    const _renderQuestionCommentIcon = () => {
-      if (options.enableComments) {
-        return (
-            <Col className="no-padding-left" lg="auto">
-              <QuestionCommentIcon
-                  question={question}
-                  onChange={props.onCommentChange}
-              />
-            </Col>
-        );
-      } else return null;
-    }
-
     return (
-        <Row>
+        <Row lg="auto">
           <Col className="no-padding-right" lg="auto">{label}</Col>
-          {questionHelp ?
-              <>
-                <Col className="no-padding-left" lg="1" >{questionHelp}</Col>
-                {_renderQuestionCommentIcon()}
-              </>
-              : _renderQuestionCommentIcon()
-          }
+          {props.icons}
         </Row>
     );
   }

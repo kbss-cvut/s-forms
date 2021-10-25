@@ -56,7 +56,7 @@ svg {
   padding-right: 0;
 }
 
-.no-padding-left {
+.icon-layout {
   padding-left: 0;
 }
 
@@ -81,11 +81,6 @@ svg {
 .caret-square-down {
   margin-right: 0.2rem;
   margin-left: -5px;
-}
-
-.help-icon-text-input {
-  margin-bottom: 25px;
-  bottom: 0;
 }
 
 .has-unit-label {

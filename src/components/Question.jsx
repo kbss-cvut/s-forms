@@ -16,6 +16,7 @@ import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
 import QuestionCommentIcon from "./comment/QuestionCommentIcon";
+import IconsLayout from "./IconsLayout";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -155,15 +156,7 @@ export default class Question extends React.Component {
                       {label}
                     </h6>
                   </Col>
-                  {this._renderQuestionHelp() ?
-                      <>
-                        <Col className="no-padding-left" lg="auto">
-                          {this._renderQuestionHelp()}
-                        </Col>
-                          {this._renderQuestionComment()}
-                      </>
-                      : this._renderQuestionComment()
-                  }
+                  {this._renderIcons()}
                 </Row>
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
@@ -240,7 +233,9 @@ export default class Question extends React.Component {
                 answer={answers[i]}
                 question={question}
                 onChange={this.onAnswerChange}
-                onCommentChange={this.onCommentChange}/>
+                onCommentChange={this.onCommentChange}
+                icons={this._renderIcons()}
+            />
           </div>
           {this._renderUnits()}
           {this._renderPrefixes()}
@@ -320,30 +315,39 @@ export default class Question extends React.Component {
     );
   }
 
-  _renderQuestionHelp() {
-    const question = this.props.question;
-    let helpClass = FormUtils.isCheckbox(question) ? 'help-icon-checkbox' : 'help-icon-text-input';
-    if (FormUtils.isSection(question)) {
-      helpClass = 'help-icon-section';
+  static _renderQuestionHelp(question, intl) {
+    if (question[Constants.HELP_DESCRIPTION]) {
+      return <HelpIcon
+          text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], intl)}/>
     }
-    return question[Constants.HELP_DESCRIPTION] ? (
-      <HelpIcon
-        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], this.context.options.intl)}
-        iconClassContainer={helpClass}
-      />
-    ) : null;
+    return null;
   }
 
   _renderQuestionComment() {
-    if (this.context.options.enableComments) {
-      return (
-          <Col className="no-padding-left" lg="auto">
-            <QuestionCommentIcon
+    if (this.context.options.questionComments === "enable") {
+      return <QuestionCommentIcon
                 question={this.props.question}
-                onChange={this.onCommentChange} />
-          </Col>
-      );
-    } else return null;
+                onChange={this.onCommentChange}/>
+    }
+    return null;
+  }
+
+  _renderIcons() {
+    const question = this.props.question;
+    const intl = this.context.options.intl;
+    const renderQuestionHelp = Question._renderQuestionHelp(question, intl);
+    const renderQuestionComment = this._renderQuestionComment();
+
+    return (
+        <IconsLayout layout={Question.setIconsLayout()}>
+          {renderQuestionHelp}
+          {renderQuestionComment}
+        </IconsLayout>
+    );
+  }
+
+  static setIconsLayout() {
+    return "icon-layout";
   }
 
   _renderPrefixes() {

@@ -3,11 +3,11 @@ import {Button, ButtonToolbar, Card, Col, Row} from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
-import HelpIcon from '../HelpIcon';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
 import QuestionCommentIcon from "../comment/QuestionCommentIcon";
 import JsonLdObjectMap from "../../util/JsonLdObjectMap";
+import IconsLayout from "../IconsLayout";
 
 
 export default class WizardStep extends React.Component {
@@ -25,29 +25,14 @@ export default class WizardStep extends React.Component {
     this.props.onPreviousStep();
   };
 
-  _renderHelpIcon = () => {
+  _renderQuestionComment = () => {
     const question = this.context.getFormQuestionsData([this.props.stepIndex]);
+    const comments = this.props.options.questionComments;
 
-    return question[Constants.HELP_DESCRIPTION] ? (
-      <HelpIcon
-        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], this.props.options.intl)}
-        iconClass="help-icon-section"
-      />
-    ) : null;
-  };
-
-  _renderQuestionCommentIcon = () => {
-    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
-
-    if (this.props.options.enableComments) {
-      return (
-          <Col className="no-padding-left" lg="auto">
-            <QuestionCommentIcon
+    if (comments) {
+      return <QuestionCommentIcon
                 question={question}
-                onChange={this.onCommentChange}
-            />
-          </Col>
-      );
+                onChange={this.onCommentChange}/>
     } else return null;
   }
 
@@ -84,6 +69,21 @@ export default class WizardStep extends React.Component {
     this.context.updateFormQuestionsData(this.props.stepIndex || index, { ...this.props.step, ...change });
   };
 
+  _renderIcons = () => {
+    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
+    const intl = this.props.options.intl;
+
+    const renderQuestionHelp = Question._renderQuestionHelp(question, intl);
+    const renderQuestionComment = this._renderQuestionComment();
+
+    return (
+        <IconsLayout layout={Question.setIconsLayout()}>
+          {renderQuestionHelp}
+          {renderQuestionComment}
+        </IconsLayout>
+    );
+  }
+
   render() {
 
     const categoryClass = Question._getQuestionCategoryClass(this.props.step);
@@ -102,13 +102,7 @@ export default class WizardStep extends React.Component {
           <Card.Header className="bg-primary text-white" as="h6" id={this.props.step['@id']}>
             <Row>
               <Col className="no-padding-right" lg="auto">{JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}</Col>
-              {this._renderHelpIcon() ?
-                  <>
-                    <Col className="no-padding-left" lg="auto">{this._renderHelpIcon()}</Col>
-                    {this._renderQuestionCommentIcon()}
-                  </>
-                  : this._renderQuestionCommentIcon()
-              }
+              {this._renderIcons()}
             </Row>
           </Card.Header>
           <Card.Body className={categoryClass}>
