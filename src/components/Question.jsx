@@ -16,7 +16,7 @@ import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
 import QuestionCommentIcon from "./comment/QuestionCommentIcon";
-import IconsLayout from "./IconsLayout";
+import IconList from "./IconList";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -339,15 +339,11 @@ export default class Question extends React.Component {
     const renderQuestionComment = this._renderQuestionComment();
 
     return (
-        <IconsLayout layout={Question.setIconsLayout()}>
+        <IconList>
           {renderQuestionHelp}
           {renderQuestionComment}
-        </IconsLayout>
+        </IconList>
     );
-  }
-
-  static setIconsLayout() {
-    return "icon-layout";
   }
 
   _renderPrefixes() {

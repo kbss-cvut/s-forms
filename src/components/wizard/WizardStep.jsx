@@ -7,7 +7,7 @@ import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
 import QuestionCommentIcon from "../comment/QuestionCommentIcon";
 import JsonLdObjectMap from "../../util/JsonLdObjectMap";
-import IconsLayout from "../IconsLayout";
+import IconList from "../IconList";
 
 
 export default class WizardStep extends React.Component {
@@ -77,10 +77,10 @@ export default class WizardStep extends React.Component {
     const renderQuestionComment = this._renderQuestionComment();
 
     return (
-        <IconsLayout layout={Question.setIconsLayout()}>
+        <IconList className="icon-wizard">
           {renderQuestionHelp}
           {renderQuestionComment}
-        </IconsLayout>
+        </IconList>
     );
   }
 
