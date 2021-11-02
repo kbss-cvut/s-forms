@@ -315,33 +315,36 @@ export default class Question extends React.Component {
     );
   }
 
-  static _renderQuestionHelp(question, intl) {
-    if (question[Constants.HELP_DESCRIPTION]) {
-      return <HelpIcon
-          text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], intl)}/>
+  static renderQuestionHelp(question, options) {
+    if (!options.questionHelp || options.questionHelp === "enable") {
+      if (question[Constants.HELP_DESCRIPTION]) {
+        return <HelpIcon
+            text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}/>
+      }
     }
     return null;
   }
 
-  _renderQuestionComment() {
-    if (this.context.options.questionComments === "enable") {
+  static renderQuestionComments = (question, options, onChange) => {
+
+    if (options.questionComments === "enable") {
       return <QuestionCommentIcon
-                question={this.props.question}
-                onChange={this.onCommentChange}/>
+          question={question}
+          onChange={onChange}/>
     }
     return null;
   }
 
   _renderIcons() {
     const question = this.props.question;
-    const intl = this.context.options.intl;
-    const renderQuestionHelp = Question._renderQuestionHelp(question, intl);
-    const renderQuestionComment = this._renderQuestionComment();
+    const options = this.context.options;
+    const renderQuestionHelp = Question.renderQuestionHelp(question, options);
+    const renderQuestionComments = Question.renderQuestionComments(question, options, this.onCommentChange);
 
     return (
         <IconList>
           {renderQuestionHelp}
-          {renderQuestionComment}
+          {renderQuestionComments}
         </IconList>
     );
   }

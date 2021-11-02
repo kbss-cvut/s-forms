@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
-import QuestionCommentIcon from "../comment/QuestionCommentIcon";
 import JsonLdObjectMap from "../../util/JsonLdObjectMap";
 import IconList from "../IconList";
 
@@ -24,17 +23,6 @@ export default class WizardStep extends React.Component {
   onPreviousStep = () => {
     this.props.onPreviousStep();
   };
-
-  _renderQuestionComment = () => {
-    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
-    const comments = this.props.options.questionComments;
-
-    if (comments === "enable") {
-      return <QuestionCommentIcon
-                question={question}
-                onChange={this.onCommentChange}/>
-    } else return null;
-  }
 
   onCommentChange = (commentIndex, change) => {
     this._onChange(Constants.HAS_COMMENT, commentIndex, change)
@@ -71,15 +59,15 @@ export default class WizardStep extends React.Component {
 
   _renderIcons = () => {
     const question = this.context.getFormQuestionsData([this.props.stepIndex]);
-    const intl = this.props.options.intl;
+    const options = this.props.options;
 
-    const renderQuestionHelp = Question._renderQuestionHelp(question, intl);
-    const renderQuestionComment = this._renderQuestionComment();
+    const renderQuestionHelp = Question.renderQuestionHelp(question, options);
+    const renderQuestionComments = Question.renderQuestionComments(question, options, this.onCommentChange);
 
     return (
         <IconList>
           {renderQuestionHelp}
-          {renderQuestionComment}
+          {renderQuestionComments}
         </IconList>
     );
   }
