@@ -29,7 +29,7 @@ export default class WizardStep extends React.Component {
     const question = this.context.getFormQuestionsData([this.props.stepIndex]);
     const comments = this.props.options.questionComments;
 
-    if (comments) {
+    if (comments === "enable") {
       return <QuestionCommentIcon
                 question={question}
                 onChange={this.onCommentChange}/>
