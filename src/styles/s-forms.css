@@ -204,7 +204,7 @@ input:disabled {
 }
 
 .comment-content .comment-author {
-  font-weight: 900;
+  font-weight: bold;
 }
 
 .comment-content .comment-value {

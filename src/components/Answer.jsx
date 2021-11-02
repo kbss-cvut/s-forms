@@ -14,7 +14,6 @@ import { FormGenContext } from '../contexts/FormGenContext';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import HelpIcon from './HelpIcon';
 import JsonLdUtils from 'jsonld-utils';
-import QuestionCommentIcon from "./comment/QuestionCommentIcon";
 import {Col, Row} from "react-bootstrap";
 
 const Answer = (props) => {
@@ -186,8 +185,9 @@ Answer.propTypes = {
   answer: PropTypes.object.isRequired,
   question: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
+  onCommentChange: PropTypes.func.isRequired,
   index: PropTypes.number,
-  onCommentChange: PropTypes.func.isRequired
+  icons: PropTypes.array
 };
 
 export default Answer;
