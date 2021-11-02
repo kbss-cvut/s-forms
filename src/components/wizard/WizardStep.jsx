@@ -77,7 +77,7 @@ export default class WizardStep extends React.Component {
     const renderQuestionComment = this._renderQuestionComment();
 
     return (
-        <IconList className="icon-wizard">
+        <IconList>
           {renderQuestionHelp}
           {renderQuestionComment}
         </IconList>
