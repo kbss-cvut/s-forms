@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Accordion, Row, Col} from 'react-bootstrap';
+import {Card, Accordion} from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Answer from './Answer';
@@ -149,15 +149,15 @@ export default class Question extends React.Component {
           <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
             <Card className="mb-3">
               <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
-                <Row>
-                  <Col className="no-padding-right" lg="auto">
+                <ul className="icon-list-items">
+                  <li className="icon-list-item">
                     <h6 className="d-inline" id={question['@id']}>
                       {collapsible && this._renderCollapseToggle()}
                       {label}
                     </h6>
-                  </Col>
+                  </li>
                   {this._renderIcons()}
-                </Row>
+                </ul>
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
             </Card>
@@ -319,7 +319,8 @@ export default class Question extends React.Component {
     if (!options.questionHelp || options.questionHelp === "enable") {
       if (question[Constants.HELP_DESCRIPTION]) {
         return <HelpIcon
-            text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}/>
+            text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
+            absolutePosition={false}/>
       }
     }
     return null;

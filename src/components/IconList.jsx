@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const IconList = (props) => {
     return (
         React.Children.map(props.children, child => {
-            if (child) return <Col className={props.className ? props.className : "icon-list" } lg="auto">{child}</Col>
+            if (child) return <li className="icon-list-item">{child}</li>
             return null;
         })
     );

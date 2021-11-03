@@ -21,7 +21,7 @@
   border: 1px solid #dfdfdf;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  margin-bottom: 18px;
+  margin-bottom: 1.11rem;
 }
 
 .answerable-question .form-group {
@@ -33,7 +33,7 @@
 }
 
 .answerable-section .form-group .form-check-label {
-  margin-left: 2px;
+  margin-left: .11rem;
   font-weight: 500;
 }
 
@@ -48,16 +48,7 @@ svg {
 }
 
 .question-comment {
-  margin-left: 0.5vw;
   cursor: pointer;
-}
-
-.no-padding-right {
-  padding-right: 0;
-}
-
-.icon-list {
-  padding-left: 0;
 }
 
 .caret-square-up,
@@ -80,13 +71,13 @@ svg {
 .caret-square-up,
 .caret-square-down {
   margin-right: 0.2rem;
-  margin-left: -5px;
+  margin-left: -0.3125rem;
 }
 
 .has-unit-label {
   font-weight: bold;
-  margin-top: 12px;
-  margin-left: 12px;
+  margin-top: 0.75rem;
+  margin-left: 0.75rem;
 }
 
 .tooltip-content {
@@ -94,7 +85,7 @@ svg {
 }
 
 .collapse-toggle {
-  margin-right: 0.3em;
+  margin-right: 0.3rem;
   line-height: 0.9;
 }
 
@@ -123,11 +114,11 @@ input:disabled {
 }
 
 .wizard-step {
-  min-height: 650px;
+  min-height: 40.625rem;
 }
 
 .wizard-step-content {
-  min-height: 600px;
+  min-height: 37.5rem;
 }
 
 .list-group-item.active {
@@ -162,7 +153,7 @@ input:disabled {
 
 .answer > .answer-content {
   flex-grow: 1;
-  max-width: 500px;
+  max-width: 31.25rem;
 }
 
 .card-header:first-child {
@@ -174,7 +165,17 @@ input:disabled {
 }
 
 .card-header.section-background {
-  background-color: #e6f9fb
+  background-color: #e6f9fb;
+}
+
+.icon-list-items {
+  display: flex;
+  padding-left: 0;
+  margin: auto;
+}
+
+.icon-list-item {
+  list-style-type: none;
 }
 
 .card-header .form-group {
@@ -191,7 +192,7 @@ input:disabled {
 
 .comment-tooltip > .tooltip-inner {
   max-width: none;
-  max-height: 400px;
+  max-height: 25rem;
   width: 50vw;
   border: solid 2px #afafaf;
   background-color: #cbeef6;
@@ -212,7 +213,7 @@ input:disabled {
 }
 
 .comment-list-items {
-  padding-top: 20px;
+  padding-top: 1.25rem;
 }
 
 .comment-timestamp {
@@ -223,14 +224,14 @@ input:disabled {
 .send-comment-arrow {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 .comment-badge {
   position: relative;
   bottom: 13px;
   right: 7px;
-  font-size: 9px;
+  font-size: 0.5625rem;
 }
 
 @keyframes emphasiseOnRelevant {

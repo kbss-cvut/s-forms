@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, ButtonToolbar, Card, Col, Row} from 'react-bootstrap';
+import {Button, ButtonToolbar, Card} from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
@@ -88,10 +88,10 @@ export default class WizardStep extends React.Component {
       <div className="wizard-step">
         <Card className="wizard-step-content">
           <Card.Header className="bg-primary text-white" as="h6" id={this.props.step['@id']}>
-            <Row>
-              <Col className="no-padding-right" lg="auto">{JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}</Col>
+            <ul className="icon-list-items">
+              <li className="icon-list-item">{JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}</li>
               {this._renderIcons()}
-            </Row>
+            </ul>
           </Card.Header>
           <Card.Body className={categoryClass}>
             {questionElement}
@@ -101,10 +101,7 @@ export default class WizardStep extends React.Component {
         {this.props.options.wizardStepButtons && this._renderWizardStepButtons()}
       </div>
     );
-
-
   }
-
 }
 
 WizardStep.contextType = FormQuestionsContext;
