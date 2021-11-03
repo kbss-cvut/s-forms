@@ -17,7 +17,7 @@ const CommentForm = (props) => {
     }
 
     const onKeyUpHandler = (e) => {
-        if (e.key === 'Enter'&& e.ctrlKey) submitHandler(e)
+        if (e.key === 'Enter'&& e.ctrlKey && commentValue.trim()) submitHandler(e);
     }
 
     const onClickHandler = (e) => {
