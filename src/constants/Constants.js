@@ -105,4 +105,15 @@ export default class Constants {
   static RDFS_LABEL = JsonLdUtils.RDFS_LABEL;
   static RDFS_COMMENT = JsonLdUtils.RDFS_COMMENT;
   static DEFAULT_HAS_CHILD = JsonLdUtils.DEFAULT_HAS_CHILD;
+
+  static ICONS = {
+    QUESTION_COMMENTS: "questionComments",
+    QUESTION_HELP: "questionHelp"
+  }
+
+  static ICON_BEHAVIOR = {
+    ENABLE: "enable",
+    DISABLE: "disable",
+    ON_HOVER: "onHover"
+  }
 }

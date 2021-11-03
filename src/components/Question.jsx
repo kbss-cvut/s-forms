@@ -16,7 +16,6 @@ import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
 import QuestionCommentIcon from "./comment/QuestionCommentIcon";
-import IconList from "./IconList";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -98,6 +97,8 @@ export default class Question extends React.Component {
 
   render() {
     const question = this.props.question;
+    const options = this.context.options;
+
     if (FormUtils.isHidden(question)) {
       return null;
     }
@@ -156,7 +157,7 @@ export default class Question extends React.Component {
                       {label}
                     </h6>
                   </li>
-                  {this._renderIcons()}
+                  {Question.renderIcons(question, options, this.onCommentChange)}
                 </ul>
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
@@ -211,7 +212,8 @@ export default class Question extends React.Component {
   renderAnswers() {
     const question = this.props.question,
       children = [],
-      answers = this._getAnswers();
+      answers = this._getAnswers(),
+      options = this.context.options;
     let cls;
     let isTextarea;
 
@@ -234,7 +236,7 @@ export default class Question extends React.Component {
                 question={question}
                 onChange={this.onAnswerChange}
                 onCommentChange={this.onCommentChange}
-                icons={this._renderIcons()}
+                icons={Question.renderIcons(question, options, this.onCommentChange)}
             />
           </div>
           {this._renderUnits()}
@@ -316,7 +318,16 @@ export default class Question extends React.Component {
   }
 
   static renderQuestionHelp(question, options) {
-    if (!options.questionHelp || options.questionHelp === "enable") {
+    const icons = options.icons;
+    let questionHelpIcon;
+
+    for (let i = 0; i < icons.length; i++) {
+      if (icons[i].id === Constants.ICONS.QUESTION_HELP) {
+        questionHelpIcon = icons[i];
+      }
+    }
+
+    if (!questionHelpIcon || questionHelpIcon.behavior === Constants.ICON_BEHAVIOR.ENABLE) {
       if (question[Constants.HELP_DESCRIPTION]) {
         return <HelpIcon
             text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
@@ -327,8 +338,16 @@ export default class Question extends React.Component {
   }
 
   static renderQuestionComments = (question, options, onChange) => {
+    const icons = options.icons
+    let questionCommentsIcon;
 
-    if (options.questionComments === "enable") {
+    for (let i = 0; i < icons.length; i++) {
+      if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
+        questionCommentsIcon = icons[i];
+      }
+    }
+
+    if (questionCommentsIcon && questionCommentsIcon.behavior === Constants.ICON_BEHAVIOR.ENABLE) {
       return <QuestionCommentIcon
           question={question}
           onChange={onChange}/>
@@ -336,18 +355,26 @@ export default class Question extends React.Component {
     return null;
   }
 
-  _renderIcons() {
-    const question = this.props.question;
-    const options = this.context.options;
+  static renderIcons(question, options, onCommentChange) {
+    const icons = options.icons;
+    let iconsArray = [];
     const renderQuestionHelp = Question.renderQuestionHelp(question, options);
-    const renderQuestionComments = Question.renderQuestionComments(question, options, this.onCommentChange);
+    const renderQuestionComments = Question.renderQuestionComments(question, options, onCommentChange);
 
-    return (
-        <IconList>
-          {renderQuestionHelp}
-          {renderQuestionComments}
-        </IconList>
-    );
+    for (let i = 0; i < icons.length; i++) {
+      if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
+        iconsArray.push(
+            <li key={i} className="icon-list-item">{renderQuestionComments}</li>
+        )
+      }
+      if (icons[i].id === Constants.ICONS.QUESTION_HELP) {
+        iconsArray.push(
+            <li key={i} className="icon-list-item">{renderQuestionHelp}</li>
+        )
+      }
+    }
+
+    return iconsArray;
   }
 
   _renderPrefixes() {

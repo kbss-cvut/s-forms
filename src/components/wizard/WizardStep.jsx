@@ -6,7 +6,6 @@ import Constants from '../../constants/Constants';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
 import JsonLdObjectMap from "../../util/JsonLdObjectMap";
-import IconList from "../IconList";
 
 
 export default class WizardStep extends React.Component {
@@ -57,24 +56,11 @@ export default class WizardStep extends React.Component {
     this.context.updateFormQuestionsData(this.props.stepIndex || index, { ...this.props.step, ...change });
   };
 
-  _renderIcons = () => {
-    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
-    const options = this.props.options;
-
-    const renderQuestionHelp = Question.renderQuestionHelp(question, options);
-    const renderQuestionComments = Question.renderQuestionComments(question, options, this.onCommentChange);
-
-    return (
-        <IconList>
-          {renderQuestionHelp}
-          {renderQuestionComments}
-        </IconList>
-    );
-  }
-
   render() {
 
     const categoryClass = Question._getQuestionCategoryClass(this.props.step);
+    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
+    const options = this.props.options;
 
     let questionComponent = this.props.mapComponent(this.props.step, Question);
     let questionElement = React.createElement(questionComponent, {
@@ -90,7 +76,7 @@ export default class WizardStep extends React.Component {
           <Card.Header className="bg-primary text-white" as="h6" id={this.props.step['@id']}>
             <ul className="icon-list-items">
               <li className="icon-list-item">{JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}</li>
-              {this._renderIcons()}
+              {Question.renderIcons(question, options, this.onCommentChange)}
             </ul>
           </Card.Header>
           <Card.Body className={categoryClass}>

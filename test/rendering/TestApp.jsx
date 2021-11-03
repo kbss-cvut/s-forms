@@ -66,8 +66,10 @@ class TestApp extends React.Component {
           {id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart"},
           {id: "http://fel.cvut.cz/people/miroslav-blasko", label: "Miroslav Blasko"}],
       currentUser: "http://fel.cvut.cz/people/max-chopart",
-      questionComments: "enable", // enable | <disable>
-      questionHelp: "enable" // <enable> | disable
+      icons: [
+        {id: "questionHelp", behavior: "enable"}, // <enable> | disable
+        {id: "questionComments", behavior: "enable"} // enable | <disable>
+      ]
     };
 
     return (

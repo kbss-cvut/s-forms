@@ -177,7 +177,7 @@ Answer.propTypes = {
   onChange: PropTypes.func.isRequired,
   onCommentChange: PropTypes.func.isRequired,
   index: PropTypes.number,
-  icons: PropTypes.object
+  icons: PropTypes.array
 };
 
 export default Answer;
