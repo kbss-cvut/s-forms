@@ -60,11 +60,13 @@ svg {
   margin-bottom: 0.15rem;
 }
 
-.question-circle, .question-comment {
+.question-circle,
+.question-comment {
   fill: grey;
 }
 
-.text-white .question-circle {
+.text-white .question-circle,
+.text-white .question-comment {
   fill: white;
 }
 
