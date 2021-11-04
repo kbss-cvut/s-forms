@@ -525,6 +525,38 @@
             "checkbox",
             "answerable"
          ],
+         "@id" : "answerable-section-with-icons-4808",
+         "has-comment" : [
+            {
+               "@type" : "form:comment",
+               "has-comment-value" : "Some comment",
+               "has-author"  : "http://fel.cvut.cz/people/max-chopart",
+               "has-timestamp" : "1636061441831"
+            },
+            {
+               "@type" : "form:comment",
+               "has-comment-value" : "Another comment",
+               "has-author"  : "http://fel.cvut.cz/people/miroslav-blasko",
+               "has-timestamp" : "1636065441831"
+            }
+         ],
+         "description" : {
+            "@value" : "Some detailed description of the question.",
+            "@language" : "en"
+         },
+
+         "@type" : "doc:question"
+      },
+      {
+         "label" : {
+            "@value" : "Answerable section",
+            "@language" : "en"
+         },
+         "has-layout-class" : [
+            "section",
+            "checkbox",
+            "answerable"
+         ],
          "@id" : "answerable-section-4808",
          "has_related_question" : [
             "aircraft-name-9553",
@@ -788,7 +820,7 @@
                   "@language" : "en"
                },
                "form:has-preceding-question" : {
-                  "@id" : "layout-options-65"
+                  "@id" : "icons-65"
                }
       },
       {
@@ -2267,6 +2299,7 @@
          },
          "has-layout-class" : "form",
          "has_related_question" : [
+            "icons-65",
             "layout-options-65",
             "conditional-logic-6448",
             "ufo-based-patterns",
@@ -2765,6 +2798,22 @@
             "@language" : "en"
          },
          "@id" : "https://example.com/grade/low"
+      },
+      {
+         "@id" : "icons-65",
+         "has-layout-class" : [
+            "section",
+            "wizard-step"
+         ],
+         "@type" : "doc:question",
+         "has_related_question" : [
+            "answerable-section-with-icons-4808"
+         ],
+         "form:has-preceding-question" : {
+            "@id" : "layout-options-65"
+         },
+
+         "label" : "Icons"
       },
       {
          "@id" : "layout-options-65",
