@@ -14,15 +14,34 @@ const CommentView = (props) => {
 
     const [show, setShow] = useState(false);
 
-    const getAuthorLabel = () => {
+    const getAuthor = () => {
         const users = options.users;
         const currentUser = options.currentUser;
         const currentUserId = users.find(c => c.id === currentUser);
 
-        if (props.author) {
+        if (props.author && currentUserId.label) {
             return "... " + currentUserId.label;
         }
+
+        if (props.author && !currentUserId.label || currentUserId.label === "") {
+            return getShortenedAuthorIRI();
+        }
+
         return UNKNOWN_AUTHOR;
+    }
+
+    const getShortenedAuthorIRI = () => {
+        const fullAuthor = props.author[Constants.HAS_AUTHOR];
+
+        if (fullAuthor.lastIndexOf("#") +1) {
+            return "... " + fullAuthor.substring(fullAuthor.lastIndexOf("#") +1);
+        }
+
+        if (fullAuthor.lastIndexOf("/") +1) {
+            return "... " + fullAuthor.substring(fullAuthor.lastIndexOf("/") +1);
+        }
+
+        return "Wrong IRI";
     }
 
     const getFullAuthor = () => {
@@ -44,7 +63,7 @@ const CommentView = (props) => {
         <div className="comment-content">
             <div className="row">
                 <span className="col-auto comment-author" onMouseEnter={onMouseEventHandler} onMouseLeave={onMouseEventHandler}>
-                    {show ? getFullAuthor() : getAuthorLabel()}
+                    {show ? getFullAuthor() : getAuthor()}
                 </span>
                 <span className="col-auto text-muted comment-timestamp">{getTimeAgo()}</span>
             </div>
