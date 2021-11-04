@@ -12,39 +12,31 @@ const CommentView = (props) => {
     TimeAgo.addLocale(en);
     const time = new TimeAgo('en-US');
 
-    const [show, setShow] = useState(false);
+    const [showIRI, setShowIRI] = useState(false);
 
-    const getAuthor = () => {
+    const getAuthorLabel = () => {
         const users = options.users;
-        const currentUser = options.currentUser;
-        const currentUserId = users.find(c => c.id === currentUser);
+        const currentUser = users.find(c => c.id === options.currentUser);
 
-        if (props.author && currentUserId.label) {
-            return "... " + currentUserId.label;
-        }
 
-        if (props.author && !currentUserId.label || currentUserId.label === "") {
-            return getShortenedAuthorIRI();
+        if (props.author) {
+            if (currentUser.label) {
+                return currentUser.label;
+            } else {
+                return getAuthorIRIAbbreviation();
+            }
         }
 
         return UNKNOWN_AUTHOR;
     }
 
-    const getShortenedAuthorIRI = () => {
+    const getAuthorIRIAbbreviation = () => {
         const fullAuthor = props.author[Constants.HAS_AUTHOR];
 
-        if (fullAuthor.lastIndexOf("#") +1) {
-            return "... " + fullAuthor.substring(fullAuthor.lastIndexOf("#") +1);
-        }
-
-        if (fullAuthor.lastIndexOf("/") +1) {
-            return "... " + fullAuthor.substring(fullAuthor.lastIndexOf("/") +1);
-        }
-
-        return "Wrong IRI";
+        return fullAuthor.replace(/.*[#\/]/, '... ');
     }
 
-    const getFullAuthor = () => {
+    const getAuthorIRI = () => {
         if (props.author) {
             return props.author[Constants.HAS_AUTHOR];
         }
@@ -56,14 +48,14 @@ const CommentView = (props) => {
     }
 
     const onMouseEventHandler = () => {
-        setShow(!show);
+        setShowIRI(!showIRI);
     }
 
     return (
         <div className="comment-content">
             <div className="row">
                 <span className="col-auto comment-author" onMouseEnter={onMouseEventHandler} onMouseLeave={onMouseEventHandler}>
-                    {show ? getFullAuthor() : getAuthor()}
+                    {showIRI ? getAuthorIRI() : getAuthorLabel()}
                 </span>
                 <span className="col-auto text-muted comment-timestamp">{getTimeAgo()}</span>
             </div>
