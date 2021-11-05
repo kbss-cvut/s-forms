@@ -1,7 +1,6 @@
 import React, {useContext, useState} from "react";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-import Constants from "../../constants/Constants";
 import {ConfigurationContext} from "../../contexts/ConfigurationContext";
 
 const UNKNOWN_AUTHOR = "Unknown author";
@@ -31,20 +30,20 @@ const CommentView = (props) => {
     }
 
     const getAuthorIRIAbbreviation = () => {
-        const fullAuthor = props.author[Constants.HAS_AUTHOR];
+        const fullAuthor = props.author;
 
         return fullAuthor.replace(/.*[#\/]/, '... ');
     }
 
     const getAuthorIRI = () => {
         if (props.author) {
-            return props.author[Constants.HAS_AUTHOR];
+            return Object.values(props.author).toString();
         }
         return UNKNOWN_AUTHOR;
     }
 
     const getTimeAgo = () => {
-        return time.format(props.timestamp[Constants.HAS_TIMESTAMP]);
+        return time.format(parseInt(props.timestamp));
     }
 
     const onMouseEventHandler = () => {
@@ -60,7 +59,7 @@ const CommentView = (props) => {
                 <span className="col-auto text-muted comment-timestamp">{getTimeAgo()}</span>
             </div>
             <div className="row">
-                <span className="col comment-value">{props.commentValue[Constants.HAS_COMMENT_VALUE]}</span>
+                <span className="col comment-value">{props.commentValue}</span>
             </div>
         </div>
     );

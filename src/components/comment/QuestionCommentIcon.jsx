@@ -37,17 +37,11 @@ const QuestionCommentIcon = (props) => {
     };
 
     const _setComment = (change, value) => {
-        change[Constants.HAS_COMMENT_VALUE] = {
-            [Constants.HAS_COMMENT_VALUE] : value
-        }
         if (context.options.currentUser) {
-            change[Constants.HAS_AUTHOR] = {
-                [Constants.HAS_AUTHOR] : context.options.currentUser
-            }
+            change[Constants.HAS_AUTHOR] = { "@id": context.options.currentUser };
         }
-        change[Constants.HAS_TIMESTAMP] = {
-            [Constants.HAS_TIMESTAMP] : Date.now()
-        }
+        change[Constants.HAS_COMMENT_VALUE] = value;
+        change[Constants.HAS_TIMESTAMP] = Date.now().toString();
     };
 
     const onClickHandler = (e) => {
