@@ -150,15 +150,11 @@ export default class Question extends React.Component {
           <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
             <Card className="mb-3">
               <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
-                <ul className="icon-list-items">
-                  <li className="icon-list-item">
                     <h6 className="d-inline" id={question['@id']}>
                       {collapsible && this._renderCollapseToggle()}
                       {label}
                     </h6>
-                  </li>
                   {Question.renderIcons(question, options, this.onCommentChange)}
-                </ul>
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
             </Card>
@@ -374,7 +370,9 @@ export default class Question extends React.Component {
       }
     }
 
-    return iconsArray;
+    return (<ol className="icon-list-items">
+      {iconsArray}
+    </ol>);
   }
 
   _renderPrefixes() {

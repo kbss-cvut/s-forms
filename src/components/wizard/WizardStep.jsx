@@ -73,11 +73,9 @@ export default class WizardStep extends React.Component {
     return (
       <div className="wizard-step">
         <Card className="wizard-step-content">
-          <Card.Header className="bg-primary text-white" as="h6" id={this.props.step['@id']}>
-            <ul className="icon-list-items">
-              <li className="icon-list-item">{JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}</li>
-              {Question.renderIcons(question, options, this.onCommentChange)}
-            </ul>
+          <Card.Header className="bg-primary text-white question-header" as="h6" id={this.props.step['@id']}>
+            {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
+            {Question.renderIcons(question, options, this.onCommentChange)}
           </Card.Header>
           <Card.Body className={categoryClass}>
             {questionElement}
