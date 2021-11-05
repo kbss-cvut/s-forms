@@ -5,6 +5,7 @@ import SForms from '../../src/components/SForms';
 import '../../src/styles/s-forms.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import queryString from 'query-string';
+import Constants from '../../src/constants/Constants'
 
 const form1 = require('./form1.json'); // form with wizard steps
 const form2 = require('./form2.json'); // form without wizard steps (proudly assembled in Semantic Form Web Editor)
@@ -67,8 +68,8 @@ class TestApp extends React.Component {
           {id: "http://fel.cvut.cz/people/miroslav-blasko", label: "Miroslav Blasko"}],
       currentUser: "http://fel.cvut.cz/people/max-chopart",
       icons: [
-        {id: "questionHelp", behavior: "enable"}, // <enable> | disable
-        {id: "questionComments", behavior: "enable"} // enable | <disable>
+        {id: Constants.ICONS.QUESTION_HELP, behavior:  Constants.ICON_BEHAVIOR.ENABLE},
+        {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ENABLE}
       ]
     };
 
