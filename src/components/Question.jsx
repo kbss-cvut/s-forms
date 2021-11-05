@@ -149,7 +149,7 @@ export default class Question extends React.Component {
       return (
           <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
             <Card className="mb-3">
-              <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName}>
+              <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName + " question-header"}>
                     <h6 className="d-inline" id={question['@id']}>
                       {collapsible && this._renderCollapseToggle()}
                       {label}

@@ -136,10 +136,10 @@ const Answer = (props) => {
     const label = JsonldUtils.getLocalized(question[Constants.RDFS_LABEL], options.intl);
 
     return (
-        <>
+        <div className="question-header">
           {label}
           {props.icons}
-        </>
+        </div>
     );
   }
 

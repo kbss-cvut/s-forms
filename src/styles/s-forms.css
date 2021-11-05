@@ -170,10 +170,19 @@ input:disabled {
   background-color: #e6f9fb;
 }
 
+.question-header {
+  display: flex;
+  align-items: center;
+}
+
+.question-header h6 {
+  margin: 0;
+}
+
 .icon-list-items {
   display: flex;
   padding-left: 0;
-  margin: auto;
+  margin: 0;
 }
 
 .icon-list-item {
