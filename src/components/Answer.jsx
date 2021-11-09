@@ -12,6 +12,7 @@ import TypeaheadAnswer from './answer/TypeaheadAnswer';
 import Constants from '../constants/Constants';
 import { FormGenContext } from '../contexts/FormGenContext';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
+import Question from "./Question";
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
@@ -138,7 +139,7 @@ const Answer = (props) => {
     return (
         <div className="question-header">
           {label}
-          {props.icons}
+          {Question.renderIcons(props.question, options, props.onCommentChange)}
         </div>
     );
   }
@@ -177,7 +178,7 @@ Answer.propTypes = {
   onChange: PropTypes.func.isRequired,
   onCommentChange: PropTypes.func.isRequired,
   index: PropTypes.number,
-  icons: PropTypes.array
+  icons: PropTypes.object
 };
 
 export default Answer;

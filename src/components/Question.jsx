@@ -232,7 +232,6 @@ export default class Question extends React.Component {
                 question={question}
                 onChange={this.onAnswerChange}
                 onCommentChange={this.onCommentChange}
-                icons={Question.renderIcons(question, options, this.onCommentChange)}
             />
           </div>
           {this._renderUnits()}
@@ -313,42 +312,44 @@ export default class Question extends React.Component {
     );
   }
 
-  static renderQuestionHelp(question, options) {
-    const icons = options.icons;
-    let questionHelpIcon;
-
-    for (let i = 0; i < icons.length; i++) {
-      if (icons[i].id === Constants.ICONS.QUESTION_HELP) {
-        questionHelpIcon = icons[i];
-      }
-    }
-
-    if (!questionHelpIcon || questionHelpIcon.behavior === Constants.ICON_BEHAVIOR.ENABLE) {
-      if (question[Constants.HELP_DESCRIPTION]) {
+  static evaluateIcon(icon, question, options, onCommentChange) {
+    if (icon && icon.behavior === Constants.ICON_BEHAVIOR.ENABLE) {
+      if (icon.id === Constants.ICONS.QUESTION_HELP && question[Constants.HELP_DESCRIPTION]) {
         return <HelpIcon
             text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
             absolutePosition={false}/>
+      }
+
+      if (icon.id === Constants.ICONS.QUESTION_COMMENTS) {
+        return <QuestionCommentIcon
+            question={question}
+            onChange={onCommentChange}/>
       }
     }
     return null;
   }
 
-  static renderQuestionComments = (question, options, onChange) => {
-    const icons = options.icons
-    let questionCommentsIcon;
+  static getIconFromIconList = (iconList, iconName) => {
+    let icon;
 
-    for (let i = 0; i < icons.length; i++) {
-      if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
-        questionCommentsIcon = icons[i];
+    for (let i = 0; i < iconList.length; i++) {
+      if (iconList[i].id === iconName) {
+        icon = iconList[i];
       }
     }
+    return icon;
+  }
 
-    if (questionCommentsIcon && questionCommentsIcon.behavior === Constants.ICON_BEHAVIOR.ENABLE) {
-      return <QuestionCommentIcon
-          question={question}
-          onChange={onChange}/>
-    }
-    return null;
+  static renderQuestionHelp(question, options) {
+    const icons = options.icons;
+    const questionHelpIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_HELP)
+    return this.evaluateIcon(questionHelpIcon, question, options);
+  }
+
+  static renderQuestionComments = (question, options, onCommentChange) => {
+    const icons = options.icons;
+    const questionCommentsIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_COMMENTS)
+    return this.evaluateIcon(questionCommentsIcon, question, options, onCommentChange);
   }
 
   static renderIcons(question, options, onCommentChange) {
