@@ -312,7 +312,7 @@ export default class Question extends React.Component {
     );
   }
 
-  static evaluateIcon(icon, question, options, onCommentChange) {
+  static getIconComponent(icon, question, options, onCommentChange) {
     if (icon && icon.behavior === Constants.ICON_BEHAVIOR.ENABLE) {
       if (icon.id === Constants.ICONS.QUESTION_HELP && question[Constants.HELP_DESCRIPTION]) {
         return <HelpIcon
@@ -330,26 +330,19 @@ export default class Question extends React.Component {
   }
 
   static getIconFromIconList = (iconList, iconName) => {
-    let icon;
-
-    for (let i = 0; i < iconList.length; i++) {
-      if (iconList[i].id === iconName) {
-        icon = iconList[i];
-      }
-    }
-    return icon;
+    return iconList.find(icon => icon.id === iconName);
   }
 
   static renderQuestionHelp(question, options) {
     const icons = options.icons;
     const questionHelpIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_HELP)
-    return this.evaluateIcon(questionHelpIcon, question, options);
+    return this.getIconComponent(questionHelpIcon, question, options);
   }
 
   static renderQuestionComments = (question, options, onCommentChange) => {
     const icons = options.icons;
     const questionCommentsIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_COMMENTS)
-    return this.evaluateIcon(questionCommentsIcon, question, options, onCommentChange);
+    return this.getIconComponent(questionCommentsIcon, question, options, onCommentChange);
   }
 
   static renderIcons(question, options, onCommentChange) {
