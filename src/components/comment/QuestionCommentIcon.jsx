@@ -11,6 +11,7 @@ const QuestionCommentIcon = (props) => {
     const context = useContext(ConfigurationContext);
     const target = useRef(null);
     const [show, setShow] = useState(false);
+    const [overlayPlacement, setOverlayPlacement] = useState("right");
 
     const hideOverlay = () => {
         setShow(false);
@@ -54,14 +55,22 @@ const QuestionCommentIcon = (props) => {
        return _getComments().length;
     }
 
+    const getOverlayPlacement = (el) => {
+        if (!el) return;
+
+        if (el.getBoundingClientRect().x > window.innerWidth / 2) {
+            setOverlayPlacement("left");
+        } else setOverlayPlacement("right");
+    };
+
     return (
-        <>
+        <div ref={el => getOverlayPlacement(el)}>
             <span ref={target} onClick={onClickHandler}>
                 <CommentBubble/>
                 {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
             </span>
 
-            <Overlay target={target.current} show={show} placement="right" rootClose={true} onHide={hideOverlay}>
+            <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={true} onHide={hideOverlay}>
                 {(overlayProps) => (
                     <Tooltip className="comment-tooltip" {...overlayProps}>
                         <span>
@@ -71,7 +80,7 @@ const QuestionCommentIcon = (props) => {
                     </Tooltip>
                 )}
             </Overlay>
-        </>
+        </div>
     );
 }
 

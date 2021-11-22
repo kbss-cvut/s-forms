@@ -12,8 +12,8 @@ import ValidatorFactory from '../model/ValidatorFactory';
 import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
 import PrefixIcon from './PrefixIcon';
 import MediaContent from './MediaContent';
-import { CaretSquareUp, CaretSquareDown, InfoCircle } from '../styles/icons';
-import { ConfigurationContext } from '../contexts/ConfigurationContext';
+import {CaretSquareDown, CaretSquareUp, InfoCircle} from '../styles/icons';
+import {ConfigurationContext} from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
 import QuestionCommentIcon from "./comment/QuestionCommentIcon";
 
@@ -154,7 +154,9 @@ export default class Question extends React.Component {
                       {collapsible && this._renderCollapseToggle()}
                       {label}
                     </h6>
+                <div>
                   {Question.renderIcons(question, options, this.onCommentChange)}
+                </div>
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
             </Card>
@@ -333,10 +335,10 @@ export default class Question extends React.Component {
     return iconList.find(icon => icon.id === iconName);
   }
 
-  static renderQuestionHelp(question, options) {
+  static renderQuestionHelp(question, options, onCommentChange) {
     const icons = options.icons;
     const questionHelpIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_HELP)
-    return this.getIconComponent(questionHelpIcon, question, options);
+    return this.getIconComponent(questionHelpIcon, question, options, onCommentChange);
   }
 
   static renderQuestionComments = (question, options, onCommentChange) => {
@@ -427,6 +429,10 @@ export default class Question extends React.Component {
 
   _getFirstAnswerValue() {
     return FormUtils.resolveValue(this._getAnswers()[0]);
+  }
+
+  static getOffset() {
+    console.log(this.inputRef.current);
   }
 }
 
