@@ -430,10 +430,6 @@ export default class Question extends React.Component {
   _getFirstAnswerValue() {
     return FormUtils.resolveValue(this._getAnswers()[0]);
   }
-
-  static getOffset() {
-    console.log(this.inputRef.current);
-  }
 }
 
 Question.contextType = ConfigurationContext;
