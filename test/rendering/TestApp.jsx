@@ -5,6 +5,7 @@ import SForms from '../../src/components/SForms';
 import '../../src/styles/s-forms.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import queryString from 'query-string';
+import Constants from '../../src/constants/Constants'
 
 const form1 = require('./form1.json'); // form with wizard steps
 const form2 = require('./form2.json'); // form without wizard steps (proudly assembled in Semantic Form Web Editor)
@@ -61,7 +62,15 @@ class TestApp extends React.Component {
       wizardStepButtons: true,
       enableForwardSkip: true,
       ...getP('startingQuestionId', 'layout-options-65'),
-      startingStep: 1
+      startingStep: 1,
+      users: [
+          {id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart"},
+          {id: "http://fel.cvut.cz/people/miroslav-blasko", label: "Miroslav Blasko"}],
+      currentUser: "http://fel.cvut.cz/people/max-chopart",
+      icons: [
+        {id: Constants.ICONS.QUESTION_HELP, behavior:  Constants.ICON_BEHAVIOR.ENABLE},
+        {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ENABLE}
+      ]
     };
 
     return (

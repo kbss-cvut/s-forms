@@ -38,7 +38,8 @@ CheckboxAnswer.propTypes = {
   label: PropTypes.object.isRequired,
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  mouseHover: PropTypes.bool
 };
 
 export default CheckboxAnswer;

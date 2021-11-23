@@ -94,6 +94,10 @@ export default class Constants {
   static HAS_DECLARED_PREFIX = 'http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix';
   static PREFIX = 'http://www.w3.org/ns/shacl#prefix';
   static NAMESPACE = 'http://www.w3.org/ns/shacl#namespace';
+  static HAS_COMMENT = 'http://onto.fel.cvut.cz/ontologies/form/has-comment'
+  static HAS_COMMENT_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/has-comment-value'
+  static HAS_AUTHOR = 'http://onto.fel.cvut.cz/ontologies/form/has-author'
+  static HAS_TIMESTAMP = 'http://onto.fel.cvut.cz/ontologies/form/has-timestamp'
 
   static NOT_ANSWERED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/not-answered-question';
   static ANSWERED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/answered-question';
@@ -101,4 +105,15 @@ export default class Constants {
   static RDFS_LABEL = JsonLdUtils.RDFS_LABEL;
   static RDFS_COMMENT = JsonLdUtils.RDFS_COMMENT;
   static DEFAULT_HAS_CHILD = JsonLdUtils.DEFAULT_HAS_CHILD;
+
+  static ICONS = {
+    QUESTION_COMMENTS: "questionComments",
+    QUESTION_HELP: "questionHelp"
+  }
+
+  static ICON_BEHAVIOR = {
+    ENABLE: "enable",
+    DISABLE: "disable",
+    ON_HOVER: "onHover"
+  }
 }
