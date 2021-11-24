@@ -141,13 +141,13 @@ export class Constants {
   static ICONS: {
     QUESTION_COMMENTS: string,
     QUESTION_HELP: string
-  }
+  };
 
   static ICON_BEHAVIOR: {
     ENABLE: string,
     DISABLE: string,
     ON_HOVER: string
-  }
+  };
 }
 
 export class JsonLdObjectUtils {
