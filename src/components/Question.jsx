@@ -26,7 +26,8 @@ export default class Question extends React.Component {
     JsonLdObjectMap.putObject(props.question['@id'], props.question);
     this.state = {
       validator: null,
-      expanded: !FormUtils.isCollapsed(props.question)
+      expanded: !FormUtils.isCollapsed(props.question),
+      showIcon: false
     };
   }
 
@@ -95,6 +96,14 @@ export default class Question extends React.Component {
     }
   };
 
+  _onMouseEnterHandler = () => {
+    this.setState({ showIcon: true });
+  };
+
+  _onMouseLeaveHandler = () => {
+    this.setState({ showIcon: false });
+  };
+
   render() {
     const question = this.props.question;
     const options = this.context.options;
@@ -149,14 +158,18 @@ export default class Question extends React.Component {
       return (
           <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
             <Card className="mb-3">
-              <Accordion.Toggle as={Card.Header} onClick={this._toggleCollapse} className={headerClassName + " question-header"}>
-                    <h6 className="d-inline" id={question['@id']}>
-                      {collapsible && this._renderCollapseToggle()}
-                      {label}
-                    </h6>
-                <div>
-                  {Question.renderIcons(question, options, this.onCommentChange)}
-                </div>
+              <Accordion.Toggle
+                  as={Card.Header}
+                  onClick={this._toggleCollapse}
+                  className={headerClassName + " question-header"}
+                  onMouseEnter={this._onMouseEnterHandler}
+                  onMouseLeave={this._onMouseLeaveHandler}
+              >
+                <h6 className="d-inline" id={question['@id']}>
+                  {collapsible && this._renderCollapseToggle()}
+                  {label}
+                </h6>
+                {Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon)}
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
             </Card>
@@ -226,7 +239,12 @@ export default class Question extends React.Component {
         Question.getEmphasizedOnRelevantClass(question)
       );
       children.push(
-        <div key={'row-item-' + i} className={cls} id={question['@id']}>
+        <div key={'row-item-' + i}
+             className={cls}
+             id={question['@id']}
+             onMouseEnter={this._onMouseEnterHandler}
+             onMouseLeave={this._onMouseLeaveHandler}
+        >
           <div className="answer-content" style={this._getAnswerWidthStyle()}>
             <Answer
                 index={i}
@@ -234,6 +252,7 @@ export default class Question extends React.Component {
                 question={question}
                 onChange={this.onAnswerChange}
                 onCommentChange={this.onCommentChange}
+                showIcon={this.state.showIcon}
             />
           </div>
           {this._renderUnits()}
@@ -314,61 +333,93 @@ export default class Question extends React.Component {
     );
   }
 
-  static getIconComponent(icon, question, options, onCommentChange) {
-    if (icon && icon.behavior === Constants.ICON_BEHAVIOR.ENABLE) {
+  static getIconComponent(icon, question, options, onCommentChange, showIcon) {
+    if (icon && (icon.behavior === Constants.ICON_BEHAVIOR.ON_HOVER || icon.behavior === Constants.ICON_BEHAVIOR.ENABLE)) {
+      if (icon.behavior === Constants.ICON_BEHAVIOR.ENABLE) showIcon = true;
       if (icon.id === Constants.ICONS.QUESTION_HELP && question[Constants.HELP_DESCRIPTION]) {
-        return <HelpIcon
-            text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
-            absolutePosition={false}/>
+        return (
+            <>
+              {showIcon ? <div className="emphasise-on-relevant-short">
+                    <HelpIcon
+                        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
+                        absolutePosition={false}/>
+                  </div>
+                  : null}
+            </>
+        );
       }
 
       if (icon.id === Constants.ICONS.QUESTION_COMMENTS) {
-        return <QuestionCommentIcon
-            question={question}
-            onChange={onCommentChange}/>
+        return (
+            <>
+              {showIcon ? <div className="emphasise-on-relevant-short">
+                    <QuestionCommentIcon
+                        question={question}
+                        onChange={onCommentChange}/>
+                  </div>
+                  : null}
+            </>
+        );
       }
+      return null;
     }
-    return null;
   }
 
   static getIconFromIconList = (iconList, iconName) => {
-    return iconList.find(icon => icon.id === iconName);
+    if (iconList) return iconList.find(icon => icon.id === iconName);
+    return null;
   }
 
-  static renderQuestionHelp(question, options, onCommentChange) {
+  static renderQuestionHelp(question, options, onCommentChange, showIcon) {
     const icons = options.icons;
-    const questionHelpIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_HELP)
-    return this.getIconComponent(questionHelpIcon, question, options, onCommentChange);
+    let questionHelpIcon;
+    if (!icons) questionHelpIcon = {id: Constants.ICONS.QUESTION_HELP, behavior:  Constants.ICON_BEHAVIOR.ENABLE};
+    else questionHelpIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_HELP);
+    return this.getIconComponent(questionHelpIcon, question, options, onCommentChange, showIcon);
   }
 
-  static renderQuestionComments = (question, options, onCommentChange) => {
+  static renderQuestionComments = (question, options, onCommentChange, showIcon) => {
     const icons = options.icons;
-    const questionCommentsIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_COMMENTS)
-    return this.getIconComponent(questionCommentsIcon, question, options, onCommentChange);
+    let questionCommentsIcon;
+    if (!icons) questionCommentsIcon = {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ON_HOVER};
+    else questionCommentsIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_COMMENTS);
+    return this.getIconComponent(questionCommentsIcon, question, options, onCommentChange, showIcon);
   }
 
-  static renderIcons(question, options, onCommentChange) {
+  static renderIcons(question, options, onCommentChange, showIcon) {
     const icons = options.icons;
     let iconsArray = [];
-    const renderQuestionHelp = Question.renderQuestionHelp(question, options);
-    const renderQuestionComments = Question.renderQuestionComments(question, options, onCommentChange);
+    const renderQuestionHelp = Question.renderQuestionHelp(question, options, onCommentChange, showIcon);
+    const renderQuestionComments = Question.renderQuestionComments(question, options, onCommentChange, showIcon);
 
-    for (let i = 0; i < icons.length; i++) {
-      if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
-        iconsArray.push(
-            <li key={i} className="icon-list-item">{renderQuestionComments}</li>
-        )
-      }
-      if (icons[i].id === Constants.ICONS.QUESTION_HELP) {
-        iconsArray.push(
-            <li key={i} className="icon-list-item">{renderQuestionHelp}</li>
-        )
-      }
+    if (icons) this.sortIcons(icons, iconsArray, renderQuestionComments, renderQuestionHelp);
+    else {
+      iconsArray.push(
+          <React.Fragment key={Math.random()}>
+            <li className="icon-list-item">{renderQuestionHelp}</li>
+            <li className="icon-list-item">{renderQuestionComments}</li>
+          </React.Fragment>
+      );
     }
 
     return (<ol className="icon-list-items">
       {iconsArray}
     </ol>);
+  }
+
+  static sortIcons(icons, iconsArray, renderQuestionComments, renderQuestionHelp) {
+    for (let i = 0; i < icons.length; i++) {
+      if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
+        iconsArray.push(
+            <li key={i} className="icon-list-item">{renderQuestionComments}</li>
+        );
+      }
+      if (icons[i].id === Constants.ICONS.QUESTION_HELP) {
+        iconsArray.push(
+            <li key={i} className="icon-list-item">{renderQuestionHelp}</li>
+        );
+      }
+    }
   }
 
   _renderPrefixes() {

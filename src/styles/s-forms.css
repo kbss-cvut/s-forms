@@ -158,6 +158,10 @@ input:disabled {
   max-width: 31.25rem;
 }
 
+.card-header {
+  height: 3rem;
+}
+
 .card-header:first-child {
   line-height: 24px;
 }
@@ -191,6 +195,10 @@ input:disabled {
 
 .card-header .form-group {
   margin-bottom: 0;
+}
+
+.emphasise-on-relevant-short {
+  animation: emphasiseOnRelevant 0.5s ease-in;
 }
 
 .emphasise-on-relevant {
