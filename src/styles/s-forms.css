@@ -197,8 +197,8 @@ input:disabled {
   margin-bottom: 0;
 }
 
-.emphasise-on-relevant-short {
-  animation: emphasiseOnRelevant 0.5s ease-in;
+.emphasise-on-relevant-icon {
+  animation: emphasiseOnRelevantIcon 0.5s ease-in;
 }
 
 .emphasise-on-relevant {
@@ -308,6 +308,34 @@ input:disabled {
     display: block;
     opacity: 1;
     background-color: #e6f9fb;
+  }
+}
+
+@keyframes emphasiseOnRelevantIcon {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+  }
+
+  25% {
+    display: block;
+    opacity: 0;
+  }
+
+  75% {
+    display: block;
+    opacity: 1;
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+    background-color: transparent;
   }
 }
 

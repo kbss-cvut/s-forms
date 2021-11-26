@@ -340,7 +340,7 @@ export default class Question extends React.Component {
       if (icon.behavior === Constants.ICON_BEHAVIOR.ENABLE){
         showIcon = true;
         iconClassname = "";
-      } else iconClassname = "emphasise-on-relevant-short";
+      } else iconClassname = "emphasise-on-relevant-icon";
 
       if (icon.id === Constants.ICONS.QUESTION_HELP && question[Constants.HELP_DESCRIPTION]) {
         if (showIcon) {
