@@ -334,32 +334,38 @@ export default class Question extends React.Component {
   }
 
   static getIconComponent(icon, question, options, onCommentChange, showIcon) {
+    let iconClassname;
+
     if (icon && (icon.behavior === Constants.ICON_BEHAVIOR.ON_HOVER || icon.behavior === Constants.ICON_BEHAVIOR.ENABLE)) {
-      if (icon.behavior === Constants.ICON_BEHAVIOR.ENABLE) showIcon = true;
+      if (icon.behavior === Constants.ICON_BEHAVIOR.ENABLE){
+        showIcon = true;
+        iconClassname = "";
+      } else iconClassname = "emphasise-on-relevant-short";
+
       if (icon.id === Constants.ICONS.QUESTION_HELP && question[Constants.HELP_DESCRIPTION]) {
-        return (
-            <>
-              {showIcon ? <div className="emphasise-on-relevant-short">
-                    <HelpIcon
-                        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
-                        absolutePosition={false}/>
-                  </div>
-                  : null}
-            </>
-        );
+        if (showIcon) {
+          return (
+              <div className={iconClassname}>
+                <HelpIcon
+                    text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
+                    absolutePosition={false}/>
+              </div>
+          );
+        }
+        return null;
       }
 
       if (icon.id === Constants.ICONS.QUESTION_COMMENTS) {
-        return (
-            <>
-              {showIcon ? <div className="emphasise-on-relevant-short">
-                    <QuestionCommentIcon
-                        question={question}
-                        onChange={onCommentChange}/>
-                  </div>
-                  : null}
-            </>
-        );
+        if (showIcon) {
+          return (
+              <div className={iconClassname}>
+                <QuestionCommentIcon
+                    question={question}
+                    onChange={onCommentChange}/>
+              </div>
+          );
+        }
+        return null;
       }
       return null;
     }
