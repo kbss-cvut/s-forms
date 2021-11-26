@@ -109,11 +109,19 @@ export default class Constants {
   static ICONS = {
     QUESTION_COMMENTS: "questionComments",
     QUESTION_HELP: "questionHelp"
-  }
+  };
 
   static ICON_BEHAVIOR = {
     ENABLE: "enable",
     DISABLE: "disable",
     ON_HOVER: "onHover"
-  }
+  };
+
+  // Default form options
+  static DEFAULT_OPTIONS = {
+    icons: [
+      {id: Constants.ICONS.QUESTION_HELP, behavior:  Constants.ICON_BEHAVIOR.ENABLE},
+      {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ON_HOVER}
+    ]
+  };
 }

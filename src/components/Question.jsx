@@ -379,7 +379,11 @@ export default class Question extends React.Component {
   static renderQuestionHelp(question, options, onCommentChange, showIcon) {
     const icons = options.icons;
     let questionHelpIcon;
-    if (!icons) questionHelpIcon = {id: Constants.ICONS.QUESTION_HELP, behavior:  Constants.ICON_BEHAVIOR.ENABLE};
+    if (!icons) {
+      questionHelpIcon = Constants.DEFAULT_OPTIONS.icons.find(icon => {
+        return icon.id === Constants.ICONS.QUESTION_HELP
+      });
+    }
     else questionHelpIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_HELP);
     return this.getIconComponent(questionHelpIcon, question, options, onCommentChange, showIcon);
   }
@@ -387,33 +391,23 @@ export default class Question extends React.Component {
   static renderQuestionComments = (question, options, onCommentChange, showIcon) => {
     const icons = options.icons;
     let questionCommentsIcon;
-    if (!icons) questionCommentsIcon = {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ON_HOVER};
+    if (!icons) {
+      questionCommentsIcon = Constants.DEFAULT_OPTIONS.icons.find(icon => {
+        return icon.id === Constants.ICONS.QUESTION_COMMENTS
+      });
+    }
     else questionCommentsIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_COMMENTS);
     return this.getIconComponent(questionCommentsIcon, question, options, onCommentChange, showIcon);
   }
 
   static renderIcons(question, options, onCommentChange, showIcon) {
-    const icons = options.icons;
+    let icons;
+    if (options.icons) icons = options.icons;
+    else icons = Constants.DEFAULT_OPTIONS.icons;
     let iconsArray = [];
     const renderQuestionHelp = Question.renderQuestionHelp(question, options, onCommentChange, showIcon);
     const renderQuestionComments = Question.renderQuestionComments(question, options, onCommentChange, showIcon);
 
-    if (icons) this.sortIcons(icons, iconsArray, renderQuestionComments, renderQuestionHelp);
-    else {
-      iconsArray.push(
-          <React.Fragment key={Math.random()}>
-            <li className="icon-list-item">{renderQuestionHelp}</li>
-            <li className="icon-list-item">{renderQuestionComments}</li>
-          </React.Fragment>
-      );
-    }
-
-    return (<ol className="icon-list-items">
-      {iconsArray}
-    </ol>);
-  }
-
-  static sortIcons(icons, iconsArray, renderQuestionComments, renderQuestionHelp) {
     for (let i = 0; i < icons.length; i++) {
       if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
         iconsArray.push(
@@ -426,6 +420,10 @@ export default class Question extends React.Component {
         );
       }
     }
+
+    return (<ol className="icon-list-items">
+      {iconsArray}
+    </ol>);
   }
 
   _renderPrefixes() {
