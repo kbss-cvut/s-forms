@@ -9,9 +9,11 @@ import JsonLdObjectMap from "../../util/JsonLdObjectMap";
 
 
 export default class WizardStep extends React.Component {
-
   constructor(props) {
     super(props);
+    this.state = {
+      showIcon: false
+    }
   }
 
   onNextStep = () => {
@@ -56,6 +58,14 @@ export default class WizardStep extends React.Component {
     this.context.updateFormQuestionsData(this.props.stepIndex || index, { ...this.props.step, ...change });
   };
 
+  _onMouseEnterHandler = () => {
+    this.setState({ showIcon: true });
+  };
+
+  _onMouseLeaveHandler = () => {
+    this.setState({ showIcon: false });
+  };
+
   render() {
 
     const categoryClass = Question._getQuestionCategoryClass(this.props.step);
@@ -73,9 +83,15 @@ export default class WizardStep extends React.Component {
     return (
       <div className="wizard-step">
         <Card className="wizard-step-content">
-          <Card.Header className="bg-primary text-white question-header" as="h6" id={this.props.step['@id']}>
+          <Card.Header
+              className="bg-primary text-white question-header"
+              as="h6"
+              id={this.props.step['@id']}
+              onMouseEnter={this._onMouseEnterHandler}
+              onMouseLeave={this._onMouseLeaveHandler}
+          >
             {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
-            {Question.renderIcons(question, options, this.onCommentChange)}
+            {Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon)}
           </Card.Header>
           <Card.Body className={categoryClass}>
             {questionElement}

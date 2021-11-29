@@ -139,7 +139,7 @@ const Answer = (props) => {
     return (
         <div className="question-header">
           {label}
-          {Question.renderIcons(props.question, options, props.onCommentChange)}
+          {Question.renderIcons(props.question, options, props.onCommentChange, props.showIcon)}
         </div>
     );
   }
