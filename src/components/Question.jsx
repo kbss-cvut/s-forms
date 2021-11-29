@@ -16,6 +16,8 @@ import {CaretSquareDown, CaretSquareUp, InfoCircle} from '../styles/icons';
 import {ConfigurationContext} from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
 import QuestionCommentIcon from "./comment/QuestionCommentIcon";
+import ExternalLink from "../styles/icons/ExternalLink";
+import LinkIcon from "./LinkIcon";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -376,28 +378,18 @@ export default class Question extends React.Component {
     return null;
   }
 
+  static getIconComponentFromName(iconName, question, options, onCommentChange, showIcon) {
+    const iconList = (options.icons) ? options.icons : Constants.DEFAULT_OPTIONS.icons;
+    const icon = this.getIconFromIconList(iconList, iconName);
+    return this.getIconComponent(icon, question, options, onCommentChange, showIcon);
+  }
+
   static renderQuestionHelp(question, options, onCommentChange, showIcon) {
-    const icons = options.icons;
-    let questionHelpIcon;
-    if (!icons) {
-      questionHelpIcon = Constants.DEFAULT_OPTIONS.icons.find(icon => {
-        return icon.id === Constants.ICONS.QUESTION_HELP
-      });
-    }
-    else questionHelpIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_HELP);
-    return this.getIconComponent(questionHelpIcon, question, options, onCommentChange, showIcon);
+    return this.getIconComponentFromName(Constants.ICONS.QUESTION_HELP, question, options, onCommentChange, showIcon);
   }
 
   static renderQuestionComments = (question, options, onCommentChange, showIcon) => {
-    const icons = options.icons;
-    let questionCommentsIcon;
-    if (!icons) {
-      questionCommentsIcon = Constants.DEFAULT_OPTIONS.icons.find(icon => {
-        return icon.id === Constants.ICONS.QUESTION_COMMENTS
-      });
-    }
-    else questionCommentsIcon = this.getIconFromIconList(icons, Constants.ICONS.QUESTION_COMMENTS);
-    return this.getIconComponent(questionCommentsIcon, question, options, onCommentChange, showIcon);
+    return this.getIconComponentFromName(Constants.ICONS.QUESTION_COMMENTS, question, options, onCommentChange, showIcon);
   }
 
   static renderIcons(question, options, onCommentChange, showIcon) {
