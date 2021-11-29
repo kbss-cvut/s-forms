@@ -37,6 +37,10 @@
       "description" : {
          "@id" : "http://purl.org/dc/elements/1.1/description"
       },
+      "source" : {
+        "@id" : "http://purl.org/dc/elements/1.1/source",
+        "@type" : "@id"
+      },
       "accepts-answer-value" : {
          "@id" : "http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value"
       },
@@ -517,7 +521,7 @@
       },
       {
          "label" : {
-            "@value" : "Answerable section",
+            "@value" : "Answerable section with icons",
             "@language" : "en"
          },
          "has-layout-class" : [
@@ -544,7 +548,7 @@
             "@value" : "Some detailed description of the question.",
             "@language" : "en"
          },
-
+         "source" : "https://slovník.gov.cz/generický/množství/pojem/má-jednotku",
          "@type" : "doc:question"
       },
       {

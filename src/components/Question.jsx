@@ -357,6 +357,19 @@ export default class Question extends React.Component {
         return null;
       }
 
+      if (icon.id === Constants.ICONS.QUESTION_LINK && question[Constants.SOURCE]) {
+        if (showIcon) {
+          return (
+              <div className={iconClassname}>
+                <LinkIcon
+                    url={Constants.SOURCE}
+                    absolutePosition={false}/>
+              </div>
+          );
+        }
+        return null;
+      }
+
       if (icon.id === Constants.ICONS.QUESTION_COMMENTS) {
         if (showIcon) {
           return (
@@ -388,6 +401,10 @@ export default class Question extends React.Component {
     return this.getIconComponentFromName(Constants.ICONS.QUESTION_HELP, question, options, onCommentChange, showIcon);
   }
 
+  static renderQuestionLink(question, options, onCommentChange, showIcon) {
+    return this.getIconComponentFromName(Constants.ICONS.QUESTION_LINK, question, options, onCommentChange, showIcon);
+  }
+
   static renderQuestionComments = (question, options, onCommentChange, showIcon) => {
     return this.getIconComponentFromName(Constants.ICONS.QUESTION_COMMENTS, question, options, onCommentChange, showIcon);
   }
@@ -409,6 +426,11 @@ export default class Question extends React.Component {
       if (icons[i].id === Constants.ICONS.QUESTION_HELP) {
         iconsArray.push(
             <li key={i} className="icon-list-item">{renderQuestionHelp}</li>
+        );
+      }
+      if (icons[i].id === Constants.ICONS.QUESTION_LINK) {
+        iconsArray.push(
+            <li key={i} className="icon-list-item">{this.renderQuestionLink}</li>
         );
       }
     }

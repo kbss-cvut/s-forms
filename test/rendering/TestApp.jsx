@@ -69,6 +69,7 @@ class TestApp extends React.Component {
       currentUser: "http://fel.cvut.cz/people/max-chopart",
       icons: [
         {id: Constants.ICONS.QUESTION_HELP, behavior:  Constants.ICON_BEHAVIOR.ENABLE},
+        {id: Constants.ICONS.QUESTION_LINK, behavior:  Constants.ICON_BEHAVIOR.ENABLE},
         {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ENABLE}
       ]
     };

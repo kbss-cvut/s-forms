@@ -49,6 +49,7 @@ export default class Constants {
   static HAS_DATA_VALUE = 'http://onto.fel.cvut.cz/ontologies/documentation/has_data_value';
   static HAS_OBJECT_VALUE = 'http://onto.fel.cvut.cz/ontologies/documentation/has_object_value';
   static HELP_DESCRIPTION = 'http://purl.org/dc/elements/1.1/description';
+  static SOURCE = 'http://purl.org/dc/elements/1.1/source';
   static XSD = {
     MAX_EXCLUSIVE: 'http://www.w3.org/2001/XMLSchema#maxExclusive',
     MAX_INCLUSIVE: 'http://www.w3.org/2001/XMLSchema#maxInclusive',
@@ -108,7 +109,8 @@ export default class Constants {
 
   static ICONS = {
     QUESTION_COMMENTS: "questionComments",
-    QUESTION_HELP: "questionHelp"
+    QUESTION_HELP: "questionHelp",
+    QUESTION_LINK: "questionLink"
   };
 
   static ICON_BEHAVIOR = {
@@ -121,7 +123,8 @@ export default class Constants {
   static DEFAULT_OPTIONS = {
     icons: [
       {id: Constants.ICONS.QUESTION_HELP, behavior:  Constants.ICON_BEHAVIOR.ENABLE},
-      {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ON_HOVER}
+      {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ON_HOVER},
+      {id: Constants.ICONS.QUESTION_LINK, behavior: Constants.ICON_BEHAVIOR.ON_HOVER}
     ]
   };
 }
