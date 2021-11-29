@@ -61,12 +61,14 @@ svg {
 }
 
 .question-circle,
-.question-comment {
+.question-comment,
+.external-link {
   fill: grey;
 }
 
 .text-white .question-circle,
-.text-white .question-comment {
+.text-white .question-comment,
+.text-white .external-link {
   fill: white;
 }
 
