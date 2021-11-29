@@ -23,9 +23,9 @@ const LinkIcon = (props) => {
   return (
       <div ref={el => getOverlayPlacement(el)}>
         <OverlayTrigger placement={props.overlayPlacement || overlayPlacement} overlay={tooltip}>
-      <span className={props.iconClassContainer} style={{ position: props.absolutePosition ? 'absolute' : null }}>
+      <a href={props.url} target="_blank" className={props.iconClassContainer} >
         <ExternalLink className={props.iconClass} />
-      </span>
+      </a>
         </OverlayTrigger>
       </div>
   );

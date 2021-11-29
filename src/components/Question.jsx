@@ -361,9 +361,7 @@ export default class Question extends React.Component {
         if (showIcon) {
           return (
               <div className={iconClassname}>
-                <LinkIcon
-                    url={Constants.SOURCE}
-                    absolutePosition={false}/>
+                <LinkIcon url={Constants.SOURCE}/>
               </div>
           );
         }
@@ -416,6 +414,7 @@ export default class Question extends React.Component {
     let iconsArray = [];
     const renderQuestionHelp = Question.renderQuestionHelp(question, options, onCommentChange, showIcon);
     const renderQuestionComments = Question.renderQuestionComments(question, options, onCommentChange, showIcon);
+    const renderQuestionLink = Question.renderQuestionLink(question, options, onCommentChange, showIcon);
 
     for (let i = 0; i < icons.length; i++) {
       if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
@@ -430,7 +429,7 @@ export default class Question extends React.Component {
       }
       if (icons[i].id === Constants.ICONS.QUESTION_LINK) {
         iconsArray.push(
-            <li key={i} className="icon-list-item">{this.renderQuestionLink}</li>
+            <li key={i} className="icon-list-item">{renderQuestionLink}</li>
         );
       }
     }
