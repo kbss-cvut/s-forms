@@ -361,7 +361,7 @@ export default class Question extends React.Component {
         if (showIcon) {
           return (
               <div className={iconClassname}>
-                <LinkIcon url={Constants.SOURCE}/>
+                <LinkIcon url={question[Constants.SOURCE]}/>
               </div>
           );
         }
