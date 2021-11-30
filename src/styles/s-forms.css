@@ -62,13 +62,13 @@ svg {
 
 .question-circle,
 .question-comment,
-.external-link {
+.external-link-icon {
   fill: grey;
 }
 
 .text-white .question-circle,
 .text-white .question-comment,
-.text-white .external-link {
+.text-white .external-link-icon {
   fill: white;
 }
 

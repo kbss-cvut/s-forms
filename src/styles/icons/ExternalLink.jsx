@@ -2,7 +2,7 @@ import React from 'react';
 
 const ExternalLink = () => (
     <svg
-        className="external-link"
+        className="external-link-icon"
         width="16"
         height="16"
         viewBox="0 0 16 16"
