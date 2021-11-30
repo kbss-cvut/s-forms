@@ -21,13 +21,13 @@ const LinkIcon = (props) => {
   );
 
   return (
-      <div ref={el => getOverlayPlacement(el)}>
-        <OverlayTrigger placement={props.overlayPlacement || overlayPlacement} overlay={tooltip}>
+      // <div ref={el => getOverlayPlacement(el)}>
+      //   <OverlayTrigger placement={props.overlayPlacement || overlayPlacement} overlay={tooltip}>
       <a href={props.url} target="_blank" className={props.iconClassContainer} >
         <ExternalLink className={props.iconClass} />
       </a>
-        </OverlayTrigger>
-      </div>
+      //   </OverlayTrigger>
+      // </div>
   );
 };
 
