@@ -140,7 +140,8 @@ export class Constants {
 
   static ICONS: {
     QUESTION_COMMENTS: string,
-    QUESTION_HELP: string
+    QUESTION_HELP: string,
+    QUESTION_LINK: string
   };
 
   static ICON_BEHAVIOR: {
