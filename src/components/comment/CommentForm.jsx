@@ -1,10 +1,15 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Button, Form, Col, Row} from "react-bootstrap";
 import PropTypes from "prop-types";
 import ArrowRight from "../../styles/icons/ArrowRight";
 
 const CommentForm = (props) => {
     const [commentValue, setCommentValue] = useState('');
+    const formInputRef = useRef(null);
+
+    useEffect(() => {
+        formInputRef.current.focus();
+    }, []);
 
     const onValueChange = (e) => {
         setCommentValue(e.target.value);
@@ -36,6 +41,7 @@ const CommentForm = (props) => {
                             required
                             value={commentValue}
                             onChange={onValueChange}
+                            ref={formInputRef}
                         />
                     </Row>
                     <Row className="send-comment-arrow col-lg-12">
