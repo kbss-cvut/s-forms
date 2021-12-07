@@ -59,6 +59,25 @@ export default class QuestionAnswerProcessor {
         result.answers.push(QuestionAnswerProcessor.processAnswer(question[Constants.HAS_ANSWER][i]));
       }
     }
+
+    if (question[Constants.HAS_COMMENT]) {
+      result.comments = [];
+      if (!Array.isArray(question[Constants.HAS_COMMENT])) {
+        question[Constants.HAS_COMMENT] = [question[Constants.HAS_COMMENT]];
+      }
+      for (let i = 0; i < question[Constants.HAS_COMMENT].length; i++) {
+        result.comments.push(QuestionAnswerProcessor.processComment(question[Constants.HAS_COMMENT][i]));
+      }
+    }
+
+    return result;
+  }
+
+  static processComment(comment) {
+    const result = {};
+    result.author = JsonLdUtils.getJsonAttValue(comment, Constants.HAS_AUTHOR, '@id');
+    result.value = JsonLdUtils.getJsonAttValue(comment, Constants.HAS_COMMENT_VALUE);
+    result.timestamp = JsonLdUtils.getJsonAttValue(comment, Constants.HAS_TIMESTAMP, '@id');
     return result;
   }
 
@@ -73,6 +92,7 @@ export default class QuestionAnswerProcessor {
     }
     return result;
   }
+
 
   /**
    * Generates an empty answer for the specified question
