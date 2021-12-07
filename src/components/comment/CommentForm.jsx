@@ -32,7 +32,7 @@ const CommentForm = (props) => {
                         <Form.Control
                             name="comment"
                             as="textarea"
-                            placeholder="Write your comments here"
+                            placeholder="Write your comments here  (Ctrl+Enter to confirm)"
                             required
                             value={commentValue}
                             onChange={onValueChange}
