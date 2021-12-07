@@ -32,7 +32,7 @@ const CommentView = (props) => {
     }
 
     const getAuthorIRIAbbreviation = () => {
-        const fullAuthor = props.author;
+        const fullAuthor = props.author['@id'];
 
         return fullAuthor.replace(/.*[#\/]/, '... ');
     }
