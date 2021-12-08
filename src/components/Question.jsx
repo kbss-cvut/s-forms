@@ -16,7 +16,6 @@ import {CaretSquareDown, CaretSquareUp, InfoCircle} from '../styles/icons';
 import {ConfigurationContext} from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
 import QuestionCommentIcon from "./comment/QuestionCommentIcon";
-import ExternalLink from "../styles/icons/ExternalLink";
 import LinkIcon from "./LinkIcon";
 
 // TODO Remove once the pretty layout is tested
@@ -171,7 +170,8 @@ export default class Question extends React.Component {
                   {collapsible && this._renderCollapseToggle()}
                   {label}
                 </h6>
-                {Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon)}
+                {this.renderIcons()}
+                {this.renderHeaderExtension()}
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
             </Card>
@@ -190,6 +190,16 @@ export default class Question extends React.Component {
     content.push(this.renderAnswers());
     content.push(this.renderSubQuestions());
     return content;
+  }
+
+  renderIcons() {
+    const question = this.props.question;
+    const options = this.context.options;
+    return Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon);
+  }
+
+  renderHeaderExtension() {
+    return;
   }
 
   renderAnswerableSection() {
@@ -329,7 +339,7 @@ export default class Question extends React.Component {
     const title = this.state.expanded ? options.i18n['section.collapse'] : options.i18n['section.expand'];
 
     return (
-      <span onClick={this._toggleCollapse} title={title}>
+      <span onClick={this.toggleCollapse} title={title}>
         {this.state.expanded ? <CaretSquareUp title={title} /> : <CaretSquareDown title={title} />}
       </span>
     );
