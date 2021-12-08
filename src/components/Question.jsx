@@ -170,7 +170,7 @@ export default class Question extends React.Component {
                   {collapsible && this._renderCollapseToggle()}
                   {label}
                 </h6>
-                {this.renderIcons()}
+                {this.renderQuestionIcons()}
                 {this.renderHeaderExtension()}
               </Accordion.Toggle>
               {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
@@ -192,7 +192,7 @@ export default class Question extends React.Component {
     return content;
   }
 
-  renderIcons() {
+  renderQuestionIcons() {
     const question = this.props.question;
     const options = this.context.options;
     return Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon);
