@@ -81,7 +81,7 @@ export default class Question extends React.Component {
     this.props.onChange(this.props.index, newState);
   }
 
-  _toggleCollapse = () => {
+  toggleCollapse = () => {
     if (this.props.collapsible) {
 
       const question = this.props.question;
@@ -162,7 +162,7 @@ export default class Question extends React.Component {
             <Card className="mb-3">
               <Accordion.Toggle
                   as={Card.Header}
-                  onClick={this._toggleCollapse}
+                  onClick={this.toggleCollapse}
                   className={headerClassName + " question-header"}
                   onMouseEnter={this._onMouseEnterHandler}
                   onMouseLeave={this._onMouseLeaveHandler}
@@ -213,7 +213,7 @@ export default class Question extends React.Component {
     return (
       <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
         <Card className="mb-3">
-          <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
+          <Card.Header onClick={this.toggleCollapse} className={classNames(headerClassNames)}>
             {this.renderAnswers()}
           </Card.Header>
           {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
