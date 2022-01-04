@@ -95,6 +95,7 @@ svg {
 
 .form-label {
   font-weight: 500;
+  white-space: nowrap;
 }
 
 input:disabled {
