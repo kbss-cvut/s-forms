@@ -89,7 +89,7 @@ export default class Question extends React.Component {
     if (this.props.collapsible) {
 
       const question = this.props.question;
-      if (FormUtils.isAnswerable(question) && FormUtils.isSection(question)) {
+      if (!this.context.options.debugMode && FormUtils.isAnswerable(question) && FormUtils.isSection(question)) {
 
         if (!this._getFirstAnswerValue()) {
           // prevent expanding/collapsing when the checkbox is not checked
@@ -159,9 +159,9 @@ export default class Question extends React.Component {
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
       const headerClassName = classNames(
-        FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
-        collapsible ? 'cursor-pointer' : '',
-        Question.getEmphasizedOnRelevantClass(question)
+          FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
+          collapsible ? 'cursor-pointer' : '',
+          Question.getEmphasizedOnRelevantClass(question)
       );
 
       if (FormUtils.isAnswerable(question)) {
@@ -169,7 +169,7 @@ export default class Question extends React.Component {
       }
 
       const cardBody = (
-        <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
+          <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
       );
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
@@ -234,72 +234,66 @@ export default class Question extends React.Component {
     }
 
     const cardBody = (
-      <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
+        <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
     );
 
     const debugMode = this.context.options.debugMode;
-    let showIrrelevant = "showIrrelevant";
-    let activeKey;
+    let showIrrelevant = "";
 
-    if (debugMode && !FormUtils.hasAnswer(question)) {
-      activeKey = question['@id'];
-    } else {
-      showIrrelevant = "";
-      activeKey = this.state.expanded ? question['@id'] : undefined;
-    }
+    if (debugMode && !FormUtils.hasAnswer(question)) showIrrelevant = "showIrrelevant";
 
-      return (
-          <Accordion activeKey={activeKey} className="answerable-section">
-            <Card className="mb-3">
-              <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
-                {this.renderAnswers()}
-              </Card.Header>
-              {collapsible ? <Accordion.Collapse className={showIrrelevant} eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
-            </Card>
-          </Accordion>
-      );
+    return (
+        <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+          <Card className="mb-3">
+            <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
+              {this.renderAnswers()}
+            </Card.Header>
+            {collapsible ? <Accordion.Collapse className={showIrrelevant} eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+          </Card>
+        </Accordion>
+    );
 
 
   }
 
   renderAnswers() {
     const question = this.props.question,
-      children = [],
-      answers = this._getAnswers(),
-      options = this.context.options;
+        children = [],
+        answers = this._getAnswers(),
+        options = this.context.options;
     let cls;
     let isTextarea;
 
     for (let i = 0, len = answers.length; i < len; i++) {
       isTextarea =
-        FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
-        FormUtils.isSparqlInput(question) ||
-        FormUtils.isTurtleInput(question);
+          FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
+          FormUtils.isSparqlInput(question) ||
+          FormUtils.isTurtleInput(question);
       cls = classNames(
-        'answer',
-        Question._getQuestionCategoryClass(question),
-        Question.getEmphasizedOnRelevantClass(question)
+          'answer',
+          Question._getQuestionCategoryClass(question),
+          Question.getEmphasizedOnRelevantClass(question)
       );
       children.push(
-        <div key={'row-item-' + i}
-             className={cls}
-             id={question['@id']}
-             onMouseEnter={this._onMouseEnterHandler}
-             onMouseLeave={this._onMouseLeaveHandler}
-        >
-          <div className="answer-content" style={this._getAnswerWidthStyle()}>
-            <Answer
-                index={i}
-                answer={answers[i]}
-                question={question}
-                onChange={this.onAnswerChange}
-                onCommentChange={this.onCommentChange}
-                showIcon={this.state.showIcon}
-            />
+          <div key={'row-item-' + i}
+               className={cls}
+               id={question['@id']}
+               onMouseEnter={this._onMouseEnterHandler}
+               onMouseLeave={this._onMouseLeaveHandler}
+          >
+            <div className="answer-content" style={this._getAnswerWidthStyle()}>
+              <Answer
+                  index={i}
+                  answer={answers[i]}
+                  question={question}
+                  onChange={this.onAnswerChange}
+                  onCommentChange={this.onCommentChange}
+                  showIcon={this.state.showIcon}
+              />
+            </div>
+            {this._renderUnits()}
+            {this._renderPrefixes()}
           </div>
-          {this._renderUnits()}
-          {this._renderPrefixes()}
-        </div>
       );
     }
     return children;
@@ -338,10 +332,10 @@ export default class Question extends React.Component {
 
   static _getAnswerClass(question, isTextarea) {
     let columns = isTextarea
-      ? 'col-12'
-      : Constants.GENERATED_ROW_SIZE === 1
-      ? 'col-6'
-      : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
+        ? 'col-12'
+        : Constants.GENERATED_ROW_SIZE === 1
+            ? 'col-6'
+            : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
 
     return columns;
   }
@@ -369,7 +363,7 @@ export default class Question extends React.Component {
     const title = this.state.expanded ? options.i18n['section.collapse'] : options.i18n['section.expand'];
 
     return (
-      <span onClick={this.toggleCollapse} title={title}>
+        <span onClick={this.toggleCollapse} title={title}>
         {this.state.expanded ? <CaretSquareUp title={title} /> : <CaretSquareDown title={title} />}
       </span>
     );
@@ -482,9 +476,9 @@ export default class Question extends React.Component {
   _renderPrefixes() {
     const question = this.props.question;
     return question[Constants.HAS_DECLARED_PREFIX] && question[Constants.HAS_DECLARED_PREFIX].length ? (
-      <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]} iconClass={'help-icon-checkbox'}>
-        <InfoCircle />
-      </PrefixIcon>
+        <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]} iconClass={'help-icon-checkbox'}>
+          <InfoCircle />
+        </PrefixIcon>
     ) : null;
   }
 
@@ -528,8 +522,8 @@ export default class Question extends React.Component {
 
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(
-      question[Constants.HAS_SUBQUESTION],
-      Constants.HAS_PRECEDING_QUESTION
+        question[Constants.HAS_SUBQUESTION],
+        Constants.HAS_PRECEDING_QUESTION
     );
 
     return question[Constants.HAS_SUBQUESTION];
