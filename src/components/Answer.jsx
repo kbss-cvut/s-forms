@@ -12,8 +12,7 @@ import TypeaheadAnswer from './answer/TypeaheadAnswer';
 import Constants from '../constants/Constants';
 import { FormGenContext } from '../contexts/FormGenContext';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
-import HelpIcon from './HelpIcon';
-import JsonLdUtils from 'jsonld-utils';
+import Question from "./Question";
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
@@ -135,20 +134,13 @@ const Answer = (props) => {
   };
 
   const _getLabel = (question) => {
-
     const label = JsonldUtils.getLocalized(question[Constants.RDFS_LABEL], options.intl);
-    const questionHelp = question[Constants.HELP_DESCRIPTION] ? (
-      <HelpIcon
-        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
-        absolutePosition={false}
-      />
-    ) : null;
 
     return (
-      <div>
-        <span>{label}</span>
-        {questionHelp}
-      </div>
+        <div className="question-header">
+          {label}
+          {Question.renderIcons(props.question, options, props.onCommentChange, props.showIcon)}
+        </div>
     );
   }
 
@@ -184,7 +176,9 @@ Answer.propTypes = {
   answer: PropTypes.object.isRequired,
   question: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  index: PropTypes.number
+  onCommentChange: PropTypes.func.isRequired,
+  index: PropTypes.number,
+  icons: PropTypes.object
 };
 
 export default Answer;

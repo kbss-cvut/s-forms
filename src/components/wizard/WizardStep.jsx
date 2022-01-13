@@ -1,17 +1,19 @@
 import React from 'react';
-import { Button, ButtonToolbar, Card } from 'react-bootstrap';
+import {Button, ButtonToolbar, Card} from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
-import HelpIcon from '../HelpIcon';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
+import JsonLdObjectMap from "../../util/JsonLdObjectMap";
 
 
 export default class WizardStep extends React.Component {
-
   constructor(props) {
     super(props);
+    this.state = {
+      showIcon: false
+    }
   }
 
   onNextStep = () => {
@@ -23,16 +25,17 @@ export default class WizardStep extends React.Component {
     this.props.onPreviousStep();
   };
 
-  _renderHelpIcon = () => {
-    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
+  onCommentChange = (commentIndex, change) => {
+    this._onChange(Constants.HAS_COMMENT, commentIndex, change)
+  }
 
-    return question[Constants.HELP_DESCRIPTION] ? (
-      <HelpIcon
-        text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], this.props.options.intl)}
-        iconClass="help-icon-section"
-      />
-    ) : null;
-  };
+  _onChange(att, valueIndex, newValue) {
+    let newState = { ...this.props.step};
+    newState[att][valueIndex] = newValue;
+
+    JsonLdObjectMap.putObject(newState['@id'], newState);
+    this.onChange(this.props.index, newState);
+  }
 
   _renderWizardStepButtons = () => {
     return (
@@ -55,9 +58,19 @@ export default class WizardStep extends React.Component {
     this.context.updateFormQuestionsData(this.props.stepIndex || index, { ...this.props.step, ...change });
   };
 
+  _onMouseEnterHandler = () => {
+    this.setState({ showIcon: true });
+  };
+
+  _onMouseLeaveHandler = () => {
+    this.setState({ showIcon: false });
+  };
+
   render() {
 
     const categoryClass = Question._getQuestionCategoryClass(this.props.step);
+    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
+    const options = this.props.options;
 
     let questionComponent = this.props.mapComponent(this.props.step, Question);
     let questionElement = React.createElement(questionComponent, {
@@ -70,9 +83,15 @@ export default class WizardStep extends React.Component {
     return (
       <div className="wizard-step">
         <Card className="wizard-step-content">
-          <Card.Header className="bg-primary text-white" as="h6" id={this.props.step['@id']}>
+          <Card.Header
+              className="bg-primary text-white question-header"
+              as="h6"
+              id={this.props.step['@id']}
+              onMouseEnter={this._onMouseEnterHandler}
+              onMouseLeave={this._onMouseLeaveHandler}
+          >
             {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
-            {this._renderHelpIcon()}
+            {Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon)}
           </Card.Header>
           <Card.Body className={categoryClass}>
             {questionElement}
@@ -82,10 +101,7 @@ export default class WizardStep extends React.Component {
         {this.props.options.wizardStepButtons && this._renderWizardStepButtons()}
       </div>
     );
-
-
   }
-
 }
 
 WizardStep.contextType = FormQuestionsContext;

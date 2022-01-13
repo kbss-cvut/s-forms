@@ -5,6 +5,7 @@ import SForms from '../../src/components/SForms';
 import '../../src/styles/s-forms.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import queryString from 'query-string';
+import Constants from '../../src/constants/Constants'
 
 const form1 = require('./form1.json'); // form with wizard steps
 const form2 = require('./form2.json'); // form without wizard steps (proudly assembled in Semantic Form Web Editor)
@@ -60,30 +61,39 @@ class TestApp extends React.Component {
       horizontalWizardNav: false,
       wizardStepButtons: true,
       enableForwardSkip: true,
-      ...getP('startingQuestionId', 'category-2-1200'),
+      ...getP('startingQuestionId', 'layout-options-65'),
       startingStep: 1,
-      debugMode: true
+        debugMode: true,
+      users: [
+          {id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart"},
+          {id: "http://fel.cvut.cz/people/miroslav-blasko", label: "Miroslav Blasko"}],
+      currentUser: "http://fel.cvut.cz/people/max-chopart",
+      icons: [
+        {id: Constants.ICONS.QUESTION_HELP, behavior:  Constants.ICON_BEHAVIOR.ENABLE},
+        {id: Constants.ICONS.QUESTION_LINK, behavior:  Constants.ICON_BEHAVIOR.ENABLE},
+        {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ENABLE}
+      ]
     };
 
     return (
-        <div className="p-4">
-            <SForms
-                ref={this.refForm}
-                form={this.state.selectedForm}
-                options={options}
-                fetchTypeAheadValues={this.fetchTypeAheadValues}
-                isFormValid={(isFormValid) => this.setState({ isFormValid })}
-            />
-            <button
-                disabled={!this.state.isFormValid}
-                style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
-                onClick={() => {
-                  this.setState((prevState) => ({selectedForm: prevState.selectedForm === form2 ? form1 : form2}));
-                }}
-            >
-              Switch form
-            </button>
-        </div>
+      <div className="p-4">
+        <SForms
+          ref={this.refForm}
+          form={this.state.selectedForm}
+          options={options}
+          fetchTypeAheadValues={this.fetchTypeAheadValues}
+          isFormValid={(isFormValid) => this.setState({ isFormValid })}
+        />
+        <button
+          disabled={!this.state.isFormValid}
+          style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
+          onClick={() => {
+            this.setState((prevState) => ({selectedForm: prevState.selectedForm === form2 ? form1 : form2}));
+          }}
+        >
+          Switch form
+        </button>
+      </div>
     );
   }
 }

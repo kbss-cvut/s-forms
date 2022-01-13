@@ -4,12 +4,49 @@ import PropTypes from 'prop-types';
 import { FormText, FormControl, FormGroup, Form } from 'react-bootstrap';
 
 export default class DefaultInput extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      cursorPosition: 0
+    };
+  }
+
   focus() {
     ReactDOM.findDOMNode(this.input).focus();
   }
 
   getInputDOMNode() {
     return ReactDOM.findDOMNode(this.input);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.fieldDidShrink(prevProps) || this.fieldDidExpand(prevProps)) {
+      this.updateFieldCursorPosition();
+    }
+  }
+
+  fieldDidExpand(prevProps) {
+    return this.props.type === "textarea" && prevProps.type !== "textarea";
+  }
+
+  fieldDidShrink(prevProps) {
+    return this.props.type === "text" && prevProps.type !== "text";
+  }
+
+  updateFieldCursorPosition() {
+    this.focus();
+    this.getInputDOMNode().setSelectionRange(
+        this.state.cursorPosition,
+        this.state.cursorPosition
+    );
+  }
+
+  saveCursorPosition(e) {
+    this.props.onChange(e)
+    this.setState({
+      cursorPosition: e.target.selectionStart
+    })
   }
 
   render() {
@@ -64,14 +101,18 @@ export default class DefaultInput extends React.Component {
 
   _renderTextArea() {
     // TODO validation
-    return (
-      <FormGroup size="small">
-        {this._renderLabel()}
-        <FormControl as="textarea" style={{ height: 'auto' }} ref={(c) => (this.input = c)} {...this.props} />
-        {this.props.validation && <FormControl.Feedback />}
-        {this._renderHelp()}
-      </FormGroup>
-    );
+    return(
+        <FormGroup size="small">
+          {this._renderLabel()}
+          <FormControl ref={(c) => (this.input = c)}
+                       as="textarea"
+                       {...this.props}
+                       onChange={e => this.saveCursorPosition(e)}
+          />
+          {this.props.validation && <FormControl.Feedback />}
+          {this._renderHelp()}
+        </FormGroup>
+    )
   }
 
   _renderHelp() {
@@ -84,7 +125,11 @@ export default class DefaultInput extends React.Component {
     return (
       <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl ref={(c) => (this.input = c)} as="input" {...this.props} />
+        <FormControl ref={(c) => (this.input = c)}
+                     as="input"
+                     {...this.props}
+                     onChange={e => this.saveCursorPosition(e)}
+        />
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}
       </FormGroup>

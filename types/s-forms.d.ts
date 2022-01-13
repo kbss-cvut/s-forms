@@ -137,6 +137,18 @@ export class Constants {
   static RDFS_LABEL: string;
   static RDFS_COMMENT: string;
   static DEFAULT_HAS_CHILD: string;
+
+  static ICONS: {
+    QUESTION_COMMENTS: string,
+    QUESTION_HELP: string,
+    QUESTION_LINK: string
+  };
+
+  static ICON_BEHAVIOR: {
+    ENABLE: string,
+    DISABLE: string,
+    ON_HOVER: string
+  };
 }
 
 export class JsonLdObjectUtils {
