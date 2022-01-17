@@ -38,6 +38,9 @@ export default class Question extends React.Component {
 
   componentDidUpdate() {
     const question = this.props.question;
+    const startingQuestionId = this.context.options.startingQuestionId;
+    const subQuestion = question[Constants.HAS_SUBQUESTION]
+    let isSubQuestionStartingQuestionId = subQuestion.find(o => o['@id'] === startingQuestionId);
 
     if (FormUtils.isSection(question) && FormUtils.isAnswerable(question)) {
       const answerValue = this._getFirstAnswerValue();
@@ -45,8 +48,13 @@ export default class Question extends React.Component {
       // Irrelevant questions are expanded if debugMode is on
       if (this.context.options.debugMode) {
         return null;
+      }
 
-      } else if (this.state.expanded && !answerValue) {
+      if (isSubQuestionStartingQuestionId) {
+        return null;
+      }
+
+      else if (this.state.expanded && !answerValue) {
         // close expanded answerable section that does not have positive answer
         this.setState({ expanded: false });
       }
@@ -112,12 +120,14 @@ export default class Question extends React.Component {
 
   render() {
     const question = this.props.question;
+    const subQuestion = question[Constants.HAS_SUBQUESTION];
     const options = this.context.options;
     const renderQuestion = this.renderQuestion(question);
     if (FormUtils.isHidden(question)) {
       return null;
     }
-    if (!FormUtils.isRelevant(question) && this.context.options.debugMode) {
+    if (!FormUtils.isRelevant(question) &&
+        (this.context.options.debugMode || FormUtils.isQuestionMatchingStartingQuestionId(subQuestion, options.startingQuestionId))) {
       return (
           <div className="showIrrelevant">
             {renderQuestion}
@@ -236,11 +246,7 @@ export default class Question extends React.Component {
     const cardBody = (
         <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
     );
-
-    const debugMode = this.context.options.debugMode;
-    let showIrrelevant = "";
-
-    if (debugMode && !FormUtils.hasAnswer(question)) showIrrelevant = "showIrrelevant";
+    let classname = this.getShowIrrelevantClassname(question);
 
     return (
         <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
@@ -248,12 +254,23 @@ export default class Question extends React.Component {
             <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
               {this.renderAnswers()}
             </Card.Header>
-            {collapsible ? <Accordion.Collapse className={showIrrelevant} eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+            {collapsible ? <Accordion.Collapse className={classname} eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
           </Card>
         </Accordion>
     );
 
 
+  }
+
+  getShowIrrelevantClassname(question) {
+    const debugMode = this.context.options.debugMode;
+    const startingQuestionId = this.context.options.startingQuestionId;
+    const subQuestion = question[Constants.HAS_SUBQUESTION]
+
+    if ((debugMode || FormUtils.isQuestionMatchingStartingQuestionId(subQuestion, startingQuestionId)) && !FormUtils.hasAnswer(question)) {
+      return "showIrrelevant";
+    }
+    return "";
   }
 
   renderAnswers() {
