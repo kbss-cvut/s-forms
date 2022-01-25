@@ -129,7 +129,7 @@ export default class Question extends React.Component {
     if (!FormUtils.isRelevant(question) &&
         (this.context.options.debugMode || FormUtils.isQuestionMatchingStartingQuestionId(subQuestion, options.startingQuestionId))) {
       return (
-          <div className="showIrrelevant">
+          <div className="show-irrelevant">
             {renderQuestion}
           </div>
       );
@@ -268,7 +268,7 @@ export default class Question extends React.Component {
     const subQuestion = question[Constants.HAS_SUBQUESTION]
 
     if ((debugMode || FormUtils.isQuestionMatchingStartingQuestionId(subQuestion, startingQuestionId)) && !FormUtils.hasAnswer(question)) {
-      return "showIrrelevant";
+      return "show-irrelevant";
     }
     return "";
   }

@@ -255,7 +255,7 @@ input:disabled {
   font-size: 0.5625rem;
 }
 
-.showIrrelevant {
+.show-irrelevant {
   opacity: 50%;
   pointer-events: none;
 }
