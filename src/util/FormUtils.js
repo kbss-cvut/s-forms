@@ -316,6 +316,9 @@ export default class FormUtils {
    * @returns {boolean}
    */
   static isQuestionMatchingStartingQuestionId(question, startingQuestionId) {
+    if (question === undefined) {
+      return;
+    }
     return !!question.find(o => o['@id'] === startingQuestionId);
   }
 }

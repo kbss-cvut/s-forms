@@ -243,10 +243,11 @@ export default class Question extends React.Component {
       headerClassNames.push('cursor-pointer');
     }
 
-    const cardBody = (
-        <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
-    );
     let classname = this.getShowIrrelevantClassname(question);
+
+    const cardBody = (
+        <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions(classname)}</Card.Body>
+    );
 
     return (
         <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
@@ -504,22 +505,26 @@ export default class Question extends React.Component {
     return question[Constants.HAS_UNIT] ? <div className="has-unit-label">{question[Constants.HAS_UNIT]}</div> : null;
   }
 
-  renderSubQuestions() {
+  renderSubQuestions(classname) {
     const children = [];
     const subQuestions = this._getSubQuestions();
+    const debugMode = this.context.options.debugMode;
+    const startingQuestionId = this.context.options.startingQuestionId;
 
     for (let i = 0; i < subQuestions.length; i++) {
-
       let question = subQuestions[i];
+      let questionId = question['@id'];
       let component = this.context.mapComponent(question, Question);
+      let element = null;
 
-      let element = React.createElement(component, {
-        key: 'sub-question-' + i,
-        question: question,
-        onChange: this.onSubQuestionChange,
-        index: i
-      });
-
+      if (debugMode || classname !== "show-irrelevant" || (!debugMode && questionId === startingQuestionId)) {
+        element = React.createElement(component, {
+          key: 'sub-question-' + i,
+          question: question,
+          onChange: this.onSubQuestionChange,
+          index: i
+        });
+      }
       children.push(element);
     }
     return children;
