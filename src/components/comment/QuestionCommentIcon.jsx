@@ -6,10 +6,12 @@ import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
 import {ConfigurationContext} from "../../contexts/ConfigurationContext";
 import CommentForm from "./CommentForm";
+import {motion} from 'framer-motion/dist/framer-motion';
 
 const QuestionCommentIcon = (props) => {
     const context = useContext(ConfigurationContext);
     const target = useRef(null);
+    const dragRef = useRef(null);
     const [show, setShow] = useState(false);
     const [overlayPlacement, setOverlayPlacement] = useState("right");
 
@@ -52,7 +54,7 @@ const QuestionCommentIcon = (props) => {
     }
 
     const getCommentsLength = () => {
-       return _getComments().length;
+        return _getComments().length;
     }
 
     const getOverlayPlacement = (el) => {
@@ -70,16 +72,18 @@ const QuestionCommentIcon = (props) => {
                 {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
             </span>
 
-            <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={true} onHide={hideOverlay}>
-                {(overlayProps) => (
-                    <Tooltip className="comment-tooltip" {...overlayProps}>
+            <motion.div ref={dragRef} drag className="overlay">
+                <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={true} onHide={hideOverlay} container={dragRef}>
+                    {(overlayProps) => (
+                        <Tooltip className="comment-tooltip" {...overlayProps}>
                         <span>
                             <CommentForm onChange={onCommentValueChangeHandler} />
                             <CommentList comment={_getComments()} />
                         </span>
-                    </Tooltip>
-                )}
-            </Overlay>
+                        </Tooltip>
+                    )}
+                </Overlay>
+            </motion.div>
         </div>
     );
 }
