@@ -1,12 +1,12 @@
 module.exports = {
   roots: ['<rootDir>'],
-  moduleFileExtensions: ['js', 'jsx', 'json'],
+  moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
   setupFiles: ['<rootDir>/test/setup.js'],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
   testEnvironment: 'jsdom',
   testURL: 'http://localhost',
   transform: {
-    '^.+\\.(js|jsx)$': 'babel-jest'
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest'
   },
   reporters: ['default'],
   moduleNameMapper: {

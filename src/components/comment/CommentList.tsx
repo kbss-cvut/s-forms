@@ -1,13 +1,16 @@
 import React from "react";
 import CommentView from "./CommentView";
-import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
 
+interface Props {
+    comment: Array<any>
+}
 
-const CommentList = (props) => {
+const CommentList = ({comment}: Props) => {
+    console.log(comment)
     const addComments = () => {
         return (
-            props.comment.map((comment, index) => (
+            comment.map((comment, index) => (
                 <div key={index}
                      className="comment-list-items">
                     <CommentView
@@ -20,17 +23,13 @@ const CommentList = (props) => {
     }
 
     const renderSortedComments = () => {
-        return addComments().sort((a, b) => {
+        return addComments().sort((a: any, b: any) => {
             return new Date(a.HAS_TIMESTAMP).getTime()
                 - new Date(b.HAS_TIMESTAMP).getTime()
         }).reverse();
     }
 
     return renderSortedComments();
-};
-
-CommentList.propTypes = {
-    comment: PropTypes.array.isRequired
 };
 
 export default CommentList;
