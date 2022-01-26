@@ -1,4 +1,4 @@
-import React, {useContext, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import CommentBubble from "../../styles/icons/CommentBubble";
 import {Badge, Overlay, Tooltip} from "react-bootstrap";
 import CommentList from "./CommentList";
@@ -72,8 +72,13 @@ const QuestionCommentIcon = (props) => {
                 {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
             </span>
 
-            <motion.div ref={dragRef} drag className="overlay">
-                <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={true} onHide={hideOverlay} container={dragRef}>
+            <motion.div className="overlay-comment" ref={dragRef} drag dragConstraints={{
+                top: -50,
+                left: -50,
+                right: 50,
+                bottom: 50,
+            }}>
+                <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={false} onHide={hideOverlay} container={dragRef}>
                     {(overlayProps) => (
                         <Tooltip className="comment-tooltip" {...overlayProps}>
                         <span>

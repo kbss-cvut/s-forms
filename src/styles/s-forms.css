@@ -43,6 +43,11 @@
   padding-right: 0;
 }
 
+.overlay-comment {
+  position: absolute;
+  z-index: 10;
+}
+
 svg {
   fill: currentColor;
 }
