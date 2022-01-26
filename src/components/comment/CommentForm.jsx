@@ -30,24 +30,25 @@ const CommentForm = (props) => {
     }
 
     return (
-        <Form onSubmit={submitHandler} className="comment-form" onKeyUp={onKeyUpHandler} onClick={onClickHandler}>
-            <Form.Group className="mb-3" controlId="formBasicComment">
-                <Col className="col-lg-12">
-                    <Row className="col-lg-12">
-                        <Form.Control
-                            name="comment"
-                            as="textarea"
-                            placeholder="Write your comments here  (Ctrl+Enter to confirm)"
-                            required
-                            value={commentValue}
-                            onChange={onValueChange}
-                            ref={formInputRef}
-                        />
-                    </Row>
-                    <Row className="send-comment-arrow col-lg-12">
-                        <Button className="comment-button" variant="primary" type="submit" >
-                            <ArrowRight />
-                        </Button>
+        <Form onSubmit={submitHandler} onKeyUp={onKeyUpHandler} onClick={onClickHandler}>
+            <Form.Group className="m-2" controlId="formBasicComment">
+                <Col className="col-lg-12 p-0">
+                    <Row className="container-fluid p-0 m-0">
+                        <div className="comment-form">
+                            <Form.Control
+                                className="comment-form-control"
+                                name="comment"
+                                as="textarea"
+                                placeholder="Write your comments here  (Ctrl+Enter to confirm)"
+                                required
+                                value={commentValue}
+                                onChange={onValueChange}
+                                ref={formInputRef}
+                            />
+                            <Button className="comment-form-button" variant="primary" type="submit" >
+                                <ArrowRight style={{zIndex:1000}}/>
+                            </Button>
+                        </div>
                     </Row>
                 </Col>
             </Form.Group>

@@ -23,7 +23,7 @@ const CommentList = (props) => {
         return addComments().sort((a, b) => {
             return new Date(a.HAS_TIMESTAMP).getTime()
                 - new Date(b.HAS_TIMESTAMP).getTime()
-        }).reverse();
+        });
     }
 
     return renderSortedComments();

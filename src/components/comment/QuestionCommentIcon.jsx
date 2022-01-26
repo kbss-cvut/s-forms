@@ -7,6 +7,7 @@ import Constants from "../../constants/Constants";
 import {ConfigurationContext} from "../../contexts/ConfigurationContext";
 import CommentForm from "./CommentForm";
 import {motion} from 'framer-motion/dist/framer-motion';
+import Close from "../../styles/icons/Close";
 
 const QuestionCommentIcon = (props) => {
     const context = useContext(ConfigurationContext);
@@ -73,8 +74,8 @@ const QuestionCommentIcon = (props) => {
     };
 
     return (
-        <div ref={overlayTarget}>
-            <span ref={target} onClick={onClickHandler}>
+        <div ref={overlayTarget} onClick={onClickHandler}>
+            <span ref={target}>
                 <CommentBubble/>
                 {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
             </span>
@@ -89,8 +90,14 @@ const QuestionCommentIcon = (props) => {
                     {(overlayProps) => (
                         <Tooltip className="comment-tooltip" {...overlayProps}>
                         <span>
-                            <CommentForm onChange={onCommentValueChangeHandler} />
+                            <motion.div
+                                className="close-comment-icon"
+                                onClick={hideOverlay}
+                                whileHover={{scale: 1.1, transition: {duration: 0.1}}}>
+                                <Close/>
+                            </motion.div>
                             <CommentList comment={_getComments()} />
+                            <CommentForm onChange={onCommentValueChangeHandler} />
                         </span>
                         </Tooltip>
                     )}
