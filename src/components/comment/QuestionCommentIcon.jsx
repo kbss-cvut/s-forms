@@ -10,10 +10,17 @@ import {motion} from 'framer-motion/dist/framer-motion';
 
 const QuestionCommentIcon = (props) => {
     const context = useContext(ConfigurationContext);
+
     const target = useRef(null);
     const dragRef = useRef(null);
+    const overlayTarget = useRef(null);
+
     const [show, setShow] = useState(false);
     const [overlayPlacement, setOverlayPlacement] = useState("right");
+
+    useEffect(() => {
+        getOverlayPlacement(overlayTarget.current)
+    });
 
     const hideOverlay = () => {
         setShow(false);
@@ -57,16 +64,16 @@ const QuestionCommentIcon = (props) => {
         return _getComments().length;
     }
 
-    const getOverlayPlacement = (el) => {
-        if (!el) return;
+    const getOverlayPlacement = (overlayTarget) => {
+        if (!overlayTarget) return;
 
-        if (el.getBoundingClientRect().x > window.innerWidth / 2) {
+        if (overlayTarget.getBoundingClientRect().x > window.innerWidth / 2) {
             setOverlayPlacement("left");
         } else setOverlayPlacement("right");
     };
 
     return (
-        <div ref={el => getOverlayPlacement(el)}>
+        <div ref={overlayTarget}>
             <span ref={target} onClick={onClickHandler}>
                 <CommentBubble/>
                 {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
