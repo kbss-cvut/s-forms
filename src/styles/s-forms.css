@@ -52,7 +52,8 @@ svg {
   fill: currentColor;
 }
 
-.question-comment {
+.question-comment,
+.comment-delete {
   cursor: pointer;
 }
 
@@ -67,7 +68,9 @@ svg {
 
 .question-circle,
 .question-comment,
-.external-link-icon {
+.external-link-icon,
+.close-icon,
+.recycle-bin-icon{
   fill: grey;
 }
 
@@ -218,12 +221,10 @@ input:disabled {
 
 .comment-tooltip > .tooltip-inner {
   max-width: none;
-  max-height: 25rem;
-  width: 50vw;
+  width: 30vw;
   border: solid 2px #afafaf;
   background-color: #cbeef6;
   color: #000000;
-  overflow: hidden scroll;
   padding: 0;
   border-radius: 0;
 }
@@ -246,12 +247,11 @@ input:disabled {
 
 .comment-form-button {
   position: absolute;
-  /*border-radius: 0;*/
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 1px;
-  bottom: 1px;
+  right: 2px;
+  bottom: 2px;
   height: 25px;
   width: 25px;
   padding: 0;
@@ -262,6 +262,11 @@ input:disabled {
   padding: 0.5rem;
 }
 
+.comment-delete {
+  height: 20px;
+  width: 20px;
+}
+
 .comment-content .comment-author {
   font-weight: bold;
 }
@@ -270,9 +275,10 @@ input:disabled {
   white-space: pre-line;
 }
 
-/*.comment-list-items {*/
-/*  padding-top: 1.25rem;*/
-/*}*/
+.comment-list-items {
+  overflow: hidden scroll;
+  max-height: 25rem;
+}
 
 .comment-timestamp {
   color: #696969;

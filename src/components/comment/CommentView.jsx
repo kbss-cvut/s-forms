@@ -5,6 +5,8 @@ import {ConfigurationContext} from "../../contexts/ConfigurationContext";
 import LinkIcon from "../LinkIcon";
 import IconOverlay from "../IconOverlay";
 import PropTypes from "prop-types";
+import RecycleBin from "../../styles/icons/RecycleBin";
+import {motion} from 'framer-motion/dist/framer-motion';
 
 const UNKNOWN_AUTHOR = "Unknown author";
 
@@ -45,17 +47,17 @@ const CommentView = (props) => {
     }
 
     const renderAuthor = () => {
-      return (
-          <>
-              {showIRI ?
-                  <>
-                      {getAuthorLabel()}
-                      <LinkIcon iconClassContainer="emphasise-on-relevant-icon" url={getAuthorIRI()}/>
-                  </>
-                  : getAuthorLabel()
-              }
-          </>
-      )
+        return (
+            <>
+                {showIRI ?
+                    <>
+                        {getAuthorLabel()}
+                        <LinkIcon iconClassContainer="emphasise-on-relevant-icon" url={getAuthorIRI()}/>
+                    </>
+                    : getAuthorLabel()
+                }
+            </>
+        )
     };
 
     const renderTimeAgo = () => {
@@ -68,8 +70,8 @@ const CommentView = (props) => {
         }
 
         return <IconOverlay id="exact-time-overlay" tooltipContent={getUTCFormat()}>
-          {getTimeAgoFormat()}
-      </IconOverlay>
+            {getTimeAgoFormat()}
+        </IconOverlay>
 
     }
 
@@ -77,16 +79,27 @@ const CommentView = (props) => {
         setShowIRI(!showIRI);
     }
 
+    const onClickDeleteCommentHandler = () => {
+        props.onClickDeleteComment(props.index);
+    }
+
     return (
         <div className="comment-content">
             <div className="row">
-                <span className="col-auto comment-author" onMouseEnter={onMouseAuthorEventHandler} onMouseLeave={onMouseAuthorEventHandler}>
+                <div className="col-auto comment-author" onMouseEnter={onMouseAuthorEventHandler} onMouseLeave={onMouseAuthorEventHandler}>
                     {renderAuthor()}
-                </span>
-                <span className="col-auto text-muted comment-timestamp">{renderTimeAgo()}</span>
+                </div>
+                <div className="col-auto text-muted comment-timestamp">{renderTimeAgo()}</div>
+                <motion.div
+                    className="comment-delete"
+                    whileHover={{scale: 1.2}}
+                    whileTap={{scale: 0.9}}
+                    onClick={onClickDeleteCommentHandler}>
+                    <RecycleBin/>
+                </motion.div>
             </div>
             <div className="row">
-                <span className="col comment-value">{props.commentValue}</span>
+                <div className="col comment-value">{props.commentValue}</div>
             </div>
         </div>
     );
@@ -95,7 +108,10 @@ const CommentView = (props) => {
 CommentView.propTypes = {
     author: PropTypes.object.isRequired,
     timestamp: PropTypes.string.isRequired,
-    commentValue: PropTypes.string.isRequired
+    commentValue: PropTypes.string.isRequired,
+    onClickDeleteComment: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
+    comment: PropTypes.object.isRequired
 };
 
 export default CommentView;

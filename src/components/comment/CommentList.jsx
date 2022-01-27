@@ -5,32 +5,27 @@ import Constants from "../../constants/Constants";
 
 
 const CommentList = (props) => {
-    const addComments = () => {
-        return (
-            props.comment.map((comment, index) => (
+    return (
+        <div className="comment-list-items">
+            {props.comment.map((comment, index) => (
                 <div key={index}
-                     className="comment-list-items">
+                     className="comment-list-item">
                     <CommentView
                         commentValue={comment[Constants.HAS_COMMENT_VALUE]}
                         author={comment[Constants.HAS_AUTHOR] ? comment[Constants.HAS_AUTHOR] : null}
                         timestamp={comment[Constants.HAS_TIMESTAMP]}
+                        onClickDeleteComment={props.onClickDeleteComment}
+                        index={index}
+                        comment={comment}
                     />
                 </div>
-            )));
-    }
-
-    const renderSortedComments = () => {
-        return addComments().sort((a, b) => {
-            return new Date(a.HAS_TIMESTAMP).getTime()
-                - new Date(b.HAS_TIMESTAMP).getTime()
-        });
-    }
-
-    return renderSortedComments();
+            ))}
+        </div>);
 };
 
 CommentList.propTypes = {
-    comment: PropTypes.array.isRequired
+    comment: PropTypes.array.isRequired,
+    onClickDeleteComment: PropTypes.func.isRequired
 };
 
 export default CommentList;

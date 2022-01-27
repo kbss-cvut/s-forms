@@ -46,7 +46,7 @@ const CommentForm = (props) => {
                                 ref={formInputRef}
                             />
                             <Button className="comment-form-button" variant="primary" type="submit" >
-                                <ArrowRight style={{zIndex:1000}}/>
+                                <ArrowRight/>
                             </Button>
                         </div>
                     </Row>

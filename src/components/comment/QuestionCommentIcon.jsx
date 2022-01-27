@@ -20,7 +20,7 @@ const QuestionCommentIcon = (props) => {
     const [overlayPlacement, setOverlayPlacement] = useState("right");
 
     useEffect(() => {
-        getOverlayPlacement(overlayTarget.current)
+        getOverlayPlacement(overlayTarget.current);
     });
 
     const hideOverlay = () => {
@@ -55,9 +55,18 @@ const QuestionCommentIcon = (props) => {
         change[Constants.HAS_TIMESTAMP] = Date.now().toString();
     };
 
-    const onClickHandler = (e) => {
+    const onClickDeleteCommentHandler = (index) => {
+        const comment = _getComments();
+        comment.splice(index, 1);
+    }
+
+    const stopPropagation = (e) => {
         e.preventDefault();
         e.stopPropagation();
+    }
+
+    const onClickSetShowHandler = (e) => {
+        stopPropagation(e);
         setShow(!show);
     }
 
@@ -74,8 +83,8 @@ const QuestionCommentIcon = (props) => {
     };
 
     return (
-        <div ref={overlayTarget} onClick={onClickHandler}>
-            <span ref={target}>
+        <div ref={overlayTarget} onClick={stopPropagation}>
+            <span ref={target} onClick={onClickSetShowHandler}>
                 <CommentBubble/>
                 {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
             </span>
@@ -96,7 +105,7 @@ const QuestionCommentIcon = (props) => {
                                 whileHover={{scale: 1.1, transition: {duration: 0.1}}}>
                                 <Close/>
                             </motion.div>
-                            <CommentList comment={_getComments()} />
+                            <CommentList comment={_getComments()} onClickDeleteComment={onClickDeleteCommentHandler}/>
                             <CommentForm onChange={onCommentValueChangeHandler} />
                         </span>
                         </Tooltip>
