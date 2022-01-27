@@ -5,18 +5,18 @@ import Constants from '../../constants/Constants';
 import { Rings } from 'react-loader-spinner';
 
 const CommentList = (props) => {
-  const [isCommentDeleted, setIsCommentDeleted] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const deleteCommentViewHandler = () => {
-    setIsCommentDeleted(true);
+    setIsDeleting(true);
     setTimeout(() => {
-      setIsCommentDeleted(false);
+      setIsDeleting(false);
     }, 2000);
   };
 
   return (
     <span>
-      {isCommentDeleted ? (
+      {isDeleting ? (
         <div className="comment-delete">
           <Rings color="#00BFFF" height={80} width={80} />
           <p>Deleting comment...</p>
