@@ -86,6 +86,7 @@ const CommentView = (props) => {
 
     const onClickDeleteCommentHandler = () => {
         props.onClickDeleteComment(props.index);
+        props.deleteCommment()
     }
 
     return (
@@ -117,8 +118,7 @@ CommentView.propTypes = {
     timestamp: PropTypes.string.isRequired,
     commentValue: PropTypes.string.isRequired,
     onClickDeleteComment: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired,
-    comment: PropTypes.object.isRequired
+    index: PropTypes.number.isRequired
 };
 
 export default CommentView;
