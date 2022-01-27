@@ -27,26 +27,23 @@ export default class DefaultInput extends React.Component {
   }
 
   fieldDidExpand(prevProps) {
-    return this.props.type === "textarea" && prevProps.type !== "textarea";
+    return this.props.type === 'textarea' && prevProps.type !== 'textarea';
   }
 
   fieldDidShrink(prevProps) {
-    return this.props.type === "text" && prevProps.type !== "text";
+    return this.props.type === 'text' && prevProps.type !== 'text';
   }
 
   updateFieldCursorPosition() {
     this.focus();
-    this.getInputDOMNode().setSelectionRange(
-        this.state.cursorPosition,
-        this.state.cursorPosition
-    );
+    this.getInputDOMNode().setSelectionRange(this.state.cursorPosition, this.state.cursorPosition);
   }
 
   saveCursorPosition(e) {
-    this.props.onChange(e)
+    this.props.onChange(e);
     this.setState({
       cursorPosition: e.target.selectionStart
-    })
+    });
   }
 
   render() {
@@ -68,7 +65,12 @@ export default class DefaultInput extends React.Component {
     // TODO change control id to hash of label
     return (
       <Form.Group size="small" controlId={Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}>
-        <Form.Check type="checkbox" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
+        <Form.Check
+          type="checkbox"
+          ref={(c) => (this.input = c)}
+          {...this.props}
+          label={this.props.label}
+        />
       </Form.Group>
     );
   }
@@ -76,7 +78,12 @@ export default class DefaultInput extends React.Component {
   _renderRadio() {
     return (
       <FormGroup size="small">
-        <Form.Check type="radio" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
+        <Form.Check
+          type="radio"
+          ref={(c) => (this.input = c)}
+          {...this.props}
+          label={this.props.label}
+        />
       </FormGroup>
     );
   }
@@ -101,18 +108,19 @@ export default class DefaultInput extends React.Component {
 
   _renderTextArea() {
     // TODO validation
-    return(
-        <FormGroup size="small">
-          {this._renderLabel()}
-          <FormControl ref={(c) => (this.input = c)}
-                       as="textarea"
-                       {...this.props}
-                       onChange={e => this.saveCursorPosition(e)}
-          />
-          {this.props.validation && <FormControl.Feedback />}
-          {this._renderHelp()}
-        </FormGroup>
-    )
+    return (
+      <FormGroup size="small">
+        {this._renderLabel()}
+        <FormControl
+          ref={(c) => (this.input = c)}
+          as="textarea"
+          {...this.props}
+          onChange={(e) => this.saveCursorPosition(e)}
+        />
+        {this.props.validation && <FormControl.Feedback />}
+        {this._renderHelp()}
+      </FormGroup>
+    );
   }
 
   _renderHelp() {
@@ -125,10 +133,11 @@ export default class DefaultInput extends React.Component {
     return (
       <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl ref={(c) => (this.input = c)}
-                     as="input"
-                     {...this.props}
-                     onChange={e => this.saveCursorPosition(e)}
+        <FormControl
+          ref={(c) => (this.input = c)}
+          as="input"
+          {...this.props}
+          onChange={(e) => this.saveCursorPosition(e)}
         />
         {this.props.validation && <FormControl.Feedback />}
         {this._renderHelp()}

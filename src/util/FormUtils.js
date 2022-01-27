@@ -16,7 +16,11 @@ export default class FormUtils {
   }
 
   static isSection(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.QUESTION_SECTION);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.QUESTION_SECTION
+    );
   }
 
   static isAnswerable(question) {
@@ -24,7 +28,11 @@ export default class FormUtils {
   }
 
   static isTypeahead(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.QUESTION_TYPEAHEAD);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.QUESTION_TYPEAHEAD
+    );
   }
 
   static getPossibleValuesQuery(question) {
@@ -41,7 +49,9 @@ export default class FormUtils {
 
   static isTextarea(question, answerValue) {
     return (
-      (answerValue && answerValue.length > Constants.INPUT_LENGTH_THRESHOLD && !FormUtils.isTypeahead(question)) ||
+      (answerValue &&
+        answerValue.length > Constants.INPUT_LENGTH_THRESHOLD &&
+        !FormUtils.isTypeahead(question)) ||
       JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TEXTAREA)
     );
   }
@@ -51,7 +61,9 @@ export default class FormUtils {
   }
 
   static isCalendar(question) {
-    return FormUtils.isDate(question) || FormUtils.isTime(question) || FormUtils.isDateTime(question);
+    return (
+      FormUtils.isDate(question) || FormUtils.isTime(question) || FormUtils.isDateTime(question)
+    );
   }
 
   static isDate(question) {
@@ -91,7 +103,9 @@ export default class FormUtils {
   }
 
   static getCategory(question) {
-    return Constants.LAYOUT.CATEGORY.find((c) => JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c));
+    return Constants.LAYOUT.CATEGORY.find((c) =>
+      JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c)
+    );
   }
 
   static resolveValue(answer) {
@@ -160,12 +174,12 @@ export default class FormUtils {
 
   static testOrCondition(condition) {
     const hasSubCondition = condition[Constants.HAS_SUB_CONDITION];
-    if (! hasSubCondition) {
+    if (!hasSubCondition) {
       console.warn('Or condition does not have any sub-condition !');
     }
     for (const subC of this._getMappedObjectsArray(hasSubCondition)) {
-      if (this.testCondition(subC)){
-          return true;
+      if (this.testCondition(subC)) {
+        return true;
       }
     }
     return false;
@@ -184,7 +198,9 @@ export default class FormUtils {
     }
 
     if (acceptedValidationsValues && acceptedAnswerValues) {
-      console.warn('Support for validation and requirement constraints at same time is not implemented !');
+      console.warn(
+        'Support for validation and requirement constraints at same time is not implemented !'
+      );
     }
 
     // any answer within all subquestions
@@ -195,16 +211,16 @@ export default class FormUtils {
       }
       if (arr[0]['@id'] === Constants.ANSWERED_QUESTION) {
         if (acceptedAnswerValues || acceptedValidationsValues) {
-          console.warn('Support for accepted answer/validations values is not implemented !')
+          console.warn('Support for accepted answer/validations values is not implemented !');
         }
         for (const q of this._getMappedObjectsArray(testedQuestions)) {
-          if (! this.hasAnswer(q)) {
-              return false;
+          if (!this.hasAnswer(q)) {
+            return false;
           }
         }
         return true;
       }
-      console.warn('No support to accept question of type ' + arr[0]['@id'] + ' !')
+      console.warn('No support to accept question of type ' + arr[0]['@id'] + ' !');
     }
 
     // valid answers
@@ -267,20 +283,25 @@ export default class FormUtils {
 
   //returns array of valid object while ignoring
   static _getMappedObjectsArray(jsonObjects, objectType) {
-    return Utils.asArray(jsonObjects).map(
-        o => {
-          const obj = JsonLdObjectMap.getObject(o['@id']);
-          if (obj === undefined) {
-            const ot = (objectType ? objectType : 'Object');
-            console.warn(
-                (objectType ? objectType : 'Object')
-                + ' "' + o['@id'] + '"'
-                + ' is not loaded in an object map.');
-            return null;
-          }
-          return obj;
+    return Utils.asArray(jsonObjects)
+      .map((o) => {
+        const obj = JsonLdObjectMap.getObject(o['@id']);
+        if (obj === undefined) {
+          const ot = objectType ? objectType : 'Object';
+          console.warn(
+            (objectType ? objectType : 'Object') +
+              ' "' +
+              o['@id'] +
+              '"' +
+              ' is not loaded in an object map.'
+          );
+          return null;
         }
-    ).filter(function (o) { return (o !== null)})
+        return obj;
+      })
+      .filter(function (o) {
+        return o !== null;
+      });
   }
 
   static hasAnswer(question) {

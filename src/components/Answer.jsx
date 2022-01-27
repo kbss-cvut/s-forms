@@ -12,7 +12,7 @@ import TypeaheadAnswer from './answer/TypeaheadAnswer';
 import Constants from '../constants/Constants';
 import { FormGenContext } from '../contexts/FormGenContext';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
-import Question from "./Question";
+import Question from './Question';
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
@@ -62,19 +62,37 @@ const Answer = (props) => {
 
   const _renderSelect = (value, label, title) => {
     return (
-      <SelectAnswer question={props.question} label={label} title={title} value={value} onChange={onValueChange} />
+      <SelectAnswer
+        question={props.question}
+        label={label}
+        title={title}
+        value={value}
+        onChange={onValueChange}
+      />
     );
   };
 
   const _renderDateTimePicker = (value, label, title) => {
     return (
-      <DateTimeAnswer question={props.question} value={value} title={title} label={label} onChange={onValueChange} />
+      <DateTimeAnswer
+        question={props.question}
+        value={value}
+        title={title}
+        label={label}
+        onChange={onValueChange}
+      />
     );
   };
 
   const _renderCheckbox = (value, label, title) => {
     return (
-      <CheckboxAnswer label={label} title={title} value={value} onChange={onValueChange} question={props.question} />
+      <CheckboxAnswer
+        label={label}
+        title={title}
+        value={value}
+        onChange={onValueChange}
+        question={props.question}
+      />
     );
   };
 
@@ -137,12 +155,12 @@ const Answer = (props) => {
     const label = JsonldUtils.getLocalized(question[Constants.RDFS_LABEL], options.intl);
 
     return (
-        <div className="question-header">
-          {label}
-          {Question.renderIcons(props.question, options, props.onCommentChange, props.showIcon)}
-        </div>
+      <div className="question-header">
+        {label}
+        {Question.renderIcons(props.question, options, props.onCommentChange, props.showIcon)}
+      </div>
     );
-  }
+  };
 
   const question = props.question;
   const value = FormUtils.resolveValue(props.answer);

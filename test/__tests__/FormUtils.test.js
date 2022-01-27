@@ -28,7 +28,10 @@ describe('FormUtils', () => {
 
   describe('isWizardStep', () => {
     it('returns true for a wizard step question', () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.WIZARD_STEP];
+      question[Constants.LAYOUT_CLASS] = [
+        Constants.LAYOUT.QUESTION_SECTION,
+        Constants.LAYOUT.WIZARD_STEP
+      ];
       expect(FormUtils.isWizardStep(question)).toBeTruthy();
     });
 
@@ -159,7 +162,10 @@ describe('FormUtils', () => {
 
   describe('isAnswerable', () => {
     it('returns true for an answerable section-question', () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.ANSWERABLE];
+      question[Constants.LAYOUT_CLASS] = [
+        Constants.LAYOUT.QUESTION_SECTION,
+        Constants.LAYOUT.ANSWERABLE
+      ];
       expect(FormUtils.isAnswerable(question)).toBeTruthy();
     });
     it('returns false for a non-answerable section-question', () => {
@@ -267,7 +273,10 @@ describe('FormUtils', () => {
 
   describe('isCollapsed', () => {
     it('returns true when question layout class contains collapsed', () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.COLLAPSED];
+      question[Constants.LAYOUT_CLASS] = [
+        Constants.LAYOUT.QUESTION_SECTION,
+        Constants.LAYOUT.COLLAPSED
+      ];
       expect(FormUtils.isCollapsed(question)).toBeTruthy();
     });
 

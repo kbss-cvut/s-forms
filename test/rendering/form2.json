@@ -113,10 +113,7 @@
       "@id": "start-date-6817",
       "@type": "doc:question",
       "has_related_question": [],
-      "has-layout-class": [
-        "masked-input",
-        "disabled"
-      ],
+      "has-layout-class": ["masked-input", "disabled"],
       "has-input-mask": "MM/YYYY",
       "has-preceding-question": "profession-6006",
       "requires-answer": true,
@@ -145,12 +142,7 @@
     {
       "@id": "x:form-root",
       "@type": "doc:question",
-      "has_related_question": [
-        "first-name-6663",
-        "last-name-1495",
-        "age-1063",
-        "job-9002"
-      ],
+      "has_related_question": ["first-name-6663", "last-name-1495", "age-1063", "job-9002"],
       "has-layout-class": "form"
     },
     {
@@ -171,13 +163,8 @@
     {
       "@id": "job-9002",
       "@type": "doc:question",
-      "has_related_question": [
-        "profession-6006",
-        "start-date-6817"
-      ],
-      "has-layout-class": [
-        "section"
-      ],
+      "has_related_question": ["profession-6006", "start-date-6817"],
+      "has-layout-class": ["section"],
       "has-preceding-question": "age-1063",
       "description": "This section is about your job",
       "label": "Job",

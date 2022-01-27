@@ -1,19 +1,18 @@
 import React from 'react';
-import {Button, ButtonToolbar, Card} from 'react-bootstrap';
+import { Button, ButtonToolbar, Card } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
-import JsonLdObjectMap from "../../util/JsonLdObjectMap";
-
+import JsonLdObjectMap from '../../util/JsonLdObjectMap';
 
 export default class WizardStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showIcon: false
-    }
+    };
   }
 
   onNextStep = () => {
@@ -26,11 +25,11 @@ export default class WizardStep extends React.Component {
   };
 
   onCommentChange = (commentIndex, change) => {
-    this._onChange(Constants.HAS_COMMENT, commentIndex, change)
-  }
+    this._onChange(Constants.HAS_COMMENT, commentIndex, change);
+  };
 
   _onChange(att, valueIndex, newValue) {
-    let newState = { ...this.props.step};
+    let newState = { ...this.props.step };
     newState[att][valueIndex] = newValue;
 
     JsonLdObjectMap.putObject(newState['@id'], newState);
@@ -55,7 +54,10 @@ export default class WizardStep extends React.Component {
   };
 
   onChange = (index, change) => {
-    this.context.updateFormQuestionsData(this.props.stepIndex || index, { ...this.props.step, ...change });
+    this.context.updateFormQuestionsData(this.props.stepIndex || index, {
+      ...this.props.step,
+      ...change
+    });
   };
 
   _onMouseEnterHandler = () => {
@@ -67,7 +69,6 @@ export default class WizardStep extends React.Component {
   };
 
   render() {
-
     const categoryClass = Question._getQuestionCategoryClass(this.props.step);
     const question = this.context.getFormQuestionsData([this.props.stepIndex]);
     const options = this.props.options;
@@ -84,18 +85,19 @@ export default class WizardStep extends React.Component {
       <div className="wizard-step">
         <Card className="wizard-step-content">
           <Card.Header
-              className="bg-primary text-white question-header"
-              as="h6"
-              id={this.props.step['@id']}
-              onMouseEnter={this._onMouseEnterHandler}
-              onMouseLeave={this._onMouseLeaveHandler}
+            className="bg-primary text-white question-header"
+            as="h6"
+            id={this.props.step['@id']}
+            onMouseEnter={this._onMouseEnterHandler}
+            onMouseLeave={this._onMouseLeaveHandler}
           >
-            {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
+            {JsonLdUtils.getLocalized(
+              this.props.step[JsonLdUtils.RDFS_LABEL],
+              this.props.options.intl
+            )}
             {Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon)}
           </Card.Header>
-          <Card.Body className={categoryClass}>
-            {questionElement}
-          </Card.Body>
+          <Card.Body className={categoryClass}>{questionElement}</Card.Body>
         </Card>
 
         {this.props.options.wizardStepButtons && this._renderWizardStepButtons()}

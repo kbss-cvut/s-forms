@@ -23,7 +23,10 @@ export default class SelectAnswer extends React.Component {
 
     for (let i = 0; i < options.length; i++) {
       rendered.push(
-        <option value={JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)} key={'opt-' + i}>
+        <option
+          value={JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)}
+          key={'opt-' + i}
+        >
           {JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)}
         </option>
       );

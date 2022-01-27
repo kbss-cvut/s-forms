@@ -11,7 +11,11 @@ import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 const DateTimeAnswer = (props) => {
   const { componentsOptions } = useContext(ConfigurationContext);
 
-  const dateFormat = Utils.resolveDateTimeFormat(props.question, props.value, componentsOptions.dateTimeAnswer);
+  const dateFormat = Utils.resolveDateTimeFormat(
+    props.question,
+    props.value,
+    componentsOptions.dateTimeAnswer
+  );
 
   const isDate = FormUtils.isDate(props.question);
   const isTime = FormUtils.isTime(props.question);
@@ -25,7 +29,8 @@ const DateTimeAnswer = (props) => {
   }
 
   // DatePicker does not know dateFormat "x", translate to datetime
-  const datePickerFormat = dateFormat === 'x' ? componentsOptions.dateTimeAnswer.dateTimeFormat : dateFormat;
+  const datePickerFormat =
+    dateFormat === 'x' ? componentsOptions.dateTimeAnswer.dateTimeFormat : dateFormat;
 
   const onChange = (date) => {
     if (dateFormat === Constants.DATETIME_NUMBER_FORMAT) {

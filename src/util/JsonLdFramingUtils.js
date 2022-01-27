@@ -65,7 +65,9 @@ export default class JsonLdFramingUtils {
     try {
       this._expandGraph(root, formShape, id2objectMap);
     } catch (e) {
-      console.error("Error '" + e + "' occured, while trying to apply frame-ing with custom shape.");
+      console.error(
+        "Error '" + e + "' occured, while trying to apply frame-ing with custom shape."
+      );
     }
 
     return id2objectMap;
@@ -98,10 +100,10 @@ export default class JsonLdFramingUtils {
   }
 
   static _getId(jsonObject) {
-      if (typeof jsonObject === 'string') {
-        return jsonObject;
-      }
-      return jsonObject['@id']
+    if (typeof jsonObject === 'string') {
+      return jsonObject;
+    }
+    return jsonObject['@id'];
   }
 
   static compressStructure = (rootNode) => {

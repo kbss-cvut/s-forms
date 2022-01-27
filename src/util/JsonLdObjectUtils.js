@@ -21,9 +21,13 @@ export default class JsonLdObjectUtils {
     // TODO remove: workaround for bad persistance of boolean values -- { @value: "true" } instead of { @value: true }
     if (jsonLdValue1 && jsonLdValue1['@value'] && jsonLdValue2 && jsonLdValue2['@value']) {
       const strValue1 =
-        typeof jsonLdValue1['@value'] === 'string' ? jsonLdValue1['@value'] : JSON.stringify(jsonLdValue1['@value']);
+        typeof jsonLdValue1['@value'] === 'string'
+          ? jsonLdValue1['@value']
+          : JSON.stringify(jsonLdValue1['@value']);
       const strValue2 =
-        typeof jsonLdValue2['@value'] === 'string' ? jsonLdValue2['@value'] : JSON.stringify(jsonLdValue2['@value']);
+        typeof jsonLdValue2['@value'] === 'string'
+          ? jsonLdValue2['@value']
+          : JSON.stringify(jsonLdValue2['@value']);
 
       if (strValue1 === strValue2) {
         return true;
@@ -47,7 +51,10 @@ export default class JsonLdObjectUtils {
       for (let i = 0; i < data.length; i++) {
         for (let j = i; j < data.length; j++) {
           if (data[i][gtProperty]) {
-            let gtId = typeof data[i][gtProperty] === 'object' ? data[i][gtProperty]['@id'] : data[i][gtProperty];
+            let gtId =
+              typeof data[i][gtProperty] === 'object'
+                ? data[i][gtProperty]['@id']
+                : data[i][gtProperty];
             if (gtId === data[j]['@id']) {
               const tmp = data[i];
               data[i] = data[j];

@@ -9,7 +9,9 @@ const FormQuestionsContext = React.createContext({});
 
 const FormQuestionsProvider = (props) => {
   const [data, setData] = useState(props.data || INITIAL_DATA);
-  const [formQuestionsData, setFormQuestionsData] = useState(props.formQuestions || INITIAL_FORM_QUESTIONS_DATA);
+  const [formQuestionsData, setFormQuestionsData] = useState(
+    props.formQuestions || INITIAL_FORM_QUESTIONS_DATA
+  );
 
   useEffect(() => {
     if (props.isFormValid) {

@@ -35,9 +35,7 @@ const SForms = forwardRef((props, ref) => {
   }
 
   const _getComponentMappingFunction = (components, form) => {
-
     return (question, defaultComponent) => {
-
       if (!components) {
         return defaultComponent;
       }
@@ -50,10 +48,9 @@ const SForms = forwardRef((props, ref) => {
 
       return defaultComponent;
     };
-  }
+  };
 
   const _mapComponent = _getComponentMappingFunction(props.componentMapRules, form);
-
 
   return (
     <ConfigurationContextProvider
@@ -63,8 +60,16 @@ const SForms = forwardRef((props, ref) => {
       options={props.options}
     >
       <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
-        <FormQuestionsProvider data={form} formQuestions={formProperties.formQuestions} isFormValid={props.isFormValid}>
-          <FormManager ref={ref} modalView={props.options && props.options.modalView} mapComponent={_mapComponent} />
+        <FormQuestionsProvider
+          data={form}
+          formQuestions={formProperties.formQuestions}
+          isFormValid={props.isFormValid}
+        >
+          <FormManager
+            ref={ref}
+            modalView={props.options && props.options.modalView}
+            mapComponent={_mapComponent}
+          />
         </FormQuestionsProvider>
       </FormGenContextProvider>
     </ConfigurationContextProvider>

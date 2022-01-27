@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Accordion} from 'react-bootstrap';
+import { Card, Accordion } from 'react-bootstrap';
 import JsonLdUtils from 'jsonld-utils';
 import PropTypes from 'prop-types';
 import Answer from './Answer';
@@ -12,11 +12,11 @@ import ValidatorFactory from '../model/ValidatorFactory';
 import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
 import PrefixIcon from './PrefixIcon';
 import MediaContent from './MediaContent';
-import {CaretSquareDown, CaretSquareUp, InfoCircle} from '../styles/icons';
-import {ConfigurationContext} from '../contexts/ConfigurationContext';
+import { CaretSquareDown, CaretSquareUp, InfoCircle } from '../styles/icons';
+import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
-import QuestionCommentIcon from "./comment/QuestionCommentIcon";
-import LinkIcon from "./LinkIcon";
+import QuestionCommentIcon from './comment/QuestionCommentIcon';
+import LinkIcon from './LinkIcon';
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -33,7 +33,9 @@ export default class Question extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ validator: ValidatorFactory.createValidator(this.props.question, this.context.options.intl) });
+    this.setState({
+      validator: ValidatorFactory.createValidator(this.props.question, this.context.options.intl)
+    });
   }
 
   componentDidUpdate() {
@@ -45,12 +47,10 @@ export default class Question extends React.Component {
         // close expanded answerable section that does not have positive answer
         this.setState({ expanded: false });
       }
-
     }
   }
 
   onAnswerChange = (answerIndex, change) => {
-
     // is answerable section
     if (FormUtils.isSection(this.props.question)) {
       let expanded = !!FormUtils.resolveValue(change);
@@ -65,8 +65,8 @@ export default class Question extends React.Component {
   };
 
   onCommentChange = (commentIndex, change) => {
-    this._onChange(Constants.HAS_COMMENT, commentIndex, change)
-  }
+    this._onChange(Constants.HAS_COMMENT, commentIndex, change);
+  };
 
   _onChange(att, valueIndex, newValue) {
     let newState = { ...this.props.question };
@@ -82,16 +82,13 @@ export default class Question extends React.Component {
 
   toggleCollapse = () => {
     if (this.props.collapsible) {
-
       const question = this.props.question;
       if (FormUtils.isAnswerable(question) && FormUtils.isSection(question)) {
-
         if (!this._getFirstAnswerValue()) {
           // prevent expanding/collapsing when the checkbox is not checked
           return;
         }
       }
-
 
       this.setState({ expanded: !this.state.expanded });
     }
@@ -139,10 +136,15 @@ export default class Question extends React.Component {
       if (withoutCard) {
         return <div>{this._renderQuestionContent()}</div>;
       }
-      const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
+      const label = JsonLdUtils.getLocalized(
+        question[JsonLdUtils.RDFS_LABEL],
+        this.context.options.intl
+      );
 
       const headerClassName = classNames(
-        FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
+        FormUtils.isEmphasised(question)
+          ? Question.getEmphasizedClass(question)
+          : 'section-background',
         collapsible ? 'cursor-pointer' : '',
         Question.getEmphasizedOnRelevantClass(question)
       );
@@ -152,30 +154,32 @@ export default class Question extends React.Component {
       }
 
       const cardBody = (
-        <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
+        <Card.Body className={classNames('p-3', categoryClass)}>
+          {this._renderQuestionContent()}
+        </Card.Body>
       );
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
       return (
-          <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
-            <Card className="mb-3">
-              <Accordion.Toggle
-                  as={Card.Header}
-                  onClick={this.toggleCollapse}
-                  className={headerClassName + " question-header"}
-                  onMouseEnter={this._onMouseEnterHandler}
-                  onMouseLeave={this._onMouseLeaveHandler}
-              >
-                <h6 className="d-inline" id={question['@id']}>
-                  {collapsible && this._renderCollapseToggle()}
-                  {label}
-                </h6>
-                {this.renderQuestionIcons()}
-                {this.renderHeaderExtension()}
-              </Accordion.Toggle>
-              {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
-            </Card>
-          </Accordion>
+        <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
+          <Card className="mb-3">
+            <Accordion.Toggle
+              as={Card.Header}
+              onClick={this.toggleCollapse}
+              className={headerClassName + ' question-header'}
+              onMouseEnter={this._onMouseEnterHandler}
+              onMouseLeave={this._onMouseLeaveHandler}
+            >
+              <h6 className="d-inline" id={question['@id']}>
+                {collapsible && this._renderCollapseToggle()}
+                {label}
+              </h6>
+              {this.renderQuestionIcons()}
+              {this.renderHeaderExtension()}
+            </Accordion.Toggle>
+            {collapsible ? <Accordion.Collapse>{cardBody}</Accordion.Collapse> : { cardBody }}
+          </Card>
+        </Accordion>
       );
     } else {
       return <div>{this._renderQuestionContent()}</div>;
@@ -185,7 +189,9 @@ export default class Question extends React.Component {
   _renderQuestionContent() {
     let content = [];
     if (this.state.expanded) {
-      content.push(<MediaContent key={this.props.question['@id'] + '-media'} question={this.props.question} />);
+      content.push(
+        <MediaContent key={this.props.question['@id'] + '-media'} question={this.props.question} />
+      );
     }
     content.push(this.renderAnswers());
     content.push(this.renderSubQuestions());
@@ -207,7 +213,9 @@ export default class Question extends React.Component {
     const collapsible = this.props.collapsible;
     const categoryClass = Question._getQuestionCategoryClass(question);
     let headerClassNames = [
-      FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
+      FormUtils.isEmphasised(question)
+        ? Question.getEmphasizedClass(question)
+        : 'section-background',
       this.state.expanded ? 'section-expanded' : 'section-collapsed',
       Question.getEmphasizedOnRelevantClass(question)
     ];
@@ -217,16 +225,25 @@ export default class Question extends React.Component {
     }
 
     const cardBody = (
-      <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
+      <Card.Body className={classNames('p-3', categoryClass)}>
+        {this.renderSubQuestions()}
+      </Card.Body>
     );
 
     return (
-      <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+      <Accordion
+        activeKey={this.state.expanded ? question['@id'] : undefined}
+        className="answerable-section"
+      >
         <Card className="mb-3">
           <Card.Header onClick={this.toggleCollapse} className={classNames(headerClassNames)}>
             {this.renderAnswers()}
           </Card.Header>
-          {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+          {collapsible ? (
+            <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse>
+          ) : (
+            { cardBody }
+          )}
         </Card>
       </Accordion>
     );
@@ -251,20 +268,21 @@ export default class Question extends React.Component {
         Question.getEmphasizedOnRelevantClass(question)
       );
       children.push(
-        <div key={'row-item-' + i}
-             className={cls}
-             id={question['@id']}
-             onMouseEnter={this._onMouseEnterHandler}
-             onMouseLeave={this._onMouseLeaveHandler}
+        <div
+          key={'row-item-' + i}
+          className={cls}
+          id={question['@id']}
+          onMouseEnter={this._onMouseEnterHandler}
+          onMouseLeave={this._onMouseLeaveHandler}
         >
           <div className="answer-content" style={this._getAnswerWidthStyle()}>
             <Answer
-                index={i}
-                answer={answers[i]}
-                question={question}
-                onChange={this.onAnswerChange}
-                onCommentChange={this.onCommentChange}
-                showIcon={this.state.showIcon}
+              index={i}
+              answer={answers[i]}
+              question={question}
+              onChange={this.onAnswerChange}
+              onCommentChange={this.onCommentChange}
+              showIcon={this.state.showIcon}
             />
           </div>
           {this._renderUnits()}
@@ -284,7 +302,10 @@ export default class Question extends React.Component {
       question[Constants.HAS_ANSWER] = [question[Constants.HAS_ANSWER]];
     }
     if (question[Constants.HAS_ANSWER].length === 0) {
-      if ((FormUtils.isSection(question) && !FormUtils.isAnswerable(question)) || FormUtils.isWizardStep(question)) {
+      if (
+        (FormUtils.isSection(question) && !FormUtils.isAnswerable(question)) ||
+        FormUtils.isWizardStep(question)
+      ) {
         question[Constants.HAS_ANSWER] = [];
       } else {
         question[Constants.HAS_ANSWER] = [QuestionAnswerProcessor.generateAnswer(question)];
@@ -303,7 +324,7 @@ export default class Question extends React.Component {
       flexGrow: 0,
       maxWidth: 'none',
       width: `calc(${length}ch + 1.5rem + 2px)`
-    }
+    };
   }
 
   static _getAnswerClass(question, isTextarea) {
@@ -326,7 +347,9 @@ export default class Question extends React.Component {
   }
 
   static getEmphasizedOnRelevantClass(question) {
-    if (JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISE_ON_RELEVANT)) {
+    if (
+      JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISE_ON_RELEVANT)
+    ) {
       return 'emphasise-on-relevant';
     }
 
@@ -336,7 +359,9 @@ export default class Question extends React.Component {
   _renderCollapseToggle() {
     const { options } = this.context;
 
-    const title = this.state.expanded ? options.i18n['section.collapse'] : options.i18n['section.expand'];
+    const title = this.state.expanded
+      ? options.i18n['section.collapse']
+      : options.i18n['section.expand'];
 
     return (
       <span onClick={this.toggleCollapse} title={title}>
@@ -348,20 +373,25 @@ export default class Question extends React.Component {
   static getIconComponent(icon, question, options, onCommentChange, showIcon) {
     let iconClassname;
 
-    if (icon && (icon.behavior === Constants.ICON_BEHAVIOR.ON_HOVER || icon.behavior === Constants.ICON_BEHAVIOR.ENABLE)) {
-      if (icon.behavior === Constants.ICON_BEHAVIOR.ENABLE){
+    if (
+      icon &&
+      (icon.behavior === Constants.ICON_BEHAVIOR.ON_HOVER ||
+        icon.behavior === Constants.ICON_BEHAVIOR.ENABLE)
+    ) {
+      if (icon.behavior === Constants.ICON_BEHAVIOR.ENABLE) {
         showIcon = true;
-        iconClassname = "";
-      } else iconClassname = "emphasise-on-relevant-icon";
+        iconClassname = '';
+      } else iconClassname = 'emphasise-on-relevant-icon';
 
       if (icon.id === Constants.ICONS.QUESTION_HELP && question[Constants.HELP_DESCRIPTION]) {
         if (showIcon) {
           return (
-              <div className={iconClassname}>
-                <HelpIcon
-                    text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
-                    absolutePosition={false}/>
-              </div>
+            <div className={iconClassname}>
+              <HelpIcon
+                text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
+                absolutePosition={false}
+              />
+            </div>
           );
         }
         return null;
@@ -370,9 +400,9 @@ export default class Question extends React.Component {
       if (icon.id === Constants.ICONS.QUESTION_LINK && question[Constants.SOURCE]) {
         if (showIcon) {
           return (
-              <div className={iconClassname}>
-                <LinkIcon url={question[Constants.SOURCE]}/>
-              </div>
+            <div className={iconClassname}>
+              <LinkIcon url={question[Constants.SOURCE]} />
+            </div>
           );
         }
         return null;
@@ -381,11 +411,9 @@ export default class Question extends React.Component {
       if (icon.id === Constants.ICONS.QUESTION_COMMENTS) {
         if (showIcon) {
           return (
-              <div className={iconClassname}>
-                <QuestionCommentIcon
-                    question={question}
-                    onChange={onCommentChange}/>
-              </div>
+            <div className={iconClassname}>
+              <QuestionCommentIcon question={question} onChange={onCommentChange} />
+            </div>
           );
         }
         return null;
@@ -395,64 +423,105 @@ export default class Question extends React.Component {
   }
 
   static getIconFromIconList = (iconList, iconName) => {
-    if (iconList) return iconList.find(icon => icon.id === iconName);
+    if (iconList) return iconList.find((icon) => icon.id === iconName);
     return null;
-  }
+  };
 
   static getIconComponentFromName(iconName, question, options, onCommentChange, showIcon) {
-    const iconList = (options.icons) ? options.icons : Constants.DEFAULT_OPTIONS.icons;
+    const iconList = options.icons ? options.icons : Constants.DEFAULT_OPTIONS.icons;
     const icon = this.getIconFromIconList(iconList, iconName);
     return this.getIconComponent(icon, question, options, onCommentChange, showIcon);
   }
 
   static renderQuestionHelp(question, options, onCommentChange, showIcon) {
-    return this.getIconComponentFromName(Constants.ICONS.QUESTION_HELP, question, options, onCommentChange, showIcon);
+    return this.getIconComponentFromName(
+      Constants.ICONS.QUESTION_HELP,
+      question,
+      options,
+      onCommentChange,
+      showIcon
+    );
   }
 
   static renderQuestionLink(question, options, onCommentChange, showIcon) {
-    return this.getIconComponentFromName(Constants.ICONS.QUESTION_LINK, question, options, onCommentChange, showIcon);
+    return this.getIconComponentFromName(
+      Constants.ICONS.QUESTION_LINK,
+      question,
+      options,
+      onCommentChange,
+      showIcon
+    );
   }
 
   static renderQuestionComments = (question, options, onCommentChange, showIcon) => {
-    return this.getIconComponentFromName(Constants.ICONS.QUESTION_COMMENTS, question, options, onCommentChange, showIcon);
-  }
+    return this.getIconComponentFromName(
+      Constants.ICONS.QUESTION_COMMENTS,
+      question,
+      options,
+      onCommentChange,
+      showIcon
+    );
+  };
 
   static renderIcons(question, options, onCommentChange, showIcon) {
     let icons;
     if (options.icons) icons = options.icons;
     else icons = Constants.DEFAULT_OPTIONS.icons;
     let iconsArray = [];
-    const renderQuestionHelp = Question.renderQuestionHelp(question, options, onCommentChange, showIcon);
-    const renderQuestionComments = Question.renderQuestionComments(question, options, onCommentChange, showIcon);
-    const renderQuestionLink = Question.renderQuestionLink(question, options, onCommentChange, showIcon);
+    const renderQuestionHelp = Question.renderQuestionHelp(
+      question,
+      options,
+      onCommentChange,
+      showIcon
+    );
+    const renderQuestionComments = Question.renderQuestionComments(
+      question,
+      options,
+      onCommentChange,
+      showIcon
+    );
+    const renderQuestionLink = Question.renderQuestionLink(
+      question,
+      options,
+      onCommentChange,
+      showIcon
+    );
 
     for (let i = 0; i < icons.length; i++) {
       if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
         iconsArray.push(
-            <li key={i} className="icon-list-item">{renderQuestionComments}</li>
+          <li key={i} className="icon-list-item">
+            {renderQuestionComments}
+          </li>
         );
       }
       if (icons[i].id === Constants.ICONS.QUESTION_HELP) {
         iconsArray.push(
-            <li key={i} className="icon-list-item">{renderQuestionHelp}</li>
+          <li key={i} className="icon-list-item">
+            {renderQuestionHelp}
+          </li>
         );
       }
       if (icons[i].id === Constants.ICONS.QUESTION_LINK) {
         iconsArray.push(
-            <li key={i} className="icon-list-item">{renderQuestionLink}</li>
+          <li key={i} className="icon-list-item">
+            {renderQuestionLink}
+          </li>
         );
       }
     }
 
-    return (<ol className="icon-list-items">
-      {iconsArray}
-    </ol>);
+    return <ol className="icon-list-items">{iconsArray}</ol>;
   }
 
   _renderPrefixes() {
     const question = this.props.question;
-    return question[Constants.HAS_DECLARED_PREFIX] && question[Constants.HAS_DECLARED_PREFIX].length ? (
-      <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]} iconClass={'help-icon-checkbox'}>
+    return question[Constants.HAS_DECLARED_PREFIX] &&
+      question[Constants.HAS_DECLARED_PREFIX].length ? (
+      <PrefixIcon
+        prefixes={question[Constants.HAS_DECLARED_PREFIX]}
+        iconClass={'help-icon-checkbox'}
+      >
         <InfoCircle />
       </PrefixIcon>
     ) : null;
@@ -460,7 +529,9 @@ export default class Question extends React.Component {
 
   _renderUnits() {
     const question = this.props.question;
-    return question[Constants.HAS_UNIT] ? <div className="has-unit-label">{question[Constants.HAS_UNIT]}</div> : null;
+    return question[Constants.HAS_UNIT] ? (
+      <div className="has-unit-label">{question[Constants.HAS_UNIT]}</div>
+    ) : null;
   }
 
   renderSubQuestions() {
@@ -468,7 +539,6 @@ export default class Question extends React.Component {
     const subQuestions = this._getSubQuestions();
 
     for (let i = 0; i < subQuestions.length; i++) {
-
       let question = subQuestions[i];
       let component = this.context.mapComponent(question, Question);
 
@@ -494,7 +564,10 @@ export default class Question extends React.Component {
     }
 
     // sort by label
-    JsonLdObjectUtils.orderByLocalizedLabels(question[Constants.HAS_SUBQUESTION], this.context.options.intl);
+    JsonLdObjectUtils.orderByLocalizedLabels(
+      question[Constants.HAS_SUBQUESTION],
+      this.context.options.intl
+    );
 
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(

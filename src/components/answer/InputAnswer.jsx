@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
 import FormUtils from '../../util/FormUtils';
 import YASQE from 'yasgui-yasqe';
-import YATE from "yasgui-yasqe";
+import YATE from 'yasgui-yasqe';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
-import "@triply/yasgui/build/yasgui.min.css";
+import '@triply/yasgui/build/yasgui.min.css';
 
 const NUMERIC_DATATYPES = [
   Constants.XSD.INT,
@@ -118,7 +118,10 @@ const InputAnswer = (props) => {
   let value = props.value;
   // When the value is an object_value, but the layout does not specify neither typeahead nor select,
   // show at least the value's label
-  if (answer[Constants.HAS_OBJECT_VALUE] && answer[Constants.HAS_OBJECT_VALUE][JsonLdUtils.RDFS_LABEL]) {
+  if (
+    answer[Constants.HAS_OBJECT_VALUE] &&
+    answer[Constants.HAS_OBJECT_VALUE][JsonLdUtils.RDFS_LABEL]
+  ) {
     value = JsonLdUtils.getJsonAttValue(answer[Constants.HAS_OBJECT_VALUE], JsonLdUtils.RDFS_LABEL);
   }
   return React.createElement(inputComponent, {
@@ -139,7 +142,11 @@ const InputAnswer = (props) => {
         });
         YASQE.Autocompleters.prefixes.appendPrefixIfNeeded = function (yasqe, completerName) {
           if (!yasqe.autocompleters.getTrie(completerName)) return; // no prefixed defined. just stop
-          if (!yasqe.options.autocompleters || yasqe.options.autocompleters.indexOf(completerName) === -1) return; //this autocompleter is disabled
+          if (
+            !yasqe.options.autocompleters ||
+            yasqe.options.autocompleters.indexOf(completerName) === -1
+          )
+            return; //this autocompleter is disabled
           const cur = yasqe.getCursor();
 
           const token = yasqe.getTokenAt(cur);
@@ -148,12 +155,17 @@ const InputAnswer = (props) => {
             if (colonIndex !== -1) {
               // check previous token isnt PREFIX, or a '<'(which would mean we are in a uri)
               //			const firstTokenString = yasqe.getNextNonWsToken(cur.line).string.toUpperCase();
-              const lastNonWsTokenString = yasqe.getPreviousNonWsToken(cur.line, token).string.toUpperCase();
+              const lastNonWsTokenString = yasqe
+                .getPreviousNonWsToken(cur.line, token)
+                .string.toUpperCase();
               const previousToken = yasqe.getTokenAt({
                 line: cur.line,
                 ch: token.start
               }); // needs to be null (beginning of line), or whitespace
-              if (lastNonWsTokenString !== 'PREFIX' && (previousToken.type === 'ws' || previousToken.type == null)) {
+              if (
+                lastNonWsTokenString !== 'PREFIX' &&
+                (previousToken.type === 'ws' || previousToken.type == null)
+              ) {
                 // check whether it isnt defined already (saves us from looping
                 // through the array)
                 const currentPrefix = token.string.substring(0, colonIndex + 1);
@@ -173,7 +185,9 @@ const InputAnswer = (props) => {
                     px[prefix[0][Constants.PREFIX]] = prefix[0][Constants.NAMESPACE];
                     yasqe.addPrefixes(px);
                   } else {
-                    const completions = yasqe.autocompleters.getTrie(completerName).autoComplete(currentPrefix);
+                    const completions = yasqe.autocompleters
+                      .getTrie(completerName)
+                      .autoComplete(currentPrefix);
                     if (completions.length > 0) {
                       yasqe.addPrefixes(completions[0]);
                     }

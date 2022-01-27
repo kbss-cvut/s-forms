@@ -14,7 +14,14 @@ import { ConfigurationContext } from '../../src/contexts/ConfigurationContext';
 import DefaultInput from '../../src/components/DefaultInput';
 
 describe('Answer component', () => {
-  let question, onChange, answer, getOptions, loadFormOptions, options, inputComponent, componentsOptions;
+  let question,
+    onChange,
+    answer,
+    getOptions,
+    loadFormOptions,
+    options,
+    inputComponent,
+    componentsOptions;
 
   beforeEach(() => {
     question = {
@@ -27,7 +34,8 @@ describe('Answer component', () => {
     };
     question[Constants.RDFS_COMMENT] = {
       '@language': 'en',
-      '@value': 'The identification of the aerodrome/helicopter landing area by name, location and status.'
+      '@value':
+        'The identification of the aerodrome/helicopter landing area by name, location and status.'
     };
     onChange = jest.fn();
     options = {
@@ -37,7 +45,11 @@ describe('Answer component', () => {
     };
     componentsOptions = {
       readOnly: false,
-      dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+      dateTimeAnswer: {
+        dateFormat: 'yyyy-MM-dd',
+        timeFormat: 'HH:mm:ss',
+        dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
+      }
     };
     inputComponent = DefaultInput;
     getOptions = jest.fn(() => []);

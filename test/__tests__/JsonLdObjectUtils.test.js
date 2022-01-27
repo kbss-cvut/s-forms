@@ -5,8 +5,18 @@ describe('JsonLd object utils', () => {
   let trueValues, falseValues;
 
   beforeEach(() => {
-    trueValues = [true, { '@value': true }, { '@value': 'true' }, { '@value': 'true', '@language': 'en' }];
-    falseValues = [false, { '@value': false }, { '@value': 'false' }, { '@value': 'false', '@language': 'en' }];
+    trueValues = [
+      true,
+      { '@value': true },
+      { '@value': 'true' },
+      { '@value': 'true', '@language': 'en' }
+    ];
+    falseValues = [
+      false,
+      { '@value': false },
+      { '@value': 'false' },
+      { '@value': 'false', '@language': 'en' }
+    ];
   });
 
   it('returns true for comparison of json-ld objects with same @id-s', () => {
@@ -30,7 +40,10 @@ describe('JsonLd object utils', () => {
       for (let j = 0; j < trueValues.length; j++) {
         expect(JsonLdObjectUtils.compareValues(trueValues[i], trueValues[j])).toBe(
           true,
-          'when comparing ' + JSON.stringify(trueValues[i]) + ' with ' + JSON.stringify(trueValues[j])
+          'when comparing ' +
+            JSON.stringify(trueValues[i]) +
+            ' with ' +
+            JSON.stringify(trueValues[j])
         );
       }
     }
@@ -41,11 +54,17 @@ describe('JsonLd object utils', () => {
       for (let j = 0; j < falseValues.length; j++) {
         expect(JsonLdObjectUtils.compareValues(trueValues[i], falseValues[j])).toBe(
           false,
-          'when comparing ' + JSON.stringify(trueValues[i]) + ' with ' + JSON.stringify(falseValues[j])
+          'when comparing ' +
+            JSON.stringify(trueValues[i]) +
+            ' with ' +
+            JSON.stringify(falseValues[j])
         );
         expect(JsonLdObjectUtils.compareValues(falseValues[j], trueValues[i])).toBe(
           false,
-          'when comparing ' + JSON.stringify(falseValues[j]) + ' with ' + JSON.stringify(trueValues[i])
+          'when comparing ' +
+            JSON.stringify(falseValues[j]) +
+            ' with ' +
+            JSON.stringify(trueValues[i])
         );
       }
     }

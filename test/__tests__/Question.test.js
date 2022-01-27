@@ -26,7 +26,8 @@ describe('Question', () => {
         'http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-453-qt',
       'http://www.w3.org/2000/01/rdf-schema#comment': {
         '@language': 'en',
-        '@value': 'The identification of the entity or organisation that is responsible for the report.'
+        '@value':
+          'The identification of the entity or organisation that is responsible for the report.'
       },
       'http://www.w3.org/2000/01/rdf-schema#label': {
         '@language': 'en',
@@ -42,13 +43,20 @@ describe('Question', () => {
     };
     componentsOptions = {
       readOnly: false,
-      dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+      dateTimeAnswer: {
+        dateFormat: 'yyyy-MM-dd',
+        timeFormat: 'HH:mm:ss',
+        dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
+      }
     };
     inputComponent = DefaultInput;
   });
 
   it('renders section collapsed when layout class is set to collapsed', () => {
-    question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION, Constants.LAYOUT.COLLAPSED];
+    question[Constants.LAYOUT_CLASS] = [
+      Constants.LAYOUT.QUESTION_SECTION,
+      Constants.LAYOUT.COLLAPSED
+    ];
 
     const result = mount(
       <ConfigurationContext.Provider

@@ -26,15 +26,10 @@ class FormManager extends React.Component {
   renderWizardlessForm = () => {
     const formQuestionsData = this.context.getFormQuestionsData();
 
-    return (
-      <Card className="p-3">
-        {formQuestionsData.map((q, i) => this._mapQuestion(q, i))}
-      </Card>
-    );
+    return <Card className="p-3">{formQuestionsData.map((q, i) => this._mapQuestion(q, i))}</Card>;
   };
 
   _mapQuestion(question, index) {
-
     let component = this.props.mapComponent(question, Question);
     return React.createElement(component, {
       key: question['@id'],

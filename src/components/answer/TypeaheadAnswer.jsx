@@ -43,7 +43,10 @@ const TypeaheadAnswer = (props) => {
 
     async function loadFormOptions() {
       try {
-        const options = await formGenContext.loadFormOptions(queryHash, FormUtils.getPossibleValuesQuery(question));
+        const options = await formGenContext.loadFormOptions(
+          queryHash,
+          FormUtils.getPossibleValuesQuery(question)
+        );
         if (!isCancelled) {
           setLoading(false);
           setOptions(processTypeaheadOptions(options, intl));
@@ -90,7 +93,9 @@ const TypeaheadAnswer = (props) => {
         isLoading={isLoading}
         isClearable={true}
         isDisabled={
-          isLoading || configurationContext.componentsOptions.readOnly || FormUtils.isDisabled(props.question)
+          isLoading ||
+          configurationContext.componentsOptions.readOnly ||
+          FormUtils.isDisabled(props.question)
         }
         value={options.filter((option) => option.id === props.value)}
         placeholder={''}
