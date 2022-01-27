@@ -13,6 +13,7 @@ const UNKNOWN_AUTHOR = "Unknown author";
 const CommentView = (props) => {
     const { options } = useContext(ConfigurationContext);
     const [showIRI, setShowIRI] = useState(false);
+    const [showRecycleBin, setShowRecycleBin] = useState(false);
 
     TimeAgo.addLocale(en);
     const time = new TimeAgo('en-US');
@@ -79,24 +80,30 @@ const CommentView = (props) => {
         setShowIRI(!showIRI);
     }
 
+    const onMouseRecycleBinEventHandler = () => {
+        setShowRecycleBin(!showRecycleBin)
+    }
+
     const onClickDeleteCommentHandler = () => {
         props.onClickDeleteComment(props.index);
     }
 
     return (
-        <div className="comment-content">
+        <div className="comment-content" onMouseEnter={onMouseRecycleBinEventHandler} onMouseLeave={onMouseRecycleBinEventHandler}>
             <div className="row">
                 <div className="col-auto comment-author" onMouseEnter={onMouseAuthorEventHandler} onMouseLeave={onMouseAuthorEventHandler}>
                     {renderAuthor()}
                 </div>
                 <div className="col-auto text-muted comment-timestamp">{renderTimeAgo()}</div>
-                <motion.div
-                    className="comment-delete"
-                    whileHover={{scale: 1.2}}
-                    whileTap={{scale: 0.9}}
-                    onClick={onClickDeleteCommentHandler}>
-                    <RecycleBin/>
-                </motion.div>
+                {showRecycleBin ?
+                    <motion.div
+                        className="comment-delete emphasise-on-relevant-icon"
+                        whileHover={{scale: 1.2}}
+                        whileTap={{scale: 0.9}}
+                        onClick={onClickDeleteCommentHandler}>
+                        <RecycleBin/>
+                    </motion.div>
+                : null }
             </div>
             <div className="row">
                 <div className="col comment-value">{props.commentValue}</div>
