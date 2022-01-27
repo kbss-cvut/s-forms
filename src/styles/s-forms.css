@@ -260,6 +260,11 @@ input:disabled {
   pointer-events: none;
 }
 
+.show-irrelevant .form-check-input,
+.show-irrelevant .caret-square-down {
+  pointer-events: auto;
+}
+
 @keyframes emphasiseOnRelevant {
   0% {
     display: none;
