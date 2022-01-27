@@ -7,7 +7,7 @@ import { Rings } from 'react-loader-spinner';
 const CommentList = (props) => {
   const [isCommentDeleted, setIsCommentDeleted] = useState(false);
 
-  const deleteComment = () => {
+  const deleteCommentViewHandler = () => {
     setIsCommentDeleted(true);
     setTimeout(() => {
       setIsCommentDeleted(false);
@@ -29,10 +29,9 @@ const CommentList = (props) => {
                 commentValue={comment[Constants.HAS_COMMENT_VALUE]}
                 author={comment[Constants.HAS_AUTHOR] ? comment[Constants.HAS_AUTHOR] : null}
                 timestamp={comment[Constants.HAS_TIMESTAMP]}
-                onClickDeleteComment={props.onClickDeleteComment}
-                deleteCommment={deleteComment}
+                deleteQuestionComment={props.deleteQuestionComment}
+                deleteCommentView={deleteCommentViewHandler}
                 index={index}
-                comment={comment}
               />
             </div>
           ))}
@@ -44,7 +43,7 @@ const CommentList = (props) => {
 
 CommentList.propTypes = {
   comment: PropTypes.array.isRequired,
-  onClickDeleteComment: PropTypes.func.isRequired
+  deleteQuestionComment: PropTypes.func.isRequired
 };
 
 export default CommentList;

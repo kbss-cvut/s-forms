@@ -55,7 +55,7 @@ const QuestionCommentIcon = (props) => {
         change[Constants.HAS_TIMESTAMP] = Date.now().toString();
     };
 
-    const onClickDeleteCommentHandler = (index) => {
+    const deleteQuestionCommentHandler = (index) => {
         const comment = _getComments();
         comment.splice(index, 1);
     }
@@ -105,7 +105,7 @@ const QuestionCommentIcon = (props) => {
                                 whileHover={{scale: 1.1, transition: {duration: 0.1}}}>
                                 <Close/>
                             </motion.div>
-                            <CommentList comment={_getComments()} onClickDeleteComment={onClickDeleteCommentHandler}/>
+                            <CommentList comment={_getComments()} deleteQuestionComment={deleteQuestionCommentHandler}/>
                             <CommentForm onChange={onCommentValueChangeHandler} />
                         </span>
                         </Tooltip>

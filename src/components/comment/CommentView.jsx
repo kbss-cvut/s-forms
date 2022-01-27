@@ -84,9 +84,9 @@ const CommentView = (props) => {
         setShowRecycleBin(!showRecycleBin)
     }
 
-    const onClickDeleteCommentHandler = () => {
-        props.onClickDeleteComment(props.index);
-        props.deleteCommment()
+    const onClickDeleteQuestionCommentHandler = () => {
+        props.deleteQuestionComment(props.index);
+        props.deleteCommentView();
     }
 
     return (
@@ -101,7 +101,7 @@ const CommentView = (props) => {
                         className="comment-delete emphasise-on-relevant-icon"
                         whileHover={{scale: 1.2}}
                         whileTap={{scale: 0.9}}
-                        onClick={onClickDeleteCommentHandler}>
+                        onClick={onClickDeleteQuestionCommentHandler}>
                         <RecycleBin/>
                     </motion.div>
                 : null }
@@ -117,7 +117,8 @@ CommentView.propTypes = {
     author: PropTypes.object.isRequired,
     timestamp: PropTypes.string.isRequired,
     commentValue: PropTypes.string.isRequired,
-    onClickDeleteComment: PropTypes.func.isRequired,
+    deleteQuestionComment: PropTypes.func.isRequired,
+    deleteCommentView: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired
 };
 
