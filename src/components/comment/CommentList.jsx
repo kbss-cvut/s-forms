@@ -32,7 +32,6 @@ const CommentList = (props) => {
                 deleteQuestionComment={props.deleteQuestionComment}
                 deleteCommentView={deleteCommentViewHandler}
                 index={index}
-                comment={comment}
               />
             </div>
           ))}
