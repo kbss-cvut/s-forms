@@ -35,9 +35,7 @@ const defaultProps = {
 const ConfigurationContextProvider = ({ children, ...props }) => {
   const values = useMemo(
     () => ({
-      inputComponent:
-        (props.components && props.components.inputComponent) ||
-        defaultProps.components.inputComponent,
+      inputComponent: (props.components && props.components.inputComponent) || defaultProps.components.inputComponent,
       componentsOptions: { ...defaultProps.componentsOptions, ...props.componentsOptions },
       options: { ...defaultProps.options, ...props.options },
       mapComponent: props.mapComponent

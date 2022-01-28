@@ -40,8 +40,7 @@ export default class Constants {
     EMPHASISE_ON_RELEVANT: 'emphasise-on-relevant',
     CATEGORY: ['category-1', 'category-2', 'category-3', 'category-4', 'category-5']
   };
-  static HAS_INITIAL_INPUT_LENGTH =
-    'http://onto.fel.cvut.cz/ontologies/form-layout/has-initial-input-length';
+  static HAS_INITIAL_INPUT_LENGTH = 'http://onto.fel.cvut.cz/ontologies/form-layout/has-initial-input-length';
   static VALUE_TYPE_CODE = 'code';
   static VALUE_TYPE_TEXT = 'text';
   static GENERATED_ROW_SIZE = 1;
@@ -71,21 +70,18 @@ export default class Constants {
   static ACCEPTS = 'http://onto.fel.cvut.cz/ontologies/form/accepts';
   static HAS_DATATYPE = 'http://onto.fel.cvut.cz/ontologies/form/has-datatype';
   static HAS_LAYOUT_CLASS = 'http://onto.fel.cvut.cz/ontologies/form/has-layout-class';
-  static HAS_POSSIBLE_VALUES_QUERY =
-    'http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query';
+  static HAS_POSSIBLE_VALUES_QUERY = 'http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query';
   static HAS_REQUIRED_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/has-required-value';
   static HAS_TESTED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/has-tested-question';
   static HAS_TESTED_FORM = 'http://onto.fel.cvut.cz/ontologies/form/has-tested-form';
   static HAS_UNIT = 'http://onto.fel.cvut.cz/ontologies/form/has-unit';
   static HAS_VALID_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/has-valid-answer';
   static IS_RELEVANT_IF = 'http://onto.fel.cvut.cz/ontologies/form/is-relevant-if';
-  static ACCEPTS_VALIDATION_VALUE =
-    'http://onto.fel.cvut.cz/ontologies/form/accepts-validation-value';
+  static ACCEPTS_VALIDATION_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/accepts-validation-value';
   static HAS_VALIDATION_MESSAGE = 'http://onto.fel.cvut.cz/ontologies/form/has-validation-message';
   static NEGATIVE_CONDITION = 'http://onto.fel.cvut.cz/ontologies/form/negative-condition';
   static REQUIRES_ANSWER = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer';
-  static REQUIRES_ANSWER_DESCRIPTION_IF =
-    'http://onto.fel.cvut.cz/ontologies/form/requires-answer-description-if';
+  static REQUIRES_ANSWER_DESCRIPTION_IF = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-description-if';
   static REQUIRES_ANSWER_IF = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-if';
   static REQUIRES_ANSWER_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/requires-answer-value';
   static REQUIRES_DESCRIPTION = 'http://onto.fel.cvut.cz/ontologies/form/requires-description';

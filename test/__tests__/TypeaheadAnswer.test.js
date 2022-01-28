@@ -26,8 +26,7 @@ describe('TypeaheadAnswer', () => {
     };
     question[Constants.RDFS_COMMENT] = {
       '@language': 'en',
-      '@value':
-        'The identification of the aerodrome/helicopter landing area by name, location and status.'
+      '@value': 'The identification of the aerodrome/helicopter landing area by name, location and status.'
     };
     onChange = jest.fn();
     loadFormOptions = jest.fn();
@@ -60,13 +59,7 @@ describe('TypeaheadAnswer', () => {
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
-          <TypeaheadAnswer
-            answer={{}}
-            question={question}
-            onChange={onChange}
-            label="TestLabel"
-            options={options}
-          />
+          <TypeaheadAnswer answer={{}} question={question} onChange={onChange} label="TestLabel" options={options} />
         </FormGenContext.Provider>
       </ConfigurationContext.Provider>
     );

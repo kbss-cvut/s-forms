@@ -14,11 +14,7 @@ export default class QuestionAnswerProcessor {
     let processedQuestion;
     if (wizardData) {
       question.uri = wizardData.root['@id'];
-      question.origin = JsonLdUtils.getJsonAttValue(
-        wizardData.root,
-        Constants.HAS_QUESTION_ORIGIN,
-        '@id'
-      );
+      question.origin = JsonLdUtils.getJsonAttValue(wizardData.root, Constants.HAS_QUESTION_ORIGIN, '@id');
     }
     if (stepData) {
       for (let i = 0; i < stepData.length; i++) {
@@ -51,9 +47,7 @@ export default class QuestionAnswerProcessor {
     if (question[Constants.HAS_SUBQUESTION]) {
       result.subQuestions = [];
       for (let i = 0; i < question[Constants.HAS_SUBQUESTION].length; i++) {
-        result.subQuestions.push(
-          QuestionAnswerProcessor._processQuestion(question[Constants.HAS_SUBQUESTION][i])
-        );
+        result.subQuestions.push(QuestionAnswerProcessor._processQuestion(question[Constants.HAS_SUBQUESTION][i]));
       }
     }
     if (question[Constants.HAS_ANSWER]) {
@@ -62,9 +56,7 @@ export default class QuestionAnswerProcessor {
         question[Constants.HAS_ANSWER] = [question[Constants.HAS_ANSWER]];
       }
       for (let i = 0; i < question[Constants.HAS_ANSWER].length; i++) {
-        result.answers.push(
-          QuestionAnswerProcessor.processAnswer(question[Constants.HAS_ANSWER][i])
-        );
+        result.answers.push(QuestionAnswerProcessor.processAnswer(question[Constants.HAS_ANSWER][i]));
       }
     }
 
@@ -74,9 +66,7 @@ export default class QuestionAnswerProcessor {
         question[Constants.HAS_COMMENT] = [question[Constants.HAS_COMMENT]];
       }
       for (let i = 0; i < question[Constants.HAS_COMMENT].length; i++) {
-        result.comments.push(
-          QuestionAnswerProcessor.processComment(question[Constants.HAS_COMMENT][i])
-        );
+        result.comments.push(QuestionAnswerProcessor.processComment(question[Constants.HAS_COMMENT][i]));
       }
     }
 

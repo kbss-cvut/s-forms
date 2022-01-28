@@ -60,16 +60,8 @@ const SForms = forwardRef((props, ref) => {
       options={props.options}
     >
       <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
-        <FormQuestionsProvider
-          data={form}
-          formQuestions={formProperties.formQuestions}
-          isFormValid={props.isFormValid}
-        >
-          <FormManager
-            ref={ref}
-            modalView={props.options && props.options.modalView}
-            mapComponent={_mapComponent}
-          />
+        <FormQuestionsProvider data={form} formQuestions={formProperties.formQuestions} isFormValid={props.isFormValid}>
+          <FormManager ref={ref} modalView={props.options && props.options.modalView} mapComponent={_mapComponent} />
         </FormQuestionsProvider>
       </FormGenContextProvider>
     </ConfigurationContextProvider>

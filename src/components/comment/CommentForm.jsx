@@ -30,12 +30,7 @@ const CommentForm = (props) => {
   };
 
   return (
-    <Form
-      onSubmit={submitHandler}
-      className="comment-form"
-      onKeyUp={onKeyUpHandler}
-      onClick={onClickHandler}
-    >
+    <Form onSubmit={submitHandler} className="comment-form" onKeyUp={onKeyUpHandler} onClick={onClickHandler}>
       <Form.Group className="mb-3" controlId="formBasicComment">
         <Col className="col-lg-12">
           <Row className="col-lg-12">

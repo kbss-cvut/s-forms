@@ -16,11 +16,7 @@ export default class FormUtils {
   }
 
   static isSection(question) {
-    return JsonLdUtils.hasValue(
-      question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.QUESTION_SECTION
-    );
+    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.QUESTION_SECTION);
   }
 
   static isAnswerable(question) {
@@ -28,11 +24,7 @@ export default class FormUtils {
   }
 
   static isTypeahead(question) {
-    return JsonLdUtils.hasValue(
-      question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.QUESTION_TYPEAHEAD
-    );
+    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.QUESTION_TYPEAHEAD);
   }
 
   static getPossibleValuesQuery(question) {
@@ -49,9 +41,7 @@ export default class FormUtils {
 
   static isTextarea(question, answerValue) {
     return (
-      (answerValue &&
-        answerValue.length > Constants.INPUT_LENGTH_THRESHOLD &&
-        !FormUtils.isTypeahead(question)) ||
+      (answerValue && answerValue.length > Constants.INPUT_LENGTH_THRESHOLD && !FormUtils.isTypeahead(question)) ||
       JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TEXTAREA)
     );
   }
@@ -61,9 +51,7 @@ export default class FormUtils {
   }
 
   static isCalendar(question) {
-    return (
-      FormUtils.isDate(question) || FormUtils.isTime(question) || FormUtils.isDateTime(question)
-    );
+    return FormUtils.isDate(question) || FormUtils.isTime(question) || FormUtils.isDateTime(question);
   }
 
   static isDate(question) {
@@ -103,9 +91,7 @@ export default class FormUtils {
   }
 
   static getCategory(question) {
-    return Constants.LAYOUT.CATEGORY.find((c) =>
-      JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c)
-    );
+    return Constants.LAYOUT.CATEGORY.find((c) => JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c));
   }
 
   static resolveValue(answer) {
@@ -198,9 +184,7 @@ export default class FormUtils {
     }
 
     if (acceptedValidationsValues && acceptedAnswerValues) {
-      console.warn(
-        'Support for validation and requirement constraints at same time is not implemented !'
-      );
+      console.warn('Support for validation and requirement constraints at same time is not implemented !');
     }
 
     // any answer within all subquestions
@@ -289,11 +273,7 @@ export default class FormUtils {
         if (obj === undefined) {
           const ot = objectType ? objectType : 'Object';
           console.warn(
-            (objectType ? objectType : 'Object') +
-              ' "' +
-              o['@id'] +
-              '"' +
-              ' is not loaded in an object map.'
+            (objectType ? objectType : 'Object') + ' "' + o['@id'] + '"' + ' is not loaded in an object map.'
           );
           return null;
         }

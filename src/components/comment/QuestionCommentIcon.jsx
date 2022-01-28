@@ -74,13 +74,7 @@ const QuestionCommentIcon = (props) => {
         ) : null}
       </span>
 
-      <Overlay
-        target={target.current}
-        show={show}
-        placement={overlayPlacement}
-        rootClose={true}
-        onHide={hideOverlay}
-      >
+      <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={true} onHide={hideOverlay}>
         {(overlayProps) => (
           <Tooltip className="comment-tooltip" {...overlayProps}>
             <span>

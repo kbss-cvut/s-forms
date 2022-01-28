@@ -564,12 +564,7 @@
     },
     {
       "label": "Category 1",
-      "has_related_question": [
-        "category-1-4352",
-        "category-1-5232",
-        "category-2-8401",
-        "category-3-8338"
-      ],
+      "has_related_question": ["category-1-4352", "category-1-5232", "category-2-8401", "category-3-8338"],
       "@type": "doc:question",
       "@id": "category-1-599",
       "has-layout-class": ["section", "category-1"]
@@ -578,12 +573,7 @@
       "@id": "category-1-7717",
       "has-layout-class": ["section", "category-1"],
       "@type": "doc:question",
-      "has_related_question": [
-        "category-1-599",
-        "category-2-3477",
-        "category-2-333",
-        "category-3-6863"
-      ],
+      "has_related_question": ["category-1-599", "category-2-3477", "category-2-333", "category-3-6863"],
       "label": "Category 1"
     },
     {
@@ -623,12 +613,7 @@
     },
     {
       "@type": "doc:question",
-      "has_related_question": [
-        "category-2-2617",
-        "category-3-5220",
-        "category-4-3775",
-        "category-5-446"
-      ],
+      "has_related_question": ["category-2-2617", "category-3-5220", "category-4-3775", "category-5-446"],
       "has-layout-class": ["section", "category-2"],
       "@id": "category-2-333",
       "label": "Category 2"
@@ -2723,11 +2708,7 @@
       }
     },
     {
-      "has_related_question": [
-        "tested-question-1-2058",
-        "tested-question-2-5915",
-        "hidden-question-8998"
-      ],
+      "has_related_question": ["tested-question-1-2058", "tested-question-2-5915", "hidden-question-8998"],
       "@type": "doc:question",
       "@id": "multiplicity-in-tested-targets-7019",
       "has-layout-class": "section",
@@ -2768,11 +2749,7 @@
       "@id": "option-6989605"
     },
     {
-      "has_related_question": [
-        "tested-question-1-8535",
-        "tested-question-2-7291",
-        "hidden-question-1755"
-      ],
+      "has_related_question": ["tested-question-1-8535", "tested-question-2-7291", "hidden-question-1755"],
       "@type": "doc:question",
       "has-layout-class": "section",
       "@id": "or-condition-9282",
@@ -3094,11 +3071,7 @@
         "@language": "en",
         "@value": "Tested section"
       },
-      "has_related_question": [
-        "tested-question-1258",
-        "tested-question-2-8261",
-        "tested-question-3-4747"
-      ],
+      "has_related_question": ["tested-question-1258", "tested-question-2-8261", "tested-question-3-4747"],
       "@type": "doc:question",
       "description": {
         "@value": "Fill in answer to any question within this section to show hidden question.",

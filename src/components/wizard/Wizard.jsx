@@ -32,20 +32,14 @@ const Wizard = () => {
 
   let startingStep = 0;
   if (options.startingQuestionId) {
-    startingStep = findStepByQuestionId(
-      formQuestionsContext.getFormQuestionsData(),
-      options.startingQuestionId
-    );
+    startingStep = findStepByQuestionId(formQuestionsContext.getFormQuestionsData(), options.startingQuestionId);
 
     if (startingStep === -1) {
       console.warn(`Question with id ${options.startingQuestionId} not found!`);
       startingStep = 0;
     }
   } else if (options.startingStep) {
-    startingStep =
-      options.startingStep < formQuestionsContext.getFormQuestionsData().length
-        ? options.startingStep
-        : 0;
+    startingStep = options.startingStep < formQuestionsContext.getFormQuestionsData().length ? options.startingStep : 0;
   }
 
   const [currentStep, setCurrentStep] = React.useState(startingStep);
@@ -95,17 +89,9 @@ const Wizard = () => {
     const formQuestionsData = formQuestionsContext.getFormQuestionsData();
 
     return options.horizontalWizardNav ? (
-      <HorizontalWizardNav
-        currentStep={currentStep}
-        steps={formQuestionsData}
-        onNavigate={navigate}
-      />
+      <HorizontalWizardNav currentStep={currentStep} steps={formQuestionsData} onNavigate={navigate} />
     ) : (
-      <VerticalWizardNav
-        currentStep={currentStep}
-        steps={formQuestionsData}
-        onNavigate={navigate}
-      />
+      <VerticalWizardNav currentStep={currentStep} steps={formQuestionsData} onNavigate={navigate} />
     );
   };
 
@@ -135,11 +121,7 @@ const Wizard = () => {
 
   const isHorizontal = options.horizontalWizardNav;
   const cardClassname = isHorizontal ? '' : 'flex-row p-3';
-  const containerClassname = isHorizontal
-    ? 'card-body p-3'
-    : nav
-    ? 'col-10 p-0 pl-3'
-    : 'col-12 p-0';
+  const containerClassname = isHorizontal ? 'card-body p-3' : nav ? 'col-10 p-0 pl-3' : 'col-12 p-0';
 
   return (
     <Card className={cardClassname}>

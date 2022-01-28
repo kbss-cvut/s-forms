@@ -91,9 +91,7 @@ export default class FormGenerator {
     });
 
     if (!formQuestions.length) {
-      Logger.log(
-        'Could not find any wizard steps in the received data. Building form without steps'
-      );
+      Logger.log('Could not find any wizard steps in the received data. Building form without steps');
 
       form[Constants.HAS_SUBQUESTION].forEach((question) => formQuestions.push(question));
     }
@@ -102,10 +100,7 @@ export default class FormGenerator {
     formQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl));
 
     // sort by property
-    JsonLdObjectUtils.orderPreservingToplogicalSort(
-      formQuestions,
-      Constants.HAS_PRECEDING_QUESTION
-    );
+    JsonLdObjectUtils.orderPreservingToplogicalSort(formQuestions, Constants.HAS_PRECEDING_QUESTION);
 
     return [formQuestions, { root: form }];
   }

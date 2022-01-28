@@ -62,37 +62,19 @@ const Answer = (props) => {
 
   const _renderSelect = (value, label, title) => {
     return (
-      <SelectAnswer
-        question={props.question}
-        label={label}
-        title={title}
-        value={value}
-        onChange={onValueChange}
-      />
+      <SelectAnswer question={props.question} label={label} title={title} value={value} onChange={onValueChange} />
     );
   };
 
   const _renderDateTimePicker = (value, label, title) => {
     return (
-      <DateTimeAnswer
-        question={props.question}
-        value={value}
-        title={title}
-        label={label}
-        onChange={onValueChange}
-      />
+      <DateTimeAnswer question={props.question} value={value} title={title} label={label} onChange={onValueChange} />
     );
   };
 
   const _renderCheckbox = (value, label, title) => {
     return (
-      <CheckboxAnswer
-        label={label}
-        title={title}
-        value={value}
-        onChange={onValueChange}
-        question={props.question}
-      />
+      <CheckboxAnswer label={label} title={title} value={value} onChange={onValueChange} question={props.question} />
     );
   };
 

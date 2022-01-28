@@ -33,10 +33,7 @@ class PrefixIcon extends React.Component {
 
     return (
       <OverlayTrigger trigger="click" placement="right" overlay={p}>
-        <span
-          className={this.props.iconClass}
-          onClick={() => this.setState({ show: !this.state.show })}
-        >
+        <span className={this.props.iconClass} onClick={() => this.setState({ show: !this.state.show })}>
           {this.props.children}
         </span>
       </OverlayTrigger>

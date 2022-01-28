@@ -91,10 +91,7 @@ export default class WizardStep extends React.Component {
             onMouseEnter={this._onMouseEnterHandler}
             onMouseLeave={this._onMouseLeaveHandler}
           >
-            {JsonLdUtils.getLocalized(
-              this.props.step[JsonLdUtils.RDFS_LABEL],
-              this.props.options.intl
-            )}
+            {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
             {Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon)}
           </Card.Header>
           <Card.Body className={categoryClass}>{questionElement}</Card.Body>

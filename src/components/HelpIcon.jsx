@@ -23,10 +23,7 @@ const HelpIcon = (props) => {
   return (
     <div ref={(el) => getOverlayPlacement(el)}>
       <OverlayTrigger placement={props.overlayPlacement || overlayPlacement} overlay={tooltip}>
-        <span
-          className={props.iconClassContainer}
-          style={{ position: props.absolutePosition ? 'absolute' : null }}
-        >
+        <span className={props.iconClassContainer} style={{ position: props.absolutePosition ? 'absolute' : null }}>
           <QuestionCircle className={props.iconClass} />
         </span>
       </OverlayTrigger>

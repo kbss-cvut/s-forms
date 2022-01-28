@@ -5,10 +5,7 @@ import Constants from '../constants/Constants';
 
 export default class MediaContent extends React.Component {
   render() {
-    const mediaContent = JsonLdUtils.getJsonAttValue(
-      this.props.question,
-      Constants.HAS_MEDIA_CONTENT
-    );
+    const mediaContent = JsonLdUtils.getJsonAttValue(this.props.question, Constants.HAS_MEDIA_CONTENT);
     if (!mediaContent) {
       return null;
     }
@@ -20,10 +17,7 @@ export default class MediaContent extends React.Component {
       return (
         <div className="col-6">
           {mediaContent.map((src) => (
-            <div
-              key={'media-' + src}
-              className="row embed-responsive-21by9 media-content-video-container mb-3"
-            >
+            <div key={'media-' + src} className="row embed-responsive-21by9 media-content-video-container mb-3">
               {MediaContent.iframe(src)}
             </div>
           ))}

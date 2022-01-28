@@ -40,9 +40,7 @@ describe('Question answer processor', () => {
     expect(actualQuestion.answers.length).toEqual(expectedQuestion[Constants.HAS_ANSWER].length);
 
     for (let i = 0; i < actualQuestion.answers.length; i++) {
-      expect(actualQuestion.answers[i].uri).toEqual(
-        expectedQuestion[Constants.HAS_ANSWER][i]['@id']
-      );
+      expect(actualQuestion.answers[i].uri).toEqual(expectedQuestion[Constants.HAS_ANSWER][i]['@id']);
 
       if (expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_DATA_VALUE]) {
         expect(actualQuestion.answers[i].textValue).toEqual(

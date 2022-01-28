@@ -47,12 +47,7 @@ export interface SFormsProps {
   loader?: React.ElementType; // default <div>Loading SForms...</div>
 }
 
-type ArrayLengthMutationKeys =
-  | 'category-1'
-  | 'category-2'
-  | 'category-3'
-  | 'category-4'
-  | 'category-5';
+type ArrayLengthMutationKeys = 'category-1' | 'category-2' | 'category-3' | 'category-4' | 'category-5';
 type ArrayItems<T extends Array<any>> = T extends Array<infer TItems> ? TItems : never;
 type FixedLengthArray<T extends any[]> = Pick<T, Exclude<keyof T, ArrayLengthMutationKeys>> & {
   [Symbol.iterator]: () => IterableIterator<ArrayItems<T>>;

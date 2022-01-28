@@ -65,12 +65,7 @@ export default class DefaultInput extends React.Component {
     // TODO change control id to hash of label
     return (
       <Form.Group size="small" controlId={Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}>
-        <Form.Check
-          type="checkbox"
-          ref={(c) => (this.input = c)}
-          {...this.props}
-          label={this.props.label}
-        />
+        <Form.Check type="checkbox" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
       </Form.Group>
     );
   }
@@ -78,12 +73,7 @@ export default class DefaultInput extends React.Component {
   _renderRadio() {
     return (
       <FormGroup size="small">
-        <Form.Check
-          type="radio"
-          ref={(c) => (this.input = c)}
-          {...this.props}
-          label={this.props.label}
-        />
+        <Form.Check type="radio" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
       </FormGroup>
     );
   }

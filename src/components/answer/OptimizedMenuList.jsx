@@ -9,8 +9,7 @@ const HEIGHT = 40;
 const OptimizedMenuList = (props) => {
   const { options, children, maxHeight, getValue } = props;
   const selectedValues = getValue();
-  const initialOffset =
-    selectedValues && selectedValues[0] ? options.indexOf(selectedValues[0]) * HEIGHT : 0;
+  const initialOffset = selectedValues && selectedValues[0] ? options.indexOf(selectedValues[0]) * HEIGHT : 0;
 
   return (
     <FixedSizeList
