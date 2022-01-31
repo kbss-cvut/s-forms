@@ -39,8 +39,8 @@ export default class Question extends React.Component {
   componentDidUpdate() {
     const question = this.props.question;
     const startingQuestionId = this.context.options.startingQuestionId;
-    const subQuestion = question[Constants.HAS_SUBQUESTION]
-    let isSubQuestionStartingQuestionId = subQuestion.find(o => o['@id'] === startingQuestionId);
+    const subQuestions = question[Constants.HAS_SUBQUESTION]
+    const isSubQuestionStartingQuestionId = subQuestions.find(o => o['@id'] === startingQuestionId);
 
     if (FormUtils.isSection(question) && FormUtils.isAnswerable(question)) {
       const answerValue = this._getFirstAnswerValue();
