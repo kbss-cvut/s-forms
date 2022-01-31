@@ -236,9 +236,14 @@ input:disabled {
   margin-left: auto;
 }
 
-.comment-form {
+#comment-form {
   display: flex;
   width: 100%;
+}
+
+#comment-form textarea {
+  resize: none;
+  overflow-y: hidden;
 }
 
 .comment-form-control {
