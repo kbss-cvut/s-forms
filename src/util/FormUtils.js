@@ -308,17 +308,4 @@ export default class FormUtils {
 
     return false;
   }
-
-  /**
-   * Evaluates if question is equal to the starting question ID, which we want to jump to.
-   * @param question
-   * @param startingQuestionId
-   * @returns {boolean}
-   */
-  static isQuestionMatchingStartingQuestionId(question, startingQuestionId) {
-    if (question === undefined) {
-      return;
-    }
-    return !!question.find(o => o['@id'] === startingQuestionId);
-  }
 }

@@ -110,4 +110,22 @@ export default class JsonLdObjectUtils {
   static orderByLocalizedLabels(data, intl) {
     return data.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl));
   }
+
+  /**
+   * Evaluates if jsonLdObject is equal to id.
+   * @param jsonLdObject
+   * @param id
+   * @returns {boolean}
+   */
+  static checkId(jsonLdObject, id) {
+    if (jsonLdObject === undefined) {
+      return;
+    }
+    if (jsonLdObject.constructor === Array) {
+      return !!jsonLdObject.find(o => o['@id'] === id);
+    }
+    if (jsonLdObject.constructor === Object) {
+      return jsonLdObject['@id'] === id;
+    }
+  }
 }

@@ -122,12 +122,12 @@ export default class Question extends React.Component {
     const question = this.props.question;
     const subQuestion = question[Constants.HAS_SUBQUESTION];
     const options = this.context.options;
-    const renderQuestion = this.renderQuestion(question);
+    const renderQuestion = this.questionComponent(question);
     if (FormUtils.isHidden(question)) {
       return null;
     }
     if (!FormUtils.isRelevant(question) &&
-        (this.context.options.debugMode || FormUtils.isQuestionMatchingStartingQuestionId(subQuestion, options.startingQuestionId))) {
+        (this.context.options.debugMode || JsonLdObjectUtils.checkId(subQuestion, options.startingQuestionId))) {
       return (
           <div className="show-irrelevant">
             {renderQuestion}
@@ -141,7 +141,7 @@ export default class Question extends React.Component {
     return renderQuestion;
   }
 
-  renderQuestion(question) {
+  questionComponent(question) {
     if (FormUtils.isAnswerable(question) && !FormUtils.isSection(question)) {
       if (PRETTY_ANSWERABLE_LAYOUT) {
         return (
@@ -268,7 +268,7 @@ export default class Question extends React.Component {
     const startingQuestionId = this.context.options.startingQuestionId;
     const subQuestion = question[Constants.HAS_SUBQUESTION]
 
-    if ((debugMode || FormUtils.isQuestionMatchingStartingQuestionId(subQuestion, startingQuestionId)) && !FormUtils.hasAnswer(question)) {
+    if ((debugMode || JsonLdObjectUtils.checkId(subQuestion, startingQuestionId)) && !FormUtils.hasAnswer(question)) {
       return "show-irrelevant";
     }
     return "";
@@ -513,11 +513,10 @@ export default class Question extends React.Component {
 
     for (let i = 0; i < subQuestions.length; i++) {
       let question = subQuestions[i];
-      let questionId = question['@id'];
       let component = this.context.mapComponent(question, Question);
       let element = null;
 
-      if (debugMode || classname !== "show-irrelevant" || (!debugMode && questionId === startingQuestionId)) {
+      if (debugMode || classname !== "show-irrelevant" || (!debugMode && JsonLdObjectUtils.checkId(question, startingQuestionId))) {
         element = React.createElement(component, {
           key: 'sub-question-' + i,
           question: question,
