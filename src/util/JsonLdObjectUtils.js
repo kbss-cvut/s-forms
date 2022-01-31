@@ -112,7 +112,7 @@ export default class JsonLdObjectUtils {
   }
 
   /**
-   * Evaluates if jsonLdObject is equal to id.
+   * Evaluates if jsonLdObject has provided id.
    * @param jsonLdObject
    * @param id
    * @returns {boolean}
