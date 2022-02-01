@@ -1,4 +1,4 @@
-import React, {useContext, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import CommentBubble from "../../styles/icons/CommentBubble";
 import {Badge, Overlay, Tooltip} from "react-bootstrap";
 import CommentList from "./CommentList";
@@ -6,12 +6,22 @@ import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
 import {ConfigurationContext} from "../../contexts/ConfigurationContext";
 import CommentForm from "./CommentForm";
+import {motion} from 'framer-motion/dist/framer-motion';
+import Close from "../../styles/icons/Close";
 
 const QuestionCommentIcon = (props) => {
     const context = useContext(ConfigurationContext);
+
     const target = useRef(null);
+    const dragRef = useRef(null);
+    const overlayTarget = useRef(null);
+
     const [show, setShow] = useState(false);
     const [overlayPlacement, setOverlayPlacement] = useState("right");
+
+    useEffect(() => {
+        getOverlayPlacement(overlayTarget.current);
+    });
 
     const hideOverlay = () => {
         setShow(false);
@@ -45,41 +55,63 @@ const QuestionCommentIcon = (props) => {
         change[Constants.HAS_TIMESTAMP] = Date.now().toString();
     };
 
-    const onClickHandler = (e) => {
+    const deleteQuestionCommentHandler = (index) => {
+        const comment = _getComments();
+        comment.splice(index, 1);
+    }
+
+    const stopPropagation = (e) => {
         e.preventDefault();
         e.stopPropagation();
+    }
+
+    const onClickSetShowHandler = (e) => {
+        stopPropagation(e);
         setShow(!show);
     }
 
     const getCommentsLength = () => {
-       return _getComments().length;
+        return _getComments().length;
     }
 
-    const getOverlayPlacement = (el) => {
-        if (!el) return;
+    const getOverlayPlacement = (overlayTarget) => {
+        if (!overlayTarget) return;
 
-        if (el.getBoundingClientRect().x > window.innerWidth / 2) {
+        if (overlayTarget.getBoundingClientRect().x > window.innerWidth / 2) {
             setOverlayPlacement("left");
         } else setOverlayPlacement("right");
     };
 
     return (
-        <div ref={el => getOverlayPlacement(el)}>
-            <span ref={target} onClick={onClickHandler}>
+        <div ref={overlayTarget} onClick={stopPropagation}>
+            <span ref={target} onClick={onClickSetShowHandler}>
                 <CommentBubble/>
                 {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
             </span>
 
-            <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={true} onHide={hideOverlay}>
-                {(overlayProps) => (
-                    <Tooltip className="comment-tooltip" {...overlayProps}>
+            <motion.div className="overlay-comment" ref={dragRef} drag dragConstraints={{
+                top: -50,
+                left: -50,
+                right: 50,
+                bottom: 50,
+            }}>
+                <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={false} onHide={hideOverlay} container={dragRef}>
+                    {(overlayProps) => (
+                        <Tooltip className="comment-tooltip" {...overlayProps}>
                         <span>
+                            <motion.div
+                                className="close-comment-icon"
+                                onClick={hideOverlay}
+                                whileHover={{scale: 1.1, transition: {duration: 0.1}}}>
+                                <Close/>
+                            </motion.div>
+                            <CommentList comments={_getComments()} deleteQuestionComment={deleteQuestionCommentHandler}/>
                             <CommentForm onChange={onCommentValueChangeHandler} />
-                            <CommentList comment={_getComments()} />
                         </span>
-                    </Tooltip>
-                )}
-            </Overlay>
+                        </Tooltip>
+                    )}
+                </Overlay>
+            </motion.div>
         </div>
     );
 }

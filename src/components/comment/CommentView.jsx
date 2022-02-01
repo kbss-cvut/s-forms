@@ -5,12 +5,15 @@ import {ConfigurationContext} from "../../contexts/ConfigurationContext";
 import LinkIcon from "../LinkIcon";
 import IconOverlay from "../IconOverlay";
 import PropTypes from "prop-types";
+import RecycleBin from "../../styles/icons/RecycleBin";
+import {motion} from 'framer-motion/dist/framer-motion';
 
 const UNKNOWN_AUTHOR = "Unknown author";
 
 const CommentView = (props) => {
     const { options } = useContext(ConfigurationContext);
     const [showIRI, setShowIRI] = useState(false);
+    const [showRecycleBin, setShowRecycleBin] = useState(false);
 
     TimeAgo.addLocale(en);
     const time = new TimeAgo('en-US');
@@ -45,17 +48,17 @@ const CommentView = (props) => {
     }
 
     const renderAuthor = () => {
-      return (
-          <>
-              {showIRI ?
-                  <>
-                      {getAuthorLabel()}
-                      <LinkIcon iconClassContainer="emphasise-on-relevant-icon" url={getAuthorIRI()}/>
-                  </>
-                  : getAuthorLabel()
-              }
-          </>
-      )
+        return (
+            <>
+                {showIRI ?
+                    <>
+                        {getAuthorLabel()}
+                        <LinkIcon iconClassContainer="emphasise-on-relevant-icon" url={getAuthorIRI()}/>
+                    </>
+                    : getAuthorLabel()
+                }
+            </>
+        )
     };
 
     const renderTimeAgo = () => {
@@ -68,8 +71,8 @@ const CommentView = (props) => {
         }
 
         return <IconOverlay id="exact-time-overlay" tooltipContent={getUTCFormat()}>
-          {getTimeAgoFormat()}
-      </IconOverlay>
+            {getTimeAgoFormat()}
+        </IconOverlay>
 
     }
 
@@ -77,16 +80,34 @@ const CommentView = (props) => {
         setShowIRI(!showIRI);
     }
 
+    const onMouseRecycleBinEventHandler = () => {
+        setShowRecycleBin(!showRecycleBin)
+    }
+
+    const onClickDeleteQuestionCommentHandler = () => {
+        props.deleteQuestionComment(props.index);
+        props.deleteCommentView();
+    }
+
     return (
-        <div className="comment-content">
+        <div className="comment-content" onMouseEnter={onMouseRecycleBinEventHandler} onMouseLeave={onMouseRecycleBinEventHandler}>
             <div className="row">
-                <span className="col-auto comment-author" onMouseEnter={onMouseAuthorEventHandler} onMouseLeave={onMouseAuthorEventHandler}>
+                <div className="col-auto comment-author" onMouseEnter={onMouseAuthorEventHandler} onMouseLeave={onMouseAuthorEventHandler}>
                     {renderAuthor()}
-                </span>
-                <span className="col-auto text-muted comment-timestamp">{renderTimeAgo()}</span>
+                </div>
+                <div className="col-auto text-muted comment-timestamp">{renderTimeAgo()}</div>
+                {showRecycleBin ?
+                    <motion.div
+                        className="comment-delete emphasise-on-relevant-icon"
+                        whileHover={{scale: 1.2}}
+                        whileTap={{scale: 0.9}}
+                        onClick={onClickDeleteQuestionCommentHandler}>
+                        <RecycleBin/>
+                    </motion.div>
+                : null }
             </div>
             <div className="row">
-                <span className="col comment-value">{props.commentValue}</span>
+                <div className="col comment-value">{props.commentValue}</div>
             </div>
         </div>
     );
@@ -95,7 +116,10 @@ const CommentView = (props) => {
 CommentView.propTypes = {
     author: PropTypes.object.isRequired,
     timestamp: PropTypes.string.isRequired,
-    commentValue: PropTypes.string.isRequired
+    commentValue: PropTypes.string.isRequired,
+    deleteQuestionComment: PropTypes.func.isRequired,
+    deleteCommentView: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired
 };
 
 export default CommentView;

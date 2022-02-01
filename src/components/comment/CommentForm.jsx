@@ -15,39 +15,48 @@ const CommentForm = (props) => {
         setCommentValue(e.target.value);
     }
 
-    const submitHandler = (e) => {
+    const onSubmitHandler = (e) => {
         e.preventDefault();
         props.onChange(commentValue);
         setCommentValue('');
     }
 
     const onKeyUpHandler = (e) => {
-        if (e.key === 'Enter'&& e.ctrlKey && commentValue.trim()) submitHandler(e);
+        if (e.key === 'Enter'&& e.ctrlKey && commentValue.trim()) onSubmitHandler(e);
     }
 
     const onClickHandler = (e) => {
         e.stopPropagation();
     }
 
+    const autoResizeTextArea = (e) => {
+        const textArea = document.getElementById("comment-form");
+        textArea.style.height = "auto";
+        let scrollHeight = e.target.scrollHeight;
+        textArea.style.height = `${scrollHeight}px`;
+    }
+
     return (
-        <Form onSubmit={submitHandler} className="comment-form" onKeyUp={onKeyUpHandler} onClick={onClickHandler}>
-            <Form.Group className="mb-3" controlId="formBasicComment">
-                <Col className="col-lg-12">
-                    <Row className="col-lg-12">
-                        <Form.Control
-                            name="comment"
-                            as="textarea"
-                            placeholder="Write your comments here  (Ctrl+Enter to confirm)"
-                            required
-                            value={commentValue}
-                            onChange={onValueChange}
-                            ref={formInputRef}
-                        />
-                    </Row>
-                    <Row className="send-comment-arrow col-lg-12">
-                        <Button className="comment-button" variant="primary" type="submit" >
-                            <ArrowRight />
-                        </Button>
+        <Form onSubmit={onSubmitHandler} onKeyUp={onKeyUpHandler} onClick={onClickHandler}>
+            <Form.Group className="m-2" controlId="formBasicComment">
+                <Col className="col-lg-12 p-0">
+                    <Row className="container-fluid p-0 m-0">
+                        <div id="comment-form">
+                            <Form.Control
+                                className="comment-form-control"
+                                name="comment"
+                                as="textarea"
+                                placeholder="Write your comments here  (Ctrl+Enter to confirm)"
+                                required
+                                value={commentValue}
+                                onChange={onValueChange}
+                                ref={formInputRef}
+                                onKeyUp={(e => autoResizeTextArea(e))}
+                            />
+                            <Button className="comment-form-button" variant="primary" type="submit" >
+                                <ArrowRight/>
+                            </Button>
+                        </div>
                     </Row>
                 </Col>
             </Form.Group>
