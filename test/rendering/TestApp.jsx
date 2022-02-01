@@ -63,7 +63,7 @@ class TestApp extends React.Component {
       enableForwardSkip: true,
       ...getP('startingQuestionId', 'layout-options-65'),
       startingStep: 1,
-        debugMode: true,
+        debugMode: false,
       users: [
           {id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart"},
           {id: "http://fel.cvut.cz/people/miroslav-blasko", label: "Miroslav Blasko"}],
