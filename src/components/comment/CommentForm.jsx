@@ -31,9 +31,9 @@ const CommentForm = (props) => {
 
     const autoResizeTextArea = (e) => {
         const textArea = document.getElementById("comment-form");
-        textArea.style.height = "auto"
+        textArea.style.height = "auto";
         let scrollHeight = e.target.scrollHeight;
-        textArea.style.height = `${scrollHeight}px`
+        textArea.style.height = `${scrollHeight}px`;
     }
 
     return (

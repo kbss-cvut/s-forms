@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import CommentView from './CommentView';
 import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants';
 import { Rings } from 'react-loader-spinner';
 
 const CommentList = (props) => {
+  const commentEndRef = useRef(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const deleteCommentViewHandler = () => {
@@ -14,6 +15,13 @@ const CommentList = (props) => {
     }, 2000);
   };
 
+  useEffect(() => {
+    if (commentEndRef.current === null) {
+      return;
+    }
+    commentEndRef.current.scrollTop = commentEndRef.current.scrollHeight;
+  }, [JSON.stringify(props.comments)]);
+
   return (
     <span>
       {isDeleting ? (
@@ -22,8 +30,8 @@ const CommentList = (props) => {
           <p>Deleting comment...</p>
         </div>
       ) : (
-        <div className="comment-list-items">
-          {props.comment.map((comment, index) => (
+        <div className="comment-list-items" ref={commentEndRef}>
+          {props.comments.map((comment, index) => (
             <div key={index} className="comment-list-item">
               <CommentView
                 commentValue={comment[Constants.HAS_COMMENT_VALUE]}
@@ -42,7 +50,7 @@ const CommentList = (props) => {
 };
 
 CommentList.propTypes = {
-  comment: PropTypes.array.isRequired,
+  comments: PropTypes.array.isRequired,
   deleteQuestionComment: PropTypes.func.isRequired
 };
 

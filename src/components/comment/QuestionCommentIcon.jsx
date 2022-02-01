@@ -105,7 +105,7 @@ const QuestionCommentIcon = (props) => {
                                 whileHover={{scale: 1.1, transition: {duration: 0.1}}}>
                                 <Close/>
                             </motion.div>
-                            <CommentList comment={_getComments()} deleteQuestionComment={deleteQuestionCommentHandler}/>
+                            <CommentList comments={_getComments()} deleteQuestionComment={deleteQuestionCommentHandler}/>
                             <CommentForm onChange={onCommentValueChangeHandler} />
                         </span>
                         </Tooltip>
