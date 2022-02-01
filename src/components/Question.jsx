@@ -38,10 +38,23 @@ export default class Question extends React.Component {
 
   componentDidUpdate() {
     const question = this.props.question;
+    const startingQuestionId = this.context.options.startingQuestionId;
+    const subQuestions = question[Constants.HAS_SUBQUESTION]
+    const isSubQuestionStartingQuestionId = subQuestions.find(o => o['@id'] === startingQuestionId);
 
     if (FormUtils.isSection(question) && FormUtils.isAnswerable(question)) {
       const answerValue = this._getFirstAnswerValue();
-      if (this.state.expanded && !answerValue) {
+
+      // Irrelevant questions are expanded if debugMode is on
+      if (this.context.options.debugMode) {
+        return null;
+      }
+
+      if (isSubQuestionStartingQuestionId) {
+        return null;
+      }
+
+      else if (this.state.expanded && !answerValue) {
         // close expanded answerable section that does not have positive answer
         this.setState({ expanded: false });
       }
@@ -80,11 +93,11 @@ export default class Question extends React.Component {
     this.props.onChange(this.props.index, newState);
   }
 
-  toggleCollapse = () => {
+  _toggleCollapse = () => {
     if (this.props.collapsible) {
 
       const question = this.props.question;
-      if (FormUtils.isAnswerable(question) && FormUtils.isSection(question)) {
+      if (!this.context.options.debugMode && FormUtils.isAnswerable(question) && FormUtils.isSection(question)) {
 
         if (!this._getFirstAnswerValue()) {
           // prevent expanding/collapsing when the checkbox is not checked
@@ -107,28 +120,42 @@ export default class Question extends React.Component {
 
   render() {
     const question = this.props.question;
+    const subQuestion = question[Constants.HAS_SUBQUESTION];
     const options = this.context.options;
-
+    const questionComponent = this.renderQuestion(question);
     if (FormUtils.isHidden(question)) {
       return null;
+    }
+    if (!FormUtils.isRelevant(question) &&
+        (this.context.options.debugMode || JsonLdObjectUtils.checkId(subQuestion, options.startingQuestionId))) {
+      return (
+          <div className="show-irrelevant">
+            {questionComponent}
+          </div>
+      );
     }
     if (!FormUtils.isRelevant(question)) {
       return null;
     }
+
+    return questionComponent;
+  }
+
+  renderQuestion(question) {
     if (FormUtils.isAnswerable(question) && !FormUtils.isSection(question)) {
       if (PRETTY_ANSWERABLE_LAYOUT) {
         return (
-          <div id={question['@id']}>
-            <div className="panel-title answerable-question">{this.renderAnswers()}</div>
-            <div className="answerable-subquestions">{this.renderSubQuestions()}</div>
-          </div>
+            <div id={question['@id']}>
+              <div className="panel-title answerable-question">{this.renderAnswers()}</div>
+              <div className="answerable-subquestions">{this.renderSubQuestions()}</div>
+            </div>
         );
       } else {
         return (
-          <div id={question['@id']}>
-            {this.renderAnswers()}
-            <div className="ml-4 mt-n2">{this.renderSubQuestions()}</div>
-          </div>
+            <div id={question['@id']}>
+              {this.renderAnswers()}
+              <div className="ml-4 mt-n2">{this.renderSubQuestions()}</div>
+            </div>
         );
       }
     }
@@ -142,9 +169,9 @@ export default class Question extends React.Component {
       const label = JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], this.context.options.intl);
 
       const headerClassName = classNames(
-        FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
-        collapsible ? 'cursor-pointer' : '',
-        Question.getEmphasizedOnRelevantClass(question)
+          FormUtils.isEmphasised(question) ? Question.getEmphasizedClass(question) : 'section-background',
+          collapsible ? 'cursor-pointer' : '',
+          Question.getEmphasizedOnRelevantClass(question)
       );
 
       if (FormUtils.isAnswerable(question)) {
@@ -152,7 +179,7 @@ export default class Question extends React.Component {
       }
 
       const cardBody = (
-        <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
+          <Card.Body className={classNames('p-3', categoryClass)}>{this._renderQuestionContent()}</Card.Body>
       );
 
       // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
@@ -216,60 +243,75 @@ export default class Question extends React.Component {
       headerClassNames.push('cursor-pointer');
     }
 
+    let classname = this.getShowIrrelevantClassname(question);
+
     const cardBody = (
-      <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions()}</Card.Body>
+        <Card.Body className={classNames('p-3', categoryClass)}>{this.renderSubQuestions(classname)}</Card.Body>
     );
 
     return (
-      <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
-        <Card className="mb-3">
-          <Card.Header onClick={this.toggleCollapse} className={classNames(headerClassNames)}>
-            {this.renderAnswers()}
-          </Card.Header>
-          {collapsible ? <Accordion.Collapse eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
-        </Card>
-      </Accordion>
+        <Accordion activeKey={this.state.expanded ? question['@id'] : undefined} className="answerable-section">
+          <Card className="mb-3">
+            <Card.Header onClick={this._toggleCollapse} className={classNames(headerClassNames)}>
+              {this.renderAnswers()}
+            </Card.Header>
+            {collapsible ? <Accordion.Collapse className={classname} eventKey={question['@id']}>{cardBody}</Accordion.Collapse> : { cardBody }}
+          </Card>
+        </Accordion>
     );
+
+
+  }
+
+  getShowIrrelevantClassname(question) {
+    const debugMode = this.context.options.debugMode;
+    const startingQuestionId = this.context.options.startingQuestionId;
+    const subQuestion = question[Constants.HAS_SUBQUESTION]
+
+    if ((debugMode || JsonLdObjectUtils.checkId(subQuestion, startingQuestionId)) && !FormUtils.hasAnswer(question)) {
+      return "show-irrelevant";
+    }
+    return "";
   }
 
   renderAnswers() {
     const question = this.props.question,
-      children = [],
-      answers = this._getAnswers(),
-      options = this.context.options;
+        children = [],
+        answers = this._getAnswers(),
+        options = this.context.options;
     let cls;
     let isTextarea;
 
     for (let i = 0, len = answers.length; i < len; i++) {
       isTextarea =
-        FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
-        FormUtils.isSparqlInput(question) ||
-        FormUtils.isTurtleInput(question);
+          FormUtils.isTextarea(question, FormUtils.resolveValue(answers[i])) ||
+          FormUtils.isSparqlInput(question) ||
+          FormUtils.isTurtleInput(question);
       cls = classNames(
-        'answer',
-        Question._getQuestionCategoryClass(question),
-        Question.getEmphasizedOnRelevantClass(question)
+          'answer',
+          Question._getQuestionCategoryClass(question),
+          Question.getEmphasizedOnRelevantClass(question)
       );
       children.push(
-        <div key={'row-item-' + i}
-             className={cls}
-             id={question['@id']}
-             onMouseEnter={this._onMouseEnterHandler}
-             onMouseLeave={this._onMouseLeaveHandler}
-        >
-          <div className="answer-content" style={this._getAnswerWidthStyle()}>
-            <Answer
-                index={i}
-                answer={answers[i]}
-                question={question}
-                onChange={this.onAnswerChange}
-                onCommentChange={this.onCommentChange}
-                showIcon={this.state.showIcon}
-            />
+          <div key={'row-item-' + i}
+               className={cls}
+               id={question['@id']}
+               onMouseEnter={this._onMouseEnterHandler}
+               onMouseLeave={this._onMouseLeaveHandler}
+          >
+            <div className="answer-content" style={this._getAnswerWidthStyle()}>
+              <Answer
+                  index={i}
+                  answer={answers[i]}
+                  question={question}
+                  onChange={this.onAnswerChange}
+                  onCommentChange={this.onCommentChange}
+                  showIcon={this.state.showIcon}
+              />
+            </div>
+            {this._renderUnits()}
+            {this._renderPrefixes()}
           </div>
-          {this._renderUnits()}
-          {this._renderPrefixes()}
-        </div>
       );
     }
     return children;
@@ -308,10 +350,10 @@ export default class Question extends React.Component {
 
   static _getAnswerClass(question, isTextarea) {
     let columns = isTextarea
-      ? 'col-12'
-      : Constants.GENERATED_ROW_SIZE === 1
-      ? 'col-6'
-      : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
+        ? 'col-12'
+        : Constants.GENERATED_ROW_SIZE === 1
+            ? 'col-6'
+            : 'col-' + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
 
     return columns;
   }
@@ -339,7 +381,7 @@ export default class Question extends React.Component {
     const title = this.state.expanded ? options.i18n['section.collapse'] : options.i18n['section.expand'];
 
     return (
-      <span onClick={this.toggleCollapse} title={title}>
+        <span onClick={this.toggleCollapse} title={title}>
         {this.state.expanded ? <CaretSquareUp title={title} /> : <CaretSquareDown title={title} />}
       </span>
     );
@@ -452,9 +494,9 @@ export default class Question extends React.Component {
   _renderPrefixes() {
     const question = this.props.question;
     return question[Constants.HAS_DECLARED_PREFIX] && question[Constants.HAS_DECLARED_PREFIX].length ? (
-      <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]} iconClass={'help-icon-checkbox'}>
-        <InfoCircle />
-      </PrefixIcon>
+        <PrefixIcon prefixes={question[Constants.HAS_DECLARED_PREFIX]} iconClass={'help-icon-checkbox'}>
+          <InfoCircle />
+        </PrefixIcon>
     ) : null;
   }
 
@@ -463,22 +505,25 @@ export default class Question extends React.Component {
     return question[Constants.HAS_UNIT] ? <div className="has-unit-label">{question[Constants.HAS_UNIT]}</div> : null;
   }
 
-  renderSubQuestions() {
+  renderSubQuestions(classname) {
     const children = [];
     const subQuestions = this._getSubQuestions();
+    const debugMode = this.context.options.debugMode;
+    const startingQuestionId = this.context.options.startingQuestionId;
 
     for (let i = 0; i < subQuestions.length; i++) {
-
       let question = subQuestions[i];
       let component = this.context.mapComponent(question, Question);
+      let element = null;
 
-      let element = React.createElement(component, {
-        key: 'sub-question-' + i,
-        question: question,
-        onChange: this.onSubQuestionChange,
-        index: i
-      });
-
+      if (debugMode || classname !== "show-irrelevant" || (!debugMode && JsonLdObjectUtils.checkId(question, startingQuestionId))) {
+        element = React.createElement(component, {
+          key: 'sub-question-' + i,
+          question: question,
+          onChange: this.onSubQuestionChange,
+          index: i
+        });
+      }
       children.push(element);
     }
     return children;
@@ -498,8 +543,8 @@ export default class Question extends React.Component {
 
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(
-      question[Constants.HAS_SUBQUESTION],
-      Constants.HAS_PRECEDING_QUESTION
+        question[Constants.HAS_SUBQUESTION],
+        Constants.HAS_PRECEDING_QUESTION
     );
 
     return question[Constants.HAS_SUBQUESTION];

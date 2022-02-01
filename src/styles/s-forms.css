@@ -256,6 +256,16 @@ input:disabled {
   font-size: 0.5625rem;
 }
 
+.show-irrelevant {
+  opacity: 50%;
+  pointer-events: none;
+}
+
+.show-irrelevant .form-check-input,
+.show-irrelevant .caret-square-down {
+  pointer-events: auto;
+}
+
 @keyframes emphasiseOnRelevant {
   0% {
     display: none;
@@ -311,34 +321,6 @@ input:disabled {
     display: block;
     opacity: 1;
     background-color: #e6f9fb;
-  }
-}
-
-@keyframes emphasiseOnRelevantIcon {
-  0% {
-    display: none;
-    opacity: 0;
-  }
-
-  1% {
-    display: block;
-    opacity: 0;
-  }
-
-  25% {
-    display: block;
-    opacity: 0;
-  }
-
-  75% {
-    display: block;
-    opacity: 1;
-  }
-
-  100% {
-    display: block;
-    opacity: 1;
-    background-color: transparent;
   }
 }
 
