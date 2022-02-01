@@ -122,7 +122,7 @@ export default class Question extends React.Component {
     const question = this.props.question;
     const subQuestion = question[Constants.HAS_SUBQUESTION];
     const options = this.context.options;
-    const renderQuestion = this.questionComponent(question);
+    const questionComponent = this.renderQuestion(question);
     if (FormUtils.isHidden(question)) {
       return null;
     }
@@ -130,7 +130,7 @@ export default class Question extends React.Component {
         (this.context.options.debugMode || JsonLdObjectUtils.checkId(subQuestion, options.startingQuestionId))) {
       return (
           <div className="show-irrelevant">
-            {renderQuestion}
+            {questionComponent}
           </div>
       );
     }
@@ -138,10 +138,10 @@ export default class Question extends React.Component {
       return null;
     }
 
-    return renderQuestion;
+    return questionComponent;
   }
 
-  questionComponent(question) {
+  renderQuestion(question) {
     if (FormUtils.isAnswerable(question) && !FormUtils.isSection(question)) {
       if (PRETTY_ANSWERABLE_LAYOUT) {
         return (
