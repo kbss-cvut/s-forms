@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import JsonLdUtils from 'jsonld-utils';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import FormUtils from '../../util/FormUtils';
-import Question from "../Question";
+import Question from '../Question';
 
 const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);

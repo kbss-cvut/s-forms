@@ -95,10 +95,10 @@ export default class Constants {
   static HAS_DECLARED_PREFIX = 'http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix';
   static PREFIX = 'http://www.w3.org/ns/shacl#prefix';
   static NAMESPACE = 'http://www.w3.org/ns/shacl#namespace';
-  static HAS_COMMENT = 'http://onto.fel.cvut.cz/ontologies/form/has-comment'
-  static HAS_COMMENT_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/has-comment-value'
-  static HAS_AUTHOR = 'http://onto.fel.cvut.cz/ontologies/form/has-author'
-  static HAS_TIMESTAMP = 'http://onto.fel.cvut.cz/ontologies/form/has-timestamp'
+  static HAS_COMMENT = 'http://onto.fel.cvut.cz/ontologies/form/has-comment';
+  static HAS_COMMENT_VALUE = 'http://onto.fel.cvut.cz/ontologies/form/has-comment-value';
+  static HAS_AUTHOR = 'http://onto.fel.cvut.cz/ontologies/form/has-author';
+  static HAS_TIMESTAMP = 'http://onto.fel.cvut.cz/ontologies/form/has-timestamp';
 
   static NOT_ANSWERED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/not-answered-question';
   static ANSWERED_QUESTION = 'http://onto.fel.cvut.cz/ontologies/form/answered-question';
@@ -108,23 +108,23 @@ export default class Constants {
   static DEFAULT_HAS_CHILD = JsonLdUtils.DEFAULT_HAS_CHILD;
 
   static ICONS = {
-    QUESTION_COMMENTS: "questionComments",
-    QUESTION_HELP: "questionHelp",
-    QUESTION_LINK: "questionLink"
+    QUESTION_COMMENTS: 'questionComments',
+    QUESTION_HELP: 'questionHelp',
+    QUESTION_LINK: 'questionLink'
   };
 
   static ICON_BEHAVIOR = {
-    ENABLE: "enable",
-    DISABLE: "disable",
-    ON_HOVER: "onHover"
+    ENABLE: 'enable',
+    DISABLE: 'disable',
+    ON_HOVER: 'onHover'
   };
 
   // Default form options
   static DEFAULT_OPTIONS = {
     icons: [
-      {id: Constants.ICONS.QUESTION_HELP, behavior:  Constants.ICON_BEHAVIOR.ENABLE},
-      {id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ON_HOVER},
-      {id: Constants.ICONS.QUESTION_LINK, behavior: Constants.ICON_BEHAVIOR.ON_HOVER}
+      { id: Constants.ICONS.QUESTION_HELP, behavior: Constants.ICON_BEHAVIOR.ENABLE },
+      { id: Constants.ICONS.QUESTION_COMMENTS, behavior: Constants.ICON_BEHAVIOR.ON_HOVER },
+      { id: Constants.ICONS.QUESTION_LINK, behavior: Constants.ICON_BEHAVIOR.ON_HOVER }
     ]
   };
 }

@@ -1,33 +1,33 @@
-import React, {useEffect, useRef, useState} from "react";
-import {Button, Form, Col, Row} from "react-bootstrap";
-import PropTypes from "prop-types";
-import ArrowRight from "../../styles/icons/ArrowRight";
+import React, { useEffect, useRef, useState } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import ArrowRight from '../../styles/icons/ArrowRight';
 
 const CommentForm = (props) => {
-    const [commentValue, setCommentValue] = useState('');
-    const formInputRef = useRef(null);
+  const [commentValue, setCommentValue] = useState('');
+  const formInputRef = useRef(null);
 
-    useEffect(() => {
-        formInputRef.current.focus();
-    }, []);
+  useEffect(() => {
+    formInputRef.current.focus();
+  }, []);
 
-    const onValueChange = (e) => {
-        setCommentValue(e.target.value);
-    }
+  const onValueChange = (e) => {
+    setCommentValue(e.target.value);
+  };
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        props.onChange(commentValue);
-        setCommentValue('');
-    }
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    props.onChange(commentValue);
+    setCommentValue('');
+  };
 
-    const onKeyUpHandler = (e) => {
-        if (e.key === 'Enter'&& e.ctrlKey && commentValue.trim()) onSubmitHandler(e);
-    }
+  const onKeyUpHandler = (e) => {
+    if (e.key === 'Enter' && e.ctrlKey && commentValue.trim()) onSubmitHandler(e);
+  };
 
-    const onClickHandler = (e) => {
-        e.stopPropagation();
-    }
+  const onClickHandler = (e) => {
+    e.stopPropagation();
+  };
 
     const autoResizeTextArea = (e) => {
         const textArea = document.getElementById("comment-form");
@@ -62,10 +62,10 @@ const CommentForm = (props) => {
             </Form.Group>
         </Form>
     );
-}
+};
 
 CommentForm.propTypes = {
-    onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired
 };
 
 export default CommentForm;

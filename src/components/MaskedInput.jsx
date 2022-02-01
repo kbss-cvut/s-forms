@@ -91,7 +91,9 @@ export default class MaskedInput extends React.Component {
       if (this.mask.getValue() === this.mask.emptyValue) {
         this.mask.setPattern(MaskMapper.mapMask(this.props.mask), { value: this.props.value });
       } else {
-        this.mask.setPattern(MaskMapper.mapMask(this.props.mask), { value: this.mask.getRawValue() });
+        this.mask.setPattern(MaskMapper.mapMask(this.props.mask), {
+          value: this.mask.getRawValue()
+        });
       }
     } else if (prevProps.mask !== this.props.mask) {
       this.mask.setPattern(MaskMapper.mapMask(this.props.mask), { value: this.mask.getRawValue() });

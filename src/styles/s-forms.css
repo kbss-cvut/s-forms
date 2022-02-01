@@ -13,7 +13,7 @@
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
-  padding: .75rem 1.25rem;
+  padding: 0.75rem 1.25rem;
 }
 
 .answerable-subquestions {
@@ -33,7 +33,7 @@
 }
 
 .answerable-section .form-group .form-check-label {
-  margin-left: .11rem;
+  margin-left: 0.11rem;
   font-weight: 500;
 }
 
@@ -368,3 +368,30 @@ input:disabled {
   }
 }
 
+@keyframes emphasiseOnRelevantIcon {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+  }
+
+  25% {
+    display: block;
+    opacity: 0;
+  }
+
+  75% {
+    display: block;
+    opacity: 1;
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+    background-color: transparent;
+  }
+}

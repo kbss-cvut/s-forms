@@ -8,7 +8,11 @@ const defaultProps = {
     inputComponent: require('../components/DefaultInput').default
   },
   componentsOptions: {
-    dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' },
+    dateTimeAnswer: {
+      dateFormat: 'yyyy-MM-dd',
+      timeFormat: 'HH:mm:ss',
+      dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
+    },
     readOnly: false
   },
   options: {

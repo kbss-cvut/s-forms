@@ -98,10 +98,10 @@ export default class JsonLdFramingUtils {
   }
 
   static _getId(jsonObject) {
-      if (typeof jsonObject === 'string') {
-        return jsonObject;
-      }
-      return jsonObject['@id']
+    if (typeof jsonObject === 'string') {
+      return jsonObject;
+    }
+    return jsonObject['@id'];
   }
 
   static compressStructure = (rootNode) => {

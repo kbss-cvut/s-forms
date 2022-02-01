@@ -160,12 +160,12 @@ export default class FormUtils {
 
   static testOrCondition(condition) {
     const hasSubCondition = condition[Constants.HAS_SUB_CONDITION];
-    if (! hasSubCondition) {
+    if (!hasSubCondition) {
       console.warn('Or condition does not have any sub-condition !');
     }
     for (const subC of this._getMappedObjectsArray(hasSubCondition)) {
-      if (this.testCondition(subC)){
-          return true;
+      if (this.testCondition(subC)) {
+        return true;
       }
     }
     return false;
@@ -195,16 +195,16 @@ export default class FormUtils {
       }
       if (arr[0]['@id'] === Constants.ANSWERED_QUESTION) {
         if (acceptedAnswerValues || acceptedValidationsValues) {
-          console.warn('Support for accepted answer/validations values is not implemented !')
+          console.warn('Support for accepted answer/validations values is not implemented !');
         }
         for (const q of this._getMappedObjectsArray(testedQuestions)) {
-          if (! this.hasAnswer(q)) {
-              return false;
+          if (!this.hasAnswer(q)) {
+            return false;
           }
         }
         return true;
       }
-      console.warn('No support to accept question of type ' + arr[0]['@id'] + ' !')
+      console.warn('No support to accept question of type ' + arr[0]['@id'] + ' !');
     }
 
     // valid answers
@@ -267,20 +267,21 @@ export default class FormUtils {
 
   //returns array of valid object while ignoring
   static _getMappedObjectsArray(jsonObjects, objectType) {
-    return Utils.asArray(jsonObjects).map(
-        o => {
-          const obj = JsonLdObjectMap.getObject(o['@id']);
-          if (obj === undefined) {
-            const ot = (objectType ? objectType : 'Object');
-            console.warn(
-                (objectType ? objectType : 'Object')
-                + ' "' + o['@id'] + '"'
-                + ' is not loaded in an object map.');
-            return null;
-          }
-          return obj;
+    return Utils.asArray(jsonObjects)
+      .map((o) => {
+        const obj = JsonLdObjectMap.getObject(o['@id']);
+        if (obj === undefined) {
+          const ot = objectType ? objectType : 'Object';
+          console.warn(
+            (objectType ? objectType : 'Object') + ' "' + o['@id'] + '"' + ' is not loaded in an object map.'
+          );
+          return null;
         }
-    ).filter(function (o) { return (o !== null)})
+        return obj;
+      })
+      .filter(function (o) {
+        return o !== null;
+      });
   }
 
   static hasAnswer(question) {

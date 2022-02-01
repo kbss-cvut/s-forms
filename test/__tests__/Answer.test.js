@@ -37,7 +37,11 @@ describe('Answer component', () => {
     };
     componentsOptions = {
       readOnly: false,
-      dateTimeAnswer: { dateFormat: 'yyyy-MM-dd', timeFormat: 'HH:mm:ss', dateTimeFormat: 'yyyy-MM-dd HH:mm:ss' }
+      dateTimeAnswer: {
+        dateFormat: 'yyyy-MM-dd',
+        timeFormat: 'HH:mm:ss',
+        dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
+      }
     };
     inputComponent = DefaultInput;
     getOptions = jest.fn(() => []);

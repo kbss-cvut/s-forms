@@ -139,15 +139,15 @@ export class Constants {
   static DEFAULT_HAS_CHILD: string;
 
   static ICONS: {
-    QUESTION_COMMENTS: string,
-    QUESTION_HELP: string,
-    QUESTION_LINK: string
+    QUESTION_COMMENTS: string;
+    QUESTION_HELP: string;
+    QUESTION_LINK: string;
   };
 
   static ICON_BEHAVIOR: {
-    ENABLE: string,
-    DISABLE: string,
-    ON_HOVER: string
+    ENABLE: string;
+    DISABLE: string;
+    ON_HOVER: string;
   };
 }
 

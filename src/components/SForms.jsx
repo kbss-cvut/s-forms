@@ -35,9 +35,7 @@ const SForms = forwardRef((props, ref) => {
   }
 
   const _getComponentMappingFunction = (components, form) => {
-
     return (question, defaultComponent) => {
-
       if (!components) {
         return defaultComponent;
       }
@@ -50,10 +48,9 @@ const SForms = forwardRef((props, ref) => {
 
       return defaultComponent;
     };
-  }
+  };
 
   const _mapComponent = _getComponentMappingFunction(props.componentMapRules, form);
-
 
   return (
     <ConfigurationContextProvider
