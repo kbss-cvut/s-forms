@@ -29,10 +29,10 @@ const CommentForm = (props) => {
     e.stopPropagation();
   };
 
-    const autoResizeTextArea = (e) => {
-        const textArea = document.getElementById("comment-form");
+    const autoResizeTextArea = () => {
+        const textArea = formInputRef.current;
         textArea.style.height = "auto";
-        let scrollHeight = e.target.scrollHeight;
+        let scrollHeight = textArea.scrollHeight;
         textArea.style.height = `${scrollHeight}px`;
     }
 
@@ -51,7 +51,8 @@ const CommentForm = (props) => {
                                 value={commentValue}
                                 onChange={onValueChange}
                                 ref={formInputRef}
-                                onKeyUp={(e => autoResizeTextArea(e))}
+                                onKeyPress={autoResizeTextArea}
+                                onKeyDown={autoResizeTextArea}
                             />
                             <Button className="comment-form-button" variant="primary" type="submit" >
                                 <ArrowRight/>
