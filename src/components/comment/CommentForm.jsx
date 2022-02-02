@@ -46,7 +46,7 @@ const CommentForm = (props) => {
                                 className="comment-form-control"
                                 name="comment"
                                 as="textarea"
-                                placeholder="Write your comments here  (Ctrl+Enter to confirm)"
+                                placeholder="Write your comments here  (Ctrl+Enter to confirm, Esc to cancel)"
                                 required
                                 value={commentValue}
                                 onChange={onValueChange}

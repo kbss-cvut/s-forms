@@ -80,6 +80,12 @@ const QuestionCommentIcon = (props) => {
     } else setOverlayPlacement('right');
   };
 
+  const onKeyDownHandler = (e) => {
+      if (e.key === 'Escape') {
+          hideOverlay();
+      }
+  };
+
     return (
         <div ref={overlayTarget} onClick={stopPropagation}>
             <span ref={target} onClick={onClickSetShowHandler}>
@@ -96,7 +102,7 @@ const QuestionCommentIcon = (props) => {
                 <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={false} onHide={hideOverlay} container={dragRef}>
                     {(overlayProps) => (
                         <Tooltip className="comment-tooltip" {...overlayProps}>
-                        <span>
+                        <span onKeyDown={(e) => {onKeyDownHandler(e)}}>
                             <motion.div
                                 className="close-comment-icon"
                                 onClick={hideOverlay}
