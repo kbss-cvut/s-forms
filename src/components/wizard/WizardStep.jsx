@@ -6,6 +6,7 @@ import Constants from '../../constants/Constants';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
 import JsonLdObjectMap from '../../util/JsonLdObjectMap';
+import QuestionStatic from "../QuestionStatic";
 
 export default class WizardStep extends React.Component {
   constructor(props) {
@@ -92,7 +93,7 @@ export default class WizardStep extends React.Component {
             onMouseLeave={this._onMouseLeaveHandler}
           >
             {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
-            {Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon)}
+            {QuestionStatic.renderIcons(question, options, this.onCommentChange, this.state.showIcon)}
           </Card.Header>
           <Card.Body className={categoryClass}>{questionElement}</Card.Body>
         </Card>

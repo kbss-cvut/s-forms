@@ -5,8 +5,8 @@ import { FormQuestionsProvider } from '../contexts/FormQuestionsContext';
 import { ConfigurationContextProvider } from '../contexts/ConfigurationContext';
 import FormGenerator from '../model/FormGenerator';
 import FormManager from './FormManager';
-import { FormUtils } from '../s-forms';
 import { Card } from 'react-bootstrap';
+import FormUtils from "../util/FormUtils.js";
 
 const SForms = forwardRef((props, ref) => {
   const [loading, setLoading] = useState(true);

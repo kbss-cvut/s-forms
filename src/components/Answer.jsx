@@ -12,7 +12,7 @@ import TypeaheadAnswer from './answer/TypeaheadAnswer';
 import Constants from '../constants/Constants';
 import { FormGenContext } from '../contexts/FormGenContext';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
-import Question from './Question';
+import QuestionStatic from "./QuestionStatic.js";
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
@@ -139,7 +139,7 @@ const Answer = (props) => {
     return (
       <div className="question-header">
         {label}
-        {Question.renderIcons(props.question, options, props.onCommentChange, props.showIcon)}
+        {QuestionStatic.renderIcons(props.question, options, props.onCommentChange, props.showIcon)}
       </div>
     );
   };

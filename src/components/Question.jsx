@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Answer from './Answer';
 import Constants from '../constants/Constants';
 import FormUtils from '../util/FormUtils';
-import HelpIcon from './HelpIcon';
 import JsonLdObjectMap from '../util/JsonLdObjectMap';
 import QuestionAnswerProcessor from '../model/QuestionAnswerProcessor';
 import ValidatorFactory from '../model/ValidatorFactory';
@@ -15,8 +14,7 @@ import MediaContent from './MediaContent';
 import { CaretSquareDown, CaretSquareUp, InfoCircle } from '../styles/icons';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
 import classNames from 'classnames';
-import QuestionCommentIcon from './comment/QuestionCommentIcon';
-import LinkIcon from './LinkIcon';
+import QuestionStatic from "./QuestionStatic";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -219,7 +217,7 @@ export default class Question extends React.Component {
   renderQuestionIcons() {
     const question = this.props.question;
     const options = this.context.options;
-    return Question.renderIcons(question, options, this.onCommentChange, this.state.showIcon);
+    return QuestionStatic.renderIcons(question, options, this.onCommentChange, this.state.showIcon);
   }
 
   renderHeaderExtension() {
@@ -381,122 +379,6 @@ export default class Question extends React.Component {
         {this.state.expanded ? <CaretSquareUp title={title} /> : <CaretSquareDown title={title} />}
       </span>
     );
-  }
-
-  static getIconComponent(icon, question, options, onCommentChange, showIcon) {
-    let iconClassname;
-
-    if (
-      icon &&
-      (icon.behavior === Constants.ICON_BEHAVIOR.ON_HOVER || icon.behavior === Constants.ICON_BEHAVIOR.ENABLE)
-    ) {
-      if (icon.behavior === Constants.ICON_BEHAVIOR.ENABLE) {
-        showIcon = true;
-        iconClassname = '';
-      } else iconClassname = 'emphasise-on-relevant-icon';
-
-      if (icon.id === Constants.ICONS.QUESTION_HELP && question[Constants.HELP_DESCRIPTION]) {
-        if (showIcon) {
-          return (
-            <div className={iconClassname}>
-              <HelpIcon
-                text={JsonLdUtils.getLocalized(question[Constants.HELP_DESCRIPTION], options.intl)}
-                absolutePosition={false}
-              />
-            </div>
-          );
-        }
-        return null;
-      }
-
-      if (icon.id === Constants.ICONS.QUESTION_LINK && question[Constants.SOURCE]) {
-        if (showIcon) {
-          return (
-            <div className={iconClassname}>
-              <LinkIcon url={question[Constants.SOURCE]} />
-            </div>
-          );
-        }
-        return null;
-      }
-
-      if (icon.id === Constants.ICONS.QUESTION_COMMENTS) {
-        if (showIcon) {
-          return (
-            <div className={iconClassname}>
-              <QuestionCommentIcon question={question} onChange={onCommentChange} />
-            </div>
-          );
-        }
-        return null;
-      }
-      return null;
-    }
-  }
-
-  static getIconFromIconList = (iconList, iconName) => {
-    if (iconList) return iconList.find((icon) => icon.id === iconName);
-    return null;
-  };
-
-  static getIconComponentFromName(iconName, question, options, onCommentChange, showIcon) {
-    const iconList = options.icons ? options.icons : Constants.DEFAULT_OPTIONS.icons;
-    const icon = this.getIconFromIconList(iconList, iconName);
-    return this.getIconComponent(icon, question, options, onCommentChange, showIcon);
-  }
-
-  static renderQuestionHelp(question, options, onCommentChange, showIcon) {
-    return this.getIconComponentFromName(Constants.ICONS.QUESTION_HELP, question, options, onCommentChange, showIcon);
-  }
-
-  static renderQuestionLink(question, options, onCommentChange, showIcon) {
-    return this.getIconComponentFromName(Constants.ICONS.QUESTION_LINK, question, options, onCommentChange, showIcon);
-  }
-
-  static renderQuestionComments = (question, options, onCommentChange, showIcon) => {
-    return this.getIconComponentFromName(
-      Constants.ICONS.QUESTION_COMMENTS,
-      question,
-      options,
-      onCommentChange,
-      showIcon
-    );
-  };
-
-  static renderIcons(question, options, onCommentChange, showIcon) {
-    let icons;
-    if (options.icons) icons = options.icons;
-    else icons = Constants.DEFAULT_OPTIONS.icons;
-    let iconsArray = [];
-    const renderQuestionHelp = Question.renderQuestionHelp(question, options, onCommentChange, showIcon);
-    const renderQuestionComments = Question.renderQuestionComments(question, options, onCommentChange, showIcon);
-    const renderQuestionLink = Question.renderQuestionLink(question, options, onCommentChange, showIcon);
-
-    for (let i = 0; i < icons.length; i++) {
-      if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
-        iconsArray.push(
-          <li key={i} className="icon-list-item">
-            {renderQuestionComments}
-          </li>
-        );
-      }
-      if (icons[i].id === Constants.ICONS.QUESTION_HELP) {
-        iconsArray.push(
-          <li key={i} className="icon-list-item">
-            {renderQuestionHelp}
-          </li>
-        );
-      }
-      if (icons[i].id === Constants.ICONS.QUESTION_LINK) {
-        iconsArray.push(
-          <li key={i} className="icon-list-item">
-            {renderQuestionLink}
-          </li>
-        );
-      }
-    }
-
-    return <ol className="icon-list-items">{iconsArray}</ol>;
   }
 
   _renderPrefixes() {
