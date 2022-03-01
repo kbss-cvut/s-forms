@@ -48,16 +48,16 @@ const CommentView = (props) => {
 
   const renderAuthor = () => {
     return (
-      <>
+      <React.Fragment>
         {showIRI ? (
-          <>
+          <React.Fragment>
             {getAuthorLabel()}
             <LinkIcon iconClassContainer="emphasise-on-relevant-icon" url={getAuthorIRI()} />
-          </>
+          </React.Fragment>
         ) : (
           getAuthorLabel()
         )}
-      </>
+      </React.Fragment>
     );
   };
 
@@ -122,9 +122,9 @@ CommentView.propTypes = {
   author: PropTypes.object.isRequired,
   timestamp: PropTypes.string.isRequired,
   commentValue: PropTypes.string.isRequired,
-    deleteQuestionComment: PropTypes.func.isRequired,
-    deleteCommentView: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired
+  deleteQuestionComment: PropTypes.func.isRequired,
+  deleteCommentView: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 export default CommentView;
