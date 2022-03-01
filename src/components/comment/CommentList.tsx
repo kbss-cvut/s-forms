@@ -9,7 +9,7 @@ interface Props {
 }
 
 const CommentList = ({comments, deleteQuestionComment}: Props) => {
-  const commentEndRef = useRef(null);
+  const commentEndRef = useRef<null | HTMLDivElement>(null);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const deleteCommentViewHandler = () => {
