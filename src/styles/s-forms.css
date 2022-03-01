@@ -251,7 +251,7 @@ input:disabled {
   border-radius: 0;
 }
 
-.comment-form-button {
+.btn.comment-form-button {
   position: absolute;
   display: flex;
   justify-content: center;
