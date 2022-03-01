@@ -1,6 +1,6 @@
 {
   "name": "s-forms",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -34,6 +34,12 @@
     "type": "git",
     "url": "https://kbss.felk.cvut.cz/git/s-forms.git"
   },
+  "type": "module",
+  "source": "src/s-forms.js",
+  "exports": "./dist/s-forms.modern.js",
+  "module": "./dist/s-forms.js",
+  "unpkg": "./dist/s-forms.umd.js",
+  "private": true,
   "dependencies": {
     "@triply/yasgui": "^4.2.14",
     "babel-runtime": "^6.26.0",
@@ -45,6 +51,7 @@
     "javascript-time-ago": "^2.3.8",
     "jsonld": "^0.4.12",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.11.tgz",
+    "microbundle": "^0.14.2",
     "prop-types": "^15.7.2",
     "react-bootstrap": "1.0.1",
     "react-datepicker": "^4.2.1",
@@ -55,11 +62,12 @@
     "yasgui-yasqe": "^2.11.22"
   },
   "peerDependencies": {
+    "framer-motion": "^6.2.3",
+    "javascript-time-ago": "^2.3.8",
     "react": ">= 17.0.2",
+    "react-bootstrap": "1.0.1",
     "react-dom": ">= 17.0.2"
   },
-  "main": "dist/s-forms.js",
-  "private": true,
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",
@@ -68,8 +76,15 @@
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.16.7",
     "@babel/register": "^7.10.3",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@types/jest": "^27.4.0",
     "@types/jsonld": "^1.5.1",
+    "@types/node": "^17.0.12",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
@@ -83,22 +98,17 @@
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
     "style-loader": "^1.2.1",
+    "typescript": "^4.5.5",
     "watchify": "^3.11.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
-    "webpack-node-externals": "^1.7.2",
-    "@types/jest": "^27.4.0",
-    "@types/node": "^17.0.12",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
-    "typescript": "^4.5.5",
-    "@babel/preset-typescript": "^7.16.7"
+    "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.prod.js",
+    "dev": "webpack-dev-server --config webpack.config.dev.cjs",
+    "build": "microbundle --jsx React.createElement",
     "lib": "babel ./src -d ./lib",
     "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css"

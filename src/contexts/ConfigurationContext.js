@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
+import DefaultInput from "../components/DefaultInput";
 
 const ConfigurationContext = React.createContext({});
 
 const defaultProps = {
   components: {
-    inputComponent: require('../components/DefaultInput').default
+    inputComponent: DefaultInput
   },
   componentsOptions: {
     dateTimeAnswer: {

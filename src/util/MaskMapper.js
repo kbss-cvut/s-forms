@@ -7,7 +7,7 @@ const REPLACEMENTS = {
   s: '1'
 };
 
-module.exports = {
+export default class MaskMapper {
   /**
    * Attempts to map regular mask (e.g. date) to the format supported by inputmask-core.
    *
@@ -17,7 +17,7 @@ module.exports = {
    * ISO 8601 acronyms (e.g. M for month and m for minute).
    * @param mask The mask to map
    */
-  mapMask(mask) {
+  static mapMask(mask) {
     if (!mask) {
       return mask;
     }

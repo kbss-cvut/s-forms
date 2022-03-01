@@ -12,7 +12,7 @@ import TypeaheadAnswer from './answer/TypeaheadAnswer';
 import Constants from '../constants/Constants';
 import { FormGenContext } from '../contexts/FormGenContext';
 import { ConfigurationContext } from '../contexts/ConfigurationContext';
-import QuestionStatic from "./QuestionStatic.js";
+import QuestionStatic from "./QuestionStatic.jsx";
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);

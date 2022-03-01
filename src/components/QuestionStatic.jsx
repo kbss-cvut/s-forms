@@ -1,9 +1,9 @@
 import React from "react";
 import Constants from "../constants/Constants.js";
 import HelpIcon from "./HelpIcon.jsx";
-import JsonLdUtils from "jsonld-utils";
 import LinkIcon from "./LinkIcon.jsx";
 import QuestionCommentIcon from "./comment/QuestionCommentIcon.jsx";
+import JsonLdUtils from "jsonld-utils";
 
 export default class QuestionStatic {
   static renderIcons(question, options, onCommentChange, showIcon) {
@@ -11,20 +11,20 @@ export default class QuestionStatic {
     if (options.icons) icons = options.icons;
     else icons = Constants.DEFAULT_OPTIONS.icons;
     let iconsArray = [];
-    const renderQuestionHelp = QuestionStatic.renderQuestionHelp(
+    const renderQuestionHelp = this.renderQuestionHelp(
       question,
       options,
       onCommentChange,
       showIcon
     );
-    const renderQuestionComments = QuestionStatic.renderQuestionComments(
+    const renderQuestionComments = this.renderQuestionComments(
       question,
       options,
       onCommentChange,
       showIcon
     );
 
-    const renderQuestionLink = QuestionStatic.renderQuestionLink(
+    const renderQuestionLink = this.renderQuestionLink(
       question,
       options,
       onCommentChange,

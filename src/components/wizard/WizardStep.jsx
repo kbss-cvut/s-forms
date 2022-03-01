@@ -6,7 +6,7 @@ import Constants from '../../constants/Constants';
 import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
 import Question from '../Question';
 import JsonLdObjectMap from '../../util/JsonLdObjectMap';
-import QuestionStatic from "../QuestionStatic";
+import QuestionStatic from "../QuestionStatic.jsx";
 
 export default class WizardStep extends React.Component {
   constructor(props) {
