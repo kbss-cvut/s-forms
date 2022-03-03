@@ -1,0 +1,97 @@
+[
+  {
+    "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--0",
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@value": "Fully active, able to carry on all pre-disease performance without restriction."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "0"
+      }
+    ]
+  },
+  {
+    "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--1",
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@value": "Restricted in physically strenuous activity but ambulatory and able to carry out work of a light or sedentary nature, e.g. light house work, office work."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "1"
+      }
+    ]
+  },
+  {
+    "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--2",
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@value": "Ambulatory and capable of all selfcare but unable to carry out any work activities. Up and about more than 50% of waking hours."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "2"
+      }
+    ]
+  },
+  {
+    "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--3",
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@value": "Capable of only limited selfcare, confined to bed or chair more than 50% of waking hours."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "3"
+      }
+    ]
+  },
+  {
+    "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--4",
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@value": "Completely disabled. Cannot carry on selfcare. Totally confined to bed or chair."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "4"
+      }
+    ]
+  },
+  {
+    "@id": "http://vfn.cz/ontologies/study-model/answer-value--na",
+    "http://onto.fel.cvut.cz/ontologies/form/has-preceding-value": [
+      {
+        "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--3"
+      },
+      {
+        "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--0"
+      },
+      {
+        "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--1"
+      },
+      {
+        "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--4"
+      },
+      {
+        "@id": "http://vfn.cz/ontologies/abrax-study-model/ecog-status--2"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@value": "Not available value"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Not available"
+      }
+    ]
+  }
+]
