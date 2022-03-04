@@ -305,6 +305,10 @@ input:disabled {
   pointer-events: none;
 }
 
+.show-irrelevant.list-group-item {
+  pointer-events: auto;
+}
+
 .show-irrelevant .form-check-input,
 .show-irrelevant .caret-square-down {
   pointer-events: auto;
