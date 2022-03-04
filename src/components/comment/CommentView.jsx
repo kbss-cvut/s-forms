@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import cs from 'javascript-time-ago/locale/cs';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import LinkIcon from '../LinkIcon';
 import IconOverlay from '../IconOverlay';
@@ -15,8 +16,11 @@ const CommentView = (props) => {
   const [showIRI, setShowIRI] = useState(false);
     const [showRecycleBin, setShowRecycleBin] = useState(false);
 
+  TimeAgo.addLocale(cs);
   TimeAgo.addLocale(en);
-  const time = new TimeAgo('en-US');
+  TimeAgo.setDefaultLocale('en');
+
+  const time = new TimeAgo(options.intl.locale);
 
   const getAuthorLabel = () => {
     const users = options.users;
@@ -67,7 +71,17 @@ const CommentView = (props) => {
     };
 
     const getUTCFormat = () => {
-      return new Date(parseInt(props.timestamp)).toUTCString();
+      let dateOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      };
+      const date = new Date(parseInt(props.timestamp));
+      return new Intl.DateTimeFormat(options.intl.locale, dateOptions).format(date);
     };
 
     return (

@@ -1,11 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Form, Col, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import ArrowRight from '../../styles/icons/ArrowRight';
+import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
 const CommentForm = (props) => {
   const [commentValue, setCommentValue] = useState('');
   const formInputRef = useRef(null);
+  const { options } = useContext(ConfigurationContext);
+
+  let placeholder = 'Write your comments here  (Ctrl+Enter to confirm, Esc to cancel)';
+  if (options.intl.locale === 'cs') {
+    placeholder = 'Sem napište své komentáře (Ctrl+Enter pro potvrzení)';
+  }
 
   useEffect(() => {
     formInputRef.current.focus();
@@ -46,7 +53,7 @@ const CommentForm = (props) => {
                                 className="comment-form-control"
                                 name="comment"
                                 as="textarea"
-                                placeholder="Write your comments here  (Ctrl+Enter to confirm, Esc to cancel)"
+                                placeholder={placeholder}
                                 required
                                 value={commentValue}
                                 onChange={onValueChange}
