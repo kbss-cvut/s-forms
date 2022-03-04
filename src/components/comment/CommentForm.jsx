@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import ArrowRight from '../../styles/icons/ArrowRight';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 
+const MAX_TEXT_AREA_HEIGHT = "300px";
+
 const CommentForm = (props) => {
   const [commentValue, setCommentValue] = useState('');
   const formInputRef = useRef(null);
@@ -41,6 +43,9 @@ const CommentForm = (props) => {
         textArea.style.height = "auto";
         let scrollHeight = textArea.scrollHeight;
         textArea.style.height = `${scrollHeight}px`;
+        if (parseInt(textArea.style.height) > parseInt(MAX_TEXT_AREA_HEIGHT)) {
+            textArea.style.height = MAX_TEXT_AREA_HEIGHT
+        }
     }
 
     return (
