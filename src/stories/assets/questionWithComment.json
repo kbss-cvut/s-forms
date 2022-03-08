@@ -1,0 +1,14 @@
+{
+  "@id": "aircraft-name-9553",
+  "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+  "http://onto.fel.cvut.cz/ontologies/form/has-comment": [
+    {
+      "http://onto.fel.cvut.cz/ontologies/form/has-comment-value": "Hello, my name is Max Chopart",
+      "http://onto.fel.cvut.cz/ontologies/form/has-timestamp": "1646399297577"
+    },
+    {
+      "http://onto.fel.cvut.cz/ontologies/form/has-comment-value": "I am a PhD student at the CVUT FD",
+      "http://onto.fel.cvut.cz/ontologies/form/has-timestamp": "1646399313263"
+    }
+  ]
+}

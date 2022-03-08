@@ -19,14 +19,16 @@ const CommentView = (props) => {
   const time = new TimeAgo('en-US');
 
   const getAuthorLabel = () => {
-    const users = options.users;
-    const currentUser = users.find((c) => c.id === options.currentUser);
+    if (options && options.users) {
+      const users = options.users;
+      const currentUser = users.find((c) => c.id === options.currentUser);
 
-    if (props.author) {
-      if (currentUser.label) {
-        return currentUser.label;
-      } else {
-        return getAuthorIRIAbbreviation();
+      if (props.author) {
+        if (currentUser.label) {
+          return currentUser.label;
+        } else {
+          return getAuthorIRIAbbreviation();
+        }
       }
     }
 
