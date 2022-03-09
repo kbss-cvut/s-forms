@@ -1,6 +1,3 @@
-import Constants from '../constants/Constants';
-import FormUtils from './FormUtils';
-
 export default class Utils {
   /**
    * Calculates a simple hash of the specified string, much like usual Java implementations.
@@ -20,26 +17,6 @@ export default class Utils {
     }
 
     return hash;
-  }
-
-  /**
-   * Resolves which format of date/time/datetime value should be used in the datetime picker.
-   * @param question Question with format info
-   * @param originalValue Value read from answer, not processed by the rendered component
-   * @param options Object with datetime formats
-   * @return {*} Format from Configuration
-   */
-  static resolveDateTimeFormat(question, originalValue, options) {
-    if (typeof originalValue === 'number') {
-      return Constants.DATETIME_NUMBER_FORMAT;
-    }
-
-    if (FormUtils.isDate(question)) {
-      return options.dateFormat;
-    } else if (FormUtils.isTime(question)) {
-      return options.timeFormat;
-    }
-    return options.dateTimeFormat;
   }
 
   /**

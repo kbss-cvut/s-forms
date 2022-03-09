@@ -2,10 +2,10 @@ import React from 'react';
 import QuestionAnswerProcessor from '../model/QuestionAnswerProcessor';
 import { FormQuestionsContext } from '../contexts/FormQuestionsContext';
 import Wizard from './wizard/Wizard';
-import { FormUtils } from '../s-forms';
 import FormWindow from './FormWindow';
 import Card from 'react-bootstrap/Card';
 import Question from './Question';
+import FormUtils from "../util/FormUtils.js";
 
 class FormManager extends React.Component {
   getFormData = () => {

@@ -309,4 +309,24 @@ export default class FormUtils {
 
     return false;
   }
+
+  /**
+   * Resolves which format of date/time/datetime value should be used in the datetime picker.
+   * @param question Question with format info
+   * @param originalValue Value read from answer, not processed by the rendered component
+   * @param options Object with datetime formats
+   * @return {*} Format from Configuration
+   */
+  static resolveDateTimeFormat(question, originalValue, options) {
+    if (typeof originalValue === 'number') {
+      return Constants.DATETIME_NUMBER_FORMAT;
+    }
+
+    if (FormUtils.isDate(question)) {
+      return options.dateFormat;
+    } else if (FormUtils.isTime(question)) {
+      return options.timeFormat;
+    }
+    return options.dateTimeFormat;
+  }
 }

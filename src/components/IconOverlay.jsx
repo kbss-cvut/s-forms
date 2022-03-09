@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import LinkIcon from './LinkIcon';
 
 const IconOverlay = (props) => {
   const [overlayPlacement, setOverlayPlacement] = useState('right');

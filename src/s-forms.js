@@ -10,6 +10,7 @@ import { FormQuestionsContext } from './contexts/FormQuestionsContext';
 import Answer from './components/Answer';
 import HelpIcon from './components/HelpIcon';
 import WizardStep from './components/wizard/WizardStep';
+import QuestionStatic from './components/QuestionStatic';
 
 export default SForms;
 export {
@@ -23,5 +24,6 @@ export {
   HelpIcon,
   ConfigurationContext,
   FormQuestionsContext,
-  WizardStep
+  WizardStep,
+  QuestionStatic
 };
