@@ -6,6 +6,7 @@ import '../../src/styles/s-forms.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import queryString from 'query-string';
 import Constants from '../../src/constants/Constants';
+import IntlContext from "../../src/contexts/IntlContextProvider";
 
 const form1 = require('./form1.json'); // form with wizard steps
 const form2 = require('./form2.json'); // form without wizard steps (proudly assembled in Semantic Form Web Editor)
@@ -78,24 +79,26 @@ class TestApp extends React.Component {
 
     return (
       <div className="p-4">
-        <SForms
-          ref={this.refForm}
-          form={this.state.selectedForm}
-          options={options}
-          fetchTypeAheadValues={this.fetchTypeAheadValues}
-          isFormValid={(isFormValid) => this.setState({ isFormValid })}
-        />
-        <button
-          disabled={!this.state.isFormValid}
-          style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
-          onClick={() => {
-            this.setState((prevState) => ({
-              selectedForm: prevState.selectedForm === form2 ? form1 : form2
-            }));
-          }}
-        >
-          Switch form
-        </button>
+        <IntlContext locale={options.intl.locale}>
+          <SForms
+            ref={this.refForm}
+            form={this.state.selectedForm}
+            options={options}
+            fetchTypeAheadValues={this.fetchTypeAheadValues}
+            isFormValid={(isFormValid) => this.setState({ isFormValid })}
+          />
+          <button
+            disabled={!this.state.isFormValid}
+            style={{ width: '100px', margin: '1rem -50px', position: 'relative', left: '50%' }}
+            onClick={() => {
+              this.setState((prevState) => ({
+                selectedForm: prevState.selectedForm === form2 ? form1 : form2
+              }));
+            }}
+          >
+            Switch form
+          </button>
+        </IntlContext>
       </div>
     );
   }
