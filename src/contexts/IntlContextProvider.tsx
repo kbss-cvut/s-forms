@@ -8,10 +8,10 @@ export const IntlContext = React.createContext({});
 
 interface Props {
   children: ReactNode;
-  locale: string;
+  locale?: string;
 }
 
-const IntlContextProvider = ({ children, locale }: Props) => {
+const IntlContextProvider = ({ children, locale = navigator.language }: Props) => {
   let lang = en;
   if (locale === Constants.LANG.cs.locale) {
     lang = cs;
