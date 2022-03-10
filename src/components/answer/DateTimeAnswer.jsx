@@ -3,7 +3,6 @@ import DatePicker from 'react-datepicker';
 import { FormGroup, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
-import Utils from '../../util/Utils';
 import FormUtils from '../../util/FormUtils';
 import Constants from '../../constants/Constants';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
@@ -11,7 +10,7 @@ import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 const DateTimeAnswer = (props) => {
   const { componentsOptions } = useContext(ConfigurationContext);
 
-  const dateFormat = Utils.resolveDateTimeFormat(props.question, props.value, componentsOptions.dateTimeAnswer);
+  const dateFormat = FormUtils.resolveDateTimeFormat(props.question, props.value, componentsOptions.dateTimeAnswer);
 
   const isDate = FormUtils.isDate(props.question);
   const isTime = FormUtils.isTime(props.question);
