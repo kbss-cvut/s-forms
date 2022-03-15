@@ -115,12 +115,11 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --config webpack.config.dev.cjs",
+    "dev": "start-storybook -p 6006",
     "build": "microbundle --jsx React.createElement",
     "lib": "babel ./src -d ./lib",
     "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
-    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "files": [

@@ -8,3 +8,5 @@ lib
 dist
 **/bundle.js
 .DS_Store
+/css/
+/types/
