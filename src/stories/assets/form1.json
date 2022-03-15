@@ -517,6 +517,7 @@
       },
       "has-layout-class": ["section", "checkbox", "answerable"],
       "@id": "answerable-section-with-icons-4808",
+      "has_related_question": ["icon-answer-1"],
       "has-comment": [
         {
           "@type": "form:comment",
@@ -3092,6 +3093,16 @@
       "has-layout-class": "section",
       "@type": "doc:question",
       "has_related_question": ["form-target-3402", "question-target-1001"]
+    },
+    {
+      "label": {
+        "@value": "Icon Answer",
+        "@language": "en"
+      },
+      "@id": "icon-answer-1",
+      "has-layout-class": "text",
+      "@type": "doc:question",
+      "has_related_question": []
     }
   ]
 }
