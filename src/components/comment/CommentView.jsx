@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import cs from 'javascript-time-ago/locale/cs';
 import { ConfigurationContext } from '../../contexts/ConfigurationContext';
 import LinkIcon from '../LinkIcon';
 import IconOverlay from '../IconOverlay';
 import PropTypes from 'prop-types';
 import RecycleBin from "../../styles/icons/RecycleBin";
 import {motion} from 'framer-motion/dist/framer-motion';
+import Constants from "../../constants/Constants";
 
 const UNKNOWN_AUTHOR = 'Unknown author';
 
@@ -15,8 +17,11 @@ const CommentView = (props) => {
   const [showIRI, setShowIRI] = useState(false);
     const [showRecycleBin, setShowRecycleBin] = useState(false);
 
+  TimeAgo.addLocale(cs);
   TimeAgo.addLocale(en);
-  const time = new TimeAgo('en-US');
+  TimeAgo.setDefaultLocale(Constants.LANG.en.locale);
+
+  const time = new TimeAgo(options.intl.locale);
 
   const getAuthorLabel = () => {
     if (options && options.users) {
@@ -69,7 +74,17 @@ const CommentView = (props) => {
     };
 
     const getUTCFormat = () => {
-      return new Date(parseInt(props.timestamp)).toUTCString();
+      let dateOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      };
+      const date = new Date(parseInt(props.timestamp));
+      return new Intl.DateTimeFormat(options.intl.locale, dateOptions).format(date);
     };
 
     return (

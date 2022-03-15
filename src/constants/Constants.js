@@ -127,4 +127,15 @@ export default class Constants {
       { id: Constants.ICONS.QUESTION_LINK, behavior: Constants.ICON_BEHAVIOR.ON_HOVER }
     ]
   };
+
+  static LANG = {
+    cs: {
+      locale: 'cs',
+      label: 'Čestina'
+    },
+    en: {
+      locale: 'en',
+      label: 'English'
+    }
+  };
 }

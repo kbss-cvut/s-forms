@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import CommentView from './CommentView';
 import Constants from '../../constants/Constants';
 import { Rings } from 'react-loader-spinner';
