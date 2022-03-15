@@ -5,6 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SForms from '../../components/SForms';
 import form1 from '../assets/form1.json'; // form with wizard steps
 import form2 from '../assets/form2.json'; // form without wizard steps (proudly assembled in Semantic Form Web Editor)
+import touristDestinationForm from '../assets/tourist_destination_form.json';
 
 import queryString from 'query-string';
 import Constants from '../../constants/Constants';
@@ -103,6 +104,11 @@ export const Form2 = Template.bind({});
 Form2.args = {
   form: form2
 };
+
+export const TouristDestinationForm = Template.bind({});
+TouristDestinationForm.args = {
+  form: touristDestinationForm
+}
 
 export const OptionControl = Template.bind({});
 OptionControl.args = {
