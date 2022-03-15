@@ -2,6 +2,13 @@
 
 **S**emantic **form** generator and processor for ontology-based smart forms.
 
+## Deployment status
+
+Checkout the live version of the app with the link below:
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/76108e0e-d74c-417a-85e8-863109114c0c/deploy-status)](https://app.netlify.com/sites/clever-bohr-4e69b7/deploys)
+
+
 ## Supported features
 
 - Input/Textarea
