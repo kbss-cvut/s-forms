@@ -115,7 +115,7 @@ input:disabled {
 }
 
 .accordion > .card {
-  overflow: visible !important;
+  overflow: visible;
 }
 
 .react-datepicker-wrapper {
