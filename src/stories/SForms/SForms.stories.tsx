@@ -8,6 +8,7 @@ import form2 from '../assets/form2.json'; // form without wizard steps (proudly 
 
 import queryString from 'query-string';
 import Constants from '../../constants/Constants';
+import IntlContextProvider from "../../contexts/IntlContextProvider";
 
 const getP = (queryParameterName: string, defaultValue: string) => {
   return {
@@ -88,7 +89,9 @@ const Template: ComponentStory<typeof SForms> = (
     ]
   };
 
-  return <SForms options={options} {...args} />;
+  return <IntlContextProvider locale={options.intl.locale}>
+    <SForms options={options} {...args} />
+  </IntlContextProvider>;
 };
 
 export const Form1 = Template.bind({});
