@@ -305,7 +305,8 @@ input:disabled {
   pointer-events: none;
 }
 
-.show-irrelevant .form-check-input {
+.show-irrelevant .form-check-input,
+.show-irrelevant .form-check-label {
   pointer-events: none;
 }
 
