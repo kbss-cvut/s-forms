@@ -1,6 +1,6 @@
-import '../src/styles/s-forms.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../src/styles/s-forms.css';
 import Constants from '../src/constants/Constants';
 
 export const parameters = {
