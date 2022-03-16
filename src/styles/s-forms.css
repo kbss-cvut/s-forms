@@ -306,7 +306,11 @@ input:disabled {
 }
 
 .show-irrelevant .form-check-input,
-.show-irrelevant .question-header,
+.show-irrelevant .form-check-label {
+  pointer-events: none;
+}
+
+.show-irrelevant .card-header,
 .show-irrelevant.list-group-item {
   pointer-events: auto;
 }
