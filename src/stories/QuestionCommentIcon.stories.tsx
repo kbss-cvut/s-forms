@@ -8,7 +8,7 @@ import Constants from "../../constants/Constants";
 import { ConfigurationContextProvider } from "../../contexts/ConfigurationContext";
 
 export default {
-  title: "Comment/QuestionCommentIcon",
+  title: "Components/QuestionCommentIcon",
   component: QuestionCommentIcon,
 } as ComponentMeta<typeof QuestionCommentIcon>;
 
