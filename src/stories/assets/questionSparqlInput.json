@@ -1,0 +1,7 @@
+{
+  "@id": "doc:question-dc3d3529-fe03-48c3-aacc-53bf279be061",
+  "http://www.w3.org/2000/01/rdf-schema#label": "http://topbraid.org/sparqlmotionlib#constructQuery",
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "sparql",
+  "http://onto.fel.cvut.cz/ontologies/form-spin/has-answer-value-type": "http://spinrdf.org/sp#Construct",
+  "@type": "doc:question"
+}
