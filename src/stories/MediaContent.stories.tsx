@@ -1,7 +1,8 @@
 import React from "react";
 import MediaContent from "../components/MediaContent";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import questionWithMedia from "./assets/questionWithMedia.json";
+
+import questionWithMedia from "./assets/question/questionWithMedia.json";
 
 export default {
   title: "Components/MediaContent",

@@ -1,12 +1,12 @@
 import React from "react";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
 import SForms from "../components/SForms";
-import form1 from "./assets/form1.json"; // form with wizard steps
-import form2 from "./assets/form2.json"; // form without wizard steps (proudly assembled in Semantic Form Web Editor)
-import touristDestinationForm1 from "./assets/touristDestinationForm1.json";
-import touristDestinationForm2 from "./assets/touristDestinationForm2.json";
+
+import form1 from "./assets/form/form1.json"; // form with wizard steps
+import form2 from "./assets/form/form2.json"; // form without wizard steps (proudly assembled in Semantic Form Web Editor)
+import touristDestinationForm1 from "./assets/form/touristDestinationForm1.json";
+import touristDestinationForm2 from "./assets/form/touristDestinationForm2.json";
 
 import queryString from "query-string";
 import Constants from "../constants/Constants";
