@@ -1,0 +1,39 @@
+{
+  "http://www.w3.org/2000/01/rdf-schema#label": {
+    "@value": "Tested question",
+    "@language": "en"
+  },
+  "@type": "doc:question",
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "type-ahead",
+  "@id": "tested-question-419",
+  "http://onto.fel.cvut.cz/ontologies/form/has-possible-value": [
+    {
+      "@id": "ex:accepted-value-4208994",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@language": "en",
+        "@value": "accepted value"
+      }
+    },
+    {
+      "@id": "option-6989605",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@language": "en",
+        "@value": "value 1"
+      }
+    },
+    {
+      "@id": "option-5194877",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@language": "en",
+        "@value": "value 2"
+      }
+    },
+    {
+      "@id": "option-5858615",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@language": "en",
+        "@value": "value 3"
+      }
+    }
+  ]
+}

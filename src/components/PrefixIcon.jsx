@@ -7,7 +7,6 @@ class PrefixIcon extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: props.show,
       prefixes: props.prefixes
     };
   }
@@ -33,7 +32,7 @@ class PrefixIcon extends React.Component {
 
     return (
       <OverlayTrigger trigger="click" placement="right" overlay={p}>
-        <span className={this.props.iconClass} onClick={() => this.setState({ show: !this.state.show })}>
+        <span className={this.props.iconClass}>
           {this.props.children}
         </span>
       </OverlayTrigger>
@@ -44,13 +43,11 @@ class PrefixIcon extends React.Component {
 PrefixIcon.propTypes = {
   prefixes: PropTypes.array.isRequired,
   children: PropTypes.element.isRequired,
-  iconClass: PropTypes.string,
-  show: PropTypes.bool
+  iconClass: PropTypes.string
 };
 
 PrefixIcon.defaultProps = {
-  iconClass: '',
-  show: false
+  iconClass: ''
 };
 
 export default PrefixIcon;
