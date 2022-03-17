@@ -1,11 +1,11 @@
 import React from "react";
-import QuestionCommentIcon from "../../components/comment/QuestionCommentIcon";
-import question from "../assets/question.json";
-import questionWithComment from "../assets/questionWithComment.json";
+import QuestionCommentIcon from "../components/comment/QuestionCommentIcon";
+import question from "./assets/question.json";
+import questionWithComment from "./assets/questionWithComment.json";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import IntlContextProvider from "../../contexts/IntlContextProvider";
-import Constants from "../../constants/Constants";
-import { ConfigurationContextProvider } from "../../contexts/ConfigurationContext";
+import IntlContextProvider from "../contexts/IntlContextProvider";
+import Constants from "../constants/Constants";
+import { ConfigurationContextProvider } from "../contexts/ConfigurationContext";
 
 export default {
   title: "Components/QuestionCommentIcon",
