@@ -4,7 +4,6 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
-    '@luigiminardim/storybook-addon-globals-controls'
   ],
   framework: '@storybook/react'
 };

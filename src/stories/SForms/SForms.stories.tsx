@@ -39,7 +39,7 @@ const options = {
     "section.collapse": "Collapse",
   },
   intl: {
-    locale: "en",
+    locale: Constants.LANG.cs.locale,
   },
   modalView: false,
   modalProps,
@@ -80,7 +80,7 @@ export default {
 
 const Template: ComponentStory<typeof SForms> = (args) => {
   return (
-    <IntlContextProvider locale={options.intl.locale}>
+    <IntlContextProvider locale={args.options.intl.locale}>
       <SForms {...args} />
     </IntlContextProvider>
   );

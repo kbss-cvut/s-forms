@@ -15,7 +15,7 @@ const UNKNOWN_AUTHOR = 'Unknown author';
 const CommentView = (props) => {
   const { options } = useContext(ConfigurationContext);
   const [showIRI, setShowIRI] = useState(false);
-    const [showRecycleBin, setShowRecycleBin] = useState(false);
+  const [showRecycleBin, setShowRecycleBin] = useState(false);
 
   TimeAgo.addLocale(cs);
   TimeAgo.addLocale(en);

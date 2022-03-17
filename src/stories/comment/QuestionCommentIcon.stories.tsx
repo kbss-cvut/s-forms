@@ -1,25 +1,49 @@
-import React from 'react';
-import QuestionCommentIcon from '../../components/comment/QuestionCommentIcon';
-import question from '../assets/question.json';
-import questionWithComment from '../assets/questionWithComment.json';
-import { action } from '@storybook/addon-actions';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from "react";
+import QuestionCommentIcon from "../../components/comment/QuestionCommentIcon";
+import question from "../assets/question.json";
+import questionWithComment from "../assets/questionWithComment.json";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import IntlContextProvider from "../../contexts/IntlContextProvider";
+import Constants from "../../constants/Constants";
+import { ConfigurationContextProvider } from "../../contexts/ConfigurationContext";
 
 export default {
-  title: 'Comment/QuestionCommentIcon',
-  component: QuestionCommentIcon
+  title: "Comment/QuestionCommentIcon",
+  component: QuestionCommentIcon,
 } as ComponentMeta<typeof QuestionCommentIcon>;
 
+const options = {
+  intl: {
+    locale: Constants.LANG.en.locale,
+  },
+  users: [
+    { id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart" },
+    {
+      id: "http://fel.cvut.cz/people/miroslav-blasko",
+      label: "Miroslav Blasko",
+    },
+  ],
+  currentUser: "http://fel.cvut.cz/people/max-chopart",
+};
+
 const Template: ComponentStory<typeof QuestionCommentIcon> = (args) => {
-  return <QuestionCommentIcon {...args} onChange={action('New comment')} />;
+  return (
+    <ConfigurationContextProvider options={options}>
+      <IntlContextProvider locale={args.options.intl.locale}>
+        <QuestionCommentIcon {...args} />
+      </IntlContextProvider>
+    </ConfigurationContextProvider>
+  );
 };
 
 export const Default = Template.bind({});
 Default.args = {
   question: question,
+  options: options,
 };
 
 export const WithComment = Template.bind({});
 WithComment.args = {
-  question: questionWithComment
+  question: questionWithComment,
+  options: options,
 };
