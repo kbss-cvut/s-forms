@@ -41,6 +41,7 @@
   "unpkg": "./dist/s-forms.umd.js",
   "private": true,
   "dependencies": {
+    "@luigiminardim/storybook-addon-globals-controls": "^0.1.3",
     "@triply/yasgui": "^4.2.14",
     "babel-runtime": "^6.26.0",
     "bootstrap": "^4.6.0",

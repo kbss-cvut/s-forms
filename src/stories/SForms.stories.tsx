@@ -31,57 +31,59 @@ const modalProps = {
   title: "Title",
 };
 
-const options = {
-  i18n: {
-    "wizard.next": "Next",
-    "wizard.previous": "Previous",
-    "section.expand": "Expand",
-    "section.collapse": "Collapse",
-  },
-  intl: {
-    locale: Constants.LANG.cs.locale,
-  },
-  modalView: false,
-  modalProps,
-  horizontalWizardNav: false,
-  wizardStepButtons: true,
-  enableForwardSkip: true,
-  ...getP("startingQuestionId", "layout-options-65"),
-  startingStep: 1,
-  debugMode: false,
-  users: [
-    { id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart" },
-    {
-      id: "http://fel.cvut.cz/people/miroslav-blasko",
-      label: "Miroslav Blasko",
-    },
-  ],
-  currentUser: "http://fel.cvut.cz/people/max-chopart",
-  icons: [
-    {
-      id: Constants.ICONS.QUESTION_HELP,
-      behavior: Constants.ICON_BEHAVIOR.ENABLE,
-    },
-    {
-      id: Constants.ICONS.QUESTION_LINK,
-      behavior: Constants.ICON_BEHAVIOR.ENABLE,
-    },
-    {
-      id: Constants.ICONS.QUESTION_COMMENTS,
-      behavior: Constants.ICON_BEHAVIOR.ENABLE,
-    },
-  ],
-};
-
 export default {
   title: "SForms",
   component: SForms,
 } as ComponentMeta<typeof SForms>;
 
-const Template: ComponentStory<typeof SForms> = (args) => {
+const Template: ComponentStory<typeof SForms> = (
+  args,
+  { globals: { iconBehavior, locale, debugMode } }
+) => {
+  const options = {
+    i18n: {
+      "wizard.next": "Next",
+      "wizard.previous": "Previous",
+      "section.expand": "Expand",
+      "section.collapse": "Collapse",
+    },
+    intl: {
+      locale: locale,
+    },
+    modalView: false,
+    modalProps,
+    horizontalWizardNav: false,
+    wizardStepButtons: true,
+    enableForwardSkip: true,
+    ...getP("startingQuestionId", "layout-options-65"),
+    startingStep: 1,
+    debugMode: debugMode,
+    users: [
+      { id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart" },
+      {
+        id: "http://fel.cvut.cz/people/miroslav-blasko",
+        label: "Miroslav Blasko",
+      },
+    ],
+    currentUser: "http://fel.cvut.cz/people/max-chopart",
+    icons: [
+      {
+        id: Constants.ICONS.QUESTION_HELP,
+        behavior: iconBehavior,
+      },
+      {
+        id: Constants.ICONS.QUESTION_LINK,
+        behavior: iconBehavior,
+      },
+      {
+        id: Constants.ICONS.QUESTION_COMMENTS,
+        behavior: iconBehavior,
+      },
+    ],
+  };
   return (
-    <IntlContextProvider locale={args.options.intl.locale}>
-      <SForms {...args} />
+    <IntlContextProvider locale={locale}>
+      <SForms {...args} options={options} />
     </IntlContextProvider>
   );
 };
@@ -89,23 +91,19 @@ const Template: ComponentStory<typeof SForms> = (args) => {
 export const Form1 = Template.bind({});
 Form1.args = {
   form: form1,
-  options: options,
 };
 
 export const Form2 = Template.bind({});
 Form2.args = {
   form: form2,
-  options: options,
 };
 
 export const TouristDestinationForm1 = Template.bind({});
 TouristDestinationForm1.args = {
-  form: touristDestinationForm1,
-  options: options,
+  form: touristDestinationForm1
 };
 
 export const TouristDestinationForm2 = Template.bind({});
 TouristDestinationForm2.args = {
   form: touristDestinationForm2,
-  options: options,
 };
