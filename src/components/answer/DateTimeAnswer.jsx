@@ -26,7 +26,7 @@ const DateTimeAnswer = (props) => {
   // DatePicker does not know dateFormat "x", translate to datetime
   const datePickerFormat = dateFormat === 'x' ? componentsOptions.dateTimeAnswer.dateTimeFormat : dateFormat;
 
-  const onChange = (date) => {
+  const handleDateChange = (date) => {
     if (dateFormat === Constants.DATETIME_NUMBER_FORMAT) {
       props.onChange(Number(date));
     } else {
@@ -40,7 +40,7 @@ const DateTimeAnswer = (props) => {
       <DatePicker
         selected={value}
         placeholderText={datePickerFormat.toUpperCase()}
-        onChange={onChange}
+        onChange={handleDateChange}
         showTimeSelect={!isDate}
         showTimeSelectOnly={isTime}
         timeFormat="HH:mm"

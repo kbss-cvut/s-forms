@@ -15,25 +15,25 @@ const CommentForm = (props) => {
     formInputRef.current.focus();
   }, []);
 
-  const onValueChange = (e) => {
+  const handleValueChange = (e) => {
     setCommentValue(e.target.value);
   };
 
-  const onSubmitHandler = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     props.onChange(commentValue);
     setCommentValue('');
   };
 
-  const onKeyUpHandler = (e) => {
-    if (e.key === 'Enter' && e.ctrlKey && commentValue.trim()) onSubmitHandler(e);
+  const handleFormKeyUp = (e) => {
+    if (e.key === 'Enter' && e.ctrlKey && commentValue.trim()) handleFormSubmit(e);
   };
 
-  const onClickHandler = (e) => {
+  const handleFormClick = (e) => {
     e.stopPropagation();
   };
 
-  const autoResizeTextArea = () => {
+  const handleTextAreaKeyPress = () => {
     const textArea = formInputRef.current;
     textArea.style.height = 'auto';
     let scrollHeight = textArea.scrollHeight;
@@ -44,7 +44,7 @@ const CommentForm = (props) => {
   };
 
   return (
-    <Form onSubmit={onSubmitHandler} onKeyUp={onKeyUpHandler} onClick={onClickHandler}>
+    <Form onSubmit={handleFormSubmit} onKeyUp={handleFormKeyUp} onClick={handleFormClick}>
       <Form.Group className="m-2" controlId="formBasicComment">
         <Col className="col-lg-12 p-0">
           <Row className="container-fluid p-0 m-0">
@@ -56,10 +56,10 @@ const CommentForm = (props) => {
                 placeholder={intl.formatMessage({ id: 'comment.form.placeholder' })}
                 required
                 value={commentValue}
-                onChange={onValueChange}
+                onChange={handleValueChange}
                 ref={formInputRef}
-                onKeyPress={autoResizeTextArea}
-                onKeyDown={autoResizeTextArea}
+                onKeyPress={handleTextAreaKeyPress}
+                onKeyDown={handleTextAreaKeyPress}
               />
               <Button className="comment-form-button" variant="primary" type="submit">
                 <ArrowRight />

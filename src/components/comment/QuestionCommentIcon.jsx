@@ -14,15 +14,15 @@ const QuestionCommentIcon = (props) => {
     const target = useRef(null);
     const dragRef = useRef(null);
     const overlayTarget = useRef(null);
-    const [show, setShow] = useState(false);
+    const [showOverlay, setShowOverlay] = useState(false);
     const [overlayPlacement, setOverlayPlacement] = useState('right');
 
   useEffect(() => {
         getOverlayPlacement(overlayTarget.current);
     });
 
-    const hideOverlay = () => {
-        setShow(false);
+    const handleHideOverlayClick = () => {
+        setShowOverlay(false);
     };
 
   // TODO make util function
@@ -39,7 +39,7 @@ const QuestionCommentIcon = (props) => {
     return question[Constants.HAS_COMMENT];
   };
 
-  const onCommentValueChangeHandler = (value) => {
+  const handleCommentValueChange = (value) => {
     const change = {};
     _setComment(change, value);
     props.onChange(getCommentsLength(), change);
@@ -53,19 +53,19 @@ const QuestionCommentIcon = (props) => {
     change[Constants.HAS_TIMESTAMP] = Date.now().toString();
   };
 
-  const deleteQuestionCommentHandler = (index) => {
+  const handleDeleteQuestionCommentClick = (index) => {
         const comment = _getComments();
         comment.splice(index, 1);
     }
 
-    const stopPropagation = (e) => {
+    const handleStopPropagationClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
     }
 
-    const onClickSetShowHandler = (e) => {
-        stopPropagation(e);
-    setShow(!show);
+    const handleOverlayClick = (e) => {
+        handleStopPropagationClick(e);
+    setShowOverlay(!showOverlay);
   };
 
     const getCommentsLength = () => {
@@ -80,15 +80,15 @@ const QuestionCommentIcon = (props) => {
     } else setOverlayPlacement('right');
   };
 
-  const onKeyDownHandler = (e) => {
+  const handleEscapeKeyDown = (e) => {
       if (e.key === 'Escape') {
-          hideOverlay();
+          handleHideOverlayClick();
       }
   };
 
     return (
-        <div ref={overlayTarget} onClick={stopPropagation}>
-            <span ref={target} onClick={onClickSetShowHandler}>
+        <div ref={overlayTarget} onClick={handleStopPropagationClick}>
+            <span ref={target} onClick={handleOverlayClick}>
                 <CommentBubble/>
                 {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
             </span>
@@ -99,18 +99,18 @@ const QuestionCommentIcon = (props) => {
                 right: 50,
                 bottom: 50,
             }}>
-                <Overlay target={target.current} show={show} placement={overlayPlacement} rootClose={false} onHide={hideOverlay} container={dragRef}>
+                <Overlay target={target.current} show={showOverlay} placement={overlayPlacement} rootClose={false} onHide={handleHideOverlayClick} container={dragRef}>
                     {(overlayProps) => (
                         <Tooltip className="comment-tooltip" {...overlayProps}>
-                        <span onKeyDown={(e) => {onKeyDownHandler(e)}}>
+                        <span onKeyDown={(e) => {handleEscapeKeyDown(e)}}>
                             <motion.div
                                 className="close-comment-icon"
-                                onClick={hideOverlay}
+                                onClick={handleHideOverlayClick}
                                 whileHover={{scale: 1.1, transition: {duration: 0.1}}}>
                                 <Close/>
                             </motion.div>
-                            <CommentList comments={_getComments()} deleteQuestionComment={deleteQuestionCommentHandler}/>
-                            <CommentForm onChange={onCommentValueChangeHandler} />
+                            <CommentList comments={_getComments()} onDeleteCommentClick={handleDeleteQuestionCommentClick}/>
+                            <CommentForm onChange={handleCommentValueChange} />
                         </span>
                         </Tooltip>
                     )}

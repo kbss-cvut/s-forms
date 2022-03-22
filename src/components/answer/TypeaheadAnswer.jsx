@@ -69,7 +69,7 @@ const TypeaheadAnswer = (props) => {
     setOptions(processTypeaheadOptions(props.question[Constants.HAS_OPTION], intl));
   }, [intl]);
 
-  const onOptionSelected = (option) => {
+  const handleOptionSelectedChange = (option) => {
     props.onChange(option ? option.id : null);
   };
 
@@ -96,7 +96,7 @@ const TypeaheadAnswer = (props) => {
         placeholder={''}
         getOptionLabel={(option) => option.name}
         getOptionValue={(option) => option.id}
-        onChange={onOptionSelected}
+        onChange={handleOptionSelectedChange}
         components={{ MenuList: OptimizedMenuList, Option: DescriptionOption }}
       />
     </FormGroup>

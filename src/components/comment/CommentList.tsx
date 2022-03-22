@@ -5,14 +5,14 @@ import { Rings } from 'react-loader-spinner';
 
 interface Props {
     comments: Array<any>,
-    deleteQuestionComment: () => void;
+    onDeleteCommentClick: (index: number) => void;
 }
 
-const CommentList = ({comments, deleteQuestionComment}: Props) => {
+const CommentList = ({comments, onDeleteCommentClick}: Props) => {
   const commentEndRef = useRef<null | HTMLDivElement>(null);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
-  const deleteCommentViewHandler = () => {
+  const handleDeleteViewComment = () => {
     setIsDeleting(true);
     setTimeout(() => {
       setIsDeleting(false);
@@ -41,8 +41,8 @@ const CommentList = ({comments, deleteQuestionComment}: Props) => {
                 commentValue={comment[Constants.HAS_COMMENT_VALUE]}
                 author={comment[Constants.HAS_AUTHOR] ? comment[Constants.HAS_AUTHOR] : null}
                 timestamp={comment[Constants.HAS_TIMESTAMP]}
-                deleteQuestionComment={deleteQuestionComment}
-                deleteCommentView={deleteCommentViewHandler}
+                onDeleteQuestionComment={onDeleteCommentClick}
+                onDeleteViewComment={handleDeleteViewComment}
                 index={index}
               />
             </div>

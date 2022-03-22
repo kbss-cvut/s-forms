@@ -61,25 +61,25 @@ export default class Question extends React.Component {
     }
   }
 
-  onAnswerChange = (answerIndex, change) => {
+  handleAnswerChange = (answerIndex, change) => {
     // is answerable section
     if (FormUtils.isSection(this.props.question)) {
       let expanded = !!FormUtils.resolveValue(change);
       this.setState({ expanded: expanded });
     }
 
-    this._onChange(Constants.HAS_ANSWER, answerIndex, change);
+    this._handleChange(Constants.HAS_ANSWER, answerIndex, change);
   };
 
-  onSubQuestionChange = (subQuestionIndex, change) => {
-    this._onChange(Constants.HAS_SUBQUESTION, subQuestionIndex, change);
+  handleSubQuestionChange = (subQuestionIndex, change) => {
+    this._handleChange(Constants.HAS_SUBQUESTION, subQuestionIndex, change);
   };
 
-  onCommentChange = (commentIndex, change) => {
-    this._onChange(Constants.HAS_COMMENT, commentIndex, change);
+  handleCommentChange = (commentIndex, change) => {
+    this._handleChange(Constants.HAS_COMMENT, commentIndex, change);
   };
 
-  _onChange(att, valueIndex, newValue) {
+  _handleChange(att, valueIndex, newValue) {
     let newState = { ...this.props.question };
     newState[att][valueIndex] = newValue;
     if (att === Constants.HAS_ANSWER) {
@@ -217,7 +217,7 @@ export default class Question extends React.Component {
   renderQuestionIcons() {
     const question = this.props.question;
     const options = this.context.options;
-    return QuestionStatic.renderIcons(question, options, this.onCommentChange, this.state.showIcon);
+    return QuestionStatic.renderIcons(question, options, this.handleCommentChange, this.state.showIcon);
   }
 
   renderHeaderExtension() {
@@ -298,8 +298,8 @@ export default class Question extends React.Component {
                   index={i}
                   answer={answers[i]}
                   question={question}
-                  onChange={this.onAnswerChange}
-                  onCommentChange={this.onCommentChange}
+                  onChange={this.handleAnswerChange}
+                  onCommentChange={this.handleCommentChange}
                   showIcon={this.state.showIcon}
               />
             </div>
@@ -410,7 +410,7 @@ export default class Question extends React.Component {
         element = React.createElement(component, {
           key: 'sub-question-' + i,
           question: question,
-          onChange: this.onSubQuestionChange,
+          onChange: this.handleSubQuestionChange,
           index: i
         });
       }
