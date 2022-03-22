@@ -1,0 +1,7 @@
+{
+  "@id": "doc:question-c69219f6-f68a-4caa-a1aa-1705695faba1",
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "masked-input",
+  "@type": "doc:question",
+  "http://onto.fel.cvut.cz/ontologies/form/has-input-mask": "MM/YYYY",
+  "http://www.w3.org/2000/01/rdf-schema#label": "Date of first diagnosis of cervical cancer (month/year)"
+}

@@ -1,0 +1,7 @@
+{
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "date",
+  "@type": "doc:question",
+  "http://onto.fel.cvut.cz/ontologies/form/has-template": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-451-qt",
+  "@id": "http://vfn.cz/ontologies/fss-form/diagnosis-date-of-first-diagnosis-of-cervical-cancer-q",
+  "http://www.w3.org/2000/01/rdf-schema#label": "Date of first diagnosis of cervical cancer"
+}

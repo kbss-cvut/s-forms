@@ -1,0 +1,7 @@
+{
+  "http://onto.fel.cvut.cz/ontologies/form/has-template": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-451-qt",
+  "@type": "doc:question",
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "checkbox",
+  "http://www.w3.org/2000/01/rdf-schema#label": "Cectoscopy or colonoscopy",
+  "@id": "http://vfn.cz/ontologies/fss-form/diagnosis-pre-treatment-imaging-cectoscopy-or-colonoscopy-q"
+}

@@ -1,0 +1,6 @@
+{
+  "@id": "job-9002",
+  "@type": "doc:question",
+  "http://www.w3.org/2000/01/rdf-schema#label": "Job",
+  "http://onto.fel.cvut.cz/ontologies/form/has-media-content": "https://www.youtube.com/embed/yzXRaJCZdFI"
+}

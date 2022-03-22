@@ -5,7 +5,7 @@ import IconOverlay from './IconOverlay';
 
 const LinkIcon = (props) => {
   return (
-    <IconOverlay tooltipContent={props.url['@id'] || props.url} id="url-tooltip">
+    <IconOverlay tooltipContent={props.url['@id'] || props.url} id="url-tooltip" overlayPlacement={props.overlayPlacement}>
       <a href={props.url['@id'] || props.url} target="_blank" className={props.iconClassContainer}>
         <ExternalLink className={props.iconClass} />
       </a>

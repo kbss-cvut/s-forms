@@ -1,7 +1,8 @@
+import Constants from '../src/constants/Constants';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../src/styles/s-forms.css';
-import Constants from '../src/constants/Constants';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -33,11 +34,5 @@ export const globalTypes = {
     description: 'Show irrelevant questions',
     defaultValue: false,
     control: { type: 'boolean' }
-  },
-  startingQuestionId: {
-    name: 'Starting question ID',
-    description: 'Set question to jump on',
-    defaultValue: 'layout-options-65',
-    control: { type: 'text' }
   }
 };
