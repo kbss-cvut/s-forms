@@ -36,12 +36,16 @@ const CommentForm = (props) => {
   const handleTextAreaKeyPress = () => {
     const textArea = formInputRef.current;
     textArea.style.height = 'auto';
+    autoResizeTextArea(textArea);
+  };
+
+  const autoResizeTextArea = (textArea) => {
     let scrollHeight = textArea.scrollHeight;
     textArea.style.height = `${scrollHeight}px`;
     if (parseInt(textArea.style.height) > parseInt(MAX_TEXT_AREA_HEIGHT)) {
       textArea.style.height = MAX_TEXT_AREA_HEIGHT;
     }
-  };
+  }
 
   return (
     <Form onSubmit={handleFormSubmit} onKeyUp={handleFormKeyUp} onClick={handleFormClick}>
