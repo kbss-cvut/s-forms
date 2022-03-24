@@ -1,5 +1,4 @@
 import React from 'react';
-import JsonLdUtils from 'jsonld-utils';
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import Select from 'react-select';

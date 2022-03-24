@@ -11,7 +11,8 @@ describe('Default form generator', () => {
 
   it('generates empty one-step wizard as a default form', async () => {
     const form = DefaultFormGenerator.generateForm();
-    const [formProperties, structure] = await FormGenerator.constructDefaultForm(null);
+    const [formProperties, structure] = FormGenerator.constructDefaultForm(null);
+    console.log(formProperties.formQuestions)
 
     expect(formProperties.formQuestions.length).toEqual(1);
 
