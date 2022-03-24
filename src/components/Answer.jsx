@@ -18,7 +18,7 @@ const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
   const { options } = React.useContext(ConfigurationContext);
 
-  const onValueChange = (value) => {
+  const handleValueChange = (value) => {
     const change = { ...props.answer };
     _setValue(change, value);
     props.onChange(props.index, change);
@@ -54,7 +54,7 @@ const Answer = (props) => {
         label={label}
         title={title}
         value={value}
-        onChange={onValueChange}
+        onChange={handleValueChange}
         options={options}
       />
     );
@@ -62,19 +62,19 @@ const Answer = (props) => {
 
   const _renderSelect = (value, label, title) => {
     return (
-      <SelectAnswer question={props.question} label={label} title={title} value={value} onChange={onValueChange} />
+      <SelectAnswer question={props.question} label={label} title={title} value={value} onChange={handleValueChange} />
     );
   };
 
   const _renderDateTimePicker = (value, label, title) => {
     return (
-      <DateTimeAnswer question={props.question} value={value} title={title} label={label} onChange={onValueChange} />
+      <DateTimeAnswer question={props.question} value={value} title={title} label={label} onChange={handleValueChange} />
     );
   };
 
   const _renderCheckbox = (value, label, title) => {
     return (
-      <CheckboxAnswer label={label} title={title} value={value} onChange={onValueChange} question={props.question} />
+      <CheckboxAnswer label={label} title={title} value={value} onChange={handleValueChange} question={props.question} />
     );
   };
 
@@ -84,7 +84,7 @@ const Answer = (props) => {
         label={label}
         title={title}
         value={value}
-        onChange={onValueChange}
+        onChange={handleValueChange}
         question={props.question}
         answer={props.answer}
       />
@@ -100,7 +100,7 @@ const Answer = (props) => {
         label={label}
         title={title}
         value={value}
-        onChange={onValueChange}
+        onChange={handleValueChange}
       />
     );
   };
@@ -113,7 +113,7 @@ const Answer = (props) => {
         label={label}
         title={title}
         value={value}
-        onChange={onValueChange}
+        onChange={handleValueChange}
         sparql={true}
       />
     );
@@ -127,7 +127,7 @@ const Answer = (props) => {
         label={label}
         title={title}
         value={value}
-        onChange={onValueChange}
+        onChange={handleValueChange}
         turtle={true}
       />
     );

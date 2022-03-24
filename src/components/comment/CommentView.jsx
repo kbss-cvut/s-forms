@@ -94,26 +94,26 @@ const CommentView = (props) => {
     );
   };
 
-  const onMouseAuthorEventHandler = () => {
+  const handleCommentAuthorMouseEnter = () => {
     setShowIRI(!showIRI);
   };
 
-  const onMouseRecycleBinEventHandler = () => {
+  const handleCommentBinMouseEnter = () => {
         setShowRecycleBin(!showRecycleBin)
     }
 
-    const onClickDeleteQuestionCommentHandler = () => {
-        props.deleteQuestionComment(props.index);
-        props.deleteCommentView();
+    const handleDeleteCommentClick = () => {
+        props.onDeleteQuestionComment(props.index);
+        props.onDeleteViewComment();
     }
 
     return (
-        <div className="comment-content" onMouseEnter={onMouseRecycleBinEventHandler} onMouseLeave={onMouseRecycleBinEventHandler}>
+        <div className="comment-content" onMouseEnter={handleCommentBinMouseEnter} onMouseLeave={handleCommentBinMouseEnter}>
       <div className="row">
         <div
           className="col-auto comment-author"
-          onMouseEnter={onMouseAuthorEventHandler}
-          onMouseLeave={onMouseAuthorEventHandler}
+          onMouseEnter={handleCommentAuthorMouseEnter}
+          onMouseLeave={handleCommentAuthorMouseEnter}
         >
           {renderAuthor()}
         </div>
@@ -123,7 +123,7 @@ const CommentView = (props) => {
                         className="comment-delete emphasise-on-relevant-icon"
                         whileHover={{scale: 1.2}}
                         whileTap={{scale: 0.9}}
-                        onClick={onClickDeleteQuestionCommentHandler}>
+                        onClick={handleDeleteCommentClick}>
                         <RecycleBin/>
                     </motion.div>
                 : null }
@@ -139,8 +139,8 @@ CommentView.propTypes = {
   author: PropTypes.object.isRequired,
   timestamp: PropTypes.string.isRequired,
   commentValue: PropTypes.string.isRequired,
-  deleteQuestionComment: PropTypes.func.isRequired,
-  deleteCommentView: PropTypes.func.isRequired,
+  onDeleteQuestionComment: PropTypes.func.isRequired,
+  onDeleteViewComment: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired
 };
 
