@@ -170,7 +170,7 @@ input:disabled {
 }
 
 .card-header {
-  height: 3rem;
+  min-height: 3rem;
 }
 
 .card-header:first-child {
