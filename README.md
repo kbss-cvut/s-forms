@@ -1,13 +1,11 @@
 # SForms
-[![Netlify Status](https://api.netlify.com/api/v1/badges/76108e0e-d74c-417a-85e8-863109114c0c/deploy-status)](https://app.netlify.com/sites/clever-bohr-4e69b7/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/004d6408-4ff5-4719-905e-5d83d5feef01/deploy-status)](https://app.netlify.com/sites/s-forms-kbss/deploys)
 
-**S**emantic **form** generator and processor for ontology-based smart forms.
+**S**emantic **form** generator and processor for ontology-based smart forms. Beside this core library, there exists also [library of advanced components](https://github.com/kbss-cvut/s-forms-components).
 
-## Live App
+## Live Demo
 
-Checkout the live version of the app here:
-https://clever-bohr-4e69b7.netlify.app
-
+Checkout [live demo using storybook](https://s-forms-kbss.netlify.app).
 
 ## Supported features
 
