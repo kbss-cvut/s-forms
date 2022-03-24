@@ -222,9 +222,9 @@ input:disabled {
 
 .comment-tooltip > .tooltip-inner {
   max-width: none;
-  width: 30vw;
+  width: 40vw;
   border: solid 2px #afafaf;
-  background-color: #cbeef6;
+  background-color: #b60d52;
   color: #000000;
   padding: 0;
   border-radius: 0;
