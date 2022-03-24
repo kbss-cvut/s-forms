@@ -91,6 +91,7 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
+    "chromatic": "^6.5.3",
     "clean-css-cli": "^4.3.0",
     "css-loader": "^3.5.3",
     "enzyme": "^3.11.0",
@@ -110,7 +111,8 @@
     "lib": "babel ./src -d ./lib",
     "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=4596425d0cfa"
   },
   "files": [
     "dist/",
