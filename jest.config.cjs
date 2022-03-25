@@ -11,5 +11,10 @@ module.exports = {
   reporters: ['default'],
   moduleNameMapper: {
     '\\.(css)$': '<rootDir>/test/__mocks__/styleMock.js'
-  }
+  },
+  globals: {
+    's-forms': {
+      tsconfig: 'tsconfig.spec.json',
+    },
+  },
 };

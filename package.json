@@ -81,12 +81,16 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@babel/register": "^7.10.3",
+    "@storybook/addon-a11y": "^6.4.19",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/addon-jest": "^6.4.19",
     "@storybook/addon-links": "^6.4.19",
     "@storybook/react": "^6.4.19",
     "@storybook/testing-library": "^0.0.9",
+    "@storybook/testing-react": "^1.2.4",
+    "@testing-library/react": "^12.1.4",
     "@types/jsonld": "^1.5.1",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "babel-jest": "^26.0.1",
@@ -112,7 +116,7 @@
     "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=4596425d0cfa"
+    "chromatic": "npx chromatic --project-token=4596425d0cfa --exit-zero-on-changes"
   },
   "files": [
     "dist/",

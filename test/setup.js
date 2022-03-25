@@ -1,6 +1,8 @@
 import enzyme, { shallow, mount } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { act } from 'react-dom/test-utils';
+import {setGlobalConfig} from "@storybook/testing-react";
+import * as globalStorybookConfig from "../.storybook/preview.js"
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -13,3 +15,5 @@ global.waitForComponentToPaint = async (wrapper) => {
     wrapper.update();
   });
 };
+
+setGlobalConfig(globalStorybookConfig);
