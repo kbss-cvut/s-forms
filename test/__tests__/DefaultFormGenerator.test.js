@@ -11,14 +11,13 @@ describe('Default form generator', () => {
 
   it('generates empty one-step wizard as a default form', async () => {
     const form = DefaultFormGenerator.generateForm();
-    const [formProperties, structure] = FormGenerator.constructDefaultForm(null);
-    console.log(formProperties.formQuestions)
+    const [formQuestions, structure] = FormGenerator.constructDefaultForm(null);
 
-    expect(formProperties.formQuestions.length).toEqual(1);
+    expect(formQuestions.length).toEqual(1);
 
     expect(structure).toEqual({ root: form['@graph'][0] });
 
-    expect(formProperties.formQuestions[0][Constants.HAS_SUBQUESTION]).toEqual([
+    expect(formQuestions[0][Constants.HAS_SUBQUESTION]).toEqual([
       form['@graph'][0][Constants.HAS_SUBQUESTION][0][Constants.HAS_SUBQUESTION][0]
     ]);
   });

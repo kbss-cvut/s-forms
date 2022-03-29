@@ -20,7 +20,7 @@ export default class FormGenerator {
 
     const [formQuestions, form] = FormGenerator._constructFormQuestions(defaultFormData, intl);
 
-    return [formQuestions, { root: form }];
+    return [formQuestions, form];
   }
 
   /**
