@@ -117,7 +117,7 @@
     "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=4596425d0cfa --exit-zero-on-changes"
+    "chromatic": "npx chromatic"
   },
   "files": [
     "dist/",
