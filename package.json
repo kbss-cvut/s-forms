@@ -87,6 +87,7 @@
     "@storybook/addon-interactions": "^6.4.19",
     "@storybook/addon-jest": "^6.4.19",
     "@storybook/addon-links": "^6.4.19",
+    "@storybook/jest": "^0.0.10",
     "@storybook/react": "^6.4.19",
     "@storybook/testing-library": "^0.0.9",
     "@storybook/testing-react": "^1.2.4",

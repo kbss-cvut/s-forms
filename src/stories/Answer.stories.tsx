@@ -1,11 +1,7 @@
 import React from "react";
 import Answer from "../components/Answer";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { ConfigurationContextProvider } from "../contexts/ConfigurationContext";
-import Constants from "../constants/Constants";
-import { FormGenContextProvider } from "../contexts/FormGenContext";
 
-import possibleValues from "./assets/possibleValues.json";
 import question from "./assets/question/questionWithMedia.json";
 import questionTypeHead from "./assets/question/questionTypeHead.json";
 import questionDate from "./assets/question/questionDate.json";
@@ -20,29 +16,13 @@ export default {
 } as ComponentMeta<typeof Answer>;
 
 const Template: ComponentStory<typeof Answer> = (args) => {
-  const options = {
-    intl: {
-      locale: Constants.LANG.cs.locale,
-    },
-  };
-
-  const fetchTypeAheadValues = () => {
-    return new Promise((resolve) =>
-      setTimeout(() => resolve(possibleValues), 1500)
-    );
-  };
-
   return (
-    <FormGenContextProvider fetchTypeAheadValues={fetchTypeAheadValues}>
-      <ConfigurationContextProvider options={options}>
-        <Answer
-          {...args}
-          answer={{}}
-          onChange={() => {}}
-          onCommentChange={() => {}}
-        />
-      </ConfigurationContextProvider>
-    </FormGenContextProvider>
+    <Answer
+      {...args}
+      answer={{}}
+      onChange={() => {}}
+      onCommentChange={() => {}}
+    />
   );
 };
 
