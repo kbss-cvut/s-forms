@@ -99,8 +99,12 @@ const CommentView = (props) => {
   };
 
   const handleCommentBinMouseEnter = () => {
-        setShowRecycleBin(!showRecycleBin)
+        setShowRecycleBin(true)
     }
+
+  const handleCommentBinMouseLeave = () => {
+    setShowRecycleBin(false)
+  }
 
     const handleDeleteCommentClick = () => {
         props.onDeleteQuestionComment(props.index);
@@ -108,7 +112,7 @@ const CommentView = (props) => {
     }
 
     return (
-        <div className="comment-content" onMouseEnter={handleCommentBinMouseEnter} onMouseLeave={handleCommentBinMouseEnter}>
+        <div className="comment-content" onMouseEnter={handleCommentBinMouseEnter} onMouseLeave={handleCommentBinMouseLeave}>
       <div className="row">
         <div
           className="col-auto comment-author"
@@ -140,7 +144,7 @@ CommentView.propTypes = {
   timestamp: PropTypes.string.isRequired,
   commentValue: PropTypes.string.isRequired,
   onDeleteQuestionComment: PropTypes.func.isRequired,
-  onDeleteViewComment: PropTypes.func.isRequired,
+  onDeleteViewComment: PropTypes.func,
   index: PropTypes.number.isRequired
 };
 

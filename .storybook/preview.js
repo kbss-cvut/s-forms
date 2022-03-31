@@ -73,15 +73,15 @@ const options = {
   icons: [
     {
       id: Constants.ICONS.QUESTION_HELP,
-      behavior: Constants.ICON_BEHAVIOR.ON_HOVER,
+      behavior: Constants.ICON_BEHAVIOR.ENABLE,
     },
     {
       id: Constants.ICONS.QUESTION_LINK,
-      behavior: Constants.ICON_BEHAVIOR.ON_HOVER,
+      behavior: Constants.ICON_BEHAVIOR.ENABLE,
     },
     {
       id: Constants.ICONS.QUESTION_COMMENTS,
-      behavior: Constants.ICON_BEHAVIOR.ON_HOVER,
+      behavior: Constants.ICON_BEHAVIOR.ENABLE,
     },
   ],
 };

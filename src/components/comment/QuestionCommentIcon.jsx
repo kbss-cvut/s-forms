@@ -65,7 +65,7 @@ const QuestionCommentIcon = (props) => {
 
     const handleOverlayClick = (e) => {
         handleStopPropagationClick(e);
-    setShowOverlay(!showOverlay);
+        setShowOverlay(!showOverlay);
   };
 
     const getCommentsLength = () => {
@@ -88,7 +88,7 @@ const QuestionCommentIcon = (props) => {
 
     return (
         <div ref={overlayTarget} onClick={handleStopPropagationClick}>
-            <span data-testid="comment-bubble" ref={target} onClick={handleOverlayClick}>
+            <span className="comment-bubble" ref={target} onClick={handleOverlayClick}>
                 <CommentBubble/>
                 {getCommentsLength() > 0 ? <Badge className="comment-badge" pill variant="primary">{getCommentsLength()}</Badge> : null}
             </span>
