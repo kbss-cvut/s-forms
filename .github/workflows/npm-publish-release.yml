@@ -8,19 +8,19 @@ on:
     types: [published]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      with:
-        node-version: 16
-    - run: npm ci
-    - run: npm test
+#  test:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: actions/setup-node@v2
+#      with:
+#        node-version: 16
+#    - run: npm ci
+#    - run: npm test
 
 
   publish-npm-release:
-    needs: test
+#    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
