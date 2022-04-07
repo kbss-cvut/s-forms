@@ -1,6 +1,6 @@
 {
-  "name": "s-forms",
-  "version": "0.3.6",
+  "name": "@kbss-cvut/s-forms",
+  "version": "0.3.5",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -39,6 +39,7 @@
   "exports": "./dist/s-forms.modern.js",
   "module": "./dist/s-forms.js",
   "unpkg": "./dist/s-forms.umd.js",
+  "private": false,
   "dependencies": {
     "@luigiminardim/storybook-addon-globals-controls": "^0.1.3",
     "@triply/yasgui": "^4.2.14",
