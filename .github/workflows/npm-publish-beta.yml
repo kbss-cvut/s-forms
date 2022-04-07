@@ -13,24 +13,27 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
-    - run: npm ci
-    - run: npm test
+      - name: Checkout repository
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install dependencies
+      - run: npm ci
+      - run: npm test
 
   publish-npm-beta:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    - name: Checkout repository
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
       with:
         node-version: 16
         registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm run build
-      - run: npm publish --tag beta --access public
+    - run: npm ci
+    - run: npm run build
+    - run: npm publish --tag beta --access public
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
