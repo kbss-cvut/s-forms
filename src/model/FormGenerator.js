@@ -18,9 +18,7 @@ export default class FormGenerator {
   static constructDefaultForm(intl) {
     const defaultFormData = DefaultFormGenerator.generateForm();
 
-    const [formQuestions, form] = FormGenerator._constructFormQuestions(defaultFormData, intl);
-
-    return [formQuestions, form];
+    return FormGenerator._constructFormQuestions(defaultFormData, intl);
   }
 
   /**
