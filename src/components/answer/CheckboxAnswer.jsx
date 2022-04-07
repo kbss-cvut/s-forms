@@ -1,35 +1,36 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import FormUtils from '../../util/FormUtils';
-import Constants from '../../constants/Constants';
-import { ConfigurationContext } from '../../contexts/ConfigurationContext';
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
+import FormUtils from "../../util/FormUtils";
+import Constants from "../../constants/Constants";
+import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 
 class InputPropertiesResolver {
   static resolveValidationProperties(question) {
     const props = {};
     if (question[Constants.HAS_VALID_ANSWER] === false) {
-      props['validation'] = 'error';
-      props['help'] = question[Constants.HAS_VALIDATION_MESSAGE];
+      props["validation"] = "error";
+      props["help"] = question[Constants.HAS_VALIDATION_MESSAGE];
     }
     return props;
   }
 }
 
 const CheckboxAnswer = (props) => {
-  const { inputComponent, componentsOptions } = useContext(ConfigurationContext);
+  const { inputComponent, componentsOptions } =
+    useContext(ConfigurationContext);
 
   const question = props.question;
 
   return React.createElement(inputComponent, {
     ...InputPropertiesResolver.resolveValidationProperties(question),
-    type: 'checkbox',
+    type: "checkbox",
     label: props.label,
     title: props.title,
-    checked: props.value === true || props.value === 'true',
+    checked: props.value === true || props.value === "true",
     onChange: (e) => {
       props.onChange(e.target.checked);
     },
-    disabled: componentsOptions.readOnly || FormUtils.isDisabled(question)
+    disabled: componentsOptions.readOnly || FormUtils.isDisabled(question),
   });
 };
 
@@ -39,7 +40,7 @@ CheckboxAnswer.propTypes = {
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onChange: PropTypes.func.isRequired,
-  mouseHover: PropTypes.bool
+  mouseHover: PropTypes.bool,
 };
 
 export default CheckboxAnswer;

@@ -7,7 +7,7 @@ export default class Logger {
     if (console.warn) {
       console.warn(msg);
     } else {
-      console.log('WARNING: ' + msg);
+      console.log("WARNING: " + msg);
     }
   }
 
@@ -15,7 +15,7 @@ export default class Logger {
     if (console.error) {
       console.error(msg);
     } else {
-      console.log('ERROR: ' + msg);
+      console.log("ERROR: " + msg);
     }
   }
 }

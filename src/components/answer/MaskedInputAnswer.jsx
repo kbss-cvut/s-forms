@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import JsonLdUtils from 'jsonld-utils';
-import PropTypes from 'prop-types';
+import React, { useContext } from "react";
+import JsonLdUtils from "jsonld-utils";
+import PropTypes from "prop-types";
 
-import Constants from '../../constants/Constants';
-import FormUtils from '../../util/FormUtils';
-import InputAnswer from './InputAnswer';
-import Logger from '../../util/Logger';
-import MaskedInput from '../MaskedInput';
-import { ConfigurationContext } from '../../contexts/ConfigurationContext';
+import Constants from "../../constants/Constants";
+import FormUtils from "../../util/FormUtils";
+import InputAnswer from "./InputAnswer";
+import Logger from "../../util/Logger";
+import MaskedInput from "../MaskedInput";
+import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 
 const MaskedInputAnswer = (props) => {
   const { componentsOptions } = useContext(ConfigurationContext);
@@ -17,7 +17,7 @@ const MaskedInputAnswer = (props) => {
   const mask = JsonLdUtils.getJsonAttValue(question, Constants.INPUT_MASK);
 
   if (!mask) {
-    Logger.warn('Input mask not provided. Falling back to regular input.');
+    Logger.warn("Input mask not provided. Falling back to regular input.");
     return <InputAnswer {...props} />;
   }
 
@@ -40,7 +40,7 @@ MaskedInputAnswer.propTypes = {
   label: PropTypes.object.isRequired,
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default MaskedInputAnswer;

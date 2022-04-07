@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { FormText, FormControl, FormGroup, Form } from 'react-bootstrap';
+import React from "react";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
+import { FormText, FormControl, FormGroup, Form } from "react-bootstrap";
 
 export default class DefaultInput extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      cursorPosition: 0
+      cursorPosition: 0,
     };
   }
 
@@ -27,34 +27,37 @@ export default class DefaultInput extends React.Component {
   }
 
   fieldDidExpand(prevProps) {
-    return this.props.type === 'textarea' && prevProps.type !== 'textarea';
+    return this.props.type === "textarea" && prevProps.type !== "textarea";
   }
 
   fieldDidShrink(prevProps) {
-    return this.props.type === 'text' && prevProps.type !== 'text';
+    return this.props.type === "text" && prevProps.type !== "text";
   }
 
   updateFieldCursorPosition() {
     this.focus();
-    this.getInputDOMNode().setSelectionRange(this.state.cursorPosition, this.state.cursorPosition);
+    this.getInputDOMNode().setSelectionRange(
+      this.state.cursorPosition,
+      this.state.cursorPosition
+    );
   }
 
   saveCursorPosition(e) {
     this.props.onChange(e);
     this.setState({
-      cursorPosition: e.target.selectionStart
+      cursorPosition: e.target.selectionStart,
     });
   }
 
   render() {
     switch (this.props.type) {
-      case 'radio':
+      case "radio":
         return this._renderRadio();
-      case 'checkbox':
+      case "checkbox":
         return this._renderCheckbox();
-      case 'select':
+      case "select":
         return this._renderSelect();
-      case 'textarea':
+      case "textarea":
         return this._renderTextArea();
       default:
         return this._renderInput();
@@ -64,8 +67,16 @@ export default class DefaultInput extends React.Component {
   _renderCheckbox() {
     // TODO change control id to hash of label
     return (
-      <Form.Group size="small" controlId={Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}>
-        <Form.Check type="checkbox" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
+      <Form.Group
+        size="small"
+        controlId={Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}
+      >
+        <Form.Check
+          type="checkbox"
+          ref={(c) => (this.input = c)}
+          {...this.props}
+          label={this.props.label}
+        />
       </Form.Group>
     );
   }
@@ -73,7 +84,12 @@ export default class DefaultInput extends React.Component {
   _renderRadio() {
     return (
       <FormGroup size="small">
-        <Form.Check type="radio" ref={(c) => (this.input = c)} {...this.props} label={this.props.label} />
+        <Form.Check
+          type="radio"
+          ref={(c) => (this.input = c)}
+          {...this.props}
+          label={this.props.label}
+        />
       </FormGroup>
     );
   }
@@ -93,7 +109,9 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderLabel() {
-    return this.props.label ? <Form.Label>{this.props.label}</Form.Label> : null;
+    return this.props.label ? (
+      <Form.Label>{this.props.label}</Form.Label>
+    ) : null;
   }
 
   _renderTextArea() {
@@ -142,9 +160,9 @@ DefaultInput.propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func,
   help: PropTypes.string,
-  validation: PropTypes.oneOf(['success', 'warning', 'error'])
+  validation: PropTypes.oneOf(["success", "warning", "error"]),
 };
 
 DefaultInput.defaultProps = {
-  type: 'text'
+  type: "text",
 };

@@ -100,7 +100,7 @@ Form2.args = {
 
 export const TouristDestinationForm1 = Template.bind({});
 TouristDestinationForm1.args = {
-  form: touristDestinationForm1
+  form: touristDestinationForm1,
 };
 
 export const TouristDestinationForm2 = Template.bind({});

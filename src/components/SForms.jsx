@@ -1,11 +1,11 @@
-import React, { forwardRef, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { FormGenContextProvider } from '../contexts/FormGenContext';
-import { FormQuestionsProvider } from '../contexts/FormQuestionsContext';
-import { ConfigurationContextProvider } from '../contexts/ConfigurationContext';
-import FormGenerator from '../model/FormGenerator';
-import FormManager from './FormManager';
-import { Card } from 'react-bootstrap';
+import React, { forwardRef, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { FormGenContextProvider } from "../contexts/FormGenContext";
+import { FormQuestionsProvider } from "../contexts/FormQuestionsContext";
+import { ConfigurationContextProvider } from "../contexts/ConfigurationContext";
+import FormGenerator from "../model/FormGenerator";
+import FormManager from "./FormManager";
+import { Card } from "react-bootstrap";
 import FormUtils from "../util/FormUtils.js";
 
 const SForms = forwardRef((props, ref) => {
@@ -16,9 +16,16 @@ const SForms = forwardRef((props, ref) => {
   useEffect(() => {
     const initialiseSForms = async () => {
       const intl = props.options.intl;
-      const [formProperties, structure] = await FormGenerator.constructForm(props.form, intl);
+      const [formProperties, structure] = await FormGenerator.constructForm(
+        props.form,
+        intl
+      );
 
-      if (formProperties.formQuestions.some((step) => FormUtils.isWizardStep(step))) {
+      if (
+        formProperties.formQuestions.some((step) =>
+          FormUtils.isWizardStep(step)
+        )
+      ) {
         formProperties.formQuestions[0].visited = true;
       }
 
@@ -31,7 +38,9 @@ const SForms = forwardRef((props, ref) => {
   }, [props.form]);
 
   if (loading) {
-    return props.loader || <Card className="p-3 font-italic">Loading SForms...</Card>;
+    return (
+      props.loader || <Card className="p-3 font-italic">Loading SForms...</Card>
+    );
   }
 
   const _getComponentMappingFunction = (components, form) => {
@@ -50,7 +59,10 @@ const SForms = forwardRef((props, ref) => {
     };
   };
 
-  const _mapComponent = _getComponentMappingFunction(props.componentMapRules, form);
+  const _mapComponent = _getComponentMappingFunction(
+    props.componentMapRules,
+    form
+  );
 
   return (
     <ConfigurationContextProvider
@@ -60,8 +72,16 @@ const SForms = forwardRef((props, ref) => {
       options={props.options}
     >
       <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
-        <FormQuestionsProvider data={form} formQuestions={formProperties.formQuestions} isFormValid={props.isFormValid}>
-          <FormManager ref={ref} modalView={props.options && props.options.modalView} mapComponent={_mapComponent} />
+        <FormQuestionsProvider
+          data={form}
+          formQuestions={formProperties.formQuestions}
+          isFormValid={props.isFormValid}
+        >
+          <FormManager
+            ref={ref}
+            modalView={props.options && props.options.modalView}
+            mapComponent={_mapComponent}
+          />
         </FormQuestionsProvider>
       </FormGenContextProvider>
     </ConfigurationContextProvider>
@@ -76,7 +96,7 @@ SForms.propTypes = {
   componentsOptions: PropTypes.object,
   fetchTypeAheadValues: PropTypes.func,
   isFormValid: PropTypes.func,
-  loader: PropTypes.element
+  loader: PropTypes.element,
 };
 
 export default SForms;

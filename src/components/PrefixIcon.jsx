@@ -1,13 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ListGroup, ListGroupItem, OverlayTrigger, Popover } from 'react-bootstrap';
-import Constants from '../constants/Constants';
+import React from "react";
+import PropTypes from "prop-types";
+import {
+  ListGroup,
+  ListGroupItem,
+  OverlayTrigger,
+  Popover,
+} from "react-bootstrap";
+import Constants from "../constants/Constants";
 
 class PrefixIcon extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      prefixes: props.prefixes
+      prefixes: props.prefixes,
     };
   }
 
@@ -32,9 +37,7 @@ class PrefixIcon extends React.Component {
 
     return (
       <OverlayTrigger trigger="click" placement="right" overlay={p}>
-        <span className={this.props.iconClass}>
-          {this.props.children}
-        </span>
+        <span className={this.props.iconClass}>{this.props.children}</span>
       </OverlayTrigger>
     );
   }
@@ -43,11 +46,11 @@ class PrefixIcon extends React.Component {
 PrefixIcon.propTypes = {
   prefixes: PropTypes.array.isRequired,
   children: PropTypes.element.isRequired,
-  iconClass: PropTypes.string
+  iconClass: PropTypes.string,
 };
 
 PrefixIcon.defaultProps = {
-  iconClass: ''
+  iconClass: "",
 };
 
 export default PrefixIcon;

@@ -1,11 +1,11 @@
-import jsonld from 'jsonld';
-import Constants from '../constants/Constants';
-import FormUtils from '../util/FormUtils';
-import Utils from './Utils';
+import jsonld from "jsonld";
+import Constants from "../constants/Constants";
+import FormUtils from "../util/FormUtils";
+import Utils from "./Utils";
 
 const formShape = {
   root: {
-    [Constants.HAS_LAYOUT_CLASS]: Constants.FORM
+    [Constants.HAS_LAYOUT_CLASS]: Constants.FORM,
   },
   expandProperties: [
     Constants.HAS_SUBQUESTION,
@@ -13,8 +13,8 @@ const formShape = {
     Constants.HAS_ANSWER,
     Constants.HAS_DECLARED_PREFIX,
     Constants.HAS_OPTION,
-    Constants.HAS_COMMENT
-  ]
+    Constants.HAS_COMMENT,
+  ],
 };
 
 export default class JsonLdFramingUtils {
@@ -31,7 +31,7 @@ export default class JsonLdFramingUtils {
   static customFrame(input, shape, callback) {
     if (arguments.length < 2) {
       return jsonld.nextTick(function () {
-        callback(new TypeError('Could not frame, too few arguments.'));
+        callback(new TypeError("Could not frame, too few arguments."));
       });
     }
 
@@ -54,8 +54,8 @@ export default class JsonLdFramingUtils {
     let root;
     const id2objectMap = {}; // mapping @id -> object
 
-    structure['@graph'].forEach((item) => {
-      id2objectMap[item['@id']] = item;
+    structure["@graph"].forEach((item) => {
+      id2objectMap[item["@id"]] = item;
 
       if (FormUtils.isForm(item)) {
         root = item;
@@ -65,7 +65,11 @@ export default class JsonLdFramingUtils {
     try {
       this._expandGraph(root, formShape, id2objectMap);
     } catch (e) {
-      console.error("Error '" + e + "' occured, while trying to apply frame-ing with custom shape.");
+      console.error(
+        "Error '" +
+          e +
+          "' occured, while trying to apply frame-ing with custom shape."
+      );
     }
 
     return id2objectMap;
@@ -90,7 +94,9 @@ export default class JsonLdFramingUtils {
             //console.log(childId + " expanded.");
             this._expandGraph(child, shape, id2ObjectMap);
           } else {
-            console.warn('object with @id ' + childId + ' was not defined in input data.');
+            console.warn(
+              "object with @id " + childId + " was not defined in input data."
+            );
           }
         }
       }
@@ -98,10 +104,10 @@ export default class JsonLdFramingUtils {
   }
 
   static _getId(jsonObject) {
-    if (typeof jsonObject === 'string') {
+    if (typeof jsonObject === "string") {
       return jsonObject;
     }
-    return jsonObject['@id'];
+    return jsonObject["@id"];
   }
 
   static compressStructure = (rootNode) => {
@@ -111,8 +117,8 @@ export default class JsonLdFramingUtils {
     object2IdMap = this._compressGraph(rootNode, object2IdMap, idIncluded);
 
     object2IdMap = object2IdMap.sort((a, b) => {
-      if (a['@id'] && b['@id']) {
-        return a['@id'].localeCompare(b['@id']);
+      if (a["@id"] && b["@id"]) {
+        return a["@id"].localeCompare(b["@id"]);
       }
       return 0;
     });
@@ -121,9 +127,9 @@ export default class JsonLdFramingUtils {
   };
 
   static _compressGraph = (parentNode, object2IdMap, idIncluded) => {
-    if (!idIncluded.has(parentNode['@id'])) {
+    if (!idIncluded.has(parentNode["@id"])) {
       object2IdMap.push(parentNode);
-      idIncluded.add(parentNode['@id']);
+      idIncluded.add(parentNode["@id"]);
     }
 
     formShape.expandProperties.forEach((prop) => {
@@ -138,7 +144,7 @@ export default class JsonLdFramingUtils {
 
             object2IdMap = this._compressGraph(child, object2IdMap, idIncluded);
 
-            parentNode[prop][i] = { '@id': child['@id'] };
+            parentNode[prop][i] = { "@id": child["@id"] };
           }
         }
       }

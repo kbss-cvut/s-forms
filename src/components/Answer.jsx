@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CheckboxAnswer from './answer/CheckboxAnswer';
-import DateTimeAnswer from './answer/DateTimeAnswer';
-import InputAnswer from './answer/InputAnswer';
-import JsonldUtils from 'jsonld-utils';
-import MaskedInputAnswer from './answer/MaskedInputAnswer';
-import SelectAnswer from './answer/SelectAnswer';
-import FormUtils from '../util/FormUtils';
-import Utils from '../util/Utils';
-import TypeaheadAnswer from './answer/TypeaheadAnswer';
-import Constants from '../constants/Constants';
-import { FormGenContext } from '../contexts/FormGenContext';
-import { ConfigurationContext } from '../contexts/ConfigurationContext';
+import React from "react";
+import PropTypes from "prop-types";
+import CheckboxAnswer from "./answer/CheckboxAnswer";
+import DateTimeAnswer from "./answer/DateTimeAnswer";
+import InputAnswer from "./answer/InputAnswer";
+import JsonldUtils from "jsonld-utils";
+import MaskedInputAnswer from "./answer/MaskedInputAnswer";
+import SelectAnswer from "./answer/SelectAnswer";
+import FormUtils from "../util/FormUtils";
+import Utils from "../util/Utils";
+import TypeaheadAnswer from "./answer/TypeaheadAnswer";
+import Constants from "../constants/Constants";
+import { FormGenContext } from "../contexts/FormGenContext";
+import { ConfigurationContext } from "../contexts/ConfigurationContext";
 import QuestionStatic from "./QuestionStatic.jsx";
 
 const Answer = (props) => {
@@ -28,23 +28,30 @@ const Answer = (props) => {
     if (value === null) {
       change[Constants.HAS_OBJECT_VALUE] = null;
       change[Constants.HAS_DATA_VALUE] = null;
-    } else if (props.answer[Constants.HAS_OBJECT_VALUE] || FormUtils.isTypeahead(props.question)) {
+    } else if (
+      props.answer[Constants.HAS_OBJECT_VALUE] ||
+      FormUtils.isTypeahead(props.question)
+    ) {
       change[Constants.HAS_OBJECT_VALUE] = {
-        '@id': value
+        "@id": value,
       };
     } else {
       change[Constants.HAS_DATA_VALUE] = {
-        '@value': value
+        "@value": value,
       };
     }
   };
 
   const _hasOptions = (item) => {
-    return item[Constants.HAS_OPTION] && item[Constants.HAS_OPTION].length !== 0;
+    return (
+      item[Constants.HAS_OPTION] && item[Constants.HAS_OPTION].length !== 0
+    );
   };
 
   const _renderTypeahead = (value, label, title) => {
-    const queryHash = Utils.getStringHash(FormUtils.getPossibleValuesQuery(props.question));
+    const queryHash = Utils.getStringHash(
+      FormUtils.getPossibleValuesQuery(props.question)
+    );
     const options = formGenContext.getOptions(queryHash) || [];
 
     return (
@@ -62,19 +69,37 @@ const Answer = (props) => {
 
   const _renderSelect = (value, label, title) => {
     return (
-      <SelectAnswer question={props.question} label={label} title={title} value={value} onChange={handleValueChange} />
+      <SelectAnswer
+        question={props.question}
+        label={label}
+        title={title}
+        value={value}
+        onChange={handleValueChange}
+      />
     );
   };
 
   const _renderDateTimePicker = (value, label, title) => {
     return (
-      <DateTimeAnswer question={props.question} value={value} title={title} label={label} onChange={handleValueChange} />
+      <DateTimeAnswer
+        question={props.question}
+        value={value}
+        title={title}
+        label={label}
+        onChange={handleValueChange}
+      />
     );
   };
 
   const _renderCheckbox = (value, label, title) => {
     return (
-      <CheckboxAnswer label={label} title={title} value={value} onChange={handleValueChange} question={props.question} />
+      <CheckboxAnswer
+        label={label}
+        title={title}
+        value={value}
+        onChange={handleValueChange}
+        question={props.question}
+      />
     );
   };
 
@@ -134,12 +159,20 @@ const Answer = (props) => {
   };
 
   const _getLabel = (question) => {
-    const label = JsonldUtils.getLocalized(question[Constants.RDFS_LABEL], options.intl);
+    const label = JsonldUtils.getLocalized(
+      question[Constants.RDFS_LABEL],
+      options.intl
+    );
 
     return (
       <div className="question-header">
         {label}
-        {QuestionStatic.renderIcons(props.question, options, props.onCommentChange, props.showIcon)}
+        {QuestionStatic.renderIcons(
+          props.question,
+          options,
+          props.onCommentChange,
+          props.showIcon
+        )}
       </div>
     );
   };
@@ -148,7 +181,10 @@ const Answer = (props) => {
   const value = FormUtils.resolveValue(props.answer);
 
   const label = _getLabel(question);
-  const title = JsonldUtils.getLocalized(question[Constants.RDFS_COMMENT], options.intl);
+  const title = JsonldUtils.getLocalized(
+    question[Constants.RDFS_COMMENT],
+    options.intl
+  );
   let component;
 
   if (FormUtils.isTypeahead(question)) {
@@ -178,7 +214,7 @@ Answer.propTypes = {
   onChange: PropTypes.func.isRequired,
   onCommentChange: PropTypes.func.isRequired,
   index: PropTypes.number,
-  icons: PropTypes.object
+  icons: PropTypes.object,
 };
 
 export default Answer;

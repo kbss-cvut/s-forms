@@ -1,57 +1,66 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { useMemo } from "react";
+import PropTypes from "prop-types";
 import DefaultInput from "../components/DefaultInput";
 
 const ConfigurationContext = React.createContext({});
 
 const defaultProps = {
   components: {
-    inputComponent: DefaultInput
+    inputComponent: DefaultInput,
   },
   componentsOptions: {
     dateTimeAnswer: {
-      dateFormat: 'yyyy-MM-dd',
-      timeFormat: 'HH:mm:ss',
-      dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
+      dateFormat: "yyyy-MM-dd",
+      timeFormat: "HH:mm:ss",
+      dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
     },
-    readOnly: false
+    readOnly: false,
   },
   options: {
-    intl: { locale: 'en' },
+    intl: { locale: "en" },
     i18n: {
-      'wizard.next': 'Next',
-      'wizard.previous': 'Previous',
-      'section.collapse': 'Collapse',
-      'section.expand': 'Expand'
+      "wizard.next": "Next",
+      "wizard.previous": "Previous",
+      "section.collapse": "Collapse",
+      "section.expand": "Expand",
     },
     modalView: false,
     modalProps: {},
     horizontalWizardNav: true,
     wizardStepButtons: true,
     enableForwardSkip: false,
-    startingStep: 0
-  }
+    startingStep: 0,
+  },
 };
 
 const ConfigurationContextProvider = ({ children, ...props }) => {
   const values = useMemo(
     () => ({
-      inputComponent: (props.components && props.components.inputComponent) || defaultProps.components.inputComponent,
-      componentsOptions: { ...defaultProps.componentsOptions, ...props.componentsOptions },
+      inputComponent:
+        (props.components && props.components.inputComponent) ||
+        defaultProps.components.inputComponent,
+      componentsOptions: {
+        ...defaultProps.componentsOptions,
+        ...props.componentsOptions,
+      },
       options: { ...defaultProps.options, ...props.options },
-      mapComponent: props.mapComponent
+      mapComponent: props.mapComponent,
     }),
     [props]
   );
 
-  return <ConfigurationContext.Provider value={values}>{children}</ConfigurationContext.Provider>;
+  return (
+    <ConfigurationContext.Provider value={values}>
+      {children}
+    </ConfigurationContext.Provider>
+  );
 };
 
 ConfigurationContextProvider.propTypes = {
   children: PropTypes.element.isRequired,
   components: PropTypes.object,
   mapComponent: PropTypes.func,
-  options: PropTypes.object
+  options: PropTypes.object,
 };
 
 export { ConfigurationContext, ConfigurationContextProvider };

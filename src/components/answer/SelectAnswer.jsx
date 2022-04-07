@@ -1,10 +1,10 @@
-import React from 'react';
-import JsonLdUtils from 'jsonld-utils';
-import PropTypes from 'prop-types';
+import React from "react";
+import JsonLdUtils from "jsonld-utils";
+import PropTypes from "prop-types";
 
-import Constants from '../../constants/Constants';
-import FormUtils from '../../util/FormUtils';
-import { ConfigurationContext } from '../../contexts/ConfigurationContext';
+import Constants from "../../constants/Constants";
+import FormUtils from "../../util/FormUtils";
+import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 
 export default class SelectAnswer extends React.Component {
   _generateSelectOptions(options) {
@@ -23,7 +23,10 @@ export default class SelectAnswer extends React.Component {
 
     for (let i = 0; i < options.length; i++) {
       rendered.push(
-        <option value={JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)} key={'opt-' + i}>
+        <option
+          value={JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)}
+          key={"opt-" + i}
+        >
           {JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)}
         </option>
       );
@@ -37,14 +40,16 @@ export default class SelectAnswer extends React.Component {
     return React.createElement(
       this.context.inputComponent,
       {
-        type: 'select',
+        type: "select",
         label: this.props.label,
         value: this.props.value,
         title: this.props.title,
         onChange: (e) => {
           this.props.onChange(e.target.value);
         },
-        disabled: this.context.componentsOptions.readOnly || FormUtils.isDisabled(question)
+        disabled:
+          this.context.componentsOptions.readOnly ||
+          FormUtils.isDisabled(question),
       },
       this._generateSelectOptions(question[Constants.HAS_OPTION])
     );
@@ -58,5 +63,5 @@ SelectAnswer.propTypes = {
   label: PropTypes.object.isRequired,
   title: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };

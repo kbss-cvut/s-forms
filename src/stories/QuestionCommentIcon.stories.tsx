@@ -40,10 +40,10 @@ const Template: ComponentStory<typeof QuestionCommentIcon> = (
 
 export const Default = Template.bind({});
 Default.args = {
-  question: question
+  question: question,
 };
 
 export const WithComment = Template.bind({});
 WithComment.args = {
-  question: questionWithComment
+  question: questionWithComment,
 };

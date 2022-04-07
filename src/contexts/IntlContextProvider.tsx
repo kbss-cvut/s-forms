@@ -1,8 +1,8 @@
-import React, { ReactNode} from 'react';
-import Constants from '../constants/Constants';
-import cs from '../i18n/cs.json';
-import en from '../i18n/en.json';
-import { IntlProvider } from 'react-intl';
+import React, { ReactNode } from "react";
+import Constants from "../constants/Constants";
+import cs from "../i18n/cs.json";
+import en from "../i18n/en.json";
+import { IntlProvider } from "react-intl";
 
 export const IntlContext = React.createContext({});
 
@@ -11,7 +11,10 @@ interface Props {
   locale?: string;
 }
 
-const IntlContextProvider = ({ children, locale = navigator.language }: Props) => {
+const IntlContextProvider = ({
+  children,
+  locale = navigator.language,
+}: Props) => {
   let lang = en;
   if (locale === Constants.LANG.cs.locale) {
     lang = cs;

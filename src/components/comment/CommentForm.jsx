@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Form, Col, Row } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import ArrowRight from '../../styles/icons/ArrowRight';
-import { useIntl } from 'react-intl';
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Form, Col, Row } from "react-bootstrap";
+import PropTypes from "prop-types";
+import ArrowRight from "../../styles/icons/ArrowRight";
+import { useIntl } from "react-intl";
 
-const MAX_TEXT_AREA_HEIGHT = '300px';
+const MAX_TEXT_AREA_HEIGHT = "300px";
 
 const CommentForm = (props) => {
-  const [commentValue, setCommentValue] = useState('');
+  const [commentValue, setCommentValue] = useState("");
   const formInputRef = useRef(null);
   const intl = useIntl();
 
@@ -22,11 +22,12 @@ const CommentForm = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     props.onChange(commentValue);
-    setCommentValue('');
+    setCommentValue("");
   };
 
   const handleFormKeyUp = (e) => {
-    if (e.key === 'Enter' && e.ctrlKey && commentValue.trim()) handleFormSubmit(e);
+    if (e.key === "Enter" && e.ctrlKey && commentValue.trim())
+      handleFormSubmit(e);
   };
 
   const handleFormClick = (e) => {
@@ -35,7 +36,7 @@ const CommentForm = (props) => {
 
   const handleTextAreaKeyPress = () => {
     const textArea = formInputRef.current;
-    textArea.style.height = 'auto';
+    textArea.style.height = "auto";
     autoResizeTextArea(textArea);
   };
 
@@ -45,10 +46,14 @@ const CommentForm = (props) => {
     if (parseInt(textArea.style.height) > parseInt(MAX_TEXT_AREA_HEIGHT)) {
       textArea.style.height = MAX_TEXT_AREA_HEIGHT;
     }
-  }
+  };
 
   return (
-    <Form onSubmit={handleFormSubmit} onKeyUp={handleFormKeyUp} onClick={handleFormClick}>
+    <Form
+      onSubmit={handleFormSubmit}
+      onKeyUp={handleFormKeyUp}
+      onClick={handleFormClick}
+    >
       <Form.Group className="m-2" controlId="formBasicComment">
         <Col className="col-lg-12 p-0">
           <Row className="container-fluid p-0 m-0">
@@ -57,7 +62,9 @@ const CommentForm = (props) => {
                 className="comment-form-control"
                 name="comment"
                 as="textarea"
-                placeholder={intl.formatMessage({ id: 'comment.form.placeholder' })}
+                placeholder={intl.formatMessage({
+                  id: "comment.form.placeholder",
+                })}
                 required
                 value={commentValue}
                 onChange={handleValueChange}
@@ -65,7 +72,11 @@ const CommentForm = (props) => {
                 onKeyPress={handleTextAreaKeyPress}
                 onKeyDown={handleTextAreaKeyPress}
               />
-              <Button className="comment-form-button" variant="primary" type="submit">
+              <Button
+                className="comment-form-button"
+                variant="primary"
+                type="submit"
+              >
                 <ArrowRight />
               </Button>
             </div>
@@ -77,7 +88,7 @@ const CommentForm = (props) => {
 };
 
 CommentForm.propTypes = {
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default CommentForm;

@@ -1,6 +1,6 @@
-import enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { act } from 'react-dom/test-utils';
+import enzyme, { shallow, mount } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import { act } from "react-dom/test-utils";
 
 enzyme.configure({ adapter: new Adapter() });
 

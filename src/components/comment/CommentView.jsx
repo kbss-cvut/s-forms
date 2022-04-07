@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react';
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
-import cs from 'javascript-time-ago/locale/cs';
-import { ConfigurationContext } from '../../contexts/ConfigurationContext';
-import LinkIcon from '../LinkIcon';
-import IconOverlay from '../IconOverlay';
-import PropTypes from 'prop-types';
+import React, { useContext, useState } from "react";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+import cs from "javascript-time-ago/locale/cs";
+import { ConfigurationContext } from "../../contexts/ConfigurationContext";
+import LinkIcon from "../LinkIcon";
+import IconOverlay from "../IconOverlay";
+import PropTypes from "prop-types";
 import RecycleBin from "../../styles/icons/RecycleBin";
-import {motion} from 'framer-motion/dist/framer-motion';
+import { motion } from "framer-motion/dist/framer-motion";
 import Constants from "../../constants/Constants";
 
-const UNKNOWN_AUTHOR = 'Unknown author';
+const UNKNOWN_AUTHOR = "Unknown author";
 
 const CommentView = (props) => {
   const { options } = useContext(ConfigurationContext);
@@ -41,9 +41,9 @@ const CommentView = (props) => {
   };
 
   const getAuthorIRIAbbreviation = () => {
-    const fullAuthor = props.author['@id'];
+    const fullAuthor = props.author["@id"];
 
-    return fullAuthor.replace(/.*[#\/]/, '... ');
+    return fullAuthor.replace(/.*[#\/]/, "... ");
   };
 
   const getAuthorIRI = () => {
@@ -59,7 +59,10 @@ const CommentView = (props) => {
         {showIRI ? (
           <React.Fragment>
             {getAuthorLabel()}
-            <LinkIcon iconClassContainer="emphasise-on-relevant-icon" url={getAuthorIRI()} />
+            <LinkIcon
+              iconClassContainer="emphasise-on-relevant-icon"
+              url={getAuthorIRI()}
+            />
           </React.Fragment>
         ) : (
           getAuthorLabel()
@@ -75,16 +78,18 @@ const CommentView = (props) => {
 
     const getUTCFormat = () => {
       let dateOptions = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric'
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
       };
       const date = new Date(parseInt(props.timestamp));
-      return new Intl.DateTimeFormat(options.intl.locale, dateOptions).format(date);
+      return new Intl.DateTimeFormat(options.intl.locale, dateOptions).format(
+        date
+      );
     };
 
     return (
@@ -99,16 +104,20 @@ const CommentView = (props) => {
   };
 
   const handleCommentBinMouseEnter = () => {
-        setShowRecycleBin(!showRecycleBin)
-    }
+    setShowRecycleBin(!showRecycleBin);
+  };
 
-    const handleDeleteCommentClick = () => {
-        props.onDeleteQuestionComment(props.index);
-        props.onDeleteViewComment();
-    }
+  const handleDeleteCommentClick = () => {
+    props.onDeleteQuestionComment(props.index);
+    props.onDeleteViewComment();
+  };
 
-    return (
-        <div className="comment-content" onMouseEnter={handleCommentBinMouseEnter} onMouseLeave={handleCommentBinMouseEnter}>
+  return (
+    <div
+      className="comment-content"
+      onMouseEnter={handleCommentBinMouseEnter}
+      onMouseLeave={handleCommentBinMouseEnter}
+    >
       <div className="row">
         <div
           className="col-auto comment-author"
@@ -117,16 +126,19 @@ const CommentView = (props) => {
         >
           {renderAuthor()}
         </div>
-        <div className="col-auto text-muted comment-timestamp">{renderTimeAgo()}</div>
-                {showRecycleBin ?
-                    <motion.div
-                        className="comment-delete emphasise-on-relevant-icon"
-                        whileHover={{scale: 1.2}}
-                        whileTap={{scale: 0.9}}
-                        onClick={handleDeleteCommentClick}>
-                        <RecycleBin/>
-                    </motion.div>
-                : null }
+        <div className="col-auto text-muted comment-timestamp">
+          {renderTimeAgo()}
+        </div>
+        {showRecycleBin ? (
+          <motion.div
+            className="comment-delete emphasise-on-relevant-icon"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={handleDeleteCommentClick}
+          >
+            <RecycleBin />
+          </motion.div>
+        ) : null}
       </div>
       <div className="row">
         <div className="col comment-value">{props.commentValue}</div>
@@ -141,7 +153,7 @@ CommentView.propTypes = {
   commentValue: PropTypes.string.isRequired,
   onDeleteQuestionComment: PropTypes.func.isRequired,
   onDeleteViewComment: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
 };
 
 export default CommentView;

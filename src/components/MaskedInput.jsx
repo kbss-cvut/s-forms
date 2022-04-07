@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import InputMask from 'inputmask-core';
-import MaskMapper from '../util/MaskMapper';
-import { ConfigurationContext } from '../contexts/ConfigurationContext';
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import InputMask from "inputmask-core";
+import MaskMapper from "../util/MaskMapper";
+import { ConfigurationContext } from "../contexts/ConfigurationContext";
 
 const KEYCODE_Z = 90;
 const KEYCODE_Y = 89;
@@ -34,7 +34,7 @@ function getSelection(el) {
       clone = rangeEl.duplicate();
 
       rangeEl.moveToBookmark(document.selection.createRange().getBookmark());
-      clone.setEndPoint('EndToStart', rangeEl);
+      clone.setEndPoint("EndToStart", rangeEl);
 
       start = clone.text.length;
       end = start + rangeEl.text.length;
@@ -57,8 +57,8 @@ function setSelection(el, selection) {
       el.focus();
       rangeEl = el.createTextRange();
       rangeEl.collapse(true);
-      rangeEl.moveStart('character', selection.start);
-      rangeEl.moveEnd('character', selection.end - selection.start);
+      rangeEl.moveStart("character", selection.start);
+      rangeEl.moveEnd("character", selection.end - selection.start);
       rangeEl.select();
     }
   } catch (e) {
@@ -74,7 +74,7 @@ export default class MaskedInput extends React.Component {
       pattern: MaskMapper.mapMask(props.mask),
       value: props.value,
       formatCharacters: props.formatCharacters,
-      placeholderChar: props.placeholderChar || '_'
+      placeholderChar: props.placeholderChar || "_",
     });
   }
 
@@ -83,20 +83,27 @@ export default class MaskedInput extends React.Component {
       this._updatePattern(this.props);
     }
 
-    if (prevProps.mask !== this.props.mask && prevProps.value !== this.props.mask) {
+    if (
+      prevProps.mask !== this.props.mask &&
+      prevProps.value !== this.props.mask
+    ) {
       // if we get a new value and a new mask at the same time
       // check if the mask.value is still the initial value
       // - if so use the nextProps value
       // - otherwise the `this.mask` has a value for us (most likely from paste action)
       if (this.mask.getValue() === this.mask.emptyValue) {
-        this.mask.setPattern(MaskMapper.mapMask(this.props.mask), { value: this.props.value });
+        this.mask.setPattern(MaskMapper.mapMask(this.props.mask), {
+          value: this.props.value,
+        });
       } else {
         this.mask.setPattern(MaskMapper.mapMask(this.props.mask), {
-          value: this.mask.getRawValue()
+          value: this.mask.getRawValue(),
         });
       }
     } else if (prevProps.mask !== this.props.mask) {
-      this.mask.setPattern(MaskMapper.mapMask(this.props.mask), { value: this.mask.getRawValue() });
+      this.mask.setPattern(MaskMapper.mapMask(this.props.mask), {
+        value: this.mask.getRawValue(),
+      });
     } else if (prevProps.value !== this.props.value) {
       this.mask.setValue(this.props.value);
     }
@@ -109,7 +116,7 @@ export default class MaskedInput extends React.Component {
   _updatePattern = (props) => {
     this.mask.setPattern(MaskMapper.mapMask(props.mask), {
       value: this.mask.getRawValue(),
-      selection: getSelection(this.input)
+      selection: getSelection(this.input),
     });
   };
 
@@ -162,7 +169,7 @@ export default class MaskedInput extends React.Component {
           this.props.onChange(e);
         }
       }
-    } else if (e.key === 'Backspace') {
+    } else if (e.key === "Backspace") {
       e.preventDefault();
       this._updateMaskSelection();
       if (this.mask.backspace()) {
@@ -181,7 +188,7 @@ export default class MaskedInput extends React.Component {
   _onKeyPress = (e) => {
     // Ignore modified key presses
     // Ignore enter key to allow form submission
-    if (e.metaKey || e.altKey || e.ctrlKey || e.key === 'Enter') {
+    if (e.metaKey || e.altKey || e.ctrlKey || e.key === "Enter") {
       return;
     }
 
@@ -200,7 +207,7 @@ export default class MaskedInput extends React.Component {
     e.preventDefault();
     this._updateMaskSelection();
     // getData value needed for IE also works in FF & Chrome
-    if (this.mask.paste(e.clipboardData.getData('Text'))) {
+    if (this.mask.paste(e.clipboardData.getData("Text"))) {
       e.target.value = this.mask.getValue();
       // Timeout needed for IE
       setTimeout(this._updateInputSelection, 0);
@@ -212,7 +219,7 @@ export default class MaskedInput extends React.Component {
 
   _getDisplayValue() {
     const value = this.mask.getValue();
-    return value === this.mask.emptyValue ? '' : value;
+    return value === this.mask.emptyValue ? "" : value;
   }
 
   focus() {
@@ -242,7 +249,7 @@ export default class MaskedInput extends React.Component {
       placeholder: placeholder || this.mask.emptyValue,
       size: size || patternLength,
       value: this._getDisplayValue(),
-      type: 'text'
+      type: "text",
     });
   }
 }
@@ -250,9 +257,9 @@ export default class MaskedInput extends React.Component {
 MaskedInput.contextType = ConfigurationContext;
 
 MaskedInput.propTypes = {
-  mask: PropTypes.string.isRequired
+  mask: PropTypes.string.isRequired,
 };
 
 MaskedInput.defaultProps = {
-  value: ''
+  value: "",
 };

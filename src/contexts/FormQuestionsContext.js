@@ -1,6 +1,6 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import FormUtils from '../util/FormUtils';
+import React, { useMemo, useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import FormUtils from "../util/FormUtils";
 
 const INITIAL_DATA = {};
 const INITIAL_FORM_QUESTIONS_DATA = [];
@@ -9,7 +9,9 @@ const FormQuestionsContext = React.createContext({});
 
 const FormQuestionsProvider = (props) => {
   const [data, setData] = useState(props.data || INITIAL_DATA);
-  const [formQuestionsData, setFormQuestionsData] = useState(props.formQuestions || INITIAL_FORM_QUESTIONS_DATA);
+  const [formQuestionsData, setFormQuestionsData] = useState(
+    props.formQuestions || INITIAL_FORM_QUESTIONS_DATA
+  );
 
   useEffect(() => {
     if (props.isFormValid) {
@@ -48,7 +50,9 @@ const FormQuestionsProvider = (props) => {
   };
 
   const getFormQuestionsData = (index) => {
-    return index === null || index === undefined ? formQuestionsData : formQuestionsData[index];
+    return index === null || index === undefined
+      ? formQuestionsData
+      : formQuestionsData[index];
   };
 
   const values = useMemo(
@@ -56,7 +60,7 @@ const FormQuestionsProvider = (props) => {
       updateData,
       updateFormQuestionsData,
       getData,
-      getFormQuestionsData
+      getFormQuestionsData,
     }),
     [getFormQuestionsData, getData]
   );
@@ -72,7 +76,7 @@ FormQuestionsProvider.propTypes = {
   children: PropTypes.element.isRequired,
   data: PropTypes.object.isRequired,
   formQuestions: PropTypes.array.isRequired,
-  isFormValid: PropTypes.func
+  isFormValid: PropTypes.func,
 };
 
 export { FormQuestionsContext, FormQuestionsProvider };

@@ -1,23 +1,26 @@
-import React from 'react';
-import { Button, ButtonToolbar, Card } from 'react-bootstrap';
-import JsonLdUtils from 'jsonld-utils';
-import PropTypes from 'prop-types';
-import Constants from '../../constants/Constants';
-import { FormQuestionsContext } from '../../contexts/FormQuestionsContext';
-import Question from '../Question';
-import JsonLdObjectMap from '../../util/JsonLdObjectMap';
+import React from "react";
+import { Button, ButtonToolbar, Card } from "react-bootstrap";
+import JsonLdUtils from "jsonld-utils";
+import PropTypes from "prop-types";
+import Constants from "../../constants/Constants";
+import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
+import Question from "../Question";
+import JsonLdObjectMap from "../../util/JsonLdObjectMap";
 import QuestionStatic from "../QuestionStatic.jsx";
 
 export default class WizardStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showIcon: false
+      showIcon: false,
     };
   }
 
   onNextStep = () => {
-    this.context.updateFormQuestionsData(this.props.stepIndex, this.context.getFormQuestionsData());
+    this.context.updateFormQuestionsData(
+      this.props.stepIndex,
+      this.context.getFormQuestionsData()
+    );
     this.props.onNextStep();
   };
 
@@ -33,7 +36,7 @@ export default class WizardStep extends React.Component {
     let newState = { ...this.props.step };
     newState[att][valueIndex] = newValue;
 
-    JsonLdObjectMap.putObject(newState['@id'], newState);
+    JsonLdObjectMap.putObject(newState["@id"], newState);
     this.onChange(this.props.index, newState);
   }
 
@@ -41,13 +44,18 @@ export default class WizardStep extends React.Component {
     return (
       <ButtonToolbar className="m-3 float-right">
         {!this.props.isFirstStep && (
-          <Button className="mr-2" onClick={this.onPreviousStep} variant="primary" size="sm">
-            {this.props.options.i18n['wizard.previous']}
+          <Button
+            className="mr-2"
+            onClick={this.onPreviousStep}
+            variant="primary"
+            size="sm"
+          >
+            {this.props.options.i18n["wizard.previous"]}
           </Button>
         )}
         {!this.props.isLastStep && (
           <Button onClick={this.onNextStep} variant="primary" size="sm">
-            {this.props.options.i18n['wizard.next']}
+            {this.props.options.i18n["wizard.next"]}
           </Button>
         )}
       </ButtonToolbar>
@@ -57,7 +65,7 @@ export default class WizardStep extends React.Component {
   onChange = (index, change) => {
     this.context.updateFormQuestionsData(this.props.stepIndex || index, {
       ...this.props.step,
-      ...change
+      ...change,
     });
   };
 
@@ -79,7 +87,7 @@ export default class WizardStep extends React.Component {
       question: this.props.step,
       onChange: this.onChange,
       withoutCard: true,
-      index: this.props.stepIndex
+      index: this.props.stepIndex,
     });
 
     return (
@@ -88,17 +96,26 @@ export default class WizardStep extends React.Component {
           <Card.Header
             className="bg-primary text-white question-header"
             as="h6"
-            id={this.props.step['@id']}
+            id={this.props.step["@id"]}
             onMouseEnter={this._onMouseEnterHandler}
             onMouseLeave={this._onMouseLeaveHandler}
           >
-            {JsonLdUtils.getLocalized(this.props.step[JsonLdUtils.RDFS_LABEL], this.props.options.intl)}
-            {QuestionStatic.renderIcons(question, options, this.onCommentChange, this.state.showIcon)}
+            {JsonLdUtils.getLocalized(
+              this.props.step[JsonLdUtils.RDFS_LABEL],
+              this.props.options.intl
+            )}
+            {QuestionStatic.renderIcons(
+              question,
+              options,
+              this.onCommentChange,
+              this.state.showIcon
+            )}
           </Card.Header>
           <Card.Body className={categoryClass}>{questionElement}</Card.Body>
         </Card>
 
-        {this.props.options.wizardStepButtons && this._renderWizardStepButtons()}
+        {this.props.options.wizardStepButtons &&
+          this._renderWizardStepButtons()}
       </div>
     );
   }
@@ -114,5 +131,5 @@ WizardStep.propTypes = {
   mapComponent: PropTypes.func,
   stepIndex: PropTypes.number.isRequired,
   isFirstStep: PropTypes.bool,
-  isLastStep: PropTypes.bool
+  isLastStep: PropTypes.bool,
 };
