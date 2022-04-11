@@ -24,7 +24,7 @@ jobs:
   automated-version-bump:
     runs-on: ubuntu-latest
     steps:
-      - uses: phips28/gh-action-bump-version@master\
+      - uses: phips28/gh-action-bump-version@v9.0.16
         with:
           default: prerelease
           preid: 'prc'
