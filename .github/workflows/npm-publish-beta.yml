@@ -20,8 +20,18 @@ jobs:
 #      - run: npm ci
 #      - run: npm test
 #
+
+  automated-version-bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: phips28/gh-action-bump-version@master\
+        with:
+          default: prerelease
+          preid: 'prc'
+
   publish-npm-beta:
 #    needs: test
+    needs: automated-version-bump
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
