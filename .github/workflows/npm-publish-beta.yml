@@ -32,7 +32,7 @@ jobs:
       - run: npm ci
       - run: |
         chmod +x ./scripts/gitbump.sh
-        ./scripts/gitbump.sh-
+        ./scripts/gitbump.sh |
       - run: npm run build
       - run: npm publish --tag beta --access public
         env:
