@@ -1,6 +1,6 @@
 {
   "name": "@kbss-cvut/s-forms",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -111,6 +111,11 @@
     "chromatic": "npx chromatic",
     "release:beta": "standard-version --prerelease beta",
     "release": "standard-version --release-as patch"
+  },
+  "standard-version": {
+    "skip": {
+      "changelog": true
+    }
   },
   "files": [
     "dist/",
