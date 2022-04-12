@@ -42,6 +42,6 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run build
-      - run: npm publish --tag beta --access public
+      - run: npm publish --tag beta --access public --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
