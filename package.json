@@ -40,10 +40,6 @@
   "module": "./dist/s-forms.js",
   "unpkg": "./dist/s-forms.umd.js",
   "private": false,
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/kbss-cvut"
-  },
   "dependencies": {
     "@luigiminardim/storybook-addon-globals-controls": "^0.1.3",
     "@triply/yasgui": "^4.2.14",
