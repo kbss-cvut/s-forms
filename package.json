@@ -1,6 +1,6 @@
 {
   "name": "@kbss-cvut/s-forms",
-  "version": "0.3.10",
+  "version": "0.3.11-0",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -101,6 +101,7 @@
     "query-string": "^6.13.5",
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
+    "standard-version": "^9.3.2",
     "style-loader": "^1.2.1",
     "typescript": "^4.5.5",
     "watchify": "^3.11.1"
@@ -113,8 +114,7 @@
     "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
-    "prepublishOnly": "git push --follow-tags && gh-release -y",
-    "version": "auto-changelog -p --template keepachangelog auto-changelog --breaking-pattern 'BREAKING CHANGE:' && git add CHANGELOG.md"
+    "release": "standard-version --prerelease"
   },
   "files": [
     "dist/",
