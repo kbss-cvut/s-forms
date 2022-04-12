@@ -25,10 +25,13 @@ jobs:
 #    needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: phips28/gh-action-bump-version@v9.0.16
+      - uses: PaulHatch/semantic-version@v4.0.2
         with:
-          default: prerelease
-          preid: 'prc'
+          branch: npm
+          tag_prefix: "beta"
+          major_pattern: "BREAKING CHANGE:"
+          minor_pattern: "feat:"
+          format: "v${major}.${minor}.${patch}-prerelease${increment}"
 
   publish-npm-beta:
 #    needs: test
