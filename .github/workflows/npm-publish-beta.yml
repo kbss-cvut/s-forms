@@ -45,7 +45,7 @@ jobs:
         with:
           git_email: blcham@gmail.com
           git_username: blcham
-          newversion: ${{ github.event.inputs.newversion }}
+          newversion: minor
           npm_token: ${{secrets.NPM_AUTH_TOKEN}}
       - run: npm ci
       - run: npm run build
