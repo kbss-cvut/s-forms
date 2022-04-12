@@ -21,8 +21,12 @@ jobs:
 #      - run: npm test
 #
 
-  automated-version-bump:
+
+
+
+  publish-npm-beta:
 #    needs: test
+    needs: automated-version-bump
     runs-on: ubuntu-latest
     steps:
       - uses: PaulHatch/semantic-version@v4.0.2
@@ -32,12 +36,6 @@ jobs:
           major_pattern: "BREAKING CHANGE:"
           minor_pattern: "feat:"
           format: "v${major}.${minor}.${patch}-prerelease${increment}"
-
-  publish-npm-beta:
-#    needs: test
-    needs: automated-version-bump
-    runs-on: ubuntu-latest
-    steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
