@@ -113,7 +113,8 @@
     "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
-    "release": "standard-version --prerelease"
+    "release:beta": "standard-version --prerelease beta",
+    "release:minor": "standard-version"
   },
   "files": [
     "dist/",
