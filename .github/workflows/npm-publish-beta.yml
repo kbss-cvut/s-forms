@@ -31,7 +31,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org
       - run: npm ci
-      - run: npm run prerelease:beta
+      - run: npm run release:beta
       - run: npm run build
       - run: npm publish --access public --ignore-scripts --tag beta
         env:
