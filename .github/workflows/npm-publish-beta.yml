@@ -34,7 +34,7 @@ jobs:
 
   publish-npm-beta:
 #    needs: test
-#    needs: automated-version-bump
+    needs: checkout
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v2
