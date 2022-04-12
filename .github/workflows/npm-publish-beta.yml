@@ -37,18 +37,16 @@ jobs:
 #    needs: automated-version-bump
     runs-on: ubuntu-latest
     steps:
-      - uses: PaulHatch/semantic-version@v4.0.2
-        with:
-          branch: npm
-          tag_prefix: "beta"
-          major_pattern: "BREAKING CHANGE:"
-          minor_pattern: "feat:"
-          format: "v${major}.${minor}.${patch}-prerelease${increment}"
-      - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org
+      - uses: bcomnes/npm-bump@v2.0.2
+        with:
+          git_email: blcham@gmail.com
+          git_username: blcham
+          newversion: ${{ github.event.inputs.newversion }}
+          npm_token: ${{secrets.NPM_AUTH_TOKEN}}
       - run: npm ci
       - run: npm run build
       - run: npm publish --tag beta --access public --ignore-scripts

@@ -110,7 +110,9 @@
     "lib": "babel ./src -d ./lib",
     "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepublishOnly": "git push --follow-tags && gh-release -y",
+    "version": "auto-changelog -p --template keepachangelog auto-changelog --breaking-pattern 'BREAKING CHANGE:' && git add CHANGELOG.md"
   },
   "files": [
     "dist/",
