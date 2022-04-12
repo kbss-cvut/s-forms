@@ -40,6 +40,6 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run build
-      - run: npm publish --tag beta --access public --npm.publishArgs="--registry=https://registry.npmjs.org"
+      - run: npm publish --tag beta --access public --npm.publishArgs="--registry=https://registry.npmjs.org/kbss-cvut"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
