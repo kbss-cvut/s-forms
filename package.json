@@ -1,6 +1,6 @@
 {
   "name": "@kbss-cvut/s-forms",
-  "version": "0.3.11-184",
+  "version": "0.3.11-232",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -95,8 +95,6 @@
     "clean-css-cli": "^4.3.0",
     "css-loader": "^3.5.3",
     "enzyme": "^3.11.0",
-    "gh-release": "^6.0.3",
-    "husky": "^7.0.4",
     "jest": "^26.0.1",
     "prettier": "^2.5.1",
     "query-string": "^6.13.5",
@@ -115,8 +113,7 @@
     "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
-    "release": "standard-version --prerelease",
-    "prepare": "husky install"
+    "release": "standard-version --prerelease"
   },
   "files": [
     "dist/",
