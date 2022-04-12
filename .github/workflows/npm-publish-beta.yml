@@ -34,7 +34,7 @@ jobs:
 
   publish-npm-beta:
 #    needs: test
-    needs: automated-version-bump
+#    needs: automated-version-bump
     runs-on: ubuntu-latest
     steps:
       - uses: PaulHatch/semantic-version@v4.0.2
