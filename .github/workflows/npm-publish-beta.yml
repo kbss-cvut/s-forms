@@ -41,13 +41,13 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org
+      - run: npm ci
       - uses: bcomnes/npm-bump@v2.0.2
         with:
           git_email: blcham@gmail.com
           git_username: blcham
           newversion: minor
           npm_token: ${{secrets.NPM_AUTH_TOKEN}}
-      - run: npm ci
       - run: npm run build
       - run: npm publish --tag beta --access public --ignore-scripts
         env:
