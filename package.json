@@ -1,5 +1,5 @@
 {
-  "name": "s-forms",
+  "name": "@kbss-cvut/s-forms",
   "version": "0.3.5",
   "description": "Semantic forms generator and processor",
   "keywords": [
