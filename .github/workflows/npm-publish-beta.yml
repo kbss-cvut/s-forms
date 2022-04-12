@@ -21,25 +21,27 @@ jobs:
 #      - run: npm test
 #
 
-  automated-version-bump:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: phips28/gh-action-bump-version@v9.0.16
-        with:
-          default: prerelease
-          preid: 'prc'
+#  automated-version-bump:
+##    needs: test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: phips28/gh-action-bump-version@v9.0.16
+#        with:
+#          default: prerelease
+#          preid: 'prc'
 
   publish-npm-beta:
 #    needs: test
-    needs: automated-version-bump
+#    needs: automated-version-bump
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run build
-      - run: npm publish --tag beta --access public --npm.publishArgs="--registry=https://registry.npmjs.org/kbss-cvut"
+      - run: npm publish --tag beta --access public --ignore-scripts"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
