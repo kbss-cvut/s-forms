@@ -37,9 +37,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           node-version: 16
-          registry-url: https://registry.npmjs.org/kbss-cvut
+          registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run build
-      - run: npm publish --tag beta --access public
+      - run: npm publish --tag beta --access public --npm.publishArgs="--registry=https://registry.npmjs.org"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
