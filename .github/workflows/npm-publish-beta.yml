@@ -22,7 +22,8 @@ jobs:
 #      - uses: TriPSs/conventional-changelog-action@v3
       - uses: 'phips28/gh-action-bump-version@master'
         with:
-          rc-wording: ''
+          skip-tag: 'true'
+          default: prerelease
       - uses: actions/setup-node@v2
         with:
           node-version: 16
