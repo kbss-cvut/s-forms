@@ -20,7 +20,9 @@ jobs:
         with:
           fetch-depth: 0
 #      - uses: TriPSs/conventional-changelog-action@v3
-      - uses: 'phips28/gh-action-bump-version@master'
+      - uses: 'phips28/gh-action-bump-version@0.1.1'
+        with:
+          rc-wording: ''
       - uses: actions/setup-node@v2
         with:
           node-version: 16
