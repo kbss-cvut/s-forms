@@ -20,9 +20,9 @@ jobs:
         with:
           fetch-depth: 0
 #      - uses: TriPSs/conventional-changelog-action@v3
-      - uses: kaskar2008/action-auto-bump-version@v1
+      - uses: 'phips28/gh-action-bump-version@master'
         with:
-          should-default: true
+          default: prerelease
       - uses: actions/setup-node@v2
         with:
           node-version: 16
