@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: TriPSs/conventional-changelog-action@master
+      - uses: TriPSs/conventional-changelog-action@v3
         with:
           git-message: 'chore(release): {version}'
       - uses: actions/setup-node@v2
