@@ -8,28 +8,31 @@ on:
     branches:
       - '*'
       - '!master'
-    paths-ignore:
-      - 'package.json'
-      - 'CHANGELOG.md'
 
 jobs:
   publish-npm-beta:
+#    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
 #      - uses: TriPSs/conventional-changelog-action@v3
+#        with:
+#          tag-prefix: ''
+#          output-file: 'false'
       - uses: 'phips28/gh-action-bump-version@master'
         with:
           skip-tag: 'true'
+          skip-commit: 'true'
           default: prerelease
+          preid: 'alpha'
       - uses: actions/setup-node@v2
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run build
-      - run: npm publish --access public --ignore-scripts --tag beta
+      - run: npm publish --access public --ignore-scripts --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
