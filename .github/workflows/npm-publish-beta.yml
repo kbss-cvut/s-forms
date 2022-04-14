@@ -21,6 +21,8 @@ jobs:
           fetch-depth: 0
 #      - uses: TriPSs/conventional-changelog-action@v3
       - uses: kaskar2008/action-auto-bump-version@v1
+        with:
+          should-default: true
       - uses: actions/setup-node@v2
         with:
           node-version: 16
