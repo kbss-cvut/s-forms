@@ -26,7 +26,7 @@ jobs:
           skip-tag: 'true'
           skip-commit: 'true'
           default: prerelease
-          preid: '${{github.ref_name}}'
+          preid: '${{ toJSON(github.ref_name) }}'
       - uses: actions/setup-node@v2
         with:
           node-version: 16
