@@ -26,7 +26,7 @@ jobs:
           skip-tag: 'true'
           skip-commit: 'true'
           default: prerelease
-          preid: 'alpha'
+          preid: '${{github.head_ref}}'
       - uses: actions/setup-node@v2
         with:
           node-version: 16
