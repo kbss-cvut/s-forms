@@ -1,6 +1,6 @@
 {
   "name": "@kbss-cvut/s-forms",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
