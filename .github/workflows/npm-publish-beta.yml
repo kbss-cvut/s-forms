@@ -26,7 +26,7 @@ jobs:
         with:
           default: prerelease
           rc-wording: null
-          preid: ${{ steps.commit.outputs.short }}
+          preid: ${{ github.event.workflow_run.head_sha }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
