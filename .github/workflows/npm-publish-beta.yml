@@ -13,17 +13,18 @@ jobs:
   publish-npm-beta:
 #    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    env:
-      SHORTSHA: $(git rev-parse --short=8 ${{ github.sha }})
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - uses: benjlevesque/short-sha@v1.2
+        with:
+          length: 6
       - uses: 'phips28/gh-action-bump-version@master'
         with:
           default: prerelease
           rc-wording: null
-          preid: ${SHORTSHA}
+          preid: ${{ toJSON(steps.short-sha.outputs.sha) }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
