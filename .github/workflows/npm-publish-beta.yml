@@ -26,7 +26,7 @@ jobs:
           skip-tag: 'true'
           skip-commit: 'true'
           default: prerelease
-          preid: 'beta'
+          preid: 'next'
           rc-wording: 'add,Adds,test,alpha,beta,[Upd],[UPD],[New],[NEW],[Fix],[FIX],[Test]'
       - uses: actions/setup-node@v2
         with:
@@ -34,6 +34,6 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run build
-      - run: npm publish --access public --ignore-scripts --tag beta
+      - run: npm publish --access public --ignore-scripts --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
