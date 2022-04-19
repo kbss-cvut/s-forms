@@ -23,7 +23,7 @@ jobs:
         with:
           default: prerelease
           rc-wording: null
-          preid: ${{ toJSON(SHA) }}
+          preid: $(SHA)
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
