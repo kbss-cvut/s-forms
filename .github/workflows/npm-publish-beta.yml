@@ -25,6 +25,7 @@ jobs:
         with:
           default: prerelease
           patch-wording: 'patch'
+          rc-wording: null
           preid: 'next'
           skip-tag: 'true'
           skip-commit: 'true'
