@@ -13,16 +13,17 @@ jobs:
   publish-npm-beta:
 #    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      SHA: $(git rev-parse --short "$GITHUB_SHA")
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: pr-mpt/actions-commit-hash@v1
       - uses: 'phips28/gh-action-bump-version@master'
         with:
           default: prerelease
           rc-wording: null
-          preid: ${{ toJSON(github.sha.short) }}
+          preid: ${{ toJSON(SHA) }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
