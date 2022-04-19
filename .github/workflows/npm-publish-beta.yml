@@ -21,12 +21,12 @@ jobs:
 #        with:
 #          tag-prefix: ''
 #          output-file: 'false'
+      - uses: pr-mpt/actions-commit-hash@v1
       - uses: 'phips28/gh-action-bump-version@master'
         with:
           default: prerelease
-          patch-wording: 'patch'
           rc-wording: null
-          preid: 'next'
+          preid: ${{ steps.commit.outputs.short }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
