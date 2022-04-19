@@ -23,8 +23,6 @@ jobs:
 #          output-file: 'false'
       - uses: 'phips28/gh-action-bump-version@master'
         with:
-          skip-tag: 'true'
-          skip-commit: 'true'
           default: prerelease
           preid: 'next'
           rc-wording: 'add,Adds,test,alpha,beta,[Upd],[UPD],[New],[NEW],[Fix],[FIX],[Test]'
