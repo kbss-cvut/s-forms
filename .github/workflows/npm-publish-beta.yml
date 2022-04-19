@@ -17,16 +17,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-#      - uses: TriPSs/conventional-changelog-action@v3
-#        with:
-#          tag-prefix: ''
-#          output-file: 'false'
       - uses: pr-mpt/actions-commit-hash@v1
       - uses: 'phips28/gh-action-bump-version@master'
         with:
           default: prerelease
           rc-wording: null
-          preid: ${{ toJSON(github.sha) }}
+          preid: ${{ toJSON(steps.commit.outputs.short) }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
