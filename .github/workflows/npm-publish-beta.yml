@@ -17,14 +17,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: benjlevesque/short-sha@v1.2
-        with:
-          length: 6
       - uses: 'phips28/gh-action-bump-version@master'
         with:
           default: prerelease
           rc-wording: null
-          preid: ${{ toJSON(steps.short-sha.outputs.sha) }}
+          preid: ${{ toJSON(github.sha) }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
