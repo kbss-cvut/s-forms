@@ -23,7 +23,7 @@ jobs:
         with:
           default: prerelease
           rc-wording: null
-          preid: ${{ steps.vars.outputs.sha_short }}
+          preid: echo ${{ steps.vars.outputs.sha_short }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
