@@ -109,13 +109,9 @@
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic",
-    "release:beta": "standard-version --prerelease beta",
-    "release": "standard-version --release-as patch"
-  },
-  "standard-version": {
-    "skip": {
-      "changelog": true
-    }
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major",
+    "release:minor": "standard-version --release-as minor"
   },
   "files": [
     "dist/",
