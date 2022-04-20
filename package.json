@@ -1,6 +1,6 @@
 {
   "name": "@kbss-cvut/s-forms",
-  "version": "0.3.16-0",
+  "version": "0.4.0",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -107,9 +107,9 @@
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic",
-    "release:patch": "standard-version --release-as patch",
-    "release:major": "standard-version --release-as major",
-    "release:minor": "standard-version --release-as minor"
+    "release:patch": "standard-version --release-as patch && npm publish",
+    "release:major": "standard-version --release-as major && npm publish",
+    "release:minor": "standard-version --release-as minor && npm publish"
   },
   "files": [
     "dist/",
