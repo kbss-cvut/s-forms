@@ -17,13 +17,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-      - run: echo ${{ steps.vars.outputs.sha_short }}
       - uses: 'phips28/gh-action-bump-version@master'
         with:
           default: prerelease
           rc-wording: null
-          preid: echo ${{ steps.vars.outputs.sha_short }}
+          preid: ${{ toJSON(SHORTSHA) }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
@@ -33,6 +31,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm publish --access public --ignore-scripts
-#      - run: npm dist-tag add @kbss-cvut/s-forms@${{ toJSON(github.sha) }} next
+      - run: npm dist-tag add @kbss-cvut/s-forms@${{ toJSON(github.sha) }} next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+          SHORTSHA: $(git rev-parse --short=4 ${{ github.sha }})
