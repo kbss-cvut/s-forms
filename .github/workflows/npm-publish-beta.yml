@@ -21,7 +21,7 @@ jobs:
         with:
           default: prerelease
           rc-wording: null
-          preid: ${{ toJSON(github.sha::8) }}
+          preid: ${{ toJSON(github.sha) }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
