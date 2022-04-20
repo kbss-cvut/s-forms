@@ -21,7 +21,7 @@ jobs:
         with:
           default: prerelease
           rc-wording: null
-          preid: ${{ toJSON($(SHORTSHA)) }}
+          preid: ${{ toJSON(GITHUB_SHA::8) }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
@@ -31,7 +31,6 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm publish --access public --ignore-scripts
-      - run: npm dist-tag add @kbss-cvut/s-forms@${{ toJSON(github.sha) }} next
+#      - run: npm dist-tag add @kbss-cvut/s-forms@${{ toJSON(github.sha) }} next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-          SHORTSHA: $(git rev-parse --short=4 ${{ github.sha }})
