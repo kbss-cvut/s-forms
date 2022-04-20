@@ -21,7 +21,7 @@ jobs:
         with:
           default: prerelease
           rc-wording: null
-          preid: ${{ toJSON(SHORTSHA) }}
+          preid: ${{ toJSON(${SHORTSHA}) }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
