@@ -30,15 +30,6 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run build
-      - run: npm publish --access public --ignore-scripts
-#      - run: npm dist-tag add @kbss-cvut/s-forms@${{ toJSON(github.sha) }}.0 next
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-
-  add-npm-tag-next:
-    runs-on: ubuntu-latest
-    needs: publish-npm-beta
-    steps:
-      - run: npm dist-tag add @kbss-cvut/s-forms@${{ github.sha }}.0 next
+      - run: npm publish --access public --ignore-scripts --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
