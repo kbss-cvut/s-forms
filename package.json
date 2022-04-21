@@ -1,6 +1,6 @@
 {
   "name": "@kbss-cvut/s-forms",
-  "version": "0.3.11-233",
+  "version": "0.3.5",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -109,12 +109,11 @@
     "test": "jest",
     "dev": "start-storybook -p 6006",
     "build": "microbundle --jsx React.createElement && npm run build:css",
-    "lib": "babel ./src -d ./lib",
-    "build:lib": "npm run build && npm run build:css && npm pack",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
-    "release:beta": "standard-version --prerelease beta",
-    "release:minor": "standard-version"
+    "release:patch": "npm test && standard-version --release-as patch && npm publish",
+    "release:major": "npm test && standard-version --release-as major && npm publish",
+    "release:minor": "npm test && standard-version --release-as minor && npm publish"
   },
   "files": [
     "dist/",
