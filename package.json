@@ -112,7 +112,7 @@
     "release:minor": "standard-version --release-as minor && npm publish"
   },
   "standard-version": {
-    "releaseCommitMessageFormat": "Bumped version to {{currentTag}}"
+    "releaseCommitMessageFormat": "[{{currentTag}}] Bumped version"
   },
   "files": [
     "dist/",
