@@ -24,7 +24,7 @@ jobs:
           minor-wording: ''
           major-wording: ''
           patch-wording: ''
-          rc-wording: ''
+          rc-wording: null
           preid: ${{ format('alpha-{0}', steps.sha.outputs.sha_short) }}
           skip-tag: 'true'
           skip-commit: 'true'
