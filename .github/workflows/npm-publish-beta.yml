@@ -34,8 +34,7 @@ jobs:
         with:
           default: prerelease
           rc-wording: null
-#          -beta-[::8].0
-          preid: ${{ steps.sha.outputs.sha_short }}
+          preid: beta- ${{ steps.sha.outputs.sha_short }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
