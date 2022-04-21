@@ -32,7 +32,7 @@ jobs:
           default: prerelease
           rc-wording: null
 #          -beta-[::8].0
-          preid: ${{ github.sha }}
+          preid: ${{ (github.sha).substr(0,8) }}
           skip-tag: 'true'
           skip-commit: 'true'
       - uses: actions/setup-node@v2
