@@ -1,5 +1,5 @@
 {
-  "name": "s-forms",
+  "name": "@kbss-cvut/s-forms",
   "version": "0.3.5",
   "description": "Semantic forms generator and processor",
   "keywords": [
@@ -36,10 +36,11 @@
   },
   "type": "module",
   "source": "src/s-forms.js",
+  "main": "dist/s-forms.js",
   "exports": "./dist/s-forms.modern.js",
   "module": "./dist/s-forms.js",
   "unpkg": "./dist/s-forms.umd.js",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@luigiminardim/storybook-addon-globals-controls": "^0.1.3",
     "@triply/yasgui": "^4.2.14",
@@ -71,7 +72,6 @@
     "react-bootstrap": "1.0.1",
     "react-dom": ">= 17.0.2"
   },
-  "main": "dist/s-forms.js",
   "devDependencies": {
     "@storybook/addon-a11y": "^6.4.19",
     "@storybook/addon-actions": "^6.4.19",
@@ -95,6 +95,7 @@
     "query-string": "^6.13.5",
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
+    "standard-version": "^9.3.2",
     "style-loader": "^1.2.1",
     "typescript": "^4.5.5",
     "watchify": "^3.11.1"
@@ -102,11 +103,12 @@
   "scripts": {
     "test": "jest",
     "dev": "start-storybook -p 6006",
-    "build": "microbundle --jsx React.createElement",
-    "lib": "babel ./src -d ./lib",
-    "build:lib": "npm run build && npm run build:css && npm pack",
+    "build": "microbundle --jsx React.createElement && npm run build:css",
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
+    "release:patch": "npm test && standard-version --release-as patch && npm publish",
+    "release:major": "npm test && standard-version --release-as major && npm publish",
+    "release:minor": "npm test && standard-version --release-as minor && npm publish",
     "chromatic": "npx chromatic"
   },
   "files": [
