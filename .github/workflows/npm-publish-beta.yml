@@ -23,7 +23,7 @@ jobs:
 #    beta if merged alpha not merged
 #    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-#    needs: run-tests
+    needs: run-tests
     steps:
       - uses: actions/checkout@v2
         with:
