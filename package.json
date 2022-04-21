@@ -115,6 +115,9 @@
     "release:major": "npm test && standard-version --release-as major && npm publish",
     "release:minor": "npm test && standard-version --release-as minor && npm publish"
   },
+  "standard-version": {
+    "releaseCommitMessageFormat": "[{{currentTag}}] Bumped version"
+  },
   "files": [
     "dist/",
     "css/",
