@@ -111,6 +111,9 @@
     "release:minor": "npm test && standard-version --release-as minor && npm publish",
     "chromatic": "npx chromatic"
   },
+  "standard-version": {
+    "releaseCommitMessageFormat": "[{{currentTag}}] Bump version"
+  },
   "files": [
     "dist/",
     "css/",
