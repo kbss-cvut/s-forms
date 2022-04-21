@@ -107,9 +107,9 @@
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic",
-    "release:patch": "standard-version --release-as patch && npm publish",
-    "release:major": "standard-version --release-as major && npm publish",
-    "release:minor": "standard-version --release-as minor && npm publish"
+    "release:patch": "npm test && standard-version --release-as patch && npm publish",
+    "release:major": "npm test && standard-version --release-as major && npm publish",
+    "release:minor": "npm test && standard-version --release-as minor && npm publish"
   },
   "standard-version": {
     "releaseCommitMessageFormat": "[{{currentTag}}] Bumped version"
