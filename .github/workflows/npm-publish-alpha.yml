@@ -21,9 +21,9 @@ jobs:
       - uses: 'phips28/gh-action-bump-version@master'
         with:
           default: prerelease
-          minor-wording: ''
-          major-wording: ''
-          patch-wording: ''
+          minor-wording: 'dfsdfsdfsd'
+          major-wording: 'dfgdfgdfgdf'
+          patch-wording: 'dfgdfgdfgdfgd'
           rc-wording: null
           preid: ${{ format('alpha-{0}', steps.sha.outputs.sha_short) }}
           skip-tag: 'true'
