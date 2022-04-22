@@ -113,7 +113,8 @@
     "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
     "prepare": "husky install",
-    "prettier": "npx prettier --write ."
+    "prettier:check": "npx prettier --check .",
+    "prettier:write": "npx prettier --write ."
   },
   "files": [
     "dist/",
