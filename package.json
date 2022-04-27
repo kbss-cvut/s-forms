@@ -102,9 +102,6 @@
     "test": "jest",
     "dev": "start-storybook -p 6006",
     "build": "microbundle --jsx React.createElement",
-    "lib": "babel ./src -d ./lib",
-    "build:lib": "npm run build && npm run build:css && npm pack",
-    "build:css": "cleancss --skip-rebase -d -o ./css/s-forms.min.css ./src/styles/s-forms.css",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic"
   },
