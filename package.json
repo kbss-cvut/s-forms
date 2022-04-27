@@ -105,10 +105,5 @@
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic"
   },
-  "files": [
-    "dist/",
-    "css/",
-    "types/"
-  ],
-  "types": "types/s-forms.d.ts"
+  "types": "./dist/s-forms.d.ts"
 }
