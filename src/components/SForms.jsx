@@ -8,6 +8,8 @@ import FormManager from './FormManager';
 import { Card } from 'react-bootstrap';
 import FormUtils from "../util/FormUtils.js";
 
+import "../styles/s-forms.css";
+
 const SForms = forwardRef((props, ref) => {
   const [loading, setLoading] = useState(true);
   const [formProperties, setFormProperties] = useState(null);
