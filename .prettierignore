@@ -1,3 +1,4 @@
 package.json
 package-lock.json
-css/s-forms.min.css
+dist
+README.md
