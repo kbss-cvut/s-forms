@@ -106,7 +106,7 @@
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic",
     "prettier:check": "npx prettier --check .",
-    "prettier:format": "npx prettier --format .",
+    "prettier:format": "npx prettier --write .",
     "prepare": "husky install"
   },
   "types": "./dist/s-forms.d.ts"
