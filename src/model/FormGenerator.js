@@ -1,11 +1,11 @@
-import jsonld from 'jsonld';
-import Constants from '../constants/Constants';
-import DefaultFormGenerator from './DefaultFormGenerator';
-import FormUtils from '../util/FormUtils';
-import Logger from '../util/Logger';
-import JsonLdFramingUtils from '../util/JsonLdFramingUtils';
-import JsonLdObjectUtils from '../util/JsonLdObjectUtils';
-import JsonLdObjectMap from '../util/JsonLdObjectMap';
+import jsonld from "jsonld";
+import Constants from "../constants/Constants";
+import DefaultFormGenerator from "./DefaultFormGenerator";
+import FormUtils from "../util/FormUtils";
+import Logger from "../util/Logger";
+import JsonLdFramingUtils from "../util/JsonLdFramingUtils";
+import JsonLdObjectUtils from "../util/JsonLdObjectUtils";
+import JsonLdObjectMap from "../util/JsonLdObjectMap";
 
 export default class FormGenerator {
   /**
@@ -38,16 +38,18 @@ export default class FormGenerator {
           Logger.error(err);
         }
         try {
-          const [formQuestions, rootForm] = FormGenerator._constructFormQuestions(structure, intl);
+          const [formQuestions, rootForm] =
+            FormGenerator._constructFormQuestions(structure, intl);
           form = rootForm;
           formProperties = {
-            formQuestions
+            formQuestions,
           };
         } catch (e) {
-          const [formQuestions, rootForm] = FormGenerator.constructDefaultForm(intl);
+          const [formQuestions, rootForm] =
+            FormGenerator.constructDefaultForm(intl);
           form = rootForm;
           formProperties = {
-            formQuestions
+            formQuestions,
           };
         }
         return resolve([formProperties, form]);
@@ -61,22 +63,22 @@ export default class FormGenerator {
     let id2ObjectMap;
     let formQuestions = [];
 
-    if (structure['@graph'][0]['@id'] !== undefined) {
+    if (structure["@graph"][0]["@id"] !== undefined) {
       id2ObjectMap = JsonLdFramingUtils.expandStructure(structure); //TODO make as callback
 
       Object.keys(id2ObjectMap).map((key) => {
         JsonLdObjectMap.putObject(key, id2ObjectMap[key]);
       });
     } else {
-      console.warn('default form is constructed.');
+      console.warn("default form is constructed.");
     }
 
-    form = structure['@graph'].find((item) => FormUtils.isForm(item));
+    form = structure["@graph"].find((item) => FormUtils.isForm(item));
     formElements = form[Constants.HAS_SUBQUESTION];
 
     if (!formElements) {
-      Logger.error('Could not find any questions in the received data.');
-      throw 'No questions in the form';
+      Logger.error("Could not find any questions in the received data.");
+      throw "No questions in the form";
     }
 
     formQuestions = formElements.filter((item) => {
@@ -84,21 +86,30 @@ export default class FormGenerator {
         return true;
       }
 
-      Logger.warn('Item is not a wizard step: ' + item);
+      Logger.warn("Item is not a wizard step: " + item);
       return false;
     });
 
     if (!formQuestions.length) {
-      Logger.log('Could not find any wizard steps in the received data. Building form without steps');
+      Logger.log(
+        "Could not find any wizard steps in the received data. Building form without steps"
+      );
 
-      form[Constants.HAS_SUBQUESTION].forEach((question) => formQuestions.push(question));
+      form[Constants.HAS_SUBQUESTION].forEach((question) =>
+        formQuestions.push(question)
+      );
     }
 
     // sort by label
-    formQuestions.sort(JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl));
+    formQuestions.sort(
+      JsonLdObjectUtils.getCompareLocalizedLabelFunction(intl)
+    );
 
     // sort by property
-    JsonLdObjectUtils.orderPreservingToplogicalSort(formQuestions, Constants.HAS_PRECEDING_QUESTION);
+    JsonLdObjectUtils.orderPreservingToplogicalSort(
+      formQuestions,
+      Constants.HAS_PRECEDING_QUESTION
+    );
 
     return [formQuestions, { root: form }];
   }

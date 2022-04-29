@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-import jsonld from 'jsonld';
-import Logger from '../util/Logger';
+import React, { useMemo, useState } from "react";
+import PropTypes from "prop-types";
+import jsonld from "jsonld";
+import Logger from "../util/Logger";
 
 const FormGenContext = React.createContext({});
 
@@ -20,11 +20,11 @@ const FormGenContextProvider = ({ children, ...props }) => {
     if (data.length) {
       return new Promise((resolve) => {
         jsonld.frame(data, {}, null, (err, framed) => {
-          const option = framed['@graph'];
+          const option = framed["@graph"];
 
           setOptions((prevState) => ({
             ...prevState,
-            [id]: option
+            [id]: option,
           }));
 
           return resolve(option);
@@ -42,7 +42,7 @@ const FormGenContextProvider = ({ children, ...props }) => {
   const values = useMemo(
     () => ({
       loadFormOptions,
-      getOptions
+      getOptions,
     }),
     [loadFormOptions, getOptions]
   );
@@ -56,7 +56,7 @@ const FormGenContextProvider = ({ children, ...props }) => {
 
 FormGenContextProvider.propTypes = {
   children: PropTypes.element.isRequired,
-  fetchTypeAheadValues: PropTypes.func
+  fetchTypeAheadValues: PropTypes.func,
 };
 
 export { FormGenContext, FormGenContextProvider };

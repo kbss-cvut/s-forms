@@ -13,8 +13,8 @@ export default {
 } as ComponentMeta<typeof QuestionCommentIcon>;
 
 const Template: ComponentStory<typeof QuestionCommentIcon> = (
-    args,
-    { globals: { locale } }
+  args,
+  { globals: { locale } }
 ) => {
   const options = {
     intl: {
@@ -30,11 +30,11 @@ const Template: ComponentStory<typeof QuestionCommentIcon> = (
     currentUser: "http://fel.cvut.cz/people/max-chopart",
   };
   return (
-      <ConfigurationContextProvider options={options}>
-        <IntlContextProvider locale={locale}>
-          <QuestionCommentIcon {...args} />
-        </IntlContextProvider>
-      </ConfigurationContextProvider>
+    <ConfigurationContextProvider options={options}>
+      <IntlContextProvider locale={locale}>
+        <QuestionCommentIcon {...args} />
+      </IntlContextProvider>
+    </ConfigurationContextProvider>
   );
 };
 
@@ -47,4 +47,3 @@ export const WithComment = Template.bind({});
 WithComment.args = {
   question: questionWithComment,
 };
-

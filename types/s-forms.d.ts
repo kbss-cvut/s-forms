@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Modal } from 'react-bootstrap';
-import { JsonLdObj } from 'jsonld/jsonld-spec';
+import * as React from "react";
+import { Modal } from "react-bootstrap";
+import { JsonLdObj } from "jsonld/jsonld-spec";
 
 export type Intl = {
   locale?: string;
@@ -9,10 +9,10 @@ export type Intl = {
 export interface SOptions {
   intl?: Intl; // default 'en'
   i18n?: {
-    'wizard.next': string; // default 'Next'
-    'wizard.previous': string; // default 'Previous'
-    'section.expand': string; // default 'Expand'
-    'section.collapse': string; // default 'Collapse'
+    "wizard.next": string; // default 'Next'
+    "wizard.previous": string; // default 'Previous'
+    "section.expand": string; // default 'Expand'
+    "section.collapse": string; // default 'Collapse'
   };
   modalView?: boolean; // default false
   modalProps?: Modal;
@@ -47,9 +47,19 @@ export interface SFormsProps {
   loader?: React.ElementType; // default <div>Loading SForms...</div>
 }
 
-type ArrayLengthMutationKeys = 'category-1' | 'category-2' | 'category-3' | 'category-4' | 'category-5';
-type ArrayItems<T extends Array<any>> = T extends Array<infer TItems> ? TItems : never;
-type FixedLengthArray<T extends any[]> = Pick<T, Exclude<keyof T, ArrayLengthMutationKeys>> & {
+type ArrayLengthMutationKeys =
+  | "category-1"
+  | "category-2"
+  | "category-3"
+  | "category-4"
+  | "category-5";
+type ArrayItems<T extends Array<any>> = T extends Array<infer TItems>
+  ? TItems
+  : never;
+type FixedLengthArray<T extends any[]> = Pick<
+  T,
+  Exclude<keyof T, ArrayLengthMutationKeys>
+> & {
   [Symbol.iterator]: () => IterableIterator<ArrayItems<T>>;
 };
 

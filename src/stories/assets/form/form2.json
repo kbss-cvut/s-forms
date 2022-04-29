@@ -142,7 +142,12 @@
     {
       "@id": "x:form-root",
       "@type": "doc:question",
-      "has_related_question": ["first-name-6663", "last-name-1495", "age-1063", "job-9002"],
+      "has_related_question": [
+        "first-name-6663",
+        "last-name-1495",
+        "age-1063",
+        "job-9002"
+      ],
       "has-layout-class": "form"
     },
     {

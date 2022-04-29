@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import JsonLdUtils from 'jsonld-utils';
-import { ConfigurationContext } from '../../contexts/ConfigurationContext';
-import FormUtils from '../../util/FormUtils';
-import Question from '../Question';
+import React, { useContext } from "react";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
+import PropTypes from "prop-types";
+import JsonLdUtils from "jsonld-utils";
+import { ConfigurationContext } from "../../contexts/ConfigurationContext";
+import FormUtils from "../../util/FormUtils";
+import Question from "../Question";
 
 const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
@@ -15,15 +15,22 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
         {steps.map((step, index) => (
           <ListGroupItem
             hidden={options.debugMode ? false : !FormUtils.isRelevant(step)}
-            key={'nav' + index}
+            key={"nav" + index}
             onClick={() => onNavigate(index)}
-            id={'wizard-nav-' + index}
+            id={"wizard-nav-" + index}
             action={true}
-            active={index === currentStep ? 'active' : ''}
-            variant={'default'}
-            className={options.debugMode && !FormUtils.isRelevant(step) ? "show-irrelevant" : Question.getEmphasizedClass(step)}
+            active={index === currentStep ? "active" : ""}
+            variant={"default"}
+            className={
+              options.debugMode && !FormUtils.isRelevant(step)
+                ? "show-irrelevant"
+                : Question.getEmphasizedClass(step)
+            }
           >
-            {JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], options.intl)}
+            {JsonLdUtils.getLocalized(
+              step[JsonLdUtils.RDFS_LABEL],
+              options.intl
+            )}
           </ListGroupItem>
         ))}
       </ListGroup>
@@ -34,7 +41,7 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
 VerticalWizardNav.propTypes = {
   currentStep: PropTypes.number.isRequired,
   steps: PropTypes.array.isRequired,
-  onNavigate: PropTypes.func.isRequired
+  onNavigate: PropTypes.func.isRequired,
 };
 
 export default VerticalWizardNav;

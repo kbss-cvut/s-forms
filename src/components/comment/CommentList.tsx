@@ -1,14 +1,14 @@
-import React, {useState, useRef, useEffect} from 'react';
-import CommentView from './CommentView';
-import Constants from '../../constants/Constants';
-import { Rings } from 'react-loader-spinner';
+import React, { useState, useRef, useEffect } from "react";
+import CommentView from "./CommentView";
+import Constants from "../../constants/Constants";
+import { Rings } from "react-loader-spinner";
 
 interface Props {
-    comments: Array<any>,
-    onDeleteCommentClick: (index: number) => void;
+  comments: Array<any>;
+  onDeleteCommentClick: (index: number) => void;
 }
 
-const CommentList = ({comments, onDeleteCommentClick}: Props) => {
+const CommentList = ({ comments, onDeleteCommentClick }: Props) => {
   const commentEndRef = useRef<null | HTMLDivElement>(null);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
@@ -39,7 +39,11 @@ const CommentList = ({comments, onDeleteCommentClick}: Props) => {
             <div key={index} className="comment-list-item">
               <CommentView
                 commentValue={comment[Constants.HAS_COMMENT_VALUE]}
-                author={comment[Constants.HAS_AUTHOR] ? comment[Constants.HAS_AUTHOR] : null}
+                author={
+                  comment[Constants.HAS_AUTHOR]
+                    ? comment[Constants.HAS_AUTHOR]
+                    : null
+                }
                 timestamp={comment[Constants.HAS_TIMESTAMP]}
                 onDeleteQuestionComment={onDeleteCommentClick}
                 onDeleteViewComment={handleDeleteViewComment}

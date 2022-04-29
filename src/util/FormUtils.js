@@ -1,30 +1,50 @@
-import JsonLdUtils from 'jsonld-utils';
-import jsonld from 'jsonld';
+import JsonLdUtils from "jsonld-utils";
+import jsonld from "jsonld";
 
-import Constants from '../constants/Constants';
-import Utils from './Utils';
-import JsonLdObjectMap from './JsonLdObjectMap';
-import JsonLdObjectUtils from './JsonLdObjectUtils';
+import Constants from "../constants/Constants";
+import Utils from "./Utils";
+import JsonLdObjectMap from "./JsonLdObjectMap";
+import JsonLdObjectUtils from "./JsonLdObjectUtils";
 
 export default class FormUtils {
   static isForm(structure) {
-    return JsonLdUtils.hasValue(structure, Constants.LAYOUT_CLASS, Constants.LAYOUT.FORM);
+    return JsonLdUtils.hasValue(
+      structure,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.FORM
+    );
   }
 
   static isWizardStep(structure) {
-    return JsonLdUtils.hasValue(structure, Constants.LAYOUT_CLASS, Constants.LAYOUT.WIZARD_STEP);
+    return JsonLdUtils.hasValue(
+      structure,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.WIZARD_STEP
+    );
   }
 
   static isSection(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.QUESTION_SECTION);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.QUESTION_SECTION
+    );
   }
 
   static isAnswerable(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.ANSWERABLE);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.ANSWERABLE
+    );
   }
 
   static isTypeahead(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.QUESTION_TYPEAHEAD);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.QUESTION_TYPEAHEAD
+    );
   }
 
   static getPossibleValuesQuery(question) {
@@ -32,66 +52,126 @@ export default class FormUtils {
   }
 
   static isDisabled(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DISABLED);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.DISABLED
+    );
   }
 
   static isHidden(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.HIDDEN);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.HIDDEN
+    );
   }
 
   static isTextarea(question, answerValue) {
     return (
-      (answerValue && answerValue.length > Constants.INPUT_LENGTH_THRESHOLD && !FormUtils.isTypeahead(question)) ||
-      JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TEXTAREA)
+      (answerValue &&
+        answerValue.length > Constants.INPUT_LENGTH_THRESHOLD &&
+        !FormUtils.isTypeahead(question)) ||
+      JsonLdUtils.hasValue(
+        question,
+        Constants.LAYOUT_CLASS,
+        Constants.LAYOUT.TEXTAREA
+      )
     );
   }
 
   static isText(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TEXT);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.TEXT
+    );
   }
 
   static isCalendar(question) {
-    return FormUtils.isDate(question) || FormUtils.isTime(question) || FormUtils.isDateTime(question);
+    return (
+      FormUtils.isDate(question) ||
+      FormUtils.isTime(question) ||
+      FormUtils.isDateTime(question)
+    );
   }
 
   static isDate(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DATE);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.DATE
+    );
   }
 
   static isTime(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TIME);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.TIME
+    );
   }
 
   static isDateTime(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.DATETIME);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.DATETIME
+    );
   }
 
   static isCheckbox(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.CHECKBOX);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.CHECKBOX
+    );
   }
 
   static isMaskedInput(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.MASKED_INPUT);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.MASKED_INPUT
+    );
   }
 
   static isSparqlInput(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.SPARQL);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.SPARQL
+    );
   }
 
   static isTurtleInput(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.TURTLE);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.TURTLE
+    );
   }
 
   static isCollapsed(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.COLLAPSED);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.COLLAPSED
+    );
   }
 
   static isEmphasised(question) {
-    return JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, Constants.LAYOUT.EMPHASISED);
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.LAYOUT_CLASS,
+      Constants.LAYOUT.EMPHASISED
+    );
   }
 
   static getCategory(question) {
-    return Constants.LAYOUT.CATEGORY.find((c) => JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c));
+    return Constants.LAYOUT.CATEGORY.find((c) =>
+      JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c)
+    );
   }
 
   static resolveValue(answer) {
@@ -99,7 +179,7 @@ export default class FormUtils {
       return null;
     }
     if (answer[Constants.HAS_OBJECT_VALUE]) {
-      return answer[Constants.HAS_OBJECT_VALUE]['@id'];
+      return answer[Constants.HAS_OBJECT_VALUE]["@id"];
     } else {
       return JsonLdUtils.getJsonAttValue(answer, Constants.HAS_DATA_VALUE);
     }
@@ -161,7 +241,7 @@ export default class FormUtils {
   static testOrCondition(condition) {
     const hasSubCondition = condition[Constants.HAS_SUB_CONDITION];
     if (!hasSubCondition) {
-      console.warn('Or condition does not have any sub-condition !');
+      console.warn("Or condition does not have any sub-condition !");
     }
     for (const subC of this._getMappedObjectsArray(hasSubCondition)) {
       if (this.testCondition(subC)) {
@@ -173,7 +253,8 @@ export default class FormUtils {
 
   static testCondition(condition) {
     const isOrCondition = condition[Constants.HAS_SUB_CONDITION];
-    const acceptedValidationsValues = condition[Constants.ACCEPTS_VALIDATION_VALUE];
+    const acceptedValidationsValues =
+      condition[Constants.ACCEPTS_VALIDATION_VALUE];
     const acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE];
     const accepts = condition[Constants.ACCEPTS];
     const testedQuestions = condition[Constants.HAS_TESTED_QUESTION];
@@ -184,18 +265,24 @@ export default class FormUtils {
     }
 
     if (acceptedValidationsValues && acceptedAnswerValues) {
-      console.warn('Support for validation and requirement constraints at same time is not implemented !');
+      console.warn(
+        "Support for validation and requirement constraints at same time is not implemented !"
+      );
     }
 
     // any answer within all subquestions
     if (accepts && testedQuestions) {
       const arr = Utils.asArray(accepts);
       if (arr.length !== 1) {
-        console.warn('Support for multiple accepts values is not implemented !');
+        console.warn(
+          "Support for multiple accepts values is not implemented !"
+        );
       }
-      if (arr[0]['@id'] === Constants.ANSWERED_QUESTION) {
+      if (arr[0]["@id"] === Constants.ANSWERED_QUESTION) {
         if (acceptedAnswerValues || acceptedValidationsValues) {
-          console.warn('Support for accepted answer/validations values is not implemented !');
+          console.warn(
+            "Support for accepted answer/validations values is not implemented !"
+          );
         }
         for (const q of this._getMappedObjectsArray(testedQuestions)) {
           if (!this.hasAnswer(q)) {
@@ -204,19 +291,23 @@ export default class FormUtils {
         }
         return true;
       }
-      console.warn('No support to accept question of type ' + arr[0]['@id'] + ' !');
+      console.warn(
+        "No support to accept question of type " + arr[0]["@id"] + " !"
+      );
     }
 
     // valid answers
     if (acceptedValidationsValues && testedQuestions) {
       const arr = Utils.asArray(acceptedValidationsValues);
-      if (arr.length !== 1 || (arr[0] !== true && arr[0] !== 'true')) {
-        console.warn('Validation values other than "true" are not implemented !');
+      if (arr.length !== 1 || (arr[0] !== true && arr[0] !== "true")) {
+        console.warn(
+          'Validation values other than "true" are not implemented !'
+        );
       }
       for (const q of Utils.asArray(testedQuestions)) {
-        question = JsonLdObjectMap.getObject(q['@id']);
+        question = JsonLdObjectMap.getObject(q["@id"]);
         if (question === undefined) {
-          console.warn('Questions is not loaded in an object map.');
+          console.warn("Questions is not loaded in an object map.");
           return true;
         }
         if (this.isValid(question) === false) {
@@ -228,10 +319,10 @@ export default class FormUtils {
 
     // concrete values
     if (acceptedAnswerValues && testedQuestions) {
-      question = JsonLdObjectMap.getObject(testedQuestions['@id']);
+      question = JsonLdObjectMap.getObject(testedQuestions["@id"]);
       for (const expValue of Utils.asArray(acceptedAnswerValues)) {
         if (!question) {
-          console.warn('Question is not defined.');
+          console.warn("Question is not defined.");
           return true;
         }
         if (!question.hasOwnProperty(Constants.HAS_ANSWER)) {
@@ -248,9 +339,9 @@ export default class FormUtils {
         if (
           qValue &&
           expValue &&
-          qValue.hasOwnProperty('@value') &&
-          expValue.hasOwnProperty('@id') &&
-          qValue['@value'] == expValue['@id']
+          qValue.hasOwnProperty("@value") &&
+          expValue.hasOwnProperty("@id") &&
+          qValue["@value"] == expValue["@id"]
         ) {
           // TODO remove !, this is temporary fix as type-ahead component returns data-value instead of
           // code-value
@@ -269,11 +360,15 @@ export default class FormUtils {
   static _getMappedObjectsArray(jsonObjects, objectType) {
     return Utils.asArray(jsonObjects)
       .map((o) => {
-        const obj = JsonLdObjectMap.getObject(o['@id']);
+        const obj = JsonLdObjectMap.getObject(o["@id"]);
         if (obj === undefined) {
-          const ot = objectType ? objectType : 'Object';
+          const ot = objectType ? objectType : "Object";
           console.warn(
-            (objectType ? objectType : 'Object') + ' "' + o['@id'] + '"' + ' is not loaded in an object map.'
+            (objectType ? objectType : "Object") +
+              ' "' +
+              o["@id"] +
+              '"' +
+              " is not loaded in an object map."
           );
           return null;
         }
@@ -294,7 +389,7 @@ export default class FormUtils {
       if (answers.length) {
         const qValue = FormUtils.resolveValueObject(answers[0]);
         if (qValue) {
-          if (qValue['@value'] || qValue['@id']) {
+          if (qValue["@value"] || qValue["@id"]) {
             return true;
           }
         }
@@ -318,7 +413,7 @@ export default class FormUtils {
    * @return {*} Format from Configuration
    */
   static resolveDateTimeFormat(question, originalValue, options) {
-    if (typeof originalValue === 'number') {
+    if (typeof originalValue === "number") {
       return Constants.DATETIME_NUMBER_FORMAT;
     }
 

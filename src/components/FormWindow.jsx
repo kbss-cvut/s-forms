@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Modal } from 'react-bootstrap';
-import { ConfigurationContext } from '../contexts/ConfigurationContext';
+import React from "react";
+import PropTypes from "prop-types";
+import { Modal } from "react-bootstrap";
+import { ConfigurationContext } from "../contexts/ConfigurationContext";
 
 const FormWindow = React.forwardRef((props, ref) => {
   const { options } = React.useContext(ConfigurationContext);
@@ -18,7 +18,7 @@ const FormWindow = React.forwardRef((props, ref) => {
 });
 
 FormWindow.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
 };
 
 export default FormWindow;

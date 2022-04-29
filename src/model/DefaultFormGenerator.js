@@ -1,4 +1,4 @@
-import formTemplate from "./defaultForm.json"
+import formTemplate from "./defaultForm.json";
 
 export default class DefaultFormGenerator {
   /**

@@ -1,6 +1,6 @@
-import JsonLdUtils from 'jsonld-utils';
+import JsonLdUtils from "jsonld-utils";
 
-const _uriBase = 'http://onto.fel.cvut.cz/ontologies/forms';
+const _uriBase = "http://onto.fel.cvut.cz/ontologies/forms";
 
 export const getRandomInt = () => {
   const min = 0;
@@ -30,13 +30,13 @@ export const generateTypeaheadOptions = (value, valueLabel) => {
 
   for (let i = 0; i < getRandomPositiveInt(3, 10); i++) {
     option = {
-      '@id': getRandomUri()
+      "@id": getRandomUri(),
     };
-    option[JsonLdUtils.RDFS_LABEL] = 'RandomLabel' + i;
+    option[JsonLdUtils.RDFS_LABEL] = "RandomLabel" + i;
     options.push(option);
   }
   option = {
-    '@id': value
+    "@id": value,
   };
   option[JsonLdUtils.RDFS_LABEL] = valueLabel;
   options.push(option);

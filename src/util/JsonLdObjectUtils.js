@@ -1,7 +1,7 @@
-import jsonld from 'jsonld';
-import JsonLdUtils from 'jsonld-utils';
-import Utils from './Utils';
-import tsort from 'tsort';
+import jsonld from "jsonld";
+import JsonLdUtils from "jsonld-utils";
+import Utils from "./Utils";
+import tsort from "tsort";
 
 export default class JsonLdObjectUtils {
   static getFirstObject(subject, predicate) {
@@ -15,15 +15,30 @@ export default class JsonLdObjectUtils {
   }
 
   static compareValues(jsonLdValue1, jsonLdValue2) {
-    jsonLdValue1 = typeof jsonLdValue1 === 'object' ? jsonLdValue1 : { '@value': jsonLdValue1 };
-    jsonLdValue2 = typeof jsonLdValue2 === 'object' ? jsonLdValue2 : { '@value': jsonLdValue2 };
+    jsonLdValue1 =
+      typeof jsonLdValue1 === "object"
+        ? jsonLdValue1
+        : { "@value": jsonLdValue1 };
+    jsonLdValue2 =
+      typeof jsonLdValue2 === "object"
+        ? jsonLdValue2
+        : { "@value": jsonLdValue2 };
 
     // TODO remove: workaround for bad persistance of boolean values -- { @value: "true" } instead of { @value: true }
-    if (jsonLdValue1 && jsonLdValue1['@value'] && jsonLdValue2 && jsonLdValue2['@value']) {
+    if (
+      jsonLdValue1 &&
+      jsonLdValue1["@value"] &&
+      jsonLdValue2 &&
+      jsonLdValue2["@value"]
+    ) {
       const strValue1 =
-        typeof jsonLdValue1['@value'] === 'string' ? jsonLdValue1['@value'] : JSON.stringify(jsonLdValue1['@value']);
+        typeof jsonLdValue1["@value"] === "string"
+          ? jsonLdValue1["@value"]
+          : JSON.stringify(jsonLdValue1["@value"]);
       const strValue2 =
-        typeof jsonLdValue2['@value'] === 'string' ? jsonLdValue2['@value'] : JSON.stringify(jsonLdValue2['@value']);
+        typeof jsonLdValue2["@value"] === "string"
+          ? jsonLdValue2["@value"]
+          : JSON.stringify(jsonLdValue2["@value"]);
 
       if (strValue1 === strValue2) {
         return true;
@@ -47,8 +62,11 @@ export default class JsonLdObjectUtils {
       for (let i = 0; i < data.length; i++) {
         for (let j = i; j < data.length; j++) {
           if (data[i][gtProperty]) {
-            let gtId = typeof data[i][gtProperty] === 'object' ? data[i][gtProperty]['@id'] : data[i][gtProperty];
-            if (gtId === data[j]['@id']) {
+            let gtId =
+              typeof data[i][gtProperty] === "object"
+                ? data[i][gtProperty]["@id"]
+                : data[i][gtProperty];
+            if (gtId === data[j]["@id"]) {
               const tmp = data[i];
               data[i] = data[j];
               data[j] = tmp;
@@ -77,12 +95,12 @@ export default class JsonLdObjectUtils {
     const id2ObjectMap = {};
 
     for (let i = 0; i < data.length; i++) {
-      let currentId = data[i]['@id'];
+      let currentId = data[i]["@id"];
       graph.add(currentId);
       id2ObjectMap[currentId] = data[i];
 
       Utils.asArray(data[i][gtProperty])
-        .map((val) => (typeof val === 'object' ? val['@id'] : val))
+        .map((val) => (typeof val === "object" ? val["@id"] : val))
         .map((val) => [val, currentId])
         .forEach((edge) => graph.add(edge));
     }
@@ -122,10 +140,10 @@ export default class JsonLdObjectUtils {
       return;
     }
     if (jsonLdObject.constructor === Array) {
-      return !!jsonLdObject.find(o => o['@id'] === id);
+      return !!jsonLdObject.find((o) => o["@id"] === id);
     }
     if (jsonLdObject.constructor === Object) {
-      return jsonLdObject['@id'] === id;
+      return jsonLdObject["@id"] === id;
     }
   }
 }

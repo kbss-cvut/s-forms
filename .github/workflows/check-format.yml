@@ -3,7 +3,7 @@ name: Check code format
 on:
   push:
     branches:
-      - '*'
+      - "*"
 
 jobs:
   check-format:

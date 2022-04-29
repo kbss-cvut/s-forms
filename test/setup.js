@@ -1,8 +1,8 @@
-import enzyme, { shallow, mount } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { act } from 'react-dom/test-utils';
-import {setGlobalConfig} from "@storybook/testing-react";
-import * as globalStorybookConfig from "../.storybook/preview.js"
+import enzyme, { shallow, mount } from "enzyme";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { act } from "react-dom/test-utils";
+import { setGlobalConfig } from "@storybook/testing-react";
+import * as globalStorybookConfig from "../.storybook/preview.js";
 
 enzyme.configure({ adapter: new Adapter() });
 

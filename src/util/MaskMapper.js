@@ -1,10 +1,10 @@
 const REPLACEMENTS = {
-  D: '1',
-  M: '1',
-  Y: '1',
-  h: '1',
-  m: '1',
-  s: '1'
+  D: "1",
+  M: "1",
+  Y: "1",
+  h: "1",
+  m: "1",
+  s: "1",
 };
 
 export default class MaskMapper {
@@ -21,7 +21,7 @@ export default class MaskMapper {
     if (!mask) {
       return mask;
     }
-    let result = '',
+    let result = "",
       character;
     for (let i = 0, len = mask.length; i < len; i++) {
       character = mask.charAt(i);
@@ -29,4 +29,4 @@ export default class MaskMapper {
     }
     return result;
   }
-};
+}
