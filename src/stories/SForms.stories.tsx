@@ -10,7 +10,6 @@ import touristDestinationForm2 from "./assets/form/touristDestinationForm2.json"
 
 import queryString from "query-string";
 import Constants from "../constants/Constants";
-import IntlContextProvider from "../contexts/IntlContextProvider";
 
 const getP = (queryParameterName: string, defaultValue: string) => {
   return {
@@ -81,11 +80,7 @@ const Template: ComponentStory<typeof SForms> = (
       },
     ],
   };
-  return (
-    <IntlContextProvider locale={locale}>
-      <SForms {...args} options={options} />
-    </IntlContextProvider>
-  );
+  return <SForms {...args} options={options} />;
 };
 
 export const Form1 = Template.bind({});
