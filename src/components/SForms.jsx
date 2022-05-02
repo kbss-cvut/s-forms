@@ -7,6 +7,7 @@ import FormGenerator from "../model/FormGenerator";
 import FormManager from "./FormManager";
 import { Card } from "react-bootstrap";
 import FormUtils from "../util/FormUtils.js";
+import IntlContextProvider from "../contexts/IntlContextProvider";
 
 import "../styles/s-forms.css";
 
@@ -74,17 +75,19 @@ const SForms = forwardRef((props, ref) => {
       options={props.options}
     >
       <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
-        <FormQuestionsProvider
-          data={form}
-          formQuestions={formProperties.formQuestions}
-          isFormValid={props.isFormValid}
-        >
-          <FormManager
-            ref={ref}
-            modalView={props.options && props.options.modalView}
-            mapComponent={_mapComponent}
-          />
-        </FormQuestionsProvider>
+        <IntlContextProvider locale={props.options.intl.locale}>
+          <FormQuestionsProvider
+            data={form}
+            formQuestions={formProperties.formQuestions}
+            isFormValid={props.isFormValid}
+          >
+            <FormManager
+              ref={ref}
+              modalView={props.options && props.options.modalView}
+              mapComponent={_mapComponent}
+            />
+          </FormQuestionsProvider>
+        </IntlContextProvider>
       </FormGenContextProvider>
     </ConfigurationContextProvider>
   );
