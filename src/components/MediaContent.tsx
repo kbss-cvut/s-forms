@@ -17,6 +17,7 @@ const MediaContent = ({ question }: Props) => {
   };
 
   const renderMedia = () => {
+    // @ts-ignore
     const mediaContent = question[Constants.HAS_MEDIA_CONTENT];
 
     if (mediaContent) {
