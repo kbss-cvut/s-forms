@@ -1,6 +1,6 @@
 {
-  "name": "s-forms",
-  "version": "0.3.5",
+  "name": "@kbss-cvut/s-forms",
+  "version": "0.4.1",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -36,10 +36,11 @@
   },
   "type": "module",
   "source": "src/s-forms.js",
+  "main": "dist/s-forms.js",
   "exports": "./dist/s-forms.modern.js",
   "module": "./dist/s-forms.js",
   "unpkg": "./dist/s-forms.umd.js",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@luigiminardim/storybook-addon-globals-controls": "^0.1.3",
     "@triply/yasgui": "^4.2.14",
@@ -71,7 +72,6 @@
     "react-bootstrap": "1.0.1",
     "react-dom": ">= 17.0.2"
   },
-  "main": "dist/s-forms.js",
   "devDependencies": {
     "@storybook/addon-a11y": "^6.4.19",
     "@storybook/addon-actions": "^6.4.19",
@@ -94,6 +94,7 @@
     "query-string": "^6.13.5",
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
+    "standard-version": "^9.3.2",
     "style-loader": "^1.2.1",
     "typescript": "^4.5.5",
     "watchify": "^3.11.1",
@@ -105,9 +106,20 @@
     "build": "microbundle --jsx React.createElement",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic",
+    "release:patch": "npm test && standard-version --release-as patch && npm publish",
+    "release:major": "npm test && standard-version --release-as major && npm publish",
+    "release:minor": "npm test && standard-version --release-as minor && npm publish",
     "prettier:check": "npx prettier --check .",
     "prettier:format": "npx prettier --write .",
     "prepare": "husky install"
   },
+  "standard-version": {
+    "releaseCommitMessageFormat": "[{{currentTag}}] Bump version"
+  },
+  "files": [
+    "dist/",
+    "css/",
+    "types/"
+  ],
   "types": "./dist/s-forms.d.ts"
 }

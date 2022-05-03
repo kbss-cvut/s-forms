@@ -1,0 +1,43 @@
+name: Publish NPM Beta Package
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+
+jobs:
+  publish-npm-beta:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get short SHA
+        id: sha
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - uses: "phips28/gh-action-bump-version@master"
+        with:
+          default: prerelease
+          minor-wording: "MINOR RELEASE"
+          major-wording: "MAJOR RELEASE"
+          patch-wording: "PATCH RELEASE"
+          rc-wording: null
+          preid: ${{ format('beta-{0}', steps.sha.outputs.sha_short) }}
+          skip-tag: "true"
+          skip-commit: "true"
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm publish --access public --ignore-scripts --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
