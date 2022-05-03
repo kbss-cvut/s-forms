@@ -117,9 +117,8 @@
     "releaseCommitMessageFormat": "[{{currentTag}}] Bump version"
   },
   "files": [
-    "dist/",
-    "css/",
-    "types/"
+    "dist/*.*",
+    "dist/**/*"
   ],
   "types": "./dist/s-forms.d.ts"
 }
