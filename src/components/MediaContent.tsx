@@ -19,33 +19,36 @@ const MediaContent = ({ question }: Props) => {
   const renderMedia = () => {
     const mediaContent = question[Constants.HAS_MEDIA_CONTENT];
 
-    if (Array.isArray(mediaContent)) {
+    if (mediaContent) {
+      if (Array.isArray(mediaContent)) {
+        return (
+          <div className="col-6">
+            {mediaContent.map((src: string, index: number) => (
+              <div
+                key={index}
+                className="row embed-responsive-21by9 media-content-video-container mb-3"
+              >
+                <iframe
+                  src={getEmbedLink(mediaContent[index])}
+                  className="embed-responsive-item"
+                  allowFullScreen
+                />
+              </div>
+            ))}
+          </div>
+        );
+      }
       return (
         <div className="col-6">
-          {mediaContent.map((src: string, index: number) => (
-            <div
-              key={index}
-              className="row embed-responsive-21by9 media-content-video-container mb-3"
-            >
-              <iframe
-                src={getEmbedLink(mediaContent[index])}
-                className="embed-responsive-item"
-                allowFullScreen
-              />
-            </div>
-          ))}
+          <iframe
+            src={getEmbedLink(mediaContent)}
+            className="embed-responsive-item"
+            allowFullScreen
+          />
         </div>
       );
     }
-    return (
-      <div className="col-6">
-        <iframe
-          src={getEmbedLink(mediaContent)}
-          className="embed-responsive-item"
-          allowFullScreen
-        />
-      </div>
-    );
+    return null;
   };
 
   return renderMedia();
