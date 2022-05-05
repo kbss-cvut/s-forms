@@ -6,16 +6,6 @@ interface Props {
 }
 
 const MediaContent = ({ question }: Props) => {
-  const getEmbedLink = (mediaContentLink: string) => {
-    if (mediaContentLink.includes("/view?")) {
-      const view: string = mediaContentLink.substring(
-        mediaContentLink.indexOf("/view?")
-      );
-      return mediaContentLink.replaceAll(view, "/preview");
-    }
-    return mediaContentLink;
-  };
-
   const renderMedia = () => {
     // @ts-ignore
     const mediaContent = question[Constants.HAS_MEDIA_CONTENT];
@@ -30,7 +20,7 @@ const MediaContent = ({ question }: Props) => {
                 className="row embed-responsive-21by9 media-content-video-container mb-3"
               >
                 <iframe
-                  src={getEmbedLink(mediaContent[index])}
+                  src={mediaContent[index]}
                   className="embed-responsive-item"
                   allowFullScreen
                 />
@@ -42,7 +32,7 @@ const MediaContent = ({ question }: Props) => {
       return (
         <div className="col-6">
           <iframe
-            src={getEmbedLink(mediaContent)}
+            src={mediaContent}
             className="embed-responsive-item"
             allowFullScreen
           />
