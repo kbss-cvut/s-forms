@@ -11,6 +11,7 @@ const question = {
   "http://onto.fel.cvut.cz/ontologies/form/has-media-content": [
     "https://www.youtube.com/embed/yzXRaJCZdFI",
     "https://drive.google.com/file/d/1C8vvDQX90vFDno0HpUCUNmVhW1_EchaX/preview",
+    "https://drive.google.com/file/d/1ItZqsUm82nKW4ZqvKaiGUn202NEF79FC/view?usp=sharing",
     "https://drive.google.com/file/d/1ItZqsUm82nKW4ZqvKaiGUn202NEF79FC/preview",
   ],
 };
@@ -29,7 +30,28 @@ YoutubeVideo.args = {
   question: questionWithMedia,
 };
 
-export const ImageAndVideo = Template.bind({});
-ImageAndVideo.args = {
+export const ParsedUrl = Template.bind({});
+ParsedUrl.args = {
   question: question,
+};
+
+export const PreviewUrl = Template.bind({});
+PreviewUrl.args = {
+  iFrame: true,
+  hardcodedLink:
+    "https://drive.google.com/file/d/1ItZqsUm82nKW4ZqvKaiGUn202NEF79FC/preview",
+};
+
+export const ViewUrl = Template.bind({});
+ViewUrl.args = {
+  iFrame: true,
+  hardcodedLink:
+    "https://drive.google.com/file/d/1ItZqsUm82nKW4ZqvKaiGUn202NEF79FC/view?usp=sharing",
+};
+
+export const ExportViewUrl = Template.bind({});
+ExportViewUrl.args = {
+  iFrame: true,
+  hardcodedLink:
+    "https://drive.google.com/uc?export=view&id=1ItZqsUm82nKW4ZqvKaiGUn202NEF79FC",
 };
