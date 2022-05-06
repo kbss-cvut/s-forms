@@ -315,6 +315,47 @@ input:disabled {
   pointer-events: auto;
 }
 
+.media-content {
+  overflow: hidden;
+}
+
+.media-content-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.media-content-item {
+  padding: 0.5rem;
+}
+
+.media-content-item img {
+  /*default size of iframe*/
+  height: 150px;
+  width: 300px;
+  border: gray solid 2px;
+}
+
+.media-content-item iframe {
+  /*default size of iframe*/
+  height: 150px;
+  width: 300px;
+  border: gray solid 2px;
+}
+
+.media-content-item .media-content-image {
+  height: 150px;
+  width: 300px;
+}
+
+.media-content-item .media-content-image .media-content-link {
+  position: absolute;
+}
+
+.media-content-item .media-content-link:hover {
+  opacity: 0.8;
+}
+
 @keyframes emphasiseOnRelevant {
   0% {
     display: none;
