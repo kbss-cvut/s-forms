@@ -4,12 +4,16 @@ import LinkIcon from "./LinkIcon";
 
 interface Props {
   question: object;
+
+  // Added only for example in story
+  hardcodedLink?: string;
+  iFrame?: boolean;
 }
 
 const YOUTUBE_URL = "https://www.youtube.com/";
 const GOOGLE_DRIVE_URL = "https://drive.google.com/";
 
-const MediaContent = ({ question }: Props) => {
+const MediaContent = ({ question, hardcodedLink, iFrame }: Props) => {
   const isGoogleDriveImage = (mediaContentUrl: string) => {
     return (
       mediaContentUrl.includes("/file/d/") &&
@@ -87,7 +91,34 @@ const MediaContent = ({ question }: Props) => {
     return null;
   };
 
-  return <div className="media-content">{renderMediaContent()}</div>;
+  // Added only for example in story
+  const isHardcoded = () => {
+    return !!hardcodedLink;
+  };
+
+  // Added only for example in story
+  const isIframe = () => {
+    return iFrame;
+  };
+
+  // Added only for example in story
+  return (
+    <>
+      {isHardcoded() && !isIframe() && (
+        <img
+          className="media-content"
+          src={hardcodedLink}
+          alt={hardcodedLink}
+        />
+      )}
+      {isHardcoded() && isIframe() && (
+        <iframe className="media-content" src={hardcodedLink} />
+      )}
+      {!isHardcoded() && (
+        <div className="media-content">{renderMediaContent()}</div>
+      )}
+    </>
+  );
 };
 
 export default MediaContent;
