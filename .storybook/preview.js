@@ -44,6 +44,12 @@ export const globalTypes = {
     defaultValue: false,
     control: { type: "boolean" },
   },
+  isIframe: {
+    name: "IFrame",
+    description: "Set IFrame to eligible media contents",
+    defaultValue: false,
+    control: { type: "boolean" },
+  },
 };
 
 const options = {
@@ -61,6 +67,7 @@ const options = {
   wizardStepButtons: true,
   enableForwardSkip: true,
   startingStep: 1,
+  isIframe: false,
   debugMode: false,
   users: [
     { id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart" },
