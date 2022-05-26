@@ -1,60 +1,81 @@
 import React from "react";
 import Constants from "../constants/Constants";
 import LinkIcon from "./LinkIcon";
+// @ts-ignore
+import ImageZoom from "react-image-zooom";
 
 interface Props {
   question: object;
-
-  // Added only for example in story
-  hardcodedLink?: string;
-  iFrame?: boolean;
+  isIframe?: boolean;
 }
 
 const YOUTUBE_URL = "https://www.youtube.com/";
+const YOUTUBE_WATCH_URL_PARAMETER = "watch?v=";
 const GOOGLE_DRIVE_URL = "https://drive.google.com/";
+const EMBED_URL_PARAMETER = "embed/";
+const GOOGLE_DRIVE_FILE_PATH = "/file/d/";
+const GOOGLE_DRIVE = "uc?export=view&id=";
 
-const MediaContent = ({ question, hardcodedLink, iFrame }: Props) => {
+const MediaContent = ({ question, isIframe = true }: Props) => {
   const isGoogleDriveImage = (mediaContentUrl: string) => {
     return (
-      mediaContentUrl.includes("/file/d/") &&
+      mediaContentUrl.includes(GOOGLE_DRIVE_FILE_PATH) &&
       mediaContentUrl.includes(GOOGLE_DRIVE_URL)
     );
   };
 
   const isYoutubeVideo = (mediaContentUrl: string) => {
     return (
-      mediaContentUrl.includes("watch?v=") &&
-      mediaContentUrl.includes(YOUTUBE_URL)
+      mediaContentUrl.includes(YOUTUBE_URL) &&
+      (mediaContentUrl.includes(YOUTUBE_WATCH_URL_PARAMETER) ||
+        mediaContentUrl.includes(EMBED_URL_PARAMETER))
     );
   };
 
   const getMediaId = (mediaContentUrl: string) => {
     if (isGoogleDriveImage(mediaContentUrl)) {
       return mediaContentUrl.substring(
-        mediaContentUrl.indexOf("/file/d/") + 8,
+        mediaContentUrl.indexOf(GOOGLE_DRIVE_FILE_PATH) +
+          GOOGLE_DRIVE_FILE_PATH.length,
         mediaContentUrl.lastIndexOf("/")
       );
     }
     if (isYoutubeVideo(mediaContentUrl)) {
-      return mediaContentUrl.substring(mediaContentUrl.indexOf("watch?v=") + 8);
+      return mediaContentUrl.substring(
+        mediaContentUrl.indexOf(YOUTUBE_WATCH_URL_PARAMETER) +
+          YOUTUBE_WATCH_URL_PARAMETER.length
+      );
     }
   };
 
   const getEmbedLink = (mediaContentUrl: string) => {
     if (isGoogleDriveImage(mediaContentUrl)) {
-      return (
-        GOOGLE_DRIVE_URL + "uc?export=view&id=" + getMediaId(mediaContentUrl)
-      );
+      return GOOGLE_DRIVE_URL + GOOGLE_DRIVE + getMediaId(mediaContentUrl);
     }
-    if (isYoutubeVideo(mediaContentUrl)) {
-      return YOUTUBE_URL + "embed/" + getMediaId(mediaContentUrl);
+    if (
+      isYoutubeVideo(mediaContentUrl) &&
+      !mediaContentUrl.includes(EMBED_URL_PARAMETER)
+    ) {
+      return YOUTUBE_URL + EMBED_URL_PARAMETER + getMediaId(mediaContentUrl);
     }
     return mediaContentUrl;
   };
 
   const getMediaType = (mediaContentUrl: string) => {
-    if (mediaContentUrl.includes(YOUTUBE_URL)) {
-      return <iframe src={getEmbedLink(mediaContentUrl)} allowFullScreen />;
+    if (
+      isYoutubeVideo(mediaContentUrl) ||
+      (isGoogleDriveImage(mediaContentUrl) && isIframe)
+    ) {
+      return (
+        <div className="media-content-image">
+          <LinkIcon
+            url={mediaContentUrl}
+            iconClassContainer="media-content-link"
+            showOverlay={false}
+          />
+          <iframe src={getEmbedLink(mediaContentUrl)} allowFullScreen />
+        </div>
+      );
     }
     return (
       <div className="media-content-image">
@@ -63,7 +84,13 @@ const MediaContent = ({ question, hardcodedLink, iFrame }: Props) => {
           iconClassContainer="media-content-link"
           showOverlay={false}
         />
-        <img src={getEmbedLink(mediaContentUrl)} alt={mediaContentUrl} />
+        <ImageZoom
+          className="media-content-item-image"
+          src={getEmbedLink(mediaContentUrl)}
+          alt={mediaContentUrl}
+          width="100%"
+          height="100%"
+        />
       </div>
     );
   };
@@ -91,34 +118,7 @@ const MediaContent = ({ question, hardcodedLink, iFrame }: Props) => {
     return null;
   };
 
-  // Added only for example in story
-  const isHardcoded = () => {
-    return !!hardcodedLink;
-  };
-
-  // Added only for example in story
-  const isIframe = () => {
-    return iFrame;
-  };
-
-  // Added only for example in story
-  return (
-    <>
-      {isHardcoded() && !isIframe() && (
-        <img
-          className="media-content"
-          src={hardcodedLink}
-          alt={hardcodedLink}
-        />
-      )}
-      {isHardcoded() && isIframe() && (
-        <iframe className="media-content" src={hardcodedLink} />
-      )}
-      {!isHardcoded() && (
-        <div className="media-content">{renderMediaContent()}</div>
-      )}
-    </>
-  );
+  return <div className="media-content">{renderMediaContent()}</div>;
 };
 
 export default MediaContent;
