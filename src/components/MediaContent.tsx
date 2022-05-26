@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Constants from "../constants/Constants";
 import LinkIcon from "./LinkIcon";
 // @ts-ignore
 import ImageZoom from "react-image-zooom";
+import { ConfigurationContext } from "../contexts/ConfigurationContext";
 
 interface Props {
   question: object;
-  isIframe?: boolean;
 }
 
 const YOUTUBE_URL = "https://www.youtube.com/";
@@ -16,7 +16,10 @@ const EMBED_URL_PARAMETER = "embed/";
 const GOOGLE_DRIVE_FILE_PATH = "/file/d/";
 const GOOGLE_DRIVE = "uc?export=view&id=";
 
-const MediaContent = ({ question, isIframe = true }: Props) => {
+const MediaContent = ({ question }: Props) => {
+  // @ts-ignore
+  const { options } = useContext(ConfigurationContext);
+
   const isGoogleDriveImage = (mediaContentUrl: string) => {
     return (
       mediaContentUrl.includes(GOOGLE_DRIVE_FILE_PATH) &&
@@ -64,7 +67,7 @@ const MediaContent = ({ question, isIframe = true }: Props) => {
   const getMediaType = (mediaContentUrl: string) => {
     if (
       isYoutubeVideo(mediaContentUrl) ||
-      (isGoogleDriveImage(mediaContentUrl) && isIframe)
+      (isGoogleDriveImage(mediaContentUrl) && options.unifyMediaContent)
     ) {
       return (
         <div className="media-content-image">
