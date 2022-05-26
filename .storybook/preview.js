@@ -50,8 +50,8 @@ export const globalTypes = {
     defaultValue: false,
     control: { type: "boolean" },
   },
-  isIframe: {
-    name: "IFrame",
+  unifyMediaContent: {
+    name: "Unify media content",
     description: "Set IFrame to eligible media contents",
     defaultValue: false,
     control: { type: "boolean" },
@@ -73,7 +73,7 @@ const options = {
   wizardStepButtons: true,
   enableForwardSkip: true,
   startingStep: 1,
-  isIframe: false,
+  unifyMediaContent: true,
   debugMode: false,
   users: [
     { id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart" },

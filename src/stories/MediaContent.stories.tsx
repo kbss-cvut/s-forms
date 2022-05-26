@@ -1,8 +1,7 @@
 import React from "react";
 import MediaContent from "../components/MediaContent";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-
-import questionWithMedia from "./assets/question/questionWithMedia.json";
+import { ConfigurationContextProvider } from "../contexts/ConfigurationContext";
 
 const question = {
   "@id": "job-9002",
@@ -23,8 +22,18 @@ export default {
   component: MediaContent,
 } as ComponentMeta<typeof MediaContent>;
 
-const Template: ComponentStory<typeof MediaContent> = (args) => {
-  return <MediaContent {...args} />;
+const Template: ComponentStory<typeof MediaContent> = (
+  args,
+  { globals: { unifyMediaContent } }
+) => {
+  const options = {
+    unifyMediaContent: unifyMediaContent,
+  };
+  return (
+    <ConfigurationContextProvider options={options}>
+      <MediaContent {...args} />
+    </ConfigurationContextProvider>
+  );
 };
 
 export const Default = Template.bind({});
