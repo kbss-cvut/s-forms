@@ -1,6 +1,6 @@
-# S-Forms publishing workflow documentation
+# SForms publishing workflow documentation
 
-S-Forms follows the [semantic versioning](https://docs.npmjs.com/about-semantic-versioning) recommendations for new **releases**, and a SHA based ID for new **pre-releases**. The workflow is described below:
+S-Forms follows the [semantic versioning](https://docs.npmjs.com/about-semantic-versioning) recommendations for new **releases**, and a SHA based ID for new **pre-releases**. The workflow is described below.
 
 ## Publish new release
 
