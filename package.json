@@ -102,7 +102,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "start-storybook -p 6006",
+    "dev": "start-storybook --no-manager-cache -p 6006",
     "build": "microbundle --jsx React.createElement",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic",
