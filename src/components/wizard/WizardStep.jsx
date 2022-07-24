@@ -7,6 +7,7 @@ import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Question from "../Question";
 import JsonLdObjectMap from "../../util/JsonLdObjectMap";
 import QuestionStatic from "../QuestionStatic.jsx";
+import FormUtils from "../../util/FormUtils.js";
 
 export default class WizardStep extends React.Component {
   constructor(props) {
@@ -86,7 +87,7 @@ export default class WizardStep extends React.Component {
     let questionElement = React.createElement(questionComponent, {
       question: this.props.step,
       onChange: this.onChange,
-      withoutCard: true,
+      withoutCard: !FormUtils.isAnswerable(question),
       index: this.props.stepIndex,
     });
 
