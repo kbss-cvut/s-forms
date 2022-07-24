@@ -375,8 +375,7 @@ export default class Question extends React.Component {
     }
     if (question[Constants.HAS_ANSWER].length === 0) {
       if (
-        (FormUtils.isSection(question) && !FormUtils.isAnswerable(question)) ||
-        FormUtils.isWizardStep(question)
+        (FormUtils.isSection(question) && !FormUtils.isAnswerable(question))
       ) {
         question[Constants.HAS_ANSWER] = [];
       } else {
