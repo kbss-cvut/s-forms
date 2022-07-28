@@ -7,6 +7,7 @@ import form1 from "./assets/form/form1.json"; // form with wizard steps
 import form2 from "./assets/form/form2.json"; // form without wizard steps (proudly assembled in Semantic Form Web Editor)
 import touristDestinationForm1 from "./assets/form/touristDestinationForm1.json";
 import touristDestinationForm2 from "./assets/form/touristDestinationForm2.json";
+import occurrenceReportingForm from "./assets/form/occurrenceReportingForm.json";
 
 import queryString from "query-string";
 import Constants from "../constants/Constants";
@@ -106,4 +107,9 @@ TouristDestinationForm1.args = {
 export const TouristDestinationForm2 = Template.bind({});
 TouristDestinationForm2.args = {
   form: touristDestinationForm2,
+};
+
+export const OccurenceReportingForm = Template.bind({});
+OccurenceReportingForm.args = {
+  form: occurrenceReportingForm,
 };
