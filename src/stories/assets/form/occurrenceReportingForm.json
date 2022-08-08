@@ -16694,8 +16694,8 @@
     "has-question-path" : "/1 - Aerodrome General",
     "form-ecc-gen-0.2:is-duplicable" : true,
     "form-ecc-gen-0.2:level" : 1,
-    "has_related_question" : [ "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q-L2-3-q", "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q", "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q-L2-4-q", "e-a-5.1.0.0:e-31-qt-1cddd9b9feb35b1d612cf0e4409bd15a-q", "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q-L2-2-q", "e-a-5.1.0.0:operational-full/s-1000042-qt-a34269b9c56fcc28404cccff36eee185-q", "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q-L2-1-q" ],
-    "has-layout-class" : [ "answerable", "checkbox", "wizard-step", "section" ],
+    "has_related_question" : [ "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q-L2-3-q", "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q", "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q-L2-4-q", "e-a-5.1.0.0:e-31-qt-1cddd9b9feb35b1d612cf0e4409bd15a-q", "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q-L2-2-q", "e-a-5.1.0.0:operational-full/s-1000042-qt-a34269b9c56fcc28404cccff36eee185-q", "e-a-5.1.0.0:e-48-qt-e95f69846a3881bbfcfe533d894e464c-q-L2-1-q", "ex:show-answerable-wizard-steps"],
+    "has-layout-class" : ["wizard-step", "section"],
     "has-origin-type" : "e-a-5.1.0.0:e-1",
     "has-question-origin" : "e-a-5.1.0.0:e-1-qt-qo",
     "has-template" : "e-a-5.1.0.0:e-1-qt",
@@ -19548,6 +19548,7 @@
     "has-origin-type" : "e-a-5.1.0.0:e-4",
     "has-question-origin" : "e-a-5.1.0.0:e-4-qt-qo",
     "has-template" : "e-a-5.1.0.0:e-4-qt",
+    "is-relevant-if": "ex:show-answerable-wizard-steps-condition",
     "description" : {
       "@language" : "en",
       "@value" : "Information on the aircraft identification and description."
@@ -26830,7 +26831,24 @@
     "accountName" : "starr@engisafe.com",
     "firstName" : "Ringo",
     "lastName" : "Starr"
-  } ],
+  },
+    {
+      "label": "Show answerable wizard step",
+      "@type": "doc:question",
+      "@id": "ex:show-answerable-wizard-steps",
+      "has-layout-class": "checkbox",
+      "form:has-preceding-question": {
+        "@id": "e-a-5.1.0.0:operational-full/s-1000042-qt-a34269b9c56fcc28404cccff36eee185-q"
+      },
+      "description": "Show wizard steps that are answerable"
+    },
+    {
+      "@id": "ex:show-answerable-wizard-steps-condition",
+      "@type": "form:condition",
+      "has-tested-question": "ex:show-answerable-wizard-steps",
+      "accepts-answer-value": [true]
+    }
+  ],
   "@context" : {
     "label" : {
       "@id" : "http://www.w3.org/2000/01/rdf-schema#label"

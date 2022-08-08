@@ -1950,6 +1950,22 @@
       "has-layout-class": "checkbox"
     },
     {
+      "label": "Show answerable wizard step",
+      "@type": "doc:question",
+      "@id": "ex:show-answerable-wizard-steps",
+      "has-layout-class": "checkbox",
+      "form:has-preceding-question": {
+        "@id": "ex:show-layout-options-for-wizard-steps"
+      },
+      "description": "Show wizard steps that are answerable"
+    },
+    {
+      "@id": "ex:show-answerable-wizard-steps-condition",
+      "@type": "form:condition",
+      "has-tested-question": "ex:show-answerable-wizard-steps",
+      "accepts-answer-value": [true]
+    },
+    {
       "has-layout-class": "date",
       "@type": "doc:question",
       "has-template": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-451-qt",
@@ -2690,13 +2706,13 @@
     },
     {
       "@id": "icons-65",
-      "has-layout-class": ["section", "wizard-step"],
+      "has-layout-class": ["checkbox", "answerable", "section", "wizard-step"],
       "@type": "doc:question",
       "has_related_question": ["answerable-section-with-icons-4808"],
       "form:has-preceding-question": {
         "@id": "layout-options-65"
       },
-
+      "is-relevant-if": "ex:show-answerable-wizard-steps-condition",
       "label": "Icons"
     },
     {
@@ -2707,7 +2723,8 @@
         "answerable-section-4808",
         "coloring-different-categories-of-questions",
         "emphasised-section-1-1089",
-        "ex:show-layout-options-for-wizard-steps"
+        "ex:show-layout-options-for-wizard-steps",
+        "ex:show-answerable-wizard-steps"
       ],
       "label": "Layout options"
     },

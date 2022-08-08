@@ -55,7 +55,6 @@ export default class WizardStep extends React.Component {
 
     return (
       <React.Fragment>
-        {/*{this.renderQuestion(question)}*/}
         <Question question={question} onChange={this.onChange} />
         {JsonLdUtils.getLocalized(
           this.props.question[JsonLdUtils.RDFS_LABEL],
