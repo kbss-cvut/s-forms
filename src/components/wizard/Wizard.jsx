@@ -127,11 +127,11 @@ const Wizard = () => {
     return React.createElement(stepComponent, {
       options: options,
       key: "step" + currentStep,
-      step: step,
+      question: step,
       onNextStep: onNextStep,
       onPreviousStep: onPreviousStep,
       mapComponent: mapComponent,
-      stepIndex: currentStep,
+      index: currentStep,
       isFirstStep: currentStep === 0,
       isLastStep:
         currentStep === formQuestionsContext.getFormQuestionsData().length - 1,

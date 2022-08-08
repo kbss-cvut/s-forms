@@ -374,9 +374,7 @@ export default class Question extends React.Component {
       question[Constants.HAS_ANSWER] = [question[Constants.HAS_ANSWER]];
     }
     if (question[Constants.HAS_ANSWER].length === 0) {
-      if (
-        (FormUtils.isSection(question) && !FormUtils.isAnswerable(question))
-      ) {
+      if (FormUtils.isSection(question) && !FormUtils.isAnswerable(question)) {
         question[Constants.HAS_ANSWER] = [];
       } else {
         question[Constants.HAS_ANSWER] = [
@@ -540,6 +538,14 @@ Question.propTypes = {
   index: PropTypes.number,
   withoutCard: PropTypes.bool,
   collapsible: PropTypes.bool, // Whether the section is collapsible (if the question is a section)
+  options: PropTypes.object,
+  step: PropTypes.object,
+  onNextStep: PropTypes.func,
+  onPreviousStep: PropTypes.func,
+  mapComponent: PropTypes.func,
+  stepIndex: PropTypes.number,
+  isFirstStep: PropTypes.bool,
+  isLastStep: PropTypes.bool,
 };
 
 Question.defaultProps = {
