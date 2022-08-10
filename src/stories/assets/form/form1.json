@@ -2711,7 +2711,7 @@
         "@id": "layout-options-65"
       },
       "is-relevant-if": "ex:show-answerable-wizard-steps-condition",
-      "label": "_ Answerable section"
+      "label": "_ Layout options (Answerable section)"
     },
     {
       "@id": "layout-options-65",
