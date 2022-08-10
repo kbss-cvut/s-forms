@@ -772,7 +772,7 @@
         "@language": "en"
       },
       "form:has-preceding-question": {
-        "@id": "icons-65"
+        "@id": "answerable-section-1"
       }
     },
     {
@@ -2231,7 +2231,7 @@
       },
       "has-layout-class": "form",
       "has_related_question": [
-        "icons-65",
+        "answerable-section-1",
         "layout-options-65",
         "conditional-logic-6448",
         "ufo-based-patterns",
@@ -2705,7 +2705,7 @@
       "@id": "https://example.com/grade/low"
     },
     {
-      "@id": "icons-65",
+      "@id": "answerable-section-1",
       "has-layout-class": ["checkbox", "answerable", "section", "wizard-step"],
       "@type": "doc:question",
       "has_related_question": ["answerable-section-with-icons-4808"],
@@ -2713,7 +2713,7 @@
         "@id": "layout-options-65"
       },
       "is-relevant-if": "ex:show-answerable-wizard-steps-condition",
-      "label": "Icons"
+      "label": "_Answerable section"
     },
     {
       "@id": "layout-options-65",

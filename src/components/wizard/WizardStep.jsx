@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, ButtonToolbar } from "react-bootstrap";
-import JsonLdUtils from "jsonld-utils";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Question from "../Question";
 
@@ -56,10 +55,6 @@ export default class WizardStep extends React.Component {
     return (
       <React.Fragment>
         <Question question={question} onChange={this.onChange} />
-        {JsonLdUtils.getLocalized(
-          this.props.question[JsonLdUtils.RDFS_LABEL],
-          this.props.options.intl
-        )}
         {this.props.options.wizardStepButtons &&
           this._renderWizardStepButtons()}
       </React.Fragment>
