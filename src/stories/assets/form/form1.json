@@ -770,9 +770,6 @@
       "label": {
         "@value": "UFO-based patterns",
         "@language": "en"
-      },
-      "form:has-preceding-question": {
-        "@id": "answerable-section-1"
       }
     },
     {
@@ -1944,20 +1941,21 @@
       "accepts-answer-value": [true]
     },
     {
-      "label": "Show layout options at top-level of form",
+      "label": "Show top-level layout options",
       "@type": "doc:question",
       "@id": "ex:show-layout-options-for-wizard-steps",
-      "has-layout-class": "checkbox"
+      "has-layout-class": "checkbox",
+      "description": "Show top-level questions (i.e. wizard steps) that demonstrates various layout options."
     },
     {
-      "label": "Show answerable wizard step",
+      "label": "Show top-level answerable question",
       "@type": "doc:question",
       "@id": "ex:show-answerable-wizard-steps",
       "has-layout-class": "checkbox",
       "form:has-preceding-question": {
         "@id": "ex:show-layout-options-for-wizard-steps"
       },
-      "description": "Show wizard steps that are answerable"
+      "description": "Show top-level question (i.e. wizard step) that is answerable."
     },
     {
       "@id": "ex:show-answerable-wizard-steps-condition",
@@ -2231,12 +2229,12 @@
       },
       "has-layout-class": "form",
       "has_related_question": [
-        "answerable-section-1",
         "layout-options-65",
         "conditional-logic-6448",
         "ufo-based-patterns",
         "domain-specific-9087",
         "http://vfn.cz/ontologies/fss-form/new-q",
+        "answerable-section-1",
         "category-1-wizard-question-65",
         "layout-options-emphasised-8480"
       ],
@@ -2713,7 +2711,7 @@
         "@id": "layout-options-65"
       },
       "is-relevant-if": "ex:show-answerable-wizard-steps-condition",
-      "label": "_Answerable section"
+      "label": "_ Answerable section"
     },
     {
       "@id": "layout-options-65",
