@@ -538,14 +538,6 @@ Question.propTypes = {
   index: PropTypes.number,
   withoutCard: PropTypes.bool,
   collapsible: PropTypes.bool, // Whether the section is collapsible (if the question is a section)
-  options: PropTypes.object,
-  step: PropTypes.object,
-  onNextStep: PropTypes.func,
-  onPreviousStep: PropTypes.func,
-  mapComponent: PropTypes.func,
-  stepIndex: PropTypes.number,
-  isFirstStep: PropTypes.bool,
-  isLastStep: PropTypes.bool,
 };
 
 Question.defaultProps = {

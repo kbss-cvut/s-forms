@@ -26824,13 +26824,6 @@
       "@language" : "en",
       "@value" : "Aircraft Maintenance"
     }
-  }, {
-    "@id" : "http://www.inbas.cz/ontologies/reporting-tool/people#Ringo+Starr",
-    "@type" : [ "http://onto.fel.cvut.cz/ontologies/reporting-tool/model/auditor", "http://onto.fel.cvut.cz/ontologies/ufo/agent", "http://onto.fel.cvut.cz/ontologies/ufo/person" ],
-    "memberOf" : "http://onto.fel.cvut.cz/ontologies/ufo/organization/aircraft-maintenance",
-    "accountName" : "starr@engisafe.com",
-    "firstName" : "Ringo",
-    "lastName" : "Starr"
   },
     {
       "label": "Show answerable wizard step",

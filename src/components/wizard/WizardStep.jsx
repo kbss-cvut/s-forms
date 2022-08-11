@@ -2,6 +2,7 @@ import React from "react";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Question from "../Question";
+import PropTypes from "prop-types";
 
 export default class WizardStep extends React.Component {
   constructor(props) {
@@ -61,5 +62,15 @@ export default class WizardStep extends React.Component {
     );
   }
 }
+
+WizardStep.propTypes = {
+  options: PropTypes.object,
+  step: PropTypes.object,
+  onNextStep: PropTypes.func,
+  onPreviousStep: PropTypes.func,
+  mapComponent: PropTypes.func,
+  isFirstStep: PropTypes.bool,
+  isLastStep: PropTypes.bool,
+};
 
 WizardStep.contextType = FormQuestionsContext;
