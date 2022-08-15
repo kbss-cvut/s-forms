@@ -65,7 +65,8 @@ export default class WizardStep extends React.Component {
 
 WizardStep.propTypes = {
   options: PropTypes.object.isRequired,
-  step: PropTypes.object.isRequired,
+  question: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
   onNextStep: PropTypes.func,
   onPreviousStep: PropTypes.func,
   mapComponent: PropTypes.func,
