@@ -177,10 +177,12 @@ export default class Question extends React.Component {
       );
 
       const headerClassName = classNames(
+        FormUtils.isWizardStep(question) &&
+          "bg-primary text-white question-header",
         FormUtils.isEmphasised(question)
           ? Question.getEmphasizedClass(question)
           : "section-background",
-        collapsible ? "cursor-pointer" : "",
+        collapsible && "cursor-pointer",
         Question.getEmphasizedOnRelevantClass(question)
       );
 

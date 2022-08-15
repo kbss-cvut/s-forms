@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonToolbar } from "react-bootstrap";
+import { Button, ButtonToolbar, Card } from "react-bootstrap";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Question from "../Question";
 import PropTypes from "prop-types";
@@ -64,8 +64,8 @@ export default class WizardStep extends React.Component {
 }
 
 WizardStep.propTypes = {
-  options: PropTypes.object,
-  step: PropTypes.object,
+  options: PropTypes.object.isRequired,
+  step: PropTypes.object.isRequired,
   onNextStep: PropTypes.func,
   onPreviousStep: PropTypes.func,
   mapComponent: PropTypes.func,
