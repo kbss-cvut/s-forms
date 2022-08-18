@@ -208,7 +208,9 @@ export default class Question extends React.Component {
               {cardBody}
             </Card>
           ) : (
-            <Accordion>
+            <Accordion
+              defaultActiveKey={!this.state.expanded ? label : undefined}
+            >
               <Card className="mb-3">
                 <Accordion.Toggle
                   as={Card.Header}
