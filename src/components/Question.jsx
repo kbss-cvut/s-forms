@@ -65,7 +65,6 @@ export default class Question extends React.Component {
   }
 
   handleAnswerChange = (answerIndex, change) => {
-    // is answerable section
     if (FormUtils.isSection(this.props.question)) {
       let expanded = !!FormUtils.resolveValue(change);
       this.setState({ expanded: expanded });
@@ -196,31 +195,43 @@ export default class Question extends React.Component {
         </Card.Body>
       );
 
-      // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
       return (
-        <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
-          <Card className="mb-3">
-            <Accordion.Toggle
-              as={Card.Header}
-              onClick={this.toggleCollapse}
-              className={headerClassName + " question-header"}
-              onMouseEnter={this._onMouseEnterHandler}
-              onMouseLeave={this._onMouseLeaveHandler}
-            >
-              <h6 className="d-inline" id={question["@id"]}>
-                {collapsible && this._renderCollapseToggle()}
-                {label}
-              </h6>
-              {this.renderQuestionIcons()}
-              {this.renderHeaderExtension()}
-            </Accordion.Toggle>
-            {collapsible ? (
-              <Accordion.Collapse>{cardBody}</Accordion.Collapse>
-            ) : (
-              { cardBody }
-            )}
-          </Card>
-        </Accordion>
+        <>
+          {FormUtils.isWizardStep(question) ? (
+            <Card className="mb-3">
+              <Card.Header className={headerClassName + " question-header"}>
+                <h6 className="d-inline" id={question["@id"]}>
+                  {label}
+                </h6>
+                {this.renderQuestionIcons()}
+              </Card.Header>
+              {cardBody}
+            </Card>
+          ) : (
+            <Accordion>
+              <Card className="mb-3">
+                <Accordion.Toggle
+                  as={Card.Header}
+                  onClick={this._toggleCollapse}
+                  className={headerClassName + " question-header"}
+                  onMouseEnter={this._onMouseEnterHandler}
+                  onMouseLeave={this._onMouseLeaveHandler}
+                >
+                  <h6 className="d-inline" id={question["@id"]}>
+                    {collapsible && this._renderCollapseToggle()}
+                    {label}
+                  </h6>
+                  {this.renderQuestionIcons()}
+                </Accordion.Toggle>
+                {collapsible ? (
+                  <Accordion.Collapse>{cardBody}</Accordion.Collapse>
+                ) : (
+                  { cardBody }
+                )}
+              </Card>
+            </Accordion>
+          )}
+        </>
       );
     } else {
       return <div>{this._renderQuestionContent()}</div>;
@@ -251,10 +262,6 @@ export default class Question extends React.Component {
       this.handleCommentChange,
       this.state.showIcon
     );
-  }
-
-  renderHeaderExtension() {
-    return;
   }
 
   renderAnswerableSection() {
@@ -443,7 +450,7 @@ export default class Question extends React.Component {
       : options.i18n["section.expand"];
 
     return (
-      <span onClick={this.toggleCollapse} title={title}>
+      <span onClick={this._toggleCollapse} title={title}>
         {this.state.expanded ? (
           <CaretSquareUp title={title} />
         ) : (

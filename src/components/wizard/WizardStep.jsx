@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonToolbar, Card } from "react-bootstrap";
+import { Button, ButtonToolbar } from "react-bootstrap";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Question from "../Question";
 import PropTypes from "prop-types";
