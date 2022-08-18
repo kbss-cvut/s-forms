@@ -5,6 +5,7 @@ import JsonLdUtils from "jsonld-utils";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import FormUtils from "../../util/FormUtils";
 import Question from "../Question";
+import classNames from "classnames";
 
 const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
@@ -21,11 +22,12 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
             action={true}
             active={index === currentStep ? "active" : ""}
             variant={"default"}
-            className={
+            className={classNames([
               options.debugMode && !FormUtils.isRelevant(step)
                 ? "show-irrelevant"
-                : Question.getEmphasizedClass(step)
-            }
+                : Question.getEmphasizedClass(step),
+              "wizard-nav",
+            ])}
           >
             {JsonLdUtils.getLocalized(
               step[JsonLdUtils.RDFS_LABEL],

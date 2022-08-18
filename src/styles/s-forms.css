@@ -311,7 +311,7 @@ input:disabled {
 }
 
 .show-irrelevant .card-header,
-.show-irrelevant.list-group-item {
+.show-irrelevant.wizard-nav {
   pointer-events: auto;
 }
 

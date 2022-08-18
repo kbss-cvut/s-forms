@@ -5,6 +5,7 @@ import JsonLdUtils from "jsonld-utils";
 import FormUtils from "../../util/FormUtils";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import Question from "../Question";
+import classNames from "classnames";
 
 const HorizontalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
@@ -17,15 +18,17 @@ const HorizontalWizardNav = ({ steps, onNavigate, currentStep }) => {
         onSelect={(key) => onNavigate(parseInt(key))}
       >
         {steps.map((step, index) => (
-          <NavItem
-            key={"nav" + index}
-            id={"wizard-nav-" + index}
-            className={Question.getEmphasizedClass(step)}
-          >
+          <NavItem key={"nav" + index} id={"wizard-nav-" + index}>
             <NavLink
               eventKey={index}
-              active={index === currentStep}
-              disabled={!FormUtils.isRelevant(step)}
+              active={index === currentStep ? "active" : ""}
+              hidden={options.debugMode ? false : !FormUtils.isRelevant(step)}
+              className={classNames([
+                options.debugMode && !FormUtils.isRelevant(step)
+                  ? "show-irrelevant"
+                  : Question.getEmphasizedClass(step),
+                "wizard-nav",
+              ])}
             >
               {JsonLdUtils.getLocalized(
                 step[JsonLdUtils.RDFS_LABEL],
