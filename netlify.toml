@@ -1,0 +1,6 @@
+[build]
+command = "npm run build-storybook"
+publish = "build"
+
+[build.environment]
+GENERATE_SOURCEMAP = "true"
