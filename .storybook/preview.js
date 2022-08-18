@@ -44,6 +44,12 @@ export const globalTypes = {
     defaultValue: false,
     control: { type: "boolean" },
   },
+  horizontalNavBar: {
+    name: "Toggle Horizontal Navigation Bar",
+    description: "Set the navigation bar to horizontal",
+    defaultValue: false,
+    control: { type: "boolean" },
+  },
 };
 
 const options = {

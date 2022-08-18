@@ -39,7 +39,7 @@ export default {
 
 const Template: ComponentStory<typeof SForms> = (
   args,
-  { globals: { iconBehavior, locale, debugMode } }
+  { globals: { iconBehavior, locale, debugMode, horizontalNavBar } }
 ) => {
   const options = {
     i18n: {
@@ -53,7 +53,7 @@ const Template: ComponentStory<typeof SForms> = (
     },
     modalView: false,
     modalProps,
-    horizontalWizardNav: false,
+    horizontalWizardNav: horizontalNavBar,
     wizardStepButtons: true,
     enableForwardSkip: true,
     ...getP("startingQuestionId", "layout-options-65"),
