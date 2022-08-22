@@ -3,6 +3,7 @@ import { Button, ButtonToolbar } from "react-bootstrap";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Question from "../Question";
 import PropTypes from "prop-types";
+import FormUtils from "../../util/FormUtils.js";
 
 export default class WizardStep extends React.Component {
   constructor(props) {
@@ -55,7 +56,11 @@ export default class WizardStep extends React.Component {
 
     return (
       <React.Fragment>
-        <Question question={question} onChange={this.onChange} />
+        <Question
+          question={question}
+          onChange={this.onChange}
+          collapsible={FormUtils.isAnswerable(question)}
+        />
         {this.props.options.wizardStepButtons &&
           this._renderWizardStepButtons()}
       </React.Fragment>
