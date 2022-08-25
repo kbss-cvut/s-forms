@@ -95,18 +95,6 @@ export default class Question extends React.Component {
 
   _toggleCollapse = () => {
     if (this.props.collapsible) {
-      const question = this.props.question;
-      if (
-        !this.context.options.debugMode &&
-        FormUtils.isAnswerable(question) &&
-        FormUtils.isSection(question)
-      ) {
-        if (!this._getFirstAnswerValue()) {
-          // prevent expanding/collapsing when the checkbox is not checked
-          return;
-        }
-      }
-
       this.setState({ expanded: !this.state.expanded });
     }
   };
@@ -140,7 +128,7 @@ export default class Question extends React.Component {
       headerClassName.push("section-background");
     if (collapsible) headerClassName.push("cursor-pointer");
     if (
-      FormUtils.isRelevant(question) &&
+      !FormUtils.isRelevant(question) &&
       (options.debugMode ||
         JsonLdObjectUtils.checkId(subQuestion, options.startingQuestionId))
     ) {
@@ -153,6 +141,17 @@ export default class Question extends React.Component {
   render() {
     const question = this.props.question;
     const questionComponent = this.renderQuestion(question);
+    const subQuestion = question[Constants.HAS_SUBQUESTION];
+    if (
+      !FormUtils.isRelevant(question) &&
+      (this.context.options.debugMode ||
+        JsonLdObjectUtils.checkId(
+          subQuestion,
+          this.context.options.startingQuestionId
+        ))
+    ) {
+      return <div className="show-irrelevant">{questionComponent}</div>;
+    }
     if (FormUtils.isHidden(question)) {
       return null;
     }
