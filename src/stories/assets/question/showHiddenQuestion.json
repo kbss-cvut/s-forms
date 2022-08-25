@@ -1,0 +1,102 @@
+{
+  "@id": "accept-answer-value-395",
+  "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+  "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question": [
+    {
+      "@id": "tested-question-419",
+      "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question": [],
+      "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "type-ahead",
+      "http://onto.fel.cvut.cz/ontologies/form/has-possible-value": [
+        {
+          "@id": "http://onto.fel.cvut.cz/ontologies/s-forms/example/accepted-value-4208994",
+          "http://www.w3.org/2000/01/rdf-schema#label": {
+            "@language": "en",
+            "@value": "accepted value"
+          }
+        },
+        {
+          "@id": "option-6989605",
+          "http://www.w3.org/2000/01/rdf-schema#label": {
+            "@language": "en",
+            "@value": "value 1"
+          }
+        },
+        {
+          "@id": "option-5194877",
+          "http://www.w3.org/2000/01/rdf-schema#label": {
+            "@language": "en",
+            "@value": "value 2"
+          }
+        },
+        {
+          "@id": "option-5858615",
+          "http://www.w3.org/2000/01/rdf-schema#label": {
+            "@language": "en",
+            "@value": "value 3"
+          }
+        }
+      ],
+      "http://purl.org/dc/elements/1.1/description": {
+        "@language": "en",
+        "@value": "Choose accepted value to show hidden question."
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@language": "en",
+        "@value": "Tested question"
+      },
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": [
+        {
+          "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/s-forms/example/accepted-value-4208994",
+            "http://www.w3.org/2000/01/rdf-schema#label": {
+              "@language": "en",
+              "@value": "accepted value"
+            }
+          },
+          "http://onto.fel.cvut.cz/ontologies/documentation/has_object_value": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/s-forms/example/accepted-value-4208994"
+          }
+        }
+      ],
+      "http://onto.fel.cvut.cz/ontologies/form/has-comment": []
+    },
+    {
+      "@id": "hidden-question-1834",
+      "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question": [],
+      "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "text",
+      "http://onto.fel.cvut.cz/ontologies/form/has-preceding-question": {
+        "@id": "tested-question-419"
+      },
+      "http://onto.fel.cvut.cz/ontologies/form/is-relevant-if": [
+        {
+          "@id": "http://onto.fel.cvut.cz/ontologies/s-forms/example/sc--ast-accepts-answer-value",
+          "@type": "http://onto.fel.cvut.cz/ontologies/form/condition",
+          "http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/s-forms/example/accepted-value-4208994"
+          },
+          "http://onto.fel.cvut.cz/ontologies/form/has-tested-question": {
+            "@id": "tested-question-419"
+          }
+        }
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@language": "en",
+        "@value": "Hidden question"
+      },
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": [
+        {
+          "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": ""
+        }
+      ]
+    }
+  ],
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "section",
+  "http://www.w3.org/2000/01/rdf-schema#label": {
+    "@language": "en",
+    "@value": "Accept answer value"
+  },
+  "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": [],
+  "http://onto.fel.cvut.cz/ontologies/form/has-comment": []
+}
