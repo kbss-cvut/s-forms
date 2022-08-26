@@ -9,11 +9,27 @@ import questionExpanded from "./assets/question/questionExpanded.json";
 import questionCollapsed from "./assets/question/questionCollapsed.json";
 import showHiddenQuestion from "./assets/question/showHiddenQuestion.json";
 import hiddenQuestion from "./assets/question/hiddenQuestion.json";
+import question from "./assets/question/question.json";
+import queryString from "query-string";
 
 export default {
   title: "Components/Question",
   component: Question,
 } as ComponentMeta<typeof Question>;
+
+const getP = (queryParameterName: string, defaultValue: string) => {
+  return {
+    [queryParameterName]: getQueryParameter(queryParameterName, defaultValue),
+  };
+};
+
+const getQueryParameter = (parameterName: string, defaultValue: string) => {
+  const value = queryString.parse(window.location.search)[parameterName];
+  if (value) {
+    return value;
+  }
+  return defaultValue;
+};
 
 const optionsWithDebugModeOn = {
   intl: {
@@ -21,6 +37,14 @@ const optionsWithDebugModeOn = {
   },
   i18n: {},
   debugMode: true,
+};
+
+const optionsWithStartingHiddenQuestion = {
+  intl: {
+    locale: "en",
+  },
+  i18n: {},
+  ...getP("startingQuestionId", "hidden-question-1834"),
 };
 
 const Template: ComponentStory<typeof Question> = (
@@ -78,9 +102,7 @@ ShowHiddenQuestion.args = {
   question: showHiddenQuestion,
 };
 
-export const HiddenQuestionWithDebugModeOn = Template.bind({
-  question: hiddenQuestion,
-});
+export const HiddenQuestionWithDebugModeOn = Template.bind({});
 HiddenQuestionWithDebugModeOn.args = {
   question: hiddenQuestion,
   options: optionsWithDebugModeOn,
@@ -94,4 +116,15 @@ CollapsedQuestion.args = {
 export const ExpandedQuestion = Template.bind({});
 ExpandedQuestion.args = {
   question: questionExpanded,
+};
+
+export const QuestionWithoutHeader = Template.bind({});
+QuestionWithoutHeader.args = {
+  question: question,
+};
+
+export const StartingWithHiddenQuestion = Template.bind({});
+StartingWithHiddenQuestion.args = {
+  question: hiddenQuestion,
+  options: optionsWithStartingHiddenQuestion,
 };

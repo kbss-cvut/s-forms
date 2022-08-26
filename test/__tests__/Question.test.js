@@ -16,6 +16,8 @@ describe("Question", () => {
     CollapsedQuestion,
     ExpandedQuestion,
     HiddenQuestionWithDebugModeOn,
+    QuestionWithoutHeader,
+    StartingWithHiddenQuestion,
   } = composeStories(stories);
 
   it("renders section collapsed when layout class is set to collapsed", () => {
@@ -23,7 +25,7 @@ describe("Question", () => {
     const expandedSection =
       component.container.getElementsByClassName("collapse show");
 
-    expect(expandedSection).toHaveLength(0);
+    expect(expandedSection.length).toBeLessThanOrEqual(0);
   });
 
   it("renders section by default expanded", () => {
@@ -31,7 +33,7 @@ describe("Question", () => {
     const expandedSectionElement =
       component.container.getElementsByClassName("collapse show");
 
-    expect(expandedSectionElement).toHaveLength(1);
+    expect(expandedSectionElement.length).toBeGreaterThan(0);
   });
 
   it("does not render hidden question when debug mode is off", () => {
@@ -50,7 +52,7 @@ describe("Question", () => {
       component.container.getElementsByClassName("show-irrelevant");
 
     expect(hiddenQuestionElement).toBeInTheDocument();
-    expect(irrelevantSectionElement).toHaveLength(1);
+    expect(irrelevantSectionElement.length).toBeGreaterThan(0);
   });
 
   it("renders hidden-question when relevant with regular styling", () => {
@@ -62,6 +64,28 @@ describe("Question", () => {
       component.container.getElementsByClassName("show-irrelevant");
 
     expect(hiddenQuestionElement).toBeInTheDocument();
-    expect(irrelevantSectionElement).toHaveLength(0);
+    expect(irrelevantSectionElement.length).toBeLessThanOrEqual(0);
+  });
+
+  it("does not have a header", () => {
+    const component = render(
+      <QuestionWithoutHeader {...QuestionWithoutHeader.args} />
+    );
+    const questionHeaderElement =
+      component.container.getElementsByClassName("card-header");
+
+    expect(questionHeaderElement.length).toBeLessThanOrEqual(0);
+  });
+
+  it("renders irrelevant question when it is the starting-question-id", () => {
+    const component = render(
+      <StartingWithHiddenQuestion {...StartingWithHiddenQuestion.args} />
+    );
+    const hiddenQuestionElement = component.queryByText("Hidden question");
+    const irrelevantSectionElement =
+      component.container.getElementsByClassName("show-irrelevant");
+
+    expect(hiddenQuestionElement).toBeInTheDocument();
+    expect(irrelevantSectionElement.length).toBeGreaterThan(0);
   });
 });
