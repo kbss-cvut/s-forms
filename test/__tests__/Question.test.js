@@ -1,102 +1,67 @@
 import React from "react";
-import { Card, Accordion } from "react-bootstrap";
-import JsonLdUtils from "jsonld-utils";
-
-import Constants from "../../src/constants/Constants";
 import Question from "../../src/components/Question";
-import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
-import DefaultInput from "../../src/components/DefaultInput";
+import { cleanup, render } from "@testing-library/react";
+import { composeStories } from "@storybook/testing-react";
+import { expect } from "@storybook/jest";
+import * as stories from "../../src/stories/Question.stories";
 
 describe("Question", () => {
-  let question, onChange, options, inputComponent, componentsOptions;
-
-  beforeEach(() => {
-    question = {
-      "@id":
-        "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1223764187-q",
-      "@type": "doc:question",
-      "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": {
-        "@id":
-          "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-636079211-a",
-        "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value":
-          "test",
-      },
-      "http://onto.fel.cvut.cz/ontologies/form/has-origin-type":
-        "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-453",
-      "http://onto.fel.cvut.cz/ontologies/form/has-template-origin":
-        "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1223764187",
-      "http://onto.fel.cvut.cz/ontologies/form/has-template":
-        "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-453-qt",
-      "http://www.w3.org/2000/01/rdf-schema#comment": {
-        "@language": "en",
-        "@value":
-          "The identification of the entity or organisation that is responsible for the report.",
-      },
-      "http://www.w3.org/2000/01/rdf-schema#label": {
-        "@language": "en",
-        "@value": "453 - Responsible entity",
-      },
-    };
-    onChange = jest.fn();
-    options = {
-      intl: {
-        locale: "en",
-      },
-      i18n: {},
-    };
-    componentsOptions = {
-      readOnly: false,
-      dateTimeAnswer: {
-        dateFormat: "yyyy-MM-dd",
-        timeFormat: "HH:mm:ss",
-        dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
-      },
-    };
-    inputComponent = DefaultInput;
+  afterEach(() => {
+    cleanup();
   });
 
+  const {
+    HiddenQuestion,
+    ShowHiddenQuestion,
+    CollapsedQuestion,
+    ExpandedQuestion,
+    HiddenQuestionWithDebugModeOn,
+  } = composeStories(stories);
+
   it("renders section collapsed when layout class is set to collapsed", () => {
-    question[Constants.LAYOUT_CLASS] = [
-      Constants.LAYOUT.QUESTION_SECTION,
-      Constants.LAYOUT.COLLAPSED,
-    ];
+    const component = render(<CollapsedQuestion {...CollapsedQuestion.args} />);
+    const expandedSection =
+      component.container.getElementsByClassName("collapse show");
 
-    const result = mount(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Question question={question} onChange={onChange} />
-      </ConfigurationContext.Provider>
-    );
-    const card = result.find(Accordion);
-    const label = JsonLdUtils.getLocalized(
-      question[JsonLdUtils.RDFS_LABEL],
-      options.intl
-    );
-
-    expect(card.prop("defaultActiveKey")).toBe(label);
+    expect(expandedSection).toHaveLength(0);
   });
 
   it("renders section by default expanded", () => {
-    question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
+    const component = render(<ExpandedQuestion {...ExpandedQuestion.args} />);
+    const expandedSectionElement =
+      component.container.getElementsByClassName("collapse show");
 
-    const result = mount(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Question question={question} onChange={onChange} />
-      </ConfigurationContext.Provider>
+    expect(expandedSectionElement).toHaveLength(1);
+  });
+
+  it("does not render hidden question when debug mode is off", () => {
+    const component = render(<HiddenQuestion {...HiddenQuestion.args} />);
+    const hiddenQuestionElement = component.queryByText("Hidden question");
+
+    expect(hiddenQuestionElement).not.toBeInTheDocument();
+  });
+
+  it("renders irrelevant question when debug mode is on with irrelevant styling", () => {
+    const component = render(
+      <HiddenQuestionWithDebugModeOn {...HiddenQuestionWithDebugModeOn.args} />
     );
-    const card = result.find(Card);
+    const hiddenQuestionElement = component.queryByText("Hidden question");
+    const irrelevantSectionElement =
+      component.container.getElementsByClassName("show-irrelevant");
 
-    expect(card.prop("defaultActiveKey")).toBe(undefined);
+    expect(hiddenQuestionElement).toBeInTheDocument();
+    expect(irrelevantSectionElement).toHaveLength(1);
+  });
+
+  it("renders hidden-question when relevant with regular styling", () => {
+    const component = render(
+      <ShowHiddenQuestion {...ShowHiddenQuestion.args} />
+    );
+    const hiddenQuestionElement = component.queryByText("Hidden question");
+    const irrelevantSectionElement =
+      component.container.getElementsByClassName("show-irrelevant");
+
+    expect(hiddenQuestionElement).toBeInTheDocument();
+    expect(irrelevantSectionElement).toHaveLength(0);
   });
 });

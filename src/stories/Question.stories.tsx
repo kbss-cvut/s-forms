@@ -2,6 +2,7 @@ import React from "react";
 import Question from "../components/Question";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ConfigurationContext } from "../contexts/ConfigurationContext";
+import { FormGenContext } from "../contexts/FormGenContext.js";
 import DefaultInput from "../components/DefaultInput";
 
 import questionExpanded from "./assets/question/questionExpanded.json";
@@ -13,6 +14,14 @@ export default {
   title: "Components/Question",
   component: Question,
 } as ComponentMeta<typeof Question>;
+
+const optionsWithDebugModeOn = {
+  intl: {
+    locale: "en",
+  },
+  i18n: {},
+  debugMode: true,
+};
 
 const Template: ComponentStory<typeof Question> = (
   args,
@@ -40,17 +49,21 @@ const Template: ComponentStory<typeof Question> = (
     };
   };
   const mapComponent = _getComponentMappingFunction();
+  const getOptions = (id: number) => options[id] || [];
 
   return (
     <ConfigurationContext.Provider
       value={{
         componentsOptions,
         inputComponent,
-        options,
         mapComponent,
+        options,
+        ...args,
       }}
     >
-      <Question {...args} />
+      <FormGenContext.Provider value={{ getOptions }}>
+        <Question {...args} onChange={() => {}} />
+      </FormGenContext.Provider>
     </ConfigurationContext.Provider>
   );
 };
@@ -63,6 +76,14 @@ HiddenQuestion.args = {
 export const ShowHiddenQuestion = Template.bind({});
 ShowHiddenQuestion.args = {
   question: showHiddenQuestion,
+};
+
+export const HiddenQuestionWithDebugModeOn = Template.bind({
+  question: hiddenQuestion,
+});
+HiddenQuestionWithDebugModeOn.args = {
+  question: hiddenQuestion,
+  options: optionsWithDebugModeOn,
 };
 
 export const CollapsedQuestion = Template.bind({});
