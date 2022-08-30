@@ -1,0 +1,48 @@
+{
+  "@id": "answerable-section-4808",
+  "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+  "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question": [
+    {
+      "@id": "aircraft-name-9553",
+      "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question": [],
+      "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "text",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@language": "en",
+        "@value": "Aircraft name"
+      },
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": [
+        {
+          "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": ""
+        }
+      ]
+    },
+    {
+      "@id": "aircraft-number-2375",
+      "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question": [],
+      "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "text",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@language": "en",
+        "@value": "Aircraft number"
+      },
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": [
+        {
+          "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": ""
+        }
+      ]
+    }
+  ],
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": [
+    "section",
+    "checkbox",
+    "answerable"
+  ],
+  "http://www.w3.org/2000/01/rdf-schema#label": {
+    "@language": "en",
+    "@value": "Answerable section"
+  },
+  "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": [
+    { "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": "true" }
+  ]
+}

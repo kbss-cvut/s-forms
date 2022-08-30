@@ -8,8 +8,10 @@ import DefaultInput from "../components/DefaultInput";
 import questionExpanded from "./assets/question/questionExpanded.json";
 import questionCollapsed from "./assets/question/questionCollapsed.json";
 import showHiddenQuestion from "./assets/question/showHiddenQuestion.json";
-import hiddenQuestion from "./assets/question/hiddenQuestion.json";
+import hiddenQuestion from "./assets/question/testedQuestion.json";
 import question from "./assets/question/question.json";
+import answerableQuestion from "./assets/question/answerableQuestion.json";
+import answerableQuestionExpanded from "./assets/question/answerableQuestionExpanded.json";
 import queryString from "query-string";
 
 export default {
@@ -127,4 +129,14 @@ ExpandedQuestion.args = {
 export const QuestionWithoutHeader = Template.bind({});
 QuestionWithoutHeader.args = {
   question: question,
+};
+
+export const AnswerableQuestion = Template.bind({});
+AnswerableQuestion.args = {
+  question: answerableQuestion,
+};
+
+export const AnswerableQuestionExpanded = Template.bind({});
+AnswerableQuestionExpanded.args = {
+  question: answerableQuestionExpanded,
 };
