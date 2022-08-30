@@ -142,13 +142,21 @@ export default class Question extends React.Component {
     const question = this.props.question;
     const questionComponent = this.renderQuestion(question);
     const subQuestion = question[Constants.HAS_SUBQUESTION];
+    let testedQuestion;
+
+    if (FormUtils.isTested(question)) testedQuestion = question;
     if (
       !FormUtils.isRelevant(question) &&
       (this.context.options.debugMode ||
         JsonLdObjectUtils.checkId(
           subQuestion,
           this.context.options.startingQuestionId
-        ))
+        ) ||
+        (testedQuestion &&
+          JsonLdObjectUtils.checkId(
+            testedQuestion,
+            this.context.options.startingQuestionId
+          )))
     ) {
       return <div className="show-irrelevant">{questionComponent}</div>;
     }

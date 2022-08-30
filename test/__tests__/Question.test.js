@@ -11,13 +11,13 @@ describe("Question", () => {
   });
 
   const {
-    HiddenQuestion,
-    ShowHiddenQuestion,
+    TestedQuestionIsIrrelevant,
+    TestedQuestionIsRelevant,
     CollapsedQuestion,
     ExpandedQuestion,
-    HiddenQuestionWithDebugModeOn,
+    TestedQuestionIsIrrelevantWithDebugModeOn,
     QuestionWithoutHeader,
-    StartingWithHiddenQuestion,
+    TestedQuestionIsIrrelevantAndStartingId,
   } = composeStories(stories);
 
   it("renders section collapsed when layout class is set to collapsed", () => {
@@ -37,7 +37,9 @@ describe("Question", () => {
   });
 
   it("does not render hidden question when debug mode is off", () => {
-    const component = render(<HiddenQuestion {...HiddenQuestion.args} />);
+    const component = render(
+      <HiddenQuestion {...TestedQuestionIsIrrelevant.args} />
+    );
     const hiddenQuestionElement = component.queryByText("Hidden question");
 
     expect(hiddenQuestionElement).not.toBeInTheDocument();
@@ -45,7 +47,9 @@ describe("Question", () => {
 
   it("renders irrelevant question when debug mode is on with irrelevant styling", () => {
     const component = render(
-      <HiddenQuestionWithDebugModeOn {...HiddenQuestionWithDebugModeOn.args} />
+      <HiddenQuestionWithDebugModeOn
+        {...TestedQuestionIsIrrelevantWithDebugModeOn.args}
+      />
     );
     const hiddenQuestionElement = component.queryByText("Hidden question");
     const irrelevantSectionElement =
@@ -57,7 +61,7 @@ describe("Question", () => {
 
   it("renders hidden-question when relevant with regular styling", () => {
     const component = render(
-      <ShowHiddenQuestion {...ShowHiddenQuestion.args} />
+      <ShowHiddenQuestion {...TestedQuestionIsRelevant.args} />
     );
     const hiddenQuestionElement = component.queryByText("Hidden question");
     const irrelevantSectionElement =
@@ -79,7 +83,9 @@ describe("Question", () => {
 
   it("renders irrelevant question when it is the starting-question-id", () => {
     const component = render(
-      <StartingWithHiddenQuestion {...StartingWithHiddenQuestion.args} />
+      <StartingWithHiddenQuestion
+        {...TestedQuestionIsIrrelevantAndStartingId.args}
+      />
     );
     const hiddenQuestionElement = component.queryByText("Hidden question");
     const irrelevantSectionElement =

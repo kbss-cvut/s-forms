@@ -92,20 +92,26 @@ const Template: ComponentStory<typeof Question> = (
   );
 };
 
-export const HiddenQuestion = Template.bind({});
-HiddenQuestion.args = {
+export const TestedQuestionIsIrrelevant = Template.bind({});
+TestedQuestionIsIrrelevant.args = {
   question: hiddenQuestion,
 };
 
-export const ShowHiddenQuestion = Template.bind({});
-ShowHiddenQuestion.args = {
+export const TestedQuestionIsRelevant = Template.bind({});
+TestedQuestionIsRelevant.args = {
   question: showHiddenQuestion,
 };
 
-export const HiddenQuestionWithDebugModeOn = Template.bind({});
-HiddenQuestionWithDebugModeOn.args = {
+export const TestedQuestionIsIrrelevantWithDebugModeOn = Template.bind({});
+TestedQuestionIsIrrelevantWithDebugModeOn.args = {
   question: hiddenQuestion,
   options: optionsWithDebugModeOn,
+};
+
+export const TestedQuestionIsIrrelevantAndStartingId = Template.bind({});
+TestedQuestionIsIrrelevantAndStartingId.args = {
+  question: hiddenQuestion,
+  options: optionsWithStartingHiddenQuestion,
 };
 
 export const CollapsedQuestion = Template.bind({});
@@ -121,10 +127,4 @@ ExpandedQuestion.args = {
 export const QuestionWithoutHeader = Template.bind({});
 QuestionWithoutHeader.args = {
   question: question,
-};
-
-export const StartingWithHiddenQuestion = Template.bind({});
-StartingWithHiddenQuestion.args = {
-  question: hiddenQuestion,
-  options: optionsWithStartingHiddenQuestion,
 };
