@@ -61,7 +61,7 @@ describe("Question", () => {
     expect(irrelevantSectionElement.length).toBeGreaterThan(0);
   });
 
-  it("renders hidden-question when relevant with regular styling", () => {
+  it("renders hidden question when relevant with regular styling", () => {
     const component = render(
       <TestedQuestionIsIrrelevant {...TestedQuestionIsRelevant.args} />
     );
