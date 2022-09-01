@@ -141,7 +141,7 @@ export default class Question extends React.Component {
   render() {
     const question = this.props.question;
     const questionComponent = this.renderQuestion(question);
-    const subQuestion = question[Constants.HAS_SUBQUESTION];
+    const subQuestions = question[Constants.HAS_SUBQUESTION];
     let testedQuestion;
 
     if (FormUtils.isTested(question)) testedQuestion = question;
@@ -149,7 +149,7 @@ export default class Question extends React.Component {
       !FormUtils.isRelevant(question) &&
       (this.context.options.debugMode ||
         JsonLdObjectUtils.checkId(
-          subQuestion,
+          subQuestions,
           this.context.options.startingQuestionId
         ) ||
         (testedQuestion &&
