@@ -56,7 +56,7 @@ const Template: ComponentStory<typeof SForms> = (
     horizontalWizardNav: horizontalNavBar,
     wizardStepButtons: true,
     enableForwardSkip: true,
-    ...getP("startingQuestionId", "layout-options-65"),
+    ...getP("startingQuestionId", "http://vfn.cz/ontologies/vita-study/form/vs--assesment-evaluation-q"),
     startingStep: 1,
     debugMode: debugMode,
     users: [
