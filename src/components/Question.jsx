@@ -93,6 +93,33 @@ export default class Question extends React.Component {
     this.props.onChange(this.props.index, newState);
   }
 
+  isDebugged(question) {
+    if (FormUtils.isRelevant(question) && !question[Constants.HAS_SUBQUESTION])
+      return false;
+    if (this.context.options.debugMode) return true;
+    return this.getSubQuestionsId(question);
+  }
+
+  getSubQuestionsId(question) {
+    const subQuestion = question[Constants.HAS_SUBQUESTION];
+    const startingQuestion = this.context.options.startingQuestionId;
+    let bool;
+
+    if (subQuestion && subQuestion.length > 0) {
+      for (let i = 0; i < subQuestion.length; i++) {
+        bool = JsonLdObjectUtils.checkId(subQuestion[i], startingQuestion);
+        if (bool) return bool;
+      }
+    }
+    if (!subQuestion) {
+      bool = JsonLdObjectUtils.checkId(question, startingQuestion);
+    }
+    if (question[Constants.IS_RELEVANT_IF]) {
+      bool = JsonLdObjectUtils.checkId(question, startingQuestion);
+    }
+    return bool;
+  }
+
   _toggleCollapse = () => {
     if (this.props.collapsible) {
       this.setState({ expanded: !this.state.expanded });
@@ -127,37 +154,17 @@ export default class Question extends React.Component {
     if (FormUtils.isSection(question))
       headerClassName.push("section-background");
     if (collapsible) headerClassName.push("cursor-pointer");
-    if (
-      !FormUtils.isRelevant(question) &&
-      (options.debugMode ||
-        JsonLdObjectUtils.checkId(subQuestion, options.startingQuestionId))
-    ) {
+    if (this.isDebugged(question)) {
       headerClassName.push("show-irrelevant");
     }
-
     return headerClassName;
   };
 
   render() {
     const question = this.props.question;
     const questionComponent = this.renderQuestion(question);
-    const subQuestions = question[Constants.HAS_SUBQUESTION];
-    let testedQuestion;
 
-    if (FormUtils.isTested(question)) testedQuestion = question;
-    if (
-      !FormUtils.isRelevant(question) &&
-      (this.context.options.debugMode ||
-        JsonLdObjectUtils.checkId(
-          subQuestions,
-          this.context.options.startingQuestionId
-        ) ||
-        (testedQuestion &&
-          JsonLdObjectUtils.checkId(
-            testedQuestion,
-            this.context.options.startingQuestionId
-          )))
-    ) {
+    if (this.isDebugged(question)) {
       return <div className="show-irrelevant">{questionComponent}</div>;
     }
     if (FormUtils.isHidden(question)) {
@@ -315,15 +322,7 @@ export default class Question extends React.Component {
   }
 
   getShowIrrelevantClassname(question) {
-    const debugMode = this.context.options.debugMode;
-    const startingQuestionId = this.context.options.startingQuestionId;
-    const subQuestion = question[Constants.HAS_SUBQUESTION];
-
-    if (
-      (debugMode ||
-        JsonLdObjectUtils.checkId(subQuestion, startingQuestionId)) &&
-      !FormUtils.hasAnswer(question)
-    ) {
+    if (this.isDebugged(question)) {
       return "show-irrelevant";
     }
     return "";
@@ -479,22 +478,16 @@ export default class Question extends React.Component {
     ) : null;
   }
 
-  renderSubQuestions(classname) {
+  renderSubQuestions() {
     const children = [];
     const subQuestions = this._getSubQuestions();
-    const debugMode = this.context.options.debugMode;
-    const startingQuestionId = this.context.options.startingQuestionId;
 
     for (let i = 0; i < subQuestions.length; i++) {
       let question = subQuestions[i];
       let component = this.context.mapComponent(question, Question);
       let element = null;
 
-      if (
-        debugMode ||
-        classname !== "show-irrelevant" ||
-        (!debugMode && JsonLdObjectUtils.checkId(question, startingQuestionId))
-      ) {
+      if (this.isDebugged(question) || FormUtils.isRelevant(question)) {
         element = React.createElement(component, {
           key: "sub-question-" + i,
           question: question,
