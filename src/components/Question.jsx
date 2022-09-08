@@ -65,7 +65,6 @@ export default class Question extends React.Component {
   }
 
   handleAnswerChange = (answerIndex, change) => {
-    // is answerable section
     if (FormUtils.isSection(this.props.question)) {
       let expanded = !!FormUtils.resolveValue(change);
       this.setState({ expanded: expanded });
@@ -96,18 +95,6 @@ export default class Question extends React.Component {
 
   _toggleCollapse = () => {
     if (this.props.collapsible) {
-      const question = this.props.question;
-      if (
-        !this.context.options.debugMode &&
-        FormUtils.isAnswerable(question) &&
-        FormUtils.isSection(question)
-      ) {
-        if (!this._getFirstAnswerValue()) {
-          // prevent expanding/collapsing when the checkbox is not checked
-          return;
-        }
-      }
-
       this.setState({ expanded: !this.state.expanded });
     }
   };
@@ -120,25 +107,65 @@ export default class Question extends React.Component {
     this.setState({ showIcon: false });
   };
 
+  _getHeaderClassName = () => {
+    const question = this.props.question;
+    const collapsible = this.props.collapsible;
+    const options = this.context.options;
+    const subQuestion = question[Constants.HAS_SUBQUESTION];
+
+    let headerClassName = [];
+
+    headerClassName.push(
+      Question.getEmphasizedOnRelevantClass(question),
+      "question-header"
+    );
+
+    if (FormUtils.isWizardStep(question))
+      headerClassName.push("wizard-step bg-primary text-white");
+    if (FormUtils.isEmphasised(question))
+      headerClassName.push(Question.getEmphasizedClass(question));
+    if (FormUtils.isSection(question))
+      headerClassName.push("section-background");
+    if (collapsible) headerClassName.push("cursor-pointer");
+    if (
+      !FormUtils.isRelevant(question) &&
+      (options.debugMode ||
+        JsonLdObjectUtils.checkId(subQuestion, options.startingQuestionId))
+    ) {
+      headerClassName.push("show-irrelevant");
+    }
+
+    return headerClassName;
+  };
+
   render() {
     const question = this.props.question;
-    const subQuestion = question[Constants.HAS_SUBQUESTION];
-    const options = this.context.options;
     const questionComponent = this.renderQuestion(question);
-    if (FormUtils.isHidden(question)) {
-      return null;
-    }
+    const subQuestions = question[Constants.HAS_SUBQUESTION];
+    let testedQuestion;
+
+    if (FormUtils.isTested(question)) testedQuestion = question;
     if (
       !FormUtils.isRelevant(question) &&
       (this.context.options.debugMode ||
-        JsonLdObjectUtils.checkId(subQuestion, options.startingQuestionId))
+        JsonLdObjectUtils.checkId(
+          subQuestions,
+          this.context.options.startingQuestionId
+        ) ||
+        (testedQuestion &&
+          JsonLdObjectUtils.checkId(
+            testedQuestion,
+            this.context.options.startingQuestionId
+          )))
     ) {
       return <div className="show-irrelevant">{questionComponent}</div>;
+    }
+    if (FormUtils.isHidden(question)) {
+      return null;
     }
     if (!FormUtils.isRelevant(question)) {
       return null;
     }
-
     return questionComponent;
   }
 
@@ -164,6 +191,9 @@ export default class Question extends React.Component {
         );
       }
     }
+    if (FormUtils.isAnswerable(question)) {
+      return this.renderAnswerableSection();
+    }
     if (FormUtils.isSection(question)) {
       const { collapsible, withoutCard } = this.props;
       const categoryClass = Question._getQuestionCategoryClass(question);
@@ -176,49 +206,42 @@ export default class Question extends React.Component {
         this.context.options.intl
       );
 
-      const headerClassName = classNames(
-        FormUtils.isEmphasised(question)
-          ? Question.getEmphasizedClass(question)
-          : "section-background",
-        collapsible ? "cursor-pointer" : "",
-        Question.getEmphasizedOnRelevantClass(question)
-      );
-
-      if (FormUtils.isAnswerable(question)) {
-        return this.renderAnswerableSection();
-      }
-
       const cardBody = (
         <Card.Body className={classNames("p-3", categoryClass)}>
           {this._renderQuestionContent()}
         </Card.Body>
       );
 
-      // TODO change defaultActiveKey to label when expanded + add eventKey to Accordion.Collapse
       return (
-        <Accordion defaultActiveKey={!this.state.expanded ? label : undefined}>
-          <Card className="mb-3">
-            <Accordion.Toggle
-              as={Card.Header}
-              onClick={this.toggleCollapse}
-              className={headerClassName + " question-header"}
-              onMouseEnter={this._onMouseEnterHandler}
-              onMouseLeave={this._onMouseLeaveHandler}
-            >
-              <h6 className="d-inline" id={question["@id"]}>
-                {collapsible && this._renderCollapseToggle()}
-                {label}
-              </h6>
-              {this.renderQuestionIcons()}
-              {this.renderHeaderExtension()}
-            </Accordion.Toggle>
-            {collapsible ? (
-              <Accordion.Collapse>{cardBody}</Accordion.Collapse>
-            ) : (
-              { cardBody }
-            )}
-          </Card>
-        </Accordion>
+        <>
+          <Accordion
+            defaultActiveKey={!this.state.expanded ? label : undefined}
+          >
+            <Card className="mb-3">
+              <Accordion.Toggle
+                as={Card.Header}
+                onClick={this._toggleCollapse}
+                className={this._getHeaderClassName()}
+                onMouseEnter={this._onMouseEnterHandler}
+                onMouseLeave={this._onMouseLeaveHandler}
+              >
+                <h6 className="d-inline" id={question["@id"]}>
+                  {collapsible &&
+                    !FormUtils.isWizardStep(question) &&
+                    this._renderCollapseToggle()}
+                  {label}
+                </h6>
+                {this.renderQuestionIcons()}
+                {this.props.children}
+              </Accordion.Toggle>
+              {collapsible ? (
+                <Accordion.Collapse>{cardBody}</Accordion.Collapse>
+              ) : (
+                <>{cardBody}</>
+              )}
+            </Card>
+          </Accordion>
+        </>
       );
     } else {
       return <div>{this._renderQuestionContent()}</div>;
@@ -251,25 +274,10 @@ export default class Question extends React.Component {
     );
   }
 
-  renderHeaderExtension() {
-    return;
-  }
-
   renderAnswerableSection() {
     const question = this.props.question;
     const collapsible = this.props.collapsible;
     const categoryClass = Question._getQuestionCategoryClass(question);
-    let headerClassNames = [
-      FormUtils.isEmphasised(question)
-        ? Question.getEmphasizedClass(question)
-        : "section-background",
-      this.state.expanded ? "section-expanded" : "section-collapsed",
-      Question.getEmphasizedOnRelevantClass(question),
-    ];
-
-    if (collapsible && this._getFirstAnswerValue()) {
-      headerClassNames.push("cursor-pointer");
-    }
 
     let classname = this.getShowIrrelevantClassname(question);
 
@@ -287,7 +295,7 @@ export default class Question extends React.Component {
         <Card className="mb-3">
           <Card.Header
             onClick={this._toggleCollapse}
-            className={classNames(headerClassNames)}
+            className={this._getHeaderClassName()}
           >
             {this.renderAnswers()}
           </Card.Header>
@@ -441,7 +449,7 @@ export default class Question extends React.Component {
       : options.i18n["section.expand"];
 
     return (
-      <span onClick={this.toggleCollapse} title={title}>
+      <span onClick={this._toggleCollapse} title={title}>
         {this.state.expanded ? (
           <CaretSquareUp title={title} />
         ) : (

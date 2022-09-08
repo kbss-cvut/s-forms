@@ -1,5 +1,6 @@
 {
   "@id": "aircraft-name-9553",
   "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
-  "http://onto.fel.cvut.cz/ontologies/form/has-comment": []
+  "http://onto.fel.cvut.cz/ontologies/form/has-comment": [],
+  "http://www.w3.org/2000/01/rdf-schema#label": "Aircraft Name"
 }

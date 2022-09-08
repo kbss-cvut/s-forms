@@ -1,25 +1,18 @@
 import React from "react";
-import { Button, ButtonToolbar, Card } from "react-bootstrap";
-import JsonLdUtils from "jsonld-utils";
-import PropTypes from "prop-types";
-import Constants from "../../constants/Constants";
+import { Button, ButtonToolbar } from "react-bootstrap";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Question from "../Question";
-import JsonLdObjectMap from "../../util/JsonLdObjectMap";
-import QuestionStatic from "../QuestionStatic.jsx";
+import PropTypes from "prop-types";
 import FormUtils from "../../util/FormUtils.js";
 
 export default class WizardStep extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showIcon: false,
-    };
   }
 
   onNextStep = () => {
     this.context.updateFormQuestionsData(
-      this.props.stepIndex,
+      this.props.index,
       this.context.getFormQuestionsData()
     );
     this.props.onNextStep();
@@ -28,18 +21,6 @@ export default class WizardStep extends React.Component {
   onPreviousStep = () => {
     this.props.onPreviousStep();
   };
-
-  onCommentChange = (commentIndex, change) => {
-    this._onChange(Constants.HAS_COMMENT, commentIndex, change);
-  };
-
-  _onChange(att, valueIndex, newValue) {
-    let newState = { ...this.props.step };
-    newState[att][valueIndex] = newValue;
-
-    JsonLdObjectMap.putObject(newState["@id"], newState);
-    this.onChange(this.props.index, newState);
-  }
 
   _renderWizardStepButtons = () => {
     return (
@@ -64,73 +45,38 @@ export default class WizardStep extends React.Component {
   };
 
   onChange = (index, change) => {
-    this.context.updateFormQuestionsData(this.props.stepIndex || index, {
-      ...this.props.step,
+    this.context.updateFormQuestionsData(this.props.index || index, {
+      ...this.props.question,
       ...change,
     });
   };
 
-  _onMouseEnterHandler = () => {
-    this.setState({ showIcon: true });
-  };
-
-  _onMouseLeaveHandler = () => {
-    this.setState({ showIcon: false });
-  };
-
   render() {
-    const categoryClass = Question._getQuestionCategoryClass(this.props.step);
-    const question = this.context.getFormQuestionsData([this.props.stepIndex]);
-    const options = this.props.options;
-
-    let questionComponent = this.props.mapComponent(this.props.step, Question);
-    let questionElement = React.createElement(questionComponent, {
-      question: this.props.step,
-      onChange: this.onChange,
-      withoutCard: !FormUtils.isAnswerable(question),
-      index: this.props.stepIndex,
-    });
+    const question = this.context.getFormQuestionsData([this.props.index]);
 
     return (
-      <div className="wizard-step">
-        <Card className="wizard-step-content">
-          <Card.Header
-            className="bg-primary text-white question-header"
-            as="h6"
-            id={this.props.step["@id"]}
-            onMouseEnter={this._onMouseEnterHandler}
-            onMouseLeave={this._onMouseLeaveHandler}
-          >
-            {JsonLdUtils.getLocalized(
-              this.props.step[JsonLdUtils.RDFS_LABEL],
-              this.props.options.intl
-            )}
-            {QuestionStatic.renderIcons(
-              question,
-              options,
-              this.onCommentChange,
-              this.state.showIcon
-            )}
-          </Card.Header>
-          <Card.Body className={categoryClass}>{questionElement}</Card.Body>
-        </Card>
-
+      <React.Fragment>
+        <Question
+          question={question}
+          onChange={this.onChange}
+          collapsible={FormUtils.isAnswerable(question)}
+        />
         {this.props.options.wizardStepButtons &&
           this._renderWizardStepButtons()}
-      </div>
+      </React.Fragment>
     );
   }
 }
 
-WizardStep.contextType = FormQuestionsContext;
-
 WizardStep.propTypes = {
   options: PropTypes.object.isRequired,
-  step: PropTypes.object.isRequired,
+  question: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
   onNextStep: PropTypes.func,
   onPreviousStep: PropTypes.func,
   mapComponent: PropTypes.func,
-  stepIndex: PropTypes.number.isRequired,
   isFirstStep: PropTypes.bool,
   isLastStep: PropTypes.bool,
 };
+
+WizardStep.contextType = FormQuestionsContext;

@@ -770,9 +770,6 @@
       "label": {
         "@value": "UFO-based patterns",
         "@language": "en"
-      },
-      "form:has-preceding-question": {
-        "@id": "icons-65"
       }
     },
     {
@@ -1944,10 +1941,27 @@
       "accepts-answer-value": [true]
     },
     {
-      "label": "Show layout options at top-level of form",
+      "label": "Show top-level layout options",
       "@type": "doc:question",
       "@id": "ex:show-layout-options-for-wizard-steps",
-      "has-layout-class": "checkbox"
+      "has-layout-class": "checkbox",
+      "description": "Show top-level questions (i.e. wizard steps) that demonstrates various layout options."
+    },
+    {
+      "label": "Show top-level answerable question",
+      "@type": "doc:question",
+      "@id": "ex:show-answerable-wizard-steps",
+      "has-layout-class": "checkbox",
+      "form:has-preceding-question": {
+        "@id": "ex:show-layout-options-for-wizard-steps"
+      },
+      "description": "Show top-level question (i.e. wizard step) that is answerable."
+    },
+    {
+      "@id": "ex:show-answerable-wizard-steps-condition",
+      "@type": "form:condition",
+      "has-tested-question": "ex:show-answerable-wizard-steps",
+      "accepts-answer-value": [true]
     },
     {
       "has-layout-class": "date",
@@ -2215,12 +2229,12 @@
       },
       "has-layout-class": "form",
       "has_related_question": [
-        "icons-65",
         "layout-options-65",
         "conditional-logic-6448",
         "ufo-based-patterns",
         "domain-specific-9087",
         "http://vfn.cz/ontologies/fss-form/new-q",
+        "answerable-section-1",
         "category-1-wizard-question-65",
         "layout-options-emphasised-8480"
       ],
@@ -2689,15 +2703,15 @@
       "@id": "https://example.com/grade/low"
     },
     {
-      "@id": "icons-65",
-      "has-layout-class": ["section", "wizard-step"],
+      "@id": "answerable-section-1",
+      "has-layout-class": ["checkbox", "answerable", "section", "wizard-step"],
       "@type": "doc:question",
       "has_related_question": ["answerable-section-with-icons-4808"],
       "form:has-preceding-question": {
         "@id": "layout-options-65"
       },
-
-      "label": "Icons"
+      "is-relevant-if": "ex:show-answerable-wizard-steps-condition",
+      "label": "_ Layout options (Answerable section)"
     },
     {
       "@id": "layout-options-65",
@@ -2707,7 +2721,8 @@
         "answerable-section-4808",
         "coloring-different-categories-of-questions",
         "emphasised-section-1-1089",
-        "ex:show-layout-options-for-wizard-steps"
+        "ex:show-layout-options-for-wizard-steps",
+        "ex:show-answerable-wizard-steps"
       ],
       "label": "Layout options"
     },
