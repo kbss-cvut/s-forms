@@ -15,6 +15,7 @@ import { CaretSquareDown, CaretSquareUp, InfoCircle } from "../styles/icons";
 import { ConfigurationContext } from "../contexts/ConfigurationContext";
 import classNames from "classnames";
 import QuestionStatic from "./QuestionStatic.jsx";
+import Utils from "../util/Utils.js";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -94,30 +95,27 @@ export default class Question extends React.Component {
   }
 
   isDebugged(question) {
-    if (FormUtils.isRelevant(question) && !question[Constants.HAS_SUBQUESTION])
-      return false;
-    if (this.context.options.debugMode) return true;
-    return this.getSubQuestionsId(question);
-  }
-
-  getSubQuestionsId(question) {
-    const subQuestion = question[Constants.HAS_SUBQUESTION];
     const startingQuestion = this.context.options.startingQuestionId;
-    let bool;
 
-    if (subQuestion && subQuestion.length > 0) {
-      for (let i = 0; i < subQuestion.length; i++) {
-        bool = JsonLdObjectUtils.checkId(subQuestion[i], startingQuestion);
-        if (bool) return bool;
-      }
+    if (
+      FormUtils.isRelevant(question) &&
+      !question[Constants.HAS_SUBQUESTION]
+    ) {
+      return false;
     }
-    if (!subQuestion) {
-      bool = JsonLdObjectUtils.checkId(question, startingQuestion);
+    if (this.context.options.debugMode && !FormUtils.isRelevant(question)) {
+      return true;
     }
-    if (question[Constants.IS_RELEVANT_IF]) {
-      bool = JsonLdObjectUtils.checkId(question, startingQuestion);
-    }
-    return bool;
+    let subQuestions = Utils.findChildren(
+      question,
+      startingQuestion,
+      true,
+      false
+    );
+    return (
+      JsonLdObjectUtils.checkId(subQuestions, startingQuestion) &&
+      !FormUtils.isRelevant(question)
+    );
   }
 
   _toggleCollapse = () => {
@@ -137,8 +135,6 @@ export default class Question extends React.Component {
   _getHeaderClassName = () => {
     const question = this.props.question;
     const collapsible = this.props.collapsible;
-    const options = this.context.options;
-    const subQuestion = question[Constants.HAS_SUBQUESTION];
 
     let headerClassName = [];
 
@@ -322,7 +318,10 @@ export default class Question extends React.Component {
   }
 
   getShowIrrelevantClassname(question) {
-    if (this.isDebugged(question)) {
+    if (
+      this.isDebugged(question[Constants.HAS_SUBQUESTION]) &&
+      !FormUtils.hasAnswer(question)
+    ) {
       return "show-irrelevant";
     }
     return "";
@@ -478,7 +477,7 @@ export default class Question extends React.Component {
     ) : null;
   }
 
-  renderSubQuestions() {
+  renderSubQuestions(classname) {
     const children = [];
     const subQuestions = this._getSubQuestions();
 
@@ -487,7 +486,7 @@ export default class Question extends React.Component {
       let component = this.context.mapComponent(question, Question);
       let element = null;
 
-      if (this.isDebugged(question) || FormUtils.isRelevant(question)) {
+      if (this.isDebugged(question) || classname !== "show-irrelevant") {
         element = React.createElement(component, {
           key: "sub-question-" + i,
           question: question,

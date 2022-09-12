@@ -1,3 +1,5 @@
+import Constants from "../constants/Constants.js";
+
 export default class Utils {
   /**
    * Calculates a simple hash of the specified string, much like usual Java implementations.
@@ -32,5 +34,36 @@ export default class Utils {
       return object_or_array;
     }
     return [object_or_array];
+  }
+
+  static findChildren(question, id, transitive, reflexive) {
+    const subQuestions = question[Constants.HAS_SUBQUESTION];
+    let questions = [];
+
+    if (!question) {
+      return null;
+    }
+
+    if (transitive || (!transitive && !reflexive)) {
+      if (question["@id"] === id) {
+        questions.push(question);
+      }
+      if (subQuestions && subQuestions.length) {
+        for (let subQuestion of subQuestions) {
+          questions.push(Utils.findChildren(subQuestion, id));
+        }
+      }
+    }
+
+    if (reflexive && !transitive) {
+      if (subQuestions && subQuestions.length) {
+        for (let i = 0; i < subQuestions.length; i++) {
+          if (subQuestions[i]["@id"] === id) {
+            questions.push(subQuestions[i]);
+          }
+        }
+      }
+    }
+    return questions;
   }
 }
