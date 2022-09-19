@@ -57,7 +57,7 @@ const Template: ComponentStory<typeof SForms> = (
     horizontalWizardNav: horizontalNavBar,
     wizardStepButtons: true,
     enableForwardSkip: true,
-    ...getP("startingQuestionId", "http://vfn.cz/ontologies/vita-study/form/vs--assesment-evaluation-q"),
+    ...getP("startingQuestionId", "http://vfn.cz/ontologies/vita-study/form/vs--assesment-evaluation-q-NOTEXISTS"),
     startingStep: 1,
     debugMode: debugMode,
     users: [
@@ -72,15 +72,7 @@ const Template: ComponentStory<typeof SForms> = (
       {
         id: Constants.ICONS.QUESTION_HELP,
         behavior: iconBehavior,
-      },
-      {
-        id: Constants.ICONS.QUESTION_LINK,
-        behavior: iconBehavior,
-      },
-      {
-        id: Constants.ICONS.QUESTION_COMMENTS,
-        behavior: iconBehavior,
-      },
+      }
     ],
   };
 
