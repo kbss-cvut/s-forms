@@ -95,27 +95,24 @@ export default class Question extends React.Component {
   }
 
   isDebugged(question) {
-    const startingQuestion = this.context.options.startingQuestionId;
+    const startingQuestionId = this.context.options.startingQuestionId;
 
-    if (
-      FormUtils.isRelevant(question) &&
-      !question[Constants.HAS_SUBQUESTION]
-    ) {
+    if (FormUtils.isRelevant(question)) {
       return false;
     }
     if (this.context.options.debugMode && !FormUtils.isRelevant(question)) {
       return true;
     }
-    let subQuestions = Utils.findChildren(
+
+    let questionById = Utils.findQuestionById(
+      startingQuestionId,
       question,
-      startingQuestion,
       true,
+      false,
       false
     );
-    return (
-      JsonLdObjectUtils.checkId(subQuestions, startingQuestion) &&
-      !FormUtils.isRelevant(question)
-    );
+
+    return !!questionById;
   }
 
   _toggleCollapse = () => {
@@ -318,8 +315,13 @@ export default class Question extends React.Component {
   }
 
   getShowIrrelevantClassname(question) {
+    const debugMode = this.context.options.debugMode;
+    const startingQuestionId = this.context.options.startingQuestionId;
+    const subQuestion = question[Constants.HAS_SUBQUESTION];
+
     if (
-      this.isDebugged(question[Constants.HAS_SUBQUESTION]) &&
+      (debugMode ||
+        JsonLdObjectUtils.checkId(subQuestion, startingQuestionId)) &&
       !FormUtils.hasAnswer(question)
     ) {
       return "show-irrelevant";
@@ -480,13 +482,19 @@ export default class Question extends React.Component {
   renderSubQuestions(classname) {
     const children = [];
     const subQuestions = this._getSubQuestions();
+    const debugMode = this.context.options.debugMode;
+    const startingQuestionId = this.context.options.startingQuestionId;
 
     for (let i = 0; i < subQuestions.length; i++) {
       let question = subQuestions[i];
       let component = this.context.mapComponent(question, Question);
       let element = null;
 
-      if (this.isDebugged(question) || classname !== "show-irrelevant") {
+      if (
+        debugMode ||
+        classname !== "show-irrelevant" ||
+        Utils.findQuestionById(startingQuestionId, question, true, false, false)
+      ) {
         element = React.createElement(component, {
           key: "sub-question-" + i,
           question: question,

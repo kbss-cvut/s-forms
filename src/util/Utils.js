@@ -36,34 +36,28 @@ export default class Utils {
     return [object_or_array];
   }
 
-  static findChildren(question, id, transitive, reflexive) {
-    const subQuestions = question[Constants.HAS_SUBQUESTION];
-    let questions = [];
-
-    if (!question) {
-      return null;
-    }
-
-    if (transitive || (!transitive && !reflexive)) {
+  static findQuestionById(id, question, reflexive, asserted, transitive) {
+    if (reflexive) {
       if (question["@id"] === id) {
-        questions.push(question);
-      }
-      if (subQuestions && subQuestions.length) {
-        for (let subQuestion of subQuestions) {
-          questions.push(Utils.findChildren(subQuestion, id));
-        }
+        return question;
       }
     }
 
-    if (reflexive && !transitive) {
-      if (subQuestions && subQuestions.length) {
-        for (let i = 0; i < subQuestions.length; i++) {
-          if (subQuestions[i]["@id"] === id) {
-            questions.push(subQuestions[i]);
-          }
-        }
+    const subQuestions = Utils.asArray(question[Constants.HAS_SUBQUESTION]); // we have such method in some kind of json-ld utils
+    if (asserted) {
+      for (let q of subQuestions) {
+        let foundQ = Utils.findQuestionById(id, q, true, false, false);
+        if (foundQ) return foundQ;
       }
     }
-    return questions;
+
+    if (transitive) {
+      for (let q of subQuestions) {
+        let foundQ = Utils.findQuestionById(id, q, false, true, true);
+        if (foundQ) return foundQ;
+      }
+    }
+
+    return null;
   }
 }
