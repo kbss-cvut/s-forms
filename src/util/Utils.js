@@ -1,3 +1,5 @@
+import Constants from "../constants/Constants.js";
+
 export default class Utils {
   /**
    * Calculates a simple hash of the specified string, much like usual Java implementations.
@@ -32,5 +34,30 @@ export default class Utils {
       return object_or_array;
     }
     return [object_or_array];
+  }
+
+  static findQuestionById(id, question, reflexive, asserted, transitive) {
+    if (reflexive) {
+      if (question["@id"] === id) {
+        return question;
+      }
+    }
+
+    const subQuestions = Utils.asArray(question[Constants.HAS_SUBQUESTION]); // we have such method in some kind of json-ld utils
+    if (asserted) {
+      for (let q of subQuestions) {
+        let foundQ = Utils.findQuestionById(id, q, true, false, false);
+        if (foundQ) return foundQ;
+      }
+    }
+
+    if (transitive) {
+      for (let q of subQuestions) {
+        let foundQ = Utils.findQuestionById(id, q, false, true, true);
+        if (foundQ) return foundQ;
+      }
+    }
+
+    return null;
   }
 }

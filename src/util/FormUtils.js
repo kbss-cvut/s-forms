@@ -212,10 +212,6 @@ export default class FormUtils {
     return true;
   }
 
-  static isTested(question) {
-    return !!question[Constants.IS_RELEVANT_IF];
-  }
-
   static hasValidationLogic(question) {
     if (question[Constants.REQUIRES_ANSWER_VALUE]) {
       return true;
