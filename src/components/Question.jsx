@@ -104,17 +104,18 @@ export default class Question extends React.Component {
       return true;
     }
 
-    if (startingQuestionId !== null) {
-      let questionById = Utils.findQuestionById(
-        startingQuestionId,
-        question,
-        true,
-        false,
-        false
-      );
-      return !!questionById;
+    if (startingQuestionId == null) {
+      return false;
     }
-    return false;
+    
+    let questionById = Utils.findQuestionById(
+      startingQuestionId,
+      question,
+      true,
+      false,
+      false
+    );
+    return !!questionById;
   }
 
   _toggleCollapse = () => {
