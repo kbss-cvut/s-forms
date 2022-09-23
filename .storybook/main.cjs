@@ -7,5 +7,9 @@ module.exports = {
     "@luigiminardim/storybook-addon-globals-controls",
     "@storybook/addon-a11y",
   ],
+  webpackFinal: async (config, { configType }) => {
+    config.devtool = 'source-map'
+    return config;
+  },
   framework: "@storybook/react",
 };

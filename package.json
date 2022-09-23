@@ -110,7 +110,7 @@
     "release:patch": "npm test && standard-version --release-as patch && npm publish",
     "release:major": "npm test && standard-version --release-as major && npm publish",
     "release:minor": "npm test && standard-version --release-as minor && npm publish",
-    "prettier:check": "npx prettier --check .",
+    "prettier:check": "npx prettier --check ./src",
     "prettier:format": "npx prettier --write .",
     "precommit": "lint-staged",
     "prepare": "husky install"
