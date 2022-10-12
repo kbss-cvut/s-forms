@@ -107,7 +107,7 @@ export default class Question extends React.Component {
     if (startingQuestionId == null) {
       return false;
     }
-    
+
     let questionById = Utils.findQuestionById(
       startingQuestionId,
       question,
