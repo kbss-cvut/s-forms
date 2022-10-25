@@ -3,8 +3,8 @@ import JsonLdUtils from "jsonld-utils";
 import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
 import FormUtils from "../../util/FormUtils";
-import YASQE from "@triply/yasqe"; //TODO stopped working correctly
-import YATE from "@triply/yasqe"; // TODO stopped working correctly
+import YASQE from "yasgui-yasqe";
+import YATE from "yasgui-yasqe";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import "@triply/yasgui/build/yasgui.min.css";
 
