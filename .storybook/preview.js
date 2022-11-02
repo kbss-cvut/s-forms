@@ -47,7 +47,7 @@ export const globalTypes = {
   horizontalNavBar: {
     name: "Toggle Horizontal Navigation Bar",
     description: "Set the navigation bar to horizontal",
-    defaultValue: false,
+    defaultValue: true,
     control: { type: "boolean" },
   },
   timeOut: {
