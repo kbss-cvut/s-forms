@@ -12,6 +12,7 @@ import occurrenceReportingForm from "./assets/form/occurrenceReportingForm.json"
 import queryString from "query-string";
 import Constants from "../constants/Constants";
 import IntlContextProvider from "../contexts/IntlContextProvider";
+import possibleValues from "./assets/possibleValues.json";
 
 const getP = (queryParameterName: string, defaultValue: string) => {
   return {
@@ -39,7 +40,7 @@ export default {
 
 const Template: ComponentStory<typeof SForms> = (
   args,
-  { globals: { iconBehavior, locale, debugMode, horizontalNavBar } }
+  { globals: { iconBehavior, locale, debugMode, horizontalNavBar, timeOut } }
 ) => {
   const options = {
     i18n: {
@@ -82,9 +83,20 @@ const Template: ComponentStory<typeof SForms> = (
       },
     ],
   };
+
+  const fetchTypeAheadValues = () => {
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(possibleValues), timeOut)
+    );
+  };
+
   return (
     <IntlContextProvider locale={locale}>
-      <SForms {...args} options={options} />
+      <SForms
+        {...args}
+        options={options}
+        fetchTypeAheadValues={fetchTypeAheadValues}
+      />
     </IntlContextProvider>
   );
 };

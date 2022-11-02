@@ -50,6 +50,12 @@ export const globalTypes = {
     defaultValue: false,
     control: { type: "boolean" },
   },
+  timeOut: {
+    name: "Time Out (ms)",
+    description: "Set time-out for possible values (in ms)",
+    defaultValue: 1500,
+    control: { type: "number", min: 0, max: 10000, step: 500 },
+  },
 };
 
 const options = {
