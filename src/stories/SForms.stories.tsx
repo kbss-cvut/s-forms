@@ -95,7 +95,7 @@ const Template: ComponentStory<typeof SForms> = (
       <SForms
         {...args}
         options={options}
-        fetchTypeAheadValues={fetchTypeAheadValues()}
+        fetchTypeAheadValues={fetchTypeAheadValues}
       />
     </IntlContextProvider>
   );
