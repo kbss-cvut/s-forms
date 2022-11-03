@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import jsonld from "jsonld";
 import Logger from "../util/Logger";
@@ -6,7 +6,7 @@ import Logger from "../util/Logger";
 const FormGenContext = React.createContext({});
 
 const FormGenContextProvider = ({ children, ...props }) => {
-  const [options, setOptions] = useState({});
+  let options = [];
 
   const loadFormOptions = async (id, query) => {
     const option = options[id];
@@ -22,10 +22,7 @@ const FormGenContextProvider = ({ children, ...props }) => {
         jsonld.frame(data, {}, null, (err, framed) => {
           const option = framed["@graph"];
 
-          setOptions((prevState) => ({
-            ...prevState,
-            [id]: option,
-          }));
+          options.push({ ...option, [id]: option });
 
           return resolve(option);
         });
