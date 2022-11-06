@@ -1,6 +1,6 @@
 {
   "name": "@kbss-cvut/s-forms",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Semantic forms generator and processor",
   "keywords": [
     "react",
@@ -55,6 +55,7 @@
     "jsonld": "^0.4.12",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.11.tgz",
     "microbundle": "^0.14.2",
+    "npm-packlist": "^7.0.2",
     "prop-types": "^15.7.2",
     "react-bootstrap": "1.0.1",
     "react-datepicker": "^4.2.1",
