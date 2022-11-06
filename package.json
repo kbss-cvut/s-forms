@@ -105,6 +105,7 @@
     "test": "jest",
     "dev": "start-storybook --no-manager-cache -p 6006",
     "build": "microbundle --jsx React.createElement --jsxFragment React.Fragment",
+    "build:lib": "npm run build && npm pack",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic",
     "release:patch": "npm test && standard-version --release-as patch && npm publish",
