@@ -1,6 +1,5 @@
 import Constants from "../src/constants/Constants";
 import { addDecorator } from "@storybook/react";
-import IntlContextProvider from "../src/contexts/IntlContextProvider";
 import { FormGenContextProvider } from "../src/contexts/FormGenContext";
 import { ConfigurationContextProvider } from "../src/contexts/ConfigurationContext";
 
@@ -107,9 +106,7 @@ const fetchTypeAheadValues = () => {
 addDecorator((story) => (
   <ConfigurationContextProvider options={options}>
     <FormGenContextProvider fetchTypeAheadValues={fetchTypeAheadValues}>
-      <IntlContextProvider locale={globalTypes.locale.defaultValue}>
-        {story()}
-      </IntlContextProvider>
+      {story()}
     </FormGenContextProvider>
   </ConfigurationContextProvider>
 ));

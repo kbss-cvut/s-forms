@@ -1,6 +1,5 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import IntlContextProvider from "../contexts/IntlContextProvider";
 
 import CommentForm from "../components/comment/CommentForm";
 
@@ -13,11 +12,7 @@ const Template: ComponentStory<typeof CommentForm> = (
   args,
   { globals: { locale } }
 ) => {
-  return (
-    <IntlContextProvider locale={locale}>
-      <CommentForm {...args} />
-    </IntlContextProvider>
-  );
+  <CommentForm {...args} />;
 };
 
 export const Default = Template.bind({});

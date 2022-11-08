@@ -1,7 +1,6 @@
 import React from "react";
 import QuestionCommentIcon from "../components/comment/QuestionCommentIcon";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import IntlContextProvider from "../contexts/IntlContextProvider";
 import { ConfigurationContextProvider } from "../contexts/ConfigurationContext";
 
 import question from "./assets/question/question.json";
@@ -31,9 +30,7 @@ const Template: ComponentStory<typeof QuestionCommentIcon> = (
   };
   return (
     <ConfigurationContextProvider options={options}>
-      <IntlContextProvider locale={locale}>
-        <QuestionCommentIcon {...args} />
-      </IntlContextProvider>
+      <QuestionCommentIcon {...args} />
     </ConfigurationContextProvider>
   );
 };
