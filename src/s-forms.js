@@ -11,7 +11,6 @@ import Answer from "./components/Answer";
 import HelpIcon from "./components/HelpIcon";
 import WizardStep from "./components/wizard/WizardStep";
 import QuestionStatic from "./components/QuestionStatic";
-import IntlContextProvider from "./contexts/IntlContextProvider.js";
 
 export default SForms;
 export {
@@ -27,5 +26,4 @@ export {
   FormQuestionsContext,
   WizardStep,
   QuestionStatic,
-  IntlContextProvider,
 };

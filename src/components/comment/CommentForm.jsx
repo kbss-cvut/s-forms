@@ -1,15 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import ArrowRight from "../../styles/icons/ArrowRight";
-import { useIntl } from "react-intl";
+import { ConfigurationContext } from "../../contexts/ConfigurationContext.js";
+import cs from "../../i18n/cs.json";
+import en from "../../i18n/en.json";
 
 const MAX_TEXT_AREA_HEIGHT = "300px";
 
 const CommentForm = (props) => {
+  const configurationContext = useContext(ConfigurationContext);
   const [commentValue, setCommentValue] = useState("");
   const formInputRef = useRef(null);
-  const intl = useIntl();
+
+  const intl = configurationContext.options.intl;
 
   useEffect(() => {
     formInputRef.current.focus();
@@ -62,9 +66,11 @@ const CommentForm = (props) => {
                 className="comment-form-control"
                 name="comment"
                 as="textarea"
-                placeholder={intl.formatMessage({
-                  id: "comment.form.placeholder",
-                })}
+                placeholder={
+                  intl.locale !== "en"
+                    ? cs["comment.form.placeholder"]
+                    : en["comment.form.placeholder"]
+                }
                 required
                 value={commentValue}
                 onChange={handleValueChange}

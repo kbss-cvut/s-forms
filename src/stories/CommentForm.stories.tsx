@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import IntlContextProvider from "../contexts/IntlContextProvider";
+import { ConfigurationContextProvider } from "../contexts/ConfigurationContext";
 
 import CommentForm from "../components/comment/CommentForm";
 
@@ -14,9 +14,17 @@ const Template: ComponentStory<typeof CommentForm> = (
   { globals: { locale } }
 ) => {
   return (
-    <IntlContextProvider locale={locale}>
-      <CommentForm {...args} />
-    </IntlContextProvider>
+    <>
+      <ConfigurationContextProvider
+        options={{
+          intl: {
+            locale: locale,
+          },
+        }}
+      >
+        <CommentForm {...args} />
+      </ConfigurationContextProvider>
+    </>
   );
 };
 
