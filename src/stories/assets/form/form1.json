@@ -556,7 +556,7 @@
       "has-layout-class": ["section", "checkbox", "answerable"],
       "@id": "answerable-section-4808",
       "has_related_question": ["aircraft-name-9553", "aircraft-number-2375"],
-      "@type": "doc:question"
+      "@type": "doc:question",
     },
     {
       "label": "Category 1",

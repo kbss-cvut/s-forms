@@ -84,6 +84,7 @@ export default class Constants {
     BOOLEAN: "http://www.w3.org/2001/XMLSchema#boolean",
   };
   static STEP = "http://onto.fel.cvut.cz/ontologies/form/step";
+  static PATTERN = "http://onto.fel.cvut.cz/ontologies/form/pattern";
   static ACCEPTS_ANSWER_VALUE =
     "http://onto.fel.cvut.cz/ontologies/form/accepts-answer-value";
   static ACCEPTS = "http://onto.fel.cvut.cz/ontologies/form/accepts";
@@ -111,6 +112,10 @@ export default class Constants {
     "http://onto.fel.cvut.cz/ontologies/form/negative-condition";
   static REQUIRES_ANSWER =
     "http://onto.fel.cvut.cz/ontologies/form/requires-answer";
+  static USED_ONLY_FOR_COMPLETENESS =
+    "http://onto.fel.cvut.cz/ontologies/form/used-only-for-completeness";
+  static REQUIRES_ANSWER_DESCRIPTION_IF =
+    "http://onto.fel.cvut.cz/ontologies/form/requires-answer-description-if";
   static REQUIRES_ANSWER_IF =
     "http://onto.fel.cvut.cz/ontologies/form/requires-answer-if";
   static HAS_PRECEDING_QUESTION =
@@ -143,6 +148,8 @@ export default class Constants {
     "http://onto.fel.cvut.cz/ontologies/form/not-answered-question";
   static ANSWERED_QUESTION =
     "http://onto.fel.cvut.cz/ontologies/form/answered-question";
+  static HAS_VALIDATION_SEVERITY =
+    "http://onto.fel.cvut.cz/ontologies/form/has-validation-severity";
 
   static RDFS_LABEL = JsonLdUtils.RDFS_LABEL;
   static RDFS_COMMENT = JsonLdUtils.RDFS_COMMENT;
@@ -192,5 +199,10 @@ export default class Constants {
       locale: "en",
       label: "English",
     },
+  };
+
+  static VALIDATION_SEVERITY = {
+    ERROR: "error",
+    WARNING: "warning",
   };
 }

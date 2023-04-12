@@ -25,7 +25,7 @@ export default class Question extends React.Component {
     super(props);
     JsonLdObjectMap.putObject(props.question["@id"], props.question);
     this.state = {
-      validator: null,
+      validator: {},
       expanded: !FormUtils.isCollapsed(props.question),
       showIcon: false,
     };

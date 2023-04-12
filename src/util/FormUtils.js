@@ -219,6 +219,9 @@ export default class FormUtils {
     if (question[Constants.REQUIRES_ANSWER_IF]) {
       return true;
     }
+    if (question[Constants.PATTERN]) {
+      return true;
+    }
     return false;
   }
 

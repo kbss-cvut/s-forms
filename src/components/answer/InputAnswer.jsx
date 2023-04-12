@@ -79,8 +79,16 @@ class InputPropertiesResolver {
     }
     props.disabled =
       componentsOptions.readOnly || FormUtils.isDisabled(question);
+
     if (question[Constants.HAS_VALID_ANSWER] === false) {
-      props.validation = "error";
+      if (
+        question[Constants.HAS_VALIDATION_SEVERITY] ===
+        Constants.VALIDATION_SEVERITY.WARNING
+      ) {
+        props.validation = "warning";
+      } else {
+        props.validation = "error";
+      }
       props.help = question[Constants.HAS_VALIDATION_MESSAGE];
     }
 
