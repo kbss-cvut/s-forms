@@ -1,6 +1,7 @@
 import React from "react";
 import Answer from "../components/Answer";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { preview } from "../../.storybook/preview";
 
 import question from "./assets/question/questionWithMedia.json";
 import questionTypeHead from "./assets/question/questionTypeHead.json";
@@ -13,7 +14,8 @@ import questionTurtleInput from "./assets/question/questionTurtleInput.json";
 export default {
   title: "Components/Answer",
   component: Answer,
-} as ComponentMeta<typeof Answer>;
+  decorators: preview.decorators,
+};
 
 const Template: ComponentStory<typeof Answer> = (args) => {
   return (

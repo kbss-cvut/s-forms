@@ -30,6 +30,18 @@ export const globalTypes = {
     ],
     control: { type: "radio" },
   },
+  locale2: {
+    description: "Internationalization locale",
+    defaultValue: "en",
+    toolbar: {
+      icon: "globe",
+      items: [
+        { value: "en", right: "🇺🇸", title: "English" },
+        { value: "cs", right: "🇨🇿", title: "Česky" },
+      ],
+      dynamicTitle: true,
+    },
+  },
   locale: {
     name: "Locale",
     description: "Internationalization locale",
@@ -105,10 +117,10 @@ const fetchTypeAheadValues = () => {
 
 export const preview = {
   decorators: [
-    (Story) => (
+    (Story, context) => (
       <ConfigurationContextProvider options={options}>
         <FormGenContextProvider fetchTypeAheadValues={fetchTypeAheadValues}>
-          <IntlContextProvider locale={globalTypes.locale.defaultValue}>
+          <IntlContextProvider locale={context.globals.locale2}>
             <Story />
           </IntlContextProvider>
         </FormGenContextProvider>
