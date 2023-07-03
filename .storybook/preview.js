@@ -115,7 +115,7 @@ const fetchTypeAheadValues = () => {
   );
 };
 
-export const preview = {
+const preview = {
   decorators: [
     (Story, context) => (
       <ConfigurationContextProvider options={options}>
@@ -128,3 +128,5 @@ export const preview = {
     ),
   ],
 };
+
+export default preview;
