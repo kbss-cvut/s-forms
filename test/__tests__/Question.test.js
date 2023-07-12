@@ -1,5 +1,4 @@
 import React from "react";
-import Question from "../../src/components/Question";
 import { cleanup, render } from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
 import { expect } from "@storybook/jest";

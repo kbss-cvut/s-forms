@@ -91,13 +91,11 @@ const Template: ComponentStory<typeof SForms> = (
   };
 
   return (
-    <IntlContextProvider locale={locale}>
-      <SForms
-        {...args}
-        options={options}
-        fetchTypeAheadValues={fetchTypeAheadValues}
-      />
-    </IntlContextProvider>
+    <SForms
+      {...args}
+      options={options}
+      fetchTypeAheadValues={fetchTypeAheadValues}
+    />
   );
 };
 

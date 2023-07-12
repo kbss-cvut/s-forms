@@ -1,16 +1,14 @@
 import React from "react";
 import { format } from "date-fns";
-import DatePicker from "react-datepicker";
-import Select from "react-select";
 
 import * as Generator from "../environment/Generator";
 import Answer from "../../src/components/Answer";
 import Constants from "../../src/constants/Constants";
-import TypeaheadAnswer from "../../src/components/answer/TypeaheadAnswer";
-import MaskedInput from "../../src/components/MaskedInput";
 import { FormGenContext } from "../../src/contexts/FormGenContext";
 import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
 import DefaultInput from "../../src/components/DefaultInput";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
 describe("Answer component", () => {
   let question,
@@ -51,13 +49,17 @@ describe("Answer component", () => {
       },
     };
     inputComponent = DefaultInput;
+    answer = {
+      id: Generator.getRandomUri(),
+    };
+    question[Constants.HAS_ANSWER] = [answer];
     getOptions = jest.fn(() => []);
     loadFormOptions = jest.fn();
   });
 
-  it("renders a Typeahead when layout class is typeahead", () => {
+  test("renders a Typeahead when layout class is typeahead", async () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -71,11 +73,13 @@ describe("Answer component", () => {
       </ConfigurationContext.Provider>
     );
 
-    const typeahead = component.find(Select);
-    expect(typeahead).not.toBeNull();
+    await waitFor(() => {
+      const typeahead = screen.getByRole("combobox");
+      expect(typeahead).toBeInTheDocument();
+    });
   });
 
-  it("maps answer object value to string label for the typeahead component", () => {
+  it("maps answer object value to string label for the typeahead component", async () => {
     const value = Generator.getRandomUri();
     const valueLabel = "masterchief";
     const typeAheadOptions = Generator.generateTypeaheadOptions(
@@ -84,11 +88,12 @@ describe("Answer component", () => {
     );
     answer = answerWithCodeValue(value);
     getOptions = jest.fn(() => typeAheadOptions);
+
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     question[Constants.HAS_OPTIONS_QUERY] = "SELECT * WHERE {?x ?y ?z. }";
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -104,12 +109,15 @@ describe("Answer component", () => {
       </ConfigurationContext.Provider>
     );
 
-    waitForComponentToPaint(component);
-    const typeahead = component.find(Answer).find(TypeaheadAnswer).find(Select);
+    await waitFor(async () => {
+      const typeahead = screen.getByRole("combobox");
 
-    expect(typeahead).not.toBeNull();
+      fireEvent.click(typeahead);
+      fireEvent.click(screen.getByText(valueLabel));
 
-    expect(typeahead.state("value")[0].name).toEqual(valueLabel);
+      expect(typeahead).toBeInTheDocument();
+      expect(screen.getByText(valueLabel)).toBeInTheDocument();
+    });
   });
 
   it("loads typeahead options when layout class is typeahead and no possible values are specified", () => {
@@ -117,7 +125,7 @@ describe("Answer component", () => {
     const query = "SELECT * WHERE { ?x ?y ?z .}";
     question[Constants.HAS_OPTIONS_QUERY] = query;
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -130,8 +138,6 @@ describe("Answer component", () => {
         </FormGenContext.Provider>
       </ConfigurationContext.Provider>
     );
-
-    waitForComponentToPaint(component);
 
     expect(loadFormOptions).toHaveBeenCalled();
     expect(loadFormOptions.mock.calls[0][1]).toEqual(query);
@@ -152,7 +158,7 @@ describe("Answer component", () => {
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -163,11 +169,12 @@ describe("Answer component", () => {
         <Answer answer={answer} question={question} onChange={onChange} />s
       </ConfigurationContext.Provider>
     );
-    const input = component.find("input");
+
+    const input = screen.getByRole("textbox");
 
     expect(input).not.toBeNull();
-    expect(input.props().type).toEqual("text");
-    expect(input.props().value).toEqual(value);
+    expect(input.type).toEqual("text");
+    expect(input.value).toEqual(value);
   });
 
   function answerWithTextValue(value) {
@@ -189,7 +196,7 @@ describe("Answer component", () => {
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATE);
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -200,12 +207,12 @@ describe("Answer component", () => {
         <Answer answer={answer} question={question} onChange={onChange} />
       </ConfigurationContext.Provider>
     );
-    const picker = component.find(DatePicker);
+
+    const picker = screen.getByPlaceholderText("YYYY-MM-DD");
 
     expect(picker).not.toBeNull();
-    expect(picker.props().showTimeSelect).toEqual(false);
-    expect(picker.props().showTimeSelectOnly).toEqual(false);
-    expect(picker.props().selected).toEqual(date);
+    expect(screen.queryByLabelText("month 2000-01")).toBeNull();
+    expect(picker.value).toEqual(format(date, "yyyy-MM-dd"));
   });
 
   it("renders time picker with answer value when time layout class is specified", () => {
@@ -216,7 +223,7 @@ describe("Answer component", () => {
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -227,22 +234,23 @@ describe("Answer component", () => {
         <Answer answer={answer} question={question} onChange={onChange} />
       </ConfigurationContext.Provider>
     );
-    const picker = component.find(DatePicker);
+
+    const picker = screen.getByPlaceholderText("HH:MM:SS");
 
     expect(picker).not.toBeNull();
-    expect(picker.props().showTimeSelect).toEqual(true);
-    expect(picker.props().showTimeSelectOnly).toEqual(true);
-    expect(picker.props().selected).toEqual(new Date(`0 ${value}`));
+    expect(screen.queryByText("Time")).toBeNull();
+    expect(picker.value).toEqual(value);
   });
 
   it("renders datetime picker with answer value when datetime layout class is specified", () => {
     const date = new Date();
+    const testDate = format(date, "yyyy-MM");
     const value = format(date, "yyyy-MM-dd HH:mm:ss");
     answer = answerWithTextValue(value);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -253,16 +261,19 @@ describe("Answer component", () => {
         <Answer answer={answer} question={question} onChange={onChange} />
       </ConfigurationContext.Provider>
     );
-    const picker = component.find(DatePicker);
+
+    const picker = screen.getByPlaceholderText("YYYY-MM-DD HH:MM:SS");
 
     expect(picker).not.toBeNull();
-    expect(picker.props().showTimeSelect).toEqual(true);
-    expect(picker.props().showTimeSelectOnly).toEqual(false);
-    expect(picker.props().selected).toEqual(new Date(value));
+    expect(screen.queryByText("Time")).toBeNull();
+    expect(screen.queryByLabelText("month " + testDate)).toBeNull();
+    expect(picker.value).toEqual(value);
   });
 
   it("renders datetime picker with answer value when no layout class is specified and numeric answer value is used", () => {
-    const value = Number(new Date());
+    const date = new Date();
+    const value = Number(date);
+    const testDate = format(date, "yyyy-MM");
     answer = {
       "@id": Generator.getRandomUri(),
     };
@@ -270,7 +281,7 @@ describe("Answer component", () => {
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -281,12 +292,15 @@ describe("Answer component", () => {
         <Answer answer={answer} question={question} onChange={onChange} />
       </ConfigurationContext.Provider>
     );
-    const picker = component.find(DatePicker);
+
+    const picker = screen.getByPlaceholderText("YYYY-MM-DD HH:MM:SS");
 
     expect(picker).not.toBeNull();
-    expect(picker.props().showTimeSelect).toEqual(true);
-    expect(picker.props().showTimeSelectOnly).toEqual(false);
-    expect(picker.props().selected).toEqual(new Date(value));
+    expect(screen.queryByText("Time")).toBeNull();
+    expect(screen.queryByLabelText("month " + testDate)).toBeNull();
+    expect(picker.value).toEqual(
+      format(new Date(value), "yyyy-MM-dd HH:mm:ss")
+    );
   });
 
   it("renders checkbox with answer value when checkbox layout class is specified", () => {
@@ -297,7 +311,7 @@ describe("Answer component", () => {
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.CHECKBOX);
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -308,11 +322,10 @@ describe("Answer component", () => {
         <Answer answer={answer} question={question} onChange={onChange} />
       </ConfigurationContext.Provider>
     );
-    const input = component.find("input");
+    const input = screen.getByRole("checkbox");
 
     expect(input).toBeDefined();
-    expect(input.props().type).toEqual("checkbox");
-    expect(input.props().checked).toBeTruthy();
+    expect(input.checked).toBeTruthy();
   });
 
   it("renders numeric input with answer value when number layout class is specified", () => {
@@ -324,7 +337,7 @@ describe("Answer component", () => {
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -335,11 +348,12 @@ describe("Answer component", () => {
         <Answer answer={answer} question={question} onChange={onChange} />
       </ConfigurationContext.Provider>
     );
-    const input = component.find("input");
+
+    // Spinbutton is aria role for input with restricted inputs
+    const input = screen.getByRole("spinbutton");
 
     expect(input).toBeDefined();
-    expect(input.props().type).toEqual("number");
-    expect(input.props().value).toEqual(value);
+    expect(Number(input.value)).toEqual(value);
   });
 
   it("renders textarea for answer with long value", () => {
@@ -351,7 +365,7 @@ describe("Answer component", () => {
     answer[Constants.HAS_DATA_VALUE] = value;
     question[Constants.HAS_ANSWER] = [answer];
 
-    const component = mount(
+    render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -362,10 +376,10 @@ describe("Answer component", () => {
         <Answer answer={answer} question={question} onChange={onChange} />
       </ConfigurationContext.Provider>
     );
-    const input = component.find("textarea");
+    const input = screen.getByRole("textbox");
 
     expect(input).toBeDefined();
-    expect(input.props().value).toEqual(value);
+    expect(input.value).toEqual(value);
   });
 
   it("renders masked input for question with masked-input layout class", () => {
@@ -379,7 +393,7 @@ describe("Answer component", () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.MASKED_INPUT);
     question[Constants.INPUT_MASK] = mask;
 
-    const component = mount(
+    const container = render(
       <ConfigurationContext.Provider
         value={{
           componentsOptions,
@@ -390,10 +404,10 @@ describe("Answer component", () => {
         <Answer answer={answer} question={question} onChange={onChange} />
       </ConfigurationContext.Provider>
     );
-    const input = component.find(MaskedInput);
+    const input = screen.getByRole("textbox");
 
     expect(input).toBeDefined();
-    expect(input.props().value).toEqual(value);
-    expect(input.props().mask).toEqual(mask);
+    expect(input.value).toEqual(value);
+    expect(document.querySelector("input").getAttribute("mask")).toEqual(mask);
   });
 });

@@ -4,8 +4,10 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "@luigiminardim/storybook-addon-globals-controls",
     "@storybook/addon-a11y",
   ],
-  framework: "@storybook/react",
+  framework: "@storybook/react-webpack5",
+  core: {
+    builder: "@storybook/builder-webpack5",
+  },
 };

@@ -1,5 +1,4 @@
 import Constants from "../src/constants/Constants";
-import { addDecorator } from "@storybook/react";
 import IntlContextProvider from "../src/contexts/IntlContextProvider";
 import { FormGenContextProvider } from "../src/contexts/FormGenContext";
 import { ConfigurationContextProvider } from "../src/contexts/ConfigurationContext";
@@ -24,37 +23,69 @@ export const globalTypes = {
     name: "Icon behavior",
     description: "Set the behavior for the icons",
     defaultValue: Constants.ICON_BEHAVIOR.ON_HOVER,
-    options: [
-      Constants.ICON_BEHAVIOR.ON_HOVER,
-      Constants.ICON_BEHAVIOR.ENABLE,
-      Constants.ICON_BEHAVIOR.DISABLE,
-    ],
-    control: { type: "radio" },
+    toolbar: {
+      icon: "photo",
+      items: [
+        { value: Constants.ICON_BEHAVIOR.ON_HOVER, title: "onHover" },
+        { value: Constants.ICON_BEHAVIOR.ENABLE, title: "Enabled" },
+        { value: Constants.ICON_BEHAVIOR.DISABLE, title: "Disabled" },
+      ],
+      dynamicTitle: true,
+    },
   },
   locale: {
-    name: "Locale",
     description: "Internationalization locale",
     defaultValue: "en",
-    options: ["en", "cs"],
-    control: { type: "radio" },
+    toolbar: {
+      icon: "globe",
+      items: [
+        { value: "en", right: "🇺🇸", title: "English" },
+        { value: "cs", right: "🇨🇿", title: "Česky" },
+      ],
+      dynamicTitle: true,
+    },
   },
   debugMode: {
     name: "Debug Mode",
     description: "Show irrelevant questions",
     defaultValue: false,
-    control: { type: "boolean" },
+    toolbar: {
+      title: "Debug mode",
+      icon: "beaker",
+      items: [
+        { value: true, title: "On" },
+        { value: false, title: "Off" },
+      ],
+    },
   },
   horizontalNavBar: {
     name: "Toggle Horizontal Navigation Bar",
     description: "Set the navigation bar to horizontal",
     defaultValue: false,
-    control: { type: "boolean" },
+    toolbar: {
+      icon: "expandalt",
+      items: [
+        { value: true, title: "On" },
+        { value: false, title: "Off" },
+      ],
+    },
   },
   timeOut: {
     name: "Time Out (ms)",
     description: "Set time-out for possible values (in ms)",
     defaultValue: 1500,
-    control: { type: "number", min: 0, max: 10000, step: 500 },
+    toolbar: {
+      title: "Time Out (ms)",
+      icon: "timer",
+      items: [
+        { value: 200, title: "200 ms" },
+        { value: 500, title: "500 ms" },
+        { value: 1000, title: "1000 ms" },
+        { value: 1500, title: "1500 ms" },
+        { value: 2000, title: "2000 ms" },
+        { value: 2500, title: "2500 ms" },
+      ],
+    },
   },
 };
 
@@ -104,12 +135,17 @@ const fetchTypeAheadValues = () => {
   );
 };
 
-addDecorator((story) => (
-  <ConfigurationContextProvider options={options}>
-    <FormGenContextProvider fetchTypeAheadValues={fetchTypeAheadValues}>
-      <IntlContextProvider locale={globalTypes.locale.defaultValue}>
-        {story()}
-      </IntlContextProvider>
-    </FormGenContextProvider>
-  </ConfigurationContextProvider>
-));
+const preview = {
+  decorators: [
+    (Story, context) => (
+      <ConfigurationContextProvider options={options}>
+        <FormGenContextProvider fetchTypeAheadValues={fetchTypeAheadValues}>
+          <IntlContextProvider locale={context.globals.locale}>
+            <Story />
+          </IntlContextProvider>
+        </FormGenContextProvider>
+      </ConfigurationContextProvider>
+    ),
+  ],
+};
+export default preview;

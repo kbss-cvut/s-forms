@@ -1,5 +1,4 @@
 import React from "react";
-import QuestionCommentIcon from "../../src/components/comment/QuestionCommentIcon";
 import { cleanup, render } from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
 import { fireEvent } from "@storybook/testing-library";
