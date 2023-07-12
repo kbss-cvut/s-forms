@@ -147,5 +147,12 @@ const preview = {
       </ConfigurationContextProvider>
     ),
   ],
+  parameters: {
+    options: {
+      storySort: {
+        order: ["Stories", "Components"],
+      },
+    },
+  },
 };
 export default preview;
