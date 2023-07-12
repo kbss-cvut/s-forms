@@ -11,6 +11,7 @@ import questionSparqlInput from "./assets/question/questionSparqlInput.json";
 import questionTurtleInput from "./assets/question/questionTurtleInput.json";
 
 const meta: Meta<typeof Answer> = {
+  title: "Components/Answer",
   component: Answer,
   argTypes: {
     onChange: {

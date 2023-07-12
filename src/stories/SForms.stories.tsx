@@ -34,7 +34,7 @@ const modalProps = {
 };
 
 export default {
-  title: "SForms",
+  title: "Stories/Forms",
   component: SForms,
 } as ComponentMeta<typeof SForms>;
 
