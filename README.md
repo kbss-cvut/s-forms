@@ -34,3 +34,4 @@ Storybook is an open source tool for building UI components and pages in isolati
 ### NPM release worklow
 
 NPM packages are created automatically for each commit to this repository, see [npm release workflow guide](./docs/npm-release-workflow.md).
+
