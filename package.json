@@ -51,7 +51,7 @@
     "framer-motion": "^6.2.3",
     "inputmask-core": "^2.2.0",
     "javascript-time-ago": "^2.3.8",
-    "jsonld": "^0.4.12",
+    "jsonld": "^1.4.0",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.11.tgz",
     "microbundle": "^0.14.2",
     "npm-packlist": "^7.0.2",
