@@ -152,7 +152,7 @@ const CommentView = (props) => {
 };
 
 CommentView.propTypes = {
-  author: PropTypes.object.isRequired,
+  author: PropTypes.object,
   timestamp: PropTypes.string.isRequired,
   commentValue: PropTypes.string.isRequired,
   onDeleteQuestionComment: PropTypes.func.isRequired,

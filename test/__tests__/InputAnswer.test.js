@@ -60,7 +60,12 @@ describe("InputAnswer", () => {
           options,
         }}
       >
-        <Answer question={question} answer={answer} onChange={onChange} />
+        <Answer
+          question={question}
+          answer={answer}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = component.find("input");
@@ -84,7 +89,12 @@ describe("InputAnswer", () => {
           options,
         }}
       >
-        <Answer question={question} answer={answer} onChange={onChange} />
+        <Answer
+          question={question}
+          answer={answer}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = component.find("input");
@@ -108,7 +118,12 @@ describe("InputAnswer", () => {
           options,
         }}
       >
-        <Answer question={question} answer={answer} onChange={onChange} />
+        <Answer
+          question={question}
+          answer={answer}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = component.find("input");
@@ -132,7 +147,12 @@ describe("InputAnswer", () => {
           options,
         }}
       >
-        <Answer question={question} answer={answer} onChange={onChange} />
+        <Answer
+          question={question}
+          answer={answer}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = component.find("input");
@@ -158,7 +178,12 @@ describe("InputAnswer", () => {
           options,
         }}
       >
-        <Answer question={question} answer={answer} onChange={onChange} />
+        <Answer
+          question={question}
+          answer={answer}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = component.find("input");
@@ -181,7 +206,12 @@ describe("InputAnswer", () => {
           options,
         }}
       >
-        <Answer question={question} answer={answer} onChange={onChange} />
+        <Answer
+          question={question}
+          answer={answer}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = component.find("input");

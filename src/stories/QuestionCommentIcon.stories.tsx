@@ -32,7 +32,7 @@ const Template: ComponentStory<typeof QuestionCommentIcon> = (
   return (
     <ConfigurationContextProvider options={options}>
       <IntlContextProvider locale={locale}>
-        <QuestionCommentIcon {...args} />
+        <QuestionCommentIcon {...args} onChange={() => void undefined} />
       </IntlContextProvider>
     </ConfigurationContextProvider>
   );

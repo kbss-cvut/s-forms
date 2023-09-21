@@ -68,7 +68,12 @@ describe("Answer component", () => {
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
-          <Answer answer={{}} question={question} onChange={onChange} />
+          <Answer
+            answer={{}}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
         </FormGenContext.Provider>
       </ConfigurationContext.Provider>
     );
@@ -104,12 +109,17 @@ describe("Answer component", () => {
         <FormGenContext.Provider
           value={{ getOptions, loadFormOptions: () => typeAheadOptions }}
         >
-          <Answer answer={answer} question={question} onChange={onChange} />
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
         </FormGenContext.Provider>
       </ConfigurationContext.Provider>
     );
 
-    await waitFor(async () => {
+    await waitFor(() => {
       const typeahead = screen.getByRole("combobox");
 
       fireEvent.click(typeahead);
@@ -120,7 +130,7 @@ describe("Answer component", () => {
     });
   });
 
-  it("loads typeahead options when layout class is typeahead and no possible values are specified", () => {
+  it("loads typeahead options when layout class is typeahead and no possible values are specified", async () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     const query = "SELECT * WHERE { ?x ?y ?z .}";
     question[Constants.HAS_OPTIONS_QUERY] = query;
@@ -134,13 +144,20 @@ describe("Answer component", () => {
         }}
       >
         <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
-          <Answer answer={{}} question={question} onChange={onChange} />
+          <Answer
+            answer={{}}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
         </FormGenContext.Provider>
       </ConfigurationContext.Provider>
     );
 
-    expect(loadFormOptions).toHaveBeenCalled();
-    expect(loadFormOptions.mock.calls[0][1]).toEqual(query);
+    await waitFor(() => {
+      expect(loadFormOptions).toHaveBeenCalled();
+      expect(loadFormOptions.mock.calls[0][1]).toEqual(query);
+    });
   });
 
   function answerWithCodeValue(value) {
@@ -166,7 +183,12 @@ describe("Answer component", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />s
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
 
@@ -204,7 +226,12 @@ describe("Answer component", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
 
@@ -231,7 +258,12 @@ describe("Answer component", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
 
@@ -258,7 +290,12 @@ describe("Answer component", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
 
@@ -289,7 +326,12 @@ describe("Answer component", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
 
@@ -319,7 +361,12 @@ describe("Answer component", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = screen.getByRole("checkbox");
@@ -345,7 +392,12 @@ describe("Answer component", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
 
@@ -373,7 +425,12 @@ describe("Answer component", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = screen.getByRole("textbox");
@@ -401,7 +458,12 @@ describe("Answer component", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = screen.getByRole("textbox");

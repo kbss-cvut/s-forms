@@ -131,7 +131,7 @@ const TypeaheadAnswer = (props) => {
 TypeaheadAnswer.propTypes = {
   question: PropTypes.object.isRequired,
   answer: PropTypes.object.isRequired,
-  label: PropTypes.object.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   title: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,

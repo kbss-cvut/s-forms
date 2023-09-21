@@ -48,7 +48,12 @@ describe("MaskedInputAnswer", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = component.find("input");
@@ -79,7 +84,12 @@ describe("MaskedInputAnswer", () => {
           options,
         }}
       >
-        <Answer answer={answer} question={question} onChange={onChange} />
+        <Answer
+          answer={answer}
+          question={question}
+          onChange={onChange}
+          onCommentChange={() => void undefined}
+        />
       </ConfigurationContext.Provider>
     );
     const input = component.find("input");
