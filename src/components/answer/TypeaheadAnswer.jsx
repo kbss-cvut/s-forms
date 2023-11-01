@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import JsonLdUtils from "jsonld-utils";
-import Select, { components } from "react-select";
+import { components } from "react-select";
+import WindowedSelect from "react-windowed-select";
 import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
 import FormUtils from "../../util/FormUtils";
@@ -10,7 +11,6 @@ import Logger from "../../util/Logger";
 import { FormGroup, Form } from "react-bootstrap";
 import { FormGenContext } from "../../contexts/FormGenContext";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
-import OptimizedMenuList from "./OptimizedMenuList";
 
 const processTypeaheadOptions = (options, intl) => {
   if (!options) {
@@ -107,7 +107,7 @@ const TypeaheadAnswer = (props) => {
   return (
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
-      <Select
+      <WindowedSelect
         options={options}
         isSearchable={true}
         isLoading={isLoading}
@@ -122,7 +122,7 @@ const TypeaheadAnswer = (props) => {
         getOptionLabel={(option) => option.name}
         getOptionValue={(option) => option.id}
         onChange={handleOptionSelectedChange}
-        components={{ MenuList: OptimizedMenuList, Option: DescriptionOption }}
+        components={{ Option: DescriptionOption }}
       />
     </FormGroup>
   );

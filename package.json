@@ -61,7 +61,7 @@
     "react-intl": "^6.4.4",
     "react-loader-spinner": "^5.3.4",
     "react-select": "^5.7.3",
-    "react-window": "^1.8.9",
+    "react-windowed-select": "^5.1.1",
     "tsort": "0.0.1",
     "yasgui-yasqe": "^2.11.22"
   },
