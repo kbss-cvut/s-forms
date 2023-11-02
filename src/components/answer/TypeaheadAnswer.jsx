@@ -98,6 +98,7 @@ const TypeaheadAnswer = (props) => {
         valueKey="name"
         labelKey="name"
         valueIsControlled={false}
+        value={options.filter((option) => option.id === props.value)}
         multi={false}
         options={options}
         isSearchable={true}
