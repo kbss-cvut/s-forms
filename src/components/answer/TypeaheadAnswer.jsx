@@ -87,6 +87,10 @@ const TypeaheadAnswer = (props) => {
     );
   }, [intl]);
 
+  const handleOptionSelectedChange = (option) => {
+    props.onChange(option ? option.id : null);
+  };
+
   return (
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
@@ -104,6 +108,7 @@ const TypeaheadAnswer = (props) => {
           configurationContext.componentsOptions.readOnly ||
           FormUtils.isDisabled(props.question)
         }
+        onChange={handleOptionSelectedChange}
       />
     </FormGroup>
   );
