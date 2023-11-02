@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import JsonLdUtils from "jsonld-utils";
-import { components } from "react-select";
-import WindowedSelect from "react-windowed-select";
 import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
 import FormUtils from "../../util/FormUtils";
@@ -11,6 +9,9 @@ import Logger from "../../util/Logger";
 import { FormGroup, Form } from "react-bootstrap";
 import { FormGenContext } from "../../contexts/FormGenContext";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
+import { IntelligentTreeSelect } from "intelligent-tree-select/lib/components/IntelligentTreeSelect.js";
+
+import "intelligent-tree-select/lib/styles.css";
 
 const processTypeaheadOptions = (options, intl) => {
   if (!options) {
@@ -86,28 +87,14 @@ const TypeaheadAnswer = (props) => {
     );
   }, [intl]);
 
-  const handleOptionSelectedChange = (option) => {
-    props.onChange(option ? option.id : null);
-  };
-
-  const { Option } = components;
-
-  const DescriptionOption = (props) => {
-    const innerProps = { ...props.innerProps, title: props.data.description };
-
-    return (
-      <Option
-        {...props}
-        title={props.data.description}
-        innerProps={innerProps}
-      />
-    );
-  };
-
   return (
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
-      <WindowedSelect
+      <IntelligentTreeSelect
+        valueKey="name"
+        labelKey="name"
+        valueIsControlled={false}
+        multi={false}
         options={options}
         isSearchable={true}
         isLoading={isLoading}
@@ -117,12 +104,6 @@ const TypeaheadAnswer = (props) => {
           configurationContext.componentsOptions.readOnly ||
           FormUtils.isDisabled(props.question)
         }
-        value={options.filter((option) => option.id === props.value)}
-        placeholder={""}
-        getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.id}
-        onChange={handleOptionSelectedChange}
-        components={{ Option: DescriptionOption }}
       />
     </FormGroup>
   );
