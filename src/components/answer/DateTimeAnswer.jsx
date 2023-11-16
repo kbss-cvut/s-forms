@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import DatePicker from "react-datepicker";
 import { FormGroup, Form } from "react-bootstrap";
-import PropTypes from "prop-types";
+import PropTypes, { number } from "prop-types";
 import { format } from "date-fns";
 import FormUtils from "../../util/FormUtils";
 import Constants from "../../constants/Constants";
@@ -21,11 +21,11 @@ const DateTimeAnswer = (props) => {
 
   // workaround because it is not possible to construct Date only with time
   let value;
-  if (isTime && props.value) {
+  if (isTime && props.value instanceof number) {
     value = new Date(`0 ${props.value}`);
-  } else {
-    value = props.value ? new Date(props.value) : null;
-  }
+  } else if (isDate && props.value instanceof number) {
+    value = new Date(props.value);
+  } else value = null;
 
   // DatePicker does not know dateFormat "x", translate to datetime
   const datePickerFormat =
