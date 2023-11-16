@@ -21,9 +21,11 @@ const DateTimeAnswer = (props) => {
 
   // workaround because it is not possible to construct Date only with time
   let value;
-  if ((isTime || isDate) && props.value && props.value !== "0") {
+  if (isTime && props.value && props.value !== "0") {
+    value = new Date(`0 ${props.value}`);
+  } else if (isDate && props.value && props.value !== "0") {
     value = new Date(props.value);
-  } else value = null;
+  } else value = new Date();
 
   // DatePicker does not know dateFormat "x", translate to datetime
   const datePickerFormat =
