@@ -14,7 +14,7 @@ import { IntelligentTreeSelect } from "intelligent-tree-select/lib/components/In
 import "intelligent-tree-select/lib/styles.css";
 
 const processTypeaheadOptions = (options, intl) => {
-  if (!options) {
+  if (!options || !options.length) {
     return [];
   }
 
