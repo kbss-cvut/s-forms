@@ -108,7 +108,7 @@
   "scripts": {
     "test": "jest",
     "dev": "sb dev -p 6006",
-    "build": "microbundle --jsx React.createElement --jsxFragment React.Fragment",
+    "build": "export NODE_OPTIONS=--max_old_space_size=4096 && microbundle --jsx React.createElement --jsxFragment React.Fragment",
     "build:lib": "npm run build && npm pack",
     "build-storybook": "sb build",
     "chromatic": "npx chromatic",
