@@ -41,7 +41,7 @@ const TypeaheadAnswer = (props) => {
   const intl = configurationContext.options.intl;
 
   const [isLoading, setLoading] = useState(true);
-  const [options, setOptions] = useState(
+  const [optionsList, setOptionsList] = useState(
     processTypeaheadOptions(props.options, intl)
   );
 
@@ -57,7 +57,7 @@ const TypeaheadAnswer = (props) => {
         );
         if (!isCancelled) {
           setLoading(false);
-          setOptions(processTypeaheadOptions(options, intl));
+          setOptionsList(processTypeaheadOptions(options, intl));
         }
       } catch (error) {
         Logger.error(
@@ -73,7 +73,9 @@ const TypeaheadAnswer = (props) => {
       loadFormOptions();
     } else {
       setLoading(false);
-      setOptions(processTypeaheadOptions(question[Constants.HAS_OPTION], intl));
+      setOptionsList(
+        processTypeaheadOptions(question[Constants.HAS_OPTION], intl)
+      );
     }
 
     return () => {
@@ -81,11 +83,66 @@ const TypeaheadAnswer = (props) => {
     };
   }, []);
 
+  const checkNonSelectableOptions = (tree) => {
+    const question = props.question;
+
+    for (let o of Object.values(tree)) {
+      if (
+        JsonLdUtils.hasValue(
+          question,
+          Constants.HAS_NON_SELECTABLE_VALUE,
+          o.value
+        )
+      ) {
+        o.isDisabled = true;
+      }
+    }
+  };
+
+  const generateOptions = () => {
+    const question = props.question;
+    const possibleValues = question[Constants.HAS_OPTION];
+    if (!possibleValues || !possibleValues.length) {
+      return [];
+    }
+
+    const options = {};
+    const relations = [];
+
+    for (let pValue of possibleValues) {
+      let label = JsonLdUtils.getLocalized(
+        pValue[Constants.RDFS_LABEL],
+        configurationContext.options.intl
+      );
+
+      options[pValue["@id"]] = {
+        value: pValue["@id"],
+        label: label,
+        children: [],
+        disjoint: [],
+      };
+      for (let parent of Utils.asArray(pValue[Constants.BROADER])) {
+        relations.push({
+          type: "parent-child",
+          parent: parent["@id"],
+          child: pValue["@id"],
+        });
+      }
+    }
+
+    for (let relation of relations) {
+      if (relation.type === "parent-child") {
+        options[relation.parent]?.children.push(relation.child);
+      }
+    }
+
+    checkNonSelectableOptions(options);
+    setOptionsList(Object.values(options));
+  };
+
   useEffect(() => {
-    setOptions(
-      processTypeaheadOptions(props.question[Constants.HAS_OPTION], intl)
-    );
-  }, [intl]);
+    generateOptions();
+  }, []);
 
   const handleOptionSelectedChange = (option) => {
     props.onChange(option ? option.id : null);
@@ -95,15 +152,17 @@ const TypeaheadAnswer = (props) => {
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
       <IntelligentTreeSelect
-        valueKey="name"
-        labelKey="name"
+        valueKey="value"
+        labelKey="label"
         valueIsControlled={false}
-        value={options.filter((option) => option.id === props.value)}
+        value={optionsList.filter((option) => option.id === props.value)}
         multi={false}
-        options={options}
+        options={optionsList}
         isSearchable={true}
         isLoading={isLoading}
         isClearable={true}
+        renderAsTree={true}
+        optionLeftOffset={5}
         isDisabled={
           isLoading ||
           configurationContext.componentsOptions.readOnly ||

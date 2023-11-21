@@ -1,0 +1,85 @@
+{
+  "@id": "ma-vlastnika-section-777",
+  "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "type-ahead",
+  "http://onto.fel.cvut.cz/ontologies/form/has-non-selectable-value": "fyzicka-osoba",
+  "http://onto.fel.cvut.cz/ontologies/form/has-possible-value": [
+    {
+      "@id": "fyzicka-osoba",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Fyzická osoba",
+      "http://www.w3.org/2002/07/owl#disjointWith": {
+        "@id": "pravnicka-osoba"
+      }
+    },
+    {
+      "@id": "pravnicka-osoba",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Právnická osoba"
+    },
+    {
+      "@id": "fyzicka-osoba--nezletila",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Fyzická osoba nezletilá",
+      "http://www.w3.org/2002/07/owl#disjointWith": {
+        "@id": "pravnicka-osoba"
+      },
+      "http://www.w3.org/2004/02/skos/core#broader": {
+        "@id": "fyzicka-osoba"
+      }
+    },
+    {
+      "@id": "fyzicka-osoba--chytra",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Fyzická osoba chytrá",
+      "http://www.w3.org/2002/07/owl#disjointWith": {
+        "@id": "pravnicka-osoba"
+      },
+      "http://www.w3.org/2004/02/skos/core#broader": {
+        "@id": "fyzicka-osoba"
+      }
+    },
+    {
+      "@id": "fyzicka-osoba--hloupa",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Fyzická osoba hloupá",
+      "http://www.w3.org/2002/07/owl#disjointWith": [
+        {
+          "@id": "pravnicka-osoba"
+        },
+        {
+          "@id": "fyzicka-osoba--chytra"
+        }
+      ],
+      "http://www.w3.org/2004/02/skos/core#broader": {
+        "@id": "fyzicka-osoba"
+      }
+    },
+    {
+      "@id": "podtrida-fyzicka-osoby-s-velice-dlouhym-nazvem",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Podtřída fyzické osoby s velice dlouhým názvem",
+      "http://www.w3.org/2002/07/owl#disjointWith": {
+        "@id": "pravnicka-osoba"
+      },
+      "http://www.w3.org/2004/02/skos/core#broader": {
+        "@id": "fyzicka-osoba"
+      }
+    },
+    {
+      "@id": "jeste-specifickejsi-podtrida-fyzicka-osoby-s-velice-dlouhym-nazvem",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Ještě specifickejší podtřída fyzické osoby s velice dlouhým názvem",
+      "http://www.w3.org/2002/07/owl#disjointWith": {
+        "@id": "pravnicka-osoba"
+      },
+      "http://www.w3.org/2004/02/skos/core#broader": {
+        "@id": "podtrida-fyzicka-osoby-s-velice-dlouhym-nazvem"
+      }
+    }
+  ],
+  "http://onto.fel.cvut.cz/ontologies/form/has-question-origin": {
+    "@id": "ma-vlastnika-section-777-qo"
+  },
+  "http://www.w3.org/2000/01/rdf-schema#label": "Má vlastníka",
+  "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": [
+    {
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": ""
+    }
+  ],
+  "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question": [],
+  "http://onto.fel.cvut.cz/ontologies/form/has-comment": []
+}
