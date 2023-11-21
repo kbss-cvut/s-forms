@@ -148,12 +148,15 @@ const TypeaheadAnswer = (props) => {
     props.onChange(option ? option.id : null);
   };
 
+  const valueKey = Utils.findKeyInObjects(optionsList, ["name", "value"]);
+  const labelKey = Utils.findKeyInObjects(optionsList, ["name", "label"]);
+
   return (
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
       <IntelligentTreeSelect
-        valueKey="value"
-        labelKey="label"
+        valueKey={valueKey}
+        labelKey={labelKey}
         valueIsControlled={false}
         value={optionsList.filter((option) => option.id === props.value)}
         multi={false}
