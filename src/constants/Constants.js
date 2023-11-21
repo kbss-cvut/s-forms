@@ -149,6 +149,9 @@ export default class Constants {
   static RDFS_LABEL = JsonLdUtils.RDFS_LABEL;
   static RDFS_COMMENT = JsonLdUtils.RDFS_COMMENT;
   static DEFAULT_HAS_CHILD = JsonLdUtils.DEFAULT_HAS_CHILD;
+  static BROADER = "http://www.w3.org/2004/02/skos/core#broader";
+  static HAS_NON_SELECTABLE_VALUE =
+    "http://onto.fel.cvut.cz/ontologies/form/has-non-selectable-value";
 
   static ICONS = {
     QUESTION_COMMENTS: "questionComments",
