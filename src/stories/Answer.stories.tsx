@@ -3,7 +3,8 @@ import Answer from "../components/Answer";
 import { Meta, StoryObj } from "@storybook/react";
 
 import question from "./assets/question/questionWithMedia.json";
-import questionTypeHead from "./assets/question/questionTypeHead.json";
+import questionTypeahead from "./assets/question/questionTypeHead.json";
+import questionTypeaheadWithTree from "./assets/question/simple-single-tree-select.json";
 import questionDate from "./assets/question/questionDate.json";
 import questionCheckBox from "./assets/question/questionCheckBox.json";
 import questionMaskedInput from "./assets/question/questionMaskedInput.json";
@@ -48,10 +49,17 @@ export const RegularInput: Story = {
   },
 };
 
-export const TypeHead: Story = {
+export const Typeahead: Story = {
   args: {
     ...Template.args,
-    question: questionTypeHead,
+    question: questionTypeahead,
+  },
+};
+
+export const TypeaheadWithTree: Story = {
+  args: {
+    ...Template.args,
+    question: questionTypeaheadWithTree,
   },
 };
 

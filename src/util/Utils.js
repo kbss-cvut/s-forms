@@ -60,4 +60,22 @@ export default class Utils {
 
     return null;
   }
+
+  /**
+   * Finds the first key in an array of objects that matches any of the specified keys.
+   *
+   * @param {Object[]} objectList - The array of objects to search through.
+   * @param {string[]} keysToCheck - An array of keys to check in each object.
+   * @returns {?string} - The first key that exists in any of the objects, or null if none are found.
+   */
+  static findKeyInObjects(objectList, keysToCheck) {
+    for (let i = 0; i < objectList.length; i++) {
+      for (let j = 0; j < keysToCheck.length; j++) {
+        if (objectList[i].hasOwnProperty(keysToCheck[j])) {
+          return keysToCheck[j];
+        }
+      }
+    }
+    return null;
+  }
 }
