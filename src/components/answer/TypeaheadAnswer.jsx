@@ -41,9 +41,7 @@ const TypeaheadAnswer = (props) => {
   const intl = configurationContext.options.intl;
 
   const [isLoading, setLoading] = useState(true);
-  const [optionsList, setOptionsList] = useState(
-    processTypeaheadOptions(props.options, intl)
-  );
+  const [optionsList, setOptionsList] = useState([]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -57,7 +55,7 @@ const TypeaheadAnswer = (props) => {
         );
         if (!isCancelled) {
           setLoading(false);
-          setOptionsList(processTypeaheadOptions(options, intl));
+          generateTreeOptions(options);
         }
       } catch (error) {
         Logger.error(
@@ -73,9 +71,7 @@ const TypeaheadAnswer = (props) => {
       loadFormOptions();
     } else {
       setLoading(false);
-      setOptionsList(
-        processTypeaheadOptions(question[Constants.HAS_OPTION], intl)
-      );
+      generateTreeOptions(question[Constants.HAS_OPTION]);
     }
 
     return () => {
@@ -83,26 +79,8 @@ const TypeaheadAnswer = (props) => {
     };
   }, []);
 
-  const checkNonSelectableOptions = (tree) => {
-    const question = props.question;
-
-    for (let o of Object.values(tree)) {
-      if (
-        JsonLdUtils.hasValue(
-          question,
-          Constants.HAS_NON_SELECTABLE_VALUE,
-          o.value
-        )
-      ) {
-        o.isDisabled = true;
-      }
-    }
-  };
-
-  const generateOptions = () => {
-    const question = props.question;
-    const possibleValues = question[Constants.HAS_OPTION];
-    if (!possibleValues || !possibleValues.length) {
+  const generateTreeOptions = (possibleValues) => {
+    if (!possibleValues) {
       return [];
     }
 
@@ -110,10 +88,7 @@ const TypeaheadAnswer = (props) => {
     const relations = [];
 
     for (let pValue of possibleValues) {
-      let label = JsonLdUtils.getLocalized(
-        pValue[Constants.RDFS_LABEL],
-        configurationContext.options.intl
-      );
+      let label = JsonLdUtils.getLocalized(pValue[Constants.RDFS_LABEL], intl);
 
       options[pValue["@id"]] = {
         value: pValue["@id"],
@@ -136,13 +111,9 @@ const TypeaheadAnswer = (props) => {
       }
     }
 
-    checkNonSelectableOptions(options);
-    setOptionsList(Object.values(options));
+    const optionsTree = Object.values(options);
+    setOptionsList(optionsTree);
   };
-
-  useEffect(() => {
-    generateOptions();
-  }, []);
 
   const handleOptionSelectedChange = (option) => {
     props.onChange(option ? option.id : null);
