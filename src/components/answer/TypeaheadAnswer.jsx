@@ -27,7 +27,7 @@ const processTypeaheadOptions = (options, intl) => {
     Constants.HAS_PRECEDING_VALUE
   );
 
-  return JsonLdUtils.processTypeaheadOptions(options, intl);
+  return options;
 };
 
 const TypeaheadAnswer = (props) => {
@@ -84,6 +84,8 @@ const TypeaheadAnswer = (props) => {
       return [];
     }
 
+    //Sort values
+    possibleValues = processTypeaheadOptions(possibleValues, intl);
     const options = {};
     const relations = [];
 
