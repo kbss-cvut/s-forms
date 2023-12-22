@@ -129,7 +129,7 @@ const TypeaheadAnswer = (props) => {
       <IntelligentTreeSelect
         valueKey={valueKey}
         labelKey={labelKey}
-        valueIsControlled={false}
+        valueIsControlled={true}
         value={optionsList.filter((option) => option.id === props.value)}
         multi={false}
         options={optionsList}
