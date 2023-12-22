@@ -96,7 +96,6 @@ const TypeaheadAnswer = (props) => {
         value: pValue["@id"],
         label: label,
         children: [],
-        disjoint: [],
       };
       for (let parent of Utils.asArray(pValue[Constants.BROADER])) {
         relations.push({
