@@ -422,13 +422,12 @@ export default class FormUtils {
       return Constants.DATETIME_NUMBER_FORMAT;
     }
     if (isDate) {
-      return question[Constants.DATE_FORMAT] || options.dateTimeFormat;
+      return question[Constants.DATE_FORMAT] || options.dateFormat;
     }
     if (isTime) {
       return question[Constants.TIME_FORMAT] || options.timeFormat;
     }
     if (isDatetime) {
-      console.log(question[Constants.DATETIME_FORMAT]);
       return question[Constants.DATETIME_FORMAT] || options.dateTimeFormat;
     }
     return null;
