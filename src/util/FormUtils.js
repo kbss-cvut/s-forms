@@ -413,15 +413,23 @@ export default class FormUtils {
    * @return {*} Format from Configuration
    */
   static resolveDateTimeFormat(question, originalValue, options) {
-    if (typeof originalValue === "number") {
+    const isNumber = typeof originalValue === "number";
+    const isDate = FormUtils.isDate(question);
+    const isTime = FormUtils.isTime(question);
+    const isDatetime = FormUtils.isDateTime(question);
+
+    if (isNumber) {
       return Constants.DATETIME_NUMBER_FORMAT;
     }
-
-    if (FormUtils.isDate(question)) {
-      return options.dateFormat;
-    } else if (FormUtils.isTime(question)) {
-      return options.timeFormat;
+    if (isDate) {
+      return question[Constants.DATE_FORMAT] || options.dateFormat;
     }
-    return options.dateTimeFormat;
+    if (isTime) {
+      return question[Constants.TIME_FORMAT] || options.timeFormat;
+    }
+    if (isDatetime) {
+      return question[Constants.DATETIME_FORMAT] || options.dateTimeFormat;
+    }
+    return null;
   }
 }
