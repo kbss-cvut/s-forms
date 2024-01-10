@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Accordion } from "react-bootstrap";
-import JsonLdUtils from "jsonld-utils";
+import * as JsonLdUtils from "jsonld-utils";
 import PropTypes from "prop-types";
 import Answer from "./Answer";
 import Constants from "../constants/Constants";

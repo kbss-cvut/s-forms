@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import CheckboxAnswer from "./answer/CheckboxAnswer";
 import DateTimeAnswer from "./answer/DateTimeAnswer";
 import InputAnswer from "./answer/InputAnswer";
-import JsonldUtils from "jsonld-utils";
+import * as JsonldUtils from "jsonld-utils";
 import MaskedInputAnswer from "./answer/MaskedInputAnswer";
 import SelectAnswer from "./answer/SelectAnswer";
 import FormUtils from "../util/FormUtils";

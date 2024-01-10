@@ -1,4 +1,4 @@
-import JsonLdUtils from "jsonld-utils";
+import * as JsonLdUtils from "jsonld-utils";
 
 const _uriBase = "http://onto.fel.cvut.cz/ontologies/forms";
 

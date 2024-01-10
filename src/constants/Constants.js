@@ -1,4 +1,4 @@
-import JsonLdUtils from "jsonld-utils";
+import * as JsonLdUtils from "jsonld-utils";
 
 export default class Constants {
   // Default bootstrap column count

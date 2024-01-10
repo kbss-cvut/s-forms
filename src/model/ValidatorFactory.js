@@ -2,7 +2,7 @@
  * Created by blcha on 4.11.16.
  */
 
-import JsonLdUtils from "jsonld-utils";
+import * as JsonLdUtils from "jsonld-utils";
 
 import Constants from "../constants/Constants";
 import FormUtils from "../util/FormUtils";

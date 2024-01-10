@@ -1,5 +1,5 @@
 import React from "react";
-import JsonLdUtils from "jsonld-utils";
+import * as JsonLdUtils from "jsonld-utils";
 
 import Answer from "../../src/components/Answer";
 import Constants from "../../src/constants/Constants";
