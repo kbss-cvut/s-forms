@@ -53,7 +53,7 @@
     "intelligent-tree-select": "^0.11.1",
     "javascript-time-ago": "^2.3.8",
     "jsonld": "^0.4.12",
-    "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.0.11.tgz",
+    "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.1.2.tgz",
     "microbundle": "^0.14.2",
     "npm-packlist": "^7.0.2",
     "prop-types": "^15.7.2",

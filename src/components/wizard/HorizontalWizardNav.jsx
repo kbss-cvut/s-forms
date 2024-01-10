@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Nav, NavItem, NavLink, Card } from "react-bootstrap";
 import PropTypes from "prop-types";
-import JsonLdUtils from "jsonld-utils";
+import * as JsonLdUtils from "jsonld-utils";
 import FormUtils from "../../util/FormUtils";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import Question from "../Question";

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import PropTypes from "prop-types";
-import JsonLdUtils from "jsonld-utils";
+import * as JsonLdUtils from "jsonld-utils";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import FormUtils from "../../util/FormUtils";
 import Question from "../Question";

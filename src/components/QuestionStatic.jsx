@@ -3,7 +3,7 @@ import Constants from "../constants/Constants.js";
 import HelpIcon from "./HelpIcon.jsx";
 import LinkIcon from "./LinkIcon.jsx";
 import QuestionCommentIcon from "./comment/QuestionCommentIcon.jsx";
-import JsonLdUtils from "jsonld-utils";
+import * as JsonLdUtils from "jsonld-utils";
 
 export default class QuestionStatic {
   static renderIcons(question, options, onCommentChange, showIcon) {
