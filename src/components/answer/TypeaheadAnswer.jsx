@@ -93,6 +93,7 @@ const TypeaheadAnswer = (props) => {
       let label = JsonLdUtils.getLocalized(pValue[Constants.RDFS_LABEL], intl);
 
       options[pValue["@id"]] = {
+        id: pValue["@id"],
         value: pValue["@id"],
         label: label,
         children: [],
