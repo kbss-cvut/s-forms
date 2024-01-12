@@ -140,6 +140,10 @@ export default class Constants {
   static HAS_AUTHOR = "http://onto.fel.cvut.cz/ontologies/form/has-author";
   static HAS_TIMESTAMP =
     "http://onto.fel.cvut.cz/ontologies/form/has-timestamp";
+  static TIME_FORMAT = "http://onto.fel.cvut.cz/ontologies/form/time-format";
+  static DATE_FORMAT = "http://onto.fel.cvut.cz/ontologies/form/date-format";
+  static DATETIME_FORMAT =
+    "http://onto.fel.cvut.cz/ontologies/form/datetime-format";
 
   static NOT_ANSWERED_QUESTION =
     "http://onto.fel.cvut.cz/ontologies/form/not-answered-question";

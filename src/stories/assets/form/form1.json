@@ -141,6 +141,15 @@
     },
     "has_data_value": {
       "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value"
+    },
+    "time-format": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/time-format"
+    },
+    "date-format": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/date-format"
+    },
+    "datetime-format": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/datetime-format"
     }
   },
   "@graph": [
@@ -2442,19 +2451,22 @@
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q",
       "has-layout-class": ["section", "answerable", "datetime"],
       "@type": "doc:question",
-      "label": "Date and time"
+      "label": "Date and time",
+      "datetime-format": "yyyy-MM-dd HH:mm"
     },
     {
       "label": "Time",
       "@type": "doc:question",
       "has-layout-class": ["section", "answerable", "time"],
+      "time-format": "HH:mm",
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q1"
     },
     {
       "label": "Date",
       "has-layout-class": ["section", "answerable", "date"],
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q2",
-      "@type": "doc:question"
+      "@type": "doc:question",
+      "date-format": "yyyy-MM-dd HH:mm"
     },
     {
       "label": "Timestamp in db",
