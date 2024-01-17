@@ -1,5 +1,5 @@
 import * as JsonLdUtils from "jsonld-utils";
-import jsonld from "jsonld";
+import * as jsonld from "jsonld";
 
 import Constants from "../constants/Constants";
 import Utils from "./Utils";

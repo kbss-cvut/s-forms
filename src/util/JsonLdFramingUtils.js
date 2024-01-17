@@ -1,4 +1,4 @@
-import jsonld from "jsonld";
+import * as jsonld from "jsonld";
 import Constants from "../constants/Constants";
 import FormUtils from "../util/FormUtils";
 import Utils from "./Utils";

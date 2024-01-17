@@ -52,7 +52,7 @@
     "inputmask-core": "^2.2.0",
     "intelligent-tree-select": "^0.11.1",
     "javascript-time-ago": "^2.3.8",
-    "jsonld": "^0.4.12",
+    "jsonld": "^8.3.2",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.1.2.tgz",
     "microbundle": "^0.14.2",
     "npm-packlist": "^7.0.2",

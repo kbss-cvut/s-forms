@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import jsonld from "jsonld";
+import * as jsonld from "jsonld";
 import Logger from "../util/Logger";
 
 const FormGenContext = React.createContext({});

@@ -1,4 +1,4 @@
-import jsonld from "jsonld";
+import * as jsonld from "jsonld";
 import * as JsonLdUtils from "jsonld-utils";
 import Utils from "./Utils";
 import tsort from "tsort";

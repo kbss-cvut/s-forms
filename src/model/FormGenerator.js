@@ -1,4 +1,4 @@
-import jsonld from "jsonld";
+import * as jsonld from "jsonld";
 import Constants from "../constants/Constants";
 import DefaultFormGenerator from "./DefaultFormGenerator";
 import FormUtils from "../util/FormUtils";
@@ -30,21 +30,23 @@ export default class FormGenerator {
    * @return Promise with generated form definition and form data
    */
   static constructForm(structure, intl) {
-    return new Promise((resolve) =>
-      jsonld.flatten(structure, {}, null, (err, structure) => {
-        let formProperties;
-        let form;
-        if (err) {
-          Logger.error(err);
-        }
+    let formProperties;
+    let form;
+    return jsonld
+      .flatten(structure, {})
+      .then((flattenedStructure) => {
         try {
           const [formQuestions, rootForm] =
-            FormGenerator._constructFormQuestions(structure, intl);
+            FormGenerator._constructFormQuestions(flattenedStructure, intl);
           form = rootForm;
           formProperties = {
             formQuestions,
           };
         } catch (e) {
+          console.error("Error in _constructFormQuestions:", e);
+        }
+
+        if (!form) {
           const [formQuestions, rootForm] =
             FormGenerator.constructDefaultForm(intl);
           form = rootForm;
@@ -52,9 +54,12 @@ export default class FormGenerator {
             formQuestions,
           };
         }
-        return resolve([formProperties, form]);
+        return [formProperties, form];
       })
-    );
+      .catch((error) => {
+        console.error("Error in jsonld.flatten:", error);
+        return [formProperties, form];
+      });
   }
 
   static _constructFormQuestions(structure, intl) {
