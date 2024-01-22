@@ -3,8 +3,10 @@ module.exports = {
   moduleFileExtensions: ["js", "jsx", "json", "ts", "tsx"],
   setupFiles: ["<rootDir>/test/setup.js"],
   transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$"],
-  testEnvironment: "jsdom",
-  testURL: "http://localhost",
+  testEnvironment: "./jest-environment-jsdom.cjs",
+  testEnvironmentOptions: {
+    url: "http://localhost",
+  },
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
   },
