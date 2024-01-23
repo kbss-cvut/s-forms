@@ -37,7 +37,10 @@
   "type": "module",
   "source": "src/s-forms.js",
   "main": "dist/s-forms.js",
-  "exports": "./dist/s-forms.modern.js",
+  "exports": {
+    ".": "./dist/s-forms.modern.js",
+    "./css": "./dist/s-forms.css"
+  },
   "module": "./dist/s-forms.js",
   "unpkg": "./dist/s-forms.umd.js",
   "private": false,
@@ -54,7 +57,6 @@
     "javascript-time-ago": "^2.3.8",
     "jsonld": "^0.4.12",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.1.2.tgz",
-    "microbundle": "^0.14.2",
     "npm-packlist": "^7.0.2",
     "prop-types": "^15.7.2",
     "react-bootstrap": "1.0.1",
@@ -96,6 +98,7 @@
     "husky": "^7.0.0",
     "jest": "^26.0.1",
     "lint-staged": "^13.0.3",
+    "microbundle": "^0.15.1",
     "prettier": "^2.5.1",
     "query-string": "^6.13.5",
     "react": "~18.2.0",
