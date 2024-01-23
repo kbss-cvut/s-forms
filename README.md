@@ -10,7 +10,7 @@ Checkout [live demo using storybook](https://s-forms-kbss.netlify.app).
 ## Supported features
 
 - Input/Textarea
-- Typeahead
+- Tree Typeahead
 - Datetime picker
 - Select
 - Checkbox
