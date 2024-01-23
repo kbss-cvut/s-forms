@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true,
 });
 
-// Using Jest 29, TextEncoder qnd TextDecoder do not have support, see https://github.com/jsdom/jsdom/issues/2524,
+// Using Jest 29, TextEncoder and TextDecoder do not have support, see https://github.com/jsdom/jsdom/issues/2524,
 // Solution was found here: https://github.com/jsdom/jsdom/issues/2524#issuecomment-1480930523
 class JSDOMEnvironment extends $JSDOMEnvironment {
   constructor(...args) {

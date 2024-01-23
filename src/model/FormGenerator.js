@@ -43,7 +43,10 @@ export default class FormGenerator {
             formQuestions,
           };
         } catch (e) {
-          console.error("Error in _constructFormQuestions:", e);
+          console.error(
+            "Error while constructing form questions from the provided structure:",
+            e
+          );
         }
 
         if (!form) {
@@ -57,7 +60,10 @@ export default class FormGenerator {
         return [formProperties, form];
       })
       .catch((error) => {
-        console.error("Error in jsonld.flatten:", error);
+        console.error(
+          "Failed to flatten the JSON-LD structure. Expected to transform a nested JSON-LD document into a flattened array of node objects:",
+          error
+        );
         return [formProperties, form];
       });
   }
