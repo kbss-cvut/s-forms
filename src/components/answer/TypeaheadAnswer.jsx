@@ -121,15 +121,22 @@ const TypeaheadAnswer = (props) => {
     props.onChange(option ? option.id : null);
   };
 
+  // Used if the value should not be displayed as a link
+  const valueRenderer = (children) => <>{children}</>;
+
   const valueKey = Utils.findKeyInObjects(optionsList, ["name", "value"]);
   const labelKey = Utils.findKeyInObjects(optionsList, ["name", "label"]);
 
+  console.log(props.question[Constants.IS_NOT_LINK]);
   return (
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
       <IntelligentTreeSelect
         valueKey={valueKey}
         labelKey={labelKey}
+        valueRenderer={
+          props.question[Constants.IS_NOT_LINK] ? valueRenderer : null
+        }
         valueIsControlled={true}
         value={optionsList.filter((option) => option.id === props.value)}
         multi={false}

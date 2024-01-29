@@ -156,6 +156,7 @@ export default class Constants {
   static BROADER = "http://www.w3.org/2004/02/skos/core#broader";
   static HAS_NON_SELECTABLE_VALUE =
     "http://onto.fel.cvut.cz/ontologies/form/has-non-selectable-value";
+  static IS_NOT_LINK = "http://onto.fel.cvut.cz/ontologies/form/is-not-link";
 
   static ICONS = {
     QUESTION_COMMENTS: "questionComments",
