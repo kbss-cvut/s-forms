@@ -127,7 +127,6 @@ const TypeaheadAnswer = (props) => {
   const valueKey = Utils.findKeyInObjects(optionsList, ["name", "value"]);
   const labelKey = Utils.findKeyInObjects(optionsList, ["name", "label"]);
 
-  console.log(props.question[Constants.IS_NOT_LINK]);
   return (
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>

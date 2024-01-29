@@ -129,7 +129,7 @@
       "has_related_question": [],
       "has-layout-class": "type-ahead",
       "has-possible-values-query": "http://example.com/",
-      "is-not-link": false,
+      "is-not-link": true,
       "requires-answer": true,
       "label": "Profession",
       "has-possible-value": [
