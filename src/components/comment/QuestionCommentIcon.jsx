@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import CommentForm from "./CommentForm";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion/dist/framer-motion";
 import Close from "../../styles/icons/Close";
 
 const QuestionCommentIcon = (props) => {
