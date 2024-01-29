@@ -7,7 +7,10 @@ import questionTypeahead from "./assets/question/questionTypeHead.json";
 import questionTypeaheadWithTree from "./assets/question/simple-single-tree-select.json";
 import questionDate from "./assets/question/questionDate.json";
 import questionCheckBox from "./assets/question/questionCheckBox.json";
-import questionMaskedInput from "./assets/question/questionMaskedInput.json";
+import questionDateMaskedInput from "./assets/question/questionDateMaskedInput.json";
+import questionTimeMaskedInput from "./assets/question/questionTimeMaskedInput.json";
+import questionMilitaryTimeMaskedInput from "./assets/question/questionMilitaryTimeMaskedInput.json";
+import questionDateTimeMaskedInput from "./assets/question/questionDateTimeMaskedInput.json";
 import questionSparqlInput from "./assets/question/questionSparqlInput.json";
 import questionTurtleInput from "./assets/question/questionTurtleInput.json";
 
@@ -77,10 +80,31 @@ export const CheckBox: Story = {
   },
 };
 
-export const MaskedInput: Story = {
+export const DateMaskedInput: Story = {
   args: {
     ...Template.args,
-    question: questionMaskedInput,
+    question: questionDateMaskedInput,
+  },
+};
+
+export const DateTimeMaskedInput: Story = {
+  args: {
+    ...Template.args,
+    question: questionDateTimeMaskedInput,
+  },
+};
+
+export const TimeMaskedInput: Story = {
+  args: {
+    ...Template.args,
+    question: questionTimeMaskedInput,
+  },
+};
+
+export const MilitaryTimeMaskedInput: Story = {
+  args: {
+    ...Template.args,
+    question: questionMilitaryTimeMaskedInput,
   },
 };
 
