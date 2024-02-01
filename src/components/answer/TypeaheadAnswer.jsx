@@ -121,7 +121,6 @@ const TypeaheadAnswer = (props) => {
     props.onChange(option ? option.id : null);
   };
 
-  // Used if the value should not be displayed as a link
   const noLinksValueRenderer = (children) => <>{children}</>;
 
   const valueKey = Utils.findKeyInObjects(optionsList, ["name", "value"]);
