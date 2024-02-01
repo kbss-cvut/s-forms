@@ -121,6 +121,8 @@ const TypeaheadAnswer = (props) => {
     props.onChange(option ? option.id : null);
   };
 
+  const noLinksValueRenderer = (children) => <>{children}</>;
+
   const valueKey = Utils.findKeyInObjects(optionsList, ["name", "value"]);
   const labelKey = Utils.findKeyInObjects(optionsList, ["name", "label"]);
 
@@ -130,6 +132,11 @@ const TypeaheadAnswer = (props) => {
       <IntelligentTreeSelect
         valueKey={valueKey}
         labelKey={labelKey}
+        valueRenderer={
+          props.question[Constants.PROVIDES_DEREFERENCEABLE_ANSWER_VALUES]
+            ? noLinksValueRenderer
+            : null
+        }
         valueIsControlled={true}
         value={optionsList.filter((option) => option.id === props.value)}
         multi={false}
