@@ -19,7 +19,7 @@ Checkout [live demo using storybook](https://s-forms-kbss.netlify.app).
 ## Representation in JSON-LD
 
 Semantic form is structure that holds a form (set of questions) as well as its data (set of answers).
-A conceptual model of Semantic forms is [questions/answers model]([https://kbss.felk.cvut.cz/gitblit/summary/s-forms-model.git](https://github.com/kbss-cvut/s-forms-model).
+A conceptual model of Semantic forms is [questions/answers model](https://github.com/kbss-cvut/s-forms-model).
 The conceptual model is described in RDF language. This library processes and generates Semantic forms using JSON-LD
 format which is JSON compatible serialization of the RDF language.
 
