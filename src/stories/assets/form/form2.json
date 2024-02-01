@@ -97,8 +97,8 @@
     "has-media-content": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/has-media-content"
     },
-    "is-not-link": {
-      "@id": "http://onto.fel.cvut.cz/ontologies/form/is-not-link"
+    "provides-dereferenceable-answer-values": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/provides-dereferenceable-answer-values"
     }
   },
   "@graph": [
@@ -129,7 +129,7 @@
       "has_related_question": [],
       "has-layout-class": "type-ahead",
       "has-possible-values-query": "http://example.com/",
-      "is-not-link": true,
+      "provides-dereferenceable-answer-values": true,
       "requires-answer": true,
       "label": "Profession",
       "has-possible-value": [

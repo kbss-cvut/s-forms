@@ -122,7 +122,7 @@ const TypeaheadAnswer = (props) => {
   };
 
   // Used if the value should not be displayed as a link
-  const valueRenderer = (children) => <>{children}</>;
+  const noLinksValueRenderer = (children) => <>{children}</>;
 
   const valueKey = Utils.findKeyInObjects(optionsList, ["name", "value"]);
   const labelKey = Utils.findKeyInObjects(optionsList, ["name", "label"]);
@@ -134,7 +134,9 @@ const TypeaheadAnswer = (props) => {
         valueKey={valueKey}
         labelKey={labelKey}
         valueRenderer={
-          props.question[Constants.IS_NOT_LINK] ? valueRenderer : null
+          props.question[Constants.PROVIDES_DEREFERENCEABLE_ANSWER_VALUES]
+            ? noLinksValueRenderer
+            : null
         }
         valueIsControlled={true}
         value={optionsList.filter((option) => option.id === props.value)}
