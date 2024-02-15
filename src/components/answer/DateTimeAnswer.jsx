@@ -10,11 +10,12 @@ import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 const DateTimeAnswer = (props) => {
   const { componentsOptions } = useContext(ConfigurationContext);
 
-  const dateFormat = FormUtils.resolveDateTimeFormat(
-    props.question,
-    props.value,
-    componentsOptions.dateTimeAnswer
-  );
+  const dateFormat = "HH:mm:ss";
+  // const dateFormat = FormUtils.resolveDateTimeFormat(
+  //   props.question,
+  //   props.value,
+  //   componentsOptions.dateTimeAnswer
+  // );
 
   const isDate = FormUtils.isDate(props.question);
   const isTime = FormUtils.isTime(props.question);
