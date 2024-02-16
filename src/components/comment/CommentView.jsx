@@ -7,7 +7,7 @@ import LinkIcon from "../LinkIcon";
 import IconOverlay from "../IconOverlay";
 import PropTypes from "prop-types";
 import RecycleBin from "../../styles/icons/RecycleBin";
-import { motion } from "framer-motion/dist/framer-motion";
+import { motion } from "framer-motion";
 import Constants from "../../constants/Constants";
 
 const UNKNOWN_AUTHOR = "Unknown author";
