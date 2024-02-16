@@ -11,7 +11,7 @@ const defaultProps = {
   componentsOptions: {
     dateTimeAnswer: {
       dateFormat: "yyyy-MM-dd",
-      timeFormat: "HH:mm:ss",
+      timeFormat: "HH:mm",
       dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
     },
     readOnly: false,
