@@ -111,14 +111,8 @@ export default class Constants {
     "http://onto.fel.cvut.cz/ontologies/form/negative-condition";
   static REQUIRES_ANSWER =
     "http://onto.fel.cvut.cz/ontologies/form/requires-answer";
-  static REQUIRES_ANSWER_DESCRIPTION_IF =
-    "http://onto.fel.cvut.cz/ontologies/form/requires-answer-description-if";
   static REQUIRES_ANSWER_IF =
     "http://onto.fel.cvut.cz/ontologies/form/requires-answer-if";
-  static REQUIRES_ANSWER_VALUE =
-    "http://onto.fel.cvut.cz/ontologies/form/requires-answer-value";
-  static REQUIRES_DESCRIPTION =
-    "http://onto.fel.cvut.cz/ontologies/form/requires-description";
   static HAS_PRECEDING_QUESTION =
     "http://onto.fel.cvut.cz/ontologies/form/has-preceding-question";
   static HAS_PRECEDING_VALUE =
