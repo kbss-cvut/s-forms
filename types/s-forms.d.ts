@@ -131,10 +131,7 @@ export class Constants {
   static HAS_VALIDATION_MESSAGE: string;
   static NEGATIVE_CONDITION: string;
   static REQUIRES_ANSWER: string;
-  static REQUIRES_ANSWER_DESCRIPTION_IF: string;
   static REQUIRES_ANSWER_IF: string;
-  static REQUIRES_ANSWER_VALUE: string;
-  static REQUIRES_DESCRIPTION: string;
   static HAS_PRECEDING_QUESTION: string;
   static HAS_PRECEDING_VALUE: string;
   static HAS_MEDIA_CONTENT: string;
