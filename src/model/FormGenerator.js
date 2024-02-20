@@ -29,7 +29,7 @@ export default class FormGenerator {
    *
    * @return Promise with generated form definition and form data
    */
-  static constructForm(structure, intl) {
+  static async constructForm(structure, intl) {
     let formProperties;
     let form;
     return jsonld
