@@ -22,12 +22,12 @@ export default class FormGenerator {
   }
 
   /**
-   * Generates form definition from the specified data-enriched template.
+   * Asynchronously generates form definition from the specified data-enriched template.
    *
-   * @param structure The form structure in JSON-LD
-   * @param intl Preferred language of questions
+   * @param {Object} structure The form structure in JSON-LD
+   * @param {string} intl Preferred language of questions
    *
-   * @return Promise with generated form definition and form data
+   * @return {Promise<Object>} Promise with generated form definition and form data
    */
   static async constructForm(structure, intl) {
     let formProperties;
