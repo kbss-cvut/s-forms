@@ -18,14 +18,10 @@ const FormGenContextProvider = ({ children, ...props }) => {
     const data = await props.fetchTypeAheadValues(query);
 
     if (data.length) {
-      return new Promise((resolve) => {
-        jsonld.frame(data, {}, null, (err, framed) => {
-          const option = framed["@graph"];
-
-          options.push({ ...option, [id]: option });
-
-          return resolve(option);
-        });
+      return jsonld.frame(data, {}, {}).then((framedData) => {
+        const option = framedData["@graph"];
+        options.push({ ...option, [id]: option });
+        return option;
       });
     }
 
