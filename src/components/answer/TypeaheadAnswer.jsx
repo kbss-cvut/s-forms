@@ -41,7 +41,9 @@ const TypeaheadAnswer = (props) => {
   const intl = configurationContext.options.intl;
 
   const [isLoading, setLoading] = useState(true);
-  const [optionsList, setOptionsList] = useState([]);
+  const [optionsList, setOptionsList] = useState([
+    processTypeaheadOptions(props.options, intl),
+  ]);
 
   useEffect(() => {
     let isCancelled = false;

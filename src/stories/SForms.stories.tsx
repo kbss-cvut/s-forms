@@ -11,7 +11,6 @@ import occurrenceReportingForm from "./assets/form/occurrenceReportingForm.json"
 
 import queryString from "query-string";
 import Constants from "../constants/Constants";
-import IntlContextProvider from "../contexts/IntlContextProvider";
 import possibleValues from "./assets/possibleValues.json";
 
 const getP = (queryParameterName: string, defaultValue: string) => {
