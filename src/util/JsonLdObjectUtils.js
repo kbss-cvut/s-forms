@@ -1,7 +1,7 @@
 import * as jsonld from "jsonld";
 import * as JsonLdUtils from "jsonld-utils";
 import Utils from "./Utils";
-import tsort from "tsort";
+import tsort from "@kbss-cvut/tsort";
 
 export default class JsonLdObjectUtils {
   static getFirstObject(subject, predicate) {
