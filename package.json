@@ -45,6 +45,7 @@
   "unpkg": "./dist/s-forms.umd.js",
   "private": false,
   "dependencies": {
+    "@kbss-cvut/tsort": "0.0.2",
     "@triply/yasgui": "^4.2.14",
     "babel-runtime": "^6.26.0",
     "bootstrap": "^4.6.0",
@@ -63,7 +64,6 @@
     "react-datepicker": "^4.14.1",
     "react-intl": "^6.5.1",
     "react-loader-spinner": "^5.3.4",
-    "tsort": "0.0.1",
     "yasgui-yasqe": "^2.11.22"
   },
   "peerDependencies": {
