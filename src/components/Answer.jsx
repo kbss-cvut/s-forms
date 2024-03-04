@@ -114,7 +114,6 @@ const Answer = (props) => {
         answer={props.answer}
       />
     );
-    return null;
   };
 
   const _renderRegularInput = (value, label, title) => {

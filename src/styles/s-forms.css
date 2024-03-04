@@ -315,6 +315,21 @@ input:disabled {
   pointer-events: auto;
 }
 
+.is-warning {
+  border-color: #dc9135;
+}
+
+.is-warning:focus {
+  box-shadow: 0 0 0 0.2rem rgba(203, 127, 16, 0.25);
+  border-color: #dc9135;
+}
+
+.is-warning.form-text {
+  color: #dc9135;
+  border: none;
+  box-shadow: none;
+}
+
 @keyframes emphasiseOnRelevant {
   0% {
     display: none;

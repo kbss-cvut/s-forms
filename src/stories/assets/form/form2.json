@@ -99,6 +99,15 @@
     },
     "provides-dereferenceable-answer-values": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/provides-dereferenceable-answer-values"
+    },
+    "used-only-for-completeness": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/used-only-for-completeness"
+    },
+    "has-validation-message": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-validation-message"
+    },
+    "pattern": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/pattern"
     }
   },
   "@graph": [
@@ -159,7 +168,11 @@
       "@type": "doc:question",
       "has_related_question": [],
       "has-layout-class": "text",
-      "label": "First name"
+      "label": "First name (test completeness and invalid values)",
+      "requires-answer": true,
+      "used-only-for-completeness": true,
+      "pattern": "^[A-Za-z]+$",
+      "description": "This question requires answer only to complete the form (i.e. it is not necessary for saving the form). When you loose focus of the field, the validation is triggered. It has custom validation message which will be triggered if you write name that is not compliant with pattern \"^[A-Za-z]+$\""
     },
     {
       "@id": "last-name-1495",
@@ -167,7 +180,11 @@
       "has_related_question": [],
       "has-layout-class": "text",
       "has-preceding-question": "first-name-6663",
-      "label": "Last name"
+      "label": "Last name (testing required and invalid values)",
+      "requires-answer": true,
+      "pattern": "^[A-Za-z]+$",
+      "has-validation-message": "Answer can only use characters.",
+      "description": "This question requires answer to save the form. When you loose focus of the field, the validation is triggered. It has custom validation message which will be triggered if you write name that is not compliant with pattern \"^[A-Za-z]+$\""
     },
     {
       "@id": "job-9002",
