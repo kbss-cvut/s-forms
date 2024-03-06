@@ -1,10 +1,10 @@
 # SForms publishing workflow documentation
 
-S-Forms follows the [semantic versioning](https://docs.npmjs.com/about-semantic-versioning) recommendations for new **releases**, and a SHA based ID for new **pre-releases**. The workflow is described below.
+SForms follows the [semantic versioning](https://docs.npmjs.com/about-semantic-versioning) recommendations for new **releases**, and a SHA based ID for new **pre-releases**. The workflow is described below.
 
 ## Publish new release
 
-New releases are done **only** on the **master** branch. The recommended workflow to publish a new release is as follow:
+New releases are done **only** on the **master** branch. The recommended workflow to publish a new release is as follows:
 
 1. Format your files with `npm run prettier:format`.
 2. Commit all your files.
