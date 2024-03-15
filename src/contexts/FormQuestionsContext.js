@@ -22,8 +22,7 @@ const FormQuestionsProvider = (props) => {
 
   useEffect(() => {
     setData(props.data || INITIAL_DATA);
-    setFormQuestionsData(props.formQuestions || INITIAL_FORM_QUESTIONS_DATA);
-  }, [props.data, props.formQuestions]);
+  }, [formQuestionsData]);
 
   const updateData = (update) => {
     if (!update) return;
@@ -34,10 +33,18 @@ const FormQuestionsProvider = (props) => {
   const updateFormQuestionsData = (index, update) => {
     if (!update || index < 0 || index >= formQuestionsData.length) return;
 
-    const newFormQuestionsData = [...formQuestionsData];
-    newFormQuestionsData[index] = { ...newFormQuestionsData[index], ...update };
+    if (typeof update === "object") {
+      const newFormQuestionsData = [...formQuestionsData];
+      newFormQuestionsData[index] = {
+        ...newFormQuestionsData[index],
+        ...update,
+      };
+      setFormQuestionsData(newFormQuestionsData);
+    }
 
-    setFormQuestionsData(newFormQuestionsData);
+    if (Array.isArray(update)) {
+      setFormQuestionsData(update);
+    }
 
     if (props.isFormValid) {
       const isValid = FormUtils.isValid(data);

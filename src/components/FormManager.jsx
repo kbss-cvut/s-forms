@@ -6,6 +6,8 @@ import FormWindow from "./FormWindow";
 import { Card } from "react-bootstrap";
 import Question from "./Question";
 import FormUtils from "../util/FormUtils.js";
+import ValidatorFactory from "../model/ValidatorFactory.js";
+import Constants from "../constants/Constants.js";
 
 class FormManager extends React.Component {
   getFormData = () => {
@@ -17,6 +19,54 @@ class FormManager extends React.Component {
       formQuestionsData
     );
   };
+
+  validateForm = () => {
+    const questions = this.context.getFormQuestionsData();
+    const updatedQuestions = [];
+    let index = 0;
+    for (let question of questions) {
+      const updatedQuestion = this.extractedQuestionValidator(question);
+      if (updatedQuestion) {
+        updatedQuestions.push(updatedQuestion);
+      }
+      if (
+        question[Constants.HAS_SUBQUESTION] &&
+        question[Constants.HAS_SUBQUESTION].length > 0
+      ) {
+        const subQuestions = question[Constants.HAS_SUBQUESTION];
+        for (let subQuestion of subQuestions) {
+          const updatedSubQuestion =
+            this.extractedQuestionValidator(subQuestion);
+          if (updatedSubQuestion) {
+            updatedQuestions.push(updatedSubQuestion);
+          }
+        }
+      }
+      if (updatedQuestions.length > 0) {
+        const newFormQuestionsData = questions.map(
+          (question, index) => updatedQuestions[index] || question
+        );
+        this.context.updateFormQuestionsData(index, newFormQuestionsData);
+      }
+    }
+  };
+
+  extractedQuestionValidator(question) {
+    if (question[Constants.HAS_ANSWER]) {
+      let answer = question[Constants.HAS_ANSWER][0] || [];
+      let answerValue = answer[Constants.HAS_DATA_VALUE] || [];
+
+      if (answerValue.length > 0 || Object.keys(answerValue).length > 0) {
+        let validator = ValidatorFactory.createValidator(question, "en");
+        const update = validator(answerValue || answerValue["@value"]);
+
+        if (update) {
+          return { ...question, ...update };
+        }
+        return null;
+      }
+    }
+  }
 
   getFormQuestionsData = () => {
     return this.context.getFormQuestionsData();
