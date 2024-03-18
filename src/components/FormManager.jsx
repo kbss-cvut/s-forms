@@ -23,7 +23,7 @@ class FormManager extends React.Component {
   validateForm = () => {
     const questions = this.context.getFormQuestionsData();
     const updatedQuestions = [];
-    let index = 0;
+
     for (let question of questions) {
       const updatedQuestion = this.extractedQuestionValidator(question);
       if (updatedQuestion) {
@@ -42,12 +42,13 @@ class FormManager extends React.Component {
           }
         }
       }
-      if (updatedQuestions.length > 0) {
-        const newFormQuestionsData = questions.map(
-          (question, index) => updatedQuestions[index] || question
-        );
-        this.context.updateFormQuestionsData(index, newFormQuestionsData);
-      }
+    }
+
+    if (updatedQuestions.length > 0) {
+      const newFormQuestionsData = questions.map(
+        (question, index) => updatedQuestions[index] || question
+      );
+      this.context.updateFormQuestionsData(null, newFormQuestionsData);
     }
   };
 
