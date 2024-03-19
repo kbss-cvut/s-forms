@@ -7,7 +7,6 @@ import { Card } from "react-bootstrap";
 import Question from "./Question";
 import FormUtils from "../util/FormUtils.js";
 import ValidatorFactory from "../model/ValidatorFactory.js";
-import Constants from "../constants/Constants.js";
 
 class FormManager extends React.Component {
   getFormData = () => {
@@ -26,8 +25,8 @@ class FormManager extends React.Component {
 
     for (let i = 0; i < questions.length; i++) {
       const question = questions[i];
-      FormUtils.updateQuestionValidation(questions, question, i);
-      FormUtils.updateSubQuestionsValidation(question);
+      ValidatorFactory.updateQuestionValidation(questions, question, i);
+      ValidatorFactory.updateSubQuestionsValidation(question);
     }
 
     this.context.updateFormQuestionsData(null, questions);

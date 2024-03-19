@@ -5,7 +5,6 @@ import Constants from "../constants/Constants";
 import Utils from "./Utils";
 import JsonLdObjectMap from "./JsonLdObjectMap";
 import JsonLdObjectUtils from "./JsonLdObjectUtils";
-import ValidatorFactory from "../model/ValidatorFactory.js";
 
 export default class FormUtils {
   static isForm(structure) {
@@ -433,41 +432,4 @@ export default class FormUtils {
     }
     return null;
   }
-
-  /**
-   * Updates the validation status of a question within an array of questions.
-   * @param {Array} questions - The array of questions to update.
-   * @param {Object} question - The question object to validate and update.
-   * @param {number} index - The index of the question in the array.
-   */
-  static updateQuestionValidation = (questions, question, index) => {
-    if (question[Constants.HAS_ANSWER]) {
-      const answer = question[Constants.HAS_ANSWER][0] || [];
-      const answerValue = answer[Constants.HAS_DATA_VALUE] || [];
-      const validator = ValidatorFactory.createValidator(question, "en");
-      const update = validator(answerValue || answerValue["@value"]);
-
-      if (update) {
-        questions[index] = { ...question, ...update };
-      }
-    }
-  };
-
-  /**
-   * Updates the validation status of sub-questions within a parent question.
-   * @param {Object} question - The parent question object containing sub-questions.
-   */
-  static updateSubQuestionsValidation = (question) => {
-    if (
-      question[Constants.HAS_SUBQUESTION] &&
-      question[Constants.HAS_SUBQUESTION].length > 0
-    ) {
-      const subQuestions = question[Constants.HAS_SUBQUESTION];
-
-      for (let j = 0; j < subQuestions.length; j++) {
-        const subQuestion = subQuestions[j];
-        this.updateQuestionValidation(subQuestions, subQuestion, j);
-      }
-    }
-  };
 }
