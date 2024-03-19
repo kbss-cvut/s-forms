@@ -152,6 +152,10 @@ export default class ValidatorFactory {
         Constants.HAS_OBJECT_VALUE,
         "@id"
       );
+    } else if (answer["@value"]) {
+      val = answer["@value"];
+    } else if (answer) {
+      val = answer;
     }
     return val;
   }
