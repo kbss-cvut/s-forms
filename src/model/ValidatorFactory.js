@@ -101,16 +101,12 @@ export default class ValidatorFactory {
   }
 
   static _requiredValidator(question, intl, answerValue) {
-    console.log("I am required to answer");
     if (
       question[Constants.REQUIRES_ANSWER] &&
       !question[Constants.USED_ONLY_FOR_COMPLETENESS]
     ) {
       const isValid = ValidatorFactory._isQuestionAnswered(answerValue);
-      console.log("isAnswerValid?");
-      console.log(isValid);
       if (!isValid) {
-        console.log("I am updating the validation...");
         return {
           isValid: false,
           validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
