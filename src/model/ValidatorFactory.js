@@ -26,8 +26,19 @@ export default class ValidatorFactory {
 
   static _isQuestionAnswered(answerValue) {
     if (Array.isArray(answerValue)) {
-      return answerValue.length > 0;
+      return (
+        answerValue.length > 0 &&
+        answerValue[0]["@value"] !== null &&
+        answerValue[0]["@value"] !== ""
+      );
     }
+
+    if (typeof answerValue === "object" && answerValue !== null) {
+      return (
+        Object.keys(answerValue).length > 0 && answerValue["@value"] !== ""
+      );
+    }
+
     return (
       answerValue !== null && answerValue !== undefined && answerValue !== ""
     );
@@ -90,12 +101,16 @@ export default class ValidatorFactory {
   }
 
   static _requiredValidator(question, intl, answerValue) {
+    console.log("I am required to answer");
     if (
       question[Constants.REQUIRES_ANSWER] &&
       !question[Constants.USED_ONLY_FOR_COMPLETENESS]
     ) {
       const isValid = ValidatorFactory._isQuestionAnswered(answerValue);
+      console.log("isAnswerValid?");
+      console.log(isValid);
       if (!isValid) {
+        console.log("I am updating the validation...");
         return {
           isValid: false,
           validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
