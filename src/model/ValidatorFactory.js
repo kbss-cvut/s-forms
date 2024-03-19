@@ -55,6 +55,8 @@ export default class ValidatorFactory {
       }
     }
     result[Constants.HAS_VALID_ANSWER] = true;
+    result[Constants.HAS_VALIDATION_MESSAGE] = "";
+    result[Constants.HAS_VALIDATION_SEVERITY] = "";
     return result;
   }
 
