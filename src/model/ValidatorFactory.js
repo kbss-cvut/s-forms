@@ -16,41 +16,12 @@ export default class ValidatorFactory {
       this._completenessValidator,
     ];
 
-    return (answer) => {
+    return () => {
       if (FormUtils.hasValidationLogic(question)) {
-        const answerValue = this._getAnswerValue(answer);
+        const answerValue = FormUtils.getAnswerValue(question);
         return this._validateAnswer(question, intl, answerValue, validators);
       }
     };
-  }
-
-  static _isQuestionAnswered(answerValue) {
-    if (Array.isArray(answerValue)) {
-      return (
-        answerValue.length > 0 &&
-        answerValue[0]["@value"] !== null &&
-        answerValue[0]["@value"] !== ""
-      );
-    }
-
-    if (typeof answerValue === "object" && answerValue !== null) {
-      return (
-        Object.keys(answerValue).length > 0 && answerValue["@value"] !== ""
-      );
-    }
-
-    return (
-      answerValue !== null && answerValue !== undefined && answerValue !== ""
-    );
-  }
-
-  static _isCheckboxAnswered(answerValue) {
-    return (
-      answerValue !== null &&
-      answerValue !== undefined &&
-      answerValue !== "" &&
-      answerValue !== false
-    );
   }
 
   static _validateAnswer(question, intl, answerValue, validators) {
@@ -80,8 +51,7 @@ export default class ValidatorFactory {
         let pattern = question[Constants.PATTERN];
         const regExp = new RegExp(pattern);
         const isValid =
-          regExp.test(answerValue) ||
-          !ValidatorFactory._isQuestionAnswered(answerValue);
+          regExp.test(answerValue) || !FormUtils.hasAnswer(question);
         if (!isValid) {
           return {
             isValid: false,
@@ -100,12 +70,12 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _requiredValidator(question, intl, answerValue) {
+  static _requiredValidator(question, intl) {
     if (
       question[Constants.REQUIRES_ANSWER] &&
       !question[Constants.USED_ONLY_FOR_COMPLETENESS]
     ) {
-      const isValid = ValidatorFactory._isQuestionAnswered(answerValue);
+      const isValid = FormUtils.hasAnswer(question);
       if (!isValid) {
         return {
           isValid: false,
@@ -119,10 +89,10 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _checkboxValidator(question, intl, answerValue) {
+  static _checkboxValidator(question, intl) {
     if (FormUtils.isCheckbox(question)) {
       if (question[Constants.REQUIRES_ANSWER]) {
-        const isValid = ValidatorFactory._isCheckboxAnswered(answerValue);
+        const isValid = FormUtils.hasAnswer(question);
         if (!isValid) {
           return {
             isValid: false,
@@ -137,12 +107,12 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _completenessValidator(question, intl, answerValue) {
+  static _completenessValidator(question, intl) {
     if (
       question[Constants.REQUIRES_ANSWER] &&
       question[Constants.USED_ONLY_FOR_COMPLETENESS]
     ) {
-      const isValid = ValidatorFactory._isQuestionAnswered(answerValue);
+      const isValid = FormUtils.hasAnswer(question);
       if (!isValid) {
         return {
           isValid: false,
@@ -156,36 +126,17 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _getAnswerValue(answer) {
-    let val = null;
-    if (answer[Constants.HAS_DATA_VALUE]) {
-      val = JsonLdUtils.getJsonAttValue(answer, Constants.HAS_DATA_VALUE);
-    } else if (answer[Constants.HAS_OBJECT_VALUE]) {
-      val = JsonLdUtils.getJsonAttValue(
-        answer,
-        Constants.HAS_OBJECT_VALUE,
-        "@id"
-      );
-    } else if (answer["@value"]) {
-      val = answer["@value"];
-    } else if (answer) {
-      val = answer;
-    }
-    return val;
-  }
-
   /**
    * Updates the validation status of a question within an array of questions.
    * @param {Array} questions - The array of questions to update.
    * @param {Object} question - The question object to validate and update.
    * @param {number} index - The index of the question in the array.
+   * @param {Object} intl - The object used for internationalization.
    */
-  static updateQuestionValidation = (questions, question, index) => {
+  static updateQuestionValidation = (questions, question, index, intl) => {
     if (question[Constants.HAS_ANSWER]) {
-      const answer = question[Constants.HAS_ANSWER][0] || [];
-      const answerValue = answer[Constants.HAS_DATA_VALUE] || [];
-      const validator = ValidatorFactory.createValidator(question, "en");
-      const update = validator(answerValue || answerValue["@value"]);
+      const validator = ValidatorFactory.createValidator(question, intl);
+      const update = validator();
 
       if (update) {
         questions[index] = { ...question, ...update };
@@ -196,8 +147,9 @@ export default class ValidatorFactory {
   /**
    * Updates the validation status of sub-questions within a parent question.
    * @param {Object} question - The parent question object containing sub-questions.
+   * @param {Object} intl - The object used for internationalization.
    */
-  static updateSubQuestionsValidation = (question) => {
+  static updateSubQuestionsValidation = (question, intl) => {
     if (
       question[Constants.HAS_SUBQUESTION] &&
       question[Constants.HAS_SUBQUESTION].length > 0
@@ -206,7 +158,7 @@ export default class ValidatorFactory {
 
       for (let j = 0; j < subQuestions.length; j++) {
         const subQuestion = subQuestions[j];
-        this.updateQuestionValidation(subQuestions, subQuestion, j);
+        this.updateQuestionValidation(subQuestions, subQuestion, j, intl);
       }
     }
   };

@@ -25,8 +25,9 @@ class FormManager extends React.Component {
 
     for (let i = 0; i < questions.length; i++) {
       const question = questions[i];
-      ValidatorFactory.updateQuestionValidation(questions, question, i);
-      ValidatorFactory.updateSubQuestionsValidation(question);
+      //TODO: Add intl from intl context
+      ValidatorFactory.updateQuestionValidation(questions, question, i, "en");
+      ValidatorFactory.updateSubQuestionsValidation(question, "en");
     }
 
     this.context.updateFormQuestionsData(null, questions);
