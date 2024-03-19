@@ -20,6 +20,7 @@ class FormManager extends React.Component {
     );
   };
 
+  //TODO: Add optional argument "isRequiredForCompleteness"
   validateForm = () => {
     const questions = this.context.getFormQuestionsData();
 
