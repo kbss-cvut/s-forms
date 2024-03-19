@@ -22,52 +22,15 @@ class FormManager extends React.Component {
 
   validateForm = () => {
     const questions = this.context.getFormQuestionsData();
-    const updatedQuestions = [];
 
-    for (let question of questions) {
-      const updatedQuestion = this.extractedQuestionValidator(question);
-      if (updatedQuestion) {
-        updatedQuestions.push(updatedQuestion);
-      }
-      if (
-        question[Constants.HAS_SUBQUESTION] &&
-        question[Constants.HAS_SUBQUESTION].length > 0
-      ) {
-        const subQuestions = question[Constants.HAS_SUBQUESTION];
-        for (let subQuestion of subQuestions) {
-          const updatedSubQuestion =
-            this.extractedQuestionValidator(subQuestion);
-          if (updatedSubQuestion) {
-            updatedQuestions.push(updatedSubQuestion);
-          }
-        }
-      }
+    for (let i = 0; i < questions.length; i++) {
+      const question = questions[i];
+      FormUtils.updateQuestionValidation(questions, question, i);
+      FormUtils.updateSubQuestionsValidation(question);
     }
 
-    if (updatedQuestions.length > 0) {
-      const newFormQuestionsData = questions.map(
-        (question, index) => updatedQuestions[index] || question
-      );
-      this.context.updateFormQuestionsData(null, newFormQuestionsData);
-    }
+    this.context.updateFormQuestionsData(null, questions);
   };
-
-  extractedQuestionValidator(question) {
-    if (question[Constants.HAS_ANSWER]) {
-      let answer = question[Constants.HAS_ANSWER][0] || [];
-      let answerValue = answer[Constants.HAS_DATA_VALUE] || [];
-
-      if (answerValue.length > 0 || Object.keys(answerValue).length > 0) {
-        let validator = ValidatorFactory.createValidator(question, "en");
-        const update = validator(answerValue || answerValue["@value"]);
-
-        if (update) {
-          return { ...question, ...update };
-        }
-        return null;
-      }
-    }
-  }
 
   getFormQuestionsData = () => {
     return this.context.getFormQuestionsData();

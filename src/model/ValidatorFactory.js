@@ -25,6 +25,9 @@ export default class ValidatorFactory {
   }
 
   static _isQuestionAnswered(answerValue) {
+    if (Array.isArray(answerValue)) {
+      return answerValue.length > 0;
+    }
     return (
       answerValue !== null && answerValue !== undefined && answerValue !== ""
     );
