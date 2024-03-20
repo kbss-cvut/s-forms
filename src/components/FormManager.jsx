@@ -3,7 +3,7 @@ import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 import { FormQuestionsContext } from "../contexts/FormQuestionsContext";
 import Wizard from "./wizard/Wizard";
 import FormWindow from "./FormWindow";
-import Card from "react-bootstrap/Card";
+import { Card } from "react-bootstrap";
 import Question from "./Question";
 import FormUtils from "../util/FormUtils.js";
 
