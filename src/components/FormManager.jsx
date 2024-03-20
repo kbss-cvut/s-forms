@@ -6,7 +6,7 @@ import FormWindow from "./FormWindow";
 import { Card } from "react-bootstrap";
 import Question from "./Question";
 import FormUtils from "../util/FormUtils.js";
-import ValidatorFactory from "../model/ValidatorFactory.js";
+import ValidationProcessor from "../model/ValidationProcessor.js";
 
 class FormManager extends React.Component {
   getFormData = () => {
@@ -26,8 +26,13 @@ class FormManager extends React.Component {
     for (let i = 0; i < questions.length; i++) {
       const question = questions[i];
       //TODO: Add intl from intl context
-      ValidatorFactory.updateQuestionValidation(questions, question, i, "en");
-      ValidatorFactory.updateSubQuestionsValidation(question, "en");
+      ValidationProcessor.updateQuestionValidation(
+        questions,
+        question,
+        i,
+        "en"
+      );
+      ValidationProcessor.updateSubQuestionsValidation(question, "en");
     }
 
     this.context.updateFormQuestionsData(null, questions);
