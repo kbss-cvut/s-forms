@@ -16,27 +16,12 @@ export default class ValidatorFactory {
       this._completenessValidator,
     ];
 
-    return (answer) => {
+    return () => {
       if (FormUtils.hasValidationLogic(question)) {
-        const answerValue = this._getAnswerValue(answer);
+        const answerValue = FormUtils.getAnswerValue(question);
         return this._validateAnswer(question, intl, answerValue, validators);
       }
     };
-  }
-
-  static _isQuestionAnswered(answerValue) {
-    return (
-      answerValue !== null && answerValue !== undefined && answerValue !== ""
-    );
-  }
-
-  static _isCheckboxAnswered(answerValue) {
-    return (
-      answerValue !== null &&
-      answerValue !== undefined &&
-      answerValue !== "" &&
-      answerValue !== false
-    );
   }
 
   static _validateAnswer(question, intl, answerValue, validators) {
@@ -55,6 +40,8 @@ export default class ValidatorFactory {
       }
     }
     result[Constants.HAS_VALID_ANSWER] = true;
+    result[Constants.HAS_VALIDATION_MESSAGE] = "";
+    result[Constants.HAS_VALIDATION_SEVERITY] = "";
     return result;
   }
 
@@ -64,8 +51,7 @@ export default class ValidatorFactory {
         let pattern = question[Constants.PATTERN];
         const regExp = new RegExp(pattern);
         const isValid =
-          regExp.test(answerValue) ||
-          !ValidatorFactory._isQuestionAnswered(answerValue);
+          regExp.test(answerValue) || !FormUtils.hasAnswer(question);
         if (!isValid) {
           return {
             isValid: false,
@@ -84,12 +70,12 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _requiredValidator(question, intl, answerValue) {
+  static _requiredValidator(question, intl) {
     if (
       question[Constants.REQUIRES_ANSWER] &&
       !question[Constants.USED_ONLY_FOR_COMPLETENESS]
     ) {
-      const isValid = ValidatorFactory._isQuestionAnswered(answerValue);
+      const isValid = FormUtils.hasAnswer(question);
       if (!isValid) {
         return {
           isValid: false,
@@ -103,10 +89,10 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _checkboxValidator(question, intl, answerValue) {
+  static _checkboxValidator(question, intl) {
     if (FormUtils.isCheckbox(question)) {
       if (question[Constants.REQUIRES_ANSWER]) {
-        const isValid = ValidatorFactory._isCheckboxAnswered(answerValue);
+        const isValid = FormUtils.hasAnswer(question);
         if (!isValid) {
           return {
             isValid: false,
@@ -121,12 +107,12 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _completenessValidator(question, intl, answerValue) {
+  static _completenessValidator(question, intl) {
     if (
       question[Constants.REQUIRES_ANSWER] &&
       question[Constants.USED_ONLY_FOR_COMPLETENESS]
     ) {
-      const isValid = ValidatorFactory._isQuestionAnswered(answerValue);
+      const isValid = FormUtils.hasAnswer(question);
       if (!isValid) {
         return {
           isValid: false,
@@ -138,19 +124,5 @@ export default class ValidatorFactory {
       }
     }
     return { isValid: true };
-  }
-
-  static _getAnswerValue(answer) {
-    let val = null;
-    if (answer[Constants.HAS_DATA_VALUE]) {
-      val = JsonLdUtils.getJsonAttValue(answer, Constants.HAS_DATA_VALUE);
-    } else if (answer[Constants.HAS_OBJECT_VALUE]) {
-      val = JsonLdUtils.getJsonAttValue(
-        answer,
-        Constants.HAS_OBJECT_VALUE,
-        "@id"
-      );
-    }
-    return val;
   }
 }

@@ -405,6 +405,33 @@ export default class FormUtils {
     return false;
   }
 
+  static getAnswerValue(question) {
+    if (!question) {
+      return null;
+    }
+
+    if (question.hasOwnProperty(Constants.HAS_ANSWER)) {
+      const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
+      if (answers.length) {
+        const qValue = FormUtils.resolveValueObject(answers[0]);
+        if (qValue) {
+          if (qValue["@value"] || qValue["@id"]) {
+            return qValue["@value"] || qValue["@id"];
+          }
+        }
+      }
+    }
+
+    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+      const subQAnswer = FormUtils.getAnswerValue(subQ);
+      if (subQAnswer) {
+        return subQAnswer;
+      }
+    }
+
+    return null;
+  }
+
   /**
    * Resolves which format of date/time/datetime value should be used in the datetime picker.
    * @param question Question with format info
