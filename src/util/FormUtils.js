@@ -459,4 +459,23 @@ export default class FormUtils {
     }
     return null;
   }
+
+  /**
+   * Traverse provided array of questions recursively by DFS algorithm
+   * and execute on each traversed question provided function.
+   * @param {Array<Object>} questions - The array of questions to be traversed.
+   * @param func - The function to be executed on each recursively traversed question.
+   */
+  static dfsTraverseQuestionTree(questions, func) {
+    function recursiveTraverse(question) {
+      func(question);
+      Utils.asArray(question[Constants.HAS_SUBQUESTION]).forEach((q) => {
+        recursiveTraverse(q);
+      });
+    }
+
+    questions.forEach((q) => {
+      recursiveTraverse(q);
+    });
+  }
 }
