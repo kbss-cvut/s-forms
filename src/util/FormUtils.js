@@ -478,4 +478,100 @@ export default class FormUtils {
       recursiveTraverse(q);
     });
   }
+
+  /**
+   * Performs a dfs on a set of questions and executes callback functions
+   * when entering and leaving each question.
+   * @param {Array<Object>} questions - The array of questions to traverse.
+   * @param {function} onEnterQuestion - The callback function to execute when entering a question.
+   * @param {function} onLeaveQuestion - The callback function to execute when leaving a question.
+   */
+  static dfsOnEnterAndLeaveQuestion(
+    questions,
+    onEnterQuestion,
+    onLeaveQuestion
+  ) {
+    /**
+     * Recursively traverses the questions and executes the appropriate callback functions.
+     * @param {Object} question - The question to traverse.
+     */
+    function recursiveTraverse(question) {
+      onEnterQuestion(question);
+      Utils.asArray(question[Constants.HAS_SUBQUESTION]).forEach((q) => {
+        recursiveTraverse(q);
+      });
+      onLeaveQuestion(question);
+    }
+
+    questions.forEach((q) => {
+      recursiveTraverse(q);
+    });
+  }
+
+  static printFormSpecification(questions) {
+    let level = -1;
+    const indentation = "    ";
+    const propertyIndentation = "..";
+    let output = "";
+
+    function onEnterQuestion(q) {
+      level += 1;
+      const ind = indentation.repeat(level);
+      let requiredValue = "";
+      if (q[Constants.REQUIRES_ANSWER]) {
+        requiredValue =
+          ind +
+          propertyIndentation +
+          "required: " +
+          q[Constants.REQUIRES_ANSWER] +
+          "\n";
+      } else if (q[Constants.USED_ONLY_FOR_COMPLETENESS]) {
+        requiredValue =
+          ind +
+          propertyIndentation +
+          "required: " +
+          q[Constants.USED_ONLY_FOR_COMPLETENESS] +
+          "\n";
+      }
+
+      let description = q[Constants.HELP_DESCRIPTION]
+        ? ind +
+          propertyIndentation +
+          "description: " +
+          q[Constants.HELP_DESCRIPTION] +
+          "\n"
+        : "";
+
+      let pattern = q[Constants.PATTERN]
+        ? ind + propertyIndentation + "pattern: " + q[Constants.PATTERN] + "\n"
+        : "";
+
+      let validationMessage = q[Constants.HAS_VALIDATION_MESSAGE]
+        ? ind +
+          propertyIndentation +
+          "validation-message: " +
+          q[Constants.HAS_VALIDATION_MESSAGE] +
+          "\n"
+        : "";
+
+      output += ind + q["http://www.w3.org/2000/01/rdf-schema#label"] + "\n";
+      output += description;
+      output += requiredValue;
+      output += pattern;
+      output += validationMessage;
+      output += "\n";
+    }
+
+    function onLeaveQuestion() {
+      level -= 1;
+    }
+
+    FormUtils.dfsOnEnterAndLeaveQuestion(
+      questions,
+      onEnterQuestion,
+      onLeaveQuestion
+    );
+
+    return output;
+  }
 }
