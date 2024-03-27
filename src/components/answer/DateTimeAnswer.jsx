@@ -18,14 +18,15 @@ const DateTimeAnswer = (props) => {
 
   const isDate = FormUtils.isDate(props.question);
   const isTime = FormUtils.isTime(props.question);
+  const isDateTime = FormUtils.isDateTime(props.question);
 
   // workaround because it is not possible to construct Date only with time
   let value;
   if (isTime && props.value && props.value !== "0") {
     value = new Date(`0 ${props.value}`);
-  } else if (isDate && props.value && props.value !== "0") {
+  } else if ((isDate || isDateTime) && props.value && props.value !== "0") {
     value = new Date(props.value);
-  } else value = new Date();
+  }
 
   // DatePicker does not know dateFormat "x", translate to datetime
   const datePickerFormat =
