@@ -486,7 +486,7 @@ export default class FormUtils {
    * @param {function} onEnterQuestion - The callback function to execute when entering a question.
    * @param {function} onLeaveQuestion - The callback function to execute when leaving a question.
    */
-  static dfsOnEnterAndLeaveQuestion(
+  static dfsTraverseQuestionTreeExtended(
     questions,
     onEnterQuestion,
     onLeaveQuestion
@@ -566,7 +566,7 @@ export default class FormUtils {
       level -= 1;
     }
 
-    FormUtils.dfsOnEnterAndLeaveQuestion(
+    FormUtils.dfsTraverseQuestionTreeExtended(
       questions,
       onEnterQuestion,
       onLeaveQuestion
