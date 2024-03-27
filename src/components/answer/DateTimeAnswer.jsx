@@ -25,7 +25,7 @@ const DateTimeAnswer = (props) => {
     value = new Date(`0 ${props.value}`);
   } else if (isDate && props.value && props.value !== "0") {
     value = new Date(props.value);
-  } else value = new Date();
+  }
 
   // DatePicker does not know dateFormat "x", translate to datetime
   const datePickerFormat =
