@@ -518,7 +518,10 @@ export default class FormUtils {
       level += 1;
       const ind = indentation.repeat(level);
       let requiredValue = "";
-      if (q[Constants.REQUIRES_ANSWER]) {
+      if (
+        q[Constants.REQUIRES_ANSWER] &&
+        !q[Constants.USED_ONLY_FOR_COMPLETENESS]
+      ) {
         requiredValue =
           ind +
           propertyIndentation +
@@ -529,7 +532,7 @@ export default class FormUtils {
         requiredValue =
           ind +
           propertyIndentation +
-          "required: " +
+          "required only for completeness: " +
           q[Constants.USED_ONLY_FOR_COMPLETENESS] +
           "\n";
       }
