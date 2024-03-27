@@ -508,7 +508,7 @@ export default class FormUtils {
     });
   }
 
-  static printFormSpecification(questions) {
+  static getFormSpecification(questions) {
     let level = -1;
     const indentation = "    ";
     const propertyIndentation = "..";
