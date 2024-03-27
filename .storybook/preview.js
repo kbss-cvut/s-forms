@@ -2,6 +2,7 @@ import Constants from "../src/constants/Constants";
 import IntlContextProvider from "../src/contexts/IntlContextProvider";
 import { FormGenContextProvider } from "../src/contexts/FormGenContext";
 import { ConfigurationContextProvider } from "../src/contexts/ConfigurationContext";
+import FormUtils from "../src/util/FormUtils.js";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -128,6 +129,8 @@ const options = {
     },
   ],
 };
+
+window.FormUtils = FormUtils;
 
 const fetchTypeAheadValues = () => {
   return new Promise((resolve) =>
