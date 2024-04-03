@@ -128,11 +128,34 @@ const TypeaheadAnswer = (props) => {
   const valueKey = Utils.findKeyInObjects(optionsList, ["name", "value"]);
   const labelKey = Utils.findKeyInObjects(optionsList, ["name", "label"]);
 
+  const _getControlValidationStyle = () => {
+    let borderColor;
+    let boxShadow;
+    if (props.validation.classname === "is-warning") {
+      borderColor = "#dc9135";
+      boxShadow = "0 0 0 0.2rem rgba(203, 127, 16, 0.25)";
+    } else if (props.validation.classname === "is-invalid") {
+      borderColor = "#dc3545";
+      boxShadow = "0 0 0 .2rem rgba(220,53,69,.25)";
+    }
+    return {
+      control: (provided) => ({
+        ...provided,
+        border: borderColor ? `1px solid ${borderColor}` : provided.border,
+        boxShadow: provided.boxShadow,
+        "&:hover": {
+          border: `1px solid ${borderColor}`,
+          boxShadow: boxShadow ? boxShadow : provided.boxShadow,
+        },
+      }),
+    };
+  };
+
   return (
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
       <IntelligentTreeSelect
-        classname={props.validation.classname}
+        styles={_getControlValidationStyle()}
         valueKey={valueKey}
         labelKey={labelKey}
         valueRenderer={
