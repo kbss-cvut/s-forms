@@ -315,8 +315,14 @@ input:disabled {
   pointer-events: auto;
 }
 
+.is-invalid.form-text {
+  color: #dc3545;
+  border: none;
+  box-shadow: none;
+}
+
 .is-warning {
-  border-color: #dc9135;
+  border: 1px solid #dc9135;
 }
 
 .is-warning:focus {

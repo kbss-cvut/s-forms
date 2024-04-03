@@ -44,6 +44,7 @@ export default class SelectAnswer extends React.Component {
         label: this.props.label,
         value: this.props.value,
         title: this.props.title,
+        validation: this.props.validation,
         onChange: (e) => {
           this.props.onChange(e.target.value);
         },
@@ -64,4 +65,5 @@ SelectAnswer.propTypes = {
   title: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  validation: PropTypes.object,
 };

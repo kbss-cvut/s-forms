@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import CheckboxAnswer from "./answer/CheckboxAnswer";
 import DateTimeAnswer from "./answer/DateTimeAnswer";
@@ -13,10 +13,20 @@ import Constants from "../constants/Constants";
 import { FormGenContext } from "../contexts/FormGenContext";
 import { ConfigurationContext } from "../contexts/ConfigurationContext";
 import QuestionStatic from "./QuestionStatic.jsx";
+import { FormText } from "react-bootstrap";
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
   const { options } = React.useContext(ConfigurationContext);
+  const [validation, setValidation] = useState({
+    severity: "",
+    classname: "",
+    message: null,
+  });
+
+  useEffect(() => {
+    _resolveValidationProps();
+  }, [props.question]);
 
   const handleValueChange = (value) => {
     const change = { ...props.answer };
@@ -63,6 +73,7 @@ const Answer = (props) => {
         value={value}
         onChange={handleValueChange}
         options={options}
+        validation={validation}
       />
     );
   };
@@ -75,6 +86,7 @@ const Answer = (props) => {
         title={title}
         value={value}
         onChange={handleValueChange}
+        validation={validation}
       />
     );
   };
@@ -87,6 +99,7 @@ const Answer = (props) => {
         title={title}
         label={label}
         onChange={handleValueChange}
+        validation={validation}
       />
     );
   };
@@ -99,6 +112,7 @@ const Answer = (props) => {
         value={value}
         onChange={handleValueChange}
         question={props.question}
+        validation={validation}
       />
     );
   };
@@ -112,6 +126,7 @@ const Answer = (props) => {
         onChange={handleValueChange}
         question={props.question}
         answer={props.answer}
+        validation={validation}
       />
     );
   };
@@ -125,6 +140,7 @@ const Answer = (props) => {
         title={title}
         value={value}
         onChange={handleValueChange}
+        validation={validation}
       />
     );
   };
@@ -139,6 +155,7 @@ const Answer = (props) => {
         value={value}
         onChange={handleValueChange}
         sparql={true}
+        validation={validation}
       />
     );
   };
@@ -153,6 +170,7 @@ const Answer = (props) => {
         value={value}
         onChange={handleValueChange}
         turtle={true}
+        validation={validation}
       />
     );
   };
@@ -176,6 +194,40 @@ const Answer = (props) => {
     );
   };
 
+  const _resolveValidationProps = () => {
+    setValidation({
+      severity: "",
+      classname: "",
+      message: null,
+    });
+    if (question[Constants.HAS_VALID_ANSWER] === false) {
+      if (
+        question[Constants.HAS_VALIDATION_SEVERITY] ===
+        Constants.VALIDATION_SEVERITY.WARNING
+      ) {
+        setValidation({
+          severity: "warning",
+          classname: "is-warning",
+          message: (
+            <FormText className="is-warning">
+              {question[Constants.HAS_VALIDATION_MESSAGE]}
+            </FormText>
+          ),
+        });
+      } else {
+        setValidation({
+          severity: "error",
+          classname: "is-invalid",
+          message: (
+            <FormText className="is-invalid">
+              {question[Constants.HAS_VALIDATION_MESSAGE]}
+            </FormText>
+          ),
+        });
+      }
+    }
+  };
+
   const question = props.question;
   const value = FormUtils.resolveValue(props.answer);
 
@@ -187,21 +239,21 @@ const Answer = (props) => {
   let component;
 
   if (FormUtils.isTypeahead(question)) {
-    component = _renderTypeahead(value, label, title);
+    component = _renderTypeahead(value, label, title, validation);
   } else if (_hasOptions(question)) {
-    component = _renderSelect(value, label, title);
+    component = _renderSelect(value, label, title, validation);
   } else if (FormUtils.isCalendar(question)) {
-    component = _renderDateTimePicker(value, label, title);
+    component = _renderDateTimePicker(value, label, title, validation);
   } else if (FormUtils.isCheckbox(question)) {
-    component = _renderCheckbox(value, label, title);
+    component = _renderCheckbox(value, label, title, validation);
   } else if (FormUtils.isMaskedInput(question)) {
-    component = _renderMaskedInput(value, label, title);
+    component = _renderMaskedInput(value, label, title, validation);
   } else if (FormUtils.isSparqlInput(question)) {
-    component = _renderSparqlInput(value, label, title);
+    component = _renderSparqlInput(value, label, title, validation);
   } else if (FormUtils.isTurtleInput(question)) {
-    component = _renderTurtleInput(value, label, title);
+    component = _renderTurtleInput(value, label, title, validation);
   } else {
-    component = _renderRegularInput(value, label, title);
+    component = _renderRegularInput(value, label, title, validation);
   }
 
   return component;

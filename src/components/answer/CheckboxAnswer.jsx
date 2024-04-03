@@ -1,19 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import FormUtils from "../../util/FormUtils";
-import Constants from "../../constants/Constants";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
-
-class InputPropertiesResolver {
-  static resolveValidationProperties(question) {
-    const props = {};
-    if (question[Constants.HAS_VALID_ANSWER] === false) {
-      props["validation"] = "error";
-      props["help"] = question[Constants.HAS_VALIDATION_MESSAGE];
-    }
-    return props;
-  }
-}
 
 const CheckboxAnswer = (props) => {
   const { inputComponent, componentsOptions } =
@@ -22,11 +10,11 @@ const CheckboxAnswer = (props) => {
   const question = props.question;
 
   return React.createElement(inputComponent, {
-    ...InputPropertiesResolver.resolveValidationProperties(question),
     type: "checkbox",
     label: props.label,
     title: props.title,
     checked: props.value === true || props.value === "true",
+    validation: props.validation,
     onChange: (e) => {
       props.onChange(e.target.checked);
     },
@@ -41,6 +29,7 @@ CheckboxAnswer.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onChange: PropTypes.func.isRequired,
   mouseHover: PropTypes.bool,
+  validation: PropTypes.object,
 };
 
 export default CheckboxAnswer;

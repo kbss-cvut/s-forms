@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { FormText, FormControl, FormGroup, Form } from "react-bootstrap";
+import { FormControl, FormGroup, Form } from "react-bootstrap";
 
 export default class DefaultInput extends React.Component {
   constructor(props) {
@@ -76,7 +76,9 @@ export default class DefaultInput extends React.Component {
           ref={(c) => (this.input = c)}
           {...this.props}
           label={this.props.label}
+          className={this.props.validation.classname}
         />
+        {this.props.validation.message}
       </Form.Group>
     );
   }
@@ -89,21 +91,26 @@ export default class DefaultInput extends React.Component {
           ref={(c) => (this.input = c)}
           {...this.props}
           label={this.props.label}
+          className={this.props.validation.classname}
         />
+        {this.props.validation.message}
       </FormGroup>
     );
   }
 
   _renderSelect() {
-    // TODO validation
     return (
       <FormGroup size="small">
         {this._renderLabel()}
-        <FormControl as="select" ref={(c) => (this.input = c)} {...this.props}>
+        <FormControl
+          as="select"
+          className={this.props.validation.classname}
+          ref={(c) => (this.input = c)}
+          {...this.props}
+        >
           {this.props.children}
         </FormControl>
-        {this.props.validation && <FormControl.Feedback />}
-        {this._renderHelp()}
+        {this.props.validation.message}
       </FormGroup>
     );
   }
@@ -123,65 +130,26 @@ export default class DefaultInput extends React.Component {
           ref={(c) => (this.input = c)}
           as="textarea"
           {...this.props}
+          className={this.props.validation.classname}
           onChange={(e) => this.saveCursorPosition(e)}
         />
-        {this.props.validation && <FormControl.Feedback />}
-        {this._renderHelp()}
+        {this.props.validation.message}
       </FormGroup>
     );
   }
 
-  _renderHelp(classname = "") {
-    return this.props.help ? (
-      <FormText className={classname}>{this.props.help}</FormText>
-    ) : null;
-  }
-
-  _hasValidationWarning() {
-    return this.props.validation && this.props.validation === "warning";
-  }
-
-  _hasValidationError() {
-    return this.props.validation && this.props.validation === "error";
-  }
-
-  _hasValidationSuccess() {
-    return this.props.validation && this.props.validation === "success";
-  }
-
-  _getValidationClassname() {
-    if (this.props.validation && this.props.validation === "error") {
-      return "is-invalid";
-    }
-
-    if (this.props.validation && this.props.validation === "warning") {
-      return "is-warning";
-    }
-
-    return "";
-  }
-
   _renderInput() {
-    // TODO validation
-
     return (
       <FormGroup size="small">
         {this._renderLabel()}
         <FormControl
-          className={this._getValidationClassname()}
+          className={this.props.validation.classname}
           ref={(c) => (this.input = c)}
           as="input"
           {...this.props}
           onChange={(e) => this.saveCursorPosition(e)}
         />
-        {(this._hasValidationSuccess() || this._hasValidationWarning()) &&
-          this._renderHelp(this._getValidationClassname())}
-        {this._hasValidationError() && (
-          <FormControl.Feedback type={"invalid"}>
-            {this.props.help}
-          </FormControl.Feedback>
-        )}
-        {!this.props.validation && this._renderHelp()}
+        {this.props.validation.message}
       </FormGroup>
     );
   }
@@ -193,7 +161,7 @@ DefaultInput.propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func,
   help: PropTypes.string,
-  validation: PropTypes.oneOf(["success", "warning", "error"]),
+  validation: PropTypes.object,
 };
 
 DefaultInput.defaultProps = {
