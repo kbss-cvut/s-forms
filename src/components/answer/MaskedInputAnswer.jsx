@@ -30,6 +30,7 @@ const MaskedInputAnswer = (props) => {
       placeholder={mask}
       onChange={(e) => props.onChange(e.target.value)}
       disabled={componentsOptions.readOnly || FormUtils.isDisabled(question)}
+      validation={props.validation}
     />
   );
 };
@@ -41,6 +42,7 @@ MaskedInputAnswer.propTypes = {
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
+  validation: PropTypes.object,
 };
 
 export default MaskedInputAnswer;

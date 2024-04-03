@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import FormUtils from "../../util/FormUtils";
 import Constants from "../../constants/Constants";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
+import classNames from "classnames";
 
 const DateTimeAnswer = (props) => {
   const { componentsOptions } = useContext(ConfigurationContext);
@@ -55,11 +56,12 @@ const DateTimeAnswer = (props) => {
         timeIntervals={1}
         timeCaption="Time"
         dateFormat={datePickerFormat}
-        className="form-control"
+        className={classNames("form-control", props.validation.classname)}
         disabled={
           componentsOptions.readOnly || FormUtils.isDisabled(props.question)
         }
       />
+      {props.validation.message}
     </FormGroup>
   );
 };
@@ -70,6 +72,7 @@ DateTimeAnswer.propTypes = {
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
+  validation: PropTypes.object,
 };
 
 export default DateTimeAnswer;

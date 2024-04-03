@@ -132,6 +132,7 @@ const TypeaheadAnswer = (props) => {
     <FormGroup size="small">
       <Form.Label>{props.label}</Form.Label>
       <IntelligentTreeSelect
+        classname={props.validation.classname}
         valueKey={valueKey}
         labelKey={labelKey}
         valueRenderer={
@@ -155,6 +156,7 @@ const TypeaheadAnswer = (props) => {
         }
         onChange={handleOptionSelectedChange}
       />
+      {props.validation.message}
     </FormGroup>
   );
 };

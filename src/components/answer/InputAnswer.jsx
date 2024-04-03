@@ -80,18 +80,6 @@ class InputPropertiesResolver {
     props.disabled =
       componentsOptions.readOnly || FormUtils.isDisabled(question);
 
-    if (question[Constants.HAS_VALID_ANSWER] === false) {
-      if (
-        question[Constants.HAS_VALIDATION_SEVERITY] ===
-        Constants.VALIDATION_SEVERITY.WARNING
-      ) {
-        props.validation = "warning";
-      } else {
-        props.validation = "error";
-      }
-      props.help = question[Constants.HAS_VALIDATION_MESSAGE];
-    }
-
     return props;
   }
 
@@ -153,6 +141,7 @@ const InputAnswer = (props) => {
       value,
       componentsOptions
     ),
+    validation: props.validation,
     label: props.label,
     title: props.title,
     value: value == null ? "" : value,
@@ -249,6 +238,7 @@ InputAnswer.propTypes = {
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
+  validation: PropTypes.object,
 };
 
 export default InputAnswer;
