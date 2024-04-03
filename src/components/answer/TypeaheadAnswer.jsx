@@ -191,6 +191,7 @@ TypeaheadAnswer.propTypes = {
   title: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  validation: PropTypes.object,
 };
 
 export default TypeaheadAnswer;

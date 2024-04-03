@@ -68,6 +68,7 @@ describe("TypeaheadAnswer", () => {
             onChange={onChange}
             label="TestLabel"
             options={options}
+            validation={{}}
           />
         </FormGenContext.Provider>
       </ConfigurationContext.Provider>
