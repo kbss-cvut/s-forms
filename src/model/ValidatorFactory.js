@@ -10,6 +10,7 @@ import FormUtils from "../util/FormUtils";
 export default class ValidatorFactory {
   static createValidator(question, intl) {
     const validators = [
+      this._intRangeValidator,
       this._patternValidator,
       this._checkboxValidator,
       this._requiredValidator,
@@ -121,6 +122,33 @@ export default class ValidatorFactory {
             JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], intl) +
             " should be filled to complete the form.",
         };
+      }
+    }
+    return { isValid: true };
+  }
+
+  static _intRangeValidator(question, intl, answerValue) {
+    if (FormUtils.containsXSDProperty(question)) {
+      if (answerValue && answerValue.length > 0) {
+        const minInclusive = question[Constants.XSD.MIN_INCLUSIVE];
+        const maxInclusive = question[Constants.XSD.MAX_INCLUSIVE];
+
+        const isValid =
+          Number.isInteger(parseInt(answerValue)) &&
+          answerValue >= minInclusive &&
+          answerValue <= maxInclusive;
+
+        if (!isValid) {
+          return {
+            isValid: false,
+            validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
+            message:
+              "The answer should be a number between " +
+              minInclusive +
+              " and " +
+              maxInclusive,
+          };
+        }
       }
     }
     return { isValid: true };

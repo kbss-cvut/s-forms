@@ -222,6 +222,9 @@ export default class FormUtils {
     if (question[Constants.PATTERN]) {
       return true;
     }
+    if (this.containsXSDProperty(question)) {
+      return true;
+    }
     return false;
   }
 
@@ -553,5 +556,22 @@ export default class FormUtils {
     );
 
     return output;
+  }
+
+  /**
+   * Checks if the keys of a question contain any of the values from the XSD object.
+   * @param {Object} question - The question to check.
+   * @returns {boolean} - True if any XSD value is found among the keys, otherwise false.
+   */
+  static containsXSDProperty(question) {
+    const objKeys = Object.keys(question);
+    const xsdValues = Object.values(Constants.XSD);
+
+    for (const value of xsdValues) {
+      if (objKeys.includes(value)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
