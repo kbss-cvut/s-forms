@@ -98,7 +98,7 @@ const Template: ComponentStory<typeof SForms> = (
     );
   };
 
-  const [formSpecifications, setFormSpecifications] = useState<any>();
+  const [formSpecifications, setFormSpecifications] = useState<String>("");
   const formRef = useRef();
 
   useEffect(() => {
