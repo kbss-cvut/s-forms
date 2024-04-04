@@ -42,7 +42,7 @@ class FormManager extends React.Component {
     return this.context.getFormQuestionsData();
   };
 
-  printFormSpecification = () => {
+  getFormSpecification = () => {
     const questions = this.context.getFormQuestionsData();
     return FormUtils.getFormSpecification(questions);
   };

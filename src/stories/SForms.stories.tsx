@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import SForms from "../components/SForms";
 
-import form1 from "./assets/form/aircraftForm.json"; // form with wizard steps
+import form1 from "./assets/form/form1.json"; // form with wizard steps
 import form2 from "./assets/form/form2.json"; // form without wizard steps (proudly assembled in Semantic Form Web Editor)
 import touristDestinationForm1 from "./assets/form/touristDestinationForm1.json";
 import touristDestinationForm2 from "./assets/form/touristDestinationForm2.json";
@@ -104,7 +104,7 @@ const Template: ComponentStory<typeof SForms> = (
   useEffect(() => {
     if (formRef.current) {
       const formRefCurrent: any = formRef.current;
-      setFormSpecifications(formRefCurrent.printFormSpecification());
+      setFormSpecifications(formRefCurrent.getFormSpecification());
     }
   }, [printFormSpecification]);
 
