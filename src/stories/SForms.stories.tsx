@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import SForms from "../components/SForms";
 
-import form1 from "./assets/form/form1.json"; // form with wizard steps
+import form1 from "./assets/form/aircraftForm.json"; // form with wizard steps
 import form2 from "./assets/form/form2.json"; // form without wizard steps (proudly assembled in Semantic Form Web Editor)
 import touristDestinationForm1 from "./assets/form/touristDestinationForm1.json";
 import touristDestinationForm2 from "./assets/form/touristDestinationForm2.json";
@@ -39,7 +39,16 @@ export default {
 
 const Template: ComponentStory<typeof SForms> = (
   args,
-  { globals: { iconBehavior, locale, debugMode, horizontalNavBar, timeOut } }
+  {
+    globals: {
+      iconBehavior,
+      locale,
+      debugMode,
+      horizontalNavBar,
+      timeOut,
+      printFormSpecification,
+    },
+  }
 ) => {
   const options = {
     i18n: {
@@ -89,9 +98,24 @@ const Template: ComponentStory<typeof SForms> = (
     );
   };
 
+  const [formSpecifications, setFormSpecifications] = useState<any>();
+  const formRef = useRef();
+
+  useEffect(() => {
+    if (formRef.current) {
+      const formRefCurrent: any = formRef.current;
+      setFormSpecifications(formRefCurrent.printFormSpecification());
+    }
+  }, [printFormSpecification]);
+
+  useEffect(() => {
+    console.log(formSpecifications);
+  }, [formSpecifications]);
+
   return (
     <SForms
       {...args}
+      ref={formRef}
       options={options}
       fetchTypeAheadValues={fetchTypeAheadValues}
     />
