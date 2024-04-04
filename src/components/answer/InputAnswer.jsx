@@ -115,6 +115,16 @@ class InputPropertiesResolver {
     }
     return restriction;
   }
+
+  static _preventCharacterInput(e, question) {
+    if (
+      InputPropertiesResolver._resolveInputType(question) === "number" &&
+      !(e.key >= "0" && e.key <= "9") &&
+      !["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(e.key)
+    ) {
+      e.preventDefault();
+    }
+  }
 }
 
 const InputAnswer = (props) => {
@@ -145,6 +155,8 @@ const InputAnswer = (props) => {
     label: props.label,
     title: props.title,
     value: value == null ? "" : value,
+    onKeyPress: (e) =>
+      InputPropertiesResolver._preventCharacterInput(e, question),
     onChange: (e) => {
       props.onChange(e.target.value);
       if (props.sparql || props.turtle) this.hide();
