@@ -465,42 +465,17 @@ export default class FormUtils {
    * and execute on each traversed question provided function.
    * @param {Array<Object>} questions - The array of questions to be traversed.
    * @param func - The function to be executed on each recursively traversed question.
+   * @param onLeaveQuestion - The callback function to execute when leaving a question.
    */
-  static dfsTraverseQuestionTree(questions, func) {
+  static dfsTraverseQuestionTree(questions, func, onLeaveQuestion = null) {
     function recursiveTraverse(question) {
       func(question);
       Utils.asArray(question[Constants.HAS_SUBQUESTION]).forEach((q) => {
         recursiveTraverse(q);
       });
-    }
-
-    questions.forEach((q) => {
-      recursiveTraverse(q);
-    });
-  }
-
-  /**
-   * Performs a dfs on a set of questions and executes callback functions
-   * when entering and leaving each question.
-   * @param {Array<Object>} questions - The array of questions to traverse.
-   * @param {function} onEnterQuestion - The callback function to execute when entering a question.
-   * @param {function} onLeaveQuestion - The callback function to execute when leaving a question.
-   */
-  static dfsTraverseQuestionTreeExtended(
-    questions,
-    onEnterQuestion,
-    onLeaveQuestion
-  ) {
-    /**
-     * Recursively traverses the questions and executes the appropriate callback functions.
-     * @param {Object} question - The question to traverse.
-     */
-    function recursiveTraverse(question) {
-      onEnterQuestion(question);
-      Utils.asArray(question[Constants.HAS_SUBQUESTION]).forEach((q) => {
-        recursiveTraverse(q);
-      });
-      onLeaveQuestion(question);
+      if (onLeaveQuestion) {
+        onLeaveQuestion(question);
+      }
     }
 
     questions.forEach((q) => {
@@ -569,7 +544,7 @@ export default class FormUtils {
       level -= 1;
     }
 
-    FormUtils.dfsTraverseQuestionTreeExtended(
+    FormUtils.dfsTraverseQuestionTree(
       questions,
       onEnterQuestion,
       onLeaveQuestion

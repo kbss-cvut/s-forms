@@ -42,6 +42,11 @@ class FormManager extends React.Component {
     return this.context.getFormQuestionsData();
   };
 
+  printFormSpecification = () => {
+    const questions = this.context.getFormQuestionsData();
+    return FormUtils.getFormSpecification(questions);
+  };
+
   handleStepChange = (question, index, change) => {
     this.context.updateFormQuestionsData(index, { ...question, ...change });
   };

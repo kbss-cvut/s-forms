@@ -2,7 +2,6 @@ import Constants from "../src/constants/Constants";
 import IntlContextProvider from "../src/contexts/IntlContextProvider";
 import { FormGenContextProvider } from "../src/contexts/FormGenContext";
 import { ConfigurationContextProvider } from "../src/contexts/ConfigurationContext";
-import FormUtils from "../src/util/FormUtils.js";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -88,6 +87,19 @@ export const globalTypes = {
       ],
     },
   },
+  printFormSpecification: {
+    name: "Print form specification",
+    description: "Set to true to print the form specification in the console",
+    toolbar: {
+      title: "Print form specification",
+      icon: "folder",
+      control: "boolean",
+      items: [
+        { value: true, title: "On" },
+        { value: false, title: "Off" },
+      ],
+    },
+  },
 };
 
 const options = {
@@ -129,8 +141,6 @@ const options = {
     },
   ],
 };
-
-window.FormUtils = FormUtils;
 
 const fetchTypeAheadValues = () => {
   return new Promise((resolve) =>
