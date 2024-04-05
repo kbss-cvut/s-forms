@@ -47,7 +47,8 @@ export default class ValidatorFactory {
     return result;
   }
 
-  static _patternValidator(question, intl, answerValue) {
+  static _patternValidator(question, intl) {
+    const answerValue = FormUtils.getAnswerValue(question);
     if (answerValue && answerValue.length > 0) {
       if (question[Constants.PATTERN]) {
         let pattern = question[Constants.PATTERN];
@@ -128,8 +129,9 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _intMinInclusiveValidator(question, intl, answerValue) {
+  static _intMinInclusiveValidator(question, intl) {
     if (question[Constants.XSD.MIN_INCLUSIVE]) {
+      const answerValue = FormUtils.getAnswerValue(question);
       if (answerValue && answerValue.length > 0) {
         const minInclusive = question[Constants.XSD.MIN_INCLUSIVE];
 
@@ -143,7 +145,8 @@ export default class ValidatorFactory {
             validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
             message:
               "The answer should be a number equal or greater than " +
-              minInclusive,
+              minInclusive +
+              ".",
           };
         }
       }
@@ -151,7 +154,8 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _intMaxInclusiveValidator(question, intl, answerValue) {
+  static _intMaxInclusiveValidator(question, intl) {
+    const answerValue = FormUtils.getAnswerValue(question);
     if (question[Constants.XSD.MAX_INCLUSIVE]) {
       if (answerValue && answerValue.length > 0) {
         const maxInclusive = question[Constants.XSD.MAX_INCLUSIVE];
@@ -166,7 +170,8 @@ export default class ValidatorFactory {
             validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
             message:
               "The answer should be a number equal or lower than " +
-              maxInclusive,
+              maxInclusive +
+              ".",
           };
         }
       }
