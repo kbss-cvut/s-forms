@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import { FormGroup, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
@@ -10,6 +10,7 @@ import classNames from "classnames";
 
 const DateTimeAnswer = (props) => {
   const { componentsOptions } = useContext(ConfigurationContext);
+  const [date, setDate] = useState(null);
 
   const dateFormat = FormUtils.resolveDateTimeFormat(
     props.question,
@@ -36,6 +37,7 @@ const DateTimeAnswer = (props) => {
       : dateFormat;
 
   const handleDateChange = (date) => {
+    setDate(date);
     if (!date) {
       props.onChange("");
     }
@@ -50,8 +52,8 @@ const DateTimeAnswer = (props) => {
     <FormGroup size="small">
       <Form.Label className={"w-100"}>{props.label}</Form.Label>
       <DatePicker
-        selected={value}
-        placeholderText={datePickerFormat.toUpperCase()}
+        selected={date}
+        placeholderText={datePickerFormat}
         onChange={handleDateChange}
         showTimeSelect={!isDate}
         showTimeSelectOnly={isTime}
