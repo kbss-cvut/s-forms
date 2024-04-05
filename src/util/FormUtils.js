@@ -464,18 +464,20 @@ export default class FormUtils {
    * Traverse provided array of questions recursively by DFS algorithm
    * and execute on each traversed question provided function.
    * @param {Array<Object>} questions - The array of questions to be traversed.
-   * @param func - The function to be executed on each recursively traversed question.
-   * @param onLeaveQuestion - The callback function to execute when leaving a question.
+   * @param {Function} onEnterQuestion - The callback function to execute when entering a question.
+   * @param {Function} [onLeaveQuestion = () => {}] - The callback function to execute when leaving a question.
    */
-  static dfsTraverseQuestionTree(questions, func, onLeaveQuestion = null) {
+  static dfsTraverseQuestionTree(
+    questions,
+    onEnterQuestion,
+    onLeaveQuestion = () => {}
+  ) {
     function recursiveTraverse(question) {
-      func(question);
+      onEnterQuestion(question);
       Utils.asArray(question[Constants.HAS_SUBQUESTION]).forEach((q) => {
         recursiveTraverse(q);
       });
-      if (onLeaveQuestion) {
-        onLeaveQuestion(question);
-      }
+      onLeaveQuestion(question);
     }
 
     questions.forEach((q) => {
