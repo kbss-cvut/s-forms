@@ -87,6 +87,19 @@ export const globalTypes = {
       ],
     },
   },
+  printFormSpecification: {
+    name: "Print form specification",
+    description: "Set to true to print the form specification in the console",
+    toolbar: {
+      title: "Print form specification",
+      icon: "folder",
+      control: "boolean",
+      items: [
+        { value: true, title: "On" },
+        { value: false, title: "Off" },
+      ],
+    },
+  },
 };
 
 const options = {

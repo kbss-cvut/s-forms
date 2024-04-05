@@ -464,18 +464,94 @@ export default class FormUtils {
    * Traverse provided array of questions recursively by DFS algorithm
    * and execute on each traversed question provided function.
    * @param {Array<Object>} questions - The array of questions to be traversed.
-   * @param func - The function to be executed on each recursively traversed question.
+   * @param {Function} onEnterQuestion - The callback function to execute when entering a question.
+   * @param {Function} [onLeaveQuestion = () => {}] - The callback function to execute when leaving a question.
    */
-  static dfsTraverseQuestionTree(questions, func) {
+  static dfsTraverseQuestionTree(
+    questions,
+    onEnterQuestion,
+    onLeaveQuestion = () => {}
+  ) {
     function recursiveTraverse(question) {
-      func(question);
+      onEnterQuestion(question);
       Utils.asArray(question[Constants.HAS_SUBQUESTION]).forEach((q) => {
         recursiveTraverse(q);
       });
+      onLeaveQuestion(question);
     }
 
     questions.forEach((q) => {
       recursiveTraverse(q);
     });
+  }
+
+  static getFormSpecification(questions) {
+    let level = -1;
+    const indentation = "    ";
+    const propertyIndentation = "..";
+    let output = "";
+
+    function onEnterQuestion(q) {
+      level += 1;
+      const ind = indentation.repeat(level);
+      let requiredValue = "";
+      if (
+        q[Constants.REQUIRES_ANSWER] &&
+        !q[Constants.USED_ONLY_FOR_COMPLETENESS]
+      ) {
+        requiredValue =
+          ind +
+          propertyIndentation +
+          "required: " +
+          q[Constants.REQUIRES_ANSWER] +
+          "\n";
+      } else if (q[Constants.USED_ONLY_FOR_COMPLETENESS]) {
+        requiredValue =
+          ind +
+          propertyIndentation +
+          "required only for completeness: " +
+          q[Constants.USED_ONLY_FOR_COMPLETENESS] +
+          "\n";
+      }
+
+      let description = q[Constants.HELP_DESCRIPTION]
+        ? ind +
+          propertyIndentation +
+          "description: " +
+          q[Constants.HELP_DESCRIPTION] +
+          "\n"
+        : "";
+
+      let pattern = q[Constants.PATTERN]
+        ? ind + propertyIndentation + "pattern: " + q[Constants.PATTERN] + "\n"
+        : "";
+
+      let validationMessage = q[Constants.HAS_VALIDATION_MESSAGE]
+        ? ind +
+          propertyIndentation +
+          "validation-message: " +
+          q[Constants.HAS_VALIDATION_MESSAGE] +
+          "\n"
+        : "";
+
+      output += ind + q["http://www.w3.org/2000/01/rdf-schema#label"] + "\n";
+      output += description;
+      output += requiredValue;
+      output += pattern;
+      output += validationMessage;
+      output += "\n";
+    }
+
+    function onLeaveQuestion() {
+      level -= 1;
+    }
+
+    FormUtils.dfsTraverseQuestionTree(
+      questions,
+      onEnterQuestion,
+      onLeaveQuestion
+    );
+
+    return output;
   }
 }

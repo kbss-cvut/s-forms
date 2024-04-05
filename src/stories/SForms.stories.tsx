@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import SForms from "../components/SForms";
@@ -39,7 +39,16 @@ export default {
 
 const Template: ComponentStory<typeof SForms> = (
   args,
-  { globals: { iconBehavior, locale, debugMode, horizontalNavBar, timeOut } }
+  {
+    globals: {
+      iconBehavior,
+      locale,
+      debugMode,
+      horizontalNavBar,
+      timeOut,
+      printFormSpecification,
+    },
+  }
 ) => {
   const options = {
     i18n: {
@@ -89,9 +98,24 @@ const Template: ComponentStory<typeof SForms> = (
     );
   };
 
+  const [formSpecifications, setFormSpecifications] = useState<String>("");
+  const formRef = useRef();
+
+  useEffect(() => {
+    if (formRef.current) {
+      const formRefCurrent: any = formRef.current;
+      setFormSpecifications(formRefCurrent.getFormSpecification());
+    }
+  }, [printFormSpecification]);
+
+  useEffect(() => {
+    console.log(formSpecifications);
+  }, [formSpecifications]);
+
   return (
     <SForms
       {...args}
+      ref={formRef}
       options={options}
       fetchTypeAheadValues={fetchTypeAheadValues}
     />
