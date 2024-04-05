@@ -36,6 +36,9 @@ const DateTimeAnswer = (props) => {
       : dateFormat;
 
   const handleDateChange = (date) => {
+    if (!date) {
+      props.onChange("");
+    }
     if (dateFormat === Constants.DATETIME_NUMBER_FORMAT) {
       props.onChange(Number(date));
     } else {
