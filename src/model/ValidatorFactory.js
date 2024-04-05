@@ -10,7 +10,8 @@ import FormUtils from "../util/FormUtils";
 export default class ValidatorFactory {
   static createValidator(question, intl) {
     const validators = [
-      this._intRangeValidator,
+      this._intMaxInclusiveValidator,
+      this._intMinInclusiveValidator,
       this._patternValidator,
       this._checkboxValidator,
       this._requiredValidator,
@@ -127,15 +128,36 @@ export default class ValidatorFactory {
     return { isValid: true };
   }
 
-  static _intRangeValidator(question, intl, answerValue) {
-    if (FormUtils.containsXSDProperty(question)) {
+  static _intMinInclusiveValidator(question, intl, answerValue) {
+    if (question[Constants.XSD.MIN_INCLUSIVE]) {
       if (answerValue && answerValue.length > 0) {
         const minInclusive = question[Constants.XSD.MIN_INCLUSIVE];
+
+        const isValid =
+          Number.isInteger(parseInt(answerValue)) &&
+          answerValue >= minInclusive;
+
+        if (!isValid) {
+          return {
+            isValid: false,
+            validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
+            message:
+              "The answer should be a number equal or greater than " +
+              minInclusive,
+          };
+        }
+      }
+    }
+    return { isValid: true };
+  }
+
+  static _intMaxInclusiveValidator(question, intl, answerValue) {
+    if (question[Constants.XSD.MAX_INCLUSIVE]) {
+      if (answerValue && answerValue.length > 0) {
         const maxInclusive = question[Constants.XSD.MAX_INCLUSIVE];
 
         const isValid =
           Number.isInteger(parseInt(answerValue)) &&
-          answerValue >= minInclusive &&
           answerValue <= maxInclusive;
 
         if (!isValid) {
@@ -143,9 +165,7 @@ export default class ValidatorFactory {
             isValid: false,
             validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
             message:
-              "The answer should be a number between " +
-              minInclusive +
-              " and " +
+              "The answer should be a number equal or lower than " +
               maxInclusive,
           };
         }
