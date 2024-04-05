@@ -120,7 +120,15 @@ class InputPropertiesResolver {
     if (
       InputPropertiesResolver._resolveInputType(question) === "number" &&
       !(e.key >= "0" && e.key <= "9") &&
-      !["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(e.key)
+      ![
+        "Backspace",
+        "Delete",
+        "ArrowLeft",
+        "ArrowRight",
+        "-",
+        "Minus",
+        "NumpadSubtract",
+      ].includes(e.key)
     ) {
       e.preventDefault();
     }
