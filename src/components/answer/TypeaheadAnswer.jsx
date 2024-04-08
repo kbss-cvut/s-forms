@@ -159,7 +159,8 @@ const TypeaheadAnswer = (props) => {
         valueKey={valueKey}
         labelKey={labelKey}
         valueRenderer={
-          props.question[Constants.PROVIDES_DEREFERENCEABLE_ANSWER_VALUES]
+          props.question[Constants.PROVIDES_DEREFERENCEABLE_ANSWER_VALUES] ===
+          false
             ? noLinksValueRenderer
             : null
         }
