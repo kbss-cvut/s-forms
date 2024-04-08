@@ -235,7 +235,7 @@ describe("Answer component", () => {
       </ConfigurationContext.Provider>
     );
 
-    const picker = screen.getByPlaceholderText("YYYY-MM-DD");
+    const picker = screen.getByPlaceholderText("yyyy-MM-dd");
 
     expect(picker).not.toBeNull();
     expect(screen.queryByLabelText("month 2000-01")).toBeNull();
@@ -246,7 +246,7 @@ describe("Answer component", () => {
     const date = new Date();
     const value = format(date, "HH:mm:ss");
 
-    answer = answerWithTextValue(value);
+    answer = answerWithTextValue(date);
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
 
@@ -267,7 +267,7 @@ describe("Answer component", () => {
       </ConfigurationContext.Provider>
     );
 
-    const picker = screen.getByPlaceholderText("HH:MM:SS");
+    const picker = screen.getByPlaceholderText("HH:mm:ss");
 
     expect(picker).not.toBeNull();
     expect(screen.queryByText("Time")).toBeNull();
@@ -299,7 +299,7 @@ describe("Answer component", () => {
       </ConfigurationContext.Provider>
     );
 
-    const picker = screen.getByPlaceholderText("YYYY-MM-DD HH:MM:SS");
+    const picker = screen.getByPlaceholderText("yyyy-MM-dd HH:mm:ss");
 
     expect(picker).not.toBeNull();
     expect(screen.queryByText("Time")).toBeNull();
@@ -335,7 +335,7 @@ describe("Answer component", () => {
       </ConfigurationContext.Provider>
     );
 
-    const picker = screen.getByPlaceholderText("YYYY-MM-DD HH:MM:SS");
+    const picker = screen.getByPlaceholderText("yyyy-MM-dd HH:mm:ss");
 
     expect(picker).not.toBeNull();
     expect(screen.queryByText("Time")).toBeNull();

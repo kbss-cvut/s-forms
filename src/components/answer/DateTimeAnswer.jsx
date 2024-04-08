@@ -10,7 +10,7 @@ import classNames from "classnames";
 
 const DateTimeAnswer = (props) => {
   const { componentsOptions } = useContext(ConfigurationContext);
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(props.value ? new Date(props.value) : null);
 
   const dateFormat = FormUtils.resolveDateTimeFormat(
     props.question,
@@ -20,15 +20,6 @@ const DateTimeAnswer = (props) => {
 
   const isDate = FormUtils.isDate(props.question);
   const isTime = FormUtils.isTime(props.question);
-  const isDateTime = FormUtils.isDateTime(props.question);
-
-  // workaround because it is not possible to construct Date only with time
-  let value;
-  if (isTime && props.value && props.value !== "0") {
-    value = new Date(`0 ${props.value}`);
-  } else if ((isDate || isDateTime) && props.value && props.value !== "0") {
-    value = new Date(props.value);
-  }
 
   // DatePicker does not know dateFormat "x", translate to datetime
   const datePickerFormat =
