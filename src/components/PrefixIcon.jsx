@@ -6,7 +6,7 @@ import {
   OverlayTrigger,
   Popover,
 } from "react-bootstrap";
-import Constants from "../constants/Constants";
+import Vocabulary from "../constants/Vocabulary.js";
 
 class PrefixIcon extends React.Component {
   constructor(props) {
@@ -22,13 +22,14 @@ class PrefixIcon extends React.Component {
         <ListGroup>
           {this.state.prefixes
             .sort((l, r) => {
-              const res = l[Constants.PREFIX] < r[Constants.PREFIX];
+              const res = l[Vocabulary.PREFIX] < r[Vocabulary.PREFIX];
               if (res) return -1;
               return 1;
             })
             .map((p) => (
-              <ListGroupItem key={p[Constants.PREFIX]}>
-                <strong>{p[Constants.PREFIX]}</strong>: {p[Constants.NAMESPACE]}
+              <ListGroupItem key={p[Vocabulary.PREFIX]}>
+                <strong>{p[Vocabulary.PREFIX]}</strong>:{" "}
+                {p[Vocabulary.NAMESPACE]}
               </ListGroupItem>
             ))}
         </ListGroup>

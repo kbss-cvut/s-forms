@@ -8,7 +8,7 @@ import IconOverlay from "../IconOverlay";
 import PropTypes from "prop-types";
 import RecycleBin from "../../styles/icons/RecycleBin";
 import { motion } from "framer-motion";
-import Constants from "../../constants/Constants";
+import Constants from "../../constants/Constants.js";
 
 const UNKNOWN_AUTHOR = "Unknown author";
 

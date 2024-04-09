@@ -3,7 +3,8 @@ import { format } from "date-fns";
 
 import * as Generator from "../environment/Generator";
 import Answer from "../../src/components/Answer";
-import Constants from "../../src/constants/Constants";
+import Vocabulary from "../../src/constants/Vocabulary.js";
+import Constants from "../../src/constants/Constants.js";
 import { FormGenContext } from "../../src/contexts/FormGenContext";
 import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
 import DefaultInput from "../../src/components/DefaultInput";
@@ -24,12 +25,12 @@ describe("Answer component", () => {
     question = {
       "@id": Generator.getRandomUri(),
     };
-    question[Constants.LAYOUT_CLASS] = [];
-    question[Constants.RDFS_LABEL] = {
+    question[Vocabulary.LAYOUT_CLASS] = [];
+    question[Vocabulary.RDFS_LABEL] = {
       "@language": "en",
       "@value": "1 - Aerodrome General",
     };
-    question[Constants.RDFS_COMMENT] = {
+    question[Vocabulary.RDFS_COMMENT] = {
       "@language": "en",
       "@value":
         "The identification of the aerodrome/helicopter landing area by name, location and status.",
@@ -52,13 +53,15 @@ describe("Answer component", () => {
     answer = {
       id: Generator.getRandomUri(),
     };
-    question[Constants.HAS_ANSWER] = [answer];
+    question[Vocabulary.HAS_ANSWER] = [answer];
     getOptions = jest.fn(() => []);
     loadFormOptions = jest.fn();
   });
 
   test("renders a Typeahead when layout class is typeahead", async () => {
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
+    question[Vocabulary.LAYOUT_CLASS].push(
+      Vocabulary.LAYOUT.QUESTION_TYPEAHEAD
+    );
     render(
       <ConfigurationContext.Provider
         value={{
@@ -94,9 +97,11 @@ describe("Answer component", () => {
     answer = answerWithCodeValue(value);
     getOptions = jest.fn(() => typeAheadOptions);
 
-    question[Constants.HAS_ANSWER] = [answer];
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
-    question[Constants.HAS_OPTIONS_QUERY] = "SELECT * WHERE {?x ?y ?z. }";
+    question[Vocabulary.HAS_ANSWER] = [answer];
+    question[Vocabulary.LAYOUT_CLASS].push(
+      Vocabulary.LAYOUT.QUESTION_TYPEAHEAD
+    );
+    question[Vocabulary.HAS_OPTIONS_QUERY] = "SELECT * WHERE {?x ?y ?z. }";
 
     render(
       <ConfigurationContext.Provider
@@ -131,9 +136,11 @@ describe("Answer component", () => {
   });
 
   it("loads typeahead options when layout class is typeahead and no possible values are specified", async () => {
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
+    question[Vocabulary.LAYOUT_CLASS].push(
+      Vocabulary.LAYOUT.QUESTION_TYPEAHEAD
+    );
     const query = "SELECT * WHERE { ?x ?y ?z .}";
-    question[Constants.HAS_OPTIONS_QUERY] = query;
+    question[Vocabulary.HAS_OPTIONS_QUERY] = query;
 
     render(
       <ConfigurationContext.Provider
@@ -164,7 +171,7 @@ describe("Answer component", () => {
     const res = {
       "@id": Generator.getRandomUri(),
     };
-    res[Constants.HAS_OBJECT_VALUE] = {
+    res[Vocabulary.HAS_OBJECT_VALUE] = {
       "@id": value,
     };
     return res;
@@ -173,7 +180,7 @@ describe("Answer component", () => {
   it("shows input with text value of the answer when no layout class is specified", () => {
     const value = "masterchief";
     answer = answerWithTextValue(value);
-    question[Constants.HAS_ANSWER] = [answer];
+    question[Vocabulary.HAS_ANSWER] = [answer];
 
     render(
       <ConfigurationContext.Provider
@@ -203,7 +210,7 @@ describe("Answer component", () => {
     const res = {
       "@id": Generator.getRandomUri(),
     };
-    res[Constants.HAS_DATA_VALUE] = {
+    res[Vocabulary.HAS_DATA_VALUE] = {
       "@language": "en",
       "@value": value,
     };
@@ -215,8 +222,8 @@ describe("Answer component", () => {
     const value = format(date, "yyyy-MM-dd HH:mm:ss");
 
     answer = answerWithTextValue(value);
-    question[Constants.HAS_ANSWER] = [answer];
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATE);
+    question[Vocabulary.HAS_ANSWER] = [answer];
+    question[Vocabulary.LAYOUT_CLASS].push(Vocabulary.LAYOUT.DATE);
 
     render(
       <ConfigurationContext.Provider
@@ -247,8 +254,8 @@ describe("Answer component", () => {
     const value = format(date, "HH:mm:ss");
 
     answer = answerWithTextValue(date);
-    question[Constants.HAS_ANSWER] = [answer];
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
+    question[Vocabulary.HAS_ANSWER] = [answer];
+    question[Vocabulary.LAYOUT_CLASS].push(Vocabulary.LAYOUT.TIME);
 
     render(
       <ConfigurationContext.Provider
@@ -279,8 +286,8 @@ describe("Answer component", () => {
     const testDate = format(date, "yyyy-MM");
     const value = format(date, "yyyy-MM-dd HH:mm:ss");
     answer = answerWithTextValue(value);
-    question[Constants.HAS_ANSWER] = [answer];
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
+    question[Vocabulary.HAS_ANSWER] = [answer];
+    question[Vocabulary.LAYOUT_CLASS].push(Vocabulary.LAYOUT.DATETIME);
 
     render(
       <ConfigurationContext.Provider
@@ -314,9 +321,9 @@ describe("Answer component", () => {
     answer = {
       "@id": Generator.getRandomUri(),
     };
-    answer[Constants.HAS_DATA_VALUE] = value;
-    question[Constants.HAS_ANSWER] = [answer];
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_ANSWER] = [answer];
+    question[Vocabulary.LAYOUT_CLASS].push(Vocabulary.LAYOUT.DATETIME);
 
     render(
       <ConfigurationContext.Provider
@@ -349,9 +356,9 @@ describe("Answer component", () => {
     const answer = {
       "@id": Generator.getRandomUri(),
     };
-    answer[Constants.HAS_DATA_VALUE] = true;
-    question[Constants.HAS_ANSWER] = [answer];
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.CHECKBOX);
+    answer[Vocabulary.HAS_DATA_VALUE] = true;
+    question[Vocabulary.HAS_ANSWER] = [answer];
+    question[Vocabulary.LAYOUT_CLASS].push(Vocabulary.LAYOUT.CHECKBOX);
 
     render(
       <ConfigurationContext.Provider
@@ -380,9 +387,9 @@ describe("Answer component", () => {
     const answer = {
       "@id": Generator.getRandomUri(),
     };
-    answer[Constants.HAS_DATA_VALUE] = value;
-    question[Constants.HAS_ANSWER] = [answer];
-    question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_ANSWER] = [answer];
+    question[Vocabulary.HAS_DATATYPE] = Vocabulary.XSD.INT;
 
     render(
       <ConfigurationContext.Provider
@@ -414,8 +421,8 @@ describe("Answer component", () => {
       value += "a";
     }
     answer = answerWithTextValue(value);
-    answer[Constants.HAS_DATA_VALUE] = value;
-    question[Constants.HAS_ANSWER] = [answer];
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_ANSWER] = [answer];
 
     render(
       <ConfigurationContext.Provider
@@ -445,10 +452,10 @@ describe("Answer component", () => {
     const answer = {
       "@id": Generator.getRandomUri(),
     };
-    answer[Constants.HAS_DATA_VALUE] = value;
-    question[Constants.HAS_ANSWER] = [answer];
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.MASKED_INPUT);
-    question[Constants.INPUT_MASK] = mask;
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_ANSWER] = [answer];
+    question[Vocabulary.LAYOUT_CLASS].push(Vocabulary.LAYOUT.MASKED_INPUT);
+    question[Vocabulary.INPUT_MASK] = mask;
 
     const container = render(
       <ConfigurationContext.Provider

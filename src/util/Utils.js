@@ -1,4 +1,4 @@
-import Constants from "../constants/Constants.js";
+import Vocabulary from "../constants/Vocabulary.js";
 
 export default class Utils {
   /**
@@ -43,7 +43,7 @@ export default class Utils {
       }
     }
 
-    const subQuestions = Utils.asArray(question[Constants.HAS_SUBQUESTION]); // we have such method in some kind of json-ld utils
+    const subQuestions = Utils.asArray(question[Vocabulary.HAS_SUBQUESTION]); // we have such method in some kind of json-ld utils
     if (asserted) {
       for (let q of subQuestions) {
         let foundQ = Utils.findQuestionById(id, q, true, false, false);

@@ -1,4 +1,4 @@
-import Constants from "../../src/constants/Constants";
+import Vocabulary from "../../src/constants/Vocabulary.js";
 import * as Generator from "../environment/Generator";
 import QuestionAnswerProcessor from "../../src/model/QuestionAnswerProcessor";
 
@@ -12,50 +12,52 @@ describe("Question answer processor", () => {
   });
 
   function generateAnswers(question) {
-    question[Constants.HAS_ANSWER] = [];
+    question[Vocabulary.HAS_ANSWER] = [];
     for (let i = 0; i < Generator.getRandomPositiveInt(1, 5); i++) {
       const codeValue = Generator.getRandomBoolean();
       const answer = {};
       answer["@id"] = Generator.getRandomUri();
-      answer[Constants.HAS_ANSWER_ORIGIN] = Generator.getRandomUri();
+      answer[Vocabulary.HAS_ANSWER_ORIGIN] = Generator.getRandomUri();
       if (codeValue) {
-        answer[Constants.HAS_OBJECT_VALUE] = {
+        answer[Vocabulary.HAS_OBJECT_VALUE] = {
           "@id": Generator.getRandomUri(),
         };
       } else {
-        answer[Constants.HAS_DATA_VALUE] = {
+        answer[Vocabulary.HAS_DATA_VALUE] = {
           "@value": i,
         };
       }
-      question[Constants.HAS_ANSWER].push(answer);
+      question[Vocabulary.HAS_ANSWER].push(answer);
     }
   }
 
   function verifyAnswers(expectedQuestion, actualQuestion) {
-    if (!expectedQuestion[Constants.HAS_ANSWER]) {
+    if (!expectedQuestion[Vocabulary.HAS_ANSWER]) {
       return;
     }
     expect(actualQuestion.answers).toBeDefined();
     expect(actualQuestion.answers.length).toEqual(
-      expectedQuestion[Constants.HAS_ANSWER].length
+      expectedQuestion[Vocabulary.HAS_ANSWER].length
     );
 
     for (let i = 0; i < actualQuestion.answers.length; i++) {
       expect(actualQuestion.answers[i].uri).toEqual(
-        expectedQuestion[Constants.HAS_ANSWER][i]["@id"]
+        expectedQuestion[Vocabulary.HAS_ANSWER][i]["@id"]
       );
 
-      if (expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_DATA_VALUE]) {
+      if (
+        expectedQuestion[Vocabulary.HAS_ANSWER][i][Vocabulary.HAS_DATA_VALUE]
+      ) {
         expect(actualQuestion.answers[i].textValue).toEqual(
-          expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_DATA_VALUE][
+          expectedQuestion[Vocabulary.HAS_ANSWER][i][Vocabulary.HAS_DATA_VALUE][
             "@value"
           ]
         );
       } else {
         expect(actualQuestion.answers[i].codeValue).toEqual(
-          expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_OBJECT_VALUE][
-            "@id"
-          ]
+          expectedQuestion[Vocabulary.HAS_ANSWER][i][
+            Vocabulary.HAS_OBJECT_VALUE
+          ]["@id"]
         );
       }
     }
@@ -72,12 +74,12 @@ describe("Question answer processor", () => {
   function generateQuestions() {
     const question = {};
     question["@id"] = Generator.getRandomUri();
-    question[Constants.RDFS_LABEL] = "Test0";
-    question[Constants.RDFS_COMMENT] = "Test0 Comment";
-    question[Constants.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
-    question[Constants.HAS_SUBQUESTION] = [];
+    question[Vocabulary.RDFS_LABEL] = "Test0";
+    question[Vocabulary.RDFS_COMMENT] = "Test0 Comment";
+    question[Vocabulary.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
+    question[Vocabulary.HAS_SUBQUESTION] = [];
     for (let i = 0; i < Generator.getRandomPositiveInt(1, 5); i++) {
-      question[Constants.HAS_SUBQUESTION].push(generateSubQuestions(0, 5));
+      question[Vocabulary.HAS_SUBQUESTION].push(generateSubQuestions(0, 5));
     }
     return question;
   }
@@ -85,13 +87,13 @@ describe("Question answer processor", () => {
   function generateSubQuestions(depth, maxDepth) {
     const question = {};
     question["@id"] = Generator.getRandomUri();
-    question[Constants.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
-    question[Constants.RDFS_LABEL] = "Test" + Generator.getRandomInt();
-    question[Constants.RDFS_COMMENT] = "Test Comment";
+    question[Vocabulary.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
+    question[Vocabulary.RDFS_LABEL] = "Test" + Generator.getRandomInt();
+    question[Vocabulary.RDFS_COMMENT] = "Test Comment";
     if (depth < maxDepth) {
-      question[Constants.HAS_SUBQUESTION] = [];
+      question[Vocabulary.HAS_SUBQUESTION] = [];
       for (let i = 0; i < Generator.getRandomPositiveInt(1, 5); i++) {
-        question[Constants.HAS_SUBQUESTION].push(
+        question[Vocabulary.HAS_SUBQUESTION].push(
           generateSubQuestions(depth + 1, maxDepth)
         );
       }
@@ -103,14 +105,14 @@ describe("Question answer processor", () => {
   function verifyQuestions(expected, actual) {
     expect(actual.uri).toEqual(expected["@id"]);
     verifyAnswers(expected, actual);
-    if (expected[Constants.HAS_SUBQUESTION]) {
+    if (expected[Vocabulary.HAS_SUBQUESTION]) {
       expect(actual.subQuestions).toBeDefined();
       expect(actual.subQuestions.length).toEqual(
-        expected[Constants.HAS_SUBQUESTION].length
+        expected[Vocabulary.HAS_SUBQUESTION].length
       );
       for (let i = 0; i < actual.subQuestions.length; i++) {
         verifyQuestions(
-          expected[Constants.HAS_SUBQUESTION][i],
+          expected[Vocabulary.HAS_SUBQUESTION][i],
           actual.subQuestions[i]
         );
       }
@@ -127,11 +129,11 @@ describe("Question answer processor", () => {
 
   function verifyPresenceOfQuestionOrigin(expected, actual) {
     expect(actual.origin).toBeDefined();
-    expect(actual.origin).toEqual(expected[Constants.HAS_QUESTION_ORIGIN]);
-    if (expected[Constants.HAS_SUBQUESTION]) {
+    expect(actual.origin).toEqual(expected[Vocabulary.HAS_QUESTION_ORIGIN]);
+    if (expected[Vocabulary.HAS_SUBQUESTION]) {
       for (let i = 0; i < actual.subQuestions.length; i++) {
         verifyQuestions(
-          expected[Constants.HAS_SUBQUESTION][i],
+          expected[Vocabulary.HAS_SUBQUESTION][i],
           actual.subQuestions[i]
         );
       }
@@ -147,16 +149,16 @@ describe("Question answer processor", () => {
   });
 
   function verifyPresenceOfAnswerOrigin(actualQuestion, expectedQuestion) {
-    if (!expectedQuestion[Constants.HAS_ANSWER]) {
+    if (!expectedQuestion[Vocabulary.HAS_ANSWER]) {
       return;
     }
     expect(actualQuestion.answers).toBeDefined();
     expect(actualQuestion.answers.length).toEqual(
-      expectedQuestion[Constants.HAS_ANSWER].length
+      expectedQuestion[Vocabulary.HAS_ANSWER].length
     );
     for (let i = 0; i < actualQuestion.answers.length; i++) {
       expect(actualQuestion.answers[i].origin).toEqual(
-        expectedQuestion[Constants.HAS_ANSWER][i][Constants.HAS_ANSWER_ORIGIN]
+        expectedQuestion[Vocabulary.HAS_ANSWER][i][Vocabulary.HAS_ANSWER_ORIGIN]
       );
     }
   }
@@ -167,14 +169,14 @@ describe("Question answer processor", () => {
     };
     const questions = [generateQuestions()];
     data.root["@id"] = Generator.getRandomUri();
-    data.root[Constants.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
+    data.root[Vocabulary.HAS_QUESTION_ORIGIN] = Generator.getRandomUri();
 
     const result = QuestionAnswerProcessor.buildQuestionAnswerModel(
       data,
       questions
     );
     expect(result.uri).toEqual(data.root["@id"]);
-    expect(result.origin).toEqual(data.root[Constants.HAS_QUESTION_ORIGIN]);
+    expect(result.origin).toEqual(data.root[Vocabulary.HAS_QUESTION_ORIGIN]);
     expect(result.subQuestions.length).toEqual(1);
     verifyQuestions(questions[0], result.subQuestions[0]);
   });

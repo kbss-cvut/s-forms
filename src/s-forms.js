@@ -1,5 +1,6 @@
 import SForms from "./components/SForms";
-import Constants from "./constants/Constants";
+import Vocabulary from "./constants/Vocabulary.js";
+import Constants from "./constants/Constants.js";
 import JsonLdObjectUtils from "./util/JsonLdObjectUtils";
 import JsonLdFramingUtils from "./util/JsonLdFramingUtils";
 import JsonLdObjectMap from "./util/JsonLdObjectMap";
@@ -15,6 +16,7 @@ import IntlContextProvider from "./contexts/IntlContextProvider.js";
 
 export default SForms;
 export {
+  Vocabulary,
   Constants,
   JsonLdObjectUtils,
   JsonLdFramingUtils,

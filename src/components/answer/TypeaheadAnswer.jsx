@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import * as JsonLdUtils from "jsonld-utils";
 import PropTypes from "prop-types";
-import Constants from "../../constants/Constants";
+import Vocabulary from "../../constants/Vocabulary.js";
 import FormUtils from "../../util/FormUtils";
 import Utils from "../../util/Utils";
 import JsonLdObjectUtils from "../../util/JsonLdObjectUtils";
@@ -24,7 +24,7 @@ const processTypeaheadOptions = (options, intl) => {
   // sort by property
   JsonLdObjectUtils.orderPreservingToplogicalSort(
     options,
-    Constants.HAS_PRECEDING_VALUE
+    Vocabulary.HAS_PRECEDING_VALUE
   );
 
   return options;
@@ -67,13 +67,13 @@ const TypeaheadAnswer = (props) => {
     }
 
     if (
-      !question[Constants.HAS_OPTION] &&
+      !question[Vocabulary.HAS_OPTION] &&
       FormUtils.getPossibleValuesQuery(question)
     ) {
       loadFormOptions();
     } else {
       setLoading(false);
-      generateTreeOptions(question[Constants.HAS_OPTION]);
+      generateTreeOptions(question[Vocabulary.HAS_OPTION]);
     }
 
     return () => {
@@ -92,7 +92,7 @@ const TypeaheadAnswer = (props) => {
     const relations = [];
 
     for (let pValue of possibleValues) {
-      let label = JsonLdUtils.getLocalized(pValue[Constants.RDFS_LABEL], intl);
+      let label = JsonLdUtils.getLocalized(pValue[Vocabulary.RDFS_LABEL], intl);
 
       options[pValue["@id"]] = {
         id: pValue["@id"],
@@ -100,7 +100,7 @@ const TypeaheadAnswer = (props) => {
         label: label,
         children: [],
       };
-      for (let parent of Utils.asArray(pValue[Constants.BROADER])) {
+      for (let parent of Utils.asArray(pValue[Vocabulary.BROADER])) {
         relations.push({
           type: "parent-child",
           parent: parent["@id"],
@@ -159,7 +159,7 @@ const TypeaheadAnswer = (props) => {
         valueKey={valueKey}
         labelKey={labelKey}
         valueRenderer={
-          props.question[Constants.PROVIDES_DEREFERENCEABLE_ANSWER_VALUES] ===
+          props.question[Vocabulary.PROVIDES_DEREFERENCEABLE_ANSWER_VALUES] ===
           false
             ? noLinksValueRenderer
             : null

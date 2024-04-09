@@ -1,4 +1,4 @@
-import Constants from "../constants/Constants";
+import Vocabulary from "../constants/Vocabulary.js";
 import ValidatorFactory from "./ValidatorFactory.js";
 
 export default class ValidationProcessor {
@@ -10,7 +10,7 @@ export default class ValidationProcessor {
    * @param {Object} intl - The object used for internationalization.
    */
   static updateQuestionValidation = (questions, question, index, intl) => {
-    if (question[Constants.HAS_ANSWER]) {
+    if (question[Vocabulary.HAS_ANSWER]) {
       const validator = ValidatorFactory.createValidator(question, intl);
       const update = validator();
 
@@ -27,10 +27,10 @@ export default class ValidationProcessor {
    */
   static updateSubQuestionsValidation = (question, intl) => {
     if (
-      question[Constants.HAS_SUBQUESTION] &&
-      question[Constants.HAS_SUBQUESTION].length > 0
+      question[Vocabulary.HAS_SUBQUESTION] &&
+      question[Vocabulary.HAS_SUBQUESTION].length > 0
     ) {
-      const subQuestions = question[Constants.HAS_SUBQUESTION];
+      const subQuestions = question[Vocabulary.HAS_SUBQUESTION];
 
       for (let j = 0; j < subQuestions.length; j++) {
         const subQuestion = subQuestions[j];

@@ -1,7 +1,8 @@
 import * as JsonLdUtils from "jsonld-utils";
 import * as jsonld from "jsonld";
 
-import Constants from "../constants/Constants";
+import Vocabulary from "../constants/Vocabulary.js";
+import Constants from "../constants/Constants.js";
 import Utils from "./Utils";
 import JsonLdObjectMap from "./JsonLdObjectMap";
 import JsonLdObjectUtils from "./JsonLdObjectUtils";
@@ -10,60 +11,60 @@ export default class FormUtils {
   static isForm(structure) {
     return JsonLdUtils.hasValue(
       structure,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.FORM
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.FORM
     );
   }
 
   static isWizardStep(structure) {
     return JsonLdUtils.hasValue(
       structure,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.WIZARD_STEP
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.WIZARD_STEP
     );
   }
 
   static isSection(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.QUESTION_SECTION
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.QUESTION_SECTION
     );
   }
 
   static isAnswerable(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.ANSWERABLE
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.ANSWERABLE
     );
   }
 
   static isTypeahead(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.QUESTION_TYPEAHEAD
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.QUESTION_TYPEAHEAD
     );
   }
 
   static getPossibleValuesQuery(question) {
-    return JsonLdUtils.getJsonAttValue(question, Constants.HAS_OPTIONS_QUERY);
+    return JsonLdUtils.getJsonAttValue(question, Vocabulary.HAS_OPTIONS_QUERY);
   }
 
   static isDisabled(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.DISABLED
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.DISABLED
     );
   }
 
   static isHidden(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.HIDDEN
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.HIDDEN
     );
   }
 
@@ -74,8 +75,8 @@ export default class FormUtils {
         !FormUtils.isTypeahead(question)) ||
       JsonLdUtils.hasValue(
         question,
-        Constants.LAYOUT_CLASS,
-        Constants.LAYOUT.TEXTAREA
+        Vocabulary.LAYOUT_CLASS,
+        Vocabulary.LAYOUT.TEXTAREA
       )
     );
   }
@@ -83,8 +84,8 @@ export default class FormUtils {
   static isText(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.TEXT
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.TEXT
     );
   }
 
@@ -99,78 +100,78 @@ export default class FormUtils {
   static isDate(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.DATE
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.DATE
     );
   }
 
   static isTime(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.TIME
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.TIME
     );
   }
 
   static isDateTime(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.DATETIME
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.DATETIME
     );
   }
 
   static isCheckbox(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.CHECKBOX
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.CHECKBOX
     );
   }
 
   static isMaskedInput(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.MASKED_INPUT
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.MASKED_INPUT
     );
   }
 
   static isSparqlInput(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.SPARQL
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.SPARQL
     );
   }
 
   static isTurtleInput(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.TURTLE
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.TURTLE
     );
   }
 
   static isCollapsed(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.COLLAPSED
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.COLLAPSED
     );
   }
 
   static isEmphasised(question) {
     return JsonLdUtils.hasValue(
       question,
-      Constants.LAYOUT_CLASS,
-      Constants.LAYOUT.EMPHASISED
+      Vocabulary.LAYOUT_CLASS,
+      Vocabulary.LAYOUT.EMPHASISED
     );
   }
 
   static getCategory(question) {
-    return Constants.LAYOUT.CATEGORY.find((c) =>
-      JsonLdUtils.hasValue(question, Constants.LAYOUT_CLASS, c)
+    return Vocabulary.LAYOUT.CATEGORY.find((c) =>
+      JsonLdUtils.hasValue(question, Vocabulary.LAYOUT_CLASS, c)
     );
   }
 
@@ -178,10 +179,10 @@ export default class FormUtils {
     if (!answer) {
       return null;
     }
-    if (answer[Constants.HAS_OBJECT_VALUE]) {
-      return answer[Constants.HAS_OBJECT_VALUE]["@id"];
+    if (answer[Vocabulary.HAS_OBJECT_VALUE]) {
+      return answer[Vocabulary.HAS_OBJECT_VALUE]["@id"];
     } else {
-      return JsonLdUtils.getJsonAttValue(answer, Constants.HAS_DATA_VALUE);
+      return JsonLdUtils.getJsonAttValue(answer, Vocabulary.HAS_DATA_VALUE);
     }
   }
 
@@ -189,21 +190,21 @@ export default class FormUtils {
     if (!answer) {
       return null;
     }
-    if (answer[Constants.HAS_OBJECT_VALUE]) {
-      return Utils.asArray(answer[Constants.HAS_OBJECT_VALUE])[0];
+    if (answer[Vocabulary.HAS_OBJECT_VALUE]) {
+      return Utils.asArray(answer[Vocabulary.HAS_OBJECT_VALUE])[0];
     }
-    if (answer[Constants.HAS_DATA_VALUE]) {
-      return Utils.asArray(answer[Constants.HAS_DATA_VALUE])[0];
+    if (answer[Vocabulary.HAS_DATA_VALUE]) {
+      return Utils.asArray(answer[Vocabulary.HAS_DATA_VALUE])[0];
     }
     return null;
   }
 
   static isRelevant(question) {
-    if (!question[Constants.IS_RELEVANT_IF]) {
+    if (!question[Vocabulary.IS_RELEVANT_IF]) {
       return true;
     }
 
-    for (let cond of Utils.asArray(question[Constants.IS_RELEVANT_IF])) {
+    for (let cond of Utils.asArray(question[Vocabulary.IS_RELEVANT_IF])) {
       if (!FormUtils.testCondition(cond)) {
         return false;
       }
@@ -213,13 +214,13 @@ export default class FormUtils {
   }
 
   static hasValidationLogic(question) {
-    if (question[Constants.REQUIRES_ANSWER]) {
+    if (question[Vocabulary.REQUIRES_ANSWER]) {
       return true;
     }
-    if (question[Constants.REQUIRES_ANSWER_IF]) {
+    if (question[Vocabulary.REQUIRES_ANSWER_IF]) {
       return true;
     }
-    if (question[Constants.PATTERN]) {
+    if (question[Vocabulary.PATTERN]) {
       return true;
     }
     if (this.containsXSDProperty(question)) {
@@ -229,10 +230,10 @@ export default class FormUtils {
   }
 
   static isValid(question) {
-    if (question[Constants.HAS_VALID_ANSWER] === false) {
+    if (question[Vocabulary.HAS_VALID_ANSWER] === false) {
       return false;
     }
-    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+    for (const subQ of Utils.asArray(question[Vocabulary.HAS_SUBQUESTION])) {
       if (this.isValid(subQ) === false) {
         return false;
       }
@@ -242,7 +243,7 @@ export default class FormUtils {
   }
 
   static testOrCondition(condition) {
-    const hasSubCondition = condition[Constants.HAS_SUB_CONDITION];
+    const hasSubCondition = condition[Vocabulary.HAS_SUB_CONDITION];
     if (!hasSubCondition) {
       console.warn("Or condition does not have any sub-condition !");
     }
@@ -255,12 +256,12 @@ export default class FormUtils {
   }
 
   static testCondition(condition) {
-    const isOrCondition = condition[Constants.HAS_SUB_CONDITION];
+    const isOrCondition = condition[Vocabulary.HAS_SUB_CONDITION];
     const acceptedValidationsValues =
-      condition[Constants.ACCEPTS_VALIDATION_VALUE];
-    const acceptedAnswerValues = condition[Constants.ACCEPTS_ANSWER_VALUE];
-    const accepts = condition[Constants.ACCEPTS];
-    const testedQuestions = condition[Constants.HAS_TESTED_QUESTION];
+      condition[Vocabulary.ACCEPTS_VALIDATION_VALUE];
+    const acceptedAnswerValues = condition[Vocabulary.ACCEPTS_ANSWER_VALUE];
+    const accepts = condition[Vocabulary.ACCEPTS];
+    const testedQuestions = condition[Vocabulary.HAS_TESTED_QUESTION];
     let question;
 
     if (isOrCondition) {
@@ -281,7 +282,7 @@ export default class FormUtils {
           "Support for multiple accepts values is not implemented !"
         );
       }
-      if (arr[0]["@id"] === Constants.ANSWERED_QUESTION) {
+      if (arr[0]["@id"] === Vocabulary.ANSWERED_QUESTION) {
         if (acceptedAnswerValues || acceptedValidationsValues) {
           console.warn(
             "Support for accepted answer/validations values is not implemented !"
@@ -328,11 +329,11 @@ export default class FormUtils {
           console.warn("Question is not defined.");
           return true;
         }
-        if (!question.hasOwnProperty(Constants.HAS_ANSWER)) {
+        if (!question.hasOwnProperty(Vocabulary.HAS_ANSWER)) {
           //console.warn('Question does not have answer value defined.');
           return false;
         }
-        const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
+        const answers = jsonld.getValues(question, Vocabulary.HAS_ANSWER);
 
         if (answers.length === 0) {
           return false;
@@ -387,8 +388,8 @@ export default class FormUtils {
       return false;
     }
 
-    if (question.hasOwnProperty(Constants.HAS_ANSWER)) {
-      const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
+    if (question.hasOwnProperty(Vocabulary.HAS_ANSWER)) {
+      const answers = jsonld.getValues(question, Vocabulary.HAS_ANSWER);
       if (answers.length) {
         const qValue = FormUtils.resolveValueObject(answers[0]);
         if (qValue) {
@@ -399,7 +400,7 @@ export default class FormUtils {
       }
     }
 
-    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+    for (const subQ of Utils.asArray(question[Vocabulary.HAS_SUBQUESTION])) {
       if (FormUtils.hasAnswer(subQ)) {
         return true;
       }
@@ -413,8 +414,8 @@ export default class FormUtils {
       return null;
     }
 
-    if (question.hasOwnProperty(Constants.HAS_ANSWER)) {
-      const answers = jsonld.getValues(question, Constants.HAS_ANSWER);
+    if (question.hasOwnProperty(Vocabulary.HAS_ANSWER)) {
+      const answers = jsonld.getValues(question, Vocabulary.HAS_ANSWER);
       if (answers.length) {
         const qValue = FormUtils.resolveValueObject(answers[0]);
         if (qValue) {
@@ -425,7 +426,7 @@ export default class FormUtils {
       }
     }
 
-    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+    for (const subQ of Utils.asArray(question[Vocabulary.HAS_SUBQUESTION])) {
       const subQAnswer = FormUtils.getAnswerValue(subQ);
       if (subQAnswer) {
         return subQAnswer;
@@ -452,13 +453,13 @@ export default class FormUtils {
       return Constants.DATETIME_NUMBER_FORMAT;
     }
     if (isDate) {
-      return question[Constants.DATE_FORMAT] || options.dateFormat;
+      return question[Vocabulary.DATE_FORMAT] || options.dateFormat;
     }
     if (isTime) {
-      return question[Constants.TIME_FORMAT] || options.timeFormat;
+      return question[Vocabulary.TIME_FORMAT] || options.timeFormat;
     }
     if (isDatetime) {
-      return question[Constants.DATETIME_FORMAT] || options.dateTimeFormat;
+      return question[Vocabulary.DATETIME_FORMAT] || options.dateTimeFormat;
     }
     return null;
   }
@@ -477,7 +478,7 @@ export default class FormUtils {
   ) {
     function recursiveTraverse(question) {
       onEnterQuestion(question);
-      Utils.asArray(question[Constants.HAS_SUBQUESTION]).forEach((q) => {
+      Utils.asArray(question[Vocabulary.HAS_SUBQUESTION]).forEach((q) => {
         recursiveTraverse(q);
       });
       onLeaveQuestion(question);
@@ -499,41 +500,41 @@ export default class FormUtils {
       const ind = indentation.repeat(level);
       let requiredValue = "";
       if (
-        q[Constants.REQUIRES_ANSWER] &&
-        !q[Constants.USED_ONLY_FOR_COMPLETENESS]
+        q[Vocabulary.REQUIRES_ANSWER] &&
+        !q[Vocabulary.USED_ONLY_FOR_COMPLETENESS]
       ) {
         requiredValue =
           ind +
           propertyIndentation +
           "required: " +
-          q[Constants.REQUIRES_ANSWER] +
+          q[Vocabulary.REQUIRES_ANSWER] +
           "\n";
-      } else if (q[Constants.USED_ONLY_FOR_COMPLETENESS]) {
+      } else if (q[Vocabulary.USED_ONLY_FOR_COMPLETENESS]) {
         requiredValue =
           ind +
           propertyIndentation +
           "required only for completeness: " +
-          q[Constants.USED_ONLY_FOR_COMPLETENESS] +
+          q[Vocabulary.USED_ONLY_FOR_COMPLETENESS] +
           "\n";
       }
 
-      let description = q[Constants.HELP_DESCRIPTION]
+      let description = q[Vocabulary.HELP_DESCRIPTION]
         ? ind +
           propertyIndentation +
           "description: " +
-          q[Constants.HELP_DESCRIPTION] +
+          q[Vocabulary.HELP_DESCRIPTION] +
           "\n"
         : "";
 
-      let pattern = q[Constants.PATTERN]
-        ? ind + propertyIndentation + "pattern: " + q[Constants.PATTERN] + "\n"
+      let pattern = q[Vocabulary.PATTERN]
+        ? ind + propertyIndentation + "pattern: " + q[Vocabulary.PATTERN] + "\n"
         : "";
 
-      let validationMessage = q[Constants.HAS_VALIDATION_MESSAGE]
+      let validationMessage = q[Vocabulary.HAS_VALIDATION_MESSAGE]
         ? ind +
           propertyIndentation +
           "validation-message: " +
-          q[Constants.HAS_VALIDATION_MESSAGE] +
+          q[Vocabulary.HAS_VALIDATION_MESSAGE] +
           "\n"
         : "";
 
@@ -565,7 +566,7 @@ export default class FormUtils {
    */
   static containsXSDProperty(question) {
     const objKeys = Object.keys(question);
-    const xsdValues = Object.values(Constants.XSD);
+    const xsdValues = Object.values(Vocabulary.XSD);
 
     for (const value of xsdValues) {
       if (objKeys.includes(value)) {

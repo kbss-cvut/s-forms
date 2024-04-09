@@ -1,4 +1,4 @@
-import Constants from "../src/constants/Constants";
+import Constants from "../src/constants/Constants.js";
 import IntlContextProvider from "../src/contexts/IntlContextProvider";
 import { FormGenContextProvider } from "../src/contexts/FormGenContext";
 import { ConfigurationContextProvider } from "../src/contexts/ConfigurationContext";

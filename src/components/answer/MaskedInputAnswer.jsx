@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import * as JsonLdUtils from "jsonld-utils";
 import PropTypes from "prop-types";
 
-import Constants from "../../constants/Constants";
+import Vocabulary from "../../constants/Vocabulary.js";
 import FormUtils from "../../util/FormUtils";
 import InputAnswer from "./InputAnswer";
 import Logger from "../../util/Logger";
@@ -14,7 +14,7 @@ const MaskedInputAnswer = (props) => {
 
   const question = props.question;
   const value = props.value;
-  const mask = JsonLdUtils.getJsonAttValue(question, Constants.INPUT_MASK);
+  const mask = JsonLdUtils.getJsonAttValue(question, Vocabulary.INPUT_MASK);
 
   if (!mask) {
     Logger.warn("Input mask not provided. Falling back to regular input.");

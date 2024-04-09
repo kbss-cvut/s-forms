@@ -9,7 +9,7 @@ import SelectAnswer from "./answer/SelectAnswer";
 import FormUtils from "../util/FormUtils";
 import Utils from "../util/Utils";
 import TypeaheadAnswer from "./answer/TypeaheadAnswer";
-import Constants from "../constants/Constants";
+import Vocabulary from "../constants/Vocabulary.js";
 import { FormGenContext } from "../contexts/FormGenContext";
 import { ConfigurationContext } from "../contexts/ConfigurationContext";
 import QuestionStatic from "./QuestionStatic.jsx";
@@ -36,17 +36,17 @@ const Answer = (props) => {
 
   const _setValue = (change, value) => {
     if (value === null) {
-      change[Constants.HAS_OBJECT_VALUE] = null;
-      change[Constants.HAS_DATA_VALUE] = null;
+      change[Vocabulary.HAS_OBJECT_VALUE] = null;
+      change[Vocabulary.HAS_DATA_VALUE] = null;
     } else if (
-      props.answer[Constants.HAS_OBJECT_VALUE] ||
+      props.answer[Vocabulary.HAS_OBJECT_VALUE] ||
       FormUtils.isTypeahead(props.question)
     ) {
-      change[Constants.HAS_OBJECT_VALUE] = {
+      change[Vocabulary.HAS_OBJECT_VALUE] = {
         "@id": value,
       };
     } else {
-      change[Constants.HAS_DATA_VALUE] = {
+      change[Vocabulary.HAS_DATA_VALUE] = {
         "@value": value,
       };
     }
@@ -54,7 +54,7 @@ const Answer = (props) => {
 
   const _hasOptions = (item) => {
     return (
-      item[Constants.HAS_OPTION] && item[Constants.HAS_OPTION].length !== 0
+      item[Vocabulary.HAS_OPTION] && item[Vocabulary.HAS_OPTION].length !== 0
     );
   };
 
@@ -177,7 +177,7 @@ const Answer = (props) => {
 
   const _getLabel = (question) => {
     const label = JsonldUtils.getLocalized(
-      question[Constants.RDFS_LABEL],
+      question[Vocabulary.RDFS_LABEL],
       options.intl
     );
 
@@ -200,17 +200,17 @@ const Answer = (props) => {
       classname: "",
       message: null,
     });
-    if (question[Constants.HAS_VALID_ANSWER] === false) {
+    if (question[Vocabulary.HAS_VALID_ANSWER] === false) {
       if (
-        question[Constants.HAS_VALIDATION_SEVERITY] ===
-        Constants.VALIDATION_SEVERITY.WARNING
+        question[Vocabulary.HAS_VALIDATION_SEVERITY] ===
+        Vocabulary.VALIDATION_SEVERITY.WARNING
       ) {
         setValidation({
           severity: "warning",
           classname: "is-warning",
           message: (
             <FormText className="is-warning">
-              {question[Constants.HAS_VALIDATION_MESSAGE]}
+              {question[Vocabulary.HAS_VALIDATION_MESSAGE]}
             </FormText>
           ),
         });
@@ -220,7 +220,7 @@ const Answer = (props) => {
           classname: "is-invalid",
           message: (
             <FormText className="is-invalid">
-              {question[Constants.HAS_VALIDATION_MESSAGE]}
+              {question[Vocabulary.HAS_VALIDATION_MESSAGE]}
             </FormText>
           ),
         });
@@ -233,7 +233,7 @@ const Answer = (props) => {
 
   const label = _getLabel(question);
   const title = JsonldUtils.getLocalized(
-    question[Constants.RDFS_COMMENT],
+    question[Vocabulary.RDFS_COMMENT],
     options.intl
   );
   let component;

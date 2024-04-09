@@ -1,4 +1,4 @@
-import Constants from "../../src/constants/Constants";
+import Vocabulary from "../../src/constants/Vocabulary.js";
 import FormGenerator from "../../src/model/FormGenerator";
 import DefaultFormGenerator from "../../src/model/DefaultFormGenerator";
 
@@ -17,9 +17,9 @@ describe("Default form generator", () => {
 
     expect(structure).toEqual({ root: form["@graph"][0] });
 
-    expect(formQuestions[0][Constants.HAS_SUBQUESTION]).toEqual([
-      form["@graph"][0][Constants.HAS_SUBQUESTION][0][
-        Constants.HAS_SUBQUESTION
+    expect(formQuestions[0][Vocabulary.HAS_SUBQUESTION]).toEqual([
+      form["@graph"][0][Vocabulary.HAS_SUBQUESTION][0][
+        Vocabulary.HAS_SUBQUESTION
       ][0],
     ]);
   });
