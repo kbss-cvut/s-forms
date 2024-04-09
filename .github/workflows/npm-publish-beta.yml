@@ -17,8 +17,8 @@ jobs:
           fetch-depth: 0
 
       - name: Get short SHA
-        id: sha
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+        id: set_sha
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - uses: "phips28/gh-action-bump-version@master"
         with:
@@ -27,13 +27,13 @@ jobs:
           major-wording: "MAJOR RELEASE"
           patch-wording: "PATCH RELEASE"
           rc-wording: null
-          preid: ${{ format('beta-{0}', steps.sha.outputs.sha_short) }}
+          preid: ${{ format('beta-{0}', env.SHA_SHORT) }}
           skip-tag: "true"
           skip-commit: "true"
 
       - uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: 20
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm test
