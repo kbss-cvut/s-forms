@@ -1,5 +1,6 @@
 import Constants from "../constants/Constants";
 import ValidatorFactory from "./ValidatorFactory.js";
+import Utils from "../util/Utils.js";
 
 export default class ValidationProcessor {
   /**
@@ -18,6 +19,9 @@ export default class ValidationProcessor {
         questions[index] = { ...question, ...update };
       }
     }
+    for (const question of questions) {
+      this.updateSubQuestionsValidation(question, intl);
+    }
   };
 
   /**
@@ -26,16 +30,10 @@ export default class ValidationProcessor {
    * @param {Object} intl - The object used for internationalization.
    */
   static updateSubQuestionsValidation = (question, intl) => {
-    if (
-      question[Constants.HAS_SUBQUESTION] &&
-      question[Constants.HAS_SUBQUESTION].length > 0
-    ) {
-      const subQuestions = question[Constants.HAS_SUBQUESTION];
-
-      for (let j = 0; j < subQuestions.length; j++) {
-        const subQuestion = subQuestions[j];
-        this.updateQuestionValidation(subQuestions, subQuestion, j, intl);
-      }
+    const subQuestions = Utils.asArray(question[Constants.HAS_SUBQUESTION]);
+    for (let index = 0; index < subQuestions.length; index++) {
+      const subQuestion = subQuestions[index];
+      this.updateQuestionValidation(subQuestions, subQuestion, index, intl);
     }
   };
 }

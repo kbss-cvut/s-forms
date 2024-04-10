@@ -32,7 +32,6 @@ class FormManager extends React.Component {
         i,
         "en"
       );
-      ValidationProcessor.updateSubQuestionsValidation(question, "en");
     }
 
     this.context.updateFormQuestionsData(null, questions);
