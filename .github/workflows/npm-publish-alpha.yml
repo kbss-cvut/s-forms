@@ -25,7 +25,7 @@ jobs:
           major-wording: "MAJOR RELEASE"
           patch-wording: "PATCH RELEASE"
           rc-wording: null
-          preid: ${{ format('beta-{0}', env.SHA_SHORT) }}
+          preid: ${{ format('alpha-{0}', env.SHA_SHORT) }}
           skip-tag: "true"
           skip-commit: "true"
 
