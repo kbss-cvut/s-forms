@@ -100,6 +100,19 @@ export const globalTypes = {
       ],
     },
   },
+  validateForm: {
+    name: "Validate form",
+    description: "Set to true to validate the form.",
+    toolbar: {
+      title: "Validate form",
+      icon: "check",
+      control: "boolean",
+      items: [
+        { value: true, title: "On" },
+        { value: false, title: "Off" },
+      ],
+    },
+  },
 };
 
 const options = {
