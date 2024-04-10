@@ -94,6 +94,7 @@ export const globalTypes = {
       title: "Print form specification",
       icon: "folder",
       control: "boolean",
+      defaultValue: false,
       items: [
         { value: true, title: "On" },
         { value: false, title: "Off" },
@@ -107,6 +108,7 @@ export const globalTypes = {
       title: "Validate form",
       icon: "check",
       control: "boolean",
+      defaultValue: false,
       items: [
         { value: true, title: "On" },
         { value: false, title: "Off" },
