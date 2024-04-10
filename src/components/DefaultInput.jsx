@@ -146,6 +146,7 @@ export default class DefaultInput extends React.Component {
           className={this.props.validation.classname}
           ref={(c) => (this.input = c)}
           as="input"
+          placeholder={this.props.placeholder}
           {...this.props}
           onChange={(e) => this.saveCursorPosition(e)}
         />
@@ -162,6 +163,7 @@ DefaultInput.propTypes = {
   onChange: PropTypes.func,
   help: PropTypes.string,
   validation: PropTypes.object,
+  placeholder: PropTypes.string,
 };
 
 DefaultInput.defaultProps = {

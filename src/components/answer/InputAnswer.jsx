@@ -163,6 +163,7 @@ const InputAnswer = (props) => {
     label: props.label,
     title: props.title,
     value: value == null ? "" : value,
+    placeholder: FormUtils.getInputMask(question),
     onKeyPress: (e) =>
       InputPropertiesResolver._preventCharacterInput(e, question),
     onChange: (e) => {
