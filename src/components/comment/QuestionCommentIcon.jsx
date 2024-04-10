@@ -3,7 +3,7 @@ import CommentBubble from "../../styles/icons/CommentBubble";
 import { Badge, Overlay, Tooltip } from "react-bootstrap";
 import CommentList from "./CommentList";
 import PropTypes from "prop-types";
-import Constants from "../../constants/Constants";
+import Vocabulary from "../../constants/Vocabulary.js";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import CommentForm from "./CommentForm";
 import { motion } from "framer-motion";
@@ -29,14 +29,14 @@ const QuestionCommentIcon = (props) => {
   const _getComments = () => {
     const question = props.question;
 
-    if (!question[Constants.HAS_COMMENT]) {
-      question[Constants.HAS_COMMENT] = [];
+    if (!question[Vocabulary.HAS_COMMENT]) {
+      question[Vocabulary.HAS_COMMENT] = [];
     }
-    if (!Array.isArray(question[Constants.HAS_COMMENT])) {
-      question[Constants.HAS_COMMENT] = [question[Constants.HAS_COMMENT]];
+    if (!Array.isArray(question[Vocabulary.HAS_COMMENT])) {
+      question[Vocabulary.HAS_COMMENT] = [question[Vocabulary.HAS_COMMENT]];
     }
 
-    return question[Constants.HAS_COMMENT];
+    return question[Vocabulary.HAS_COMMENT];
   };
 
   const handleCommentValueChange = (value) => {
@@ -47,10 +47,10 @@ const QuestionCommentIcon = (props) => {
 
   const _setComment = (change, value) => {
     if (context.options.currentUser) {
-      change[Constants.HAS_AUTHOR] = { "@id": context.options.currentUser };
+      change[Vocabulary.HAS_AUTHOR] = { "@id": context.options.currentUser };
     }
-    change[Constants.HAS_COMMENT_VALUE] = value;
-    change[Constants.HAS_TIMESTAMP] = Date.now().toString();
+    change[Vocabulary.HAS_COMMENT_VALUE] = value;
+    change[Vocabulary.HAS_TIMESTAMP] = Date.now().toString();
   };
 
   const handleDeleteQuestionCommentClick = (index) => {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Answer from "../../src/components/Answer";
-import Constants from "../../src/constants/Constants";
+import Vocabulary from "../../src/constants/Vocabulary.js";
 import * as Generator from "../environment/Generator";
 import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
 import DefaultInput from "../../src/components/DefaultInput";
@@ -15,12 +15,12 @@ describe("InputAnswer", () => {
     question = {
       "@id": Generator.getRandomUri(),
     };
-    question[Constants.LAYOUT_CLASS] = [];
-    question[Constants.RDFS_LABEL] = {
+    question[Vocabulary.LAYOUT_CLASS] = [];
+    question[Vocabulary.RDFS_LABEL] = {
       "@language": "en",
       "@value": LABEL,
     };
-    question[Constants.RDFS_COMMENT] = {
+    question[Vocabulary.RDFS_COMMENT] = {
       "@language": "en",
       "@value": "Javascript sucks!!!",
     };
@@ -42,15 +42,15 @@ describe("InputAnswer", () => {
     answer = {
       id: Generator.getRandomUri(),
     };
-    question[Constants.HAS_ANSWER] = [answer];
+    question[Vocabulary.HAS_ANSWER] = [answer];
   });
 
   it("sets min on numeric input when xsd:minInclusive is used in question", () => {
     const min = 100;
     const value = 117;
-    question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
-    question[Constants.XSD.MIN_INCLUSIVE] = min;
-    answer[Constants.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_DATATYPE] = Vocabulary.XSD.INT;
+    question[Vocabulary.XSD.MIN_INCLUSIVE] = min;
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
 
     const component = mount(
       <ConfigurationContext.Provider
@@ -77,9 +77,9 @@ describe("InputAnswer", () => {
   it("sets min on numeric input when xsd:minExclusive is used in question", () => {
     const min = 100;
     const value = 117;
-    question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
-    question[Constants.XSD.MIN_EXCLUSIVE] = min;
-    answer[Constants.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_DATATYPE] = Vocabulary.XSD.INT;
+    question[Vocabulary.XSD.MIN_EXCLUSIVE] = min;
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
 
     const component = mount(
       <ConfigurationContext.Provider
@@ -106,9 +106,9 @@ describe("InputAnswer", () => {
   it("sets max on numeric input when xsd:maxExclusive is used in question", () => {
     const max = 1000;
     const value = 117;
-    question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
-    question[Constants.XSD.MAX_EXCLUSIVE] = max;
-    answer[Constants.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_DATATYPE] = Vocabulary.XSD.INT;
+    question[Vocabulary.XSD.MAX_EXCLUSIVE] = max;
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
 
     const component = mount(
       <ConfigurationContext.Provider
@@ -135,9 +135,9 @@ describe("InputAnswer", () => {
   it("sets max on numeric input when xsd:maxInclusive is used in question", () => {
     const max = 1000;
     const value = 117;
-    question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
-    question[Constants.XSD.MAX_INCLUSIVE] = max;
-    answer[Constants.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_DATATYPE] = Vocabulary.XSD.INT;
+    question[Vocabulary.XSD.MAX_INCLUSIVE] = max;
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
 
     const component = mount(
       <ConfigurationContext.Provider
@@ -165,10 +165,10 @@ describe("InputAnswer", () => {
     const max = 1000;
     const min = 100;
     const value = 117;
-    question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
-    question[Constants.XSD.MAX_INCLUSIVE] = max;
-    question[Constants.XSD.MIN_INCLUSIVE] = min;
-    answer[Constants.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_DATATYPE] = Vocabulary.XSD.INT;
+    question[Vocabulary.XSD.MAX_INCLUSIVE] = max;
+    question[Vocabulary.XSD.MIN_INCLUSIVE] = min;
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
 
     const component = mount(
       <ConfigurationContext.Provider
@@ -195,8 +195,8 @@ describe("InputAnswer", () => {
 
   it("sets min when xsd:positiveInteger is used as question datatype", () => {
     const value = 117;
-    question[Constants.HAS_DATATYPE] = Constants.XSD.POSITIVE_INTEGER;
-    answer[Constants.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_DATATYPE] = Vocabulary.XSD.POSITIVE_INTEGER;
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
 
     const component = mount(
       <ConfigurationContext.Provider

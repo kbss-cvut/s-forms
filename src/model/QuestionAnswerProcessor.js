@@ -1,5 +1,5 @@
 import * as JsonLdUtils from "jsonld-utils";
-import Constants from "../constants/Constants";
+import Vocabulary from "../constants/Vocabulary.js";
 
 export default class QuestionAnswerProcessor {
   /**
@@ -16,7 +16,7 @@ export default class QuestionAnswerProcessor {
       question.uri = wizardData.root["@id"];
       question.origin = JsonLdUtils.getJsonAttValue(
         wizardData.root,
-        Constants.HAS_QUESTION_ORIGIN,
+        Vocabulary.HAS_QUESTION_ORIGIN,
         "@id"
       );
     }
@@ -50,42 +50,42 @@ export default class QuestionAnswerProcessor {
     result.uri = question["@id"];
     result.origin = JsonLdUtils.getJsonAttValue(
       question,
-      Constants.HAS_QUESTION_ORIGIN,
+      Vocabulary.HAS_QUESTION_ORIGIN,
       "@id"
     );
-    if (question[Constants.HAS_SUBQUESTION]) {
+    if (question[Vocabulary.HAS_SUBQUESTION]) {
       result.subQuestions = [];
-      for (let i = 0; i < question[Constants.HAS_SUBQUESTION].length; i++) {
+      for (let i = 0; i < question[Vocabulary.HAS_SUBQUESTION].length; i++) {
         result.subQuestions.push(
           QuestionAnswerProcessor._processQuestion(
-            question[Constants.HAS_SUBQUESTION][i]
+            question[Vocabulary.HAS_SUBQUESTION][i]
           )
         );
       }
     }
-    if (question[Constants.HAS_ANSWER]) {
+    if (question[Vocabulary.HAS_ANSWER]) {
       result.answers = [];
-      if (!Array.isArray(question[Constants.HAS_ANSWER])) {
-        question[Constants.HAS_ANSWER] = [question[Constants.HAS_ANSWER]];
+      if (!Array.isArray(question[Vocabulary.HAS_ANSWER])) {
+        question[Vocabulary.HAS_ANSWER] = [question[Vocabulary.HAS_ANSWER]];
       }
-      for (let i = 0; i < question[Constants.HAS_ANSWER].length; i++) {
+      for (let i = 0; i < question[Vocabulary.HAS_ANSWER].length; i++) {
         result.answers.push(
           QuestionAnswerProcessor.processAnswer(
-            question[Constants.HAS_ANSWER][i]
+            question[Vocabulary.HAS_ANSWER][i]
           )
         );
       }
     }
 
-    if (question[Constants.HAS_COMMENT]) {
+    if (question[Vocabulary.HAS_COMMENT]) {
       result.comments = [];
-      if (!Array.isArray(question[Constants.HAS_COMMENT])) {
-        question[Constants.HAS_COMMENT] = [question[Constants.HAS_COMMENT]];
+      if (!Array.isArray(question[Vocabulary.HAS_COMMENT])) {
+        question[Vocabulary.HAS_COMMENT] = [question[Vocabulary.HAS_COMMENT]];
       }
-      for (let i = 0; i < question[Constants.HAS_COMMENT].length; i++) {
+      for (let i = 0; i < question[Vocabulary.HAS_COMMENT].length; i++) {
         result.comments.push(
           QuestionAnswerProcessor.processComment(
-            question[Constants.HAS_COMMENT][i]
+            question[Vocabulary.HAS_COMMENT][i]
           )
         );
       }
@@ -98,16 +98,16 @@ export default class QuestionAnswerProcessor {
     const result = {};
     result.author = JsonLdUtils.getJsonAttValue(
       comment,
-      Constants.HAS_AUTHOR,
+      Vocabulary.HAS_AUTHOR,
       "@id"
     );
     result.value = JsonLdUtils.getJsonAttValue(
       comment,
-      Constants.HAS_COMMENT_VALUE
+      Vocabulary.HAS_COMMENT_VALUE
     );
     result.timestamp = JsonLdUtils.getJsonAttValue(
       comment,
-      Constants.HAS_TIMESTAMP,
+      Vocabulary.HAS_TIMESTAMP,
       "@id"
     );
     return result;
@@ -118,19 +118,19 @@ export default class QuestionAnswerProcessor {
     result.uri = answer["@id"];
     result.origin = JsonLdUtils.getJsonAttValue(
       answer,
-      Constants.HAS_ANSWER_ORIGIN,
+      Vocabulary.HAS_ANSWER_ORIGIN,
       "@id"
     );
-    if (answer[Constants.HAS_OBJECT_VALUE]) {
+    if (answer[Vocabulary.HAS_OBJECT_VALUE]) {
       result.codeValue = JsonLdUtils.getJsonAttValue(
         answer,
-        Constants.HAS_OBJECT_VALUE,
+        Vocabulary.HAS_OBJECT_VALUE,
         "@id"
       );
     } else {
       result.textValue = JsonLdUtils.getJsonAttValue(
         answer,
-        Constants.HAS_DATA_VALUE
+        Vocabulary.HAS_DATA_VALUE
       );
     }
     return result;
@@ -142,7 +142,7 @@ export default class QuestionAnswerProcessor {
    */
   static generateAnswer(question) {
     const answer = {};
-    answer[Constants.HAS_DATA_VALUE] = "";
+    answer[Vocabulary.HAS_DATA_VALUE] = "";
     return answer;
   }
 }

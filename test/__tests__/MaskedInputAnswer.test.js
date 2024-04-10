@@ -2,7 +2,7 @@ import React from "react";
 import * as JsonLdUtils from "jsonld-utils";
 
 import Answer from "../../src/components/Answer";
-import Constants from "../../src/constants/Constants";
+import Vocabulary from "../../src/constants/Vocabulary.js";
 import * as Generator from "../environment/Generator";
 import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
 import DefaultInput from "../../src/components/DefaultInput";
@@ -35,10 +35,10 @@ describe("MaskedInputAnswer", () => {
       "@id": Generator.getRandomUri(),
     };
 
-    answer[Constants.HAS_DATA_VALUE] = value;
-    question[Constants.HAS_ANSWER] = [answer];
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_ANSWER] = [answer];
     question[JsonLdUtils.RDFS_LABEL] = "Test";
-    question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.MASKED_INPUT];
+    question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.MASKED_INPUT];
 
     const component = mount(
       <ConfigurationContext.Provider
@@ -67,13 +67,13 @@ describe("MaskedInputAnswer", () => {
     const answer = {
       "@id": Generator.getRandomUri(),
     };
-    answer[Constants.HAS_DATA_VALUE] = value;
-    question[Constants.HAS_ANSWER] = [answer];
+    answer[Vocabulary.HAS_DATA_VALUE] = value;
+    question[Vocabulary.HAS_ANSWER] = [answer];
     question[JsonLdUtils.RDFS_LABEL] = "Test";
-    question[Constants.INPUT_MASK] = mask;
-    question[Constants.LAYOUT_CLASS] = [
-      Constants.LAYOUT.MASKED_INPUT,
-      Constants.LAYOUT.DISABLED,
+    question[Vocabulary.INPUT_MASK] = mask;
+    question[Vocabulary.LAYOUT_CLASS] = [
+      Vocabulary.LAYOUT.MASKED_INPUT,
+      Vocabulary.LAYOUT.DISABLED,
     ];
 
     const component = mount(

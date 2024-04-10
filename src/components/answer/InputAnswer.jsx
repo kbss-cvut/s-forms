@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import * as JsonLdUtils from "jsonld-utils";
 import PropTypes from "prop-types";
-import Constants from "../../constants/Constants";
+import Vocabulary from "../../constants/Vocabulary.js";
 import FormUtils from "../../util/FormUtils";
 import YASQE from "yasgui-yasqe";
 import YATE from "yasgui-yasqe";
@@ -9,22 +9,22 @@ import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import "@triply/yasgui/build/yasgui.min.css";
 
 const NUMERIC_DATATYPES = [
-  Constants.XSD.INT,
-  Constants.XSD.INTEGER,
-  Constants.XSD.NON_NEGATIVE_INTEGER,
-  Constants.XSD.NON_POSITIVE_INTEGER,
-  Constants.XSD.NEGATIVE_INTEGER,
-  Constants.XSD.POSITIVE_INTEGER,
+  Vocabulary.XSD.INT,
+  Vocabulary.XSD.INTEGER,
+  Vocabulary.XSD.NON_NEGATIVE_INTEGER,
+  Vocabulary.XSD.NON_POSITIVE_INTEGER,
+  Vocabulary.XSD.NEGATIVE_INTEGER,
+  Vocabulary.XSD.POSITIVE_INTEGER,
 ];
 
 const DECLARED_PREFIXES =
   "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix";
 
 const NUMBER_RULES = {};
-NUMBER_RULES[Constants.XSD.NON_NEGATIVE_INTEGER] = { min: 0 };
-NUMBER_RULES[Constants.XSD.NON_POSITIVE_INTEGER] = { max: 0 };
-NUMBER_RULES[Constants.XSD.NEGATIVE_INTEGER] = { max: -1 };
-NUMBER_RULES[Constants.XSD.POSITIVE_INTEGER] = { min: 1 };
+NUMBER_RULES[Vocabulary.XSD.NON_NEGATIVE_INTEGER] = { min: 0 };
+NUMBER_RULES[Vocabulary.XSD.NON_POSITIVE_INTEGER] = { max: 0 };
+NUMBER_RULES[Vocabulary.XSD.NEGATIVE_INTEGER] = { max: -1 };
+NUMBER_RULES[Vocabulary.XSD.POSITIVE_INTEGER] = { min: 1 };
 
 const tokenTypes = {
   "string-2": "prefixed",
@@ -50,7 +50,7 @@ class InputPropertiesResolver {
       if (
         JsonLdUtils.hasValue(
           question,
-          Constants.HAS_DATATYPE,
+          Vocabulary.HAS_DATATYPE,
           NUMERIC_DATATYPES[i]
         )
       ) {
@@ -85,10 +85,10 @@ class InputPropertiesResolver {
 
   static _resolveStepRestriction(question) {
     let restriction = {};
-    if (question[Constants.STEP] !== undefined) {
+    if (question[Vocabulary.STEP] !== undefined) {
       restriction["step"] = JsonLdUtils.getJsonAttValue(
         question,
-        Constants.STEP
+        Vocabulary.STEP
       );
     }
     return restriction;
@@ -97,21 +97,21 @@ class InputPropertiesResolver {
   static _resolveNumberRestrictions(question) {
     let restriction = {};
     Object.getOwnPropertyNames(NUMBER_RULES).forEach((key) => {
-      if (JsonLdUtils.hasValue(question, Constants.HAS_DATATYPE, key)) {
+      if (JsonLdUtils.hasValue(question, Vocabulary.HAS_DATATYPE, key)) {
         restriction = { ...restriction, ...NUMBER_RULES[key] };
       }
     });
-    if (question[Constants.XSD.MIN_INCLUSIVE] !== undefined) {
-      restriction["min"] = question[Constants.XSD.MIN_INCLUSIVE];
+    if (question[Vocabulary.XSD.MIN_INCLUSIVE] !== undefined) {
+      restriction["min"] = question[Vocabulary.XSD.MIN_INCLUSIVE];
     }
-    if (question[Constants.XSD.MIN_EXCLUSIVE] !== undefined) {
-      restriction["min"] = question[Constants.XSD.MIN_EXCLUSIVE] + 1;
+    if (question[Vocabulary.XSD.MIN_EXCLUSIVE] !== undefined) {
+      restriction["min"] = question[Vocabulary.XSD.MIN_EXCLUSIVE] + 1;
     }
-    if (question[Constants.XSD.MAX_EXCLUSIVE] !== undefined) {
-      restriction["max"] = question[Constants.XSD.MAX_EXCLUSIVE] - 1;
+    if (question[Vocabulary.XSD.MAX_EXCLUSIVE] !== undefined) {
+      restriction["max"] = question[Vocabulary.XSD.MAX_EXCLUSIVE] - 1;
     }
-    if (question[Constants.XSD.MAX_INCLUSIVE] !== undefined) {
-      restriction["max"] = question[Constants.XSD.MAX_INCLUSIVE];
+    if (question[Vocabulary.XSD.MAX_INCLUSIVE] !== undefined) {
+      restriction["max"] = question[Vocabulary.XSD.MAX_INCLUSIVE];
     }
     return restriction;
   }
@@ -145,11 +145,11 @@ const InputAnswer = (props) => {
   // When the value is an object_value, but the layout does not specify neither typeahead nor select,
   // show at least the value's label
   if (
-    answer[Constants.HAS_OBJECT_VALUE] &&
-    answer[Constants.HAS_OBJECT_VALUE][JsonLdUtils.RDFS_LABEL]
+    answer[Vocabulary.HAS_OBJECT_VALUE] &&
+    answer[Vocabulary.HAS_OBJECT_VALUE][JsonLdUtils.RDFS_LABEL]
   ) {
     value = JsonLdUtils.getJsonAttValue(
-      answer[Constants.HAS_OBJECT_VALUE],
+      answer[Vocabulary.HAS_OBJECT_VALUE],
       JsonLdUtils.RDFS_LABEL
     );
   }
@@ -212,19 +212,19 @@ const InputAnswer = (props) => {
                 if (queryPrefixes[currentPrefix.slice(0, -1)] == null) {
                   // ok, so it isnt added yet!
                   if (
-                    props.question[Constants.HAS_DECLARED_PREFIX] &&
-                    props.question[Constants.HAS_DECLARED_PREFIX].filter(
-                      (p) => p[Constants.PREFIX] === currentPrefix.slice(0, -1)
+                    props.question[Vocabulary.HAS_DECLARED_PREFIX] &&
+                    props.question[Vocabulary.HAS_DECLARED_PREFIX].filter(
+                      (p) => p[Vocabulary.PREFIX] === currentPrefix.slice(0, -1)
                     ).length
                   ) {
                     const prefix = props.question[
-                      Constants.HAS_DECLARED_PREFIX
+                      Vocabulary.HAS_DECLARED_PREFIX
                     ].filter(
-                      (p) => p[Constants.PREFIX] === currentPrefix.slice(0, -1)
+                      (p) => p[Vocabulary.PREFIX] === currentPrefix.slice(0, -1)
                     );
                     const px = {};
-                    px[prefix[0][Constants.PREFIX]] =
-                      prefix[0][Constants.NAMESPACE];
+                    px[prefix[0][Vocabulary.PREFIX]] =
+                      prefix[0][Vocabulary.NAMESPACE];
                     yasqe.addPrefixes(px);
                   } else {
                     const completions = yasqe.autocompleters

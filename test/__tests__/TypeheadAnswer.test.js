@@ -2,7 +2,7 @@ import React from "react";
 import * as JsonLdUtils from "jsonld-utils";
 
 import * as Generator from "../environment/Generator";
-import Constants from "../../src/constants/Constants";
+import Vocabulary from "../../src/constants/Vocabulary.js";
 import TypeaheadAnswer from "../../src/components/answer/TypeaheadAnswer";
 import { FormGenContext } from "../../src/contexts/FormGenContext";
 import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
@@ -18,12 +18,12 @@ describe("TypeaheadAnswer", () => {
     question = {
       "@id": Generator.getRandomUri(),
     };
-    question[Constants.LAYOUT_CLASS] = [];
-    question[Constants.RDFS_LABEL] = {
+    question[Vocabulary.LAYOUT_CLASS] = [];
+    question[Vocabulary.RDFS_LABEL] = {
       "@language": "en",
       "@value": "1 - Aerodrome General",
     };
-    question[Constants.RDFS_COMMENT] = {
+    question[Vocabulary.RDFS_COMMENT] = {
       "@language": "en",
       "@value":
         "The identification of the aerodrome/helicopter landing area by name, location and status.",
@@ -46,8 +46,10 @@ describe("TypeaheadAnswer", () => {
     );
     const query = "SELECT * WHERE { ?x ?y ?z .}";
 
-    question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
-    question[Constants.HAS_OPTIONS_QUERY] = query;
+    question[Vocabulary.LAYOUT_CLASS].push(
+      Vocabulary.LAYOUT.QUESTION_TYPEAHEAD
+    );
+    question[Vocabulary.HAS_OPTIONS_QUERY] = query;
 
     const component = mount(
       <ConfigurationContext.Provider
@@ -96,7 +98,7 @@ describe("TypeaheadAnswer", () => {
       const secondId = rule.substring(rule.indexOf("<") + 1);
       const secondIndex = ids.indexOf(secondId);
 
-      options[secondIndex][Constants.HAS_PRECEDING_VALUE] = firstId;
+      options[secondIndex][Vocabulary.HAS_PRECEDING_VALUE] = firstId;
     });
     return options;
   }

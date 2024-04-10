@@ -1,5 +1,5 @@
 import * as jsonld from "jsonld";
-import Constants from "../constants/Constants";
+import Vocabulary from "../constants/Vocabulary.js";
 import DefaultFormGenerator from "./DefaultFormGenerator";
 import FormUtils from "../util/FormUtils";
 import Logger from "../util/Logger";
@@ -85,7 +85,7 @@ export default class FormGenerator {
     }
 
     form = structure["@graph"].find((item) => FormUtils.isForm(item));
-    formElements = form[Constants.HAS_SUBQUESTION];
+    formElements = form[Vocabulary.HAS_SUBQUESTION];
 
     if (!formElements) {
       Logger.error("Could not find any questions in the received data.");
@@ -106,7 +106,7 @@ export default class FormGenerator {
         "Could not find any wizard steps in the received data. Building form without steps"
       );
 
-      form[Constants.HAS_SUBQUESTION].forEach((question) =>
+      form[Vocabulary.HAS_SUBQUESTION].forEach((question) =>
         formQuestions.push(question)
       );
     }
@@ -119,7 +119,7 @@ export default class FormGenerator {
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(
       formQuestions,
-      Constants.HAS_PRECEDING_QUESTION
+      Vocabulary.HAS_PRECEDING_QUESTION
     );
 
     return [formQuestions, { root: form }];

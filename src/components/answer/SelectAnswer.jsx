@@ -2,7 +2,7 @@ import React from "react";
 import * as JsonLdUtils from "jsonld-utils";
 import PropTypes from "prop-types";
 
-import Constants from "../../constants/Constants";
+import Vocabulary from "../../constants/Vocabulary.js";
 import FormUtils from "../../util/FormUtils";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 
@@ -10,8 +10,8 @@ export default class SelectAnswer extends React.Component {
   _generateSelectOptions(options) {
     const rendered = [];
     options.sort(function (a, b) {
-      const aLabel = JsonLdUtils.getJsonAttValue(a, Constants.RDFS_LABEL),
-        bLabel = JsonLdUtils.getJsonAttValue(b, Constants.RDFS_LABEL);
+      const aLabel = JsonLdUtils.getJsonAttValue(a, Vocabulary.RDFS_LABEL),
+        bLabel = JsonLdUtils.getJsonAttValue(b, Vocabulary.RDFS_LABEL);
       if (aLabel < bLabel) {
         return -1;
       }
@@ -24,10 +24,10 @@ export default class SelectAnswer extends React.Component {
     for (let i = 0; i < options.length; i++) {
       rendered.push(
         <option
-          value={JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)}
+          value={JsonLdUtils.getJsonAttValue(options[i], Vocabulary.RDFS_LABEL)}
           key={"opt-" + i}
         >
-          {JsonLdUtils.getJsonAttValue(options[i], Constants.RDFS_LABEL)}
+          {JsonLdUtils.getJsonAttValue(options[i], Vocabulary.RDFS_LABEL)}
         </option>
       );
     }
@@ -52,7 +52,7 @@ export default class SelectAnswer extends React.Component {
           this.context.componentsOptions.readOnly ||
           FormUtils.isDisabled(question),
       },
-      this._generateSelectOptions(question[Constants.HAS_OPTION])
+      this._generateSelectOptions(question[Vocabulary.HAS_OPTION])
     );
   }
 }

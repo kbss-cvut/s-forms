@@ -3,7 +3,7 @@ import { Card, Accordion } from "react-bootstrap";
 import * as JsonLdUtils from "jsonld-utils";
 import PropTypes from "prop-types";
 import Answer from "./Answer";
-import Constants from "../constants/Constants";
+import Vocabulary from "../constants/Vocabulary.js";
 import FormUtils from "../util/FormUtils";
 import JsonLdObjectMap from "../util/JsonLdObjectMap";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
@@ -43,7 +43,7 @@ export default class Question extends React.Component {
   componentDidUpdate() {
     const question = this.props.question;
     const startingQuestionId = this.context.options.startingQuestionId;
-    const subQuestions = question[Constants.HAS_SUBQUESTION];
+    const subQuestions = question[Vocabulary.HAS_SUBQUESTION];
     const isSubQuestionStartingQuestionId = subQuestions.find(
       (o) => o["@id"] === startingQuestionId
     );
@@ -71,21 +71,21 @@ export default class Question extends React.Component {
       this.setState({ expanded: expanded });
     }
 
-    this._handleChange(Constants.HAS_ANSWER, answerIndex, change);
+    this._handleChange(Vocabulary.HAS_ANSWER, answerIndex, change);
   };
 
   handleSubQuestionChange = (subQuestionIndex, change) => {
-    this._handleChange(Constants.HAS_SUBQUESTION, subQuestionIndex, change);
+    this._handleChange(Vocabulary.HAS_SUBQUESTION, subQuestionIndex, change);
   };
 
   handleCommentChange = (commentIndex, change) => {
-    this._handleChange(Constants.HAS_COMMENT, commentIndex, change);
+    this._handleChange(Vocabulary.HAS_COMMENT, commentIndex, change);
   };
 
   _handleChange(att, valueIndex, newValue) {
     let newState = { ...this.props.question };
     newState[att][valueIndex] = newValue;
-    if (att === Constants.HAS_ANSWER) {
+    if (att === Vocabulary.HAS_ANSWER) {
       const result = this.state.validator(newValue);
       newState = { ...newState, ...result };
     }
@@ -320,7 +320,7 @@ export default class Question extends React.Component {
   getShowIrrelevantClassname(question) {
     const debugMode = this.context.options.debugMode;
     const startingQuestionId = this.context.options.startingQuestionId;
-    const subQuestion = question[Constants.HAS_SUBQUESTION];
+    const subQuestion = question[Vocabulary.HAS_SUBQUESTION];
 
     if (
       (debugMode ||
@@ -378,27 +378,27 @@ export default class Question extends React.Component {
 
   _getAnswers() {
     const question = this.props.question;
-    if (!question[Constants.HAS_ANSWER]) {
-      question[Constants.HAS_ANSWER] = [];
+    if (!question[Vocabulary.HAS_ANSWER]) {
+      question[Vocabulary.HAS_ANSWER] = [];
     }
-    if (!Array.isArray(question[Constants.HAS_ANSWER])) {
-      question[Constants.HAS_ANSWER] = [question[Constants.HAS_ANSWER]];
+    if (!Array.isArray(question[Vocabulary.HAS_ANSWER])) {
+      question[Vocabulary.HAS_ANSWER] = [question[Vocabulary.HAS_ANSWER]];
     }
-    if (question[Constants.HAS_ANSWER].length === 0) {
+    if (question[Vocabulary.HAS_ANSWER].length === 0) {
       if (FormUtils.isSection(question) && !FormUtils.isAnswerable(question)) {
-        question[Constants.HAS_ANSWER] = [];
+        question[Vocabulary.HAS_ANSWER] = [];
       } else {
-        question[Constants.HAS_ANSWER] = [
+        question[Vocabulary.HAS_ANSWER] = [
           QuestionAnswerProcessor.generateAnswer(question),
         ];
       }
     }
-    return question[Constants.HAS_ANSWER];
+    return question[Vocabulary.HAS_ANSWER];
   }
 
   _getAnswerWidthStyle() {
     const length = Number(
-      this.props.question[Constants.HAS_INITIAL_INPUT_LENGTH]
+      this.props.question[Vocabulary.HAS_INITIAL_INPUT_LENGTH]
     );
     if (!length) {
       return {};
@@ -414,9 +414,9 @@ export default class Question extends React.Component {
   static _getAnswerClass(question, isTextarea) {
     let columns = isTextarea
       ? "col-12"
-      : Constants.GENERATED_ROW_SIZE === 1
+      : Vocabulary.GENERATED_ROW_SIZE === 1
       ? "col-6"
-      : "col-" + Constants.COLUMN_COUNT / Constants.GENERATED_ROW_SIZE;
+      : "col-" + Vocabulary.COLUMN_COUNT / Vocabulary.GENERATED_ROW_SIZE;
 
     return columns;
   }
@@ -434,8 +434,8 @@ export default class Question extends React.Component {
     if (
       JsonLdUtils.hasValue(
         question,
-        Constants.LAYOUT_CLASS,
-        Constants.LAYOUT.EMPHASISE_ON_RELEVANT
+        Vocabulary.LAYOUT_CLASS,
+        Vocabulary.LAYOUT.EMPHASISE_ON_RELEVANT
       )
     ) {
       return "emphasise-on-relevant";
@@ -464,10 +464,10 @@ export default class Question extends React.Component {
 
   _renderPrefixes() {
     const question = this.props.question;
-    return question[Constants.HAS_DECLARED_PREFIX] &&
-      question[Constants.HAS_DECLARED_PREFIX].length ? (
+    return question[Vocabulary.HAS_DECLARED_PREFIX] &&
+      question[Vocabulary.HAS_DECLARED_PREFIX].length ? (
       <PrefixIcon
-        prefixes={question[Constants.HAS_DECLARED_PREFIX]}
+        prefixes={question[Vocabulary.HAS_DECLARED_PREFIX]}
         iconClass={"help-icon-checkbox"}
       >
         <InfoCircle />
@@ -477,8 +477,8 @@ export default class Question extends React.Component {
 
   _renderUnits() {
     const question = this.props.question;
-    return question[Constants.HAS_UNIT] ? (
-      <div className="has-unit-label">{question[Constants.HAS_UNIT]}</div>
+    return question[Vocabulary.HAS_UNIT] ? (
+      <div className="has-unit-label">{question[Vocabulary.HAS_UNIT]}</div>
     ) : null;
   }
 
@@ -512,28 +512,28 @@ export default class Question extends React.Component {
 
   _getSubQuestions() {
     const question = this.props.question;
-    if (!question[Constants.HAS_SUBQUESTION]) {
-      question[Constants.HAS_SUBQUESTION] = [];
+    if (!question[Vocabulary.HAS_SUBQUESTION]) {
+      question[Vocabulary.HAS_SUBQUESTION] = [];
     }
-    if (!Array.isArray(question[Constants.HAS_SUBQUESTION])) {
-      question[Constants.HAS_SUBQUESTION] = [
-        question[Constants.HAS_SUBQUESTION],
+    if (!Array.isArray(question[Vocabulary.HAS_SUBQUESTION])) {
+      question[Vocabulary.HAS_SUBQUESTION] = [
+        question[Vocabulary.HAS_SUBQUESTION],
       ];
     }
 
     // sort by label
     JsonLdObjectUtils.orderByLocalizedLabels(
-      question[Constants.HAS_SUBQUESTION],
+      question[Vocabulary.HAS_SUBQUESTION],
       this.context.options.intl
     );
 
     // sort by property
     JsonLdObjectUtils.orderPreservingToplogicalSort(
-      question[Constants.HAS_SUBQUESTION],
-      Constants.HAS_PRECEDING_QUESTION
+      question[Vocabulary.HAS_SUBQUESTION],
+      Vocabulary.HAS_PRECEDING_QUESTION
     );
 
-    return question[Constants.HAS_SUBQUESTION];
+    return question[Vocabulary.HAS_SUBQUESTION];
   }
 
   _getFirstAnswerValue() {

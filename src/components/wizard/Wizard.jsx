@@ -6,7 +6,7 @@ import VerticalWizardNav from "./VerticalWizardNav";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Utils from "../../util/Utils";
-import Constants from "../../constants/Constants";
+import Vocabulary from "../../constants/Vocabulary.js";
 
 const findStepByQuestionId = (stepData, id) => {
   const findQuestionTraversal = (question, index) => {
@@ -18,7 +18,7 @@ const findStepByQuestionId = (stepData, id) => {
       return index;
     }
 
-    const subQuestions = Utils.asArray(question[Constants.HAS_SUBQUESTION]);
+    const subQuestions = Utils.asArray(question[Vocabulary.HAS_SUBQUESTION]);
 
     return subQuestions.findIndex(
       (q, index) => findQuestionTraversal(q, index) !== -1

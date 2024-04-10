@@ -1,19 +1,19 @@
 import * as jsonld from "jsonld";
-import Constants from "../constants/Constants";
+import Vocabulary from "../constants/Vocabulary.js";
 import FormUtils from "../util/FormUtils";
 import Utils from "./Utils";
 
 const formShape = {
   root: {
-    [Constants.HAS_LAYOUT_CLASS]: Constants.FORM,
+    [Vocabulary.HAS_LAYOUT_CLASS]: Vocabulary.FORM,
   },
   expandProperties: [
-    Constants.HAS_SUBQUESTION,
-    Constants.IS_RELEVANT_IF,
-    Constants.HAS_ANSWER,
-    Constants.HAS_DECLARED_PREFIX,
-    Constants.HAS_OPTION,
-    Constants.HAS_COMMENT,
+    Vocabulary.HAS_SUBQUESTION,
+    Vocabulary.IS_RELEVANT_IF,
+    Vocabulary.HAS_ANSWER,
+    Vocabulary.HAS_DECLARED_PREFIX,
+    Vocabulary.HAS_OPTION,
+    Vocabulary.HAS_COMMENT,
   ],
 };
 

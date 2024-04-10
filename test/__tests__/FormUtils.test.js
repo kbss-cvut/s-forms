@@ -1,5 +1,6 @@
 import FormUtils from "../../src/util/FormUtils";
-import Constants from "../../src/constants/Constants";
+import Vocabulary from "../../src/constants/Vocabulary.js";
+import Constants from "../../src/constants/Constants.js";
 import JsonObjectMap from "../../src/util/JsonLdObjectMap";
 
 describe("FormUtils", () => {
@@ -12,38 +13,38 @@ describe("FormUtils", () => {
   describe("isForm", () => {
     it("returns true for a form element.", () => {
       const form = {
-        "@type": Constants.FORM,
+        "@type": Vocabulary.FORM,
         hasQuestion: [{}, {}],
       };
-      form[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.FORM];
+      form[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.FORM];
       expect(FormUtils.isForm(form)).toBeTruthy();
     });
 
     it("returns false for non-form element.", () => {
       const question = {};
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.QUESTION_SECTION];
       expect(FormUtils.isForm(question)).toBeFalsy();
     });
   });
 
   describe("isWizardStep", () => {
     it("returns true for a wizard step question", () => {
-      question[Constants.LAYOUT_CLASS] = [
-        Constants.LAYOUT.QUESTION_SECTION,
-        Constants.LAYOUT.WIZARD_STEP,
+      question[Vocabulary.LAYOUT_CLASS] = [
+        Vocabulary.LAYOUT.QUESTION_SECTION,
+        Vocabulary.LAYOUT.WIZARD_STEP,
       ];
       expect(FormUtils.isWizardStep(question)).toBeTruthy();
     });
 
     it("returns false for a section", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.QUESTION_SECTION];
       expect(FormUtils.isWizardStep(question)).toBeFalsy();
     });
   });
 
   describe("isSection", () => {
     it("returns true for a section.", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.QUESTION_SECTION];
       expect(FormUtils.isSection(question)).toBeTruthy();
     });
 
@@ -54,7 +55,9 @@ describe("FormUtils", () => {
 
   describe("isTypeahead", () => {
     it("returns true for a typeahead question.", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_TYPEAHEAD];
+      question[Vocabulary.LAYOUT_CLASS] = [
+        Vocabulary.LAYOUT.QUESTION_TYPEAHEAD,
+      ];
       expect(FormUtils.isTypeahead(question)).toBeTruthy();
     });
 
@@ -77,14 +80,16 @@ describe("FormUtils", () => {
       for (let i = 0; i < Constants.INPUT_LENGTH_THRESHOLD + 1; i++) {
         dataValue += i.toString();
       }
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_TYPEAHEAD];
+      question[Vocabulary.LAYOUT_CLASS] = [
+        Vocabulary.LAYOUT.QUESTION_TYPEAHEAD,
+      ];
       expect(FormUtils.isTextarea(question, dataValue)).toBeFalsy();
     });
   });
 
   describe("isDisabled", () => {
     it("returns true for a disabled question.", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DISABLED];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.DISABLED];
       expect(FormUtils.isDisabled(question)).toBeTruthy();
     });
 
@@ -95,7 +100,7 @@ describe("FormUtils", () => {
 
   describe("isHidden", () => {
     it("returns true for a hidden question.", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.HIDDEN];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.HIDDEN];
       expect(FormUtils.isHidden(question)).toBeTruthy();
     });
 
@@ -106,7 +111,7 @@ describe("FormUtils", () => {
 
   describe("isCalendar", () => {
     it("returns true for a date question", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DATE];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.DATE];
       expect(FormUtils.isCalendar(question)).toBeTruthy();
     });
 
@@ -118,7 +123,7 @@ describe("FormUtils", () => {
 
   describe("isDate", () => {
     it("returns true for a date question", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DATE];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.DATE];
       expect(FormUtils.isCalendar(question)).toBeTruthy();
     });
 
@@ -129,7 +134,7 @@ describe("FormUtils", () => {
 
   describe("isTime", () => {
     it("returns true for a time question", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.TIME];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.TIME];
       expect(FormUtils.isCalendar(question)).toBeTruthy();
     });
 
@@ -140,7 +145,7 @@ describe("FormUtils", () => {
 
   describe("isDateTime", () => {
     it("returns true for a datetime question", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.DATETIME];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.DATETIME];
       expect(FormUtils.isCalendar(question)).toBeTruthy();
     });
 
@@ -151,32 +156,32 @@ describe("FormUtils", () => {
 
   describe("isCheckbox", () => {
     it("returns true for a checkbox question", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.CHECKBOX];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.CHECKBOX];
       expect(FormUtils.isCheckbox(question)).toBeTruthy();
     });
     it("returns false for a non-checkbox question", () => {
-      question[Constants.LAYOUT_CLASS] = [];
+      question[Vocabulary.LAYOUT_CLASS] = [];
       expect(FormUtils.isCheckbox(question)).toBeFalsy();
     });
   });
 
   describe("isAnswerable", () => {
     it("returns true for an answerable section-question", () => {
-      question[Constants.LAYOUT_CLASS] = [
-        Constants.LAYOUT.QUESTION_SECTION,
-        Constants.LAYOUT.ANSWERABLE,
+      question[Vocabulary.LAYOUT_CLASS] = [
+        Vocabulary.LAYOUT.QUESTION_SECTION,
+        Vocabulary.LAYOUT.ANSWERABLE,
       ];
       expect(FormUtils.isAnswerable(question)).toBeTruthy();
     });
     it("returns false for a non-answerable section-question", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.QUESTION_SECTION];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.QUESTION_SECTION];
       expect(FormUtils.isAnswerable(question)).toBeFalsy();
     });
   });
 
   describe("isMaskedInput", () => {
     it("returns true for a question with masked input layout class", () => {
-      question[Constants.LAYOUT_CLASS] = [Constants.LAYOUT.MASKED_INPUT];
+      question[Vocabulary.LAYOUT_CLASS] = [Vocabulary.LAYOUT.MASKED_INPUT];
       expect(FormUtils.isMaskedInput(question)).toBeTruthy();
     });
 
@@ -283,9 +288,9 @@ describe("FormUtils", () => {
 
   describe("isCollapsed", () => {
     it("returns true when question layout class contains collapsed", () => {
-      question[Constants.LAYOUT_CLASS] = [
-        Constants.LAYOUT.QUESTION_SECTION,
-        Constants.LAYOUT.COLLAPSED,
+      question[Vocabulary.LAYOUT_CLASS] = [
+        Vocabulary.LAYOUT.QUESTION_SECTION,
+        Vocabulary.LAYOUT.COLLAPSED,
       ];
       expect(FormUtils.isCollapsed(question)).toBeTruthy();
     });

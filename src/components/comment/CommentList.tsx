@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import CommentView from "./CommentView";
-import Constants from "../../constants/Constants";
+import Vocabulary from "../../constants/Vocabulary";
 import { Rings } from "react-loader-spinner";
 
 interface Props {
@@ -38,13 +38,13 @@ const CommentList = ({ comments, onDeleteCommentClick }: Props) => {
           {comments.map((comment, index) => (
             <div key={index} className="comment-list-item">
               <CommentView
-                commentValue={comment[Constants.HAS_COMMENT_VALUE]}
+                commentValue={comment[Vocabulary.HAS_COMMENT_VALUE]}
                 author={
-                  comment[Constants.HAS_AUTHOR]
-                    ? comment[Constants.HAS_AUTHOR]
+                  comment[Vocabulary.HAS_AUTHOR]
+                    ? comment[Vocabulary.HAS_AUTHOR]
                     : null
                 }
-                timestamp={comment[Constants.HAS_TIMESTAMP]}
+                timestamp={comment[Vocabulary.HAS_TIMESTAMP]}
                 onDeleteQuestionComment={onDeleteCommentClick}
                 onDeleteViewComment={handleDeleteViewComment}
                 index={index}

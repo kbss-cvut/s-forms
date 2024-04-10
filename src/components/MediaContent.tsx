@@ -1,5 +1,5 @@
 import React from "react";
-import Constants from "../constants/Constants";
+import Vocabulary from "../constants/Vocabulary";
 
 interface Props {
   question: object;
@@ -8,7 +8,7 @@ interface Props {
 const MediaContent = ({ question }: Props) => {
   const renderMedia = () => {
     // @ts-ignore
-    const mediaContent = question[Constants.HAS_MEDIA_CONTENT];
+    const mediaContent = question[Vocabulary.HAS_MEDIA_CONTENT];
 
     if (mediaContent) {
       if (Array.isArray(mediaContent)) {
