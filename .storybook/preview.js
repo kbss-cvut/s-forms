@@ -90,11 +90,11 @@ export const globalTypes = {
   printFormSpecification: {
     name: "Print form specification",
     description: "Set to true to print the form specification in the console",
+    defaultValue: false,
     toolbar: {
       title: "Print form specification",
       icon: "folder",
       control: "boolean",
-      defaultValue: false,
       items: [
         { value: true, title: "On" },
         { value: false, title: "Off" },
@@ -104,11 +104,11 @@ export const globalTypes = {
   validateForm: {
     name: "Validate form",
     description: "Set to true to validate the form.",
+    defaultValue: false,
     toolbar: {
       title: "Validate form",
       icon: "check",
       control: "boolean",
-      defaultValue: false,
       items: [
         { value: true, title: "On" },
         { value: false, title: "Off" },
