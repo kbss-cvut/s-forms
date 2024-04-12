@@ -47,6 +47,7 @@ const Template: ComponentStory<typeof SForms> = (
       horizontalNavBar,
       timeOut,
       printFormSpecification,
+      validateForm,
     },
   }
 ) => {
@@ -111,6 +112,15 @@ const Template: ComponentStory<typeof SForms> = (
   useEffect(() => {
     console.log(formSpecifications);
   }, [formSpecifications]);
+
+  useEffect(() => {
+    if (formRef.current) {
+      const formRefCurrent: any = formRef.current;
+      if (validateForm === true) {
+        formRefCurrent.validateForm();
+      }
+    }
+  }, [validateForm]);
 
   return (
     <SForms
