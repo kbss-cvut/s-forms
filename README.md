@@ -9,10 +9,10 @@ Checkout [live demo using storybook](https://s-forms-kbss.netlify.app).
 
 ## Supported features
 
-- validation
-- question comments
-- navigation to selected question
-- emphasizing selected questions
+- Validation
+- Question comments
+- Navigation to the selected question
+- Emphasizing selected questions
 
 ### Components
 
