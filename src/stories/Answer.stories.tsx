@@ -10,6 +10,7 @@ import questionDateMaskedInput from "./assets/question/questionDateMaskedInput.j
 import questionTimeMaskedInput from "./assets/question/questionTimeMaskedInput.json";
 import questionMilitaryTimeMaskedInput from "./assets/question/questionMilitaryTimeMaskedInput.json";
 import questionDateTimeMaskedInput from "./assets/question/questionDateTimeMaskedInput.json";
+import inputWithPlaceholder from "./assets/question/inputWithPlaceholder.json";
 import questionSparqlInput from "./assets/question/questionSparqlInput.json";
 import questionTurtleInput from "./assets/question/questionTurtleInput.json";
 
@@ -97,6 +98,13 @@ export const TimeMaskedInput: Story = {
   args: {
     ...Template.args,
     question: questionTimeMaskedInput,
+  },
+};
+
+export const InputTimeMaskedInput: Story = {
+  args: {
+    ...Template.args,
+    question: inputWithPlaceholder,
   },
 };
 

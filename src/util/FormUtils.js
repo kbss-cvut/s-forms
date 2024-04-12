@@ -574,4 +574,10 @@ export default class FormUtils {
     }
     return false;
   }
+
+  static getInputMask(question) {
+    if (question[Constants.INPUT_MASK]) {
+      return question[Constants.INPUT_MASK];
+    }
+  }
 }
