@@ -9,6 +9,13 @@ Checkout [live demo using storybook](https://s-forms-kbss.netlify.app).
 
 ## Supported features
 
+- validation
+- question comments
+- navigation to selected question
+- emphasizing selected questions
+
+### Components
+
 - Input/Textarea
 - Tree Typeahead
 - Datetime picker
