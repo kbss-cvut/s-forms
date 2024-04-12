@@ -1,7 +1,7 @@
 name: Publish NPM Beta Package
 
 on:
-  pull_request_target:
+  pull_request:
     types:
       - closed
     branches:
@@ -19,6 +19,16 @@ jobs:
       - name: Get short SHA
         id: set_sha
         run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Determine branch name
+        run: echo "BRANCH_NAME=$(echo $GITHUB_REF | awk -F'/' '{print $3}')" >> $GITHUB_ENV
+
+      - name: Fetch branch from forked repository
+        run: git fetch https://github.com/$GITHUB_REPOSITORY.git $BRANCH_NAME:$BRANCH_NAME
+        if: startsWith(github.event.pull_request.head.repo.full_name, 'forked_repo_owner')
+
+      - name: Checkout branch
+        run: git checkout $BRANCH_NAME
 
       - uses: "phips28/gh-action-bump-version@master"
         with:
