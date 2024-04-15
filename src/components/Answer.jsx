@@ -203,23 +203,23 @@ const Answer = (props) => {
     if (question[Constants.HAS_VALID_ANSWER] === false) {
       if (
         question[Constants.HAS_VALIDATION_SEVERITY] ===
-        Constants.VALIDATION_SEVERITY.WARNING
+        Constants.VALIDATION.SEVERITY.WARNING
       ) {
         setValidation({
-          severity: "warning",
-          classname: "is-warning",
+          severity: Constants.VALIDATION.SEVERITY.WARNING,
+          classname: Constants.VALIDATION.CLASSNAME.WARNING,
           message: (
-            <FormText className="is-warning">
+            <FormText className={Constants.VALIDATION.CLASSNAME.WARNING}>
               {question[Constants.HAS_VALIDATION_MESSAGE]}
             </FormText>
           ),
         });
       } else {
         setValidation({
-          severity: "error",
-          classname: "is-invalid",
+          severity: Constants.VALIDATION.SEVERITY.ERROR,
+          classname: Constants.VALIDATION.CLASSNAME.ERROR,
           message: (
-            <FormText className="is-invalid">
+            <FormText className={Constants.VALIDATION.CLASSNAME.ERROR}>
               {question[Constants.HAS_VALIDATION_MESSAGE]}
             </FormText>
           ),
