@@ -34,9 +34,21 @@ format which is JSON-compatible serialization of the RDF language.
 
 Building SForms library can be done using `npm run build:lib`.
 
-### Debugging form and components with StorybookJS
+### StorybookJS
 
-Storybook is an open-source tool for building UI components and pages in isolation. Rendering of a form or a specific component can be tested through a story provided in `./src/stories/`. The application can be started by executing npm script through `npm run dev` and then accessing `localhost:6006` from a browser. It renders the forms provided by the file `./src/stories/assets/`. See `./src/stories/SForms/SForms.stories.tsx` for more details.
+#### Debugging forms and components with StorybookJS
+
+Storybook is an open-source tool for building UI components and pages in isolation.  Rendering of a form or a specific component can be tested through a story provided in `./src/stories/`. The application can be started by executing npm script through `npm run dev` and then accessing `localhost:6006` from a browser. It renders the forms provided by the file `./src/stories/assets/`. See `./src/stories/SForms/SForms.stories.tsx` for more details.
+
+#### Testing forms with the toolbar
+With the Storybook [toolbar](https://storybook.js.org/docs/essentials/toolbars-and-globals), it is possible to test a set of predefined global variables. The toolbar supports the following features:
+- Icon behavior: Set the behavior for the icons
+- Locale: Set the internationalization locale
+- Debug mode: Show irrelevant questions
+- Navbar position: Set the navigation bar to horizontal/vertical position
+- Timeout: Set time-out for possible values (in ms)
+- Print form specification: Print the form specification in the console
+- Validate form: Triggers the form validation
 
 ### NPM release workflow
 
