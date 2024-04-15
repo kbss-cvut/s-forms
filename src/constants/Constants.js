@@ -201,8 +201,23 @@ export default class Constants {
     },
   };
 
-  static VALIDATION_SEVERITY = {
-    ERROR: "error",
-    WARNING: "warning",
+  static VALIDATION = {
+    SEVERITY: {
+      ERROR: "error",
+      WARNING: "warning",
+    },
+    DEFAULT_MESSAGE: {
+      REQUIRED: "This field is required.",
+      REQUIRED_ONLY_FOR_COMPLETENESS:
+        "This field is required to complete the form.",
+      INVALID: "This field is invalid.",
+      CHECK: "This field must be checked.",
+      LOWER_OR_EQUAL: "This field should be a number equal or lower to ",
+      GREATER_OR_EQUAL: "This field must be greater or equal to ",
+    },
+    CLASSNAME: {
+      ERROR: "is-invalid",
+      WARNING: "is-warning",
+    },
   };
 }

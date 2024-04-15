@@ -58,14 +58,10 @@ export default class ValidatorFactory {
         if (!isValid) {
           return {
             isValid: false,
-            validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
+            validationSeverity: Constants.VALIDATION.SEVERITY.ERROR,
             message: question[Constants.HAS_VALIDATION_MESSAGE]
               ? question[Constants.HAS_VALIDATION_MESSAGE]
-              : "Please enter a valid answer to " +
-                JsonLdUtils.getLocalized(
-                  question[JsonLdUtils.RDFS_LABEL],
-                  intl
-                ),
+              : Constants.VALIDATION.DEFAULT_MESSAGE.INVALID,
           };
         }
       }
@@ -82,10 +78,10 @@ export default class ValidatorFactory {
       if (!isValid) {
         return {
           isValid: false,
-          validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
-          message:
-            JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], intl) +
-            " is required",
+          validationSeverity: Constants.VALIDATION.SEVERITY.ERROR,
+          message: question[Constants.HAS_VALIDATION_MESSAGE]
+            ? question[Constants.HAS_VALIDATION_MESSAGE]
+            : Constants.VALIDATION.DEFAULT_MESSAGE.REQUIRED,
         };
       }
     }
@@ -99,10 +95,10 @@ export default class ValidatorFactory {
         if (!isValid) {
           return {
             isValid: false,
-            validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
-            message:
-              JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], intl) +
-              " must be checked",
+            validationSeverity: Constants.VALIDATION.SEVERITY.ERROR,
+            message: question[Constants.HAS_VALIDATION_MESSAGE]
+              ? question[Constants.HAS_VALIDATION_MESSAGE]
+              : Constants.VALIDATION.DEFAULT_MESSAGE.CHECK,
           };
         }
       }
@@ -119,10 +115,11 @@ export default class ValidatorFactory {
       if (!isValid) {
         return {
           isValid: false,
-          validationSeverity: Constants.VALIDATION_SEVERITY.WARNING,
-          message:
-            JsonLdUtils.getLocalized(question[JsonLdUtils.RDFS_LABEL], intl) +
-            " should be filled to complete the form.",
+          validationSeverity: Constants.VALIDATION.SEVERITY.WARNING,
+          message: question[Constants.HAS_VALIDATION_MESSAGE]
+            ? question[Constants.HAS_VALIDATION_MESSAGE]
+            : Constants.VALIDATION.DEFAULT_MESSAGE
+                .REQUIRED_ONLY_FOR_COMPLETENESS,
         };
       }
     }
@@ -142,11 +139,12 @@ export default class ValidatorFactory {
         if (!isValid) {
           return {
             isValid: false,
-            validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
-            message:
-              "The answer should be a number equal or greater than " +
-              minInclusive +
-              ".",
+            validationSeverity: Constants.VALIDATION.SEVERITY.ERROR,
+            message: question[Constants.HAS_VALIDATION_MESSAGE]
+              ? question[Constants.HAS_VALIDATION_MESSAGE]
+              : Constants.VALIDATION.DEFAULT_MESSAGE.GREATER_OR_EQUAL +
+                minInclusive +
+                ".",
           };
         }
       }
@@ -167,11 +165,12 @@ export default class ValidatorFactory {
         if (!isValid) {
           return {
             isValid: false,
-            validationSeverity: Constants.VALIDATION_SEVERITY.ERROR,
-            message:
-              "The answer should be a number equal or lower than " +
-              maxInclusive +
-              ".",
+            validationSeverity: Constants.VALIDATION.SEVERITY.ERROR,
+            message: question[Constants.HAS_VALIDATION_MESSAGE]
+              ? question[Constants.HAS_VALIDATION_MESSAGE]
+              : Constants.VALIDATION.DEFAULT_MESSAGE.LOWER_OR_EQUAL +
+                maxInclusive +
+                ".",
           };
         }
       }
