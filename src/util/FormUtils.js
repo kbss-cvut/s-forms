@@ -529,6 +529,10 @@ export default class FormUtils {
         ? ind + propertyIndentation + "pattern: " + q[Constants.PATTERN] + "\n"
         : "";
 
+      let mask = q[Constants.INPUT_MASK]
+        ? ind + propertyIndentation + "mask: " + q[Constants.INPUT_MASK] + "\n"
+        : "";
+
       let validationMessage = q[Constants.HAS_VALIDATION_MESSAGE]
         ? ind +
           propertyIndentation +
@@ -541,6 +545,7 @@ export default class FormUtils {
       output += description;
       output += requiredValue;
       output += pattern;
+      output += mask;
       output += validationMessage;
       output += "\n";
     }

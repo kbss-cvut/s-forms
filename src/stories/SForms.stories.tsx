@@ -110,7 +110,9 @@ const Template: ComponentStory<typeof SForms> = (
   }, [printFormSpecification]);
 
   useEffect(() => {
-    console.log(formSpecifications);
+    if (formSpecifications) {
+      console.log(formSpecifications);
+    }
   }, [formSpecifications]);
 
   useEffect(() => {
