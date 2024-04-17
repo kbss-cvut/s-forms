@@ -65,7 +65,6 @@ const Template: ComponentStory<typeof SForms> = (
     modalProps,
     horizontalWizardNav: horizontalNavBar,
     wizardStepButtons: true,
-    enableForwardSkip: true,
     ...getP("startingQuestionId", "layout-options-65"),
     startingStep: 1,
     debugMode: debugMode,

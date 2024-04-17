@@ -130,7 +130,6 @@ const options = {
   modalView: false,
   horizontalWizardNav: false,
   wizardStepButtons: true,
-  enableForwardSkip: true,
   startingStep: 1,
   debugMode: false,
   users: [

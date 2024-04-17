@@ -93,7 +93,7 @@ const Wizard = () => {
     if (
       stepIndex > currentStep &&
       !stepData[stepIndex].visited &&
-      !options.enableForwardSkip
+      !options.enableWizardStepSkip
     ) {
       return;
     }
