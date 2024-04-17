@@ -6,6 +6,7 @@ import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import FormUtils from "../../util/FormUtils";
 import Question from "../Question";
 import classNames from "classnames";
+import IconOverlay from "../IconOverlay.jsx";
 
 const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
@@ -14,26 +15,33 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
     <div className="wizard-nav col-2 p-0">
       <ListGroup>
         {steps.map((step, index) => (
-          <ListGroupItem
-            hidden={options.debugMode ? false : !FormUtils.isRelevant(step)}
-            key={"nav" + index}
-            onClick={() => onNavigate(index)}
-            id={"wizard-nav-" + index}
-            action={true}
-            active={index === currentStep ? "active" : ""}
-            variant={"default"}
-            className={classNames([
-              options.debugMode && !FormUtils.isRelevant(step)
-                ? "show-irrelevant"
-                : Question.getEmphasizedClass(step),
-              "wizard-nav",
-            ])}
+          <IconOverlay
+            id="step-disabled"
+            tooltipContent="Navigation to this tab is disabled to prevent overlooking important questions. Use form-related buttons to navigate to this tab instead."
+            show={!options.enableWizardStepSkip}
           >
-            {JsonLdUtils.getLocalized(
-              step[JsonLdUtils.RDFS_LABEL],
-              options.intl
-            )}
-          </ListGroupItem>
+            <ListGroupItem
+              hidden={options.debugMode ? false : !FormUtils.isRelevant(step)}
+              key={"nav" + index}
+              onClick={() => onNavigate(index)}
+              id={"wizard-nav-" + index}
+              action={true}
+              active={index === currentStep ? "active" : ""}
+              disabled={!options.enableWizardStepSkip}
+              variant={"default"}
+              className={classNames([
+                options.debugMode && !FormUtils.isRelevant(step)
+                  ? "show-irrelevant"
+                  : Question.getEmphasizedClass(step),
+                "wizard-nav",
+              ])}
+            >
+              {JsonLdUtils.getLocalized(
+                step[JsonLdUtils.RDFS_LABEL],
+                options.intl
+              )}
+            </ListGroupItem>
+          </IconOverlay>
         ))}
       </ListGroup>
     </div>

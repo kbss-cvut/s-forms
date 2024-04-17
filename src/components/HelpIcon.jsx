@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Tooltip } from "react-bootstrap";
 import { QuestionCircle } from "../styles/icons";
 import IconOverlay from "./IconOverlay.jsx";
 

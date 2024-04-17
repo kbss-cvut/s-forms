@@ -6,6 +6,7 @@ import FormUtils from "../../util/FormUtils";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import Question from "../Question";
 import classNames from "classnames";
+import IconOverlay from "../IconOverlay.jsx";
 
 const HorizontalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
@@ -18,24 +19,31 @@ const HorizontalWizardNav = ({ steps, onNavigate, currentStep }) => {
         onSelect={(key) => onNavigate(parseInt(key))}
       >
         {steps.map((step, index) => (
-          <NavItem key={"nav" + index} id={"wizard-nav-" + index}>
-            <NavLink
-              eventKey={index}
-              active={index === currentStep ? "active" : ""}
-              hidden={options.debugMode ? false : !FormUtils.isRelevant(step)}
-              className={classNames([
-                options.debugMode && !FormUtils.isRelevant(step)
-                  ? "show-irrelevant"
-                  : Question.getEmphasizedClass(step),
-                "wizard-nav",
-              ])}
-            >
-              {JsonLdUtils.getLocalized(
-                step[JsonLdUtils.RDFS_LABEL],
-                options.intl
-              )}
-            </NavLink>
-          </NavItem>
+          <IconOverlay
+            id="step-disabled"
+            tooltipContent="Navigation to this tab is disabled to prevent overlooking important questions. Use form-related buttons to navigate to this tab instead."
+            show={!options.enableWizardStepSkip}
+          >
+            <NavItem key={"nav" + index} id={"wizard-nav-" + index}>
+              <NavLink
+                eventKey={index}
+                active={index === currentStep ? "active" : ""}
+                hidden={options.debugMode ? false : !FormUtils.isRelevant(step)}
+                disabled={!options.enableWizardStepSkip}
+                className={classNames([
+                  options.debugMode && !FormUtils.isRelevant(step)
+                    ? "show-irrelevant"
+                    : Question.getEmphasizedClass(step),
+                  "wizard-nav",
+                ])}
+              >
+                {JsonLdUtils.getLocalized(
+                  step[JsonLdUtils.RDFS_LABEL],
+                  options.intl
+                )}
+              </NavLink>
+            </NavItem>
+          </IconOverlay>
         ))}
       </Nav>
     </Card.Header>
