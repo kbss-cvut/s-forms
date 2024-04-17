@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { FormGroup, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 import FormUtils from "../../util/FormUtils";
 import Constants from "../../constants/Constants";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
@@ -10,7 +10,13 @@ import classNames from "classnames";
 
 const DateTimeAnswer = (props) => {
   const { componentsOptions } = useContext(ConfigurationContext);
-  const [date, setDate] = useState(props.value ? new Date(props.value) : null);
+  const [date, setDate] = useState(null);
+
+  useEffect(() => {
+    if (props.value) {
+      setDate(new Date(parse(props.value, datePickerFormat, new Date())));
+    }
+  }, []);
 
   const dateFormat = FormUtils.resolveDateTimeFormat(
     props.question,
