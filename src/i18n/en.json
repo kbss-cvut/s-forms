@@ -1,3 +1,4 @@
 {
-  "comment.form.placeholder": "Write your comments here  (Ctrl+Enter to confirm, Esc to cancel)"
+  "comment.form.placeholder": "Write your comments here  (Ctrl+Enter to confirm, Esc to cancel)",
+  "wizard.nav.tooltip": "Navigation to this tab is disabled to prevent overlooking important questions. Use form-related buttons to navigate to this tab instead."
 }

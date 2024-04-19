@@ -13,10 +13,12 @@ const IconOverlay = (props) => {
     } else setOverlayPlacement("right");
   };
 
-  const tooltip = (
+  const tooltip = props.show ? (
     <Tooltip className="tooltip-content" id={props.id}>
       {props.tooltipContent}
     </Tooltip>
+  ) : (
+    <span />
   );
 
   return (
@@ -39,12 +41,14 @@ IconOverlay.propTypes = {
   id: PropTypes.string.isRequired,
   overlayPlacement: PropTypes.string,
   absolutePosition: PropTypes.bool,
+  show: PropTypes.bool,
 };
 
 IconOverlay.defaultProps = {
   iconClassContainer: "",
   iconClass: "",
   absolutePosition: true,
+  show: true,
 };
 
 export default IconOverlay;

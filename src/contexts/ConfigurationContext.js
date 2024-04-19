@@ -28,7 +28,7 @@ const defaultProps = {
     modalProps: {},
     horizontalWizardNav: true,
     wizardStepButtons: true,
-    enableForwardSkip: false,
+    enableWizardStepSkip: true,
     startingStep: 0,
   },
 };
