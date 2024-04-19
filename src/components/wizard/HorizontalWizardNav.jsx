@@ -7,9 +7,11 @@ import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import Question from "../Question";
 import classNames from "classnames";
 import IconOverlay from "../IconOverlay.jsx";
+import { useIntl } from "react-intl";
 
 const HorizontalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
+  const intl = useIntl();
 
   return (
     <Card.Header>
@@ -21,7 +23,7 @@ const HorizontalWizardNav = ({ steps, onNavigate, currentStep }) => {
         {steps.map((step, index) => (
           <IconOverlay
             id="step-disabled"
-            tooltipContent="Navigation to this tab is disabled to prevent overlooking important questions. Use form-related buttons to navigate to this tab instead."
+            tooltipContent={intl.formatMessage({ id: "wizard.nav.tooltip" })}
             show={!options.enableWizardStepSkip}
           >
             <NavItem key={"nav" + index} id={"wizard-nav-" + index}>

@@ -7,9 +7,11 @@ import FormUtils from "../../util/FormUtils";
 import Question from "../Question";
 import classNames from "classnames";
 import IconOverlay from "../IconOverlay.jsx";
+import { useIntl } from "react-intl";
 
 const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
   const { options } = useContext(ConfigurationContext);
+  const intl = useIntl();
 
   return (
     <div className="wizard-nav col-2 p-0">
@@ -17,7 +19,7 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
         {steps.map((step, index) => (
           <IconOverlay
             id="step-disabled"
-            tooltipContent="Navigation to this tab is disabled to prevent overlooking important questions. Use form-related buttons to navigate to this tab instead."
+            tooltipContent={intl.formatMessage({ id: "wizard.nav.tooltip" })}
             show={!options.enableWizardStepSkip}
           >
             <ListGroupItem
