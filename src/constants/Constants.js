@@ -80,6 +80,9 @@ export default class Constants {
     NON_NEGATIVE_INTEGER: "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
     NON_POSITIVE_INTEGER: "http://www.w3.org/2001/XMLSchema#nonPositiveInteger",
     POSITIVE_INTEGER: "http://www.w3.org/2001/XMLSchema#positiveInteger",
+    FLOAT: "http://www.w3.org/2001/XMLSchema#float",
+    POSITIVE_FLOAT: "http://www.w3.org/2001/XMLSchema#positiveFloat",
+    NEGATIVE_FLOAT: "http://www.w3.org/2001/XMLSchema#negativeFloat",
 
     BOOLEAN: "http://www.w3.org/2001/XMLSchema#boolean",
   };

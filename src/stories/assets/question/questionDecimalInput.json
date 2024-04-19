@@ -1,0 +1,12 @@
+{
+  "@id": "average-number-9553",
+  "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+  "http://www.w3.org/2000/01/rdf-schema#label": "Average number of men during repairment",
+  "http://onto.fel.cvut.cz/ontologies/form/step": 0.1,
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "number",
+  "http://onto.fel.cvut.cz/ontologies/form/has-datatype": {
+    "@id": "http://www.w3.org/2001/XMLSchema#float"
+  },
+  "http://www.w3.org/2001/XMLSchema#maxInclusive": 30,
+  "http://www.w3.org/2001/XMLSchema#minInclusive": 0
+}
