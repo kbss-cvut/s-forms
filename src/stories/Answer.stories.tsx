@@ -13,6 +13,7 @@ import questionDateTimeMaskedInput from "./assets/question/questionDateTimeMaske
 import inputWithPlaceholder from "./assets/question/inputWithPlaceholder.json";
 import questionSparqlInput from "./assets/question/questionSparqlInput.json";
 import questionTurtleInput from "./assets/question/questionTurtleInput.json";
+import questionDecimalInput from "./assets/question/questionDecimalInput.json";
 
 const meta: Meta<typeof Answer> = {
   title: "Components/Answer",
@@ -49,6 +50,13 @@ export const RegularInput: Story = {
       "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": "",
     },
     question: question,
+  },
+};
+
+export const DecimalInput: Story = {
+  args: {
+    ...Template.args,
+    question: questionDecimalInput,
   },
 };
 
