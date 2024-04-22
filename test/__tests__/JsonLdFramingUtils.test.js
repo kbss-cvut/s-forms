@@ -1,4 +1,3 @@
-import React from "react";
 import JsonLdFramingUtils from "../../src/util/JsonLdFramingUtils";
 
 describe("JsonLd framing utils", () => {
