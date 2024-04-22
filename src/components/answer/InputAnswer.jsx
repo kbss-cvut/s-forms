@@ -131,6 +131,8 @@ class InputPropertiesResolver {
         "-",
         "Minus",
         "NumpadSubtract",
+        ".",
+        "Period",
       ].includes(e.key)
     ) {
       e.preventDefault();
