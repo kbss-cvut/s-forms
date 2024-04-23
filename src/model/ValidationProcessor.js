@@ -1,5 +1,5 @@
 import Constants from "../constants/Constants";
-import ValidatorFactory from "./ValidatorFactory.js";
+import { createValidator } from "./ValidatorFactory.js";
 import Utils from "../util/Utils.js";
 
 export default class ValidationProcessor {
@@ -12,7 +12,7 @@ export default class ValidationProcessor {
    */
   static updateQuestionValidation = (questions, question, index, intl) => {
     if (question[Constants.HAS_ANSWER]) {
-      const validator = ValidatorFactory.createValidator(question, intl);
+      const validator = createValidator(question, intl);
       const update = validator();
 
       if (update) {

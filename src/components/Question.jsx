@@ -501,6 +501,7 @@ export default class Question extends React.Component {
           question: question,
           onChange: this.handleSubQuestionChange,
           index: i,
+          intl: this.props.intl,
         });
       }
       children.push(element);
