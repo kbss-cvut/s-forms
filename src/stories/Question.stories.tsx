@@ -37,7 +37,6 @@ const optionsWithDebugModeOn = {
   intl: {
     locale: "en",
   },
-  i18n: {},
   debugMode: true,
 };
 
@@ -45,7 +44,6 @@ const optionsWithStartingHiddenQuestion = {
   intl: {
     locale: "en",
   },
-  i18n: {},
   ...getP("startingQuestionId", "hidden-question-1834"),
 };
 
@@ -66,7 +64,6 @@ const Template: ComponentStory<typeof Question> = (
     intl: {
       locale: "en",
     },
-    i18n: {},
     debugMode: debugMode,
   };
   const _getComponentMappingFunction = () => {

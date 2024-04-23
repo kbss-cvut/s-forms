@@ -442,12 +442,9 @@ export default class Question extends React.Component {
   }
 
   _renderCollapseToggle() {
-    const { options } = this.context;
-
-    // TODO: Convert this component into a functional component to use useIntl() Hook
     const title = this.state.expanded
-      ? options.i18n["section.collapse"]
-      : options.i18n["section.expand"];
+      ? this.props.intl.formatMessage({ id: "section.collapse" })
+      : this.props.intl.formatMessage({ id: "section.expand" });
 
     return (
       <span onClick={this._toggleCollapse} title={title}>
