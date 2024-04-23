@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 import { FormQuestionsContext } from "../contexts/FormQuestionsContext";
 import Wizard from "./wizard/Wizard";
@@ -7,11 +7,16 @@ import { Card } from "react-bootstrap";
 import Question from "./Question";
 import FormUtils from "../util/FormUtils.js";
 import ValidationProcessor from "../model/ValidationProcessor.js";
+import { useIntl } from "react-intl";
 
-class FormManager extends React.Component {
-  getFormData = () => {
-    const data = this.context.getData();
-    const formQuestionsData = this.context.getFormQuestionsData();
+const FormManager = (props) => {
+  const { getFormQuestionsData, updateFormQuestionsData, getData } =
+    useContext(FormQuestionsContext);
+  const intl = useIntl();
+
+  const getFormData = () => {
+    const data = getData();
+    const formQuestionsData = getFormQuestionsData();
 
     return QuestionAnswerProcessor.buildQuestionAnswerModel(
       data,
@@ -20,86 +25,77 @@ class FormManager extends React.Component {
   };
 
   //TODO: Add optional argument "isRequiredForCompleteness"
-  validateForm = () => {
-    const questions = this.context.getFormQuestionsData();
+  const validateForm = () => {
+    const questions = getFormQuestionsData();
 
     for (let i = 0; i < questions.length; i++) {
       const question = questions[i];
-      //TODO: Convert to functional component to add intl from intl context
       ValidationProcessor.updateQuestionValidation(
         questions,
         question,
         i,
-        "en"
+        intl.locale
       );
     }
 
-    this.context.updateFormQuestionsData(null, questions);
+    updateFormQuestionsData(null, questions);
   };
 
-  getFormQuestionsData = () => {
-    return this.context.getFormQuestionsData();
-  };
-
-  getFormSpecification = () => {
-    const questions = this.context.getFormQuestionsData();
+  const getFormSpecification = () => {
+    const questions = getFormQuestionsData();
     return FormUtils.getFormSpecification(questions);
   };
 
-  handleStepChange = (question, index, change) => {
-    this.context.updateFormQuestionsData(index, { ...question, ...change });
+  const handleStepChange = (question, index, change) => {
+    updateFormQuestionsData(index, { ...question, ...change });
   };
 
-  renderWizardlessForm = () => {
-    const formQuestionsData = this.context.getFormQuestionsData();
+  const renderWizardlessForm = () => {
+    const formQuestionsData = getFormQuestionsData();
 
     return (
       <Card className="p-3">
-        {formQuestionsData.map((q, i) => this._mapQuestion(q, i))}
+        {formQuestionsData.map((q, i) => _mapQuestion(q, i))}
       </Card>
     );
   };
 
-  _mapQuestion(question, index) {
-    let component = this.props.mapComponent(question, Question);
+  const _mapQuestion = (question, index) => {
+    let component = props.mapComponent(question, Question);
     return React.createElement(component, {
       key: question["@id"],
       question: question,
-      onChange: (index, change) =>
-        this.handleStepChange(question, index, change),
+      onChange: (index, change) => handleStepChange(question, index, change),
       index: index,
+      intl: intl,
     });
-  }
+  };
 
-  render() {
-    const { modalView } = this.props;
+  const { modalView } = props;
 
-    const formQuestionsData = this.context.getFormQuestionsData();
+  const formQuestionsData = getFormQuestionsData();
 
-    if (!formQuestionsData.length) {
-      return (
-        <Card className="p-3 font-italic">
-          There are no questions available...
-        </Card>
-      );
-    }
-
-    const isWizardless = formQuestionsData.every(
-      (question) => !FormUtils.isWizardStep(question)
+  if (!formQuestionsData.length) {
+    return (
+      <Card className="p-3 font-italic">
+        There are no questions available...
+      </Card>
     );
-
-    if (modalView) {
-      return (
-        <FormWindow>
-          {isWizardless ? this.renderWizardlessForm() : <Wizard />}
-        </FormWindow>
-      );
-    }
-
-    return isWizardless ? this.renderWizardlessForm() : <Wizard />;
   }
-}
 
-FormManager.contextType = FormQuestionsContext;
+  const isWizardless = formQuestionsData.every(
+    (question) => !FormUtils.isWizardStep(question)
+  );
+
+  if (modalView) {
+    return (
+      <FormWindow>
+        {isWizardless ? renderWizardlessForm() : <Wizard />}
+      </FormWindow>
+    );
+  }
+
+  return isWizardless ? renderWizardlessForm() : <Wizard />;
+};
 
 export default FormManager;
