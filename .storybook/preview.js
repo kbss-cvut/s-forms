@@ -1,12 +1,8 @@
 import Constants from "../src/constants/Constants";
-import IntlContextProvider from "../src/contexts/IntlContextProvider";
-import { FormGenContextProvider } from "../src/contexts/FormGenContext";
-import { ConfigurationContextProvider } from "../src/contexts/ConfigurationContext";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../src/styles/s-forms.css";
-import possibleValues from "../src/stories/assets/possibleValues.json";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -117,63 +113,7 @@ export const globalTypes = {
   },
 };
 
-const options = {
-  i18n: {
-    "wizard.next": "Next",
-    "wizard.previous": "Previous",
-    "section.expand": "Expand",
-    "section.collapse": "Collapse",
-  },
-  intl: {
-    locale: "en",
-  },
-  modalView: false,
-  horizontalWizardNav: false,
-  wizardStepButtons: true,
-  startingStep: 1,
-  debugMode: false,
-  users: [
-    { id: "http://fel.cvut.cz/people/max-chopart", label: "Max Chopart" },
-    {
-      id: "http://fel.cvut.cz/people/miroslav-blasko",
-      label: "Miroslav Blasko",
-    },
-  ],
-  currentUser: "http://fel.cvut.cz/people/max-chopart",
-  icons: [
-    {
-      id: Constants.ICONS.QUESTION_HELP,
-      behavior: Constants.ICON_BEHAVIOR.ENABLE,
-    },
-    {
-      id: Constants.ICONS.QUESTION_LINK,
-      behavior: Constants.ICON_BEHAVIOR.ENABLE,
-    },
-    {
-      id: Constants.ICONS.QUESTION_COMMENTS,
-      behavior: Constants.ICON_BEHAVIOR.ENABLE,
-    },
-  ],
-};
-
-const fetchTypeAheadValues = () => {
-  return new Promise((resolve) =>
-    setTimeout(() => resolve(possibleValues), 1500)
-  );
-};
-
 const preview = {
-  decorators: [
-    (Story, context) => (
-      <ConfigurationContextProvider options={options}>
-        <FormGenContextProvider fetchTypeAheadValues={fetchTypeAheadValues}>
-          <IntlContextProvider locale={context.globals.locale}>
-            <Story />
-          </IntlContextProvider>
-        </FormGenContextProvider>
-      </ConfigurationContextProvider>
-    ),
-  ],
   parameters: {
     options: {
       storySort: {

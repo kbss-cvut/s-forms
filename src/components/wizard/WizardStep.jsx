@@ -1,72 +1,67 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Question from "../Question";
 import PropTypes from "prop-types";
 import FormUtils from "../../util/FormUtils.js";
+import { useIntl } from "react-intl";
 
-export default class WizardStep extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const WizardStep = (props) => {
+  const { updateFormQuestionsData, getFormQuestionsData } =
+    useContext(FormQuestionsContext);
+  const intl = useIntl();
 
-  onNextStep = () => {
-    this.context.updateFormQuestionsData(
-      this.props.index,
-      this.context.getFormQuestionsData()
-    );
-    this.props.onNextStep();
+  const onNextStep = () => {
+    updateFormQuestionsData(props.index, getFormQuestionsData());
+    props.onNextStep();
   };
 
-  onPreviousStep = () => {
-    this.props.onPreviousStep();
+  const onPreviousStep = () => {
+    props.onPreviousStep();
   };
 
-  _renderWizardStepButtons = () => {
+  const _renderWizardStepButtons = () => {
     return (
       <ButtonToolbar className="m-3 float-right">
-        {!this.props.isFirstStep && (
+        {!props.isFirstStep && (
           <Button
             className="mr-2"
-            onClick={this.onPreviousStep}
+            onClick={onPreviousStep}
             variant="primary"
             size="sm"
           >
-            {this.props.options.i18n["wizard.previous"]}
+            {intl.formatMessage({ id: "wizard.previous" })}
           </Button>
         )}
-        {!this.props.isLastStep && (
-          <Button onClick={this.onNextStep} variant="primary" size="sm">
-            {this.props.options.i18n["wizard.next"]}
+        {!props.isLastStep && (
+          <Button onClick={onNextStep} variant="primary" size="sm">
+            {intl.formatMessage({ id: "wizard.next" })}
           </Button>
         )}
       </ButtonToolbar>
     );
   };
 
-  onChange = (index, change) => {
-    this.context.updateFormQuestionsData(this.props.index || index, {
-      ...this.props.question,
+  const onChange = (index, change) => {
+    updateFormQuestionsData(props.index || index, {
+      ...props.question,
       ...change,
     });
   };
 
-  render() {
-    const question = this.context.getFormQuestionsData([this.props.index]);
+  const question = getFormQuestionsData([props.index]);
 
-    return (
-      <React.Fragment>
-        <Question
-          question={question}
-          onChange={this.onChange}
-          collapsible={FormUtils.isAnswerable(question)}
-        />
-        {this.props.options.wizardStepButtons &&
-          this._renderWizardStepButtons()}
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      <Question
+        question={question}
+        onChange={onChange}
+        collapsible={FormUtils.isAnswerable(question)}
+      />
+      {props.options.wizardStepButtons && _renderWizardStepButtons()}
+    </React.Fragment>
+  );
+};
 
 WizardStep.propTypes = {
   options: PropTypes.object.isRequired,
@@ -79,4 +74,4 @@ WizardStep.propTypes = {
   isLastStep: PropTypes.bool,
 };
 
-WizardStep.contextType = FormQuestionsContext;
+export default WizardStep;

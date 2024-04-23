@@ -52,12 +52,6 @@ const Template: ComponentStory<typeof SForms> = (
   }
 ) => {
   const options = {
-    i18n: {
-      "wizard.next": "Next",
-      "wizard.previous": "Previous",
-      "section.expand": "Expand",
-      "section.collapse": "Collapse",
-    },
     intl: {
       locale: locale,
     },

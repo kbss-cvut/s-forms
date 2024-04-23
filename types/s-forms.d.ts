@@ -8,12 +8,6 @@ export type Intl = {
 
 export interface SOptions {
   intl?: Intl; // default 'en'
-  i18n?: {
-    "wizard.next": string; // default 'Next'
-    "wizard.previous": string; // default 'Previous'
-    "section.expand": string; // default 'Expand'
-    "section.collapse": string; // default 'Collapse'
-  };
   modalView?: boolean; // default false
   modalProps?: Modal;
   horizontalWizardNav?: boolean; // default true

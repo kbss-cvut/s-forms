@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { FormGenContextProvider } from "../contexts/FormGenContext";
 import { FormQuestionsProvider } from "../contexts/FormQuestionsContext";
 import { ConfigurationContextProvider } from "../contexts/ConfigurationContext";
+import IntlContextProvider from "../contexts/IntlContextProvider.tsx";
 import FormGenerator from "../model/FormGenerator";
 import FormManager from "./FormManager";
 import { Card } from "react-bootstrap";
@@ -73,19 +74,23 @@ const SForms = forwardRef((props, ref) => {
       mapComponent={_mapComponent}
       options={props.options}
     >
-      <FormGenContextProvider fetchTypeAheadValues={props.fetchTypeAheadValues}>
-        <FormQuestionsProvider
-          data={form}
-          formQuestions={formProperties.formQuestions}
-          isFormValid={props.isFormValid}
+      <IntlContextProvider locale={props.options.intl.locale}>
+        <FormGenContextProvider
+          fetchTypeAheadValues={props.fetchTypeAheadValues}
         >
-          <FormManager
-            ref={ref}
-            modalView={props.options && props.options.modalView}
-            mapComponent={_mapComponent}
-          />
-        </FormQuestionsProvider>
-      </FormGenContextProvider>
+          <FormQuestionsProvider
+            data={form}
+            formQuestions={formProperties.formQuestions}
+            isFormValid={props.isFormValid}
+          >
+            <FormManager
+              ref={ref}
+              modalView={props.options && props.options.modalView}
+              mapComponent={_mapComponent}
+            />
+          </FormQuestionsProvider>
+        </FormGenContextProvider>
+      </IntlContextProvider>
     </ConfigurationContextProvider>
   );
 });
