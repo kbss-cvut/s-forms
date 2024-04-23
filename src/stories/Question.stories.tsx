@@ -13,7 +13,6 @@ import question from "./assets/question/question.json";
 import answerableQuestion from "./assets/question/answerableQuestion.json";
 import answerableQuestionExpanded from "./assets/question/answerableQuestionExpanded.json";
 import queryString from "query-string";
-import IntlContextProvider from "../contexts/IntlContextProvider";
 
 export default {
   title: "Components/Question",
@@ -74,7 +73,6 @@ const Template: ComponentStory<typeof Question> = (
   };
   const mapComponent = _getComponentMappingFunction();
   const getOptions = (id: number) => options[id] || [];
-  const Intl = jest.genMockFromModule("react-intl"); // <-- This is the change
 
   const intl = {
     formatMessage: ({ defaultMessage }) => defaultMessage,
