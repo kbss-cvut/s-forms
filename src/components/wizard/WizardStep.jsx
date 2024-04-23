@@ -57,6 +57,7 @@ const WizardStep = (props) => {
         question={question}
         onChange={onChange}
         collapsible={FormUtils.isAnswerable(question)}
+        intl={intl}
       />
       {props.options.wizardStepButtons && _renderWizardStepButtons()}
     </React.Fragment>

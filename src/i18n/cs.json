@@ -5,5 +5,12 @@
   "wizard.next": "Další",
   "wizard.previous": "Předchozí",
   "section.expand": "Rozbalit",
-  "section.collapse": "Sbalit"
+  "section.collapse": "Sbalit",
+
+  "validation.required": "Toto pole je povinné.",
+  "validation.required_only_for_completeness": "Toto pole je povinné pro vyplnění formuláře.",
+  "validation.invalid": "Toto pole je neplatné.",
+  "validation.check": "Toto pole musí být zkontrolováno.",
+  "validation.lower_or_equal": "Toto pole by mělo být číslo rovné nebo nižší než ",
+  "validation.greater_or_equal": "Toto pole musí být větší nebo rovno "
 }

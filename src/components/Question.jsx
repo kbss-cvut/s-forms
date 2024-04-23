@@ -7,7 +7,7 @@ import Constants from "../constants/Constants";
 import FormUtils from "../util/FormUtils";
 import JsonLdObjectMap from "../util/JsonLdObjectMap";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
-import ValidatorFactory from "../model/ValidatorFactory";
+import { createValidator } from "../model/ValidatorFactory";
 import JsonLdObjectUtils from "../util/JsonLdObjectUtils";
 import PrefixIcon from "./PrefixIcon";
 import MediaContent from "./MediaContent";
@@ -33,10 +33,7 @@ export default class Question extends React.Component {
 
   componentDidMount() {
     this.setState({
-      validator: ValidatorFactory.createValidator(
-        this.props.question,
-        this.context.options.intl
-      ),
+      validator: createValidator(this.props.question, this.props.intl),
     });
   }
 

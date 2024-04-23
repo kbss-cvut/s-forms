@@ -5,5 +5,12 @@
   "wizard.next": "Next",
   "wizard.previous": "Previous",
   "section.expand": "Expand",
-  "section.collapse": "Collapse"
+  "section.collapse": "Collapse",
+
+  "validation.required": "This field is required.",
+  "validation.required_only_for_completeness": "This field is required to complete the form.",
+  "validation.invalid": "This field is invalid.",
+  "validation.check": "This field must be checked.",
+  "validation.lower_or_equal": "This field should be a number equal or lower to ",
+  "validation.greater_or_equal": "This field must be greater or equal to "
 }
