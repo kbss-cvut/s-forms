@@ -25,7 +25,7 @@ class FormManager extends React.Component {
 
     for (let i = 0; i < questions.length; i++) {
       const question = questions[i];
-      //TODO: Add intl from intl context
+      //TODO: Convert to functional component to add intl from intl context
       ValidationProcessor.updateQuestionValidation(
         questions,
         question,

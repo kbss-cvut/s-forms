@@ -1,4 +1,9 @@
 {
   "comment.form.placeholder": "Sem napište své komentáře (Ctrl+Enter pro potvrzení)",
-  "wizard.nav.tooltip": "Navigace na této kartě je zakázána, aby nedošlo k přehlédnutí důležitých otázek. K navigaci na tuto kartu použijte tlačítka související s formulářem."
+
+  "wizard.nav.tooltip": "Navigace na této kartě je zakázána, aby nedošlo k přehlédnutí důležitých otázek. K navigaci na tuto kartu použijte tlačítka související s formulářem.",
+  "wizard.next": "Další",
+  "wizard.previous": "Předchozí",
+  "section.expand": "Rozbalit",
+  "section.collapse": "Sbalit"
 }
