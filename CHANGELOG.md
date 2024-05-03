@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.1](https://kbss.felk.cvut.cz/git/s-forms/compare/v0.6.4...v0.7.1) (2024-05-03)
+
 ## 0.7.0 (2023-07-13)
 
 - migration to React v18
