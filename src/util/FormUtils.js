@@ -541,11 +541,29 @@ export default class FormUtils {
           "\n"
         : "";
 
+      let minInclusive = q[Constants.XSD.MIN_INCLUSIVE]
+        ? ind +
+          propertyIndentation +
+          "This field must be greater or equal to " +
+          q[Constants.XSD.MIN_INCLUSIVE] +
+          "\n"
+        : "";
+
+      let maxInclusive = q[Constants.XSD.MAX_INCLUSIVE]
+        ? ind +
+          propertyIndentation +
+          "This field should be a number equal or lower to " +
+          q[Constants.XSD.MAX_INCLUSIVE] +
+          "\n"
+        : "";
+
       output += ind + q["http://www.w3.org/2000/01/rdf-schema#label"] + "\n";
       output += description;
       output += requiredValue;
       output += pattern;
       output += mask;
+      output += maxInclusive;
+      output += minInclusive;
       output += validationMessage;
       output += "\n";
     }
