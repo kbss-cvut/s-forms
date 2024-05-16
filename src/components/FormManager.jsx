@@ -19,7 +19,12 @@ const FormManager = forwardRef((props, ref) => {
   useImperativeHandle(
     ref,
     () => {
-      return { validateForm, getFormSpecification };
+      return {
+        validateForm,
+        getFormSpecification,
+        getFormQuestionsData,
+        getFormData,
+      };
     },
     []
   );
