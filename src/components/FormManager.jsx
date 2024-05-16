@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { forwardRef, useContext, useImperativeHandle } from "react";
 import QuestionAnswerProcessor from "../model/QuestionAnswerProcessor";
 import { FormQuestionsContext } from "../contexts/FormQuestionsContext";
 import Wizard from "./wizard/Wizard";
@@ -9,10 +9,25 @@ import FormUtils from "../util/FormUtils.js";
 import ValidationProcessor from "../model/ValidationProcessor.js";
 import { useIntl } from "react-intl";
 
-const FormManager = (props) => {
+const FormManager = forwardRef((props, ref) => {
   const { getFormQuestionsData, updateFormQuestionsData, getData } =
     useContext(FormQuestionsContext);
   const intl = useIntl();
+
+  // Used to expose function as a ref.
+  // See https://react.dev/reference/react/useImperativeHandle
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        validateForm,
+        getFormSpecification,
+        getFormQuestionsData,
+        getFormData,
+      };
+    },
+    []
+  );
 
   const getFormData = () => {
     const data = getData();
@@ -34,7 +49,7 @@ const FormManager = (props) => {
         questions,
         question,
         i,
-        intl.locale
+        intl
       );
     }
 
@@ -96,6 +111,6 @@ const FormManager = (props) => {
   }
 
   return isWizardless ? renderWizardlessForm() : <Wizard />;
-};
+});
 
 export default FormManager;
