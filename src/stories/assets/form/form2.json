@@ -144,11 +144,13 @@
       "has-possible-value": [
         {
           "@id": "http://profession.com/chef",
-          "label": "Chef"
+          "label": "Chef",
+          "comment": "A chef prepares and cooks food, creates menus, and manages kitchen staff."
         },
         {
           "@id": "http://profession.com/developer",
-          "label": "Developer"
+          "label": "Developer",
+          "comment": "A developer writes and maintains software applications."
         }
       ]
     },
