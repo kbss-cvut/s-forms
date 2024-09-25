@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, Suspense } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as JsonLdUtils from "jsonld-utils";
 import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
