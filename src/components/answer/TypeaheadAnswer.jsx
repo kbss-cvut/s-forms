@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, Suspense } from "react";
 import * as JsonLdUtils from "jsonld-utils";
 import PropTypes from "prop-types";
 import Constants from "../../constants/Constants";
@@ -93,11 +93,16 @@ const TypeaheadAnswer = (props) => {
 
     for (let pValue of possibleValues) {
       let label = JsonLdUtils.getLocalized(pValue[Constants.RDFS_LABEL], intl);
+      let comment = JsonLdUtils.getLocalized(
+        pValue[Constants.RDFS_COMMENT],
+        intl
+      );
 
       options[pValue["@id"]] = {
         id: pValue["@id"],
         value: pValue["@id"],
         label: label,
+        title: comment,
         children: [],
       };
       for (let parent of Utils.asArray(pValue[Constants.BROADER])) {
@@ -105,6 +110,7 @@ const TypeaheadAnswer = (props) => {
           type: "parent-child",
           parent: parent["@id"],
           child: pValue["@id"],
+          title: comment,
         });
       }
     }
