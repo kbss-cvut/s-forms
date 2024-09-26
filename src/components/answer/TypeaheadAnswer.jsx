@@ -93,7 +93,7 @@ const TypeaheadAnswer = (props) => {
 
     for (let pValue of possibleValues) {
       let label = JsonLdUtils.getLocalized(pValue[Constants.RDFS_LABEL], intl);
-      let comment = JsonLdUtils.getLocalized(
+      let description = JsonLdUtils.getLocalized(
         pValue[Constants.RDFS_COMMENT],
         intl
       );
@@ -102,7 +102,7 @@ const TypeaheadAnswer = (props) => {
         id: pValue["@id"],
         value: pValue["@id"],
         label: label,
-        title: comment,
+        description: description,
         children: [],
       };
       for (let parent of Utils.asArray(pValue[Constants.BROADER])) {
@@ -185,6 +185,7 @@ const TypeaheadAnswer = (props) => {
           FormUtils.isDisabled(props.question)
         }
         onChange={handleOptionSelectedChange}
+        titleKey="description"
       />
       {props.validation.message}
     </FormGroup>
