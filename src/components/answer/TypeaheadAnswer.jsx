@@ -110,7 +110,6 @@ const TypeaheadAnswer = (props) => {
           type: "parent-child",
           parent: parent["@id"],
           child: pValue["@id"],
-          title: comment,
         });
       }
     }
