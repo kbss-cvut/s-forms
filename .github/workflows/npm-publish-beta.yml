@@ -11,6 +11,9 @@ jobs:
   publish-npm-beta:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      TARGET_BRANCH: master  # Define the master branch as a variable
+      
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,7 +22,7 @@ jobs:
 
       - name: Get short SHA
         id: set_sha
-        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV; echo $(git rev-parse --short HEAD)
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - uses: "phips28/gh-action-bump-version@master"
         with:
@@ -31,7 +34,7 @@ jobs:
           preid: beta-${{ env.SHA_SHORT }}
           skip-tag: "true"
           skip-commit: "true"
-          target-branch: "master"
+          target-branch: ${{ env.TARGET_BRANCH }}
 
       - uses: actions/setup-node@v4
         with:
