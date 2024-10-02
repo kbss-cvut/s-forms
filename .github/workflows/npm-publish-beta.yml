@@ -12,8 +12,9 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
-      TARGET_BRANCH: master  # Define the master branch as a variable
-      
+      # Define the master branch as a variable
+      TARGET_BRANCH: master
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,7 +35,8 @@ jobs:
           preid: beta-${{ env.SHA_SHORT }}
           skip-tag: "true"
           skip-commit: "true"
-          target-branch: ${{ env.TARGET_BRANCH }}  # Setting this parameter is a workaround to cope with auto-deleted branches upon merge
+          # Setting `target-branch:` is a workaround to cope with auto-deleted branches upon merge
+          target-branch: ${{ env.TARGET_BRANCH }}
 
       - uses: actions/setup-node@v4
         with:
