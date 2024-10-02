@@ -35,6 +35,7 @@ jobs:
           preid: beta-${{ env.SHA_SHORT }}
           skip-tag: "true"
           skip-commit: "true"
+          skip-push: "true"
           # Setting `target-branch:` is a workaround to cope with auto-deleted branches upon merge
           target-branch: ${{ github.event.pull_request.merge_commit_sha }}
 
