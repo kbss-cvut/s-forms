@@ -19,7 +19,7 @@ jobs:
 
       - name: Get short SHA
         id: set_sha
-        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV; echo $(git rev-parse --short HEAD)
 
       - uses: "phips28/gh-action-bump-version@master"
         with:
@@ -28,7 +28,7 @@ jobs:
           major-wording: "MAJOR RELEASE"
           patch-wording: "PATCH RELEASE"
           rc-wording: null
-          preid: ${{ format('beta-{0}', env.SHA_SHORT) }}
+          preid: beta-${{ env.SHA_SHORT }}
           skip-tag: "true"
           skip-commit: "true"
 
