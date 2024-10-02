@@ -41,7 +41,7 @@ Building SForms library can be done using `npm run build:lib`.
 Storybook is an open-source tool for building UI components and pages in isolation.  Rendering of a form or a specific component can be tested through a story provided in `./src/stories/`. The application can be started by executing npm script through `npm run dev` and then accessing `localhost:6006` from a browser. It renders the forms provided by the file `./src/stories/assets/`. See `./src/stories/SForms/SForms.stories.tsx` for more details.
 
 #### Testing forms with Storybook toolbar
-With the Storybook [toolbar](https://storybook.js.org/docs/essentials/toolbars-and-globals), it is possible to test a set of predefined global variables. The toolbar supports the following features:
+With the Storybook [toolbar](https://storybook.js.org/docs/essentials/toolbars-and-globals), testing a set of predefined global variables is possible. The toolbar supports the following features:
 - Icon behavior: Set the behavior for the icons
 - Locale: Set the internationalization locale
 - Debug mode: Show irrelevant questions
