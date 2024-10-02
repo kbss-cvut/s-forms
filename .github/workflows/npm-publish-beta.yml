@@ -31,6 +31,7 @@ jobs:
           preid: beta-${{ env.SHA_SHORT }}
           skip-tag: "true"
           skip-commit: "true"
+          target-branch: "master"
 
       - uses: actions/setup-node@v4
         with:
