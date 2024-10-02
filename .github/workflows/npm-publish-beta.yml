@@ -36,7 +36,7 @@ jobs:
           skip-tag: "true"
           skip-commit: "true"
           # Setting `target-branch:` is a workaround to cope with auto-deleted branches upon merge
-          target-branch: ${{ env.TARGET_BRANCH }}
+          target-branch: ${{ github.event.pull_request.merge_commit_sha }}
 
       - uses: actions/setup-node@v4
         with:
