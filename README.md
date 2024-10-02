@@ -28,7 +28,7 @@ Checkout [live demo using storybook](https://s-forms-kbss.netlify.app).
 Semantic form is a structure that holds a form (set of questions) and its data (set of answers).
 A conceptual model of Semantic forms is [questions/answers model](https://github.com/kbss-cvut/s-forms-model).
 The conceptual model is described in RDF language. This library processes and generates Semantic forms using JSON-LD
-format which is JSON-compatible serialization of the RDF language.
+format, which is JSON-compatible serialization of the RDF language.
 
 ## Development
 
