@@ -34,7 +34,7 @@ jobs:
           preid: beta-${{ env.SHA_SHORT }}
           skip-tag: "true"
           skip-commit: "true"
-          target-branch: ${{ env.TARGET_BRANCH }}  # Setting this parameter is a workaround for auto-deleted branches upon merge
+          target-branch: ${{ env.TARGET_BRANCH }}  # Setting this parameter is a workaround to cope with auto-deleted branches upon merge
 
       - uses: actions/setup-node@v4
         with:
