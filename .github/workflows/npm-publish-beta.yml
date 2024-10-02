@@ -33,6 +33,7 @@ jobs:
           skip-commit: "true"
           skip-push: "true"
           # Setting `target-branch:` is a workaround to cope with auto-deleted branches upon merge
+          #   for more info see https://github.com/kbss-cvut/s-forms/issues/356
           target-branch: ${{ github.event.pull_request.merge_commit_sha }}
 
       - uses: actions/setup-node@v4
