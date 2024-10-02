@@ -11,10 +11,6 @@ jobs:
   publish-npm-beta:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    env:
-      # Define the master branch as a variable
-      TARGET_BRANCH: master
-
     steps:
       - uses: actions/checkout@v4
         with:
