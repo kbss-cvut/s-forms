@@ -10,6 +10,7 @@ import { Card } from "react-bootstrap";
 import FormUtils from "../util/FormUtils.js";
 
 import "../styles/s-forms.css";
+import ErrorBoundaries from "./ErrorBoundaries.jsx";
 
 const SForms = forwardRef((props, ref) => {
   const [loading, setLoading] = useState(true);
@@ -68,30 +69,32 @@ const SForms = forwardRef((props, ref) => {
   );
 
   return (
-    <ConfigurationContextProvider
-      components={props.components}
-      componentsOptions={props.componentsOptions}
-      mapComponent={_mapComponent}
-      options={props.options}
-    >
-      <IntlContextProvider locale={props.options.intl.locale}>
-        <FormGenContextProvider
-          fetchTypeAheadValues={props.fetchTypeAheadValues}
-        >
-          <FormQuestionsProvider
-            data={form}
-            formQuestions={formProperties.formQuestions}
-            isFormValid={props.isFormValid}
+    <ErrorBoundaries>
+      <ConfigurationContextProvider
+        components={props.components}
+        componentsOptions={props.componentsOptions}
+        mapComponent={_mapComponent}
+        options={props.options}
+      >
+        <IntlContextProvider locale={props.options.intl.locale}>
+          <FormGenContextProvider
+            fetchTypeAheadValues={props.fetchTypeAheadValues}
           >
-            <FormManager
-              ref={ref}
-              modalView={props.options && props.options.modalView}
-              mapComponent={_mapComponent}
-            />
-          </FormQuestionsProvider>
-        </FormGenContextProvider>
-      </IntlContextProvider>
-    </ConfigurationContextProvider>
+            <FormQuestionsProvider
+              data={form}
+              formQuestions={formProperties.formQuestions}
+              isFormValid={props.isFormValid}
+            >
+              <FormManager
+                ref={ref}
+                modalView={props.options && props.options.modalView}
+                mapComponent={_mapComponent}
+              />
+            </FormQuestionsProvider>
+          </FormGenContextProvider>
+        </IntlContextProvider>
+      </ConfigurationContextProvider>
+    </ErrorBoundaries>
   );
 });
 
