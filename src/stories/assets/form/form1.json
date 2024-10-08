@@ -2453,7 +2453,7 @@
     },
     {
       "@id": "http://vfn.cz/ontologies/fss-form/simple-date-time-q",
-      "has-layout-class": ["section", "answerable", "datetime"],
+      "has-layout-class": ["datetime"],
       "@type": "doc:question",
       "label": "Date and time",
       "datetime-format": "yyyy-MM-dd HH:mm"
@@ -2461,13 +2461,13 @@
     {
       "label": "Time",
       "@type": "doc:question",
-      "has-layout-class": ["section", "answerable", "time"],
+      "has-layout-class": ["time"],
       "time-format": "HH:mm",
       "@id": "http://vfn.cz/ontologies/fss-form/simple-time-q"
     },
     {
       "label": "Date",
-      "has-layout-class": ["section", "answerable", "date"],
+      "has-layout-class": ["date"],
       "@id": "http://vfn.cz/ontologies/fss-form/simple-date-q",
       "@type": "doc:question",
       "date-format": "yyyy-MM-dd HH:mm"
@@ -2475,7 +2475,7 @@
     {
       "label": "Timestamp in db",
       "@id": "http://vfn.cz/ontologies/fss-form/timestamp-in-db-q",
-      "has-layout-class": ["section", "answerable", "datetime"],
+      "has-layout-class": ["datetime"],
       "has_answer": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance123456-a",
       "@type": "doc:question"
     },
