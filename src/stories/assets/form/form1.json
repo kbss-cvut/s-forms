@@ -1347,6 +1347,20 @@
       "has_answer": []
     },
     {
+      "label": "Technical section 3",
+      "form:has-question-origin": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod/techical-section-3",
+      "@type": "doc:question",
+      "@id": "doc:question-e7e8eae0-6340-4a96-b13e-7dedaxxxaaaaa",
+      "has_related_question": [
+        "http://vfn.cz/ontologies/fss-form/simple-date-q",
+        "http://vfn.cz/ontologies/fss-form/simple-date-time-q",
+        "http://vfn.cz/ontologies/fss-form/simple-time-q",
+        "http://vfn.cz/ontologies/fss-form/timestamp-in-db-q"
+      ],
+      "has-layout-class": "section",
+      "has_answer": []
+    },
+    {
       "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
       "label": "Vfn",
       "@id": "doc:question-f516f3e3-c650-4074-9076-6d89244cc81e",
@@ -2473,18 +2487,6 @@
       "label": "Adjuvant (after treatment procedure)"
     },
     {
-      "has_related_question": [
-        "http://vfn.cz/ontologies/fss-form/simple-date-q",
-        "http://vfn.cz/ontologies/fss-form/simple-date-time-q",
-        "http://vfn.cz/ontologies/fss-form/simple-time-q",
-        "http://vfn.cz/ontologies/fss-form/timestamp-in-db-q"
-      ],
-      "@type": "doc:question",
-      "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--neoadjuvant-q",
-      "has-layout-class": ["section", "answerable", "checkbox"],
-      "label": "Neoadjuvant (before treatment procedure)"
-    },
-    {
       "label": "No",
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--no-q",
       "has-layout-class": "checkbox",
@@ -2495,7 +2497,6 @@
       "label": "Chemotherapy",
       "has_related_question": [
         "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--adjuvant-q",
-        "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--neoadjuvant-q",
         "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--no-q"
       ],
       "@type": "doc:question",
@@ -2680,7 +2681,8 @@
         "http://vfn.cz/ontologies/fss-form/primary-treatment--definitive-histology-q",
         "http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment-q",
         "doc:question-e7e8eae0-6340-4a96-b13e-7ded2b87abd4",
-        "doc:question-e7e8eae0-6340-4a96-b13e-7dedaaaaaaaa"
+        "doc:question-e7e8eae0-6340-4a96-b13e-7dedaaaaaaaa",
+        "doc:question-e7e8eae0-6340-4a96-b13e-7dedaxxxaaaaa"
       ],
       "@type": "doc:question",
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment-q",
