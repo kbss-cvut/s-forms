@@ -18,7 +18,9 @@ const DateTimeAnswer = (props) => {
       if (!isNaN(parsedDate.getTime())) {
         setDate(parsedDate);
       } else {
-        console.error("Invalid date value:", props.value);
+        console.error(
+          `Invalid date value ${props.value} of question ${props.question["@id"]}.`
+        );
       }
     } else {
       setDate(null);
