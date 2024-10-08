@@ -2470,7 +2470,7 @@
       "has-layout-class": ["date"],
       "@id": "http://vfn.cz/ontologies/fss-form/simple-date-q",
       "@type": "doc:question",
-      "date-format": "yyyy-MM-dd HH:mm"
+      "date-format": "yyyy-MM-dd"
     },
     {
       "label": "Timestamp in db",
