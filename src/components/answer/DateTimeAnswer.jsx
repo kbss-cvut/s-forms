@@ -14,9 +14,16 @@ const DateTimeAnswer = (props) => {
 
   useEffect(() => {
     if (props.value) {
-      setDate(new Date(parse(props.value, datePickerFormat, new Date())));
+      const parsedDate = parse(props.value, datePickerFormat, new Date());
+      if (!isNaN(parsedDate.getTime())) {
+        setDate(parsedDate);
+      } else {
+        console.error("Invalid date value:", props.value);
+      }
+    } else {
+      setDate(null);
     }
-  }, []);
+  }, [props.value, datePickerFormat]);
 
   const dateFormat = FormUtils.resolveDateTimeFormat(
     props.question,
