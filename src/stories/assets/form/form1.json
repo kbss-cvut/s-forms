@@ -2491,8 +2491,8 @@
       ],
       "@type": "doc:question",
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--neoadjuvant-q",
-      "has-layout-class": ["section", "answerable", "checkbox"],
-      "label": "Neoadjuvant (before treatment procedure)"
+      "has-layout-class": ["section" ],
+      "label": "Neoadjuvant (before treatment procedure) "
     },
     {
       "label": "No",
