@@ -70,6 +70,7 @@ export default class DefaultInput extends React.Component {
       <Form.Group
         size="small"
         controlId={Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}
+        className="mb-3"
       >
         <Form.Check
           type="checkbox"
@@ -85,7 +86,7 @@ export default class DefaultInput extends React.Component {
 
   _renderRadio() {
     return (
-      <FormGroup size="small">
+      <FormGroup size="small" className="mb-3">
         <Form.Check
           type="radio"
           ref={(c) => (this.input = c)}
@@ -100,7 +101,7 @@ export default class DefaultInput extends React.Component {
 
   _renderSelect() {
     return (
-      <FormGroup size="small">
+      <FormGroup size="small" className="mb-3">
         {this._renderLabel()}
         <FormControl
           as="select"
@@ -124,7 +125,7 @@ export default class DefaultInput extends React.Component {
   _renderTextArea() {
     // TODO validation
     return (
-      <FormGroup size="small">
+      <FormGroup size="small" className="mb-3">
         {this._renderLabel()}
         <FormControl
           ref={(c) => (this.input = c)}
@@ -140,7 +141,7 @@ export default class DefaultInput extends React.Component {
 
   _renderInput() {
     return (
-      <FormGroup size="small">
+      <FormGroup size="small" className="mb-3">
         {this._renderLabel()}
         <FormControl
           className={this.props.validation.classname}
