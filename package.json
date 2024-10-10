@@ -48,7 +48,7 @@
     "@kbss-cvut/tsort": "0.0.2",
     "@triply/yasgui": "^4.2.14",
     "babel-runtime": "^6.26.0",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.0",
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",
     "date-fns": "^2.13.0",
