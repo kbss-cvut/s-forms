@@ -120,6 +120,14 @@ export default class FormUtils {
     );
   }
 
+  static isTimestamp(question) {
+    return JsonLdUtils.hasValue(
+      question,
+      Constants.TIMESTAMP_FORMAT,
+      Constants.EPOCH_MILLISECONDS
+    );
+  }
+
   static isCheckbox(question) {
     return JsonLdUtils.hasValue(
       question,

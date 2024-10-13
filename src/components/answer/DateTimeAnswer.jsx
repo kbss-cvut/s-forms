@@ -35,6 +35,7 @@ const DateTimeAnswer = (props) => {
 
   const isDate = FormUtils.isDate(props.question);
   const isTime = FormUtils.isTime(props.question);
+  const isTimestamp = FormUtils.isTimestamp(props.question);
 
   // DatePicker does not know dateFormat "x", translate to datetime
   const datePickerFormat =
@@ -47,11 +48,16 @@ const DateTimeAnswer = (props) => {
     if (!date) {
       props.onChange("");
     }
-    if (dateFormat === Constants.DATETIME_NUMBER_FORMAT) {
-      props.onChange(Number(date));
+
+    let timeValue;
+    if (isTimestamp) {
+      timeValue = date.getTime();
+    } else if (dateFormat === Constants.DATETIME_NUMBER_FORMAT) {
+      timeValue = Number(date);
     } else {
-      props.onChange(format(date, dateFormat));
+      timeValue = format(date, dateFormat);
     }
+    props.onChange(timeValue);
   };
 
   return (

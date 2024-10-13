@@ -148,6 +148,9 @@
     "date-format": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/date-format"
     },
+    "timestamp-format": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/timestamp-format"
+    },
     "datetime-format": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/datetime-format"
     }
@@ -2477,7 +2480,8 @@
       "@id": "http://vfn.cz/ontologies/fss-form/timestamp-in-db-q",
       "has-layout-class": ["datetime"],
       "has_answer": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance123456-a",
-      "@type": "doc:question"
+      "@type": "doc:question",
+      "timestamp-format": "epoch-milliseconds"
     },
     {
       "has_related_question": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--adjuvant--no-of-cycles-q",
