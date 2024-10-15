@@ -208,6 +208,14 @@ input:disabled {
   margin-bottom: 0;
 }
 
+.accordion-button::after {
+  background-image: initial;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: initial;
+}
+
 .emphasise-on-relevant-icon {
   animation: emphasiseOnRelevantIcon 0.5s ease-in;
 }
