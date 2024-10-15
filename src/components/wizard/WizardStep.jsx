@@ -22,10 +22,10 @@ const WizardStep = (props) => {
 
   const _renderWizardStepButtons = () => {
     return (
-      <ButtonToolbar className="m-3 float-right">
+      <ButtonToolbar className="m-3 float-end">
         {!props.isFirstStep && (
           <Button
-            className="mr-2"
+            className="me-2"
             onClick={onPreviousStep}
             variant="primary"
             size="sm"
