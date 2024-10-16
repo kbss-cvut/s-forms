@@ -12,5 +12,8 @@
   "validation.invalid": "This field is invalid.",
   "validation.check": "This field must be checked.",
   "validation.lower_or_equal": "This field should be a number equal or lower to ",
-  "validation.greater_or_equal": "This field must be greater or equal to "
+  "validation.greater_or_equal": "This field must be greater or equal to ",
+
+  "error.default_message": "Something went wrong.",
+  "error.view_details": "View Error Details"
 }
