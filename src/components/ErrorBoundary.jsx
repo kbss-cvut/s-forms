@@ -1,13 +1,14 @@
 import React from "react";
 import { Alert, Accordion, Card, Button } from "react-bootstrap";
+import { IntlContext } from "../contexts/IntlContextProvider";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hasError: false,
-      error: null,
-      errorInfo: null,
+      errorLabel: null,
+      errorDetails: null,
     };
   }
 
@@ -15,33 +16,36 @@ class ErrorBoundary extends React.Component {
     return { hasError: true, error: error };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(errorLabel, errorDetails) {
     this.setState({
-      error: error,
-      errorInfo: errorInfo,
+      errorLabel: errorLabel,
+      errorDetails: errorDetails,
     });
   }
 
   render() {
     if (this.state.hasError) {
+      const { lang } = this.context;
       return (
         <div style={{ padding: "20px" }}>
           <Alert variant="danger">
-            <Alert.Heading>Something went wrong.</Alert.Heading>
-            <p>{this.state.error && this.state.error.toString()}</p>
+            <Alert.Heading>
+              {lang["error.default_message"] || "Something went wrong."}
+            </Alert.Heading>
+            <p>{this.state.errorLabel && this.state.errorLabel.toString()}</p>
           </Alert>
           <Accordion>
             <Card>
               <Card.Header>
                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                  View Error Details
+                  {lang["error.view_details"] || "View Error Details"}
                 </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
                   <pre style={{ whiteSpace: "pre-wrap" }}>
-                    {this.state.errorInfo &&
-                      this.state.errorInfo.componentStack}
+                    {this.state.errorDetails &&
+                      this.state.errorDetails.componentStack}
                   </pre>
                 </Card.Body>
               </Accordion.Collapse>
@@ -54,5 +58,7 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
+
+ErrorBoundary.contextType = IntlContext;
 
 export default ErrorBoundary;

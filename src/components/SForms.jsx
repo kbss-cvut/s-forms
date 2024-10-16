@@ -8,9 +8,8 @@ import FormGenerator from "../model/FormGenerator";
 import FormManager from "./FormManager";
 import { Card } from "react-bootstrap";
 import FormUtils from "../util/FormUtils.js";
-
 import "../styles/s-forms.css";
-import ErrorBoundaries from "./ErrorBoundaries.jsx";
+import ErrorBoundaries from "./ErrorBoundary.jsx";
 
 const SForms = forwardRef((props, ref) => {
   const [loading, setLoading] = useState(true);
@@ -69,14 +68,14 @@ const SForms = forwardRef((props, ref) => {
   );
 
   return (
-    <ErrorBoundaries>
-      <ConfigurationContextProvider
-        components={props.components}
-        componentsOptions={props.componentsOptions}
-        mapComponent={_mapComponent}
-        options={props.options}
-      >
-        <IntlContextProvider locale={props.options.intl.locale}>
+    <ConfigurationContextProvider
+      components={props.components}
+      componentsOptions={props.componentsOptions}
+      mapComponent={_mapComponent}
+      options={props.options}
+    >
+      <IntlContextProvider locale={props.options.intl.locale}>
+        <ErrorBoundaries>
           <FormGenContextProvider
             fetchTypeAheadValues={props.fetchTypeAheadValues}
           >
@@ -92,9 +91,9 @@ const SForms = forwardRef((props, ref) => {
               />
             </FormQuestionsProvider>
           </FormGenContextProvider>
-        </IntlContextProvider>
-      </ConfigurationContextProvider>
-    </ErrorBoundaries>
+        </ErrorBoundaries>
+      </IntlContextProvider>
+    </ConfigurationContextProvider>
   );
 });
 

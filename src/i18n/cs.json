@@ -12,5 +12,8 @@
   "validation.invalid": "Toto pole je neplatné.",
   "validation.check": "Toto pole musí být zkontrolováno.",
   "validation.lower_or_equal": "Toto pole by mělo být číslo rovné nebo nižší než ",
-  "validation.greater_or_equal": "Toto pole musí být větší nebo rovno "
+  "validation.greater_or_equal": "Toto pole musí být větší nebo rovno ",
+
+  "error.default_message": "Něco se pokazilo.",
+  "error.view_details": "Zobrazit podrobnosti o chybě"
 }
