@@ -5,6 +5,7 @@ export default class Constants {
   static COLUMN_COUNT = 12;
   static INPUT_LENGTH_THRESHOLD = 50;
   static DATETIME_NUMBER_FORMAT = "x";
+  static EPOCH_MILLISECONDS = "epoch-milliseconds";
 
   /**
    * Contains mainly definition of constants used to parse the form declaration.
@@ -146,6 +147,8 @@ export default class Constants {
   static DATE_FORMAT = "http://onto.fel.cvut.cz/ontologies/form/date-format";
   static DATETIME_FORMAT =
     "http://onto.fel.cvut.cz/ontologies/form/datetime-format";
+  static TIMESTAMP_FORMAT =
+    "http://onto.fel.cvut.cz/ontologies/form/timestamp-format";
 
   static NOT_ANSWERED_QUESTION =
     "http://onto.fel.cvut.cz/ontologies/form/not-answered-question";

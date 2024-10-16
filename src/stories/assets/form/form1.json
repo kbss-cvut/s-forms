@@ -148,6 +148,9 @@
     "date-format": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/date-format"
     },
+    "timestamp-format": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/timestamp-format"
+    },
     "datetime-format": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/datetime-format"
     }
@@ -1347,6 +1350,20 @@
       "has_answer": []
     },
     {
+      "label": "Technical section 3",
+      "form:has-question-origin": "http://onto.fel.cvut.cz/ontologies/vfn-form-mod/techical-section-3",
+      "@type": "doc:question",
+      "@id": "doc:question-e7e8eae0-6340-4a96-b13e-7dedaxxxaaaaa",
+      "has_related_question": [
+        "http://vfn.cz/ontologies/fss-form/simple-date-q",
+        "http://vfn.cz/ontologies/fss-form/simple-date-time-q",
+        "http://vfn.cz/ontologies/fss-form/simple-time-q",
+        "http://vfn.cz/ontologies/fss-form/timestamp-in-db-q"
+      ],
+      "has-layout-class": "section",
+      "has_answer": []
+    },
+    {
       "http://onto.fel.cvut.cz/ontologies/form-spin/has-declared-prefix": [],
       "label": "Vfn",
       "@id": "doc:question-f516f3e3-c650-4074-9076-6d89244cc81e",
@@ -1433,15 +1450,6 @@
       "@type": "doc:answer",
       "has-answer-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1236864794",
       "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1236864794-a"
-    },
-    {
-      "@type": "doc:answer",
-      "has-answer-origin": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1293838025",
-      "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1293838025-a",
-      "has_data_value": {
-        "@value": "0",
-        "@language": "en"
-      }
     },
     {
       "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1345228433-a",
@@ -2380,7 +2388,6 @@
     },
     {
       "@type": "doc:question",
-      "has_answer": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1293838025-a",
       "has-layout-class": "date",
       "has-template": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-462-qt",
       "comment": {
@@ -2448,8 +2455,8 @@
       "label": "no of cycles"
     },
     {
-      "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q",
-      "has-layout-class": ["section", "answerable", "datetime"],
+      "@id": "http://vfn.cz/ontologies/fss-form/simple-date-time-q",
+      "has-layout-class": ["datetime"],
       "@type": "doc:question",
       "label": "Date and time",
       "datetime-format": "yyyy-MM-dd HH:mm"
@@ -2457,23 +2464,24 @@
     {
       "label": "Time",
       "@type": "doc:question",
-      "has-layout-class": ["section", "answerable", "time"],
+      "has-layout-class": ["time"],
       "time-format": "HH:mm",
-      "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q1"
+      "@id": "http://vfn.cz/ontologies/fss-form/simple-time-q"
     },
     {
       "label": "Date",
-      "has-layout-class": ["section", "answerable", "date"],
-      "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q2",
+      "has-layout-class": ["date"],
+      "@id": "http://vfn.cz/ontologies/fss-form/simple-date-q",
       "@type": "doc:question",
-      "date-format": "yyyy-MM-dd HH:mm"
+      "date-format": "yyyy-MM-dd"
     },
     {
       "label": "Timestamp in db",
-      "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q3",
-      "has-layout-class": ["section", "answerable", "datetime"],
+      "@id": "http://vfn.cz/ontologies/fss-form/timestamp-in-db-q",
+      "has-layout-class": ["datetime"],
       "has_answer": "http://onto.fel.cvut.cz/ontologies/custom/model/instance#instance123456-a",
-      "@type": "doc:question"
+      "@type": "doc:question",
+      "timestamp-format": "epoch-milliseconds"
     },
     {
       "has_related_question": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--adjuvant--no-of-cycles-q",
@@ -2481,18 +2489,6 @@
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--adjuvant-q",
       "has-layout-class": ["section", "answerable", "checkbox"],
       "label": "Adjuvant (after treatment procedure)"
-    },
-    {
-      "has_related_question": [
-        "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q2",
-        "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q",
-        "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q1",
-        "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q3"
-      ],
-      "@type": "doc:question",
-      "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--neoadjuvant-q",
-      "has-layout-class": ["section", "answerable", "checkbox"],
-      "label": "Neoadjuvant (before treatment procedure)"
     },
     {
       "label": "No",
@@ -2505,7 +2501,6 @@
       "label": "Chemotherapy",
       "has_related_question": [
         "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--adjuvant-q",
-        "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--neoadjuvant-q",
         "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--no-q"
       ],
       "@type": "doc:question",
@@ -2690,7 +2685,8 @@
         "http://vfn.cz/ontologies/fss-form/primary-treatment--definitive-histology-q",
         "http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment-q",
         "doc:question-e7e8eae0-6340-4a96-b13e-7ded2b87abd4",
-        "doc:question-e7e8eae0-6340-4a96-b13e-7dedaaaaaaaa"
+        "doc:question-e7e8eae0-6340-4a96-b13e-7dedaaaaaaaa",
+        "doc:question-e7e8eae0-6340-4a96-b13e-7dedaxxxaaaaa"
       ],
       "@type": "doc:question",
       "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment-q",
