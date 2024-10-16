@@ -451,24 +451,22 @@ export default class FormUtils {
    * @return {*} Format from Configuration
    */
   static resolveDateTimeFormat(question, originalValue, options) {
-    const isNumber = typeof originalValue === "number";
     const isDate = FormUtils.isDate(question);
     const isTime = FormUtils.isTime(question);
     const isDatetime = FormUtils.isDateTime(question);
 
-    if (isNumber) {
-      return Constants.DATETIME_NUMBER_FORMAT;
+    switch (true) {
+      case isDate:
+        return question[Constants.DATE_FORMAT] || options.dateFormat;
+
+      case isTime:
+        return question[Constants.TIME_FORMAT] || options.timeFormat;
+
+      case isDatetime:
+        return question[Constants.DATETIME_FORMAT] || options.dateTimeFormat;
+      default:
+        return null;
     }
-    if (isDate) {
-      return question[Constants.DATE_FORMAT] || options.dateFormat;
-    }
-    if (isTime) {
-      return question[Constants.TIME_FORMAT] || options.timeFormat;
-    }
-    if (isDatetime) {
-      return question[Constants.DATETIME_FORMAT] || options.dateTimeFormat;
-    }
-    return null;
   }
 
   /**
