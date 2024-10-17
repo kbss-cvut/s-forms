@@ -56,7 +56,7 @@ const DateTimeAnswer = (props) => {
   };
 
   return (
-    <FormGroup size="small">
+    <FormGroup size="small" className="mb-3">
       <Form.Label className={"w-100"}>{props.label}</Form.Label>
       <DatePicker
         selected={date}
