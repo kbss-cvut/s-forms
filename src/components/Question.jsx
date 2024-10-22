@@ -121,11 +121,11 @@ export default class Question extends React.Component {
     }
   };
 
-  _onMouseEnterHandler = () => {
+  _onEnterHandler = () => {
     this.setState({ showIcon: true });
   };
 
-  _onMouseLeaveHandler = () => {
+  _onLeaveHandler = () => {
     this.setState({ showIcon: false });
   };
 
@@ -224,8 +224,10 @@ export default class Question extends React.Component {
                   as={Card.Header}
                   onClick={this._toggleCollapse}
                   className={this._getHeaderClassName()}
-                  onMouseEnter={this._onMouseEnterHandler}
-                  onMouseLeave={this._onMouseLeaveHandler}
+                  onMouseEnter={this._onEnterHandler}
+                  onMouseLeave={this._onLeaveHandler}
+                  onFocus={this._onEnterHandler}
+                  onBlur={this._onLeaveHandler}
                 >
                   <div className="d-inline" id={question["@id"]}>
                     {collapsible &&
@@ -356,8 +358,10 @@ export default class Question extends React.Component {
           key={"row-item-" + i}
           className={cls}
           id={question["@id"]}
-          onMouseEnter={this._onMouseEnterHandler}
-          onMouseLeave={this._onMouseLeaveHandler}
+          onMouseEnter={this._onEnterHandler}
+          onMouseLeave={this._onLeaveHandler}
+          onFocus={this._onEnterHandler}
+          onBlur={this._onLeaveHandler}
         >
           <div className="answer-content" style={this._getAnswerWidthStyle()}>
             <Answer
