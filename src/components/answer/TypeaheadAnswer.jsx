@@ -14,7 +14,7 @@ import { IntelligentTreeSelect } from "intelligent-tree-select/lib/components/In
 import "intelligent-tree-select/lib/styles.css";
 
 const processTypeaheadOptions = (options, intl) => {
-  if (!options || !options.length) {
+  if (options === undefined || !options.length) {
     return [];
   }
 
@@ -41,9 +41,9 @@ const TypeaheadAnswer = (props) => {
   const intl = configurationContext.options.intl;
 
   const [isLoading, setLoading] = useState(true);
-  const [optionsList, setOptionsList] = useState([
-    processTypeaheadOptions(props.options, intl),
-  ]);
+  const [optionsList, setOptionsList] = useState(
+    processTypeaheadOptions(props.options, intl)
+  );
 
   useEffect(() => {
     let isCancelled = false;
@@ -79,7 +79,7 @@ const TypeaheadAnswer = (props) => {
     return () => {
       isCancelled = true;
     };
-  }, []);
+  }, [queryHash, formGenContext, props.question, intl]);
 
   const generateTreeOptions = (possibleValues) => {
     if (!possibleValues) {
@@ -169,8 +169,7 @@ const TypeaheadAnswer = (props) => {
             ? noLinksValueRenderer
             : null
         }
-        valueIsControlled={true}
-        value={optionsList.filter((option) => option.id === props.value)}
+        value={optionsList.find((option) => option.id === props.value) || null}
         multi={false}
         options={optionsList}
         isSearchable={true}

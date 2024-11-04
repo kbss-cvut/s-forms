@@ -18,6 +18,7 @@ class JSDOMEnvironment extends $JSDOMEnvironment {
     if (!global.TextEncoder) global.TextEncoder = TextEncoder;
     if (!global.TextDecoder) global.TextDecoder = TextDecoder;
     if (!global.Uint8Array) global.Uint8Array = Uint8Array;
+    this.global.structuredClone = structuredClone;
   }
 }
 
