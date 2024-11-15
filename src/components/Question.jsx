@@ -227,12 +227,12 @@ export default class Question extends React.Component {
                   onMouseEnter={this._onMouseEnterHandler}
                   onMouseLeave={this._onMouseLeaveHandler}
                 >
-                  <h6 className="d-inline" id={question["@id"]}>
+                  <div className="d-inline" id={question["@id"]}>
                     {collapsible &&
                       !FormUtils.isWizardStep(question) &&
                       this._renderCollapseToggle()}
                     {label}
-                  </h6>
+                  </div>
                   {this.renderQuestionIcons()}
                   {this.props.children}
                 </Accordion.Button>
