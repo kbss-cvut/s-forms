@@ -287,6 +287,9 @@ export default class Question extends React.Component {
         {this.renderSubQuestions(classname)}
       </Card.Body>
     );
+    const answerableSectionStyles = this._getHeaderClassName();
+
+    if (this.state.expanded) answerableSectionStyles.push("text-primary");
 
     return (
       <Accordion
@@ -296,7 +299,7 @@ export default class Question extends React.Component {
         <Card className="mb-3">
           <Card.Header
             onClick={this._toggleCollapse}
-            className={this._getHeaderClassName()}
+            className={answerableSectionStyles}
           >
             {this.renderAnswers()}
           </Card.Header>
