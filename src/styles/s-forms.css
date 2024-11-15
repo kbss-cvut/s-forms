@@ -37,6 +37,15 @@
   font-weight: 500;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
 .answerable-section .card-header .col-10 {
   width: auto;
   flex-basis: auto;
