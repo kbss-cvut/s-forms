@@ -273,8 +273,8 @@ input:disabled {
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 2px;
-  bottom: 2px;
+  right: 13px;
+  bottom: 1px;
   height: 25px;
   width: 25px;
   padding: 0;

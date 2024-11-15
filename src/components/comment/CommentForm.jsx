@@ -54,7 +54,10 @@ const CommentForm = (props) => {
       onKeyUp={handleFormKeyUp}
       onClick={handleFormClick}
     >
-      <Form.Group className="m-2" controlId="formBasicComment">
+      <Form.Group
+        className="m-2 position-relative"
+        controlId="formBasicComment"
+      >
         <Col className="col-lg-12 p-0">
           <Row className="container-fluid p-0 m-0">
             <div id="comment-form">
