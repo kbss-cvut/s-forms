@@ -215,31 +215,32 @@ export default class Question extends React.Component {
       return (
         <>
           <Accordion
-            defaultActiveKey={!this.state.expanded ? label : undefined}
+            activeKey={this.state.expanded ? label : undefined}
+            className="mb-3"
           >
-            <Card className="mb-3">
-              <Accordion.Toggle
-                as={Card.Header}
-                onClick={this._toggleCollapse}
-                className={this._getHeaderClassName()}
-                onMouseEnter={this._onMouseEnterHandler}
-                onMouseLeave={this._onMouseLeaveHandler}
-              >
-                <h6 className="d-inline" id={question["@id"]}>
-                  {collapsible &&
-                    !FormUtils.isWizardStep(question) &&
-                    this._renderCollapseToggle()}
-                  {label}
-                </h6>
-                {this.renderQuestionIcons()}
-                {this.props.children}
-              </Accordion.Toggle>
-              {collapsible ? (
-                <Accordion.Collapse>{cardBody}</Accordion.Collapse>
-              ) : (
-                <>{cardBody}</>
-              )}
-            </Card>
+            <Accordion.Item eventKey={label}>
+              <Card className="">
+                <Accordion.Button
+                  as={Card.Header}
+                  onClick={this._toggleCollapse}
+                  className={this._getHeaderClassName()}
+                  onMouseEnter={this._onMouseEnterHandler}
+                  onMouseLeave={this._onMouseLeaveHandler}
+                >
+                  <div className="d-inline" id={question["@id"]}>
+                    {collapsible &&
+                      !FormUtils.isWizardStep(question) &&
+                      this._renderCollapseToggle()}
+                    {label}
+                  </div>
+                  {this.renderQuestionIcons()}
+                  {this.props.children}
+                </Accordion.Button>
+                <Accordion.Body className="p-0">
+                  {collapsible ? cardBody : <>{cardBody}</>}
+                </Accordion.Body>
+              </Card>
+            </Accordion.Item>
           </Accordion>
         </>
       );
@@ -286,6 +287,9 @@ export default class Question extends React.Component {
         {this.renderSubQuestions(classname)}
       </Card.Body>
     );
+    const answerableSectionStyles = this._getHeaderClassName();
+
+    if (this.state.expanded) answerableSectionStyles.push("text-primary");
 
     return (
       <Accordion
@@ -295,7 +299,7 @@ export default class Question extends React.Component {
         <Card className="mb-3">
           <Card.Header
             onClick={this._toggleCollapse}
-            className={this._getHeaderClassName()}
+            className={answerableSectionStyles}
           >
             {this.renderAnswers()}
           </Card.Header>
