@@ -4,6 +4,8 @@
     "x": "https://x.com/x/",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "form": "http://onto.fel.cvut.cz/ontologies/form/",
+    "form-lt": "http://onto.fel.cvut.cz/ontologies/form-layout/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "xml": "http://www.w3.org/XML/1998/namespace",
