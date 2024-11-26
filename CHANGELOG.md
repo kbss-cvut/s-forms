@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://kbss.felk.cvut.cz/git/s-forms/compare/v0.7.2...v0.8.0) (2024-11-26)
+
 ### [0.7.2](https://kbss.felk.cvut.cz/git/s-forms/compare/v0.7.1...v0.7.2) (2024-10-03)
 
 - Fix support for tooltip in tree component (#347)
