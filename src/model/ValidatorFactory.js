@@ -17,8 +17,6 @@ const createValidator = (question, intl) => {
   return () => {
     if (FormUtils.hasValidationLogic(question, intl)) {
       const answerValue = FormUtils.getAnswerValue(question);
-      // console.log(question);
-      // console.log(intl);
       return _validateAnswer(question, intl, answerValue, validators);
     }
   };

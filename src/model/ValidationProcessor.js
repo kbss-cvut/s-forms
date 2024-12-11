@@ -11,13 +11,11 @@ export default class ValidationProcessor {
    * @param {Object} intl - The object used for internationalization.
    */
   static updateQuestionValidation = (questions, question, index, intl) => {
-    if (question[Constants.HAS_ANSWER]) {
-      const validator = createValidator(question, intl);
-      const update = validator();
+    const validator = createValidator(question, intl);
+    const update = validator();
 
-      if (update) {
-        questions[index] = { ...question, ...update };
-      }
+    if (update) {
+      questions[index] = { ...question, ...update };
     }
     for (const question of questions) {
       this.updateSubQuestionsValidation(question, intl);
