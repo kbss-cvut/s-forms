@@ -19,7 +19,7 @@
       "form:provides-dereferenceable-answer-values": false,
       "form:requires-answer": true,
       "form:used-only-for-completeness": false,
-      "label": "7. Hinge Pin Condition"
+      "label": "7. Hinge pin condition"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/12bde36185db4724036d236c3c91af16-q",
@@ -53,7 +53,7 @@
       ],
       "has-origin-path-id": "32cc13e0c072c4b11764fa54b0f3e762",
       "has-question-origin": "http://vfn.cz/ontologies/ava-study/form/vs--failure-form-q-generated-qo",
-      "label": "Reliability Report DA 42 Flight Controls"
+      "label": "Reliability Report DA 42 - Flight Controls"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/12eb1318bd23dd201046eedc067474b6-q",
@@ -66,7 +66,7 @@
       "form:provides-dereferenceable-answer-values": false,
       "form:requires-answer": true,
       "form:used-only-for-completeness": true,
-      "label": "16. Affected Flight Control Surfaces"
+      "label": "16. Affected flight control surfaces"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/1909a2742233ccfbb9774c13a25b94d0-q",
@@ -78,7 +78,7 @@
       "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/12eb1318bd23dd201046eedc067474b6-q",
       "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/year-of-production-of-defective-equipment",
       "description": "Number of overhauls of defective equipment not including the currently ongoing overhaul.",
-      "label": "17. Year of Production for Affected Component",
+      "label": "17. Year of production of the affected component",
       "xsd:maxInclusive": 2100,
       "xsd:minInclusive": 1950
     },
@@ -90,7 +90,7 @@
       "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
       "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/a62a7b0b22382633dc9d700d404bb204-q",
       "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/notes",
-      "label": "21. Additional Observations"
+      "label": "21. Additional observations"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/23fd15358be967a128bad4b0fe5f0d81-q",
@@ -103,7 +103,7 @@
       "form:provides-dereferenceable-answer-values": false,
       "form:requires-answer": true,
       "form:used-only-for-completeness": false,
-      "label": "9. Potential Consequences"
+      "label": "9. Potential consequences"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2a3ebf45fa082bc02793bb490bb93242-q",
@@ -120,7 +120,7 @@
         "Enter value in hours h and minutes m, i.e., examples of valid values are 0:15, 12:59, 234:00.",
         "System/equipment/block/part repair duration including disassembly and assembly."
       ],
-      "label": "12. Estimated Repair Duration for Flight Controls"
+      "label": "12. Estimated repair duration"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2a8d710154fe21bf4edf0d261dc05423-q",
@@ -135,7 +135,7 @@
       "step": "0.1",
       "form:used-only-for-completeness": true,
       "description": "The average number of men during system/equipment/block/part repairment, including disassembly and assembly, is calculated in FTE full-time equivalent. E.g., if 3 people participated with capacity one day per week 0.2 FTE, the average would be 3*0.2 = 0.6.",
-      "label": "13. Average Maintenance Crew"
+      "label": "13. Average maintenance crew"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2f8c31d4ac43aac51b5dcfcd68226ee1-q",
@@ -148,7 +148,7 @@
       "form:requires-answer": true,
       "form:used-only-for-completeness": true,
       "description": "Description of corrective action in words",
-      "label": "15. Proposed Corrective Action"
+      "label": "15. Proposed corrective action"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/55fd83f85777317e21e816f51e9cc0ac-q",
@@ -159,7 +159,7 @@
       "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
       "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/1909a2742233ccfbb9774c13a25b94d0-q",
       "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/number-of-overhauls-of-defective-equipment",
-      "label": "18. Overhauls Performed on Affected Equipment",
+      "label": "18. Overhauls performed",
       "xsd:maxInclusive": 99,
       "xsd:minInclusive": 0
     },
@@ -172,7 +172,7 @@
       "has-validation-message": "Please enter a valid alphanumeric sequence. Your input should consist only of letters A-Z a-z and numbers 0-9. Special characters are not permitted.",
       "pattern": "^[A-Za-z0-9]+$",
       "form:used-only-for-completeness": true,
-      "label": "19. Serial No. of Affected Part"
+      "label": "19. Serial No. of the affected part"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/582164824575f653e1e20770ead5104f-q",
@@ -185,7 +185,7 @@
       "form:provides-dereferenceable-answer-values": false,
       "form:requires-answer": true,
       "form:used-only-for-completeness": true,
-      "label": "11. Select Repair Action"
+      "label": "11. Select repair action"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/5da139014a1d5112c5d9cfd5af60bd4c-q",
@@ -198,7 +198,7 @@
       "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/number-of-airframe-overhauls",
       "form:requires-answer": false,
       "description": "Number of airframe overhauls not including the currently ongoing overhaul.",
-      "label": "4. Overhauls on the Airframe",
+      "label": "4. Overhauls on the airframe",
       "xsd:maxInclusive": 30,
       "xsd:minInclusive": 0
     },
@@ -231,7 +231,7 @@
       "form:provides-dereferenceable-answer-values": false,
       "form:requires-answer": true,
       "form:used-only-for-completeness": false,
-      "label": "5. Classification of This Flight Control Issue"
+      "label": "5. Classification the Flight Control issue"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/952f32ad1c75974f571b5ca91cd9f9b2-q",
@@ -244,7 +244,7 @@
       "form:requires-answer": true,
       "form:used-only-for-completeness": false,
       "description": "Failure description in words",
-      "label": "14. Detailed Description of the Issue"
+      "label": "14. Detailed description of the issue"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/9d08c5136213046d5391da9240dc0bba-q",
@@ -267,7 +267,7 @@
       "has-validation-message": "Please enter a valid alphanumeric sequence. Your input should consist only of letters A-Z a-z and numbers 0-9. Special characters are not permitted.",
       "pattern": "^[A-Za-z0-9]+$",
       "form:used-only-for-completeness": true,
-      "label": "20. Engine Serial Number if applicable"
+      "label": "20. Engine serial number"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/b1471c9f6f1ddb9de1d150955a40ab6d-q",
@@ -306,7 +306,7 @@
       "form:provides-dereferenceable-answer-values": false,
       "form:requires-answer": true,
       "form:used-only-for-completeness": false,
-      "label": "6. Observed Condition for Hinges or Controls"
+      "label": "6. Observed condition for the hinges or the controls"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/dda6e990be349c8b54effa9ab133d672-q",
@@ -322,7 +322,7 @@
       "form:requires-answer": true,
       "form:used-only-for-completeness": false,
       "description": "Enter value in hours h and minutes m, i.e., examples of valid values are 0:15, 12:59, 234:00, 4567:49.",
-      "label": "3. Total Flight Hours on Airframe"
+      "label": "3. Total flight hours on airframe"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/f44ba9c0a34bfb25039250037b63a5a1-q",
@@ -335,7 +335,7 @@
       "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/date-of-failure-ascertainment",
       "form:requires-answer": true,
       "form:used-only-for-completeness": false,
-      "label": "2. Date of Discovery"
+      "label": "2. Date of finding"
     },
     {
       "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/fd9b05dda61215b077379b405244cbec-q",
@@ -348,7 +348,7 @@
       "form:provides-dereferenceable-answer-values": false,
       "form:requires-answer": true,
       "form:used-only-for-completeness": false,
-      "label": "8. Potential Cause Roll Pin Hinge etc."
+      "label": "8. Potential estimated cause"
     },
     {
       "@id": "form-lt:has-layout-class",
