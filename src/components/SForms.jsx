@@ -10,15 +10,16 @@ import { Card } from "react-bootstrap";
 import FormUtils from "../util/FormUtils.js";
 import "../styles/s-forms.css";
 import ErrorBoundaries from "./ErrorBoundary.jsx";
+import { useIntl } from "react-intl";
 
 const SForms = forwardRef((props, ref) => {
   const [loading, setLoading] = useState(true);
   const [formProperties, setFormProperties] = useState(null);
   const [form, setForm] = useState(null);
+  const intl = useIntl();
 
   useEffect(() => {
     const initialiseSForms = async () => {
-      const intl = props.options.intl;
       const [formProperties, structure] = await FormGenerator.constructForm(
         props.form,
         intl
@@ -74,7 +75,7 @@ const SForms = forwardRef((props, ref) => {
       mapComponent={_mapComponent}
       options={props.options}
     >
-      <IntlContextProvider locale={props.options.intl.locale}>
+      <IntlContextProvider locale={intl.locale}>
         <ErrorBoundaries>
           <FormGenContextProvider
             fetchTypeAheadValues={props.fetchTypeAheadValues}

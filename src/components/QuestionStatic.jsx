@@ -6,7 +6,7 @@ import QuestionCommentIcon from "./comment/QuestionCommentIcon.jsx";
 import * as JsonLdUtils from "jsonld-utils";
 
 export default class QuestionStatic {
-  static renderIcons(question, options, onCommentChange, showIcon) {
+  static renderIcons(question, options, onCommentChange, showIcon, intl) {
     let icons;
     if (options.icons) icons = options.icons;
     else icons = Constants.DEFAULT_OPTIONS.icons;
@@ -15,20 +15,24 @@ export default class QuestionStatic {
       question,
       options,
       onCommentChange,
-      showIcon
+      showIcon,
+      intl
     );
+
     const renderQuestionComments = this.renderQuestionComments(
       question,
       options,
       onCommentChange,
-      showIcon
+      showIcon,
+      intl
     );
 
     const renderQuestionLink = this.renderQuestionLink(
       question,
       options,
       onCommentChange,
-      showIcon
+      showIcon,
+      intl
     );
 
     for (let i = 0; i < icons.length; i++) {
@@ -58,13 +62,20 @@ export default class QuestionStatic {
     return <ol className="icon-list-items">{iconsArray}</ol>;
   }
 
-  static renderQuestionHelp(question, options, onCommentChange, showIcon) {
+  static renderQuestionHelp(
+    question,
+    options,
+    onCommentChange,
+    showIcon,
+    intl
+  ) {
     return this.getIconComponentFromName(
       Constants.ICONS.QUESTION_HELP,
       question,
       options,
       onCommentChange,
-      showIcon
+      showIcon,
+      intl
     );
   }
 
@@ -72,24 +83,33 @@ export default class QuestionStatic {
     question,
     options,
     onCommentChange,
-    showIcon
+    showIcon,
+    intl
   ) => {
     return this.getIconComponentFromName(
       Constants.ICONS.QUESTION_COMMENTS,
       question,
       options,
       onCommentChange,
-      showIcon
+      showIcon,
+      intl
     );
   };
 
-  static renderQuestionLink(question, options, onCommentChange, showIcon) {
+  static renderQuestionLink(
+    question,
+    options,
+    onCommentChange,
+    showIcon,
+    intl
+  ) {
     return this.getIconComponentFromName(
       Constants.ICONS.QUESTION_LINK,
       question,
       options,
       onCommentChange,
-      showIcon
+      showIcon,
+      intl
     );
   }
 
@@ -98,7 +118,8 @@ export default class QuestionStatic {
     question,
     options,
     onCommentChange,
-    showIcon
+    showIcon,
+    intl
   ) {
     const iconList = options.icons
       ? options.icons
@@ -109,7 +130,8 @@ export default class QuestionStatic {
       question,
       options,
       onCommentChange,
-      showIcon
+      showIcon,
+      intl
     );
   }
 
@@ -118,7 +140,14 @@ export default class QuestionStatic {
     return null;
   };
 
-  static getIconComponent(icon, question, options, onCommentChange, showIcon) {
+  static getIconComponent(
+    icon,
+    question,
+    options,
+    onCommentChange,
+    showIcon,
+    intl
+  ) {
     let iconClassname;
 
     if (
@@ -141,7 +170,7 @@ export default class QuestionStatic {
               <HelpIcon
                 text={JsonLdUtils.getLocalized(
                   question[Constants.HELP_DESCRIPTION],
-                  options.intl
+                  intl
                 )}
                 absolutePosition={false}
               />

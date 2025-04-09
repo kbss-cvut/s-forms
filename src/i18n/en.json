@@ -15,5 +15,7 @@
   "validation.greater_or_equal": "This field must be greater or equal to ",
 
   "error.default_message": "Something went wrong.",
-  "error.view_details": "View Error Details"
+  "error.view_details": "View Error Details",
+
+  "comment.unknownAuthor": "Unknown Author"
 }

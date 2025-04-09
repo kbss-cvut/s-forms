@@ -15,5 +15,7 @@
   "validation.greater_or_equal": "Toto pole musí být větší nebo rovno ",
 
   "error.default_message": "Něco se pokazilo.",
-  "error.view_details": "Zobrazit podrobnosti o chybě"
+  "error.view_details": "Zobrazit podrobnosti o chybě",
+
+  "comment.unknownAuthor": "Neznámý autor"
 }
