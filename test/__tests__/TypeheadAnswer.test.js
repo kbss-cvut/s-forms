@@ -7,6 +7,7 @@ import TypeaheadAnswer from "../../src/components/answer/TypeaheadAnswer";
 import { FormGenContext } from "../../src/contexts/FormGenContext";
 import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
 import DefaultInput from "../../src/components/DefaultInput";
+import { IntlProvider } from "react-intl";
 
 describe("TypeaheadAnswer", () => {
   let question;
@@ -39,7 +40,6 @@ describe("TypeaheadAnswer", () => {
   });
 
   it("orders options using partial ordering with alphabetical ordering", () => {
-    // create options
     const options = createOptionsWithPartialOrder(
       ["3", "2", "1", "before2"],
       ["before2<2"]
@@ -50,28 +50,26 @@ describe("TypeaheadAnswer", () => {
     question[Constants.HAS_OPTIONS_QUERY] = query;
 
     const component = mount(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions: { readOnly: false },
-          inputComponent: DefaultInput,
-          options: {
-            intl: {
-              locale: "en",
-            },
-          },
-        }}
-      >
-        <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
-          <TypeaheadAnswer
-            answer={{}}
-            question={question}
-            onChange={onChange}
-            label="TestLabel"
-            options={options}
-            validation={{}}
-          />
-        </FormGenContext.Provider>
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions: { readOnly: false },
+            inputComponent: DefaultInput,
+            options: {},
+          }}
+        >
+          <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
+            <TypeaheadAnswer
+              answer={{}}
+              question={question}
+              onChange={onChange}
+              label="TestLabel"
+              options={options}
+              validation={{}}
+            />
+          </FormGenContext.Provider>
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     waitForComponentToPaint(component);

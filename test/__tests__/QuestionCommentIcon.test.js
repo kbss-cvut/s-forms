@@ -3,6 +3,7 @@ import { cleanup, render, waitFor } from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
 import { fireEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+import { IntlProvider, useIntl } from "react-intl";
 
 import * as stories from "../../src/stories/QuestionCommentIcon.stories";
 
@@ -14,7 +15,11 @@ describe("QuestionCommentIcon", () => {
   const { Default, WithComment } = composeStories(stories);
 
   it("should have empty comment list", async () => {
-    const component = render(<Default {...Default.args} />);
+    const component = render(
+      <IntlProvider locale="en">
+        <Default {...Default.args} />
+      </IntlProvider>
+    );
 
     fireEvent.click(component.container.querySelector(".comment-bubble"));
     await waitFor(() => {
@@ -24,7 +29,11 @@ describe("QuestionCommentIcon", () => {
   });
 
   it("should have two comments", async () => {
-    const component = render(<WithComment {...WithComment.args} />);
+    const component = render(
+      <IntlProvider locale="en">
+        <WithComment {...WithComment.args} />
+      </IntlProvider>
+    );
 
     fireEvent.click(component.container.querySelector(".comment-bubble"));
     await waitFor(async () => {
@@ -35,12 +44,16 @@ describe("QuestionCommentIcon", () => {
   });
 
   it("should show link icon when hover author comment", async () => {
-    const component = render(<WithComment {...WithComment.args} />);
+    const component = render(
+      <IntlProvider locale="en">
+        <WithComment {...WithComment.args} />
+      </IntlProvider>
+    );
 
     fireEvent.click(component.container.querySelector(".comment-bubble"));
 
     await waitFor(async () => {
-      const authors = await component.queryAllByText("Unknown author");
+      const authors = await component.findAllByText("Unknown Author");
       const author = authors[0];
 
       expect(component.queryByRole("link")).not.toBeInTheDocument();
@@ -50,10 +63,15 @@ describe("QuestionCommentIcon", () => {
   });
 
   it("should delete comment when click on recycle bin", async () => {
-    const component = render(<WithComment {...WithComment.args} />);
+    const component = render(
+      <IntlProvider locale="en">
+        <WithComment {...WithComment.args} />
+      </IntlProvider>
+    );
 
     fireEvent.click(component.container.querySelector(".comment-bubble"));
-    const authors = component.queryAllByText("Unknown author");
+
+    const authors = await component.findAllByText("Unknown Author"); // capital A ✅
     const author = authors[0];
 
     expect(
