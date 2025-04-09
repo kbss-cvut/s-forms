@@ -37,9 +37,9 @@ class ErrorBoundary extends React.Component {
           <Accordion>
             <Card>
               <Card.Header>
-                <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                <Accordion as={Button} variant="link" eventKey="0">
                   {lang["error.view_details"] || "View Error Details"}
-                </Accordion.Toggle>
+                </Accordion>
               </Card.Header>
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
