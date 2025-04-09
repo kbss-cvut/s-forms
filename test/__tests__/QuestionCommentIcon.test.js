@@ -71,7 +71,7 @@ describe("QuestionCommentIcon", () => {
 
     fireEvent.click(component.container.querySelector(".comment-bubble"));
 
-    const authors = await component.findAllByText("Unknown Author"); // capital A ✅
+    const authors = await component.findAllByText("Unknown Author");
     const author = authors[0];
 
     expect(
