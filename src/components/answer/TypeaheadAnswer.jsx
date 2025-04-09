@@ -10,6 +10,7 @@ import { FormGroup, Form } from "react-bootstrap";
 import { FormGenContext } from "../../contexts/FormGenContext";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import { IntelligentTreeSelect } from "intelligent-tree-select/lib/components/IntelligentTreeSelect.js";
+import { useIntl } from "react-intl";
 
 import "intelligent-tree-select/lib/styles.css";
 
@@ -38,7 +39,7 @@ const TypeaheadAnswer = (props) => {
   const formGenContext = useContext(FormGenContext);
   const configurationContext = useContext(ConfigurationContext);
 
-  const intl = configurationContext.options.intl;
+  const intl = useIntl();
 
   const [isLoading, setLoading] = useState(true);
   const [optionsList, setOptionsList] = useState(
