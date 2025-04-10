@@ -203,7 +203,7 @@ export default class Question extends React.Component {
       }
       const label = JsonLdUtils.getLocalized(
         question[JsonLdUtils.RDFS_LABEL],
-        this.context.options.intl
+        this.props.intl
       );
 
       const cardBody = (
@@ -273,7 +273,8 @@ export default class Question extends React.Component {
       question,
       options,
       this.handleCommentChange,
-      this.state.showIcon
+      this.state.showIcon,
+      this.props.intl
     );
   }
 
@@ -528,7 +529,7 @@ export default class Question extends React.Component {
     // sort by label
     JsonLdObjectUtils.orderByLocalizedLabels(
       question[Constants.HAS_SUBQUESTION],
-      this.context.options.intl
+      this.props.intl
     );
 
     // sort by property

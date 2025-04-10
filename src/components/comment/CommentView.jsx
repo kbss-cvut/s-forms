@@ -9,19 +9,19 @@ import PropTypes from "prop-types";
 import RecycleBin from "../../styles/icons/RecycleBin";
 import { motion } from "framer-motion";
 import Constants from "../../constants/Constants";
-
-const UNKNOWN_AUTHOR = "Unknown author";
+import { useIntl } from "react-intl";
 
 const CommentView = (props) => {
   const { options } = useContext(ConfigurationContext);
   const [showIRI, setShowIRI] = useState(false);
   const [showRecycleBin, setShowRecycleBin] = useState(false);
+  const intl = useIntl();
 
   TimeAgo.addLocale(cs);
   TimeAgo.addLocale(en);
   TimeAgo.setDefaultLocale(Constants.LANG.en.locale);
 
-  const time = new TimeAgo(options.intl.locale);
+  const time = new TimeAgo(intl.locale);
 
   const getAuthorLabel = () => {
     if (options && options.users) {
@@ -37,12 +37,13 @@ const CommentView = (props) => {
       }
     }
 
-    return UNKNOWN_AUTHOR;
+    return intl.formatMessage({
+      id: "comment.unknownAuthor",
+    });
   };
 
   const getAuthorIRIAbbreviation = () => {
     const fullAuthor = props.author["@id"];
-
     return fullAuthor.replace(/.*[#\/]/, "... ");
   };
 
@@ -50,7 +51,9 @@ const CommentView = (props) => {
     if (props.author) {
       return Object.values(props.author).toString();
     }
-    return UNKNOWN_AUTHOR;
+    return intl.formatMessage({
+      id: "comment.unknownAuthor",
+    });
   };
 
   const renderAuthor = () => {
@@ -87,9 +90,7 @@ const CommentView = (props) => {
         second: "numeric",
       };
       const date = new Date(parseInt(props.timestamp));
-      return new Intl.DateTimeFormat(options.intl.locale, dateOptions).format(
-        date
-      );
+      return new Intl.DateTimeFormat(intl.locale, dateOptions).format(date);
     };
 
     return (

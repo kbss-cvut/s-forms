@@ -40,7 +40,7 @@ const VerticalWizardNav = ({ steps, onNavigate, currentStep }) => {
             >
               {JsonLdUtils.getLocalized(
                 step[JsonLdUtils.RDFS_LABEL],
-                options.intl
+                useIntl()
               )}
             </ListGroupItem>
           </IconOverlay>

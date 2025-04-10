@@ -5,6 +5,7 @@ import Constants from "../../src/constants/Constants";
 import * as Generator from "../environment/Generator";
 import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
 import DefaultInput from "../../src/components/DefaultInput";
+import { IntlProvider } from "react-intl";
 
 const LABEL = "Input answer test";
 
@@ -25,11 +26,7 @@ describe("InputAnswer", () => {
       "@value": "Javascript sucks!!!",
     };
     onChange = jest.fn();
-    options = {
-      intl: {
-        locale: "en",
-      },
-    };
+    options = {};
     componentsOptions = {
       readOnly: false,
       dateTimeAnswer: {
@@ -53,20 +50,22 @@ describe("InputAnswer", () => {
     answer[Constants.HAS_DATA_VALUE] = value;
 
     const component = mount(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          question={question}
-          answer={answer}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            question={question}
+            answer={answer}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
     const input = component.find("input");
 
@@ -82,20 +81,22 @@ describe("InputAnswer", () => {
     answer[Constants.HAS_DATA_VALUE] = value;
 
     const component = mount(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          question={question}
-          answer={answer}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            question={question}
+            answer={answer}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
     const input = component.find("input");
 
@@ -111,20 +112,22 @@ describe("InputAnswer", () => {
     answer[Constants.HAS_DATA_VALUE] = value;
 
     const component = mount(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          question={question}
-          answer={answer}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            question={question}
+            answer={answer}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
     const input = component.find("input");
 
@@ -140,20 +143,22 @@ describe("InputAnswer", () => {
     answer[Constants.HAS_DATA_VALUE] = value;
 
     const component = mount(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          question={question}
-          answer={answer}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            question={question}
+            answer={answer}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
     const input = component.find("input");
 
@@ -171,20 +176,22 @@ describe("InputAnswer", () => {
     answer[Constants.HAS_DATA_VALUE] = value;
 
     const component = mount(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          question={question}
-          answer={answer}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            question={question}
+            answer={answer}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
     const input = component.find("input");
 
@@ -199,20 +206,22 @@ describe("InputAnswer", () => {
     answer[Constants.HAS_DATA_VALUE] = value;
 
     const component = mount(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          question={question}
-          answer={answer}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            question={question}
+            answer={answer}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
     const input = component.find("input");
 

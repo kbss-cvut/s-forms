@@ -14,6 +14,7 @@ import { FormGenContext } from "../contexts/FormGenContext";
 import { ConfigurationContext } from "../contexts/ConfigurationContext";
 import QuestionStatic from "./QuestionStatic.jsx";
 import { FormText } from "react-bootstrap";
+import { useIntl } from "react-intl";
 
 const Answer = (props) => {
   const formGenContext = React.useContext(FormGenContext);
@@ -23,6 +24,7 @@ const Answer = (props) => {
     classname: "",
     message: null,
   });
+  const intl = useIntl();
 
   useEffect(() => {
     _resolveValidationProps();
@@ -178,7 +180,7 @@ const Answer = (props) => {
   const _getLabel = (question) => {
     const label = JsonldUtils.getLocalized(
       question[Constants.RDFS_LABEL],
-      options.intl
+      intl
     );
 
     return (
@@ -188,7 +190,8 @@ const Answer = (props) => {
           props.question,
           options,
           props.onCommentChange,
-          props.showIcon
+          props.showIcon,
+          intl
         )}
       </div>
     );
@@ -234,7 +237,7 @@ const Answer = (props) => {
   const label = _getLabel(question);
   const title = JsonldUtils.getLocalized(
     question[Constants.RDFS_COMMENT],
-    options.intl
+    intl
   );
   let component;
 

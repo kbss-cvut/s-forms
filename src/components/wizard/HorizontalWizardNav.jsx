@@ -39,10 +39,7 @@ const HorizontalWizardNav = ({ steps, onNavigate, currentStep }) => {
                   "wizard-nav",
                 ])}
               >
-                {JsonLdUtils.getLocalized(
-                  step[JsonLdUtils.RDFS_LABEL],
-                  options.intl
-                )}
+                {JsonLdUtils.getLocalized(step[JsonLdUtils.RDFS_LABEL], intl)}
               </NavLink>
             </NavItem>
           </IconOverlay>

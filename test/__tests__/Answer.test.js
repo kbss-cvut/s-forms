@@ -9,6 +9,7 @@ import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
 import DefaultInput from "../../src/components/DefaultInput";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { IntlProvider } from "react-intl";
 
 describe("Answer component", () => {
   let question,
@@ -35,11 +36,7 @@ describe("Answer component", () => {
         "The identification of the aerodrome/helicopter landing area by name, location and status.",
     };
     onChange = jest.fn();
-    options = {
-      intl: {
-        locale: "en",
-      },
-    };
+    options = {};
     componentsOptions = {
       readOnly: false,
       dateTimeAnswer: {
@@ -60,22 +57,24 @@ describe("Answer component", () => {
   test("renders a Typeahead when layout class is typeahead", async () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.QUESTION_TYPEAHEAD);
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
-          <Answer
-            answer={{}}
-            question={question}
-            onChange={onChange}
-            onCommentChange={() => void undefined}
-          />
-        </FormGenContext.Provider>
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
+            <Answer
+              answer={{}}
+              question={question}
+              onChange={onChange}
+              onCommentChange={() => void 0}
+            />
+          </FormGenContext.Provider>
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     await waitFor(() => {
@@ -99,24 +98,26 @@ describe("Answer component", () => {
     question[Constants.HAS_OPTIONS_QUERY] = "SELECT * WHERE {?x ?y ?z. }";
 
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <FormGenContext.Provider
-          value={{ getOptions, loadFormOptions: () => typeAheadOptions }}
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
         >
-          <Answer
-            answer={answer}
-            question={question}
-            onChange={onChange}
-            onCommentChange={() => void undefined}
-          />
-        </FormGenContext.Provider>
-      </ConfigurationContext.Provider>
+          <FormGenContext.Provider
+            value={{ getOptions, loadFormOptions: () => typeAheadOptions }}
+          >
+            <Answer
+              answer={answer}
+              question={question}
+              onChange={onChange}
+              onCommentChange={() => void undefined}
+            />
+          </FormGenContext.Provider>
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     await waitFor(() => {
@@ -136,22 +137,24 @@ describe("Answer component", () => {
     question[Constants.HAS_OPTIONS_QUERY] = query;
 
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
-          <Answer
-            answer={{}}
-            question={question}
-            onChange={onChange}
-            onCommentChange={() => void undefined}
-          />
-        </FormGenContext.Provider>
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <FormGenContext.Provider value={{ getOptions, loadFormOptions }}>
+            <Answer
+              answer={{}}
+              question={question}
+              onChange={onChange}
+              onCommentChange={() => void undefined}
+            />
+          </FormGenContext.Provider>
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     await waitFor(() => {
@@ -176,20 +179,22 @@ describe("Answer component", () => {
     question[Constants.HAS_ANSWER] = [answer];
 
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          answer={answer}
-          question={question}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     const input = screen.getByRole("textbox");
@@ -219,20 +224,22 @@ describe("Answer component", () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATE);
 
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          answer={answer}
-          question={question}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     const picker = screen.getByPlaceholderText("yyyy-MM-dd");
@@ -251,20 +258,22 @@ describe("Answer component", () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.TIME);
 
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          answer={answer}
-          question={question}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     const picker = screen.getByPlaceholderText("HH:mm:ss");
@@ -283,20 +292,22 @@ describe("Answer component", () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          answer={answer}
-          question={question}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     const picker = screen.getByPlaceholderText("yyyy-MM-dd HH:mm:ss");
@@ -318,23 +329,23 @@ describe("Answer component", () => {
     question[Constants.HAS_ANSWER] = [answer];
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.DATETIME);
 
-    console.log(date);
-
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent: { inputComponent },
-          options,
-        }}
-      >
-        <Answer
-          answer={answer}
-          question={question}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent: { inputComponent },
+            options,
+          }}
+        >
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     const picker = screen.getByPlaceholderText("yyyy-MM-dd HH:mm:ss");
@@ -356,20 +367,22 @@ describe("Answer component", () => {
     question[Constants.LAYOUT_CLASS].push(Constants.LAYOUT.CHECKBOX);
 
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          answer={answer}
-          question={question}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
     const input = screen.getByRole("checkbox");
 
@@ -387,20 +400,22 @@ describe("Answer component", () => {
     question[Constants.HAS_DATATYPE] = Constants.XSD.INT;
 
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          answer={answer}
-          question={question}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
 
     // Spinbutton is aria role for input with restricted inputs
@@ -420,20 +435,22 @@ describe("Answer component", () => {
     question[Constants.HAS_ANSWER] = [answer];
 
     render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          answer={answer}
-          question={question}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
     const input = screen.getByRole("textbox");
 
@@ -453,20 +470,22 @@ describe("Answer component", () => {
     question[Constants.INPUT_MASK] = mask;
 
     const container = render(
-      <ConfigurationContext.Provider
-        value={{
-          componentsOptions,
-          inputComponent,
-          options,
-        }}
-      >
-        <Answer
-          answer={answer}
-          question={question}
-          onChange={onChange}
-          onCommentChange={() => void undefined}
-        />
-      </ConfigurationContext.Provider>
+      <IntlProvider locale="en">
+        <ConfigurationContext.Provider
+          value={{
+            componentsOptions,
+            inputComponent,
+            options,
+          }}
+        >
+          <Answer
+            answer={answer}
+            question={question}
+            onChange={onChange}
+            onCommentChange={() => void undefined}
+          />
+        </ConfigurationContext.Provider>
+      </IntlProvider>
     );
     const input = screen.getByRole("textbox");
 
