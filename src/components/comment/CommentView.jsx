@@ -75,12 +75,17 @@ const CommentView = (props) => {
   };
 
   const renderTimeAgo = () => {
+    const numericTimestamp = Number(props.timestamp);
+    const parsedDate = isNaN(numericTimestamp)
+      ? new Date(props.timestamp)
+      : new Date(numericTimestamp);
+
     const getTimeAgoFormat = () => {
-      return time.format(parseInt(props.timestamp));
+      return time.format(parsedDate);
     };
 
     const getUTCFormat = () => {
-      let dateOptions = {
+      return new Intl.DateTimeFormat(intl.locale, {
         weekday: "long",
         year: "numeric",
         month: "long",
@@ -88,9 +93,7 @@ const CommentView = (props) => {
         hour: "numeric",
         minute: "numeric",
         second: "numeric",
-      };
-      const date = new Date(parseInt(props.timestamp));
-      return new Intl.DateTimeFormat(intl.locale, dateOptions).format(date);
+      }).format(new Date(parsedDate));
     };
 
     return (
