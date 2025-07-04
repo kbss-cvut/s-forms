@@ -33,11 +33,11 @@ export default class FormGenerator {
     let formProperties;
     let form;
     return jsonld
-      .flatten(structure, {})
-      .then((flattenedStructure) => {
+      .compact(structure, {})
+      .then((compactedStructure) => {
         try {
           const [formQuestions, rootForm] =
-            FormGenerator._constructFormQuestions(flattenedStructure, intl);
+            FormGenerator._constructFormQuestions(compactedStructure, intl);
           form = rootForm;
           formProperties = {
             formQuestions,
