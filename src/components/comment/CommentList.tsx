@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import CommentView from "./CommentView";
 import Constants from "../../constants/Constants";
 import { Rings } from "react-loader-spinner";
+import * as JsonLdUtils from "jsonld-utils";
 
 interface Props {
   comments: Array<any>;
@@ -38,13 +39,19 @@ const CommentList = ({ comments, onDeleteCommentClick }: Props) => {
           {comments.map((comment, index) => (
             <div key={index} className="comment-list-item">
               <CommentView
-                commentValue={comment[Constants.HAS_COMMENT_VALUE]}
+                commentValue={JsonLdUtils.getJsonAttValue(
+                  comment,
+                  Constants.HAS_COMMENT_VALUE
+                )}
                 author={
                   comment[Constants.HAS_AUTHOR]
                     ? comment[Constants.HAS_AUTHOR]
                     : null
                 }
-                timestamp={comment[Constants.HAS_TIMESTAMP]}
+                timestamp={JsonLdUtils.getJsonAttValue(
+                  comment,
+                  Constants.HAS_TIMESTAMP
+                )}
                 onDeleteQuestionComment={onDeleteCommentClick}
                 onDeleteViewComment={handleDeleteViewComment}
                 index={index}
