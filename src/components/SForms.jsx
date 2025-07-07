@@ -1,100 +1,14 @@
-import React, { forwardRef, useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { FormGenContextProvider } from "../contexts/FormGenContext";
-import { FormQuestionsProvider } from "../contexts/FormQuestionsContext";
-import { ConfigurationContextProvider } from "../contexts/ConfigurationContext";
+import React, { forwardRef } from "react";
 import IntlContextProvider from "../contexts/IntlContextProvider.tsx";
-import FormGenerator from "../model/FormGenerator";
-import FormManager from "./FormManager";
-import { Card } from "react-bootstrap";
-import FormUtils from "../util/FormUtils.js";
 import "../styles/s-forms.css";
-import ErrorBoundaries from "./ErrorBoundary.jsx";
-import { useIntl } from "react-intl";
+import SFormsInner from "./SFormsInner.jsx";
+import PropTypes from "prop-types";
 
 const SForms = forwardRef((props, ref) => {
-  const [loading, setLoading] = useState(true);
-  const [formProperties, setFormProperties] = useState(null);
-  const [form, setForm] = useState(null);
-  const intl = useIntl();
-
-  useEffect(() => {
-    const initialiseSForms = async () => {
-      const [formProperties, structure] = await FormGenerator.constructForm(
-        props.form,
-        intl
-      );
-
-      if (
-        formProperties.formQuestions.some((step) =>
-          FormUtils.isWizardStep(step)
-        )
-      ) {
-        formProperties.formQuestions[0].visited = true;
-      }
-
-      setFormProperties(formProperties);
-      setForm(structure);
-      setLoading(false);
-    };
-
-    initialiseSForms();
-  }, [props.form]);
-
-  if (loading) {
-    return (
-      props.loader || <Card className="p-3 font-italic">Loading SForms...</Card>
-    );
-  }
-
-  const _getComponentMappingFunction = (components, form) => {
-    return (question, defaultComponent) => {
-      if (!components) {
-        return defaultComponent;
-      }
-
-      for (let { component, mapRule } of components) {
-        if (mapRule(question, form)) {
-          return component;
-        }
-      }
-
-      return defaultComponent;
-    };
-  };
-
-  const _mapComponent = _getComponentMappingFunction(
-    props.componentMapRules,
-    form
-  );
-
   return (
-    <ConfigurationContextProvider
-      components={props.components}
-      componentsOptions={props.componentsOptions}
-      mapComponent={_mapComponent}
-      options={props.options}
-    >
-      <IntlContextProvider locale={intl.locale}>
-        <ErrorBoundaries>
-          <FormGenContextProvider
-            fetchTypeAheadValues={props.fetchTypeAheadValues}
-          >
-            <FormQuestionsProvider
-              data={form}
-              formQuestions={formProperties.formQuestions}
-              isFormValid={props.isFormValid}
-            >
-              <FormManager
-                ref={ref}
-                modalView={props.options && props.options.modalView}
-                mapComponent={_mapComponent}
-              />
-            </FormQuestionsProvider>
-          </FormGenContextProvider>
-        </ErrorBoundaries>
-      </IntlContextProvider>
-    </ConfigurationContextProvider>
+    <IntlContextProvider locale={props.options?.intl?.locale}>
+      <SFormsInner ref={ref} {...props} />
+    </IntlContextProvider>
   );
 });
 
