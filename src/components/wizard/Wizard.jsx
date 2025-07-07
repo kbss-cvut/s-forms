@@ -7,6 +7,7 @@ import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Utils from "../../util/Utils";
 import Constants from "../../constants/Constants";
+import useScrollToElementById from "../../hooks/useScrollToElementById.jsx";
 
 const findStepByQuestionId = (stepData, id) => {
   const findQuestionTraversal = (question, index) => {
@@ -54,19 +55,7 @@ const Wizard = () => {
 
   const [currentStep, setCurrentStep] = React.useState(startingStep);
 
-  const [scrolledToStartingQuestionId, setScrolledToStartingQuestionId] =
-    React.useState(false);
-
-  useEffect(() => {
-    if (options.startingQuestionId && !scrolledToStartingQuestionId) {
-      const element = document.getElementById(options.startingQuestionId);
-      if (element) {
-        element.scrollIntoView();
-        element.classList.add("text-danger");
-        setScrolledToStartingQuestionId(true);
-      }
-    }
-  });
+  useScrollToElementById(options.startingQuestionId);
 
   const onNextStep = () => {
     const stepData = formQuestionsContext.getFormQuestionsData();
