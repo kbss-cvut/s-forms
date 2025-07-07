@@ -4,10 +4,10 @@ import { FormQuestionsContext } from "../contexts/FormQuestionsContext";
 import Wizard from "./wizard/Wizard";
 import FormWindow from "./FormWindow";
 import { Card } from "react-bootstrap";
-import Question from "./Question";
 import FormUtils from "../util/FormUtils.js";
 import ValidationProcessor from "../model/ValidationProcessor.js";
 import { useIntl } from "react-intl";
+import Wizardless from "./wizard/Wizardless.jsx";
 
 const FormManager = forwardRef((props, ref) => {
   const { getFormQuestionsData, updateFormQuestionsData, getData } =
@@ -61,31 +61,6 @@ const FormManager = forwardRef((props, ref) => {
     return FormUtils.getFormSpecification(questions);
   };
 
-  const handleStepChange = (question, index, change) => {
-    updateFormQuestionsData(index, { ...question, ...change });
-  };
-
-  const renderWizardlessForm = () => {
-    const formQuestionsData = getFormQuestionsData();
-
-    return (
-      <Card className="p-3">
-        {formQuestionsData.map((q, i) => _mapQuestion(q, i))}
-      </Card>
-    );
-  };
-
-  const _mapQuestion = (question, index) => {
-    let component = props.mapComponent(question, Question);
-    return React.createElement(component, {
-      key: question["@id"],
-      question: question,
-      onChange: (index, change) => handleStepChange(question, index, change),
-      index: index,
-      intl: intl,
-    });
-  };
-
   const { modalView } = props;
 
   const formQuestionsData = getFormQuestionsData();
@@ -102,15 +77,9 @@ const FormManager = forwardRef((props, ref) => {
     (question) => !FormUtils.isWizardStep(question)
   );
 
-  if (modalView) {
-    return (
-      <FormWindow>
-        {isWizardless ? renderWizardlessForm() : <Wizard />}
-      </FormWindow>
-    );
-  }
+  const content = isWizardless ? <Wizardless /> : <Wizard />;
 
-  return isWizardless ? renderWizardlessForm() : <Wizard />;
+  return modalView ? <FormWindow>{content}</FormWindow> : content;
 });
 
 export default FormManager;
