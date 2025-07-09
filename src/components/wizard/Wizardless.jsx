@@ -4,7 +4,7 @@ import { FormQuestionsContext } from "../../contexts/FormQuestionsContext.js";
 import Question from "../Question.jsx";
 import { ConfigurationContext } from "../../contexts/ConfigurationContext.js";
 import { useIntl } from "react-intl";
-import useScrollToElementById from "../../hooks/useScrollToElementById.jsx";
+import useScrollToElement from "../../hooks/useScrollToElement.jsx";
 
 const Wizardless = () => {
   const intl = useIntl();
@@ -14,7 +14,7 @@ const Wizardless = () => {
 
   const { options, mapComponent } = React.useContext(ConfigurationContext);
 
-  useScrollToElementById(options.startingQuestionId);
+  useScrollToElement(options.startingQuestionId);
 
   const handleStepChange = (question, index, change) => {
     updateFormQuestionsData(index, { ...question, ...change });
