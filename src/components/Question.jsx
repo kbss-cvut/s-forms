@@ -16,6 +16,7 @@ import { ConfigurationContext } from "../contexts/ConfigurationContext";
 import classNames from "classnames";
 import QuestionStatic from "./QuestionStatic.jsx";
 import Utils from "../util/Utils.js";
+import JsonLdFramingUtils from "../util/JsonLdFramingUtils.js";
 
 // TODO Remove once the pretty layout is tested
 const PRETTY_ANSWERABLE_LAYOUT = true;
@@ -351,6 +352,7 @@ export default class Question extends React.Component {
         FormUtils.isTurtleInput(question);
       cls = classNames(
         "answer",
+        JsonLdFramingUtils._getId(question[Constants.HAS_QUESTION_ORIGIN]),
         Question._getQuestionCategoryClass(question),
         Question.getEmphasizedOnRelevantClass(question)
       );
