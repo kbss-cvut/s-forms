@@ -7,7 +7,8 @@ import { ConfigurationContext } from "../../contexts/ConfigurationContext";
 import { FormQuestionsContext } from "../../contexts/FormQuestionsContext";
 import Utils from "../../util/Utils";
 import Constants from "../../constants/Constants";
-import useScrollToElementById from "../../hooks/useScrollToElementById.jsx";
+import useScrollToElement from "../../hooks/useScrollToElement.jsx";
+import JsonLdFramingUtils from "../../util/JsonLdFramingUtils.js";
 
 const findStepByQuestionId = (stepData, id) => {
   const findQuestionTraversal = (question, index) => {
@@ -15,7 +16,10 @@ const findStepByQuestionId = (stepData, id) => {
       return -1;
     }
 
-    if (question["@id"] === id) {
+    if (
+      question["@id"] === id ||
+      JsonLdFramingUtils._getId(question[Constants.HAS_QUESTION_ORIGIN]) === id
+    ) {
       return index;
     }
 
@@ -55,7 +59,10 @@ const Wizard = () => {
 
   const [currentStep, setCurrentStep] = React.useState(startingStep);
 
-  useScrollToElementById(options.startingQuestionId);
+  useScrollToElement({
+    id: options.startingQuestionId,
+    classNames: [options.startingQuestionOrigin],
+  });
 
   const onNextStep = () => {
     const stepData = formQuestionsContext.getFormQuestionsData();

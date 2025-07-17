@@ -60,6 +60,7 @@ const Template: ComponentStory<typeof SForms> = (
     horizontalWizardNav: horizontalNavBar,
     wizardStepButtons: true,
     ...getP("startingQuestionId", "layout-options-65"),
+    ...getP("startingQuestionOrigin", "hidden-question-1834"),
     startingStep: 1,
     debugMode: debugMode,
     users: [

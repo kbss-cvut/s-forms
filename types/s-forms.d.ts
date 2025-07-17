@@ -15,6 +15,7 @@ export interface SOptions {
   enableForwardSkip?: boolean; // default false
   startingStep?: number; // default 0; indexed from 0
   startingQuestionId?: string; // default undefined; overrides startingStep
+  startingQuestionOrigin?: string; // default undefined;
 }
 
 export interface SComponents {

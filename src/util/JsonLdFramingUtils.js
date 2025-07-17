@@ -107,7 +107,10 @@ export default class JsonLdFramingUtils {
     if (typeof jsonObject === "string") {
       return jsonObject;
     }
-    return jsonObject["@id"];
+    if (jsonObject && typeof jsonObject === "object") {
+      return jsonObject["@id"];
+    }
+    return undefined;
   }
 
   static compressStructure = (rootNode) => {
