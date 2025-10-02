@@ -16,7 +16,9 @@ const Wizardless = () => {
 
   useScrollToElement({
     id: options.startingQuestionId,
-    classNames: [options.startingQuestionOrigin],
+    dataAttributes: {
+      "question-origin": [options.startingQuestionOrigin],
+    },
   });
 
   const handleStepChange = (question, index, change) => {

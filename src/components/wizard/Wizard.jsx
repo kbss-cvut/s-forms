@@ -61,7 +61,9 @@ const Wizard = () => {
 
   useScrollToElement({
     id: options.startingQuestionId,
-    classNames: [options.startingQuestionOrigin],
+    dataAttributes: {
+      "question-origin": [options.startingQuestionOrigin],
+    },
   });
 
   const onNextStep = () => {

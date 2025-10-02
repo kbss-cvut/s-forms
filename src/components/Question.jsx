@@ -352,7 +352,6 @@ export default class Question extends React.Component {
         FormUtils.isTurtleInput(question);
       cls = classNames(
         "answer",
-        JsonLdFramingUtils._getId(question[Constants.HAS_QUESTION_ORIGIN]),
         Question._getQuestionCategoryClass(question),
         Question.getEmphasizedOnRelevantClass(question)
       );
@@ -363,6 +362,9 @@ export default class Question extends React.Component {
           id={question["@id"]}
           onMouseEnter={this._onEnterHandler}
           onMouseLeave={this._onLeaveHandler}
+          data-question-origin={JsonLdFramingUtils._getId(
+            question[Constants.HAS_QUESTION_ORIGIN]
+          )}
           onFocus={this._onEnterHandler}
           onBlur={this._onLeaveHandler}
         >
