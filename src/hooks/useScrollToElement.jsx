@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 function useScrollToElement({
   id,
-  classNames = [],
+  dataAttributes = [],
   scrollOptions = { behavior: "smooth" },
   highlightClass = "text-danger",
 }) {
@@ -13,14 +13,11 @@ function useScrollToElement({
       element = document.getElementById(id);
     }
 
-    if (!element && classNames.length > 0) {
-      for (const className of classNames) {
-        const elements = document.getElementsByClassName(className);
-        if (elements.length > 0) {
-          element = elements[0];
-          break;
-        }
-      }
+    if (!element && Object.keys(dataAttributes).length > 0) {
+      const selector = Object.entries(dataAttributes)
+        .map(([key, value]) => `[data-${key}="${value}"]`)
+        .join("");
+      element = document.querySelector(selector);
     }
 
     if (element) {
@@ -29,7 +26,7 @@ function useScrollToElement({
         element.classList.add(highlightClass);
       }
     }
-  }, [id, classNames, scrollOptions, highlightClass]);
+  }, [id, dataAttributes, scrollOptions, highlightClass]);
 }
 
 export default useScrollToElement;

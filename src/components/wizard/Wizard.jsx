@@ -10,16 +10,14 @@ import Constants from "../../constants/Constants";
 import useScrollToElement from "../../hooks/useScrollToElement.jsx";
 import JsonLdFramingUtils from "../../util/JsonLdFramingUtils.js";
 
-const findStepByQuestionId = (stepData, id) => {
+const findStepBy = (key, value, stepData) => {
+  console.log(stepData, key, value);
   const findQuestionTraversal = (question, index) => {
     if (!question) {
       return -1;
     }
 
-    if (
-      question["@id"] === id ||
-      JsonLdFramingUtils._getId(question[Constants.HAS_QUESTION_ORIGIN]) === id
-    ) {
+    if (JsonLdFramingUtils._getId(question[key]) === value) {
       return index;
     }
 
@@ -41,13 +39,25 @@ const Wizard = () => {
 
   let startingStep = 0;
   if (options.startingQuestionId) {
-    startingStep = findStepByQuestionId(
-      formQuestionsContext.getFormQuestionsData(),
-      options.startingQuestionId
+    startingStep = findStepBy(
+      "@id",
+      options.startingQuestionId,
+      formQuestionsContext.getFormQuestionsData()
     );
-
     if (startingStep === -1) {
       console.warn(`Question with id ${options.startingQuestionId} not found!`);
+      startingStep = 0;
+    }
+  } else if (options.startingQuestionOrigin) {
+    startingStep = findStepBy(
+      Constants.HAS_QUESTION_ORIGIN,
+      options.startingQuestionOrigin,
+      formQuestionsContext.getFormQuestionsData()
+    );
+    if (startingStep === -1) {
+      console.warn(
+        `Question with question origin ${options.startingQuestionOrigin} not found!`
+      );
       startingStep = 0;
     }
   } else if (options.startingStep) {
@@ -61,7 +71,9 @@ const Wizard = () => {
 
   useScrollToElement({
     id: options.startingQuestionId,
-    classNames: [options.startingQuestionOrigin],
+    dataAttributes: {
+      "question-origin": [options.startingQuestionOrigin],
+    },
   });
 
   const onNextStep = () => {
