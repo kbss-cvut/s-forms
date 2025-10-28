@@ -24,19 +24,14 @@ const CommentView = (props) => {
   const time = new TimeAgo(intl.locale);
 
   const getAuthorLabel = () => {
-    if (options && options.users) {
+    if (options && options.users && props.author) {
       const users = options.users;
-      const currentUser = users.find((c) => c.id === options.currentUser);
+      const author = users.find((u) => u.id === props.author["@id"]);
 
-      if (props.author) {
-        if (currentUser.label) {
-          return currentUser.label;
-        } else {
-          return getAuthorIRIAbbreviation();
-        }
+      if (author && author.label) {
+        return author.label;
       }
     }
-
     return intl.formatMessage({
       id: "comment.unknownAuthor",
     });
