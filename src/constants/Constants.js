@@ -242,7 +242,7 @@ export default class Constants {
       color: "red",
       fontSizeInNormalizedPx: 0.05,
       fontWeight: "300",
-      fontFamily: "Arial",
+      fontFamily: "sans-serif",
       fontColor: "red",
       opacity: 1.0,
     },
