@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import VideoJS from "./video/VideoJS";
+import VideoViewer from "./video/VideoViewer.jsx";
 import ViewerUtils from "../../util/MediaAssetViewerUtil.js";
 import AnnotationRenderer from "./annotation/AnnotationRenderer.jsx";
 import ImageViewer from "./image/ImageViewer.jsx";
@@ -34,6 +34,7 @@ const MediaAssetViewer = (props) => {
   const [myTime, setMyTime] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [containerSize, setContainerSize] = useState(null);
+  const [assetSize, setAssetSize] = useState(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -92,16 +93,21 @@ const MediaAssetViewer = (props) => {
     switch (mediaInfo.kind) {
       case "video":
         return (
-          <VideoJS
+          <VideoViewer
             type={mediaInfo.type}
             src={props.src}
             onReady={handlePlayerReady}
             onFullScreen={toggleFullscreen}
+            onAssetChangesSize={setAssetSize}
           />
         );
       case "image":
         return (
-          <ImageViewer src={props.src} annotations={props?.annotations ?? []} />
+          <ImageViewer
+            src={props.src}
+            annotations={props?.annotations ?? []}
+            onAssetChangesSize={setAssetSize}
+          />
         );
 
       default:
@@ -121,22 +127,23 @@ const MediaAssetViewer = (props) => {
     props.src,
     props.allowFullScreen,
   ]);
+
   return (
     <div
       ref={containerRef}
       style={{
         position: "relative",
         width: "100%",
+        height: "100%",
         maxWidth: isFullscreen ? "100%" : 640,
         maxHeight: isFullscreen ? "100%" : 640,
-        background: "black",
       }}
     >
       {mediaElement}
-      {mediaInfo.kind !== "iframe" && containerSize && (
+      {mediaInfo.kind !== "iframe" && assetSize && (
         <AnnotationRenderer
-          mediaAssetViewportWidth={containerSize.width}
-          mediaAssetViewportHeight={containerSize.height}
+          mediaAssetViewportWidth={assetSize.width}
+          mediaAssetViewportHeight={assetSize.height}
           annotations={props?.annotations ?? []}
           playerCurrentTime={myTime}
         />

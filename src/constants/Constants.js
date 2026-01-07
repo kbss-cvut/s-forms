@@ -201,6 +201,11 @@ export default class Constants {
     ],
   };
 
+  static MEDIA_ASSET_VIEWER = {
+    DEFAULT_VIEW_PORT_WIDTH: 640,
+    DEFAULT_VIEW_PORT_HEIGHT: 640,
+  };
+
   static ANNOTATION = {
     HAS_ANNOTATION_TYPE:
       "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-annotation-type",
@@ -217,7 +222,7 @@ export default class Constants {
   };
 
   static POLYLINE_ANNOTATION = {
-    HAS_IMPLICIT_TYPE_LABEL: "polyline",
+    IMPLICIT_TYPE_LABEL: "polyline",
     HAS_STROKE_WIDTH:
       "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-stroke-width",
     HAS_FILL_COLOR:
@@ -230,7 +235,7 @@ export default class Constants {
     },
   };
   static TEXT_ANNOTATION = {
-    HAS_IMPLICIT_TYPE_LABEL: "text",
+    IMPLICIT_TYPE_LABEL: "text",
     HAS_FONT_SIZE:
       "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-font-size",
     HAS_FONT_WEIGHT:
