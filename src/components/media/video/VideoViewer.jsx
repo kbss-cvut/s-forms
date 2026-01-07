@@ -2,9 +2,10 @@ import { useEffect, useMemo, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import enhancePlayer from "./enhancePlayer";
+import { useObservedSize } from "../../../hooks/useObservedSize.jsx";
 
 /**
- * VideoJS
+ * VideoViewer
  *
  * React wrapper component for initializing and managing a Video.js player
  * instance.
@@ -27,7 +28,7 @@ import enhancePlayer from "./enhancePlayer";
  *
  * @see https://videojs.org/guides/react/
  */
-const VideoJS = ({
+const VideoViewer = ({
   type,
   src,
   autoplay,
@@ -38,10 +39,11 @@ const VideoJS = ({
   aspectRatio,
   onReady,
   onFullScreen,
+  onAssetChangesSize,
 }) => {
   const videoContainerRef = useRef(null);
   const playerRef = useRef(null);
-
+  const size = useObservedSize(videoContainerRef);
   const options = useMemo(
     () => ({
       autoplay: autoplay ?? false,
@@ -85,6 +87,10 @@ const VideoJS = ({
   }, [options]);
 
   useEffect(() => {
+    if (size) onAssetChangesSize(size);
+  }, [size, onAssetChangesSize]);
+
+  useEffect(() => {
     const player = playerRef.current;
     return () => {
       if (player && !player.isDisposed()) {
@@ -101,4 +107,4 @@ const VideoJS = ({
   );
 };
 
-export default VideoJS;
+export default VideoViewer;

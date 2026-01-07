@@ -103,8 +103,7 @@ const AnnotationRenderer = ({
 
   return (
     <svg
-      width={mediaAssetViewportWidth}
-      height={mediaAssetViewportHeight}
+      viewBox={`0 0 ${mediaAssetViewportWidth} ${mediaAssetViewportHeight}`}
       style={{
         position: "absolute",
         inset: 0,
@@ -121,10 +120,10 @@ const AnnotationRenderer = ({
         );
 
         switch (annotation[Constants.ANNOTATION.HAS_ANNOTATION_TYPE]) {
-          case Constants.POLYLINE_ANNOTATION.HAS_IMPLICIT_TYPE_LABEL:
+          case Constants.POLYLINE_ANNOTATION.IMPLICIT_TYPE_LABEL:
             return <g key={idx}>{renderPolyline(annotation, points)}</g>;
 
-          case Constants.TEXT_ANNOTATION.HAS_IMPLICIT_TYPE_LABEL:
+          case Constants.TEXT_ANNOTATION.IMPLICIT_TYPE_LABEL:
             return (
               <g key={idx}>
                 {renderText(annotation, points, mediaAssetViewportHeight)}

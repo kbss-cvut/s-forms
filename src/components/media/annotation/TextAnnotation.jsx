@@ -1,5 +1,3 @@
-import Constants from "../../../constants/Constants.js";
-
 /**
  * Stateless SVG component responsible for rendering a single text annotation.
  *
