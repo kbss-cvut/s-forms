@@ -14,6 +14,8 @@ const formShape = {
     Constants.HAS_DECLARED_PREFIX,
     Constants.HAS_OPTION,
     Constants.HAS_COMMENT,
+    Constants.HAS_MEDIA_CONTENT,
+    Constants.HAS_ANNOTATION,
   ],
 };
 

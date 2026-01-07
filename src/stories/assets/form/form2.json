@@ -99,6 +99,9 @@
     "has-media-content": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/has-media-content"
     },
+    "has-source": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/media/has-source"
+    },
     "provides-dereferenceable-answer-values": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/provides-dereferenceable-answer-values"
     },
@@ -190,6 +193,7 @@
       "has-validation-message": "Answer can only use characters.",
       "description": "This question requires answer to save the form. When you loose focus of the field, the validation is triggered. It has custom validation message which will be triggered if you write name that is not compliant with pattern \"^[A-Za-z]+$\""
     },
+
     {
       "@id": "job-9002",
       "@type": "doc:question",
@@ -198,7 +202,12 @@
       "has-preceding-question": "age-1063",
       "description": "This section is about your job",
       "label": "Job",
-      "has-media-content": "https://www.youtube.com/embed/yzXRaJCZdFI"
+      "has-media-content":
+      {
+        "@id": "media-asset-1",
+        "@type": "http://onto.fel.cvut.cz/ontologies/form/media/asset",
+        "has-source": "https://www.youtube.com/embed/yzXRaJCZdFI"
+      }
     }
   ]
 }

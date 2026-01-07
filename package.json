@@ -28,6 +28,10 @@
     {
       "name": "Tomas Klima",
       "email": "tomas.klim@gmail.com"
+    },
+    {
+      "name": "Yevgeniy Ulchenkov",
+      "email": "ulchenkov2001@gmail.com"
     }
   ],
   "repository": {
@@ -64,7 +68,8 @@
     "react-datepicker": "^4.14.1",
     "react-intl": "^6.5.1",
     "react-loader-spinner": "^5.3.4",
-    "yasgui-yasqe": "^2.11.22"
+    "yasgui-yasqe": "^2.11.22",
+    "video.js": "^8.23.4"
   },
   "peerDependencies": {
     "framer-motion": "^6.2.3",
@@ -106,7 +111,8 @@
     "standard-version": "^9.3.2",
     "style-loader": "^1.2.1",
     "typescript": "^5.2.2",
-    "watchify": "^4.0.0"
+    "watchify": "^4.0.0",
+    "video.js": "^8.23.4"
   },
   "scripts": {
     "test": "jest",
