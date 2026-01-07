@@ -18,7 +18,7 @@ import { useObservedSize } from "../../../hooks/useObservedSize.jsx";
  *
  * @remarks
  * - Displays a hover-based control to open the full-screen overlay
- * - Does not perform image scaling or annotation processing itself
+ * - Performs image scaling itself
  */
 
 const ImageViewer = ({
@@ -30,13 +30,35 @@ const ImageViewer = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [imageBox, setImageBox] = useState(null);
+  const imgRef = useRef(null);
 
-  const imageBoxRef = useRef(null);
-  const size = useObservedSize(imageBoxRef);
-
+  // Compute rendered image size deterministically
   useEffect(() => {
-    if (size) onAssetChangesSize(size);
-  }, [size, onAssetChangesSize]);
+    const img = imgRef.current;
+    if (!img) return;
+
+    const update = () => {
+      const iw = img.naturalWidth;
+      const ih = img.naturalHeight;
+      if (!iw || !ih) return;
+
+      const scale = Math.min(width / iw, height / ih);
+
+      const w = iw * scale;
+      const h = ih * scale;
+
+      setImageBox({ width: w, height: h });
+      onAssetChangesSize?.({ width: w, height: h });
+    };
+
+    if (img.complete) update();
+    else img.onload = update;
+
+    return () => {
+      img.onload = null;
+    };
+  }, [src, width, height, onAssetChangesSize]);
 
   return (
     <>
@@ -52,48 +74,50 @@ const ImageViewer = ({
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {/* IMAGE BOX (exact image size) */}
-        <div
-          ref={imageBoxRef}
-          style={{
-            position: "relative",
-            width: "fit-content",
-            height: "fit-content",
-            maxWidth: "100%",
-            maxHeight: "100%",
-          }}
-        >
-          <img
-            src={src}
-            alt=""
+        {imageBox && (
+          <div
             style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              width: "auto",
-              height: "auto",
-              display: "block",
+              position: "relative",
+              width: imageBox.width,
+              height: imageBox.height,
             }}
-          />
-
-          {hovered && (
-            <button
-              onClick={() => setOpen(true)}
+          >
+            <img
+              ref={imgRef}
+              src={src}
+              alt=""
               style={{
-                position: "absolute",
-                right: 8,
-                bottom: 8,
-                background: "rgba(0,0,0,0.6)",
-                padding: "6px 10px",
-                color: "white",
-                borderRadius: 6,
-                border: "none",
-                cursor: "pointer",
+                width: "100%",
+                height: "100%",
+                display: "block",
               }}
-            >
-              Full
-            </button>
-          )}
-        </div>
+            />
+
+            {hovered && (
+              <button
+                onClick={() => setOpen(true)}
+                style={{
+                  position: "absolute",
+                  right: 8,
+                  bottom: 8,
+                  background: "rgba(0,0,0,0.6)",
+                  padding: "6px 10px",
+                  color: "white",
+                  borderRadius: 6,
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Full
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* preload image to read natural size */}
+        {!imageBox && (
+          <img ref={imgRef} src={src} alt="" style={{ display: "none" }} />
+        )}
       </div>
 
       {open && (
