@@ -1,5 +1,6 @@
 import AnnotationRenderer from "../annotation/AnnotationRenderer.jsx";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
+import { useObservedSize } from "../../../hooks/useObservedSize.jsx";
 
 /**
  * Displays an image in a full-screen modal overlay and renders annotations on top of it.
@@ -17,10 +18,11 @@ import { useRef, useState, useEffect } from "react";
  * @returns {JSX.Element} Full-screen image overlay with annotations.
  */
 const ImageOverlay = ({ src, annotations, onClose }) => {
-  const containerRef = useRef(null);
+  const imageBoxRef = useRef(null);
+  const size = useObservedSize(imageBoxRef);
+
   return (
     <div
-      onClick={onClose}
       style={{
         position: "fixed",
         inset: 0,
@@ -32,30 +34,45 @@ const ImageOverlay = ({ src, annotations, onClose }) => {
       }}
     >
       <div
-        ref={containerRef}
-        onClick={(e) => e.stopPropagation()}
+        onClick={onClose}
         style={{
-          position: "relative",
           width: "90vw",
           height: "90vh",
           maxWidth: "1200px",
-          background: "black",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <img
-          src={src}
-          alt=""
+        <div
+          ref={imageBoxRef}
           style={{
-            width: "100%",
-            height: "100%",
-            display: "block",
+            position: "relative",
+            width: "fit-content",
+            height: "fit-content",
+            maxWidth: "100%",
+            maxHeight: "100%",
           }}
-        />
-        <AnnotationRenderer
-          mediaAssetViewportWidth={containerRef?.current?.clientWidth}
-          mediaAssetViewportHeight={containerRef?.current?.clientHeight}
-          annotations={annotations}
-        />
+        >
+          <img
+            src={src}
+            alt=""
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+              width: "auto",
+              height: "auto",
+              display: "block",
+            }}
+          />
+          {size && (
+            <AnnotationRenderer
+              mediaAssetViewportWidth={size.width}
+              mediaAssetViewportHeight={size.height}
+              annotations={annotations}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const MediaContent = ({ question }: Props) => {
     if (mediaContents) {
       if (Array.isArray(mediaContents)) {
         return (
-          <div className="col-6">
+          <div className="col-6 ">
             {mediaContents.map((media, index) => (
               <div
                 key={index}
