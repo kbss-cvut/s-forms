@@ -56,7 +56,7 @@
     "inputmask-core": "^2.2.0",
     "intelligent-tree-select": "^0.11.7",
     "javascript-time-ago": "^2.3.8",
-    "jsonld": "^8.3.2",
+    "jsonld": "^9.0.0",
     "jsonld-utils": "https://kbss.felk.cvut.cz/dist/jsonld-utils-0.1.3.tgz",
     "npm-packlist": "^7.0.2",
     "prop-types": "^15.7.2",
