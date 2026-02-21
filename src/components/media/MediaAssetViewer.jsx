@@ -36,6 +36,10 @@ const MediaAssetViewer = (props) => {
   const [containerSize, setContainerSize] = useState(null);
   const [assetSize, setAssetSize] = useState(null);
 
+  if (!props.src) {
+    return <></>;
+  }
+
   useEffect(() => {
     if (!containerRef.current) return;
 
