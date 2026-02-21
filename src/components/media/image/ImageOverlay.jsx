@@ -23,6 +23,7 @@ const ImageOverlay = ({ src, annotations, onClose }) => {
 
   return (
     <div
+      onClick={onClose}
       style={{
         position: "fixed",
         inset: 0,
@@ -34,7 +35,6 @@ const ImageOverlay = ({ src, annotations, onClose }) => {
       }}
     >
       <div
-        onClick={onClose}
         style={{
           width: "90vw",
           height: "90vh",

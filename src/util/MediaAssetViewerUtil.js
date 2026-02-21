@@ -15,6 +15,7 @@ export default class MediaAssetViewerUtil {
    * - Unsupported or unknown formats fall back to iframe rendering
    */
   static getMediaKindFromSource(source) {
+    if (!source) return;
     const lower = source.toLowerCase();
 
     // ---- VIDEO (video.js) ----
@@ -85,5 +86,51 @@ export default class MediaAssetViewerUtil {
       .map((pair) => {
         return pair.split(",").map(Number);
       });
+  }
+
+  static stripExpandedLiterals(input) {
+    if (Array.isArray(input)) {
+      return input.map(MediaAssetViewerUtil.stripExpandedLiterals);
+    }
+
+    if (input && typeof input === "object") {
+      // Case 1: Typed literal object
+      if (
+        Object.prototype.hasOwnProperty.call(input, "@value") &&
+        Object.keys(input).length <= 2 // usually @value + @type
+      ) {
+        return MediaAssetViewerUtil.castLiteral(
+          input["@value"],
+          input["@type"]
+        );
+      }
+
+      // Case 2: Normal object → recurse
+      const result = {};
+      for (const key in input) {
+        result[key] = MediaAssetViewerUtil.stripExpandedLiterals(input[key]);
+      }
+      return result;
+    }
+
+    return input;
+  }
+
+  static castLiteral(value, type) {
+    if (!type) return value;
+
+    if (type.includes("#decimal")) {
+      return parseFloat(value);
+    }
+
+    if (type.includes("#integer")) {
+      return parseInt(value, 10);
+    }
+
+    if (type.includes("#boolean")) {
+      return value === true || value === "true";
+    }
+
+    return value;
   }
 }
