@@ -133,4 +133,33 @@ export default class MediaAssetViewerUtil {
 
     return value;
   }
+
+  static getContainRect(
+    containerWidth,
+    containerHeight,
+    mediaWidth,
+    mediaHeight
+  ) {
+    const containerRatio = containerWidth / containerHeight;
+    const mediaRatio = mediaWidth / mediaHeight;
+
+    let width,
+      height,
+      offsetX = 0,
+      offsetY = 0;
+
+    if (mediaRatio > containerRatio) {
+      // media is wider
+      width = containerWidth;
+      height = containerWidth / mediaRatio;
+      offsetY = (containerHeight - height) / 2;
+    } else {
+      // media is taller
+      height = containerHeight;
+      width = containerHeight * mediaRatio;
+      offsetX = (containerWidth - width) / 2;
+    }
+
+    return { width, height, offsetX, offsetY };
+  }
 }

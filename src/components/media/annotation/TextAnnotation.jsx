@@ -19,7 +19,6 @@
  * @returns {JSX.Element} SVG <text> element.
  */
 const TextAnnotation = ({
-  key,
   text,
   fontFamily,
   fontWeight,
@@ -31,7 +30,6 @@ const TextAnnotation = ({
 }) => {
   return (
     <text
-      key={key}
       x={x}
       y={y}
       fill={color}

@@ -1,0 +1,153 @@
+/* ============================= */
+/* MEDIA CONTAINER */
+/* ============================= */
+
+.media-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 640px;
+  max-height: 640px;
+}
+
+.media-container.fullscreen {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* ============================= */
+/* ANNOTATION OVERLAY */
+/* ============================= */
+
+.annotation-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ============================= */
+/* MEDIA ELEMENTS */
+/* ============================= */
+
+.media-container video,
+.media-container img,
+.media-container iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* ============================= */
+/* IMAGE VIEW */
+/* ============================= */
+
+.media-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.media-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.media-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ============================= */
+/* FULLSCREEN BUTTON */
+/* ============================= */
+
+.media-fullscreen-button {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Appear on hover */
+.media-image-container:hover .media-fullscreen-button {
+  opacity: 1;
+}
+
+.media-fullscreen-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* ============================= */
+/* MODAL */
+/* ============================= */
+
+.media-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-modal-content {
+  width: 90vw;
+  height: 90vh;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-modal-image-wrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.media-modal-image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.media-fullscreen-exit {
+  opacity: 1; /* always visible in modal */
+}
+
+.media-modal-image-wrapper .media-fullscreen-button {
+  opacity: 0;
+}
+
+.media-modal-image-wrapper:hover .media-fullscreen-button {
+  opacity: 1;
+}
+/* ============================= */
+/* VIDEO */
+/* ============================= */
+
+.video-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+}

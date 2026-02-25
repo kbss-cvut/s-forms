@@ -1,80 +1,44 @@
-import AnnotationRenderer from "../annotation/AnnotationRenderer.jsx";
 import { useRef } from "react";
+import { createPortal } from "react-dom";
 import { useObservedSize } from "../../../hooks/useObservedSize.jsx";
+import { useAnnotationsEngine } from "../annotation/engine/useAnnotationsEngine.js";
+import AnnotationOverlay from "../annotation/AnnotationOverlay.jsx";
 
-/**
- * Displays an image in a full-screen modal overlay and renders annotations on top of it.
- *
- * The component is responsible only for layout and sizing. Annotation filtering,
- * geometry handling, and rendering are delegated to AnnotationRenderer.
- *
- * @component
- *
- * @param {Object} props
- * @param {string} props.src - Source URL of the image to display.
- * @param {Array<Object>} props.annotations - List of annotations associated with the image.
- * @param {Function} props.onClose - Callback invoked when the overlay is dismissed.
- *
- * @returns {JSX.Element} Full-screen image overlay with annotations.
- */
-const ImageOverlay = ({ src, annotations, onClose }) => {
-  const imageBoxRef = useRef(null);
-  const size = useObservedSize(imageBoxRef);
+const ImageOverlay = ({ src, annotations = [], onClose }) => {
+  const wrapperRef = useRef(null);
+  const size = useObservedSize(wrapperRef);
 
-  return (
-    <div
-      onClick={onClose}
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.85)",
-        zIndex: 1000,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+  const renderModels = useAnnotationsEngine({
+    annotations,
+    width: size?.width,
+    height: size?.height,
+    currentTime: null,
+  });
+
+  return createPortal(
+    <div className="media-modal" onClick={onClose}>
       <div
-        style={{
-          width: "90vw",
-          height: "90vh",
-          maxWidth: "1200px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+        className="media-modal-content"
+        onMouseDown={(e) => e.stopPropagation()}
       >
-        <div
-          ref={imageBoxRef}
-          style={{
-            position: "relative",
-            width: "fit-content",
-            height: "fit-content",
-            maxWidth: "100%",
-            maxHeight: "100%",
-          }}
-        >
-          <img
-            src={src}
-            alt=""
-            style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              width: "auto",
-              height: "auto",
-              display: "block",
-            }}
-          />
-          {size && (
-            <AnnotationRenderer
-              mediaAssetViewportWidth={size.width}
-              mediaAssetViewportHeight={size.height}
-              annotations={annotations}
-            />
+        <div ref={wrapperRef} className="media-modal-image-wrapper">
+          <img src={src} alt="" />
+
+          {renderModels.length > 0 && (
+            <AnnotationOverlay renderModels={renderModels} />
           )}
+
+          {/* EXIT BUTTON */}
+          <button
+            className="media-fullscreen-button media-fullscreen-exit"
+            onClick={onClose}
+          >
+            ✕
+          </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
