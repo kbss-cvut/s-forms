@@ -6,7 +6,6 @@ import MediaAssetViewerUtil from "../util/MediaAssetViewerUtil";
 interface Props {
   question: object;
 }
-
 const MediaContent = ({ question }: Props) => {
   const renderMedia = () => {
     const normalizedQuestion =

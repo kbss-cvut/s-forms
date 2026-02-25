@@ -15,18 +15,9 @@
  *
  * @returns {JSX.Element} SVG <polyline> element.
  */
-
-const PolylineAnnotation = ({
-  key,
-  points,
-  stroke,
-  strokeWidth,
-  fill,
-  opacity,
-}) => {
+const PolylineAnnotation = ({ points, stroke, strokeWidth, fill, opacity }) => {
   return (
     <polyline
-      key={key}
       points={points}
       stroke={stroke}
       strokeWidth={strokeWidth}
