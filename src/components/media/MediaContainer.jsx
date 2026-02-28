@@ -1,23 +1,14 @@
-import { forwardRef, useEffect } from "react";
-import { useObservedSize } from "../../hooks/useObservedSize.jsx";
+import { forwardRef } from "react";
 
-const MediaContainer = forwardRef(
-  ({ children, onResize, fullscreen = false }, ref) => {
-    const size = useObservedSize(ref);
-
-    useEffect(() => {
-      if (size) onResize?.(size);
-    }, [size, onResize]);
-
-    return (
-      <div
-        ref={ref}
-        className={`media-container ${fullscreen ? "fullscreen" : ""}`}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+const MediaContainer = forwardRef(({ children, fullscreen = false }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={`media-container ${fullscreen ? "fullscreen" : ""}`}
+    >
+      {children}
+    </div>
+  );
+});
 
 export default MediaContainer;
