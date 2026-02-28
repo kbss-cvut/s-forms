@@ -6,7 +6,7 @@ import { useMediaSurface } from "../hooks/useMediaSurface.js";
 import AnnotationOverlay from "../annotation/AnnotationOverlay";
 
 /**
- * Viewer for displaying videos with annotations.
+ * Viewer for displaying video with annotations.
  */
 const VideoViewer = ({
   type,
