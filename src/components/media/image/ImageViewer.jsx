@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useObservedSize } from "../../../hooks/useObservedSize.jsx";
 import ImageOverlay from "./ImageOverlay.jsx";
+import AnnotationOverlay from "../annotation/AnnotationOverlay.jsx";
+import { useAnnotationsEngine } from "../annotation/engine/useAnnotationsEngine.js";
 
 const ImageViewer = ({ src, annotations = [], onAssetChangesSize }) => {
   const wrapperRef = useRef(null);
@@ -13,6 +15,13 @@ const ImageViewer = ({ src, annotations = [], onAssetChangesSize }) => {
       onAssetChangesSize?.(size);
     }
   }, [size, onAssetChangesSize]);
+
+  const renderModels = useAnnotationsEngine({
+    annotations,
+    width: size?.width,
+    height: size?.height,
+    currentTime: null,
+  });
 
   return (
     <>
@@ -28,7 +37,9 @@ const ImageViewer = ({ src, annotations = [], onAssetChangesSize }) => {
           ⛶
         </button>
       </div>
-
+      {renderModels.length > 0 && (
+        <AnnotationOverlay renderModels={renderModels} />
+      )}
       {isOpen && (
         <ImageOverlay
           src={src}

@@ -5,11 +5,16 @@ import TextAnnotation from "./TextAnnotation.jsx";
  * Pure SVG overlay renderer.
  * Receives already-prepared renderModels from engine.
  */
-const AnnotationOverlay = ({ renderModels = [] }) => {
+const AnnotationOverlay = ({
+  renderModels = [],
+  viewBoxWidth,
+  viewBoxHeight,
+}) => {
   if (!renderModels.length) return null;
 
   return (
     <svg
+      viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
       className="annotation-overlay"
       style={{
         position: "absolute",

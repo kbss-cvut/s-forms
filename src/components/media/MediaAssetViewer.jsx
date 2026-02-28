@@ -32,12 +32,6 @@ const MediaAssetViewer = ({ src, annotations = [], allowFullScreen }) => {
   // ---------------------------
   // Annotation engine
   // ---------------------------
-  const renderModels = useAnnotationsEngine({
-    annotations,
-    width: assetSize?.width,
-    height: assetSize?.height,
-    currentTime: time,
-  });
 
   // ---------------------------
   // Media element
@@ -48,6 +42,7 @@ const MediaAssetViewer = ({ src, annotations = [], allowFullScreen }) => {
         return (
           <VideoViewer
             type={mediaInfo.type}
+            annotations={annotations}
             src={src}
             onReady={(player) => {
               playerRef.current = player;
@@ -80,21 +75,13 @@ const MediaAssetViewer = ({ src, annotations = [], allowFullScreen }) => {
   }, [mediaInfo.kind, mediaInfo.type, src, allowFullScreen, toggle]);
 
   return (
-    <>
-      <MediaContainer
-        ref={containerRef}
-        fullscreen={isFullscreen}
-        onResize={setAssetSize}
-        overlay={
-          mediaInfo.kind !== "iframe" &&
-          renderModels.length > 0 && (
-            <AnnotationOverlay renderModels={renderModels} />
-          )
-        }
-      >
-        {mediaElement}
-      </MediaContainer>
-    </>
+    <MediaContainer
+      ref={containerRef}
+      fullscreen={isFullscreen}
+      onResize={setAssetSize}
+    >
+      {mediaElement}
+    </MediaContainer>
   );
 };
 
