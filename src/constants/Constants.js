@@ -201,11 +201,6 @@ export default class Constants {
     ],
   };
 
-  static MEDIA_ASSET_VIEWER = {
-    DEFAULT_VIEW_PORT_WIDTH: 640,
-    DEFAULT_VIEW_PORT_HEIGHT: 640,
-  };
-
   static ANNOTATION = {
     HAS_ANNOTATION_TYPE:
       "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-annotation-type",
@@ -229,7 +224,7 @@ export default class Constants {
       "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-fill-color",
     DEFAULT_POLYLINE_ANNOTATION_STYLE: {
       color: "red",
-      strokeWidth: 5,
+      strokeWidth: 0.000002,
       fillColor: "transparent",
       opacity: 1.0,
     },
