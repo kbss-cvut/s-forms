@@ -36,7 +36,8 @@ const TextAnnotation = ({
       fontSize={`${fontSize}px`}
       fontFamily={fontFamily}
       fontWeight={fontWeight}
-      dominantBaseline="hanging"
+      dominantBaseline="text-before-edge"
+      textAnchor="start"
       opacity={opacity}
     >
       {text}
