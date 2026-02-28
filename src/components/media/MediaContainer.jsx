@@ -2,7 +2,7 @@ import { forwardRef, useEffect } from "react";
 import { useObservedSize } from "../../hooks/useObservedSize.jsx";
 
 const MediaContainer = forwardRef(
-  ({ children, overlay, onResize, fullscreen = false }, ref) => {
+  ({ children, onResize, fullscreen = false }, ref) => {
     const size = useObservedSize(ref);
 
     useEffect(() => {
@@ -15,7 +15,6 @@ const MediaContainer = forwardRef(
         className={`media-container ${fullscreen ? "fullscreen" : ""}`}
       >
         {children}
-        {overlay}
       </div>
     );
   }

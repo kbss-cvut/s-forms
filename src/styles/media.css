@@ -151,3 +151,28 @@
   width: 100%;
   height: 100%;
 }
+
+.vjs-annotation-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.annotation-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.media-container {
+  position: relative;
+}
+
+.video-wrapper {
+  position: relative;
+}
+
+.annotation-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
