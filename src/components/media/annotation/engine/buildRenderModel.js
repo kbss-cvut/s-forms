@@ -31,8 +31,8 @@ const buildPolylineModel = (annotation, width, height, base) => {
     style: {
       stroke: annotation[Constants.ANNOTATION.HAS_COLOR] ?? defaultStyle.color,
       strokeWidth:
-        annotation[Constants.POLYLINE_ANNOTATION.HAS_STROKE_WIDTH] ??
-        defaultStyle.strokeWidth,
+        (annotation[Constants.POLYLINE_ANNOTATION.HAS_STROKE_WIDTH] ??
+          defaultStyle.strokeWidth) * width,
       fill:
         annotation[Constants.POLYLINE_ANNOTATION.HAS_FILL_COLOR] ??
         defaultStyle.fillColor,
@@ -75,6 +75,8 @@ const annotationBuildersRegistry = {
   [Constants.TEXT_ANNOTATION.IMPLICIT_TYPE_LABEL]: buildTextModel,
 };
 
+// Converts a raw annotation into a renderer-ready model.
+// Returns null for unknown types.
 export const buildRenderModel = (annotation, width, height) => {
   const type = annotation[Constants.ANNOTATION.HAS_ANNOTATION_TYPE];
 

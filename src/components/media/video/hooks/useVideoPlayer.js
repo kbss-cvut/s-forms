@@ -2,9 +2,7 @@ import { useEffect, useRef } from "react";
 import videojs from "video.js";
 import enhancePlayer from "./enhancePlayer";
 
-/**
- * Handles Video.js lifecycle only.
- */
+//Handles Video.js lifecycle.
 export const useVideoPlayer = ({
   videoRef,
   options,

@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 
+// Tracks and controls fullscreen state for a given element ref.
 export const useFullscreen = (ref) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 

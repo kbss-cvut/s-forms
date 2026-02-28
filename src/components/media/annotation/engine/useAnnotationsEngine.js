@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { isAnnotationVisible } from "./annotationVisibility.js";
 import { buildRenderModel } from "./buildRenderModel.js";
 
+// Transforms raw annotations into renderer-ready models for the current frame.
 export const useAnnotationsEngine = ({
   annotations = [],
   width,
