@@ -1,3 +1,4 @@
+import React from "react";
 /**
  * Stateless SVG component responsible for rendering a single text annotation.
  * Receives fully resolved position, styling, and content from the parent renderer.

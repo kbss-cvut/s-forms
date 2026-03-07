@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import ViewerUtils from "../../util/MediaAssetViewerUtil.js";
 import "../../styles/media.css";
 import VideoViewer from "./video/VideoViewer.jsx";

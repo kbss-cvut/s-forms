@@ -1,3 +1,4 @@
+import React from "react";
 /**
  * Stateless SVG component responsible for rendering a single polyline annotation.
  * Receives fully resolved geometry and styling from the parent renderer and

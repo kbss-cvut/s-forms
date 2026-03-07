@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useMediaSurface } from "../hooks/useMediaSurface.js";
 import AnnotationOverlay from "../annotation/AnnotationOverlay.jsx";
 

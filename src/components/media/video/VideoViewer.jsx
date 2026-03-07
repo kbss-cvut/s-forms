@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import "video.js/dist/video-js.css";
 
 import { useVideoPlayer } from "./hooks/useVideoPlayer";
