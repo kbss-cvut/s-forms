@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import PolylineAnnotation from "./PolylineAnnotation";
 import TextAnnotation from "./TextAnnotation";
 import { useAnnotationsEngine } from "./engine/useAnnotationsEngine";
