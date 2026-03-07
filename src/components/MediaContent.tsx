@@ -13,7 +13,6 @@ const MediaContent = ({ question }: Props) => {
     const mediaContents =
       // @ts-ignore
       normalizedQuestion[Constants.HAS_MEDIA_CONTENT];
-    console.log(mediaContents);
     if (mediaContents) {
       if (Array.isArray(mediaContents)) {
         return (
