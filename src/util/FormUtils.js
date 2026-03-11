@@ -416,6 +416,32 @@ export default class FormUtils {
     return false;
   }
 
+  static hasCorrectAnswer(question) {
+    if (!question) {
+      return false;
+    }
+
+    if (question.hasOwnProperty(Constants.HAS_CORRECT_ANSWER)) {
+      const answers = jsonld.getValues(question, Constants.HAS_CORRECT_ANSWER);
+      if (answers.length) {
+        const qValue = FormUtils.resolveValueObject(answers[0]);
+        if (qValue) {
+          if (qValue["@value"] || qValue["@id"]) {
+            return true;
+          }
+        }
+      }
+    }
+
+    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+      if (FormUtils.hasCorrectAnswer(subQ)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   static getAnswerValue(question) {
     if (!question) {
       return null;
@@ -435,6 +461,40 @@ export default class FormUtils {
 
     for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
       const subQAnswer = FormUtils.getAnswerValue(subQ);
+      if (subQAnswer) {
+        return subQAnswer;
+      }
+    }
+
+    return null;
+  }
+
+  static getCorrectAnswerValue(question) {
+    if (!question) {
+      return null;
+    }
+
+    if (question.hasOwnProperty(Constants.HAS_CORRECT_ANSWER)) {
+      let answer = jsonld.getValues(question, Constants.HAS_CORRECT_ANSWER);
+      if (answer && Array.isArray(answer)) {
+        answer = answer[0];
+        let qValue =
+          jsonld.getValues(answer, Constants.HAS_DATA_VALUE) ||
+          jsonld.getValues(answer, Constants.HAS_OBJECT_VALUE);
+        if (qValue) {
+          if (Array.isArray(qValue)) {
+            qValue = qValue[0];
+          }
+          const label = qValue[Constants.RDFS_LABEL];
+          if (label && label["@value"]) {
+            return label["@value"];
+          }
+          return qValue["@value"];
+        }
+      }
+    }
+    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+      const subQAnswer = FormUtils.getCorrectAnswerValue(subQ);
       if (subQAnswer) {
         return subQAnswer;
       }
@@ -608,5 +668,35 @@ export default class FormUtils {
     if (question[Constants.INPUT_MASK]) {
       return question[Constants.INPUT_MASK];
     }
+  }
+
+  static hasMediaContentWithAnnotations(question) {
+    if (question[Constants.HAS_MEDIA_CONTENT]) {
+      for (const media of Utils.asArray(
+        question[Constants.HAS_MEDIA_CONTENT]
+      )) {
+        if (
+          media[Constants.HAS_ANNOTATION] &&
+          Utils.asArray(media[Constants.HAS_ANNOTATION]).length > 0
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  static containsHints(question) {
+    if (question[Constants.HAS_SUBQUESTION]) {
+      for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+        if (FormUtils.containsHints(subQ)) {
+          return true;
+        }
+      }
+    }
+    return (
+      this.hasCorrectAnswer(question) ||
+      this.hasMediaContentWithAnnotations(question)
+    );
   }
 }

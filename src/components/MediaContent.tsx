@@ -1,18 +1,18 @@
 import React from "react";
 import Constants from "../constants/Constants";
 import MediaAssetViewer from "./media/MediaAssetViewer";
-import MediaAssetViewerUtil from "../util/MediaAssetViewerUtil";
+import MediaAssetViewerUtils from "../util/MediaAssetViewerUtils";
 
 interface Props {
   question: object;
+  displayAnnotations?: boolean;
 }
-const MediaContent = ({ question }: Props) => {
+
+const MediaContent = ({ question, displayAnnotations }: Props) => {
   const renderMedia = () => {
     const normalizedQuestion =
-      MediaAssetViewerUtil.stripExpandedLiterals(question);
-    const mediaContents =
-      // @ts-ignore
-      normalizedQuestion[Constants.HAS_MEDIA_CONTENT];
+      MediaAssetViewerUtils.stripExpandedLiterals(question);
+    const mediaContents = normalizedQuestion[Constants.HAS_MEDIA_CONTENT];
     if (mediaContents) {
       if (Array.isArray(mediaContents)) {
         return (
@@ -27,6 +27,7 @@ const MediaContent = ({ question }: Props) => {
                     src={media[Constants.HAS_SOURCE]}
                     allowFullScreen
                     annotations={media[Constants.HAS_ANNOTATION]}
+                    showAnnotations={displayAnnotations}
                   />
                 </div>
               );
@@ -40,6 +41,7 @@ const MediaContent = ({ question }: Props) => {
             src={mediaContents[Constants.HAS_SOURCE]}
             allowFullScreen
             annotations={mediaContents[Constants.HAS_ANNOTATION]}
+            showAnnotations={displayAnnotations}
           />
         </div>
       );

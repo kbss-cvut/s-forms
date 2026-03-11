@@ -5,7 +5,7 @@ import AnnotationOverlay from "../annotation/AnnotationOverlay.jsx";
 /**
  * Viewer for displaying images with annotations.
  */
-const ImageViewer = ({ src, annotations, onFullScreen }) => {
+const ImageViewer = ({ src, annotations, onFullScreen, showAnnotations }) => {
   const wrapperRef = useRef(null);
 
   const surface = useMediaSurface({
@@ -19,6 +19,7 @@ const ImageViewer = ({ src, annotations, onFullScreen }) => {
         <img src={src} alt="Beautiful Image" />
         <AnnotationOverlay
           annotations={annotations}
+          showAnnotations={showAnnotations}
           surface={surface}
           currentTime={null}
         />

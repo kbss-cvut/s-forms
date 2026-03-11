@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import ViewerUtils from "../../util/MediaAssetViewerUtil.js";
+import ViewerUtils from "../../util/MediaAssetViewerUtils.js";
 import "../../styles/media.css";
 import VideoViewer from "./video/VideoViewer.jsx";
 import { useFullscreen } from "./hooks/useFullscreen.js";
@@ -24,7 +24,12 @@ const IframeViewer = ({ src, allowFullScreen }) => (
  * Orchestrates the rendering of media assets based on their type and manages fullscreen state.
  * Defaults to an iframe viewer for unsupported types.
  */
-const MediaAssetViewer = ({ src, annotations = [], allowFullScreen }) => {
+const MediaAssetViewer = ({
+  src,
+  annotations = [],
+  allowFullScreen,
+  showAnnotations = true,
+}) => {
   const containerRef = useRef(null);
   const { isFullscreen, toggle } = useFullscreen(containerRef);
 
@@ -40,6 +45,7 @@ const MediaAssetViewer = ({ src, annotations = [], allowFullScreen }) => {
         annotations={annotations}
         allowFullScreen={allowFullScreen}
         onFullScreen={toggle}
+        showAnnotations={showAnnotations}
       />
     </MediaFullScreenContainer>
   );

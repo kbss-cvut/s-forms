@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PolylineAnnotation from "./PolylineAnnotation";
 import TextAnnotation from "./TextAnnotation";
 import { useAnnotationsEngine } from "./engine/useAnnotationsEngine";
@@ -9,9 +9,22 @@ const ANNOTATION_COMPONENTS = {
 };
 
 // Maps annotation type to its SVG component
-const AnnotationOverlay = ({ annotations = [], surface, currentTime }) => {
+const AnnotationOverlay = ({
+  annotations = [],
+  surface,
+  currentTime,
+  showAnnotations,
+}) => {
   const intrinsicWidth = surface?.intrinsicWidth;
   const intrinsicHeight = surface?.intrinsicHeight;
+  const [pulseClass, setPulseClass] = useState("");
+
+  useEffect(() => {
+    if (!showAnnotations) return;
+    setPulseClass("annotation-overlay-revealed");
+    const timer = setTimeout(() => setPulseClass(""), 700);
+    return () => clearTimeout(timer);
+  }, [showAnnotations]);
 
   const renderModels = useAnnotationsEngine({
     annotations,
@@ -28,8 +41,12 @@ const AnnotationOverlay = ({ annotations = [], surface, currentTime }) => {
   if (!intrinsicWidth || !intrinsicHeight) return null;
   if (!renderModels.length) return null;
 
+  if (!showAnnotations) {
+    return <></>;
+  }
+
   return (
-    <svg viewBox={viewBox} className="annotation-overlay">
+    <svg viewBox={viewBox} className={`annotation-overlay ${pulseClass}`}>
       {renderModels.map((model) => {
         const Component = ANNOTATION_COMPONENTS[model.type];
         if (!Component) return null;
