@@ -78,4 +78,13 @@ export default class Utils {
     }
     return null;
   }
+
+  /**
+   * Checks whether the feedback for option questions is enabled in the options.
+   * @param options
+   * @returns {*|boolean}
+   */
+  static isOptionQuestionFeedbackEnabled(options) {
+    return options?.enableOptionQuestionFeedback ?? false;
+  }
 }

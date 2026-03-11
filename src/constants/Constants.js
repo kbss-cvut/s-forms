@@ -106,6 +106,8 @@ export default class Constants {
   static HAS_UNIT = "http://onto.fel.cvut.cz/ontologies/form/has-unit";
   static HAS_VALID_ANSWER =
     "http://onto.fel.cvut.cz/ontologies/form/has-valid-answer";
+  static HAS_CORRECT_ANSWER =
+    "http://onto.fel.cvut.cz/ontologies/form/has-correct-answer-value";
   static IS_RELEVANT_IF =
     "http://onto.fel.cvut.cz/ontologies/form/is-relevant-if";
   static ACCEPTS_VALIDATION_VALUE =
@@ -175,6 +177,7 @@ export default class Constants {
     QUESTION_COMMENTS: "questionComments",
     QUESTION_HELP: "questionHelp",
     QUESTION_LINK: "questionLink",
+    QUESTION_HINT: "questionHint",
   };
 
   static ICON_BEHAVIOR = {
@@ -198,7 +201,12 @@ export default class Constants {
         id: Constants.ICONS.QUESTION_LINK,
         behavior: Constants.ICON_BEHAVIOR.ON_HOVER,
       },
+      {
+        id: Constants.ICONS.QUESTION_HINT,
+        behavior: Constants.ICON_BEHAVIOR.DISABLE,
+      },
     ],
+    enableOptionQuestionFeedback: false,
   };
 
   static ANNOTATION = {

@@ -24,6 +24,7 @@ const defaultProps = {
     wizardStepButtons: true,
     enableWizardStepSkip: true,
     startingStep: 0,
+    enableOptionQuestionFeedback: false,
   },
 };
 

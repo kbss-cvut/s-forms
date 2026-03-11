@@ -3,7 +3,7 @@ import * as JsonLdUtils from "jsonld-utils";
 
 import * as Generator from "../environment/Generator";
 import Constants from "../../src/constants/Constants";
-import TypeaheadAnswer from "../../src/components/answer/TypeaheadAnswer";
+import TypeaheadAnswer from "../../src/components/answer/typehead/TypeaheadAnswer.jsx";
 import { FormGenContext } from "../../src/contexts/FormGenContext";
 import { ConfigurationContext } from "../../src/contexts/ConfigurationContext";
 import DefaultInput from "../../src/components/DefaultInput";

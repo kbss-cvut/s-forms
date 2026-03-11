@@ -5,10 +5,10 @@ import DateTimeAnswer from "./answer/DateTimeAnswer";
 import InputAnswer from "./answer/InputAnswer";
 import * as JsonldUtils from "jsonld-utils";
 import MaskedInputAnswer from "./answer/MaskedInputAnswer";
-import SelectAnswer from "./answer/SelectAnswer";
+import SelectAnswer from "./answer/select/SelectAnswer.jsx";
 import FormUtils from "../util/FormUtils";
 import Utils from "../util/Utils";
-import TypeaheadAnswer from "./answer/TypeaheadAnswer";
+import TypeaheadAnswer from "./answer/typehead/TypeaheadAnswer.jsx";
 import Constants from "../constants/Constants";
 import { FormGenContext } from "../contexts/FormGenContext";
 import { ConfigurationContext } from "../contexts/ConfigurationContext";
@@ -76,6 +76,8 @@ const Answer = (props) => {
         onChange={handleValueChange}
         options={options}
         validation={validation}
+        hintRevealed={props.hintRevealed}
+        onHintReveal={props.onHintReveal}
       />
     );
   };
@@ -89,6 +91,8 @@ const Answer = (props) => {
         value={value}
         onChange={handleValueChange}
         validation={validation}
+        hintRevealed={props.hintRevealed}
+        onHintReveal={props.onHintReveal}
       />
     );
   };
@@ -191,7 +195,9 @@ const Answer = (props) => {
           options,
           props.onCommentChange,
           props.showIcon,
-          intl
+          intl,
+          props.hintRevealed,
+          props.onHintReveal
         )}
       </div>
     );
@@ -269,6 +275,8 @@ Answer.propTypes = {
   onCommentChange: PropTypes.func.isRequired,
   index: PropTypes.number,
   icons: PropTypes.object,
+  hintRevealed: PropTypes.bool,
+  onHintReveal: PropTypes.func,
 };
 
 export default Answer;

@@ -1,5 +1,5 @@
 import Constants from "../../../../constants/Constants.js";
-import MediaAssetViewerUtil from "../../../../util/MediaAssetViewerUtil.js";
+import MediaAssetViewerUtils from "../../../../util/MediaAssetViewerUtils.js";
 
 const buildBaseModel = (annotation) => {
   const type = annotation[Constants.ANNOTATION.HAS_ANNOTATION_TYPE];
@@ -22,7 +22,7 @@ const buildPolylineModel = (annotation, width, height, base) => {
   return {
     ...base,
     geometry: {
-      points: MediaAssetViewerUtil.denormalizePointsFromStringToString(
+      points: MediaAssetViewerUtils.denormalizePointsFromStringToString(
         points,
         width,
         height
@@ -45,7 +45,7 @@ const buildTextModel = (annotation, width, height, base) => {
 
   const defaultStyle = Constants.TEXT_ANNOTATION.DEFAULT_TEXT_ANNOTATION_STYLE;
 
-  const [[nx, ny]] = MediaAssetViewerUtil.getArrayPointsFromString(points);
+  const [[nx, ny]] = MediaAssetViewerUtils.getArrayPointsFromString(points);
 
   return {
     ...base,

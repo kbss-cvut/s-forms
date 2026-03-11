@@ -72,9 +72,11 @@ const Template: ComponentStory<typeof MediaContent> = (args) => {
 export const Video = Template.bind({});
 Video.args = {
   question: questionWithMedia,
+  displayAnnotations: true,
 };
 
 export const ImageAndVideo = Template.bind({});
 ImageAndVideo.args = {
   question: question,
+  displayAnnotations: true,
 };
