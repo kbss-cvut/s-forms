@@ -1,13 +1,17 @@
 import Constants from "../../../../constants/Constants.js";
 import MediaAssetViewerUtils from "../../../../util/MediaAssetViewerUtils.js";
 
+const getRandomUUID = () => {
+  return `uuid-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+};
+
 const buildBaseModel = (annotation) => {
   const type = annotation[Constants.ANNOTATION.HAS_ANNOTATION_TYPE];
 
   const opacity = annotation[Constants.ANNOTATION.HAS_OPACITY];
 
   return {
-    id: annotation.id ?? crypto.randomUUID(),
+    id: annotation.id ?? getRandomUUID(),
     type,
     opacity: opacity ?? 1.0,
   };
