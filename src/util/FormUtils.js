@@ -422,15 +422,20 @@ export default class FormUtils {
     }
 
     if (question.hasOwnProperty(Constants.HAS_CORRECT_ANSWER)) {
-      const answers = jsonld.getValues(question, Constants.HAS_CORRECT_ANSWER);
-      if (answers.length) {
-        const qValue = FormUtils.resolveValueObject(answers[0]);
+      let answer = jsonld.getValues(question, Constants.HAS_CORRECT_ANSWER);
+      if (Array.isArray(answer) && answer.length !== 0) {
+        answer = answer[0];
+        const qValue = FormUtils.resolveValueObject(answer);
         if (qValue) {
           if (qValue["@value"] || qValue["@id"]) {
             return true;
           }
         }
       }
+      if (answer["@value"] || answer["@id"]) {
+        return true;
+      }
+      return false;
     }
 
     for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
@@ -476,23 +481,33 @@ export default class FormUtils {
 
     if (question.hasOwnProperty(Constants.HAS_CORRECT_ANSWER)) {
       let answer = jsonld.getValues(question, Constants.HAS_CORRECT_ANSWER);
-      if (answer && Array.isArray(answer)) {
+      if (!answer) return null;
+
+      if (Array.isArray(answer)) {
         answer = answer[0];
-        let qValue =
-          jsonld.getValues(answer, Constants.HAS_DATA_VALUE) ||
-          jsonld.getValues(answer, Constants.HAS_OBJECT_VALUE);
-        if (qValue) {
-          if (Array.isArray(qValue)) {
-            qValue = qValue[0];
-          }
-          const label = qValue[Constants.RDFS_LABEL];
-          if (label && label["@value"]) {
-            return label["@value"];
-          }
-          return qValue["@value"];
-        }
       }
+
+      let qValue =
+        jsonld.getValues(answer, Constants.HAS_DATA_VALUE) ||
+        jsonld.getValues(answer, Constants.HAS_OBJECT_VALUE);
+
+      // Skip parsing if qValue is an empty array
+      if (qValue && (!Array.isArray(qValue) || qValue.length > 0)) {
+        if (Array.isArray(qValue)) {
+          qValue = qValue[0];
+        }
+
+        const label = qValue[Constants.RDFS_LABEL];
+        if (label) {
+          return label["@value"] ?? label;
+        }
+        return qValue["@value"] ?? null;
+      }
+
+      // No data/object value — fall back to the answer node itself
+      return answer["@value"] ?? answer[Constants.RDFS_LABEL] ?? null;
     }
+
     for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
       const subQAnswer = FormUtils.getCorrectAnswerValue(subQ);
       if (subQAnswer) {
