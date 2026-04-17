@@ -128,6 +128,11 @@ export default class Constants {
     "http://onto.fel.cvut.cz/ontologies/form/has-preceding-value";
   static HAS_MEDIA_CONTENT =
     "http://onto.fel.cvut.cz/ontologies/form/has-media-content";
+  static ASSET = "http://onto.fel.cvut.cz/ontologies/form/media/asset";
+  static HAS_SOURCE =
+    "http://onto.fel.cvut.cz/ontologies/form/media/has-source";
+  static HAS_ANNOTATION =
+    "http://onto.fel.cvut.cz/ontologies/form/media/has-annotation";
   static CONDITION = "http://onto.fel.cvut.cz/ontologies/form/condition";
   static OR_CONDITION = "http://onto.fel.cvut.cz/ontologies/form/or-condition";
   static HAS_SUB_CONDITION =
@@ -194,6 +199,58 @@ export default class Constants {
         behavior: Constants.ICON_BEHAVIOR.ON_HOVER,
       },
     ],
+  };
+
+  static MEDIA_ASSET_VIEWER = {
+    DEFAULT_VIEW_PORT_WIDTH: 640,
+    DEFAULT_VIEW_PORT_HEIGHT: 640,
+  };
+
+  static ANNOTATION = {
+    HAS_ANNOTATION_TYPE:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-annotation-type",
+    HAS_START_TIME:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-start-time",
+    HAS_END_TIME:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-end-time",
+    HAS_GEOMETRY_POINTS:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-geometry-points",
+    HAS_OPACITY:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-opacity",
+    HAS_COLOR:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-color",
+  };
+
+  static POLYLINE_ANNOTATION = {
+    IMPLICIT_TYPE_LABEL: "polyline",
+    HAS_STROKE_WIDTH:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-stroke-width",
+    HAS_FILL_COLOR:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-fill-color",
+    DEFAULT_POLYLINE_ANNOTATION_STYLE: {
+      color: "red",
+      strokeWidth: 5,
+      fillColor: "transparent",
+      opacity: 1.0,
+    },
+  };
+  static TEXT_ANNOTATION = {
+    IMPLICIT_TYPE_LABEL: "text",
+    HAS_FONT_SIZE:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-font-size",
+    HAS_FONT_WEIGHT:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-font-weight",
+    HAS_TEXT:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-text",
+    DEFAULT_TEXT_ANNOTATION_STYLE: {
+      text: "Hello world",
+      color: "red",
+      fontSizeInNormalizedPx: 0.05,
+      fontWeight: "300",
+      fontFamily: "sans-serif",
+      fontColor: "red",
+      opacity: 1.0,
+    },
   };
 
   static LANG = {
