@@ -17,6 +17,7 @@ const VideoViewer = ({
   responsive = true,
   aspectRatio = "16:9",
   annotations = [],
+  showAnnotations,
   onFullScreen,
 }) => {
   const videoRef = useRef(null);
@@ -46,6 +47,8 @@ const VideoViewer = ({
     options,
     onFullScreen,
     onTimeUpdate: setCurrentTime,
+    annotations,
+    showAnnotations,
   });
 
   const surface = useMediaSurface({
@@ -59,6 +62,7 @@ const VideoViewer = ({
       {surface && (
         <AnnotationOverlay
           annotations={annotations}
+          showAnnotations={showAnnotations}
           surface={surface}
           currentTime={currentTime}
         />

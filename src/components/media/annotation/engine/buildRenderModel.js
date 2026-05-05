@@ -1,5 +1,9 @@
 import Constants from "../../../../constants/Constants.js";
-import MediaAssetViewerUtil from "../../../../util/MediaAssetViewerUtil.js";
+import MediaAssetViewerUtils from "../../../../util/MediaAssetViewerUtils.js";
+
+const getRandomUUID = () => {
+  return `uuid-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+};
 
 const buildBaseModel = (annotation) => {
   const type = annotation[Constants.ANNOTATION.HAS_ANNOTATION_TYPE];
@@ -7,7 +11,7 @@ const buildBaseModel = (annotation) => {
   const opacity = annotation[Constants.ANNOTATION.HAS_OPACITY];
 
   return {
-    id: annotation.id ?? crypto.randomUUID(),
+    id: annotation.id ?? getRandomUUID(),
     type,
     opacity: opacity ?? 1.0,
   };
@@ -22,7 +26,7 @@ const buildPolylineModel = (annotation, width, height, base) => {
   return {
     ...base,
     geometry: {
-      points: MediaAssetViewerUtil.denormalizePointsFromStringToString(
+      points: MediaAssetViewerUtils.denormalizePointsFromStringToString(
         points,
         width,
         height
@@ -45,7 +49,7 @@ const buildTextModel = (annotation, width, height, base) => {
 
   const defaultStyle = Constants.TEXT_ANNOTATION.DEFAULT_TEXT_ANNOTATION_STYLE;
 
-  const [[nx, ny]] = MediaAssetViewerUtil.getArrayPointsFromString(points);
+  const [[nx, ny]] = MediaAssetViewerUtils.getArrayPointsFromString(points);
 
   return {
     ...base,

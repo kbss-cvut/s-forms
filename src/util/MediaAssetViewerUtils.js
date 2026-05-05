@@ -2,7 +2,7 @@
  *
  * Utility class providing helper functions for media asset.
  */
-export default class MediaAssetViewerUtil {
+export default class MediaAssetViewerUtils {
   /**
    * Determines the media kind and MIME type based on the source URL.
    *
@@ -90,7 +90,7 @@ export default class MediaAssetViewerUtil {
 
   static stripExpandedLiterals(input) {
     if (Array.isArray(input)) {
-      return input.map(MediaAssetViewerUtil.stripExpandedLiterals);
+      return input.map(MediaAssetViewerUtils.stripExpandedLiterals);
     }
 
     if (input && typeof input === "object") {
@@ -99,7 +99,7 @@ export default class MediaAssetViewerUtil {
         Object.prototype.hasOwnProperty.call(input, "@value") &&
         Object.keys(input).length <= 2 // usually @value + @type
       ) {
-        return MediaAssetViewerUtil.castLiteral(
+        return MediaAssetViewerUtils.castLiteral(
           input["@value"],
           input["@type"]
         );
@@ -108,7 +108,7 @@ export default class MediaAssetViewerUtil {
       // Case 2: Normal object → recurse
       const result = {};
       for (const key in input) {
-        result[key] = MediaAssetViewerUtil.stripExpandedLiterals(input[key]);
+        result[key] = MediaAssetViewerUtils.stripExpandedLiterals(input[key]);
       }
       return result;
     }
