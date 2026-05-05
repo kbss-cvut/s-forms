@@ -416,6 +416,37 @@ export default class FormUtils {
     return false;
   }
 
+  static hasCorrectAnswer(question) {
+    if (!question) {
+      return false;
+    }
+
+    if (question.hasOwnProperty(Constants.HAS_CORRECT_ANSWER)) {
+      let answer = jsonld.getValues(question, Constants.HAS_CORRECT_ANSWER);
+      if (Array.isArray(answer) && answer.length !== 0) {
+        answer = answer[0];
+        const qValue = FormUtils.resolveValueObject(answer);
+        if (qValue) {
+          if (qValue["@value"] || qValue["@id"]) {
+            return true;
+          }
+        }
+      }
+      if (answer["@value"] || answer["@id"]) {
+        return true;
+      }
+      return false;
+    }
+
+    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+      if (FormUtils.hasCorrectAnswer(subQ)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   static getAnswerValue(question) {
     if (!question) {
       return null;
@@ -435,6 +466,50 @@ export default class FormUtils {
 
     for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
       const subQAnswer = FormUtils.getAnswerValue(subQ);
+      if (subQAnswer) {
+        return subQAnswer;
+      }
+    }
+
+    return null;
+  }
+
+  static getCorrectAnswerValue(question) {
+    if (!question) {
+      return null;
+    }
+
+    if (question.hasOwnProperty(Constants.HAS_CORRECT_ANSWER)) {
+      let answer = jsonld.getValues(question, Constants.HAS_CORRECT_ANSWER);
+      if (!answer) return null;
+
+      if (Array.isArray(answer)) {
+        answer = answer[0];
+      }
+
+      let qValue =
+        jsonld.getValues(answer, Constants.HAS_DATA_VALUE) ||
+        jsonld.getValues(answer, Constants.HAS_OBJECT_VALUE);
+
+      // Skip parsing if qValue is an empty array
+      if (qValue && (!Array.isArray(qValue) || qValue.length > 0)) {
+        if (Array.isArray(qValue)) {
+          qValue = qValue[0];
+        }
+
+        const label = qValue[Constants.RDFS_LABEL];
+        if (label) {
+          return label["@value"] ?? label;
+        }
+        return qValue["@value"] ?? null;
+      }
+
+      // No data/object value — fall back to the answer node itself
+      return answer["@value"] ?? answer[Constants.RDFS_LABEL] ?? null;
+    }
+
+    for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+      const subQAnswer = FormUtils.getCorrectAnswerValue(subQ);
       if (subQAnswer) {
         return subQAnswer;
       }
@@ -608,5 +683,35 @@ export default class FormUtils {
     if (question[Constants.INPUT_MASK]) {
       return question[Constants.INPUT_MASK];
     }
+  }
+
+  static hasMediaContentWithAnnotations(question) {
+    if (question[Constants.HAS_MEDIA_CONTENT]) {
+      for (const media of Utils.asArray(
+        question[Constants.HAS_MEDIA_CONTENT]
+      )) {
+        if (
+          media[Constants.HAS_ANNOTATION] &&
+          Utils.asArray(media[Constants.HAS_ANNOTATION]).length > 0
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  static containsHints(question) {
+    if (question[Constants.HAS_SUBQUESTION]) {
+      for (const subQ of Utils.asArray(question[Constants.HAS_SUBQUESTION])) {
+        if (FormUtils.containsHints(subQ)) {
+          return true;
+        }
+      }
+    }
+    return (
+      this.hasCorrectAnswer(question) ||
+      this.hasMediaContentWithAnnotations(question)
+    );
   }
 }

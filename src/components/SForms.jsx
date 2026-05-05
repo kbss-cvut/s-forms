@@ -21,6 +21,7 @@ SForms.propTypes = {
   fetchTypeAheadValues: PropTypes.func,
   isFormValid: PropTypes.func,
   loader: PropTypes.element,
+  enableOptionQuestionFeedback: PropTypes.bool,
 };
 
 export default SForms;

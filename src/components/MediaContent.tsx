@@ -1,40 +1,47 @@
 import React from "react";
 import Constants from "../constants/Constants";
+import MediaAssetViewer from "./media/MediaAssetViewer";
+import MediaAssetViewerUtils from "../util/MediaAssetViewerUtils";
 
 interface Props {
   question: object;
+  displayAnnotations?: boolean;
 }
 
-const MediaContent = ({ question }: Props) => {
+const MediaContent = ({ question, displayAnnotations }: Props) => {
   const renderMedia = () => {
-    // @ts-ignore
-    const mediaContent = question[Constants.HAS_MEDIA_CONTENT];
-
-    if (mediaContent) {
-      if (Array.isArray(mediaContent)) {
+    const normalizedQuestion =
+      MediaAssetViewerUtils.stripExpandedLiterals(question);
+    const mediaContents = normalizedQuestion[Constants.HAS_MEDIA_CONTENT];
+    if (mediaContents) {
+      if (Array.isArray(mediaContents)) {
         return (
-          <div className="col-6">
-            {mediaContent.map((src: string, index: number) => (
-              <div
-                key={index}
-                className="row embed-responsive-21by9 media-content-video-container mb-3"
-              >
-                <iframe
-                  src={mediaContent[index]}
-                  className="embed-responsive-item"
-                  allowFullScreen
-                />
-              </div>
-            ))}
+          <div className="col-6 ">
+            {mediaContents.map((media, index) => {
+              return (
+                <div
+                  key={index}
+                  className="embed-responsive-21by9 media-content-video-container mb-3"
+                >
+                  <MediaAssetViewer
+                    src={media[Constants.HAS_SOURCE]}
+                    allowFullScreen
+                    annotations={media[Constants.HAS_ANNOTATION]}
+                    showAnnotations={displayAnnotations}
+                  />
+                </div>
+              );
+            })}
           </div>
         );
       }
       return (
         <div className="col-6">
-          <iframe
-            src={mediaContent}
-            className="embed-responsive-item"
+          <MediaAssetViewer
+            src={mediaContents[Constants.HAS_SOURCE]}
             allowFullScreen
+            annotations={mediaContents[Constants.HAS_ANNOTATION]}
+            showAnnotations={displayAnnotations}
           />
         </div>
       );

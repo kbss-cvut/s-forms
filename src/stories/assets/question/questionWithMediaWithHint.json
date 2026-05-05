@@ -1,0 +1,40 @@
+{
+  "@id": "accept-answer-value-media",
+  "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+  "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "section",
+  "http://www.w3.org/2000/01/rdf-schema#label": { "@language": "en", "@value": "Question with annotated Media Content" },
+  "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": [],
+  "http://onto.fel.cvut.cz/ontologies/form/has-comment": [],
+  "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question": [
+    {
+      "@id": "tested-question-media",
+      "@type": "http://onto.fel.cvut.cz/ontologies/documentation/question",
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question": [],
+      "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class": "type-ahead",
+      "http://onto.fel.cvut.cz/ontologies/form/has-possible-value": [
+        {
+          "@id": "http://onto.fel.cvut.cz/ontologies/s-forms/example/accepted-value-4208994",
+          "http://www.w3.org/2000/01/rdf-schema#label": { "@language": "en", "@value": "correct value" }
+        },
+        {
+          "@id": "option-5194877",
+          "http://www.w3.org/2000/01/rdf-schema#label": { "@language": "en", "@value": "not correct value" }
+        }
+      ],
+      "http://purl.org/dc/elements/1.1/description": { "@language": "en", "@value": "Question with media content. Click the hint bulb to reveal the correct answer and media annotation." },
+      "http://www.w3.org/2000/01/rdf-schema#label": { "@language": "en", "@value": "Question with media" },
+      "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": {},
+      "http://onto.fel.cvut.cz/ontologies/form/has-correct-answer-value": {
+        "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": {
+          "@id": "http://onto.fel.cvut.cz/ontologies/s-forms/example/accepted-value-4208994",
+          "http://www.w3.org/2000/01/rdf-schema#label": { "@language": "en", "@value": "correct value" }
+        },
+        "http://onto.fel.cvut.cz/ontologies/documentation/has_object_value": {
+          "@id": "http://onto.fel.cvut.cz/ontologies/s-forms/example/accepted-value-4208994"
+        }
+      },
+      "http://onto.fel.cvut.cz/ontologies/form/has-comment": [],
+      "http://onto.fel.cvut.cz/ontologies/form/has-media-content":[]
+    }
+  ]
+}
