@@ -54,7 +54,7 @@
         "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-geometry-points": "0.7276644095656953,0.7687898089171975",
         "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-color": "red",
         "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-opacity": 1,
-        "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-text": "Ghost!!",
+        "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-text": "Ghost!!\nBoo!!",
         "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-font-size": 0.04713375796178344,
         "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-font-weight": 400
       }
