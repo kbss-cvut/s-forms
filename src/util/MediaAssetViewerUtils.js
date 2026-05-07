@@ -133,4 +133,23 @@ export default class MediaAssetViewerUtils {
 
     return value;
   }
+
+  /**
+   * Normalizes the HAS_MEDIA_CONTENT value into a uniform array of media objects.
+   * Accepts:
+   * - A plain URL string wrapped into a single-element array with HAS_SOURCE set
+   * - An array of strings/objects: strings are wrapped, objects are passed through
+   * - A single object is wrapped into a single-element array
+   */
+  static normalizeMediaContents(mediaContents, hasSourceKey) {
+    if (!mediaContents) return [];
+
+    const asArray = Array.isArray(mediaContents)
+      ? mediaContents
+      : [mediaContents];
+
+    return asArray.map((item) =>
+      typeof item === "string" ? { [hasSourceKey]: item } : item
+    );
+  }
 }

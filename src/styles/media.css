@@ -1,7 +1,6 @@
 /* ============================= */
-/* MEDIA CONTAINER */
+/* MEDIA CONTAINER
 /* ============================= */
-
 .media-container {
   position: relative;
   width: 100%;
@@ -24,9 +23,8 @@
 }
 
 /* ============================= */
-/* ANNOTATION OVERLAY */
+/* ANNOTATION OVERLAY
 /* ============================= */
-
 .annotation-overlay {
   position: absolute;
   inset: 0;
@@ -60,9 +58,8 @@
 }
 
 /* ============================= */
-/* MEDIA ELEMENTS */
+/* MEDIA ELEMENTS
 /* ============================= */
-
 .media-container video,
 .media-container img,
 .media-container iframe,
@@ -76,7 +73,7 @@
 }
 
 /* ============================= */
-/* IMAGE VIEW */
+/* IMAGE VIEW
 /* ============================= */
 
 .media-image-container {
@@ -102,9 +99,8 @@
 }
 
 /* ============================= */
-/* FULLSCREEN BUTTON */
+/* FULLSCREEN BUTTON
 /* ============================= */
-
 .media-fullscreen-button {
   position: absolute;
   right: 12px;
@@ -150,11 +146,32 @@
 }
 
 /* ============================= */
-/* VIDEO */
+/* VIDEO                         */
 /* ============================= */
-
 .video-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
+}
+
+/* ============================= */
+/* IFRAME VIEW                   */
+/* ============================= */
+.media-iframe-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.media-iframe-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.media-iframe-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }

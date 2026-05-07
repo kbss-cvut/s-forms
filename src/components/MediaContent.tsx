@@ -9,47 +9,32 @@ interface Props {
 }
 
 const MediaContent = ({ question, displayAnnotations }: Props) => {
-  const renderMedia = () => {
-    const normalizedQuestion =
-      MediaAssetViewerUtils.stripExpandedLiterals(question);
-    const mediaContents = normalizedQuestion[Constants.HAS_MEDIA_CONTENT];
-    if (mediaContents) {
-      if (Array.isArray(mediaContents)) {
-        return (
-          <div className="col-6 ">
-            {mediaContents.map((media, index) => {
-              return (
-                <div
-                  key={index}
-                  className="embed-responsive-21by9 media-content-video-container mb-3"
-                >
-                  <MediaAssetViewer
-                    src={media[Constants.HAS_SOURCE]}
-                    allowFullScreen
-                    annotations={media[Constants.HAS_ANNOTATION]}
-                    showAnnotations={displayAnnotations}
-                  />
-                </div>
-              );
-            })}
+  const normalizedQuestion =
+    MediaAssetViewerUtils.stripExpandedLiterals(question);
+  const mediaContents = MediaAssetViewerUtils.normalizeMediaContents(
+    normalizedQuestion[Constants.HAS_MEDIA_CONTENT],
+    Constants.HAS_SOURCE
+  );
+  if (mediaContents.length > 0) {
+    return (
+      <div className="col-6 ">
+        {mediaContents.map((media, index) => (
+          <div
+            key={index}
+            className="embed-responsive-21by9 media-content-video-container mb-3"
+          >
+            <MediaAssetViewer
+              src={media[Constants.HAS_SOURCE]}
+              allowFullScreen
+              annotations={media[Constants.HAS_ANNOTATION] ?? []}
+              showAnnotations={displayAnnotations}
+            />
           </div>
-        );
-      }
-      return (
-        <div className="col-6">
-          <MediaAssetViewer
-            src={mediaContents[Constants.HAS_SOURCE]}
-            allowFullScreen
-            annotations={mediaContents[Constants.HAS_ANNOTATION]}
-            showAnnotations={displayAnnotations}
-          />
-        </div>
-      );
-    }
-    return null;
-  };
-
-  return renderMedia();
+        ))}
+      </div>
+    );
+  }
+  return <></>;
 };
 
 export default MediaContent;

@@ -12,14 +12,16 @@ const mediaRegistry = {
 };
 
 const IframeViewer = ({ src, allowFullScreen }) => (
-  <iframe
-    src={src}
-    title="Embedded content"
-    allowFullScreen={allowFullScreen}
-    className="media-iframe"
-  />
+  <div className="media-iframe-container">
+    <div className="media-iframe-wrapper">
+      <iframe
+        src={src}
+        title="Embedded content"
+        allowFullScreen={allowFullScreen}
+      />
+    </div>
+  </div>
 );
-
 /**
  * Orchestrates the rendering of media assets based on their type and manages fullscreen state.
  * Defaults to an iframe viewer for unsupported types.
