@@ -6,27 +6,38 @@ import React from "react";
  */
 const TextAnnotation = ({
   text,
-  fontFamily,
-  fontWeight,
-  opacity,
+  fontFamily = "Arial",
+  fontWeight = 400,
+  opacity = 1,
   fontSize,
   x,
   y,
-  color,
+  color = "#00ff00",
+  lineHeight = 1.15,
 }) => {
+  const lines = (text ?? "").split(/\r?\n/);
+  const lineHeightPx = fontSize * lineHeight;
+  const correctedY = y - fontSize * 0.2;
+
   return (
     <text
-      x={x}
-      y={y}
       fill={color}
       fontSize={`${fontSize}px`}
       fontFamily={fontFamily}
       fontWeight={fontWeight}
-      dominantBaseline="text-before-edge"
       textAnchor="start"
       opacity={opacity}
     >
-      {text}
+      {lines.map((line, index) => (
+        <tspan
+          key={index}
+          x={x}
+          y={correctedY + index * lineHeightPx}
+          dominantBaseline="hanging"
+        >
+          {line || "\u00A0"}
+        </tspan>
+      ))}
     </text>
   );
 };
