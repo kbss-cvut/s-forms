@@ -13,7 +13,10 @@ const formShape = {
     Constants.HAS_ANSWER,
     Constants.HAS_DECLARED_PREFIX,
     Constants.HAS_OPTION,
+    Constants.HAS_CORRECT_ANSWER,
     Constants.HAS_COMMENT,
+    Constants.HAS_MEDIA_CONTENT,
+    Constants.HAS_ANNOTATION,
   ],
 };
 

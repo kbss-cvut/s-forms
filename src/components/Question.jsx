@@ -29,6 +29,7 @@ export default class Question extends React.Component {
       validator: {},
       expanded: !FormUtils.isCollapsed(props.question),
       showIcon: false,
+      hintRevealed: false,
     };
   }
 
@@ -62,6 +63,14 @@ export default class Question extends React.Component {
       }
     }
   }
+
+  handleHintReveal = (state) => {
+    if (state && typeof state === "boolean") {
+      this.setState({ hintRevealed: state });
+      return;
+    }
+    this.setState({ hintRevealed: !this.state.hintRevealed });
+  };
 
   handleAnswerChange = (answerIndex, change) => {
     if (FormUtils.isSection(this.props.question)) {
@@ -259,6 +268,7 @@ export default class Question extends React.Component {
         <MediaContent
           key={this.props.question["@id"] + "-media"}
           question={this.props.question}
+          displayAnnotations={this.state.hintRevealed}
         />
       );
     }
@@ -275,7 +285,9 @@ export default class Question extends React.Component {
       options,
       this.handleCommentChange,
       this.state.showIcon,
-      this.props.intl
+      this.props.intl,
+      this.state.hintRevealed,
+      this.handleHintReveal
     );
   }
 
@@ -376,6 +388,8 @@ export default class Question extends React.Component {
               onChange={this.handleAnswerChange}
               onCommentChange={this.handleCommentChange}
               showIcon={this.state.showIcon}
+              hintRevealed={this.state.hintRevealed}
+              onHintReveal={this.handleHintReveal}
             />
           </div>
           {this._renderUnits()}
