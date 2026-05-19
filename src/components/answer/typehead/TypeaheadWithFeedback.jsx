@@ -36,10 +36,6 @@ const TypeaheadWithFeedback = (props) => {
     setFeedback(evaluateAnswer(matched.label, props.question));
   }, [props.optionsList]);
 
-  useEffect(() => {
-    setMenuOpen(props.hintRevealed);
-  }, [props.hintRevealed]);
-
   return (
     <FormGroup size="small" className="mb-3">
       <Form.Label>{props.label}</Form.Label>
