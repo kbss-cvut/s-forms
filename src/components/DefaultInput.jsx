@@ -100,18 +100,20 @@ export default class DefaultInput extends React.Component {
   }
 
   _renderSelect() {
+    const { validation, children, value, ...rest } = this.props;
     return (
       <FormGroup size="small" className="mb-3">
         {this._renderLabel()}
         <FormControl
           as="select"
-          className={this.props.validation.classname}
+          value={value}
+          className={validation.classname}
           ref={(c) => (this.input = c)}
-          {...this.props}
+          {...rest}
         >
-          {this.props.children}
+          {children}
         </FormControl>
-        {this.props.validation.message}
+        {validation.message}
       </FormGroup>
     );
   }

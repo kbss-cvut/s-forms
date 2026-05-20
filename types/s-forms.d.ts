@@ -144,6 +144,7 @@ export class Constants {
     QUESTION_COMMENTS: string;
     QUESTION_HELP: string;
     QUESTION_LINK: string;
+    QUESTION_HINT: string;
   };
 
   static ICON_BEHAVIOR: {

@@ -106,6 +106,8 @@ export default class Constants {
   static HAS_UNIT = "http://onto.fel.cvut.cz/ontologies/form/has-unit";
   static HAS_VALID_ANSWER =
     "http://onto.fel.cvut.cz/ontologies/form/has-valid-answer";
+  static HAS_CORRECT_ANSWER =
+    "http://onto.fel.cvut.cz/ontologies/form/has-correct-answer-value";
   static IS_RELEVANT_IF =
     "http://onto.fel.cvut.cz/ontologies/form/is-relevant-if";
   static ACCEPTS_VALIDATION_VALUE =
@@ -128,6 +130,11 @@ export default class Constants {
     "http://onto.fel.cvut.cz/ontologies/form/has-preceding-value";
   static HAS_MEDIA_CONTENT =
     "http://onto.fel.cvut.cz/ontologies/form/has-media-content";
+  static ASSET = "http://onto.fel.cvut.cz/ontologies/form/media/asset";
+  static HAS_SOURCE =
+    "http://onto.fel.cvut.cz/ontologies/form/media/has-source";
+  static HAS_ANNOTATION =
+    "http://onto.fel.cvut.cz/ontologies/form/media/has-annotation";
   static CONDITION = "http://onto.fel.cvut.cz/ontologies/form/condition";
   static OR_CONDITION = "http://onto.fel.cvut.cz/ontologies/form/or-condition";
   static HAS_SUB_CONDITION =
@@ -170,6 +177,7 @@ export default class Constants {
     QUESTION_COMMENTS: "questionComments",
     QUESTION_HELP: "questionHelp",
     QUESTION_LINK: "questionLink",
+    QUESTION_HINT: "questionHint",
   };
 
   static ICON_BEHAVIOR = {
@@ -193,7 +201,59 @@ export default class Constants {
         id: Constants.ICONS.QUESTION_LINK,
         behavior: Constants.ICON_BEHAVIOR.ON_HOVER,
       },
+      {
+        id: Constants.ICONS.QUESTION_HINT,
+        behavior: Constants.ICON_BEHAVIOR.DISABLE,
+      },
     ],
+    enableOptionQuestionFeedback: false,
+  };
+
+  static ANNOTATION = {
+    HAS_ANNOTATION_TYPE:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-annotation-type",
+    HAS_START_TIME:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-start-time",
+    HAS_END_TIME:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-end-time",
+    HAS_GEOMETRY_POINTS:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-geometry-points",
+    HAS_OPACITY:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-opacity",
+    HAS_COLOR:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-color",
+  };
+
+  static POLYLINE_ANNOTATION = {
+    IMPLICIT_TYPE_LABEL: "polyline",
+    HAS_STROKE_WIDTH:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-stroke-width",
+    HAS_FILL_COLOR:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-fill-color",
+    DEFAULT_POLYLINE_ANNOTATION_STYLE: {
+      color: "red",
+      strokeWidth: 0.000002,
+      fillColor: "transparent",
+      opacity: 1.0,
+    },
+  };
+  static TEXT_ANNOTATION = {
+    IMPLICIT_TYPE_LABEL: "text",
+    HAS_FONT_SIZE:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-font-size",
+    HAS_FONT_WEIGHT:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-font-weight",
+    HAS_TEXT:
+      "http://onto.fel.cvut.cz/ontologies/form/media/annotation/has-text",
+    DEFAULT_TEXT_ANNOTATION_STYLE: {
+      text: "Hello world",
+      color: "red",
+      fontSizeInNormalizedPx: 0.05,
+      fontWeight: "300",
+      fontFamily: "sans-serif",
+      fontColor: "red",
+      opacity: 1.0,
+    },
   };
 
   static LANG = {

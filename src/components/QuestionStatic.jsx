@@ -4,9 +4,19 @@ import HelpIcon from "./HelpIcon.jsx";
 import LinkIcon from "./LinkIcon.jsx";
 import QuestionCommentIcon from "./comment/QuestionCommentIcon.jsx";
 import * as JsonLdUtils from "jsonld-utils";
+import HintIcon from "./HintIcon.jsx";
+import FormUtils from "../util/FormUtils.js";
 
 export default class QuestionStatic {
-  static renderIcons(question, options, onCommentChange, showIcon, intl) {
+  static renderIcons(
+    question,
+    options,
+    onCommentChange,
+    showIcon,
+    intl,
+    hintRevealed,
+    onHintReveal
+  ) {
     let icons;
     if (options.icons) icons = options.icons;
     else icons = Constants.DEFAULT_OPTIONS.icons;
@@ -35,6 +45,16 @@ export default class QuestionStatic {
       intl
     );
 
+    const renderQuestionHint = this.renderQuestionHint(
+      question,
+      options,
+      onCommentChange,
+      showIcon,
+      intl,
+      hintRevealed,
+      onHintReveal
+    );
+
     for (let i = 0; i < icons.length; i++) {
       if (icons[i].id === Constants.ICONS.QUESTION_COMMENTS) {
         iconsArray.push(
@@ -54,6 +74,13 @@ export default class QuestionStatic {
         iconsArray.push(
           <li key={i} className="icon-list-item">
             {renderQuestionLink}
+          </li>
+        );
+      }
+      if (icons[i].id === Constants.ICONS.QUESTION_HINT) {
+        iconsArray.push(
+          <li key={i} className="icon-list-item">
+            {renderQuestionHint}
           </li>
         );
       }
@@ -113,13 +140,36 @@ export default class QuestionStatic {
     );
   }
 
+  static renderQuestionHint(
+    question,
+    options,
+    onCommentChange,
+    showIcon,
+    intl,
+    hintRevealed,
+    onHintReveal
+  ) {
+    return this.getIconComponentFromName(
+      Constants.ICONS.QUESTION_HINT,
+      question,
+      options,
+      onCommentChange,
+      showIcon,
+      intl,
+      hintRevealed,
+      onHintReveal
+    );
+  }
+
   static getIconComponentFromName(
     iconName,
     question,
     options,
     onCommentChange,
     showIcon,
-    intl
+    intl,
+    hintRevealed,
+    onHintReveal
   ) {
     const iconList = options.icons
       ? options.icons
@@ -131,7 +181,9 @@ export default class QuestionStatic {
       options,
       onCommentChange,
       showIcon,
-      intl
+      intl,
+      hintRevealed,
+      onHintReveal
     );
   }
 
@@ -146,7 +198,9 @@ export default class QuestionStatic {
     options,
     onCommentChange,
     showIcon,
-    intl
+    intl,
+    hintRevealed,
+    onHintReveal
   ) {
     let iconClassname;
 
@@ -207,6 +261,29 @@ export default class QuestionStatic {
         }
         return null;
       }
+
+      if (icon.id === Constants.ICONS.QUESTION_HINT) {
+        if (!options.enableOptionQuestionFeedback) return null;
+        if (
+          FormUtils.isSection(question) ||
+          !FormUtils.containsHints(question)
+        ) {
+          return null;
+        }
+        if (showIcon) {
+          return (
+            <div className={iconClassname}>
+              <HintIcon
+                absolutePosition={false}
+                onHintClick={onHintReveal}
+                revealed={hintRevealed}
+              />
+            </div>
+          );
+        }
+        return null;
+      }
+
       return null;
     }
   }

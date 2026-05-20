@@ -1,0 +1,177 @@
+/* ============================= */
+/* MEDIA CONTAINER
+/* ============================= */
+.media-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 640px;
+  max-height: 480px;
+
+  background: linear-gradient(180deg, #3a3a3a 40%, #1c1c1c 70%);
+
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.media-container.fullscreen {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+}
+
+/* ============================= */
+/* ANNOTATION OVERLAY
+/* ============================= */
+.annotation-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes annotation-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  70% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.annotation-overlay-revealed {
+  animation: annotation-pulse 0.7s ease-out forwards;
+}
+
+/* ============================= */
+/* MEDIA ELEMENTS
+/* ============================= */
+.media-container video,
+.media-container img,
+.media-container iframe,
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  backface-visibility: hidden;
+  image-rendering: auto;
+}
+
+/* ============================= */
+/* IMAGE VIEW
+/* ============================= */
+
+.media-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.media-image-wrapper img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================= */
+/* FULLSCREEN BUTTON
+/* ============================= */
+.media-fullscreen-button {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 36px;
+  min-height: 36px;
+
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 6px;
+
+  cursor: pointer;
+  opacity: 0;
+
+  transition: opacity 0.2s ease, background 0.2s ease, transform 0.15s ease;
+
+  z-index: 10;
+}
+
+.media-image-container:hover .media-fullscreen-button,
+.media-modal-image-wrapper:hover .media-fullscreen-button {
+  opacity: 1;
+}
+
+.media-fullscreen-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.05);
+}
+
+.media-fullscreen-button:active {
+  transform: scale(0.95);
+}
+
+.media-fullscreen-button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+/* ============================= */
+/* VIDEO                         */
+/* ============================= */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================= */
+/* IFRAME VIEW                   */
+/* ============================= */
+.media-iframe-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.media-iframe-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.media-iframe-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
