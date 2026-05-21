@@ -28,7 +28,9 @@ const TypeaheadAnswer = (props) => {
   );
 
   const [isLoading, setLoading] = useState(true);
-  const [optionsList, setOptionsList] = useState([]);
+  const [optionsList, setOptionsList] = useState(() =>
+    buildOptionsTree(props.options, intl)
+  );
 
   const learningEnabled = Utils.isOptionQuestionFeedbackEnabled(
     configurationContext?.options

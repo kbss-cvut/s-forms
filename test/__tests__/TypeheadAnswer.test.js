@@ -39,7 +39,7 @@ describe("TypeaheadAnswer", () => {
     ]);
   });
 
-  xit("orders options using partial ordering with alphabetical ordering", () => {
+  it("orders options using partial ordering with alphabetical ordering", () => {
     const options = createOptionsWithPartialOrder(
       ["3", "2", "1", "before2"],
       ["before2<2"]
