@@ -1,0 +1,549 @@
+{
+  "@graph": [
+    {
+      "@id": "doc:has_related_question",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "doc:question",
+      "@type": "owl:Class"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/04371778b41b6ae179d66204a0ef5d9a-q",
+      "@type": "doc:question",
+      "has-layout-class": "type-ahead",
+      "has-origin-path-id": "00db0c55033a8596703796a19ee7fd84",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/d8f0606a6696eb5223b2f722a854ff8c-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/repeated-failure",
+      "form:provides-dereferenceable-answer-values": false,
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "label": "7. Hinge pin condition"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/12bde36185db4724036d236c3c91af16-q",
+      "@type": "doc:question",
+      "has_related_question": [
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/1909a2742233ccfbb9774c13a25b94d0-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/a62a7b0b22382633dc9d700d404bb204-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/55fd83f85777317e21e816f51e9cc0ac-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/5da139014a1d5112c5d9cfd5af60bd4c-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2a3ebf45fa082bc02793bb490bb93242-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2f8c31d4ac43aac51b5dcfcd68226ee1-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/19d93f340bb29a86da85af72d12fba43-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/c6fec778277f83b1a2221794283d2f9a-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/12eb1318bd23dd201046eedc067474b6-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2a8d710154fe21bf4edf0d261dc05423-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/f44ba9c0a34bfb25039250037b63a5a1-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/fd9b05dda61215b077379b405244cbec-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/b1471c9f6f1ddb9de1d150955a40ab6d-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/952f32ad1c75974f571b5ca91cd9f9b2-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/582164824575f653e1e20770ead5104f-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/23fd15358be967a128bad4b0fe5f0d81-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/04371778b41b6ae179d66204a0ef5d9a-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/933418af23435d9b62ddf0b313ad12d9-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/d8f0606a6696eb5223b2f722a854ff8c-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/dda6e990be349c8b54effa9ab133d672-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/56b3d45ff144d4e28266bcee66480452-q"
+      ],
+      "has-layout-class": [
+        "wizard-step",
+        "section"
+      ],
+      "has-origin-path-id": "32cc13e0c072c4b11764fa54b0f3e762",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/form/vs--failure-form-q-generated-qo",
+      "label": "Reliability Report DA 42 - Flight Controls"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/12eb1318bd23dd201046eedc067474b6-q",
+      "@type": "doc:question",
+      "has-layout-class": "type-ahead",
+      "has-origin-path-id": "56b2c167f1a76d9ad7f045a2b3c77697",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2f8c31d4ac43aac51b5dcfcd68226ee1-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/system-equipment-block-part-l-39ng.a1",
+      "form:provides-dereferenceable-answer-values": false,
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": true,
+      "label": "16. Affected flight control surfaces"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/1909a2742233ccfbb9774c13a25b94d0-q",
+      "@type": "doc:question",
+      "has-layout-class": "number",
+      "has-datatype": "xsd:int",
+      "has-origin-path-id": "2f849a20f411e005d196b791e3140a1f",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/12eb1318bd23dd201046eedc067474b6-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/year-of-production-of-defective-equipment",
+      "description": "Number of overhauls of defective equipment not including the currently ongoing overhaul.",
+      "label": "17. Year of production of the affected component",
+      "xsd:maxInclusive": 2100,
+      "xsd:minInclusive": 1950
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/19d93f340bb29a86da85af72d12fba43-q",
+      "@type": "doc:question",
+      "has-layout-class": "textarea",
+      "has-origin-path-id": "ec2ce6edb13732af2c9b87ab0ec02177",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/a62a7b0b22382633dc9d700d404bb204-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/notes",
+      "label": "21. Additional observations"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/23fd15358be967a128bad4b0fe5f0d81-q",
+      "@type": "doc:question",
+      "has-layout-class": "type-ahead",
+      "has-origin-path-id": "1ce8e677a94cef65f91190923a8759e7",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/fd9b05dda61215b077379b405244cbec-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/consequence",
+      "form:provides-dereferenceable-answer-values": false,
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "label": "9. Potential consequences"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2a3ebf45fa082bc02793bb490bb93242-q",
+      "@type": "doc:question",
+      "has-input-mask": "hhh:mm",
+      "has-origin-path-id": "f45387886530825685c4b8df3ead356b",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/582164824575f653e1e20770ead5104f-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/repair-duration",
+      "pattern": "^(0|[1-9]\\d{0,2}):[0-5]\\d$",
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": true,
+      "description": [
+        "Enter value in hours h and minutes m, i.e., examples of valid values are 0:15, 12:59, 234:00.",
+        "System/equipment/block/part repair duration including disassembly and assembly."
+      ],
+      "label": "12. Estimated repair duration"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2a8d710154fe21bf4edf0d261dc05423-q",
+      "@type": "doc:question",
+      "has-layout-class": "number",
+      "has-datatype": "xsd:float",
+      "has-origin-path-id": "5bf84c5c4901a44b1c3160005a2ff9b0",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2a3ebf45fa082bc02793bb490bb93242-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/average-number-of-men-during-repairment",
+      "form:requires-answer": true,
+      "step": "0.1",
+      "form:used-only-for-completeness": true,
+      "description": "The average number of men during system/equipment/block/part repairment, including disassembly and assembly, is calculated in FTE full-time equivalent. E.g., if 3 people participated with capacity one day per week 0.2 FTE, the average would be 3*0.2 = 0.6.",
+      "label": "13. Average maintenance crew"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2f8c31d4ac43aac51b5dcfcd68226ee1-q",
+      "@type": "doc:question",
+      "has-layout-class": "textarea",
+      "has-origin-path-id": "15aed49d77fe70acc577cb83e1198d6b",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/952f32ad1c75974f571b5ca91cd9f9b2-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/description-of-corrective-action",
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": true,
+      "description": "Description of corrective action in words",
+      "label": "15. Proposed corrective action"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/55fd83f85777317e21e816f51e9cc0ac-q",
+      "@type": "doc:question",
+      "has-layout-class": "number",
+      "has-datatype": "xsd:int",
+      "has-origin-path-id": "c4ac1bae6ff571141749e0cec48983f3",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/1909a2742233ccfbb9774c13a25b94d0-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/number-of-overhauls-of-defective-equipment",
+      "label": "18. Overhauls performed",
+      "xsd:maxInclusive": 99,
+      "xsd:minInclusive": 0
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/56b3d45ff144d4e28266bcee66480452-q",
+      "@type": "doc:question",
+      "has-origin-path-id": "6bb5587eb53ae23ae96fddd27fc49155",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/55fd83f85777317e21e816f51e9cc0ac-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/serial-no-of-equipment",
+      "has-validation-message": "Please enter a valid alphanumeric sequence. Your input should consist only of letters A-Z a-z and numbers 0-9. Special characters are not permitted.",
+      "pattern": "^[A-Za-z0-9]+$",
+      "form:used-only-for-completeness": true,
+      "label": "19. Serial No. of the affected part"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/582164824575f653e1e20770ead5104f-q",
+      "@type": "doc:question",
+      "has-layout-class": "type-ahead",
+      "has-origin-path-id": "0a7b69c1bf19c7c1d69ce683f1cf2aa5",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/c6fec778277f83b1a2221794283d2f9a-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/repair",
+      "form:provides-dereferenceable-answer-values": false,
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": true,
+      "label": "11. Select repair action"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/5da139014a1d5112c5d9cfd5af60bd4c-q",
+      "@type": "doc:question",
+      "has-layout-class": "number",
+      "has-datatype": "xsd:int",
+      "has-origin-path-id": "70a16145b19c4eff03a1e12510ee21f6",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/dda6e990be349c8b54effa9ab133d672-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/number-of-airframe-overhauls",
+      "form:requires-answer": false,
+      "description": "Number of airframe overhauls not including the currently ongoing overhaul.",
+      "label": "4. Overhauls on the airframe",
+      "xsd:maxInclusive": 30,
+      "xsd:minInclusive": 0
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/78c7c5a611b0b94a540b9a7755c1b1cd-q",
+      "@type": [
+        "form:form-template",
+        "doc:question"
+      ],
+      "has_related_question": [
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/f828777d4545eb97bb7b387e58fa4fee-q",
+        "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/12bde36185db4724036d236c3c91af16-q"
+      ],
+      "has-layout-class": "form",
+      "has-origin-path-id": "ee83516b19443be864e7cd4f2fb6c70f",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/form/l-39ng.a1-form-q-generated-qo",
+      "has-template": "http://vfn.cz/ontologies/ava-study/form/ava-study-qt",
+      "description": "Vietnam People's Air Force Aircraft L-39NG.A1",
+      "comment": "Vietnam People's Air Force Aircraft L-39NG.A1",
+      "label": "DA 42 AFM Flight Controls Reliability Form"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/933418af23435d9b62ddf0b313ad12d9-q",
+      "@type": "doc:question",
+      "has-layout-class": "type-ahead",
+      "has-origin-path-id": "14ef8e4888362d86b478406561cb0539",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/5da139014a1d5112c5d9cfd5af60bd4c-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/classification-of-occurrence",
+      "form:provides-dereferenceable-answer-values": false,
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "label": "5. Classification the Flight Control issue"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/952f32ad1c75974f571b5ca91cd9f9b2-q",
+      "@type": "doc:question",
+      "has-layout-class": "textarea",
+      "has-origin-path-id": "1de4a77fb597697e60822269168b5441",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/2a8d710154fe21bf4edf0d261dc05423-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/failure-description",
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "description": "Failure description in words",
+      "label": "14. Detailed description of the issue"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/9d08c5136213046d5391da9240dc0bba-q",
+      "@type": "doc:question",
+      "has-layout-class": "type-ahead",
+      "has-origin-path-id": "07442ed39415e849a01d4a83209f709e",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/fha-event-l-39ng.a1",
+      "form:provides-dereferenceable-answer-values": false,
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": true,
+      "label": "Flight Control Event"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/a62a7b0b22382633dc9d700d404bb204-q",
+      "@type": "doc:question",
+      "has-origin-path-id": "7ed2d6c615652324f1a68c469724f925",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/56b3d45ff144d4e28266bcee66480452-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/serial-no-of-engine",
+      "has-validation-message": "Please enter a valid alphanumeric sequence. Your input should consist only of letters A-Z a-z and numbers 0-9. Special characters are not permitted.",
+      "pattern": "^[A-Za-z0-9]+$",
+      "form:used-only-for-completeness": true,
+      "label": "20. Engine serial number"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/b1471c9f6f1ddb9de1d150955a40ab6d-q",
+      "@type": "doc:question",
+      "has-layout-class": "text",
+      "has-origin-path-id": "605b1ba6d21aa2962a30ba034a0fe515",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/fuselage-no",
+      "has-validation-message": "Please enter a 4-digit numeric code.",
+      "pattern": "^[0-9]{4,4}$",
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "label": "1. Fuselage No for DA 42"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/c6fec778277f83b1a2221794283d2f9a-q",
+      "@type": "doc:question",
+      "has-layout-class": "type-ahead",
+      "has-origin-path-id": "82c4627deef6631ef1884a027c85b913",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/23fd15358be967a128bad4b0fe5f0d81-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/mission",
+      "form:provides-dereferenceable-answer-values": false,
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "label": "10. Affected AFM Section Flaps Elevator Rudder"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/d8f0606a6696eb5223b2f722a854ff8c-q",
+      "@type": "doc:question",
+      "has-layout-class": "type-ahead",
+      "has-origin-path-id": "29f63d10fa3806a37d18a4b396411fbf",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/933418af23435d9b62ddf0b313ad12d9-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/failure-ascertainment-circumstances",
+      "form:provides-dereferenceable-answer-values": false,
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "label": "6. Observed condition for the hinges or the controls"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/dda6e990be349c8b54effa9ab133d672-q",
+      "@type": "doc:question",
+      "has-layout-class": "text",
+      "has-input-mask": "hhhh:mm",
+      "has-origin-path-id": "3fb21da46d8c40a8600667d2d50aeb93",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/f44ba9c0a34bfb25039250037b63a5a1-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/flight-hours-of-airframe-since-the-service-beginning",
+      "has-validation-message": "Please enter a valid value using the format hhhh:mm.",
+      "pattern": "^(0|[1-9]\\d{0,3}):[0-5]\\d$",
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "description": "Enter value in hours h and minutes m, i.e., examples of valid values are 0:15, 12:59, 234:00, 4567:49.",
+      "label": "3. Total flight hours on airframe"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/f44ba9c0a34bfb25039250037b63a5a1-q",
+      "@type": "doc:question",
+      "has-layout-class": "date",
+      "date-format": "dd-MM-yyyy",
+      "has-origin-path-id": "13fe43931fe7589e5152a450b5379040",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/b1471c9f6f1ddb9de1d150955a40ab6d-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/date-of-failure-ascertainment",
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "label": "2. Date of finding"
+    },
+    {
+      "@id": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/fd9b05dda61215b077379b405244cbec-q",
+      "@type": "doc:question",
+      "has-layout-class": "type-ahead",
+      "has-origin-path-id": "28f8a83796c2d114584d6ccfbb202d7a",
+      "has-possible-values-query": "http://db-server:7200/repositories/record-manager-formgen",
+      "has-preceding-question": "doc:question/b1b42e5a-25ac-42f0-aa01-0698c60dd83d/04371778b41b6ae179d66204a0ef5d9a-q",
+      "has-question-origin": "http://vfn.cz/ontologies/ava-study/model/failure-cause",
+      "form:provides-dereferenceable-answer-values": false,
+      "form:requires-answer": true,
+      "form:used-only-for-completeness": false,
+      "label": "8. Potential estimated cause"
+    },
+    {
+      "@id": "form-lt:has-layout-class",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:accepts-answer-value",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:accepts-validation-value",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:condition",
+      "@type": "owl:Class"
+    },
+    {
+      "@id": "form:has-datatype",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:has-input-mask",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:has-layout-class",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:has-preceding-question",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:has-question-origin",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:has-tested-question",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:has-unit",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:is-relevant-if",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:is-relevant-if_removed",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:requires-answer",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "requires-answer:-if",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "form:step",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "http://purl.org/dc/elements/1.1/description",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "xsd:maxInclusive",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "xsd:minInclusive",
+      "@type": "owl:AnnotationProperty"
+    },
+    {
+      "@id": "http://www.w3.org/2004/02/skos/core#altLabel",
+      "subPropertyOf": "rdfs:label"
+    }
+  ],
+  "@context": {
+    "has-possible-values-query": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-possible-values-query"
+    },
+    "date-format": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/date-format"
+    },
+    "has-layout-class": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form-layout/has-layout-class"
+    },
+    "has-question-origin": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-question-origin",
+      "@type": "@id"
+    },
+    "used-only-for-completeness": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/used-only-for-completeness",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "has-origin-path-id": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-origin-path-id"
+    },
+    "requires-answer": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/requires-answer",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "has-preceding-question": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-preceding-question",
+      "@type": "@id"
+    },
+    "label": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+    },
+    "has-datatype": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-datatype",
+      "@type": "@id"
+    },
+    "minInclusive": {
+      "@id": "http://www.w3.org/2001/XMLSchema#minInclusive",
+      "@type": "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "maxInclusive": {
+      "@id": "http://www.w3.org/2001/XMLSchema#maxInclusive",
+      "@type": "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "description": {
+      "@id": "http://purl.org/dc/elements/1.1/description"
+    },
+    "pattern": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/pattern"
+    },
+    "has-validation-message": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-validation-message"
+    },
+    "provides-dereferenceable-answer-values": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/provides-dereferenceable-answer-values",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "subPropertyOf": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#subPropertyOf",
+      "@type": "@id"
+    },
+    "has-input-mask": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-input-mask"
+    },
+    "has_related_question": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/documentation/has_related_question",
+      "@type": "@id"
+    },
+    "step": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/step",
+      "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "comment": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#comment"
+    },
+    "has-template": {
+      "@id": "http://onto.fel.cvut.cz/ontologies/form/has-template",
+      "@type": "@id"
+    },
+    "@vocab": "http://onto.fel.cvut.cz/ontologies/record-manager/form-generation/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "fn": "http://www.w3.org/2005/xpath-functions#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dl": "http://onto.fel.cvut.cz/ontologies/ava/data-lib/",
+    "tops": "http://www.topbraid.org/tops#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "smf": "http://topbraid.org/sparqlmotionfunctions#",
+    "spif": "http://spinrdf.org/spif#",
+    "sml": "http://topbraid.org/sparqlmotionlib#",
+    "form-mod": "http://onto.fel.cvut.cz/ontologies/form-mod/",
+    "km-rdf2csv": "http://onto.fel.cvut.cz/ontologies/lib/module/RDF2CSV/",
+    "form-lib": "http://onto.fel.cvut.cz/ontologies/form-lib/",
+    "arg": "http://spinrdf.org/arg#",
+    "km-text-analysis": "http://onto.fel.cvut.cz/ontologies/lib/module/text-analysis/",
+    "sm": "http://topbraid.org/sparqlmotion#",
+    "km-rdf4j": "http://onto.fel.cvut.cz/ontologies/lib/module/rdf4j/",
+    "sp": "http://spinrdf.org/sp#",
+    "kbss-module": "http://onto.fel.cvut.cz/ontologies/lib/module/",
+    "rm-gen": "http://onto.fel.cvut.cz/ontologies/record-manager/form-generation/",
+    "turtle": "http://www.semanticweb.org/owl/owlapi/turtle#",
+    "km-param": "http://onto.fel.cvut.cz/ontologies/lib/module-param/",
+    "afn": "http://jena.hpl.hp.com/ARQ/function#",
+    "km-form": "http://onto.fel.cvut.cz/ontologies/lib/module/form/",
+    "km-tabular": "http://onto.fel.cvut.cz/ontologies/lib/module/tabular/",
+    "spl": "http://spinrdf.org/spl#",
+    "form-lt": "http://onto.fel.cvut.cz/ontologies/form-layout/",
+    "jfn": "java:org.apache.jena.sparql.function.library.",
+    "form": "http://onto.fel.cvut.cz/ontologies/form/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "pf": "http://jena.hpl.hp.com/ARQ/property#",
+    "km-sesame": "http://onto.fel.cvut.cz/ontologies/lib/module/sesame/",
+    "spin": "http://spinrdf.org/spin#",
+    "kbss-spif": "http://onto.fel.cvut.cz/ontologies/lib/spin-function/",
+    "doc": "http://onto.fel.cvut.cz/ontologies/documentation/"
+  }
+}
