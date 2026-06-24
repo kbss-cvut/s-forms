@@ -39,7 +39,7 @@
           }
         }
       ],
-      "http://purl.org/dc/elements/1.1/description": { "@language": "en", "@value": "Pick a value from the dropdown, or click the hint bulb to reveal the correct answer." },
+      "http://purl.org/dc/terms/description": { "@language": "en", "@value": "Pick a value from the dropdown, or click the hint bulb to reveal the correct answer." },
       "http://www.w3.org/2000/01/rdf-schema#label": { "@language": "en", "@value": "This is question for Select" },
       "http://onto.fel.cvut.cz/ontologies/form/has-correct-answer-value": {
         "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value": {

@@ -27,7 +27,7 @@
     "has_revision" : "1",
     "has_severity_assessment" : "e-a-5.1.0.0:vl-a-431/v-300",
     "created" : "2020-06-25T21:31:54.252Z",
-    "dct:description" : {
+    "dcterms:description" : {
       "@language" : "en",
       "@value" : "<p>test</p>"
     }
@@ -26836,7 +26836,7 @@
       "@id" : "http://www.w3.org/2000/01/rdf-schema#label"
     },
     "description" : {
-      "@id" : "http://purl.org/dc/elements/1.1/description"
+      "@id" : "http://purl.org/dc/terms/description"
     },
     "has-origin-type" : {
       "@id" : "http://onto.fel.cvut.cz/ontologies/form/has-origin-type",
@@ -27025,7 +27025,7 @@
     "form-ecc-cfg-0.2" : "http://onto.fel.cvut.cz/ontologies/aviation/eccairs-form-config-0.2/",
     "doc" : "http://onto.fel.cvut.cz/ontologies/documentation/",
     "e-mv" : "http://onto.fel.cvut.cz/ontologies/eccairs/model-view/",
-    "dce" : "http://purl.org/dc/elements/1.1/",
+    "dcterms" : "http://purl.org/dc/terms/",
     "xsd" : "http://www.w3.org/2001/XMLSchema#",
     "fn" : "http://www.w3.org/2005/xpath-functions#",
     "for" : "http://onto.fel.cvut.cz/ontologies/form",
@@ -27034,7 +27034,6 @@
     "eccairs-form-stabl" : "http://onto.fel.cvut.cz/ontologies/aviation/eccairs-form-stable",
     "sml" : "http://topbraid.org/sparqlmotionlib#",
     "form-ecc-gen" : "http://onto.fel.cvut.cz/ontologies/aviation/eccairs-form-generated/",
-    "dct" : "http://purl.org/dc/terms/",
     "form-ecc" : "http://onto.fel.cvut.cz/ontologies/aviation/eccairs-form/",
     "arg" : "http://spinrdf.org/arg#",
     "sm" : "http://topbraid.org/sparqlmotion#",

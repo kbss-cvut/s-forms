@@ -75,7 +75,7 @@
       "@id": "http://onto.fel.cvut.cz/ontologies/form/has-input-mask"
     },
     "description": {
-      "@id": "http://purl.org/dc/elements/1.1/description"
+      "@id": "http://purl.org/dc/terms/description"
     },
     "is-relevant-if_removed": {
       "@id": "http://onto.fel.cvut.cz/ontologies/form/is-relevant-if_removed",
