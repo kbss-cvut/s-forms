@@ -21,7 +21,7 @@
           "http://www.w3.org/2000/01/rdf-schema#label": { "@language": "en", "@value": "not correct value" }
         }
       ],
-      "http://purl.org/dc/elements/1.1/description": { "@language": "en", "@value": "Question with media content. Click the hint bulb to reveal the correct answer and media annotation." },
+      "http://purl.org/dc/terms/description": { "@language": "en", "@value": "Question with media content. Click the hint bulb to reveal the correct answer and media annotation." },
       "http://www.w3.org/2000/01/rdf-schema#label": { "@language": "en", "@value": "Question with media" },
       "http://onto.fel.cvut.cz/ontologies/documentation/has_answer": {},
       "http://onto.fel.cvut.cz/ontologies/form/has-correct-answer-value": {

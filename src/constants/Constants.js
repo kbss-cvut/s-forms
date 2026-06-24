@@ -67,8 +67,8 @@ export default class Constants {
     "http://onto.fel.cvut.cz/ontologies/documentation/has_data_value";
   static HAS_OBJECT_VALUE =
     "http://onto.fel.cvut.cz/ontologies/documentation/has_object_value";
-  static HELP_DESCRIPTION = "http://purl.org/dc/elements/1.1/description";
-  static SOURCE = "http://purl.org/dc/elements/1.1/source";
+  static HELP_DESCRIPTION = "http://purl.org/dc/terms/description";
+  static SOURCE = "http://purl.org/dc/terms/source";
   static XSD = {
     MAX_EXCLUSIVE: "http://www.w3.org/2001/XMLSchema#maxExclusive",
     MAX_INCLUSIVE: "http://www.w3.org/2001/XMLSchema#maxInclusive",

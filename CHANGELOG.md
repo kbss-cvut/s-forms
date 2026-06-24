@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+> ⚠️ marks a breaking change that may require consumers to update their code or data.
+
+## [Unreleased]
+
+### Features
+
+- Add media asset viewer for video, image, and embedded content, with SVG-based annotations, custom fullscreen handling, and responsive image/video viewers (#442)
+- Add answer correctness ("hint") revealing for Typeahead and Select answers (#442)
+- Support navigation by `questionOrigin` and `startingQuestionId`, including a new Wizardless component (#395, #397, #405)
+
+### Bug Fixes
+
+- ⚠️ Migrate Dublin Core namespace from `dc/elements/1.1/` to `dc/terms/` (dcterms); update form data/templates using `dc/elements/1.1/description` or `.../source` accordingly (#456)
+- Harmonize intl provisioning by removing intl passed via the configuration context (#387, #193)
+- Fix "Could not find required intl object" error when `IntlProvider` is missing (#394)
+- Fix comment value errors (#393)
+- Fix comment author label view (#406)
+- Fix questions not being validated when they have no answer (#379)
+- Fix failing tests (revert undici/jsonld bump, typeahead values sorting) (#448)
+
 ## [0.8.0](https://kbss.felk.cvut.cz/git/s-forms/compare/v0.7.2...v0.8.0) (2024-11-26)
 
 - Migrate to Bootstrap 5.0.0

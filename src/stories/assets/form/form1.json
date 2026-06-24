@@ -35,10 +35,10 @@
       "@type": "@id"
     },
     "description": {
-      "@id": "http://purl.org/dc/elements/1.1/description"
+      "@id": "http://purl.org/dc/terms/description"
     },
     "source": {
-      "@id": "http://purl.org/dc/elements/1.1/source",
+      "@id": "http://purl.org/dc/terms/source",
       "@type": "@id"
     },
     "accepts-answer-value": {
@@ -357,9 +357,9 @@
     },
     {
       "@id": "_:b39",
-      "shacl:namespace": "http://purl.org/dc/elements/1.1/",
+      "shacl:namespace": "http://purl.org/dc/terms/",
       "@type": "shacl:PrefixDeclaration",
-      "shacl:prefix": "dc"
+      "shacl:prefix": "dcterms"
     },
     {
       "@id": "_:b4",
