@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 > ⚠️ marks a breaking change that may require consumers to update their code or data.
 
-## [Unreleased]
+## [0.9.1](https://kbss.felk.cvut.cz/git/s-forms/compare/v0.8.0...v0.9.1) (2026-06-25)
 
 ### Features
 
