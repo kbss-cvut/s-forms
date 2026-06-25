@@ -45,6 +45,126 @@ export default class MediaAssetViewerUtils {
   }
 
   /**
+   * Determines the media kind from an asset identifier. MediaCMS-provided
+   * assets encode the kind in their `@id`
+   * (e.g. `.../media-metadata/video/<id>/asset`), so the kind can be resolved
+   * without inspecting the (extension-less) source URL.
+   *
+   * @param {string} id - Asset `@id`.
+   * @returns {{ kind: "video" | "image", type: string | null } | null}
+   */
+  static getMediaKindFromId(id) {
+    if (!id || typeof id !== "string") return null;
+    const lower = id.toLowerCase();
+
+    if (/\/video\//.test(lower)) {
+      return { kind: "video", type: null };
+    }
+    if (/\/image\//.test(lower)) {
+      return { kind: "image", type: null };
+    }
+    return null;
+  }
+
+  /**
+   * Resolves the media kind synchronously from the information available in the
+   * form data: the source URL extension first, then the asset `@id` hint.
+   * Returns an `iframe` fallback when neither is conclusive.
+   *
+   * @returns {{ kind: "video" | "image" | "iframe", type: string | null }}
+   */
+  static getMediaKind(src, id) {
+    const byUrl = MediaAssetViewerUtils.getMediaKindFromSource(src);
+    if (byUrl && byUrl.kind !== "iframe") {
+      return byUrl;
+    }
+    return MediaAssetViewerUtils.getMediaKindFromId(id) ?? byUrl;
+  }
+
+  /**
+   * Maps an HTTP Content-Type to a media kind.
+   *
+   * @param {string|null} contentType - Raw `Content-Type` header value.
+   * @returns {{ kind: "video" | "image", type: string | null } | null}
+   * The resolved kind, or `null` when the type is not a renderable media type.
+   */
+  static getMediaKindFromContentType(contentType) {
+    if (!contentType) return null;
+    const lower = contentType.toLowerCase();
+
+    if (lower.includes("mpegurl")) {
+      return { kind: "video", type: "application/x-mpegURL" };
+    }
+    if (lower.startsWith("image/")) {
+      return { kind: "image", type: null };
+    }
+    if (lower.startsWith("video/")) {
+      return { kind: "video", type: lower.split(";")[0].trim() };
+    }
+    return null;
+  }
+
+  /**
+   * Reads the `Content-Type` of a source via a lightweight HEAD request.
+   * Returns `null` on any failure (network error, CORS, non-OK response).
+   */
+  static async probeContentType(src) {
+    try {
+      const res = await fetch(src, { method: "HEAD", credentials: "include" });
+      if (!res.ok) return null;
+      return res.headers.get("Content-Type");
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /**
+   * Checks whether a source loads as an image. Works cross-origin without CORS
+   * (an `<img>` load is not CORS-gated), so it is a reliable fallback when the
+   * Content-Type probe is blocked.
+   */
+  static probeIsImage(src) {
+    return new Promise((resolve) => {
+      if (typeof Image === "undefined") {
+        resolve(false);
+        return;
+      }
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
+    });
+  }
+
+  /**
+   * Resolves the media kind for a source. Uses the synchronous hints (URL
+   * extension and asset `@id`) first; only when those are inconclusive does it
+   * fall back to the response Content-Type and, if that is unavailable (e.g.
+   * blocked by CORS), to an image-load probe.
+   *
+   * @returns {Promise<{ kind: "video" | "image" | "iframe", type: string | null }>}
+   */
+  static async resolveMediaKind(src, id) {
+    const known = MediaAssetViewerUtils.getMediaKind(src, id);
+    if (known && known.kind !== "iframe") {
+      return known;
+    }
+
+    const byContentType = MediaAssetViewerUtils.getMediaKindFromContentType(
+      await MediaAssetViewerUtils.probeContentType(src)
+    );
+    if (byContentType) {
+      return byContentType;
+    }
+
+    if (await MediaAssetViewerUtils.probeIsImage(src)) {
+      return { kind: "image", type: null };
+    }
+
+    return known;
+  }
+
+  /**
    * Converts normalized annotation points into viewport pixel coordinates.
    *
    * Input points are expected to be normalized (range 0–1) and encoded as
