@@ -85,4 +85,38 @@ describe("MediaAssetViewerUtils media kind detection", () => {
       ).toBeNull();
     });
   });
+
+  describe("resolveMediaKind (video MIME type)", () => {
+    let originalFetch;
+    beforeEach(() => {
+      originalFetch = global.fetch;
+    });
+    afterEach(() => {
+      global.fetch = originalFetch;
+    });
+
+    it("fills in the MIME type from the Content-Type for an extension-less video", async () => {
+      global.fetch = jest.fn(() =>
+        Promise.resolve({ ok: true, headers: { get: () => "video/webm" } })
+      );
+      const res = await MediaAssetViewerUtils.resolveMediaKind(
+        cmsVideoSrc,
+        cmsVideoId
+      );
+      expect(res.kind).toBe("video");
+      expect(res.type).toBe("video/webm");
+    });
+
+    it("defaults to video/mp4 when the Content-Type cannot be read", async () => {
+      global.fetch = jest.fn(() =>
+        Promise.reject(new Error("blocked by CORS"))
+      );
+      const res = await MediaAssetViewerUtils.resolveMediaKind(
+        cmsVideoSrc,
+        cmsVideoId
+      );
+      expect(res.kind).toBe("video");
+      expect(res.type).toBe("video/mp4");
+    });
+  });
 });
