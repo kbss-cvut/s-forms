@@ -25,6 +25,7 @@ const MediaContent = ({ question, displayAnnotations }: Props) => {
           >
             <MediaAssetViewer
               src={media[Constants.HAS_SOURCE]}
+              mediaId={media["@id"]}
               allowFullScreen
               annotations={media[Constants.HAS_ANNOTATION] ?? []}
               showAnnotations={displayAnnotations}

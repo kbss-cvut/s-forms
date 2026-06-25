@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ViewerUtils from "../../util/MediaAssetViewerUtils.js";
 import "../../styles/media.css";
 import VideoViewer from "./video/VideoViewer.jsx";
@@ -28,6 +28,7 @@ const IframeViewer = ({ src, allowFullScreen }) => (
  */
 const MediaAssetViewer = ({
   src,
+  mediaId,
   annotations = [],
   allowFullScreen,
   showAnnotations = true,
@@ -35,20 +36,47 @@ const MediaAssetViewer = ({
   const containerRef = useRef(null);
   const { isFullscreen, toggle } = useFullscreen(containerRef);
 
+  // Resolve synchronously from the URL/`@id` hints; fall back to an async probe
+  // only when those are inconclusive (e.g. an extension-less, hint-less URL).
+  const [resolved, setResolved] = useState(() => {
+    const known = ViewerUtils.getMediaKind(src, mediaId);
+    return known && known.kind !== "iframe" ? known : null;
+  });
+
+  useEffect(() => {
+    let cancelled = false;
+    const known = ViewerUtils.getMediaKind(src, mediaId);
+    if (known && known.kind !== "iframe") {
+      setResolved(known);
+      return;
+    }
+    setResolved(null);
+    ViewerUtils.resolveMediaKind(src, mediaId).then((res) => {
+      if (!cancelled) setResolved(res ?? { kind: "iframe", type: null });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [src, mediaId]);
+
   if (!src) return null;
 
-  const { kind } = ViewerUtils.getMediaKindFromSource(src);
-  const MediaComponent = mediaRegistry[kind] || IframeViewer;
+  const MediaComponent = resolved
+    ? mediaRegistry[resolved.kind] || IframeViewer
+    : null;
 
   return (
     <MediaFullScreenContainer ref={containerRef} fullscreen={isFullscreen}>
-      <MediaComponent
-        src={src}
-        annotations={annotations}
-        allowFullScreen={allowFullScreen}
-        onFullScreen={toggle}
-        showAnnotations={showAnnotations}
-      />
+      {MediaComponent && (
+        <MediaComponent
+          src={src}
+          type={resolved.type}
+          annotations={annotations}
+          allowFullScreen={allowFullScreen}
+          onFullScreen={toggle}
+          showAnnotations={showAnnotations}
+        />
+      )}
     </MediaFullScreenContainer>
   );
 };
