@@ -1,3 +1,5 @@
+import { fullscreenIconSvg } from "../../icons/fullscreenIcon.jsx";
+
 /**
  * Adds a custom fullscreen button to a Video.js player's control bar.
  * The button is inserted next to an existing control (remaining time display
@@ -13,8 +15,8 @@ const addCustomFullScreenButton = (player, onFullScreen) => {
     : controlBar.children().length;
   const button = controlBar.addChild("button", {}, index + 1);
   const buttonEl = button.el();
-  buttonEl.innerHTML = "⛶";
-  buttonEl.style.fontSize = "20px";
+  buttonEl.innerHTML = fullscreenIconSvg;
+  buttonEl.setAttribute("aria-label", "Fullscreen");
   buttonEl.onclick = () => onFullScreen(player);
 };
 

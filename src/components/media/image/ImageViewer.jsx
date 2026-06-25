@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useMediaSurface } from "../hooks/useMediaSurface.js";
 import AnnotationOverlay from "../annotation/AnnotationOverlay.jsx";
+import { FullscreenIcon } from "../icons/fullscreenIcon.jsx";
 
 /**
  * Viewer for displaying images with annotations.
@@ -24,8 +25,12 @@ const ImageViewer = ({ src, annotations, onFullScreen, showAnnotations }) => {
           currentTime={null}
         />
       </div>
-      <button className="media-fullscreen-button" onClick={onFullScreen}>
-        ⛶
+      <button
+        className="media-fullscreen-button"
+        onClick={onFullScreen}
+        aria-label="Fullscreen"
+      >
+        <FullscreenIcon />
       </button>
     </div>
   );
