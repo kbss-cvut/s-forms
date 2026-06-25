@@ -11,6 +11,14 @@ const mediaRegistry = {
   image: ImageViewer,
 };
 
+// A synchronously resolved kind is usable as-is unless it is the iframe
+// fallback or a video missing its MIME type (which Video.js requires); those
+// need the async probe in resolveMediaKind.
+const isDirectlyUsable = (resolved) =>
+  resolved &&
+  resolved.kind !== "iframe" &&
+  !(resolved.kind === "video" && !resolved.type);
+
 const IframeViewer = ({ src, allowFullScreen }) => (
   <div className="media-iframe-container">
     <div className="media-iframe-wrapper">
@@ -37,16 +45,17 @@ const MediaAssetViewer = ({
   const { isFullscreen, toggle } = useFullscreen(containerRef);
 
   // Resolve synchronously from the URL/`@id` hints; fall back to an async probe
-  // only when those are inconclusive (e.g. an extension-less, hint-less URL).
+  // only when those are inconclusive (e.g. an extension-less, hint-less URL, or
+  // a video whose MIME type still has to be determined).
   const [resolved, setResolved] = useState(() => {
     const known = ViewerUtils.getMediaKind(src, mediaId);
-    return known && known.kind !== "iframe" ? known : null;
+    return isDirectlyUsable(known) ? known : null;
   });
 
   useEffect(() => {
     let cancelled = false;
     const known = ViewerUtils.getMediaKind(src, mediaId);
-    if (known && known.kind !== "iframe") {
+    if (isDirectlyUsable(known)) {
       setResolved(known);
       return;
     }

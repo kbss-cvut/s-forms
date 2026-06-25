@@ -1,3 +1,8 @@
+// Assumed MIME type for a video whose exact type cannot be determined (an
+// extension-less source resolved from the @id, with the Content-Type probe
+// unavailable). Video.js needs a type or it reports "No compatible source".
+const DEFAULT_VIDEO_TYPE = "video/mp4";
+
 /**
  *
  * Utility class providing helper functions for media asset.
@@ -146,6 +151,17 @@ export default class MediaAssetViewerUtils {
    */
   static async resolveMediaKind(src, id) {
     const known = MediaAssetViewerUtils.getMediaKind(src, id);
+
+    // A known video without an explicit MIME type (e.g. an extension-less
+    // source resolved from the @id) needs its type filled in, otherwise
+    // Video.js reports "No compatible source was found for this media".
+    if (known && known.kind === "video" && !known.type) {
+      const byContentType = MediaAssetViewerUtils.getMediaKindFromContentType(
+        await MediaAssetViewerUtils.probeContentType(src)
+      );
+      return { kind: "video", type: byContentType?.type ?? DEFAULT_VIDEO_TYPE };
+    }
+
     if (known && known.kind !== "iframe") {
       return known;
     }
