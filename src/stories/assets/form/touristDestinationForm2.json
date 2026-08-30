@@ -112190,13 +112190,6 @@
       "@id": "https://slovník.gov.cz/datový/turistické-cíle/form-template/umístnění-aspect-classifier-f344c6409954204f23c4cba5a81704ce-q",
       "@type": ["doc:question", "form:aspect-group-question"],
       "has_related_question": [
-        "https://slovník.gov.cz/generický/umístění/pojem/má-popis-umístění-f344c6409954204f23c4cba5a81704ce-q",
-        "https://slovník.gov.cz/generický/umístění/pojem/má-budovu-f344c6409954204f23c4cba5a81704ce-q",
-        "https://slovník.gov.cz/generický/umístění/pojem/má-patro-f344c6409954204f23c4cba5a81704ce-q",
-        "https://slovník.gov.cz/generický/umístění/pojem/má-místnost-f344c6409954204f23c4cba5a81704ce-q",
-        "https://slovník.gov.cz/generický/umístění/pojem/má-zahraniční-adresu-f344c6409954204f23c4cba5a81704ce-q",
-        "https://slovník.gov.cz/generický/umístění/pojem/má-geografický-název-f344c6409954204f23c4cba5a81704ce-q",
-        "https://slovník.gov.cz/generický/umístění/pojem/má-geografický-identifikátor-f344c6409954204f23c4cba5a81704ce-q",
         "show-advanced-question:-96439d40f9db96d2bbe24917e085a7c0-q",
         "https://slovník.gov.cz/generický/umístění/pojem/má-adresu-f344c6409954204f23c4cba5a81704ce-q",
         "https://slovník.gov.cz/generický/umístění/pojem/má-geometrii-f344c6409954204f23c4cba5a81704ce-q"
@@ -134076,36 +134069,15 @@
       "@id": "https://slovník.gov.cz/generický/umístění/pojem/má-adresu-f344c6409954204f23c4cba5a81704ce-q",
       "@type": ["form:relator-question", "doc:question"],
       "has_related_question": [
-        "https://slovník.gov.cz/generický/adresy/pojem/typ-čísla-domovního-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-přiřazené-území-městského-obvodu-v-hlavním-městě-praze-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-přiřazené-území-okresu-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-části-obce-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/359/2011/pojem/je-sestavena-jako-10005b019002e80be7c73b06cd1ea969-q",
         "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číslo-orientační-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-přiřazené-katastrální-území-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/generický/adresy/pojem/text-adresy-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-přiřazené-území-obce-10005b019002e80be7c73b06cd1ea969-q",
+        "https://slovník.gov.cz/generický/adresy/pojem/typ-čísla-domovního-10005b019002e80be7c73b06cd1ea969-q",
         "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-ulice-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/generický/adresy/pojem/poštovní-směrovací-číslo-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/generický/adresy/pojem/název-vyššího-územního-samosprávního-celku-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-přiřazenou-ulici-10005b019002e80be7c73b06cd1ea969-q",
         "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-číslo-domovní-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-zvláštní-údaje-pro-doručování-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/generický/adresy/pojem/prvek-rúian-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-obce-nebo-vojenského-újezdu-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-městského-obvodu-v-hlavním-městě-praze-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-katastrálního-území-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-přiřazené-území-vojenského-újezdu-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-přiřazenou-část-obce-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/je-adresou-stavebního-objektu-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-okresu-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-přiřazené-území-obce-nebo-vojenského-újezdu-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-vazbu-na-adresní-komponent-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/generický/adresy/pojem/vyšší-územní-samosprávní-celek-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/generický/adresy/pojem/městský-obvod-městská-část-10005b019002e80be7c73b06cd1ea969-q",
+        "https://slovník.gov.cz/generický/adresy/pojem/má-kód-adresního-místa-10005b019002e80be7c73b06cd1ea969-q",
+        "https://slovník.gov.cz/generický/adresy/pojem/poštovní-směrovací-číslo-10005b019002e80be7c73b06cd1ea969-q",
         "https://slovník.gov.cz/generický/adresy/pojem/název-městského-obvodu-městské-části-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/generický/adresy/pojem/znak-čísla-orientačního-10005b019002e80be7c73b06cd1ea969-q",
-        "https://slovník.gov.cz/generický/adresy/pojem/má-kód-adresního-místa-10005b019002e80be7c73b06cd1ea969-q"
+        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-obce-nebo-vojenského-újezdu-10005b019002e80be7c73b06cd1ea969-q",
+        "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-okresu-10005b019002e80be7c73b06cd1ea969-q"
       ],
       "has-layout-class": ["emphasise-on-relevant", "collapsed", "section"],
       "has-importance": "ft:advanced",
@@ -183078,7 +183050,10 @@
     {
       "@id": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číslo-orientační-10005b019002e80be7c73b06cd1ea969-q",
       "@type": ["form:trope-question", "doc:question"],
-      "has_related_question": "https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/dodatek-čísla-orientačního-5b087d79625c3e3198cb50dfab802b4b-q",
+      "has_related_question": [
+		"https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/dodatek-čísla-orientačního-5b087d79625c3e3198cb50dfab802b4b-q",
+		"https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/miro-čísla-orientačního-5b087d79625c3e3198cb50dfab802b4b-q"
+      ],
       "has-layout-class": ["section", "collapsed"],
       "has-importance": "ft:important",
       "has-question-origin": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číslo-orientační-10005b019002e80be7c73b06cd1ea969-q-qo",
@@ -195696,6 +195671,9 @@
       "has-main-processing-aspect-target": "https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/dodatek-čísla-orientačního",
       "has-parent-question-entity": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číslo-orientační",
       "has-processing-aspect-target": "https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/dodatek-čísla-orientačního",
+      "has-preceding-question": [
+        "https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/miro-čísla-orientačního-5b087d79625c3e3198cb50dfab802b4b-q"
+      ],
       "http://onto.fel.cvut.cz/ontologies/kodi/sgov2sforms/has-related-question-level": 5,
       "is-question-of-aspect": "https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/dodatek-čísla-orientačního",
       "is-question-of-intrinsic-mode": "https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/dodatek-čísla-orientačního",
@@ -195707,6 +195685,21 @@
       "label": {
         "@language": "cs",
         "@value": "Dodatek čísla orientačního"
+      }
+    },
+    {
+      "@id": "https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/miro-čísla-orientačního-5b087d79625c3e3198cb50dfab802b4b-q",
+      "@type": ["doc:question", "form:trope-question"],
+      "has-importance": "ft:important",
+      "has-question-origin": "https://slovník.gov.cz/legislativní/sbírka/326/2000/pojem/miro-čísla-orientačního-5b087d79625c3e3198cb50dfab802b4b-q-qo",
+      "label": {
+        "@language": "cs",
+        "@value": "Číslo orientační"
+      },
+      "http://onto.fel.cvut.cz/ontologies/kodi/sgov2sforms/has-related-question-level": 5,
+      "description": {
+        "@language": "cs",
+        "@value": "Adresou se rozumí kombinace názvu okresu, názvu obce nebo vojenského újezdu, názvu části obce nebo v případě hlavního města Prahy názvu katastrálního území a názvu městského obvodu, čísla popisného nebo evidenčního, názvu ulice a čísla orientačního a dále zvláštních údajů pro doručování prostřednictvím poštovních služeb, která jednoznačně určuje adresní místo."
       }
     },
     {
