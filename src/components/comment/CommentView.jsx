@@ -28,10 +28,15 @@ const CommentView = (props) => {
       const users = options.users;
       const author = users.find((u) => u.id === props.author["@id"]);
 
-      if (author && author.label) {
-        return author.label;
+      if (author) {
+        if (author.label) {
+          return author.label;
+        } else {
+          return getAuthorIRIAbbreviation();
+        }
       }
     }
+
     return intl.formatMessage({
       id: "comment.unknownAuthor",
     });
